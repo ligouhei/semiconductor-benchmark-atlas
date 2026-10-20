@@ -2,17 +2,17 @@
 <html lang="zh-CN"><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>芯片行业 benchmark 分类研究 · 工作稿</title><style>
 body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:0}main{max-width:1400px;margin:auto;padding:36px}h1,h2,h3{line-height:1.35}h1{font-size:32px}h2{margin-top:40px;border-top:2px solid #ced9e4;padding-top:24px}a{color:#075ca8}table{border-collapse:collapse;background:white;width:100%;font-size:14px}th,td{border:1px solid #dbe2ea;padding:12px;vertical-align:top;text-align:left}th{background:#eaf0f7}td:first-child{min-width:160px}nav,.note{background:#e8f0fa;border-radius:10px;padding:20px}details{background:white;border:1px solid #d5e0ec;margin:12px 0;padding:16px;border-radius:8px}summary{font-weight:650;cursor:pointer}dt{font-weight:bold;margin-top:12px}dd{margin-left:0}small,.muted{color:#58697b}.tag{display:inline-block;padding:2px 8px;border-radius:5px;background:#e8eff7;font-size:12px}.tablewrap{overflow:auto}@media print{body{background:white}main{padding:0}details{break-inside:avoid}nav{display:none}a{color:#203044}td{font-size:10px}}
 </style><main><p><a href="index.html">← 返回交互式 Benchmark 表格</a></p><h1>芯片行业 benchmark 分类研究</h1>
-<p class="muted">工作稿 · 研究起点 2026-10-19 · 生成时间 2026-10-20T13:32+08:00（北京时间）</p>
+<p class="muted">工作稿 · 研究起点 2026-10-19 · 生成时间 2026-10-20T13:44+08:00（北京时间）</p>
 <div class="note"><a href="agentic-research.html">Agentic 续查专题：11项新增研究对象与开放边界</a> · <a href="agentic-followup.json">结构化协议</a></div>
 <div class="note"><a href="round2-research.html">第二轮12小时续研（进行中）：首批新增协议与证据边界</a> · <a href="round2-research-update.json">结构化增量</a></div>
-<div class="note"><strong>研究仍在进行。</strong>本稿包含 572 条任务/版本记录，归并为 331 个家族/对象。记录中也包含公开数据集、方法实验、工具示例和内部评测线索；这些数量不能解释为同等成熟的独立公开 benchmark 数量。12 小时研究尚未完成，待核验字段均保留，完整覆盖与最终优先级尚待补齐。</div>
+<div class="note"><strong>研究仍在进行。</strong>本稿包含 583 条任务/版本记录，归并为 334 个家族/对象。记录中也包含公开数据集、方法实验、工具示例和内部评测线索；这些数量不能解释为同等成熟的独立公开 benchmark 数量。12 小时研究尚未完成，待核验字段均保留，完整覆盖与最终优先级尚待补齐。</div>
 <div class="note"><strong>补订说明：</strong>2026-10-20补订：原12小时清单遗漏VPEvolve，OPC agentic覆盖审核不充分。现补入商业Calibre recipeagent协议与开放光学testbed两轨（同一家族），并更正此前容易被理解为该方向没有已有评测的表述。此补订发生在原12小时交付之后；目录仍不是全行业穷尽证明。 本次另续查新增11项研究对象（含待开放/部分协议），详见Agentic专题；VPEvolve配套testbed已显式标记非独立Agent benchmark。 <a href="research-corrections.json">更正记录</a></div>
 <p>本研究围绕芯片设计与制造中的工作任务分类。每条记录回答：给模型什么、让它完成什么、交付什么、由谁按什么指标评分，以及成熟软件已经覆盖到哪一层。成品 CPU/GPU 与微体系结构性能负载在边界组单列：其输入是程序、模型和运行数据，不是设计规格、网表或工艺规则；不直接证明EDA能力。</p>
 <p><a href="research-overview.html">从简明阅读总览开始</a> · <a href="benchmark-catalog-zh.csv">中文列名CSV</a></p><nav><strong>分类索引</strong><ol>
 <li><a href="#group-0">数字前端：RTL 生成、理解与工程任务</a> · 76 条</li>
 <li><a href="#group-1">数字验证：断言、形式证明、修复与安全</a> · 59 条</li>
 <li><a href="#group-2">模拟前端：感知、推理、拓扑、尺寸与规格闭环</a> · 81 条</li>
-<li><a href="#group-3">综合、HLS 与 FPGA 加速器</a> · 61 条</li>
+<li><a href="#group-3">综合、HLS 与 FPGA 加速器</a> · 72 条</li>
 <li><a href="#group-4">数字后端：布局布线、预测与优化</a> · 146 条</li>
 <li><a href="#group-5">模拟后端：版图与物理实现</a> · 15 条</li>
 <li><a href="#group-6">制造、光刻、OPC 与良率</a> · 61 条</li>
@@ -24,7 +24,7 @@ body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:
 <li><a href="#group-12">边界：既有加速器上的工作负载映射</a> · 2 条</li>
 <li><a href="#group-13">边界：成品性能与微体系结构工作负载</a> · 23 条</li>
 </ol><a href="catalog.csv">下载 CSV</a> · <a href="catalog.json">下载 JSON</a> · 进度与未完成事项（本地研究附件） · <a href="#coverage-limits">已有覆盖与具体缺口</a></nav>
-<p>来源存档与完整性索引（本地研究附件）：6302 条检索/下载记录，6047 个本地文件完成哈希核对，完整性异常 0 项。475/572 条目录记录至少有一个精确URL或相同GitHub repo/ref/path的存档关联。此比例不是研究准确率：入口链接与实际论文/脚本常不同，完整逐字段证据映射仍待补，下载与哈希匹配也不等事实已被来源支持。</p>
+<p>来源存档与完整性索引（本地研究附件）：6559 条检索/下载记录，6303 个本地文件完成哈希核对，完整性异常 0 项。486/583 条目录记录至少有一个精确URL或相同GitHub repo/ref/path的存档关联。此比例不是研究准确率：入口链接与实际论文/脚本常不同，完整逐字段证据映射仍待补，下载与哈希匹配也不等事实已被来源支持。</p>
 <h2>分类与判断方法</h2><p>按“领域阶段 × 任务层次 × 证据成熟度”交叉归类。任务层次包括底层数值或组合优化、性能预测与代理模型、固定工具参数调优、多步工具工作流，以及端到端工程闭环。公开可下载代码、公开可下载数据、可重建标签、独立受保护评分和可商用，分别核验。</p><p>时效性从工艺/规模/规则、基线强度、信息条件、独立评价及实际约束判断。经典基准可以仍适合算法研究；新发布的基准也可能只有弱检查器、内部数据或未完整发布的流程。研究价值判断是分析结论，和来源中直接报告的事实分开。</p>
 <h2>目前已核实的关键区别</h2><ul>
 <li>维护替代与任务饱和分开：<a href="#rtl-masterrtl-power">MasterRTL</a> 作者已明确停止旧仓库维护并推荐 RTL-Timer，因此新工作应优先检查后继实现。此证据支持实现版本替代，不能证明早期功耗预测已解决；其功耗特征还需要 EDA 提取活动率，与纯 RTL 输入分轨。</li>
@@ -5206,6 +5206,17 @@ body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:
 <tr><td><a href="#hls-ahrr-agent">AHRR / agent-based HLS with RTL refinement</a><br/><small>agentic续查2026-10-20；ahrr:3ad7306f1d52db461873382e397ff87a28c282a2</small><br/><span class="tag">公开11任务及接口变体/实验协议/评分代码与派生轨迹</span></td><td>11个工作负载；GEM1的12-port变体是同工作负载的接口变体。每题规格、C++参考、接口合同和public TB；hidden TB定义也公开，但实验时应对agent隔离。</td><td>比较直接RTL、agent HLS、HLS后RTL改写、编译器后HLS改写四种flow；反复读仿真/综合/布线报告改设计。<p><strong>输出：</strong>HLS C++或RTL、每轮提交、ledger与测量报告。</p></td><td>C/RTL仿真正确性与可布线/资源硬门后计吞吐=workitems/(cycles×max(实测period,target))；target3.33ns，U55C资源上限各类60%。最多5round，agent每轮60min、RTLsim75min、综合PnR90min，总10h；不能将多轮best当单次pass@1。FPGA OOC结果，不等含shell的板上吞吐。<p class="muted">公开隐藏测试定义需运行时隔离；11任务不能加接口变体算12独立IP；OOC/PnR可行与实际板级性能不同。</p></td></tr>
 <tr><td><a href="#hls-hlsfactory-agent-extraction">HLSFactory-Agent / repository-to-HLS dataset extraction</a><br/><small>agentic续查2026-10-20；hlsfactoryagent:8fac504210fae6403808b2acaad1310300dedd69</small><br/><span class="tag">公开抽取工具与26仓库实验；非新独立设计优化任务集</span></td><td>26个学术/开源HLS源码仓库、抽取指令与Vitis目标；不能把候选design直接算有效任务。</td><td>识别kernel/top、复制headers/testdata、必要时迁移非Vitis构造，生成独立工程与synth.tcl，再Vitis HLS验证。<p><strong>输出：</strong>独立设计目录、synth.tcl、run_data、Pi session/HTML transcript。</p></td><td>论文271候选中130通过Vitis HLS synthesis、141失败，5仓库未抽到design；另报designs/$、designs/min。合成成功不等C/RTL功能等价、后PnR或最优QoR。<p class="muted">HLSFactory-Agent与已有HLSFactory工具/数据来源相关，不把所有271重复加成独立IP；数据构建agent和硬件优化agent分层。</p></td></tr>
 <tr><td><a href="#lib-siemens-nemo-characterization">Siemens Fuse / NeMo Gym Liberty characterization study</a><br/><small>NVIDIA/Siemens作者文章2026-10-14；第二轮续查</small><br/><span class="tag">厂商工程agent实验协议，非已核完整公共任务包</span></td><td>GF180MCU背景库229cells/36PVT；实际每次工作流调试仅2cells×36PVT，约25rollouts。</td><td>agent配置/运行表征，读反馈并恢复失败；团队迭代skills/MCP描述，模型和harness固定。<p><strong>输出：</strong>Liberty库文件、执行证据与验证报告。</p></td><td>reward=coverage×validity×relativevalidation×integrity四个二值gate×容差内输出占比；任一gate失败0。作者mean composite约55→95%，不是全229cells成功率。每run约1.5–2h；turn155→53、outputtokens约81k→29k为作者调试结果。<p class="muted">没有可核的独立heldout分割与全库结果；不称完整公共benchmark或第三方复现。商业工具输出强oracle仍需工件完整性与过程验证。</p></td></tr>
+<tr><td><a href="#hls-hlseval-generation">HLS-Eval / original description-to-kernel generation</a><br/><small>原paper2504.12268v1(2025-04-16)，current repo5fb3649738feb2622ba574321031f81c9d2e200c；原94与当前扩展分列</small><br/><span class="tag">公开任务/框架；原paper单轮生成</span></td><td>自然语言描述、单header与可见C++testbench；生成kernel不提供参考实现。原94来自8sourcegroups；生成实验只用PolyBench/MachSuite/CHStone/Rosetta/C2HLSC子集。</td><td>生成符合接口的kernel，固定TB做C仿真与HLS综合。<p><strong>输出：</strong>C/C++kernel、编译/执行/综合状态。</p></td><td>parse/compile/run/synth四级二值验收；run要求TBexit0。原paper每题n5,T.7，无放回组合pass@k；不等RTLcosim或板上通过。<p class="muted">公开TB可能被适配；94是原suite大小，不把每轨所有题数默认94，也不把当前目录202configs套旧paper分数。</p></td></tr>
+<tr><td><a href="#hls-hlseval-editing">HLS-Eval / original optimization-oriented code editing</a><br/><small>原paper2504.12268v1(2025-04-16)，current repo5fb3649738feb2622ba574321031f81c9d2e200c；原94与当前扩展分列</small><br/><span class="tag">公开编辑任务/评测框架</span></td><td>已有HLSkernel/header/TB与编辑指令；looplabels、AP/fixedpoint转换、dataflow重构、tiling。</td><td>按编辑意图改写，运行C仿真/综合验功能与可实现性。<p><strong>输出：</strong>编辑后的kernel及分阶段状态。</p></td><td>原paper主要parse/compile/run/synth pass@k，不自动以最终PPA改善率评分；looplabel容易任务与架构重构分开，AP转换需精度合同。<p class="muted">不同编辑轨用不同适用子集；功能测试有限，原paper无postroute/硬件验收；不把所有编辑题称agentic。</p></td></tr>
+<tr><td><a href="#hls-hlseval-pi-generation">HLS-Eval / current Pi tool-agent kernel generation</a><br/><small>current repo5fb3649738feb2622ba574321031f81c9d2e200c，与2025paper分轨</small><br/><span class="tag">公开新增工具agent接口；非原paper同版本结果</span></td><td>agent目录只复制description/header/TB和所需TBdata，不复制goldkernel；可选挂载兼容Vitis/Vivado。</td><td>Pi在容器内编辑kernel/用工具，提交后原始header/TB重建验证。<p><strong>输出：</strong>kernel、PiJSONL/HTML、Csim/综合与失败日志。</p></td><td>kernel存在且header/TB字节未改才可继续；compile/run/synth分列。源码记录temperature字段但run_pi_agent调用不传它，不能据日志认定实际采样温度；n_samples默认1。<p class="muted">公开测试可见；Csimexit0非形式等价或RTL正确性；未确认统一hidden评分/全量模型榜及公开轨迹集。</p></td></tr>
+<tr><td><a href="#hls-hlseval-parameterization">HLS-Eval / current agentic parameterization and Pareto study</a><br/><small>current repo5fb3649738feb2622ba574321031f81c9d2e200c</small><br/><span class="tag">公开当前实现/文档；需额外固定任务split</span></td><td>完整原kernel工程；agent改kernel为Jinja模板，提交design_space.jsonl；给定point上限/part/clock。</td><td>生成2至maxpoints个不同参数赋值；独立渲染、检查接口/原非kernel文件、Csim/综合。<p><strong>输出：</strong>模板、全部points工件和baseline/Pareto摘要。</p></td><td>只有正确性/综合全过且worstcycles与LUT/FF/DSP/BRAM/URAM六项有限非负才进frontier。等目标去重，uniquefrontierfraction分母为所有提交points；无任意scalar总分，Pareto不等全局最优。<p class="muted">代码限制explicit接口pragma而非任意macro生成接口；有限TB不等全输入/RTL等价，unknownlatency不应补0；没有全量重现结果声明。</p></td></tr>
+<tr><td><a href="#hls-hlseval-dataflow-agent">HLS-Eval / iterative dataflow with LightningSim feedback</a><br/><small>current repo5fb3649738feb2622ba574321031f81c9d2e200c</small><br/><span class="tag">当前公开dataflow工具agent接口</span></td><td>同参数化工程；tools-on与tools-off隔离条件，迭代次数/LightningSim预算需冻结。</td><td>逐point Csim/综合后运行LightningSim，带deadlock/timeout/log反馈进入下一轮。<p><strong>输出：</strong>迭代模板、全部points/状态/延迟/Pareto结果。</p></td><td>Pareto的latency替换为LightningSim topmodulecycles，保留HLSestimate供对照；无有效latency不得pass。deadlock/timeout/failed/skipped逐点保留，非postroute或实板时钟。<p class="muted">工具存在/缺失的容器隔离为代码/文档声明，本轮未动态检验；LightningSim不等硅实现的全部物理效应。</p></td></tr>
+<tr><td><a href="#hls-fpgagent-78">FPGAgent / adapted 78-task HLS-Eval to U200 execution</a><br/><small>arXiv2608.23630v1(2026-08-23)</small><br/><span class="tag">论文方法评测；基于HLS-Eval子集，不增独立数据家族</span></td><td>94题筛选且部分接口调整后的78任务，规格/header；Vitis2022.2、U200/200MHz。</td><td>搜索kernel，用生成的C++验证程序修复，生成host及xclbin并运行。<p><strong>输出：</strong>kernel/host/xclbin与执行/功能结果。</p></td><td>分别报可综合、可执行、功能正确比例；对zero-shot pass@10。pool4初始化后保留2、3轮；每题硬件build一次、约3–5h，完整LLM/工具成本未齐。按table计算平均提升16.9/26.7/30.6是百分点。<p class="muted">功能反思和host测试包含模型生成expectedoutputs，独立oracle边界仍待核；不能据生成checker自洽推出任意输入正确。与原94及HLS-Eval默认Csim不同评分链。</p></td></tr>
+<tr><td><a href="#hls-hlsmith-polybench">HLSmith / PolyBench expert-guided optimization protocol</a><br/><small>arXiv2608.06791v1 HTML读取版本；paper各cohort分列</small><br/><span class="tag">论文多实验臂，复用PolyBench/HLSFactory</span></td><td>plainC、header/interface、testinputs及独立CPUgold；文中还列参考HLS实现。Vitis2023.2/U280/300MHz；每实验kernelcohort不同。</td><td>flash或multistep结合guardedexpertise改C/pragma；保留可行最佳候选，再做RTLcosim。<p><strong>输出：</strong>选中HLS设计与C/综合/RTL验证结果，另有teacher动作与模型适配实验。</p></td><td>综合估计cycles与RTL执行cycles分开。ChatHLS比较14尝试：14vs8过；8共同成功GM6.91x，去syr2k后7对4.24x，不能省略分母。exhaustivebestofsetup是搜索上界；matched4kernel适配RTLratio区间[1,2.56]含1。<p class="muted">论文说明其CSV未包含生成RTL/outputtraces，不能据CSV独立value-replay；partial/unmatched额外attempt排除须保留。不是新28独立IP，也不以abstract4.24x代全cohort统计。</p></td></tr>
+<tr><td><a href="#hls-bench4hls-generation">Bench4HLS / 170-task generation and PPA envelope</a><br/><small>arXiv2601.19941v1；repo7fac5b356b0383e9463995e2c6b13a5fee27a62d</small><br/><span class="tag">公开170输入/TB/reference/框架；原生多候选生成非工具agent</span></td><td>170个task_n唯一的prompt/TB/reference三元组，来自多源与Verilog→HLS迁移；固定TopModule接口。</td><td>生成HLS-C，Vitis编译/仿真/综合，Vivado综合后估功耗，可扩YAML DSE。<p><strong>输出：</strong>各候选C++、阶段状态、latency ns/资源util%/power W与对照CSV。</p></td><td>currentPass@K为每题K次至少一次通过的经验比例，分母取实际存在designfiles；非无放回组合估计。PPA comparison每指标分别min，不保证同一候选。latency/资源delta为绝对差(ns/百分点)，powerdelta才是相对%；未知latency/resource有0初始化回退需核。<p class="muted">currentcode不应泛称postPnR/实板或全流程cosim；仿真看logmarker；部分skipgen文件缺失会缩分母，应对照170manifest。论文图注百分比与当前CSVdelta定义需分开。</p></td></tr>
+<tr><td><a href="#hls-chathls-generation">ChatHLS / generation</a><br/><small>ACL2026.acl-long.962；repo204397cba1c4dfdd88cad1c8477f8db2fe038fbf</small><br/><span class="tag">公开方法代码/分轨实验协议</span></td><td>108题=85个HLS-Eval来源+23customspec，含FSM/counter等；每题goldTB。</td><td>从自然语言生成HLS-C，再debug/优化。<p><strong>输出：</strong>HLS-C与CSIM/CSYN/COSIM/QoR日志。</p></td><td>生成n20，分阶段CSIM/CSYN/COSIM与无放回组合pass@k；每设计两轮完整验证及最多5CSYN优化。<p class="muted">108含继承85，不与HLS-Eval原94叠加为全新数据；当前目录不同计数需manifest去重。</p></td></tr>
+<tr><td><a href="#hls-chathls-debug">ChatHLS / HLSFixer repair</a><br/><small>ACL2026.acl-long.962；repo204397cba1c4dfdd88cad1c8477f8db2fe038fbf</small><br/><span class="tag">公开方法代码/分轨实验协议</span></td><td>32个正确设计按34种工具可识别错误注入得591测试case；buggycode/工具反馈。</td><td>固定修改模型，变分析模型，以诊断和修复工具错误。<p><strong>输出：</strong>HLS-C与CSIM/CSYN/COSIM/QoR日志。</p></td><td>n5报告pass@1；成功须CSIM/CSYN/COSIM。生成/调试/优化典型时限分别&lt;3/&lt;10/&lt;30min是论文开销，不等统一硬budget。<p class="muted">注入且工具显式报类型的筛选形成分布；591不是591独立IP。原始gold不可见条件、train/testsource重叠需核。</p></td></tr>
+<tr><td><a href="#hls-chathls-tuning">ChatHLS / HLSTuner optimization</a><br/><small>ACL2026.acl-long.962；repo204397cba1c4dfdd88cad1c8477f8db2fe038fbf</small><br/><span class="tag">公开方法代码/分轨实验协议</span></td><td>已有HLSkernel与目标资源约束，所选线代/密码/NNkernel与ref基线。</td><td>改pragma和局部结构，修复优化失败并控制DSP/FF/LUT。<p><strong>输出：</strong>HLS-C与CSIM/CSYN/COSIM/QoR日志。</p></td><td>latency cycles与DSP/FF/LUT；baseline为Vitis自动pipeline，不能当未优化kernel。最多5CSYN迭代；需同时报功能门/资源预算。<p class="muted">训练4804样本来自20Rosettakernels；评测cohort与训练样本来源不等同，完整groupheldout与独立rawartifact待核。</p></td></tr>
 </tbody></table></div>
 <details id="synth-epfl"><summary>EPFL Combinational Benchmark Suite · 综合/组合逻辑优化</summary><dl>
 <dt>版本/时间</dt><dd>2015原23；master82d8cc6910419298e713a46644ed59fd3df53038声明2026结果/2027周期；本次tags/releases实取最高v2025.1(2025-11-18),commit8c832d5d07d822d28ba84dc6e95295367702401f，二者不混</dd>
@@ -6439,6 +6450,208 @@ body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:
 <dt>下一步核验</dt><dd>固定完整输入/工具与评分器、budget与失败分母；补足记录中明确缺口；不从静态阅读推独立复现实验或工业签核。</dd>
 <dt>一手来源</dt><dd><ul>
 <li><a href="https://developer.nvidia.com/blog/optimizing-agent-reliability-and-tool-calling-efficiency-for-chip-design-using-nvidia-nemo-gym/">https://developer.nvidia.com/blog/optimizing-agent-reliability-and-tool-calling-efficiency-for-chip-design-using-nvidia-nemo-gym/</a></li>
+</ul></dd></dl></details>
+<details id="hls-hlseval-generation"><summary>HLS-Eval / original description-to-kernel generation · 综合HLS/规格→HLS kernel</summary><dl>
+<dt>版本/时间</dt><dd>原paper2504.12268v1(2025-04-16)，current repo5fb3649738feb2622ba574321031f81c9d2e200c；原94与当前扩展分列</dd>
+<dt>对象类型</dt><dd>公开任务/框架；原paper单轮生成</dd>
+<dt>模型工作的层次</dt><dd>规格→HLS kernel；非原生多步agent</dd>
+<dt>输入</dt><dd>自然语言描述、单header与可见C++testbench；生成kernel不提供参考实现。原94来自8sourcegroups；生成实验只用PolyBench/MachSuite/CHStone/Rosetta/C2HLSC子集。</dd>
+<dt>任务设定</dt><dd>生成符合接口的kernel，固定TB做C仿真与HLS综合。</dd>
+<dt>输出</dt><dd>C/C++kernel、编译/执行/综合状态。</dd>
+<dt>考核指标</dt><dd>parse/compile/run/synth四级二值验收；run要求TBexit0。原paper每题n5,T.7，无放回组合pass@k；不等RTLcosim或板上通过。</dd>
+<dt>基线</dt><dd>原paper四openmodels单轮；与新增Pi工具agent需同题/预算重比。</dd>
+<dt>工具、数据与访问条件</dt><dd>固定repo根LICENSE为AGPL3；上游各自许可。Vitis HLS原paper2024.1；current core122config+accel80config全部TOML实读且Gitblob匹配。含固定small PolyBench/float变体，202不是202独立IP。</dd>
+<dt>限制与可比性</dt><dd>公开TB可能被适配；94是原suite大小，不把每轨所有题数默认94，也不把当前目录202configs套旧paper分数。</dd>
+<dt>现实价值判断</dt><dd>研究判断：规格→HLS kernel；非原生多步agent。需按相同输入/工具/候选/成本对照原生HLS自动优化，不能据工具成熟推任务已解决。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；一手论文与固定源码/数据元信息静态审计，未执行模型、HLS、RTL仿真或硬件。</dd>
+<dt>下一步核验</dt><dd>锁定任务版本/源IP分组/可见测试与隐藏验收、模型/tool全预算及失败分母；进一步核公开材料中未确认的实验工件和轨迹。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://arxiv.org/html/2504.12268v1">https://arxiv.org/html/2504.12268v1</a></li>
+<li><a href="https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/hls_eval/eval.py">https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/hls_eval/eval.py</a></li>
+<li><a href="https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/LICENSE">https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/LICENSE</a></li>
+</ul></dd></dl></details>
+<details id="hls-hlseval-editing"><summary>HLS-Eval / original optimization-oriented code editing · 综合HLS/已有kernel的指定代码编辑</summary><dl>
+<dt>版本/时间</dt><dd>原paper2504.12268v1(2025-04-16)，current repo5fb3649738feb2622ba574321031f81c9d2e200c；原94与当前扩展分列</dd>
+<dt>对象类型</dt><dd>公开编辑任务/评测框架</dd>
+<dt>模型工作的层次</dt><dd>已有kernel的指定代码编辑；原实验单轮</dd>
+<dt>输入</dt><dd>已有HLSkernel/header/TB与编辑指令；looplabels、AP/fixedpoint转换、dataflow重构、tiling。</dd>
+<dt>任务设定</dt><dd>按编辑意图改写，运行C仿真/综合验功能与可实现性。</dd>
+<dt>输出</dt><dd>编辑后的kernel及分阶段状态。</dd>
+<dt>考核指标</dt><dd>原paper主要parse/compile/run/synth pass@k，不自动以最终PPA改善率评分；looplabel容易任务与架构重构分开，AP转换需精度合同。</dd>
+<dt>基线</dt><dd>原代码/nativecompiler与单轮LLM；标签添加成功不能当硬件优化成功。</dd>
+<dt>工具、数据与访问条件</dt><dd>固定repo根LICENSE为AGPL3；上游各自许可。Vitis HLS原paper2024.1；current core122config+accel80config全部TOML实读且Gitblob匹配。含固定small PolyBench/float变体，202不是202独立IP。</dd>
+<dt>限制与可比性</dt><dd>不同编辑轨用不同适用子集；功能测试有限，原paper无postroute/硬件验收；不把所有编辑题称agentic。</dd>
+<dt>现实价值判断</dt><dd>研究判断：已有kernel的指定代码编辑；原实验单轮。需按相同输入/工具/候选/成本对照原生HLS自动优化，不能据工具成熟推任务已解决。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；一手论文与固定源码/数据元信息静态审计，未执行模型、HLS、RTL仿真或硬件。</dd>
+<dt>下一步核验</dt><dd>锁定任务版本/源IP分组/可见测试与隐藏验收、模型/tool全预算及失败分母；进一步核公开材料中未确认的实验工件和轨迹。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://arxiv.org/html/2504.12268v1">https://arxiv.org/html/2504.12268v1</a></li>
+<li><a href="https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/hls_eval/eval.py">https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/hls_eval/eval.py</a></li>
+</ul></dd></dl></details>
+<details id="hls-hlseval-pi-generation"><summary>HLS-Eval / current Pi tool-agent kernel generation · 综合HLS/可见TB/编译反馈上的多步kernel生成</summary><dl>
+<dt>版本/时间</dt><dd>current repo5fb3649738feb2622ba574321031f81c9d2e200c，与2025paper分轨</dd>
+<dt>对象类型</dt><dd>公开新增工具agent接口；非原paper同版本结果</dd>
+<dt>模型工作的层次</dt><dd>可见TB/编译反馈上的多步kernel生成</dd>
+<dt>输入</dt><dd>agent目录只复制description/header/TB和所需TBdata，不复制goldkernel；可选挂载兼容Vitis/Vivado。</dd>
+<dt>任务设定</dt><dd>Pi在容器内编辑kernel/用工具，提交后原始header/TB重建验证。</dd>
+<dt>输出</dt><dd>kernel、PiJSONL/HTML、Csim/综合与失败日志。</dd>
+<dt>考核指标</dt><dd>kernel存在且header/TB字节未改才可继续；compile/run/synth分列。源码记录temperature字段但run_pi_agent调用不传它，不能据日志认定实际采样温度；n_samples默认1。</dd>
+<dt>基线</dt><dd>同题zero-shot vsPi；额外工具调用、模型/时间成本需补计。</dd>
+<dt>工具、数据与访问条件</dt><dd>固定repo根LICENSE为AGPL3；上游各自许可。Vitis HLS原paper2024.1；current core122config+accel80config全部TOML实读且Gitblob匹配。含固定small PolyBench/float变体，202不是202独立IP。 agent支持只读工具安装挂载，自备工具与许可；当前runner不是新的独立数据集。</dd>
+<dt>限制与可比性</dt><dd>公开测试可见；Csimexit0非形式等价或RTL正确性；未确认统一hidden评分/全量模型榜及公开轨迹集。</dd>
+<dt>现实价值判断</dt><dd>研究判断：可见TB/编译反馈上的多步kernel生成。需按相同输入/工具/候选/成本对照原生HLS自动优化，不能据工具成熟推任务已解决。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；一手论文与固定源码/数据元信息静态审计，未执行模型、HLS、RTL仿真或硬件。</dd>
+<dt>下一步核验</dt><dd>锁定任务版本/源IP分组/可见测试与隐藏验收、模型/tool全预算及失败分母；进一步核公开材料中未确认的实验工件和轨迹。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/hls_eval/eval_agent_pi/eval_agent_pi.py">https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/hls_eval/eval_agent_pi/eval_agent_pi.py</a></li>
+<li><a href="https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/hls_eval/eval_agent_pi/vitis.py">https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/hls_eval/eval_agent_pi/vitis.py</a></li>
+</ul></dd></dl></details>
+<details id="hls-hlseval-parameterization"><summary>HLS-Eval / current agentic parameterization and Pareto study · 综合HLS/现有kernel→参数模板与显式DSE候选集</summary><dl>
+<dt>版本/时间</dt><dd>current repo5fb3649738feb2622ba574321031f81c9d2e200c</dd>
+<dt>对象类型</dt><dd>公开当前实现/文档；需额外固定任务split</dd>
+<dt>模型工作的层次</dt><dd>现有kernel→参数模板与显式DSE候选集</dd>
+<dt>输入</dt><dd>完整原kernel工程；agent改kernel为Jinja模板，提交design_space.jsonl；给定point上限/part/clock。</dd>
+<dt>任务设定</dt><dd>生成2至maxpoints个不同参数赋值；独立渲染、检查接口/原非kernel文件、Csim/综合。</dd>
+<dt>输出</dt><dd>模板、全部points工件和baseline/Pareto摘要。</dd>
+<dt>考核指标</dt><dd>只有正确性/综合全过且worstcycles与LUT/FF/DSP/BRAM/URAM六项有限非负才进frontier。等目标去重，uniquefrontierfraction分母为所有提交points；无任意scalar总分，Pareto不等全局最优。</dd>
+<dt>基线</dt><dd>同设置原始kernel及非agent搜索；currentflow关HLS自动pipeline/unroll/arraypartition，须另报原生默认自动优化baseline。</dd>
+<dt>工具、数据与访问条件</dt><dd>固定repo根LICENSE为AGPL3；上游各自许可。Vitis HLS原paper2024.1；current core122config+accel80config全部TOML实读且Gitblob匹配。含固定small PolyBench/float变体，202不是202独立IP。 docs示例max64points/xczu9eg/5ns，示例不是所有实验统一配置。</dd>
+<dt>限制与可比性</dt><dd>代码限制explicit接口pragma而非任意macro生成接口；有限TB不等全输入/RTL等价，unknownlatency不应补0；没有全量重现结果声明。</dd>
+<dt>现实价值判断</dt><dd>研究判断：现有kernel→参数模板与显式DSE候选集。需按相同输入/工具/候选/成本对照原生HLS自动优化，不能据工具成熟推任务已解决。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；一手论文与固定源码/数据元信息静态审计，未执行模型、HLS、RTL仿真或硬件。</dd>
+<dt>下一步核验</dt><dd>锁定任务版本/源IP分组/可见测试与隐藏验收、模型/tool全预算及失败分母；进一步核公开材料中未确认的实验工件和轨迹。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/hls_eval/eval_agent_pi/PARAMETERIZATION.md">https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/hls_eval/eval_agent_pi/PARAMETERIZATION.md</a></li>
+<li><a href="https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/hls_eval/eval_agent_pi/eval_agent_pi_paramaterized.py">https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/hls_eval/eval_agent_pi/eval_agent_pi_paramaterized.py</a></li>
+</ul></dd></dl></details>
+<details id="hls-hlseval-dataflow-agent"><summary>HLS-Eval / iterative dataflow with LightningSim feedback · 综合HLS/参数化DSE加dataflow仿真反馈</summary><dl>
+<dt>版本/时间</dt><dd>current repo5fb3649738feb2622ba574321031f81c9d2e200c</dd>
+<dt>对象类型</dt><dd>当前公开dataflow工具agent接口</dd>
+<dt>模型工作的层次</dt><dd>参数化DSE加dataflow仿真反馈</dd>
+<dt>输入</dt><dd>同参数化工程；tools-on与tools-off隔离条件，迭代次数/LightningSim预算需冻结。</dd>
+<dt>任务设定</dt><dd>逐point Csim/综合后运行LightningSim，带deadlock/timeout/log反馈进入下一轮。</dd>
+<dt>输出</dt><dd>迭代模板、全部points/状态/延迟/Pareto结果。</dd>
+<dt>考核指标</dt><dd>Pareto的latency替换为LightningSim topmodulecycles，保留HLSestimate供对照；无有效latency不得pass。deadlock/timeout/failed/skipped逐点保留，非postroute或实板时钟。</dd>
+<dt>基线</dt><dd>同题tools-on/off及原始kernel；关闭原生自动优化的设置仍需独立说明。</dd>
+<dt>工具、数据与访问条件</dt><dd>固定repo根LICENSE为AGPL3；上游各自许可。Vitis HLS原paper2024.1；current core122config+accel80config全部TOML实读且Gitblob匹配。含固定small PolyBench/float变体，202不是202独立IP。 Vitis安装与LightningSim版本要匹配，文档验证2024.1；tools-on含FIFOAdvisor。</dd>
+<dt>限制与可比性</dt><dd>工具存在/缺失的容器隔离为代码/文档声明，本轮未动态检验；LightningSim不等硅实现的全部物理效应。</dd>
+<dt>现实价值判断</dt><dd>研究判断：参数化DSE加dataflow仿真反馈。需按相同输入/工具/候选/成本对照原生HLS自动优化，不能据工具成熟推任务已解决。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；一手论文与固定源码/数据元信息静态审计，未执行模型、HLS、RTL仿真或硬件。</dd>
+<dt>下一步核验</dt><dd>锁定任务版本/源IP分组/可见测试与隐藏验收、模型/tool全预算及失败分母；进一步核公开材料中未确认的实验工件和轨迹。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/hls_eval/eval_agent_pi/PARAMETERIZATION.md">https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/hls_eval/eval_agent_pi/PARAMETERIZATION.md</a></li>
+<li><a href="https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/hls_eval/eval_agent_pi/eval_agent_pi_paramaterized_dataflow.py">https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/hls_eval/eval_agent_pi/eval_agent_pi_paramaterized_dataflow.py</a></li>
+</ul></dd></dl></details>
+<details id="hls-fpgagent-78"><summary>FPGAgent / adapted 78-task HLS-Eval to U200 execution · 综合HLS/kernel进化/功能反思/host生成与实板执行</summary><dl>
+<dt>版本/时间</dt><dd>arXiv2608.23630v1(2026-08-23)</dd>
+<dt>对象类型</dt><dd>论文方法评测；基于HLS-Eval子集，不增独立数据家族</dd>
+<dt>模型工作的层次</dt><dd>kernel进化/功能反思/host生成与实板执行</dd>
+<dt>输入</dt><dd>94题筛选且部分接口调整后的78任务，规格/header；Vitis2022.2、U200/200MHz。</dd>
+<dt>任务设定</dt><dd>搜索kernel，用生成的C++验证程序修复，生成host及xclbin并运行。</dd>
+<dt>输出</dt><dd>kernel/host/xclbin与执行/功能结果。</dd>
+<dt>考核指标</dt><dd>分别报可综合、可执行、功能正确比例；对zero-shot pass@10。pool4初始化后保留2、3轮；每题硬件build一次、约3–5h，完整LLM/工具成本未齐。按table计算平均提升16.9/26.7/30.6是百分点。</dd>
+<dt>基线</dt><dd>五模型zero-shot与框架、机制ablation；等候选数不自动等token/工具成本。</dd>
+<dt>工具、数据与访问条件</dt><dd>论文全文已读；未确认改后78完整manifest/代码/独立gold与许可、实板rawrun。</dd>
+<dt>限制与可比性</dt><dd>功能反思和host测试包含模型生成expectedoutputs，独立oracle边界仍待核；不能据生成checker自洽推出任意输入正确。与原94及HLS-Eval默认Csim不同评分链。</dd>
+<dt>现实价值判断</dt><dd>研究判断：kernel进化/功能反思/host生成与实板执行。需按相同输入/工具/候选/成本对照原生HLS自动优化，不能据工具成熟推任务已解决。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；一手论文与固定源码/数据元信息静态审计，未执行模型、HLS、RTL仿真或硬件。</dd>
+<dt>下一步核验</dt><dd>锁定任务版本/源IP分组/可见测试与隐藏验收、模型/tool全预算及失败分母；进一步核公开材料中未确认的实验工件和轨迹。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://arxiv.org/html/2608.23630v1">https://arxiv.org/html/2608.23630v1</a></li>
+</ul></dd></dl></details>
+<details id="hls-hlsmith-polybench"><summary>HLSmith / PolyBench expert-guided optimization protocol · 综合HLS/expertise/工具反馈架构优化与行为迁移</summary><dl>
+<dt>版本/时间</dt><dd>arXiv2608.06791v1 HTML读取版本；paper各cohort分列</dd>
+<dt>对象类型</dt><dd>论文多实验臂，复用PolyBench/HLSFactory</dd>
+<dt>模型工作的层次</dt><dd>expertise/工具反馈架构优化与行为迁移</dd>
+<dt>输入</dt><dd>plainC、header/interface、testinputs及独立CPUgold；文中还列参考HLS实现。Vitis2023.2/U280/300MHz；每实验kernelcohort不同。</dd>
+<dt>任务设定</dt><dd>flash或multistep结合guardedexpertise改C/pragma；保留可行最佳候选，再做RTLcosim。</dd>
+<dt>输出</dt><dd>选中HLS设计与C/综合/RTL验证结果，另有teacher动作与模型适配实验。</dd>
+<dt>考核指标</dt><dd>综合估计cycles与RTL执行cycles分开。ChatHLS比较14尝试：14vs8过；8共同成功GM6.91x，去syr2k后7对4.24x，不能省略分母。exhaustivebestofsetup是搜索上界；matched4kernel适配RTLratio区间[1,2.56]含1。</dd>
+<dt>基线</dt><dd>同输入/资源/模型、expertiseoff与on，ChatHLS同题子集；nativeHLS默认优化仍须同预算对照。</dd>
+<dt>工具、数据与访问条件</dt><dd>全文含165teacheractions/22train+5heldoutkernel等多种训练划分；未确认完整代码/165动作轨迹文件和授权。</dd>
+<dt>限制与可比性</dt><dd>论文说明其CSV未包含生成RTL/outputtraces，不能据CSV独立value-replay；partial/unmatched额外attempt排除须保留。不是新28独立IP，也不以abstract4.24x代全cohort统计。</dd>
+<dt>现实价值判断</dt><dd>研究判断：expertise/工具反馈架构优化与行为迁移。需按相同输入/工具/候选/成本对照原生HLS自动优化，不能据工具成熟推任务已解决。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；一手论文与固定源码/数据元信息静态审计，未执行模型、HLS、RTL仿真或硬件。</dd>
+<dt>下一步核验</dt><dd>锁定任务版本/源IP分组/可见测试与隐藏验收、模型/tool全预算及失败分母；进一步核公开材料中未确认的实验工件和轨迹。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://arxiv.org/html/2608.06791v1">https://arxiv.org/html/2608.06791v1</a></li>
+</ul></dd></dl></details>
+<details id="hls-bench4hls-generation"><summary>Bench4HLS / 170-task generation and PPA envelope · 综合HLS/单轮多候选生成→确定性工具验收/DSE</summary><dl>
+<dt>版本/时间</dt><dd>arXiv2601.19941v1；repo7fac5b356b0383e9463995e2c6b13a5fee27a62d</dd>
+<dt>对象类型</dt><dd>公开170输入/TB/reference/框架；原生多候选生成非工具agent</dd>
+<dt>模型工作的层次</dt><dd>单轮多候选生成→确定性工具验收/DSE</dd>
+<dt>输入</dt><dd>170个task_n唯一的prompt/TB/reference三元组，来自多源与Verilog→HLS迁移；固定TopModule接口。</dd>
+<dt>任务设定</dt><dd>生成HLS-C，Vitis编译/仿真/综合，Vivado综合后估功耗，可扩YAML DSE。</dd>
+<dt>输出</dt><dd>各候选C++、阶段状态、latency ns/资源util%/power W与对照CSV。</dd>
+<dt>考核指标</dt><dd>currentPass@K为每题K次至少一次通过的经验比例，分母取实际存在designfiles；非无放回组合估计。PPA comparison每指标分别min，不保证同一候选。latency/资源delta为绝对差(ns/百分点)，powerdelta才是相对%；未知latency/resource有0初始化回退需核。</dd>
+<dt>基线</dt><dd>reference实现、同K与同工具模型；多候选最优包络不能充单个设计Pareto点。</dd>
+<dt>工具、数据与访问条件</dt><dd>repoApache2，上游另许可；已核170prompt、170TB、170reference完整路径。2024.1/Artix7/10ns；powerTcl只synth/opt/report_power，未place/route或导入活动trace。</dd>
+<dt>限制与可比性</dt><dd>currentcode不应泛称postPnR/实板或全流程cosim；仿真看logmarker；部分skipgen文件缺失会缩分母，应对照170manifest。论文图注百分比与当前CSVdelta定义需分开。</dd>
+<dt>现实价值判断</dt><dd>研究判断：单轮多候选生成→确定性工具验收/DSE。需按相同输入/工具/候选/成本对照原生HLS自动优化，不能据工具成熟推任务已解决。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；一手论文与固定源码/数据元信息静态审计，未执行模型、HLS、RTL仿真或硬件。</dd>
+<dt>下一步核验</dt><dd>锁定任务版本/源IP分组/可见测试与隐藏验收、模型/tool全预算及失败分母；进一步核公开材料中未确认的实验工件和轨迹。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://arxiv.org/html/2601.19941v1">https://arxiv.org/html/2601.19941v1</a></li>
+<li><a href="https://github.com/zfsadik/Bench4HLS/blob/7fac5b356b0383e9463995e2c6b13a5fee27a62d/bench4hls/evaluator.py">https://github.com/zfsadik/Bench4HLS/blob/7fac5b356b0383e9463995e2c6b13a5fee27a62d/bench4hls/evaluator.py</a></li>
+<li><a href="https://github.com/zfsadik/Bench4HLS/blob/7fac5b356b0383e9463995e2c6b13a5fee27a62d/bench4hls/report.py">https://github.com/zfsadik/Bench4HLS/blob/7fac5b356b0383e9463995e2c6b13a5fee27a62d/bench4hls/report.py</a></li>
+<li><a href="https://github.com/zfsadik/Bench4HLS/blob/7fac5b356b0383e9463995e2c6b13a5fee27a62d/tcl/vivado_power.tcl">https://github.com/zfsadik/Bench4HLS/blob/7fac5b356b0383e9463995e2c6b13a5fee27a62d/tcl/vivado_power.tcl</a></li>
+</ul></dd></dl></details>
+<details id="hls-chathls-generation"><summary>ChatHLS / generation · 综合HLS/多步HLS生成、debug和pragma优化</summary><dl>
+<dt>版本/时间</dt><dd>ACL2026.acl-long.962；repo204397cba1c4dfdd88cad1c8477f8db2fe038fbf</dd>
+<dt>对象类型</dt><dd>公开方法代码/分轨实验协议</dd>
+<dt>模型工作的层次</dt><dd>多步HLS生成、debug和pragma优化</dd>
+<dt>输入</dt><dd>108题=85个HLS-Eval来源+23customspec，含FSM/counter等；每题goldTB。</dd>
+<dt>任务设定</dt><dd>从自然语言生成HLS-C，再debug/优化。</dd>
+<dt>输出</dt><dd>HLS-C与CSIM/CSYN/COSIM/QoR日志。</dd>
+<dt>考核指标</dt><dd>生成n20，分阶段CSIM/CSYN/COSIM与无放回组合pass@k；每设计两轮完整验证及最多5CSYN优化。</dd>
+<dt>基线</dt><dd>固定工具/资源下baseline模型、HLSFixer/HLSTuner、nativeauto-pipeline；不同harness/采样预算分开。</dd>
+<dt>工具、数据与访问条件</dt><dd>fixedrepo204397cba1c4dfdd88cad1c8477f8db2fe038fbf根Apache2；论文ACL2026与repo可读。Vitis2022.1/ZCU106/100MHz；HF链接指向HLSFixer/HLSTuner模型repo；本轮未核全部权重/许可，更不等训练交互数据公开。上游/模型许可分别核。</dd>
+<dt>限制与可比性</dt><dd>108含继承85，不与HLS-Eval原94叠加为全新数据；当前目录不同计数需manifest去重。</dd>
+<dt>现实价值判断</dt><dd>研究判断：多步HLS生成、debug和pragma优化。需按相同输入/工具/候选/成本对照原生HLS自动优化，不能据工具成熟推任务已解决。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；一手论文与固定源码/数据元信息静态审计，未执行模型、HLS、RTL仿真或硬件。</dd>
+<dt>下一步核验</dt><dd>锁定任务版本/源IP分组/可见测试与隐藏验收、模型/tool全预算及失败分母；进一步核公开材料中未确认的实验工件和轨迹。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://aclanthology.org/2026.acl-long.962.pdf">https://aclanthology.org/2026.acl-long.962.pdf</a></li>
+<li><a href="https://github.com/GEAR-SEU/ChatHLS-ACL-26/blob/204397cba1c4dfdd88cad1c8477f8db2fe038fbf/README.md">https://github.com/GEAR-SEU/ChatHLS-ACL-26/blob/204397cba1c4dfdd88cad1c8477f8db2fe038fbf/README.md</a></li>
+<li><a href="https://github.com/GEAR-SEU/ChatHLS-ACL-26/blob/204397cba1c4dfdd88cad1c8477f8db2fe038fbf/LICENSE">https://github.com/GEAR-SEU/ChatHLS-ACL-26/blob/204397cba1c4dfdd88cad1c8477f8db2fe038fbf/LICENSE</a></li>
+</ul></dd></dl></details>
+<details id="hls-chathls-debug"><summary>ChatHLS / HLSFixer repair · 综合HLS/多步HLS生成、debug和pragma优化</summary><dl>
+<dt>版本/时间</dt><dd>ACL2026.acl-long.962；repo204397cba1c4dfdd88cad1c8477f8db2fe038fbf</dd>
+<dt>对象类型</dt><dd>公开方法代码/分轨实验协议</dd>
+<dt>模型工作的层次</dt><dd>多步HLS生成、debug和pragma优化</dd>
+<dt>输入</dt><dd>32个正确设计按34种工具可识别错误注入得591测试case；buggycode/工具反馈。</dd>
+<dt>任务设定</dt><dd>固定修改模型，变分析模型，以诊断和修复工具错误。</dd>
+<dt>输出</dt><dd>HLS-C与CSIM/CSYN/COSIM/QoR日志。</dd>
+<dt>考核指标</dt><dd>n5报告pass@1；成功须CSIM/CSYN/COSIM。生成/调试/优化典型时限分别&lt;3/&lt;10/&lt;30min是论文开销，不等统一硬budget。</dd>
+<dt>基线</dt><dd>固定工具/资源下baseline模型、HLSFixer/HLSTuner、nativeauto-pipeline；不同harness/采样预算分开。</dd>
+<dt>工具、数据与访问条件</dt><dd>fixedrepo204397cba1c4dfdd88cad1c8477f8db2fe038fbf根Apache2；论文ACL2026与repo可读。Vitis2022.1/ZCU106/100MHz；HF链接指向HLSFixer/HLSTuner模型repo；本轮未核全部权重/许可，更不等训练交互数据公开。上游/模型许可分别核。</dd>
+<dt>限制与可比性</dt><dd>注入且工具显式报类型的筛选形成分布；591不是591独立IP。原始gold不可见条件、train/testsource重叠需核。</dd>
+<dt>现实价值判断</dt><dd>研究判断：多步HLS生成、debug和pragma优化。需按相同输入/工具/候选/成本对照原生HLS自动优化，不能据工具成熟推任务已解决。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；一手论文与固定源码/数据元信息静态审计，未执行模型、HLS、RTL仿真或硬件。</dd>
+<dt>下一步核验</dt><dd>锁定任务版本/源IP分组/可见测试与隐藏验收、模型/tool全预算及失败分母；进一步核公开材料中未确认的实验工件和轨迹。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://aclanthology.org/2026.acl-long.962.pdf">https://aclanthology.org/2026.acl-long.962.pdf</a></li>
+<li><a href="https://github.com/GEAR-SEU/ChatHLS-ACL-26/blob/204397cba1c4dfdd88cad1c8477f8db2fe038fbf/README.md">https://github.com/GEAR-SEU/ChatHLS-ACL-26/blob/204397cba1c4dfdd88cad1c8477f8db2fe038fbf/README.md</a></li>
+<li><a href="https://github.com/GEAR-SEU/ChatHLS-ACL-26/blob/204397cba1c4dfdd88cad1c8477f8db2fe038fbf/LICENSE">https://github.com/GEAR-SEU/ChatHLS-ACL-26/blob/204397cba1c4dfdd88cad1c8477f8db2fe038fbf/LICENSE</a></li>
+</ul></dd></dl></details>
+<details id="hls-chathls-tuning"><summary>ChatHLS / HLSTuner optimization · 综合HLS/多步HLS生成、debug和pragma优化</summary><dl>
+<dt>版本/时间</dt><dd>ACL2026.acl-long.962；repo204397cba1c4dfdd88cad1c8477f8db2fe038fbf</dd>
+<dt>对象类型</dt><dd>公开方法代码/分轨实验协议</dd>
+<dt>模型工作的层次</dt><dd>多步HLS生成、debug和pragma优化</dd>
+<dt>输入</dt><dd>已有HLSkernel与目标资源约束，所选线代/密码/NNkernel与ref基线。</dd>
+<dt>任务设定</dt><dd>改pragma和局部结构，修复优化失败并控制DSP/FF/LUT。</dd>
+<dt>输出</dt><dd>HLS-C与CSIM/CSYN/COSIM/QoR日志。</dd>
+<dt>考核指标</dt><dd>latency cycles与DSP/FF/LUT；baseline为Vitis自动pipeline，不能当未优化kernel。最多5CSYN迭代；需同时报功能门/资源预算。</dd>
+<dt>基线</dt><dd>固定工具/资源下baseline模型、HLSFixer/HLSTuner、nativeauto-pipeline；不同harness/采样预算分开。</dd>
+<dt>工具、数据与访问条件</dt><dd>fixedrepo204397cba1c4dfdd88cad1c8477f8db2fe038fbf根Apache2；论文ACL2026与repo可读。Vitis2022.1/ZCU106/100MHz；HF链接指向HLSFixer/HLSTuner模型repo；本轮未核全部权重/许可，更不等训练交互数据公开。上游/模型许可分别核。</dd>
+<dt>限制与可比性</dt><dd>训练4804样本来自20Rosettakernels；评测cohort与训练样本来源不等同，完整groupheldout与独立rawartifact待核。</dd>
+<dt>现实价值判断</dt><dd>研究判断：多步HLS生成、debug和pragma优化。需按相同输入/工具/候选/成本对照原生HLS自动优化，不能据工具成熟推任务已解决。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；一手论文与固定源码/数据元信息静态审计，未执行模型、HLS、RTL仿真或硬件。</dd>
+<dt>下一步核验</dt><dd>锁定任务版本/源IP分组/可见测试与隐藏验收、模型/tool全预算及失败分母；进一步核公开材料中未确认的实验工件和轨迹。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://aclanthology.org/2026.acl-long.962.pdf">https://aclanthology.org/2026.acl-long.962.pdf</a></li>
+<li><a href="https://github.com/GEAR-SEU/ChatHLS-ACL-26/blob/204397cba1c4dfdd88cad1c8477f8db2fe038fbf/README.md">https://github.com/GEAR-SEU/ChatHLS-ACL-26/blob/204397cba1c4dfdd88cad1c8477f8db2fe038fbf/README.md</a></li>
+<li><a href="https://github.com/GEAR-SEU/ChatHLS-ACL-26/blob/204397cba1c4dfdd88cad1c8477f8db2fe038fbf/LICENSE">https://github.com/GEAR-SEU/ChatHLS-ACL-26/blob/204397cba1c4dfdd88cad1c8477f8db2fe038fbf/LICENSE</a></li>
 </ul></dd></dl></details>
 <h2 id="group-4">数字后端：布局布线、预测与优化</h2><div class="tablewrap"><table><thead><tr><th>名称与版本</th><th>输入</th><th>任务与输出</th><th>指标与限制</th></tr></thead><tbody>
 <tr><td><a href="#physical-circuitnet">CircuitNet / dataset and task overview</a><br/><small>N28v1/N14v2 legacy image/graph；N45v3 ICLR2026新增预测任务</small><br/><span class="tag">公开数据集与任务</span></td><td>图像特征图或图：宏块、RUDY、pin RUDY、密度、功耗/时间窗、位置等；split实核：冻结default image CSV实数：N28 train7078（RISCY-a2003/b1858/FPU-a1969/FPU-b1248）/test3164（zero-riscy-a2042/b1122），合10242；N14 train6790（RISCY3162/FPU3449/nvdla-small84/Vortex-small95）/test3544（zero-riscy3441/openc910-1 56/Vortex-large47），合10334。各split内部unique且train/test basename无交集，不证明数组近重复或IPfamily完全隔离；Vortex-small/large为同命名架构family。</td><td>从较早设计阶段预测后续拥塞/DRC/IR-drop/net delay<p><strong>输出：</strong>空间预测图或边/网时延</p></td><td>同家族三image任务NRMS/SSIM/EMD/ROC分列；legacy graph netdelay logMSE及反序R²问题见独立记录；N45v3新增RTL时序、RTL功耗、RTL+netlist功耗，PCC/R²/MAPE，不套旧图像评分<p class="muted">DRC预测使用全局布线阶段信息；IR预测用post-CTS功耗/时间窗。不能当作直接修复布局或签核器替代评测。 README披露2024DEF instance名错误及fixscript，派生版本锁；image test.py跳过恰等1的metric却除全N，不能静默解释为标准macro平均。</p></td></tr>
@@ -12545,7 +12758,7 @@ body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:
 <tr><td>数字前端<p>76条 / 33域内家族</p></td><td>RTL与VHDL生成/理解/修复、跨模块工程、微架构优化、规格一致性与功耗/PPA预测；单轮生成与多步agent分别记录<p><a href="#rtl-verilogeval-v2">VerilogEval v2</a> · <a href="#rtl-hwe-arch-v2">HWE Bench / FeSens architecture V2</a> · <a href="#rtl-cvdp-agentic">CVDP / agentic project workflow</a> · <a href="#ara-cpu-level2">Chip-Bench ARA / CPU Level 2</a> · <a href="#ara-network-n3">Chip-Bench ARA / n3-pcie-switch</a></p></td><td>近期大套件完整harness/隐藏数据/许可未全公开；CPU/PCIe规范完成不等全ASIC实现，训练语料与评测集关系、跨family泛化需持续核。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
 <tr><td>数字验证<p>59条 / 43域内家族</p></td><td>SVA/NL翻译/RTL到性质、形式证明、UVM/coverage闭环、mutation、安全/鲁棒性与EDA工具语义回归<p><a href="#verify-fveval-human">FVEval NL2SVA-Human</a> · <a href="#verify-fveval-design">FVEval Design2SVA</a> · <a href="#verify-security-assertions">(Security) Assertions by LLMs</a> · <a href="#verify-chibench-tool-corpus">ChiBench / real-world Verilog tool-testing corpus</a> · <a href="#ver-haven-uvm">HAVEN / protocol-template and coverage-guided DSL UVM suite</a></p></td><td>证明强度/方向/undetermined/vacuity与mutation敏感性不等价；opaque PEC、commercialformal和完整hiddenoracle限制单列，静态wrapper审计不等复现实验。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
 <tr><td>模拟前端<p>81条 / 39域内家族</p></td><td>电路图感知、拓扑/结构、尺寸、预测/检索、长程规格闭环、RF与存储电路/稀有失效；方法实验和成熟bench分身份<p><a href="#analog-longhorizon">Analog Design Bench (Long-Horizon)</a> · <a href="#analog-sganalog-sizing">SGAnalog / 17-task device sizing: 10 fidelity + 7 survival</a> · <a href="#analog-analogmaster-image-layout">AnalogMaster / 15-circuit image-to-layout method evaluation</a> · <a href="#memory-openyield-rare-yield">OpenYield / rare-event yield-estimation research track</a> · <a href="#rf-cobra">COBRA / surrogate-assisted RF circuit optimization workflow</a></p></td><td>多数开源spec/模型仍简化，真实PDK/全PVT/MC/寄生/测量gold有缺口；高识别/收敛/nominalFoM不能推完整电性能。部分agent论文尚未完整发布。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
-<tr><td>综合HLS<p>61条 / 32域内家族</p></td><td>经典逻辑综合、IWLS现代学习/精确综合、HLS程序/应用、代理预测、DSE/agent与FPGA CAD<p><a href="#synth-epfl">EPFL Combinational Benchmark Suite</a> · <a href="#synth-iwls25-weighted">IWLS2025 / 200 exact functions, AIG-only weighted old/new score</a> · <a href="#hls-hlsyn-inductive">HLSyn / inductive unseen-kernel prediction</a> · <a href="#hls-hlsdataset">HLSDataset</a> · <a href="#fpga-vtr">VTR benchmark circuits / full FPGA CAD flow</a> · <a href="#ara-acc-a3-bf16-exp">Chip-Bench ARA / a3-bf16-exp</a></p></td><td>有些原包取得但未执行CEC/HLS；数据多点并非独立IP，FPGA器件/工具版本跨域与真实后实现验收另核；PolyBench原始C包已取，部分派生HLS完整配置/标签仍待核。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
+<tr><td>综合HLS<p>72条 / 35域内家族</p></td><td>经典逻辑综合、IWLS现代学习/精确综合、HLS程序/应用、代理预测、DSE/agent与FPGA CAD<p><a href="#synth-epfl">EPFL Combinational Benchmark Suite</a> · <a href="#synth-iwls25-weighted">IWLS2025 / 200 exact functions, AIG-only weighted old/new score</a> · <a href="#hls-hlsyn-inductive">HLSyn / inductive unseen-kernel prediction</a> · <a href="#hls-hlsdataset">HLSDataset</a> · <a href="#fpga-vtr">VTR benchmark circuits / full FPGA CAD flow</a> · <a href="#ara-acc-a3-bf16-exp">Chip-Bench ARA / a3-bf16-exp</a></p></td><td>有些原包取得但未执行CEC/HLS；数据多点并非独立IP，FPGA器件/工具版本跨域与真实后实现验收另核；PolyBench原始C包已取，部分派生HLS完整配置/标签仍待核。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
 <tr><td>数字后端<p>146条 / 93域内家族</p></td><td>划分/块规划/宏与cell布局、合法化、GR/DR、CTS/STA/sizing/MBFF/ECO、功耗/IR/EM、DRC/LVS工作流与agent<p><a href="#macro-ct">Circuit Training / AlphaChip public Ariane protocol</a> · <a href="#physical-ispd19">ISPD 2019 Initial Detailed Routing</a> · <a href="#physical-ispd26">ISPD 2026 Post-Placement Buffering and Sizing</a> · <a href="#pd-ispd10-cts">ISPD 2010 Clock Network Synthesis</a> · <a href="#pd-iccad25-incremental">ICCAD 2025 Problem C / joint sizing-buffering-relocation</a> · <a href="#be-posteda-drc-essential">PostEDA-Bench / DRC-Essential</a></p></td><td>历年已覆盖不等全部contest题目/最终checker均取得；部分旧链接失效、商业flow与PDK不可重建；proxy、原生修复、有限DRC与全签核严格分层。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
 <tr><td>模拟后端<p>15条 / 13域内家族</p></td><td>传统/语言版图、寄生感知、自动generator、后仿尺寸、IOring及memorycompiler原生基线<p><a href="#analog-align">ALIGN CircuitsDatabase/examples</a> · <a href="#analog-glayout-language">gLayout / MLCAD2024 human-language-to-layout evaluation</a> · <a href="#analog-autockt-pex">AutoCkt / Spectre-to-BAG post-layout transfer experiment</a> · <a href="#analog-amsio-bench">AMS-IO-Bench / wirebond AMS I/O-ring generation</a> · <a href="#memory-openram-native">OpenRAM / native SRAM compiler and verification baseline</a></p></td><td>固定工艺/模板往往承担大量先验；完整GDS/DRC/LVS/PEX与工艺授权、几何目标和电性能对应尚不能全独立复核。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
 <tr><td>制造光刻<p>61条 / 42域内家族</p></td><td>OPC/ILT求解、前向代理、SMO/随机性、recipe/工程助手、掩模写版、热点/SEM/晶圆模式/计量/良率/调度<p><a href="#litho-lithobench">LithoBench / Mask optimization</a> · <a href="#litho-vpevolve-commercial">VPEvolve / 主评测：Calibre recipe agent</a> · <a href="#litho-vpevolve-open-testbed">VPEvolve / 配套仿真资源（非独立 Agent benchmark）</a> · <a href="#litho-opc-engineer-assistant">Intelligent OPC Engineer Assistant</a> · <a href="#litho-culitho-industrial">cuLitho AC+AI / NVIDIA-imec industrial OPC experiment</a> · <a href="#litho-openlithohub">OpenLithoHub benchmarks/workflow</a> · <a href="#fab-mixedwm38">MixedWM38</a> · <a href="#fab-mimac2026-dispatch">MIMAC-2026 / synthetic fab dispatching specification and partial implementation</a></p></td><td>VPEvolve已有公开20窗口/代码的Calibre recipeagent协议，但商业model/deck与wafer闭环不公开；跨工艺/多工具/隐藏布局统一agent榜仍缺完整对照；SEM像素与电测不是同gold。部分官方原包/许可证/lot血缘未取，mock/合成/partialagent明确标记。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>

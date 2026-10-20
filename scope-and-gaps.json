@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T05:32:03.286649+00:00",
+  "as_of": "2026-10-20T05:44:29.392898+00:00",
   "status": "coverage inventory with explicit residual limits, not universal completeness/quality certification",
   "scope": "依据用户阶段划分逐项列已有覆盖与剩余限制；“所有可发现”按此次公开资料检索边界理解，不声称覆盖未公开工业bench或互联网全部材料。",
   "method": [
@@ -339,8 +339,8 @@
     },
     {
       "domain": "综合HLS",
-      "record_count": 61,
-      "family_count": 32,
+      "record_count": 72,
+      "family_count": 35,
       "catalog_ids": [
         "synth-epfl",
         "synth-openabc",
@@ -402,7 +402,18 @@
         "rtl-synthagentic-crosslib",
         "hls-ahrr-agent",
         "hls-hlsfactory-agent-extraction",
-        "lib-siemens-nemo-characterization"
+        "lib-siemens-nemo-characterization",
+        "hls-hlseval-generation",
+        "hls-hlseval-editing",
+        "hls-hlseval-pi-generation",
+        "hls-hlseval-parameterization",
+        "hls-hlseval-dataflow-agent",
+        "hls-fpgagent-78",
+        "hls-hlsmith-polybench",
+        "hls-bench4hls-generation",
+        "hls-chathls-generation",
+        "hls-chathls-debug",
+        "hls-chathls-tuning"
       ],
       "covered_tasks": "经典逻辑综合、IWLS现代学习/精确综合、HLS程序/应用、代理预测、DSE/agent与FPGA CAD",
       "remaining_limits": "有些原包取得但未执行CEC/HLS；数据多点并非独立IP，FPGA器件/工具版本跨域与真实后实现验收另核；PolyBench原始C包已取，部分派生HLS完整配置/标签仍待核。",

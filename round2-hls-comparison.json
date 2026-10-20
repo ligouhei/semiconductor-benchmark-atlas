@@ -1,0 +1,223 @@
+{
+  "status": "round2 active; source-based HLS capability comparison, not measured agent leaderboard",
+  "scope": "区分Csim、综合、RTLcosim、后PnR和实板；同源94/78、PolyBench与多次候选不叠加为独立IP；原paper与currentagent接口分开",
+  "items": [
+    {
+      "catalog_id": "hls-hlseval-generation",
+      "name": "HLS-Eval / original description-to-kernel generation",
+      "family": "HLS-Eval",
+      "input": "自然语言描述、单header与可见C++testbench；生成kernel不提供参考实现。原94来自8sourcegroups；生成实验只用PolyBench/MachSuite/CHStone/Rosetta/C2HLSC子集。",
+      "task": "生成符合接口的kernel，固定TB做C仿真与HLS综合。",
+      "metrics": "parse/compile/run/synth四级二值验收；run要求TBexit0。原paper每题n5,T.7，无放回组合pass@k；不等RTLcosim或板上通过。",
+      "native_baseline": "原paper四openmodels单轮；与新增Pi工具agent需同题/预算重比。",
+      "tools_and_access": "固定repo根LICENSE为AGPL3；上游各自许可。Vitis HLS原paper2024.1；current core122config+accel80config全部TOML实读且Gitblob匹配。含固定small PolyBench/float变体，202不是202独立IP。",
+      "trajectory_access": "原paper单轮响应；不是完整多步工具轨迹",
+      "limits": "公开TB可能被适配；94是原suite大小，不把每轨所有题数默认94，也不把当前目录202configs套旧paper分数。",
+      "source_snapshots": [
+        {
+          "id": "hls-hlseval-generation",
+          "record_sha256": "a6012c3be2b86fd5cc145fd1febdf7f45e0a955fa50a8a90e13950ed31a47ead",
+          "primary_sources": "https://arxiv.org/html/2504.12268v1; https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/hls_eval/eval.py; https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/LICENSE"
+        }
+      ]
+    },
+    {
+      "catalog_id": "hls-hlseval-editing",
+      "name": "HLS-Eval / original optimization-oriented code editing",
+      "family": "HLS-Eval",
+      "input": "已有HLSkernel/header/TB与编辑指令；looplabels、AP/fixedpoint转换、dataflow重构、tiling。",
+      "task": "按编辑意图改写，运行C仿真/综合验功能与可实现性。",
+      "metrics": "原paper主要parse/compile/run/synth pass@k，不自动以最终PPA改善率评分；looplabel容易任务与架构重构分开，AP转换需精度合同。",
+      "native_baseline": "原代码/nativecompiler与单轮LLM；标签添加成功不能当硬件优化成功。",
+      "tools_and_access": "固定repo根LICENSE为AGPL3；上游各自许可。Vitis HLS原paper2024.1；current core122config+accel80config全部TOML实读且Gitblob匹配。含固定small PolyBench/float变体，202不是202独立IP。",
+      "trajectory_access": "单轮编辑输出；可扩多步但信息条件改变",
+      "limits": "不同编辑轨用不同适用子集；功能测试有限，原paper无postroute/硬件验收；不把所有编辑题称agentic。",
+      "source_snapshots": [
+        {
+          "id": "hls-hlseval-editing",
+          "record_sha256": "82d522ca041cd61d0b8ab8e35419de82ac75e2c775bfc1fab256693f12626e20",
+          "primary_sources": "https://arxiv.org/html/2504.12268v1; https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/hls_eval/eval.py"
+        }
+      ]
+    },
+    {
+      "catalog_id": "hls-hlseval-pi-generation",
+      "name": "HLS-Eval / current Pi tool-agent kernel generation",
+      "family": "HLS-Eval",
+      "input": "agent目录只复制description/header/TB和所需TBdata，不复制goldkernel；可选挂载兼容Vitis/Vivado。",
+      "task": "Pi在容器内编辑kernel/用工具，提交后原始header/TB重建验证。",
+      "metrics": "kernel存在且header/TB字节未改才可继续；compile/run/synth分列。源码记录temperature字段但run_pi_agent调用不传它，不能据日志认定实际采样温度；n_samples默认1。",
+      "native_baseline": "同题zero-shot vsPi；额外工具调用、模型/时间成本需补计。",
+      "tools_and_access": "固定repo根LICENSE为AGPL3；上游各自许可。Vitis HLS原paper2024.1；current core122config+accel80config全部TOML实读且Gitblob匹配。含固定small PolyBench/float变体，202不是202独立IP。 agent支持只读工具安装挂载，自备工具与许可；当前runner不是新的独立数据集。",
+      "trajectory_access": "支持保存PiJSONL/HTML；固定tree未见sessions/trajectory命名文件，不证明外部没有数据集",
+      "limits": "公开测试可见；Csimexit0非形式等价或RTL正确性；未确认统一hidden评分/全量模型榜及公开轨迹集。",
+      "source_snapshots": [
+        {
+          "id": "hls-hlseval-pi-generation",
+          "record_sha256": "f94d9a7a28eadd7fa49021f7589712ed519a32ccf190ef252f233f31adc066d8",
+          "primary_sources": "https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/hls_eval/eval_agent_pi/eval_agent_pi.py; https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/hls_eval/eval_agent_pi/vitis.py"
+        }
+      ]
+    },
+    {
+      "catalog_id": "hls-hlseval-parameterization",
+      "name": "HLS-Eval / current agentic parameterization and Pareto study",
+      "family": "HLS-Eval",
+      "input": "完整原kernel工程；agent改kernel为Jinja模板，提交design_space.jsonl；给定point上限/part/clock。",
+      "task": "生成2至maxpoints个不同参数赋值；独立渲染、检查接口/原非kernel文件、Csim/综合。",
+      "metrics": "只有正确性/综合全过且worstcycles与LUT/FF/DSP/BRAM/URAM六项有限非负才进frontier。等目标去重，uniquefrontierfraction分母为所有提交points；无任意scalar总分，Pareto不等全局最优。",
+      "native_baseline": "同设置原始kernel及非agent搜索；currentflow关HLS自动pipeline/unroll/arraypartition，须另报原生默认自动优化baseline。",
+      "tools_and_access": "固定repo根LICENSE为AGPL3；上游各自许可。Vitis HLS原paper2024.1；current core122config+accel80config全部TOML实读且Gitblob匹配。含固定small PolyBench/float变体，202不是202独立IP。 docs示例max64points/xczu9eg/5ns，示例不是所有实验统一配置。",
+      "trajectory_access": "每sample支持prompt/trace、baseline和逐point报告；完整可下载实验轨迹集未确认",
+      "limits": "代码限制explicit接口pragma而非任意macro生成接口；有限TB不等全输入/RTL等价，unknownlatency不应补0；没有全量重现结果声明。",
+      "source_snapshots": [
+        {
+          "id": "hls-hlseval-parameterization",
+          "record_sha256": "1083ceb21b0e554f0bfe3fc8d2ecace32d975a3d1ce81a05b3470d4b2e80b269",
+          "primary_sources": "https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/hls_eval/eval_agent_pi/PARAMETERIZATION.md; https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/hls_eval/eval_agent_pi/eval_agent_pi_paramaterized.py"
+        }
+      ]
+    },
+    {
+      "catalog_id": "hls-hlseval-dataflow-agent",
+      "name": "HLS-Eval / iterative dataflow with LightningSim feedback",
+      "family": "HLS-Eval",
+      "input": "同参数化工程；tools-on与tools-off隔离条件，迭代次数/LightningSim预算需冻结。",
+      "task": "逐point Csim/综合后运行LightningSim，带deadlock/timeout/log反馈进入下一轮。",
+      "metrics": "Pareto的latency替换为LightningSim topmodulecycles，保留HLSestimate供对照；无有效latency不得pass。deadlock/timeout/failed/skipped逐点保留，非postroute或实板时钟。",
+      "native_baseline": "同题tools-on/off及原始kernel；关闭原生自动优化的设置仍需独立说明。",
+      "tools_and_access": "固定repo根LICENSE为AGPL3；上游各自许可。Vitis HLS原paper2024.1；current core122config+accel80config全部TOML实读且Gitblob匹配。含固定small PolyBench/float变体，202不是202独立IP。 Vitis安装与LightningSim版本要匹配，文档验证2024.1；tools-on含FIFOAdvisor。",
+      "trajectory_access": "支持每迭代trace/pointlog；未确认公开完整模型rollouts",
+      "limits": "工具存在/缺失的容器隔离为代码/文档声明，本轮未动态检验；LightningSim不等硅实现的全部物理效应。",
+      "source_snapshots": [
+        {
+          "id": "hls-hlseval-dataflow-agent",
+          "record_sha256": "270ce67e1ba51773f76b409fb83cc8b22143bef1fc6bbc5cf90bc9ff0aa4e005",
+          "primary_sources": "https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/hls_eval/eval_agent_pi/PARAMETERIZATION.md; https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/hls_eval/eval_agent_pi/eval_agent_pi_paramaterized_dataflow.py"
+        }
+      ]
+    },
+    {
+      "catalog_id": "hls-fpgagent-78",
+      "name": "FPGAgent / adapted 78-task HLS-Eval to U200 execution",
+      "family": "HLS-Eval",
+      "input": "94题筛选且部分接口调整后的78任务，规格/header；Vitis2022.2、U200/200MHz。",
+      "task": "搜索kernel，用生成的C++验证程序修复，生成host及xclbin并运行。",
+      "metrics": "分别报可综合、可执行、功能正确比例；对zero-shot pass@10。pool4初始化后保留2、3轮；每题硬件build一次、约3–5h，完整LLM/工具成本未齐。按table计算平均提升16.9/26.7/30.6是百分点。",
+      "native_baseline": "五模型zero-shot与框架、机制ablation；等候选数不自动等token/工具成本。",
+      "tools_and_access": "论文全文已读；未确认改后78完整manifest/代码/独立gold与许可、实板rawrun。",
+      "trajectory_access": "论文描述ErrorPool和运行经验，完整公开交互轨迹未确认",
+      "limits": "功能反思和host测试包含模型生成expectedoutputs，独立oracle边界仍待核；不能据生成checker自洽推出任意输入正确。与原94及HLS-Eval默认Csim不同评分链。",
+      "source_snapshots": [
+        {
+          "id": "hls-fpgagent-78",
+          "record_sha256": "f6ec2b93597690f76874c84161ee79ae729759539ea9ea7eecc421533f5efe9e",
+          "primary_sources": "https://arxiv.org/html/2608.23630v1"
+        }
+      ]
+    },
+    {
+      "catalog_id": "hls-hlsmith-polybench",
+      "name": "HLSmith / PolyBench expert-guided optimization protocol",
+      "family": "PolyBench-C",
+      "input": "plainC、header/interface、testinputs及独立CPUgold；文中还列参考HLS实现。Vitis2023.2/U280/300MHz；每实验kernelcohort不同。",
+      "task": "flash或multistep结合guardedexpertise改C/pragma；保留可行最佳候选，再做RTLcosim。",
+      "metrics": "综合估计cycles与RTL执行cycles分开。ChatHLS比较14尝试：14vs8过；8共同成功GM6.91x，去syr2k后7对4.24x，不能省略分母。exhaustivebestofsetup是搜索上界；matched4kernel适配RTLratio区间[1,2.56]含1。",
+      "native_baseline": "同输入/资源/模型、expertiseoff与on，ChatHLS同题子集；nativeHLS默认优化仍须同预算对照。",
+      "tools_and_access": "全文含165teacheractions/22train+5heldoutkernel等多种训练划分；未确认完整代码/165动作轨迹文件和授权。",
+      "trajectory_access": "描述将teacher轨迹用于SFT；全量可训练轨迹公开状态未确认",
+      "limits": "论文说明其CSV未包含生成RTL/outputtraces，不能据CSV独立value-replay；partial/unmatched额外attempt排除须保留。不是新28独立IP，也不以abstract4.24x代全cohort统计。",
+      "source_snapshots": [
+        {
+          "id": "hls-hlsmith-polybench",
+          "record_sha256": "3c593f0e1dcda283da837200f26350c7c82c13a297a51ced89b6985cbe2b2767",
+          "primary_sources": "https://arxiv.org/html/2608.06791v1"
+        }
+      ]
+    },
+    {
+      "catalog_id": "hls-bench4hls-generation",
+      "name": "Bench4HLS / 170-task generation and PPA envelope",
+      "family": "Bench4HLS",
+      "input": "170个task_n唯一的prompt/TB/reference三元组，来自多源与Verilog→HLS迁移；固定TopModule接口。",
+      "task": "生成HLS-C，Vitis编译/仿真/综合，Vivado综合后估功耗，可扩YAML DSE。",
+      "metrics": "currentPass@K为每题K次至少一次通过的经验比例，分母取实际存在designfiles；非无放回组合估计。PPA comparison每指标分别min，不保证同一候选。latency/资源delta为绝对差(ns/百分点)，powerdelta才是相对%；未知latency/resource有0初始化回退需核。",
+      "native_baseline": "reference实现、同K与同工具模型；多候选最优包络不能充单个设计Pareto点。",
+      "tools_and_access": "repoApache2，上游另许可；已核170prompt、170TB、170reference完整路径。2024.1/Artix7/10ns；powerTcl只synth/opt/report_power，未place/route或导入活动trace。",
+      "trajectory_access": "生成输出和工具日志可记录；原生多步agent轨迹非本套主要产物",
+      "limits": "currentcode不应泛称postPnR/实板或全流程cosim；仿真看logmarker；部分skipgen文件缺失会缩分母，应对照170manifest。论文图注百分比与当前CSVdelta定义需分开。",
+      "source_snapshots": [
+        {
+          "id": "hls-bench4hls-generation",
+          "record_sha256": "3d5e04e2d743d5da2f1e6f3fcb7aca9dd029541e3ebdc4395aa72be5e5614bca",
+          "primary_sources": "https://arxiv.org/html/2601.19941v1; https://github.com/zfsadik/Bench4HLS/blob/7fac5b356b0383e9463995e2c6b13a5fee27a62d/bench4hls/evaluator.py; https://github.com/zfsadik/Bench4HLS/blob/7fac5b356b0383e9463995e2c6b13a5fee27a62d/bench4hls/report.py; https://github.com/zfsadik/Bench4HLS/blob/7fac5b356b0383e9463995e2c6b13a5fee27a62d/tcl/vivado_power.tcl"
+        }
+      ]
+    },
+    {
+      "catalog_id": "hls-chathls-generation",
+      "name": "ChatHLS / generation",
+      "family": "ChatHLS experimental suite",
+      "input": "108题=85个HLS-Eval来源+23customspec，含FSM/counter等；每题goldTB。",
+      "task": "从自然语言生成HLS-C，再debug/优化。",
+      "metrics": "生成n20，分阶段CSIM/CSYN/COSIM与无放回组合pass@k；每设计两轮完整验证及最多5CSYN优化。",
+      "native_baseline": "固定工具/资源下baseline模型、HLSFixer/HLSTuner、nativeauto-pipeline；不同harness/采样预算分开。",
+      "tools_and_access": "fixedrepo204397cba1c4dfdd88cad1c8477f8db2fe038fbf根Apache2；论文ACL2026与repo可读。Vitis2022.1/ZCU106/100MHz；HF链接指向HLSFixer/HLSTuner模型repo；本轮未核全部权重/许可，更不等训练交互数据公开。上游/模型许可分别核。",
+      "trajectory_access": "repo可生成debug/优化记录，模型repo链接/权重声明不证明完整训练轨迹/提示/成本数据公开",
+      "limits": "108含继承85，不与HLS-Eval原94叠加为全新数据；当前目录不同计数需manifest去重。",
+      "source_snapshots": [
+        {
+          "id": "hls-chathls-generation",
+          "record_sha256": "1995ddf54715aa53aa850e3c01e26f88809402d9312e72710919968ed9caf6b7",
+          "primary_sources": "https://aclanthology.org/2026.acl-long.962.pdf; https://github.com/GEAR-SEU/ChatHLS-ACL-26/blob/204397cba1c4dfdd88cad1c8477f8db2fe038fbf/README.md; https://github.com/GEAR-SEU/ChatHLS-ACL-26/blob/204397cba1c4dfdd88cad1c8477f8db2fe038fbf/LICENSE"
+        }
+      ]
+    },
+    {
+      "catalog_id": "hls-chathls-debug",
+      "name": "ChatHLS / HLSFixer repair",
+      "family": "ChatHLS experimental suite",
+      "input": "32个正确设计按34种工具可识别错误注入得591测试case；buggycode/工具反馈。",
+      "task": "固定修改模型，变分析模型，以诊断和修复工具错误。",
+      "metrics": "n5报告pass@1；成功须CSIM/CSYN/COSIM。生成/调试/优化典型时限分别<3/<10/<30min是论文开销，不等统一硬budget。",
+      "native_baseline": "固定工具/资源下baseline模型、HLSFixer/HLSTuner、nativeauto-pipeline；不同harness/采样预算分开。",
+      "tools_and_access": "fixedrepo204397cba1c4dfdd88cad1c8477f8db2fe038fbf根Apache2；论文ACL2026与repo可读。Vitis2022.1/ZCU106/100MHz；HF链接指向HLSFixer/HLSTuner模型repo；本轮未核全部权重/许可，更不等训练交互数据公开。上游/模型许可分别核。",
+      "trajectory_access": "repo可生成debug/优化记录，模型repo链接/权重声明不证明完整训练轨迹/提示/成本数据公开",
+      "limits": "注入且工具显式报类型的筛选形成分布；591不是591独立IP。原始gold不可见条件、train/testsource重叠需核。",
+      "source_snapshots": [
+        {
+          "id": "hls-chathls-debug",
+          "record_sha256": "5aeb71d9dd344b13d8921776ef654bd27ab4db137350e136ea09f53cb06231b0",
+          "primary_sources": "https://aclanthology.org/2026.acl-long.962.pdf; https://github.com/GEAR-SEU/ChatHLS-ACL-26/blob/204397cba1c4dfdd88cad1c8477f8db2fe038fbf/README.md; https://github.com/GEAR-SEU/ChatHLS-ACL-26/blob/204397cba1c4dfdd88cad1c8477f8db2fe038fbf/LICENSE"
+        }
+      ]
+    },
+    {
+      "catalog_id": "hls-chathls-tuning",
+      "name": "ChatHLS / HLSTuner optimization",
+      "family": "ChatHLS experimental suite",
+      "input": "已有HLSkernel与目标资源约束，所选线代/密码/NNkernel与ref基线。",
+      "task": "改pragma和局部结构，修复优化失败并控制DSP/FF/LUT。",
+      "metrics": "latency cycles与DSP/FF/LUT；baseline为Vitis自动pipeline，不能当未优化kernel。最多5CSYN迭代；需同时报功能门/资源预算。",
+      "native_baseline": "固定工具/资源下baseline模型、HLSFixer/HLSTuner、nativeauto-pipeline；不同harness/采样预算分开。",
+      "tools_and_access": "fixedrepo204397cba1c4dfdd88cad1c8477f8db2fe038fbf根Apache2；论文ACL2026与repo可读。Vitis2022.1/ZCU106/100MHz；HF链接指向HLSFixer/HLSTuner模型repo；本轮未核全部权重/许可，更不等训练交互数据公开。上游/模型许可分别核。",
+      "trajectory_access": "repo可生成debug/优化记录，模型repo链接/权重声明不证明完整训练轨迹/提示/成本数据公开",
+      "limits": "训练4804样本来自20Rosettakernels；评测cohort与训练样本来源不等同，完整groupheldout与独立rawartifact待核。",
+      "source_snapshots": [
+        {
+          "id": "hls-chathls-tuning",
+          "record_sha256": "30b0605c66ef9bc5ee52a60226381fa13dad0ad711a6c8240273f91ba33766c9",
+          "primary_sources": "https://aclanthology.org/2026.acl-long.962.pdf; https://github.com/GEAR-SEU/ChatHLS-ACL-26/blob/204397cba1c4dfdd88cad1c8477f8db2fe038fbf/README.md; https://github.com/GEAR-SEU/ChatHLS-ACL-26/blob/204397cba1c4dfdd88cad1c8477f8db2fe038fbf/LICENSE"
+        }
+      ]
+    }
+  ],
+  "static_checks": {
+    "hlseval_config_audit": "202configs parse and match fixedGit; core122/accel80 with variants",
+    "bench4hls_metadata": "170 unique taskIDs each hasreference/TB path"
+  },
+  "source_files": [
+    "round2/hlseval-config-static-audit.json",
+    "round2/bench4hls-static-audit.json"
+  ]
+}
