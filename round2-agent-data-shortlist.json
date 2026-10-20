@@ -1,0 +1,273 @@
+{
+  "status": "第二轮12小时仍在进行；静态核查清单，不是训练授权或模型实验结果",
+  "as_of": "2026-10-20T12:40:31.819892+00:00",
+  "scope": "只发布派生研究摘要；原始轨迹/问题/答案/凭据不随网站重发。",
+  "records": [
+    {
+      "name": "ResizerAgent / released planner-selector traces and native-search controls",
+      "catalog_ids": [
+        "data-resizeragent-traces",
+        "pd-resizeragent-repair"
+      ],
+      "data_kind": "实际模型/工具交互与优化工件",
+      "quantity": "官方outputs.zip1.833GB/source.zip1.032GB均MD5与hash核；36agentruns×15iteration=540出现次数、1080JSONL/1050uniquehash，1432planrows。",
+      "authenticity": "真实planner/selector日志与native结果；16997eventrecords不等16997独立决策。",
+      "availability": "本轮实际下载、嵌套archive静态读取与表格核。",
+      "license_note": "根BSD3；上游ORFS/PDK、provider内容与设计许可另核。",
+      "caution": "并非全部run时序闭合；14个最终字段与最后可解析Write不齐、1个缺Write，要标repair/postprocessing。",
+      "sources": [
+        "https://vlsicad.ucsd.edu/Publications/Conferences/428/c428.pdf",
+        "https://github.com/ASU-VDA-Lab/ResizerAgent/tree/ae402b9bf00b5116b9f2743b3bd8f7c9aed52127",
+        "https://zenodo.org/records/21959752"
+      ]
+    },
+    {
+      "name": "COMPASS / SupplyBench-based query-agent trajectories",
+      "catalog_ids": [
+        "fab-supplybench-compass"
+      ],
+      "data_kind": "实际query-agent逐步轨迹",
+      "quantity": "2069trajectories/36503messages/17321toolfeedback，来源690questions×3（其中缺一）。",
+      "authenticity": "真实LLMquery-agent/图谱反馈；供应链图谱问题，不是晶圆设备控制。",
+      "availability": "本轮实际JSON/评分全量重聚合。",
+      "license_note": "代码AGPL3、上游图谱CCBYNCSA4.0分开。",
+      "caution": "大量重复问题/服务端点混用、自报SUCCESS≠F1；不能当2069独立硬件任务。",
+      "sources": [
+        "https://ceur-ws.org/Vol-3996/paper-5.pdf",
+        "https://github.com/wintechis/compass/tree/0c2184af6a4770a473235ab896540528c43cf38f",
+        "https://github.com/wintechis/supplybench"
+      ]
+    },
+    {
+      "name": "SemiKongBench-100 / synthetic fab operations",
+      "catalog_ids": [
+        "fab-semikongbench100-agent"
+      ],
+      "data_kind": "脚本reference episodes与状态模拟任务",
+      "quantity": "100tasks/100JSONL/100verifiers、200snapshots、2100scriptedtooltransitions；10fabs×10templates。",
+      "authenticity": "确定性reference replay，provider-native-style格式，不是实际模型providerrollout。",
+      "availability": "897selectedblobs核，reference/verifier/state交叉一致，2000Harbor复制资产hash一致。",
+      "license_note": "代码Apache2、数据CCBY4；非Aitomatic官方benchmark。",
+      "caution": "100条reference可以监督动作，但gold/eval必须隔离；作者800qualificationepisodes不等本轮运行800。",
+      "sources": [
+        "https://github.com/blobfishai/semiconductor-agent-simulation/blob/24eaa3e239839576041fc3b1ce48af611951ac63/README.md",
+        "https://github.com/blobfishai/semiconductor-agent-simulation/blob/24eaa3e239839576041fc3b1ce48af611951ac63/benchmark/semikongbench100/evaluation.py"
+      ]
+    },
+    {
+      "name": "OpenROAD Agent / EDA-Corpus-v2 aligned error-feedback training data",
+      "catalog_ids": [
+        "data-openroad-agent-correction-v2",
+        "pd-openroad-agent-script"
+      ],
+      "data_kind": "单步错误代码/真实工具报错/修复目标",
+      "quantity": "1739完整wrongcode-feedback对；258DB/32单stagebase行，各6wrongvariants；2972crossstageprompt-code另列。",
+      "authenticity": "原生OpenROAD报错矩阵+正确脚本，未见完整历史providertrace。",
+      "availability": "本轮29core/datafiles与所有工作簿结构/holdout对齐核。",
+      "license_note": "根BSD3，上游EDA-CorpusCCBY4/PDK另核。",
+      "caution": "DB一个variant缺message；140测试是20DB×6tones+20flow；运行无异常≠意图满足。",
+      "sources": [
+        "https://github.com/OpenROAD-Assistant/OpenROAD-Agent/tree/2b3889e0574b8167f15df8aee3d507b42ee83c14",
+        "https://doi.org/10.1109/ICLAD65226.2025.00039",
+        "https://bingyuew.github.io/publication/2025-06-26-iclad"
+      ]
+    },
+    {
+      "name": "EDA Corpus v1 / OpenROAD question-answer data",
+      "catalog_ids": [
+        "data-eda-corpus-qa-v1",
+        "data-eda-corpus-ps-v1"
+      ],
+      "data_kind": "公开单轮proseQA与工具脚本对",
+      "quantity": "当前增强581QA+943PS=1524有效行；非增强196+396=592，增强包含改写不另加。",
+      "authenticity": "人工/增强reference pairs，非多步agent工具interaction。",
+      "availability": "25Gitfiles、9组CSV/XLSX有效对逐行一致。",
+      "license_note": "CCBY4.0，保留归属；上游工具/设计另核。",
+      "caution": "README数量不同、padding空白、重复和sourcegroup分割须处理；旧API会随工具更新。",
+      "sources": [
+        "https://arxiv.org/html/2405.06676v1",
+        "https://github.com/OpenROAD-Assistant/EDA-Corpus/tree/473daeb20677758b612e1a9e30246231c02d133c"
+      ]
+    },
+    {
+      "name": "ProtocolLLM / public generations and lint-refinement companion",
+      "catalog_ids": [
+        "data-protocolllm-generations"
+      ],
+      "data_kind": "真实生成/局部lint-refinement对",
+      "quantity": "102rawJSON+22refinedJSON共261prompt-answer字段对，221HDL/221metricfiles；8提取SV为空。",
+      "authenticity": "模型输出与部分lint修订，不是完整功能仿真agent链。",
+      "availability": "592blobs核；62汇总row独立复算。",
+      "license_note": "根统一LICENSE未定位，公开可读不自动等商业训练授权。",
+      "caution": "Score仅lint+综合，不可当功能positive；未见UVM/TB/波形truth。",
+      "sources": [
+        "https://arxiv.org/html/2506.07945v2",
+        "https://github.com/amsheth/ProtocolLLM/tree/fba94a81b975b9b85c6e2c3c5da27d65021b1369"
+      ]
+    },
+    {
+      "name": "EDA-env / 57 completion and engineering-repair tasks",
+      "catalog_ids": [
+        "be-edaenv-engineering",
+        "be-edaenv-physical-opt"
+      ],
+      "data_kind": "任务与最终patch",
+      "quantity": "当前85tasks（57completion/28physicalopt）、85最终patch/hash与archive/Git身份核。",
+      "authenticity": "任务+已完成补丁，不是完整LLM多步采样history。",
+      "availability": "1295archivefiles与Git相符，作者完整trajectory明确未释放。",
+      "license_note": "依目录代码/数据和工具/PDK许可分别核，详记录。",
+      "caution": "论文103题不是当前85；patch不能自动补成中间动作/成本。",
+      "sources": [
+        "https://vlsicad.ucsd.edu/Publications/Conferences/436/c436.pdf",
+        "https://github.com/Ergodex-Labs/eda-env-iccad-26/tree/89dfcbed4376e2065b3917249f6c91f56dbf79bc",
+        "https://zenodo.org/records/22990248"
+      ]
+    },
+    {
+      "name": "AnalogGym-Opt / 358234 historical performance observations",
+      "catalog_ids": [
+        "data-analoggym-opt-historical"
+      ],
+      "data_kind": "数值优化历史性能表",
+      "quantity": "358234performanceCSVrows，73sources/18topologies；压缩23.23MB解压150.1MB。",
+      "authenticity": "电学performance observations，不是LLM对话/动作反馈。",
+      "availability": "官方压缩/展开hash与Gitblob核，全部flag/profile统计重算。",
+      "license_note": "代码MIT，历史数据/PDK与来源权利单独核。",
+      "caution": "缺对应TD/TBM transistorparameter向量，不能当完整W/L→performance surrogate pairs。",
+      "sources": [
+        "https://ieeexplore.ieee.org/document/11690621",
+        "https://doi.org/10.1109/TCAD.2026.3733612",
+        "https://github.com/Computing-Intelligent-Decision-Team/AnalogGym-Opt/tree/10093e3496ef2c7d06494d91d131b0cc5de6c25b"
+      ]
+    },
+    {
+      "name": "SpiceXplorer / PAM-4驱动器三轮布局共设计",
+      "catalog_ids": [
+        "analog-spicexplorer-pam4",
+        "analog-spicexplorer-lpf"
+      ],
+      "data_kind": "数值optimizer trials与策展工程记录",
+      "quantity": "PAM4三轮800optimizertrials；LPF37curated尺寸行/14layoutiterations。",
+      "authenticity": "真实优化/工程摘要，但数值trial不等LLM agentturn。",
+      "availability": "已下载并核汇总与边界。",
+      "license_note": "主平台PolyForm Noncommercial；两个case子库未定位独立LICENSE。",
+      "caution": "跨轮reward/measurement变化、PEX/PVTmiss与LVS边界保留；不能当所有达标。",
+      "sources": [
+        "https://github.com/MacAnalog/agentic-design-pam4-driver-ihp130/blob/f81f417fa8ef6b4dbe786d7e04022eb0bd7466bf/README.md",
+        "https://github.com/MacAnalog/agentic-design-pam4-driver-ihp130/blob/f81f417fa8ef6b4dbe786d7e04022eb0bd7466bf/layout/codesign/flow.yaml",
+        "https://github.com/MacAnalog/agentic-design-pam4-driver-ihp130/blob/f81f417fa8ef6b4dbe786d7e04022eb0bd7466bf/layout/codesign/project_setup.yaml",
+        "https://github.com/MacAnalog/agentic-design-pam4-driver-ihp130/blob/f81f417fa8ef6b4dbe786d7e04022eb0bd7466bf/layout/codesign/results/r3/trials.jsonl",
+        "https://github.com/MacAnalog/dn-003-afe-lpf-250hz-ihp130/blob/cc24b6db5523be530f1143cbf383ccd38b246f46/README.md",
+        "https://github.com/MacAnalog/dn-003-afe-lpf-250hz-ihp130/blob/cc24b6db5523be530f1143cbf383ccd38b246f46/doc/sizing-history/rounds.json",
+        "https://github.com/MacAnalog/dn-003-afe-lpf-250hz-ihp130/blob/cc24b6db5523be530f1143cbf383ccd38b246f46/signoff/pre-pvt/scorecard.json",
+        "https://github.com/MacAnalog/dn-003-afe-lpf-250hz-ihp130/blob/cc24b6db5523be530f1143cbf383ccd38b246f46/layout/H12-pdk-cap/scorecard_post.json",
+        "https://github.com/MacAnalog/dn-003-afe-lpf-250hz-ihp130/blob/cc24b6db5523be530f1143cbf383ccd38b246f46/layout/H12-pdk-cap/REVIEW.yaml"
+      ]
+    },
+    {
+      "name": "HighTide / 13个skill与17份决策记忆（非独立benchmark）",
+      "catalog_ids": [
+        "pd-hightide-agent-memory",
+        "pd-hightide-flow-suite"
+      ],
+      "data_kind": "策展决策记忆/skills",
+      "quantity": "13currentSKILL.md/17DECISIONS；63design-platform声明来自17sourcegroups/22variantpaths。",
+      "authenticity": "策展知识/决策摘要，非完整rawtoolrollout。",
+      "availability": "100选定blobs与配置身份核。",
+      "license_note": "依仓库代码与各设计/PDK许可，详记录。",
+      "caution": "cacheOK/final不等完整功能/时序/DRC闭合；训练检索记忆与benchmarkinputs隔离。",
+      "sources": [
+        "https://arxiv.org/html/2606.04126v1",
+        "https://github.com/VLSIDA/HighTide/blob/157644588d12732779acfc0d34ece49ed9b39bbb/.claude/skills/optimize-ppa/SKILL.md",
+        "https://github.com/VLSIDA/HighTide/blob/157644588d12732779acfc0d34ece49ed9b39bbb/designs/src/NVDLA/DECISIONS.md",
+        "https://github.com/VLSIDA/HighTide/blob/157644588d12732779acfc0d34ece49ed9b39bbb/.github/workflows/benchmark-status.yml",
+        "https://github.com/VLSIDA/HighTide/blob/157644588d12732779acfc0d34ece49ed9b39bbb/MODULE.bazel",
+        "https://github.com/VLSIDA/HighTide/blob/157644588d12732779acfc0d34ece49ed9b39bbb/defs.bzl",
+        "https://github.com/VLSIDA/HighTide/blob/157644588d12732779acfc0d34ece49ed9b39bbb/docs/designs.md",
+        "https://github.com/VLSIDA/HighTide/blob/157644588d12732779acfc0d34ece49ed9b39bbb/tools/benchmark_manifest.py",
+        "https://github.com/VLSIDA/HighTide/blob/157644588d12732779acfc0d34ece49ed9b39bbb/tools/summary.sh",
+        "https://github.com/VLSIDA/HighTide/blob/157644588d12732779acfc0d34ece49ed9b39bbb/tools/fetch_cache.sh"
+      ]
+    },
+    {
+      "name": "AgenticTCAD / 中间数据与SFT构建资源（非独立benchmark）",
+      "catalog_ids": [
+        "device-agentictcad-corpus",
+        "device-agentictcad-codegen"
+      ],
+      "data_kind": "代码生成评测与中间SFT语料",
+      "quantity": "1004evalJSON/Parquet字段一致；7765main+7919分片中间样本。",
+      "authenticity": "许多中间prompt含TODO，不是全30000最终SFT对或完整agent轨迹。",
+      "availability": "公开作者repo已静态下载/去重/格式核。",
+      "license_note": "按作者repo及上游TCAD手册/商业工具条款核，不能仅按论文开放标签判断。",
+      "caution": "main/shards/eval有重合但最终训练集未知，不能武断证明模型实际train/test泄漏。",
+      "sources": [
+        "https://arxiv.org/html/2512.23742v2",
+        "https://github.com/guangxifan/llm4tcad_flow/blob/c6f026d4e23c08420f24b3785ea84633337b49fa/build_dataset/README.md",
+        "https://github.com/guangxifan/llm4tcad_flow/blob/c6f026d4e23c08420f24b3785ea84633337b49fa/build_dataset/prompt_gen_Qwen72B_sub_dataset/sampled_dataset.json",
+        "https://github.com/guangxifan/llm4tcad_flow/blob/c6f026d4e23c08420f24b3785ea84633337b49fa/build_dataset/final_data/build_final_data.py",
+        "https://github.com/guangxifan/llm4tcad_flow/blob/c6f026d4e23c08420f24b3785ea84633337b49fa/tcad_llm_sft/train/data_parallel_sft.py",
+        "https://github.com/guangxifan/llm4tcad_flow/blob/c6f026d4e23c08420f24b3785ea84633337b49fa/tcad_llm_sft/datasets/eval_dataset/qwen_eval.json",
+        "https://github.com/guangxifan/llm4tcad_flow/blob/c6f026d4e23c08420f24b3785ea84633337b49fa/tcad_llm_sft/datasets/eval_dataset/qwen_eval.parquet",
+        "https://github.com/guangxifan/llm4tcad_flow/blob/c6f026d4e23c08420f24b3785ea84633337b49fa/tcad_llm_sft/eval/utils.py",
+        "https://github.com/guangxifan/llm4tcad_flow/blob/c6f026d4e23c08420f24b3785ea84633337b49fa/tcad_llm_sft/eval/generate_codes.py"
+      ]
+    },
+    {
+      "name": "VPEvolve / 主评测：Calibre recipe agent",
+      "catalog_ids": [
+        "litho-vpevolve-commercial",
+        "litho-vpevolve-open-testbed"
+      ],
+      "data_kind": "recipe-agent框架/配套光学testbed",
+      "quantity": "同20GDS窗口、R0/源码/独立forward-resist simulator；商用Calibre主协议另依赖。",
+      "authenticity": "框架/输入资源不自动等完整商业toolrollout数据。",
+      "availability": "同家族两记录：主评测与配套仿真资源，不是两套独立bench。",
+      "license_note": "Apache2及ACE模板上游许可；Calibre/工艺manual/model自备。",
+      "caution": "开放analyticpreset不能替商业model/deck、recipe/MRC/SRAF硬门；nominalEPE不等硅测。",
+      "sources": [
+        "https://arxiv.org/abs/2609.32473",
+        "https://arxiv.org/pdf/2609.32473v1",
+        "https://github.com/True-Litianyi/VPEVOLVE_code",
+        "https://github.com/True-Litianyi/VPEVOLVE_code/blob/5d7bbdd189be450179a423c4df2409643239bc76/README.md"
+      ]
+    },
+    {
+      "name": "QuArch v1.0 / architecture recall MCQ",
+      "catalog_ids": [
+        "arch-quarch-mcq",
+        "arch-quarch-frq"
+      ],
+      "data_kind": "仅公开输入样例／完整评测受限",
+      "quantity": "20FRQ+2MCQ明文输入，答案加密；完整2671QA需要作者授权，privateholdout不释放。",
+      "authenticity": "知识/推理QA，不是工具轨迹。",
+      "availability": "本轮读harness/样例元数据，未取/解密受限答案。",
+      "license_note": "需作者accessagreement，禁止未经授权再分发/训练；不把评测申请当训练授权。",
+      "caution": "源码可读/论文有SFT实验不等新版gatedeval可拿来训练。",
+      "sources": [
+        "https://arxiv.org/html/2510.22087v3",
+        "https://github.com/harvard-edge/quarch-eval/tree/2df4734692f9783a9978d4d4698ff25f391ced41",
+        "https://quarch.ai/"
+      ]
+    },
+    {
+      "name": "AGAPI-Agents / four-workflow repeated execution study",
+      "catalog_ids": [
+        "device-agapi-workflow-repeat"
+      ],
+      "data_kind": "教学notebook与局部stdout",
+      "quantity": "17participantnotebooks+1clientexample；主体201codecells/118stdoutobjects，80正式workflowtrials完整history未取得。",
+      "authenticity": "教学工作流示范，非正式80trialsprovider数据。",
+      "availability": "部分下载含凭据样式字串已局部隔离/脱敏，仅读干净副本，未使用凭据。",
+      "license_note": "根Apache2client；云backend/API/models/data另依赖。",
+      "caution": "未重发rawnotebooks；execution_count清空不证明未运行，stdout不等动作/观察/状态完整链。",
+      "sources": [
+        "https://arxiv.org/html/2512.11935v2",
+        "https://doi.org/10.1021/acs.jpclett.6c00837",
+        "https://doi.org/10.1021/acs.jpclett.6c00837.s001",
+        "https://github.com/atomgptlab/agapi/tree/b367c87d99cec479737592b05883495df920e19e",
+        "https://github.com/atomgptlab/aai4science/tree/01d7630cd9914a6991ce72b2f7f6627f2774184e"
+      ]
+    }
+  ]
+}
