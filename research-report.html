@@ -2,10 +2,10 @@
 <html lang="zh-CN"><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>芯片行业 benchmark 分类研究 · 工作稿</title><style>
 body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:0}main{max-width:1400px;margin:auto;padding:36px}h1,h2,h3{line-height:1.35}h1{font-size:32px}h2{margin-top:40px;border-top:2px solid #ced9e4;padding-top:24px}a{color:#075ca8}table{border-collapse:collapse;background:white;width:100%;font-size:14px}th,td{border:1px solid #dbe2ea;padding:12px;vertical-align:top;text-align:left}th{background:#eaf0f7}td:first-child{min-width:160px}nav,.note{background:#e8f0fa;border-radius:10px;padding:20px}details{background:white;border:1px solid #d5e0ec;margin:12px 0;padding:16px;border-radius:8px}summary{font-weight:650;cursor:pointer}dt{font-weight:bold;margin-top:12px}dd{margin-left:0}small,.muted{color:#58697b}.tag{display:inline-block;padding:2px 8px;border-radius:5px;background:#e8eff7;font-size:12px}.tablewrap{overflow:auto}@media print{body{background:white}main{padding:0}details{break-inside:avoid}nav{display:none}a{color:#203044}td{font-size:10px}}
 </style><main><p><a href="index.html">← 返回交互式 Benchmark 表格</a></p><h1>芯片行业 benchmark 分类研究</h1>
-<p class="muted">工作稿 · 研究起点 2026-10-19 · 生成时间 2026-10-20T13:57+08:00（北京时间）</p>
+<p class="muted">工作稿 · 研究起点 2026-10-19 · 生成时间 2026-10-20T14:05+08:00（北京时间）</p>
 <div class="note"><a href="agentic-research.html">Agentic 续查专题：11项新增研究对象与开放边界</a> · <a href="agentic-followup.json">结构化协议</a></div>
 <div class="note"><a href="round2-research.html">第二轮12小时续研（进行中）：首批新增协议与证据边界</a> · <a href="round2-research-update.json">结构化增量</a></div>
-<div class="note"><strong>研究仍在进行。</strong>本稿包含 589 条任务/版本记录，归并为 335 个家族/对象。记录中也包含公开数据集、方法实验、工具示例和内部评测线索；这些数量不能解释为同等成熟的独立公开 benchmark 数量。12 小时研究尚未完成，待核验字段均保留，完整覆盖与最终优先级尚待补齐。</div>
+<div class="note"><strong>研究仍在进行。</strong>本稿包含 597 条任务/版本记录，归并为 337 个家族/对象。记录中也包含公开数据集、方法实验、工具示例和内部评测线索；这些数量不能解释为同等成熟的独立公开 benchmark 数量。12 小时研究尚未完成，待核验字段均保留，完整覆盖与最终优先级尚待补齐。</div>
 <div class="note"><strong>补订说明：</strong>2026-10-20补订：原12小时清单遗漏VPEvolve，OPC agentic覆盖审核不充分。现补入商业Calibre recipeagent协议与开放光学testbed两轨（同一家族），并更正此前容易被理解为该方向没有已有评测的表述。此补订发生在原12小时交付之后；目录仍不是全行业穷尽证明。 本次另续查新增11项研究对象（含待开放/部分协议），详见Agentic专题；VPEvolve配套testbed已显式标记非独立Agent benchmark。 <a href="research-corrections.json">更正记录</a></div>
 <p>本研究围绕芯片设计与制造中的工作任务分类。每条记录回答：给模型什么、让它完成什么、交付什么、由谁按什么指标评分，以及成熟软件已经覆盖到哪一层。成品 CPU/GPU 与微体系结构性能负载在边界组单列：其输入是程序、模型和运行数据，不是设计规格、网表或工艺规则；不直接证明EDA能力。</p>
 <p><a href="research-overview.html">从简明阅读总览开始</a> · <a href="benchmark-catalog-zh.csv">中文列名CSV</a></p><nav><strong>分类索引</strong><ol>
@@ -15,16 +15,16 @@ body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:
 <li><a href="#group-3">综合、HLS 与 FPGA 加速器</a> · 72 条</li>
 <li><a href="#group-4">数字后端：布局布线、预测与优化</a> · 146 条</li>
 <li><a href="#group-5">模拟后端：版图与物理实现</a> · 15 条</li>
-<li><a href="#group-6">制造、光刻、OPC 与良率</a> · 61 条</li>
+<li><a href="#group-6">制造、光刻、OPC 与良率</a> · 68 条</li>
 <li><a href="#group-7">测试：模拟与混合信号缺陷仿真</a> · 3 条</li>
 <li><a href="#group-8">测试：数字 DFT、ATPG、后硅与调试</a> · 13 条</li>
 <li><a href="#group-9">先进封装：芯粒、3D 实现与热</a> · 20 条</li>
-<li><a href="#group-10">器件：电气建模、参数提取与仿真</a> · 8 条</li>
+<li><a href="#group-10">器件：电气建模、参数提取与仿真</a> · 9 条</li>
 <li><a href="#group-11">边界：PCB工程、板级射频与电磁仿真</a> · 4 条</li>
 <li><a href="#group-12">边界：既有加速器上的工作负载映射</a> · 2 条</li>
 <li><a href="#group-13">边界：成品性能与微体系结构工作负载</a> · 23 条</li>
 </ol><a href="catalog.csv">下载 CSV</a> · <a href="catalog.json">下载 JSON</a> · 进度与未完成事项（本地研究附件） · <a href="#coverage-limits">已有覆盖与具体缺口</a></nav>
-<p>来源存档与完整性索引（本地研究附件）：6687 条检索/下载记录，6431 个本地文件完成哈希核对，完整性异常 0 项。492/589 条目录记录至少有一个精确URL或相同GitHub repo/ref/path的存档关联。此比例不是研究准确率：入口链接与实际论文/脚本常不同，完整逐字段证据映射仍待补，下载与哈希匹配也不等事实已被来源支持。</p>
+<p>来源存档与完整性索引（本地研究附件）：6724 条检索/下载记录，6467 个本地文件完成哈希核对，完整性异常 0 项。500/597 条目录记录至少有一个精确URL或相同GitHub repo/ref/path的存档关联。此比例不是研究准确率：入口链接与实际论文/脚本常不同，完整逐字段证据映射仍待补，下载与哈希匹配也不等事实已被来源支持。</p>
 <h2>分类与判断方法</h2><p>按“领域阶段 × 任务层次 × 证据成熟度”交叉归类。任务层次包括底层数值或组合优化、性能预测与代理模型、固定工具参数调优、多步工具工作流，以及端到端工程闭环。公开可下载代码、公开可下载数据、可重建标签、独立受保护评分和可商用，分别核验。</p><p>时效性从工艺/规模/规则、基线强度、信息条件、独立评价及实际约束判断。经典基准可以仍适合算法研究；新发布的基准也可能只有弱检查器、内部数据或未完整发布的流程。研究价值判断是分析结论，和来源中直接报告的事实分开。</p>
 <h2>目前已核实的关键区别</h2><ul>
 <li>维护替代与任务饱和分开：<a href="#rtl-masterrtl-power">MasterRTL</a> 作者已明确停止旧仓库维护并推荐 RTL-Timer，因此新工作应优先检查后继实现。此证据支持实现版本替代，不能证明早期功耗预测已解决；其功耗特征还需要 EDA 提取活动率，与纯 RTL 输入分轨。</li>
@@ -10158,6 +10158,13 @@ body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:
 <tr><td><a href="#litho-vpevolve-open-testbed">VPEvolve / 配套仿真资源（非独立 Agent benchmark）</a><br/><small>arXiv2609.32473v1 (2026-09-26)；public repo5d7bbdd189be450179a423c4df2409643239bc76；2026-10-20用户指出遗漏后的补订</small><br/><span class="tag">VPEvolve配套开放testbed；不是第二套独立agent benchmark</span></td><td>20个FreePDK45衍生GDS窗口：10Poly(9/0)、10Metal1(11/0)，各层五密度组各2；每例10×10µm评分core+2µm halo。20唯一GDS hash，全部公开manifest/source hash匹配；是同源全芯片裁剪窗口，非20独立芯片。 同一版图集合配独立analytic193nm配置/光学mode；输入mask与像素尺度，可选GDS栅格化区域/halo/tiles。</td><td>开放光学/光阻前向仿真与梯度mask示例，可用于独立layout-level研究；该simulator组件本身不包含商业recipe纠正与Calibre评价链。<p><strong>输出：</strong>aerial/exposed-aerial/logits/probability及硬阈值resist、图像/数组和梯度。</p></td><td>开放preset193nm/NA1.35/annularσ0.6–0.9/5nm nativepixel/60SOCSmode、focus−30/0/+30nm；可验证预测或优化成本/误差，但必须另外固定目标、测点、EPE/PVB/MRC和预算。示例probability.mean().backward或resist图存在，不是主paperSR/0.1nm成功。无统一独立hiddenagent排行榜，不能直接套商业表EPE/PVB分数。<p class="muted">与主评测是同一工作/同一20窗口，目录为区分任务层次保留资源记录，不应相加为两套独立benchmark。与commercial条目共用20窗口，不新增20独立IP。preset是analytic配置，不是随附foundry/Calibre校准模型；开放光学sim可用不等commercialrecipe主实验可无依赖复现。原始论文的layer-quality阈值/商业MRC/SRAF验收不可用近似图像loss替代。</p></td></tr>
 <tr><td><a href="#fab-semikongbench100-agent">SemiKongBench-100 / synthetic fab operations</a><br/><small>agentic续查2026-10-20；semikongbench:24eaa3e239839576041fc3b1ce48af611951ac63</small><br/><span class="tag">公开100状态任务/工具/状态差分评分与参考轨迹</span></td><td>10syntheticfab×10workflows=100任务；每题20证据文件、多格式文档，task-local24SQLite表；都是新编合成数据，非真实fabrecords。</td><td>用38provider-shaped tools/11MCPservers或CLI/REST进行调查、计算、处置、写入业务记录并回读，保持无关状态不变。<p><strong>输出：</strong>最终答案、业务数据库状态和tooltrace。</p></td><td>26确定性criteria共100SemiOpsScore：证据发现12/分析20/决策10/状态执行30/回读20/范围保持8；sample任务含独立rubric。部分得分不等全任务通过；参考oracle/replay/6adversarialcontrols是资格控制，不是LLM成绩。<p class="muted">作者明确非Aitomatic/SemiKong/AIAlliance官方bench。完全合成状态机，不能推真实蚀刻/CMP/OPC物理仿真、真实MES对接或工艺收益。</p></td></tr>
 <tr><td><a href="#fab-semibench-virtual-process">Semibench / virtual semiconductor synthesis microtasks</a><br/><small>AVS2025官方AIML-ThP-1；2025-09-25</small><br/><span class="tag">官方会议摘要确认的协议；完整数据/评分器未确认</span></td><td>虚拟实验工具、可访问信息和唯一解microtask；选ALD precursor、sputter target/power或RIErecipe。</td><td>调用虚拟工具，配置并输出合成步骤序列以满足指定问题。<p><strong>输出：</strong>工具配置与合成步骤序列。</p></td><td>摘要称按预测方案离groundtruth的距离定量评估；任务数、精确距离/单位、预算和阈值未披露，不编造成功率。<p class="muted">虚拟工艺不是fab实测或量产收益；不同于facebookresearch/SemiBench网页QA，应区分同名对象。</p></td></tr>
+<tr><td><a href="#fab-ldu-triage">LDU-Bench / A：缺陷分流</a><br/><small>arXiv2608.03078v1(2026-08-04)</small><br/><span class="tag">论文benchmark分轨；完整数据/评分工件公开未确认</span></td><td>1761张光刻IC-SEM review图，BEOL/DEP/DPR等工序背景，原图加冻结任务提示。</td><td>对图像给good/defect二分类<p><strong>输出：</strong>结构化good/defect标签</p></td><td>macro-F1主指标、accuracy辅助；非法JSON/标签/空答案留在分母，按错误/缺失计。 LCS_p=((S_A^p+S_B^p+S_C^p+S_D^p)/4)^(1/p)，主p=.5；输入各任务汇总分，不是逐图完整工程闭环成功率。表1六行与舍入容差内重算一致。 主文称输出上限统一1024，但附录Claude/MiniMax/Gemma为512、Qwen/GLM1024，GPT未暴露控制沿用endpoint默认；按实际adapter分列。温度0仅适用于暴露接口，重试数/超时各异；未确认总token/美元/图像费用。<p class="muted">分类高分不推出形貌/定位/工艺因果能力。 四任务独立提示/评分以避免级联错误，非同一agent依次完成四步。A/B同1761图，C984、D532，合计5038是任务实例数，非5038独立图像；六模型30228实例及加AnomalyGPT32973复算一致。</p></td></tr>
+<tr><td><a href="#fab-ldu-morphology">LDU-Bench / B：形貌类别</a><br/><small>arXiv2608.03078v1(2026-08-04)</small><br/><span class="tag">论文benchmark分轨；完整数据/评分工件公开未确认</span></td><td>与A相同1761张图，normal+11种defect形貌标签。</td><td>按固定分类体系识别缺陷形貌<p><strong>输出：</strong>受控形貌标签</p></td><td>macro-F1为主、accuracy辅助；CMD在易混类别对上比较label-only与definition-guided，是诊断子集，不能用CMD分代完整B分。 LCS_p=((S_A^p+S_B^p+S_C^p+S_D^p)/4)^(1/p)，主p=.5；输入各任务汇总分，不是逐图完整工程闭环成功率。表1六行与舍入容差内重算一致。 主文称输出上限统一1024，但附录Claude/MiniMax/Gemma为512、Qwen/GLM1024，GPT未暴露控制沿用endpoint默认；按实际adapter分列。温度0仅适用于暴露接口，重试数/超时各异；未确认总token/美元/图像费用。<p class="muted">类别定义跨fab可变；论文独立盲标一致性不等跨厂泛化。 四任务独立提示/评分以避免级联错误，非同一agent依次完成四步。A/B同1761图，C984、D532，合计5038是任务实例数，非5038独立图像；六模型30228实例及加AnomalyGPT32973复算一致。</p></td></tr>
+<tr><td><a href="#fab-ldu-localization">LDU-Bench / C：粗定位</a><br/><small>arXiv2608.03078v1(2026-08-04)</small><br/><span class="tag">论文benchmark分轨；完整数据/评分工件公开未确认</span></td><td>984个带mask空间标注的样本；模型接收图像，mask派生GT供评分。</td><td>输出缺陷xyxy框<p><strong>输出：</strong>可解析且合法的边界框</p></td><td>每图DICU=2*IoU*GTcoverage/(IoU+GTcoverage)，报告meanDICU；非法/无法解析框得0，留分母。它结合区域覆盖与IoU，不等分割mIoU或纳米EPE。 LCS_p=((S_A^p+S_B^p+S_C^p+S_D^p)/4)^(1/p)，主p=.5；输入各任务汇总分，不是逐图完整工程闭环成功率。表1六行与舍入容差内重算一致。 主文称输出上限统一1024，但附录Claude/MiniMax/Gemma为512、Qwen/GLM1024，GPT未暴露控制沿用endpoint默认；按实际adapter分列。温度0仅适用于暴露接口，重试数/超时各异；未确认总token/美元/图像费用。<p class="muted">整图框GTcoverage=1却DICU仅约.0663，不能仅用coverage冒充定位。附录Gemma951/984合法框、Qwen982/984；缺框不能删掉。 四任务独立提示/评分以避免级联错误，非同一agent依次完成四步。A/B同1761图，C984、D532，合计5038是任务实例数，非5038独立图像；六模型30228实例及加AnomalyGPT32973复算一致。</p></td></tr>
+<tr><td><a href="#fab-ldu-cause">LDU-Bench / D：图像条件原因归因</a><br/><small>arXiv2608.03078v1(2026-08-04)</small><br/><span class="tag">论文benchmark分轨；完整数据/评分工件公开未确认</span></td><td>532个专家review的图像条件cause参考；没有配套工艺日志、recipe/设备状态与时序记录。</td><td>预测cause标签并给简短可见证据解释<p><strong>输出：</strong>受控cause与rationale</p></td><td>Sem精确/alias=1、同supergroup=.5、其他0；S_D=.7*Sem+.3*KeyF1。固定标签/alias/keyword规则评分，主分无LLMjudge；EFS为人工抽样解释faithfulness诊断，不入LCS。 LCS_p=((S_A^p+S_B^p+S_C^p+S_D^p)/4)^(1/p)，主p=.5；输入各任务汇总分，不是逐图完整工程闭环成功率。表1六行与舍入容差内重算一致。 主文称输出上限统一1024，但附录Claude/MiniMax/Gemma为512、Qwen/GLM1024，GPT未暴露控制沿用endpoint默认；按实际adapter分列。温度0仅适用于暴露接口，重试数/超时各异；未确认总token/美元/图像费用。<p class="muted">从可见图像匹配参考原因，不是完整工艺因果诊断、根因干预或recipe优化；未确认完整alias/keyword表公开。 四任务独立提示/评分以避免级联错误，非同一agent依次完成四步。A/B同1761图，C984、D532，合计5038是任务实例数，非5038独立图像；六模型30228实例及加AnomalyGPT32973复算一致。</p></td></tr>
+<tr><td><a href="#litho-lithogrpo-protocol">LithoGRPO / flow+GRPO掩膜生成方法评测</a><br/><small>arXiv2606.00228v1；ICML2026poster61189；repof694498f1523efb89381fd9fb8984247f166095e</small><br/><span class="tag">复用LithoBench的方法实验；当前公开代码仅部分组件</span></td><td>LithoBench MetalSet/StdMetal/ViaSet/StdContact目标/成对掩膜，原区域2048×2048nm²，处理为512²图。</td><td>预训练flow→SFT→GRPO，按L2/PVB/EPE/shot反馈训练生成掩膜。<p><strong>输出：</strong>二值掩膜与LithoBench的L2/PVB/EPE/传统shot/runtime。</p></td><td>reward为各指标除SFT末baseline值后的负均匀和；训练用fastshot，推理报告传统shot。EPE为15nm容差下的采样违规计数，可为0但仍有容差内误差。G6、约87M U-Net、默认1step；四RTX3090，每stage&lt;8h为论文开销，非统一agent评测硬budget。<p class="muted">StdContact从ViaSet模型再SFT/RL，不是纯zero-shot OOD；主文StdContact SFT50epochs而附表100，需固定实际配置后重比。fastoverlap rectangle set-cover与传统greedy分解不同；高rank相关不等数值/掩膜写入物理一致。所发fastcounter设CBC300s上限，随后直接计x=1而未核solverstatus，不能默认每次证明ILP最优。学术光刻模型，不是Calibre recipe评分。</p></td></tr>
+<tr><td><a href="#litho-binaryflow-final">Binary discrete-flow OPC / 冻结final raw N=1</a><br/><small>repob971fdcab4e2ef024cdd8009c4d66c2e474d9497；manuscript暂无persistentID</small><br/><span class="tag">公开方法代码/协议/数表；复用上游数据，weights未随包</span></td><td>MetalSet成对训练，sortedbasename90/10；StdMetal271+ICCAD2013十图终测，上游固定LithoBench9c74e822。</td><td>64NFE CTMC二值采样，ST fine-tune后冻结step1500；256²mask nearest上采样到2048²评分，不做cleanup或选择。<p><strong>输出：</strong>逐cell/seed的EPE违规计数与汇总。</p></td><td>主seed42，其他43/44取三seed均值不是best-of3。公开281行重算：StdMetal2.642066与三seed2.766298；ICCAD2013 9.4与8.633333。仅为所发数表静态算术一致，无模型实跑。<p class="muted">完整训练/验证图像名单身份仍需上游工件核；无fab校准/DRC签核。checkpointSHA存在不证明训练数据授权或数值复现；论文版本与实际源一致性仅作者provenance声明。</p></td></tr>
+<tr><td><a href="#litho-binaryflow-capability">Binary discrete-flow OPC / 固定dev best-of-N与cleanup</a><br/><small>repob971fdcab4e2ef024cdd8009c4d66c2e474d9497</small><br/><span class="tag">同方法开发集能力审计；非第二独立终测集</span></td><td>固定32devcells，每cell8候选，baseline/finetuned与raw/cleanup四设置共1024行。</td><td>以同一mask的2048²softEPE选择，按N1/2/4/8全部候选子集精确平均；cleanup为256²closingdisk2及删面积&lt;64的前景块。<p><strong>输出：</strong>选中candidate及EPE/PVB、256²row-scan shot/MRC proxies、validity。</p></td><td>13696subset行对应2模型×2paths×32cells×[C(8,1)+C(8,2)+C(8,4)+C(8,8)]。本轮独立重建全部子集与softEPE/tie-ID选择，0差异；cleanupfinetuned EPE N1 .34375→N8 .0625，非final-test结果。<p class="muted">validnominal门是contourproxy&lt;2且MRCproxy≤5；低EPE与validity分别报，不能以0EPE称通过签核。dev候选数扩增有额外仿真/采样预算，不能等同单轮agent改进或32独立新IP。开发32名单与所发4×20heldouttier无交集已核，仍需完整源图划分核。</p></td></tr>
 </tbody></table></div>
 <details id="litho-lithobench"><summary>LithoBench / Mask optimization · 制造/光刻仿真与掩模优化</summary><dl>
 <dt>版本/时间</dt><dd>NeurIPS2023；当前固定commit 9c74e82218e377eaf6d02d113fc1ce6e36c92aa6</dd>
@@ -11318,6 +11325,138 @@ body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:
 <dt>一手来源</dt><dd><ul>
 <li><a href="https://www.avsconferences.org/AVS2025/Sessions/Schedule/83957">https://www.avsconferences.org/AVS2025/Sessions/Schedule/83957</a></li>
 </ul></dd></dl></details>
+<details id="fab-ldu-triage"><summary>LDU-Bench / A：缺陷分流 · 制造/缺陷理解与review</summary><dl>
+<dt>版本/时间</dt><dd>arXiv2608.03078v1(2026-08-04)</dd>
+<dt>对象类型</dt><dd>论文benchmark分轨；完整数据/评分工件公开未确认</dd>
+<dt>模型工作的层次</dt><dd>图像理解评测；非原生OPC recipe agent</dd>
+<dt>输入</dt><dd>1761张光刻IC-SEM review图，BEOL/DEP/DPR等工序背景，原图加冻结任务提示。</dd>
+<dt>任务设定</dt><dd>对图像给good/defect二分类</dd>
+<dt>输出</dt><dd>结构化good/defect标签</dd>
+<dt>考核指标</dt><dd>macro-F1主指标、accuracy辅助；非法JSON/标签/空答案留在分母，按错误/缺失计。 LCS_p=((S_A^p+S_B^p+S_C^p+S_D^p)/4)^(1/p)，主p=.5；输入各任务汇总分，不是逐图完整工程闭环成功率。表1六行与舍入容差内重算一致。 主文称输出上限统一1024，但附录Claude/MiniMax/Gemma为512、Qwen/GLM1024，GPT未暴露控制沿用endpoint默认；按实际adapter分列。温度0仅适用于暴露接口，重试数/超时各异；未确认总token/美元/图像费用。</dd>
+<dt>基线</dt><dd>论文六个完整MLLM与仅A/C的AnomalyGPT；TaskC另比整图框/中心框/随机框。结果为作者报告，不是本轮运行或当下完整市场最强榜。</dd>
+<dt>工具、数据与访问条件</dt><dd>全文与PDF可读，未定位作者具名数据/manifest/冻结prompt/alias与keyword评分表下载或代码仓库；不能仅据publicly releasable措辞标成完整公开数据集。真实IC-SEM图来源/再分发授权、跨fab/source分组split待核。</dd>
+<dt>限制与可比性</dt><dd>分类高分不推出形貌/定位/工艺因果能力。 四任务独立提示/评分以避免级联错误，非同一agent依次完成四步。A/B同1761图，C984、D532，合计5038是任务实例数，非5038独立图像；六模型30228实例及加AnomalyGPT32973复算一致。</dd>
+<dt>现实价值判断</dt><dd>研究判断：图像理解评测；非原生OPC recipe agent；公开academic或方法实验不自动具有工厂校准、商业签核与独立盲测效力。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；一手正文/固定源码/发布数表静态核查，未运行模型、光刻/TCAD仿真或第三方评测代码。</dd>
+<dt>下一步核验</dt><dd>继续核完整任务/数据授权、原生工具与独立oracle、同源split、原始输出/轨迹和全部预算；未确认项保留为缺口。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://arxiv.org/html/2608.03078v1">https://arxiv.org/html/2608.03078v1</a></li>
+<li><a href="https://arxiv.org/pdf/2608.03078v1">https://arxiv.org/pdf/2608.03078v1</a></li>
+</ul></dd></dl></details>
+<details id="fab-ldu-morphology"><summary>LDU-Bench / B：形貌类别 · 制造/缺陷理解与review</summary><dl>
+<dt>版本/时间</dt><dd>arXiv2608.03078v1(2026-08-04)</dd>
+<dt>对象类型</dt><dd>论文benchmark分轨；完整数据/评分工件公开未确认</dd>
+<dt>模型工作的层次</dt><dd>图像理解评测；非原生OPC recipe agent</dd>
+<dt>输入</dt><dd>与A相同1761张图，normal+11种defect形貌标签。</dd>
+<dt>任务设定</dt><dd>按固定分类体系识别缺陷形貌</dd>
+<dt>输出</dt><dd>受控形貌标签</dd>
+<dt>考核指标</dt><dd>macro-F1为主、accuracy辅助；CMD在易混类别对上比较label-only与definition-guided，是诊断子集，不能用CMD分代完整B分。 LCS_p=((S_A^p+S_B^p+S_C^p+S_D^p)/4)^(1/p)，主p=.5；输入各任务汇总分，不是逐图完整工程闭环成功率。表1六行与舍入容差内重算一致。 主文称输出上限统一1024，但附录Claude/MiniMax/Gemma为512、Qwen/GLM1024，GPT未暴露控制沿用endpoint默认；按实际adapter分列。温度0仅适用于暴露接口，重试数/超时各异；未确认总token/美元/图像费用。</dd>
+<dt>基线</dt><dd>论文六个完整MLLM与仅A/C的AnomalyGPT；TaskC另比整图框/中心框/随机框。结果为作者报告，不是本轮运行或当下完整市场最强榜。</dd>
+<dt>工具、数据与访问条件</dt><dd>全文与PDF可读，未定位作者具名数据/manifest/冻结prompt/alias与keyword评分表下载或代码仓库；不能仅据publicly releasable措辞标成完整公开数据集。真实IC-SEM图来源/再分发授权、跨fab/source分组split待核。</dd>
+<dt>限制与可比性</dt><dd>类别定义跨fab可变；论文独立盲标一致性不等跨厂泛化。 四任务独立提示/评分以避免级联错误，非同一agent依次完成四步。A/B同1761图，C984、D532，合计5038是任务实例数，非5038独立图像；六模型30228实例及加AnomalyGPT32973复算一致。</dd>
+<dt>现实价值判断</dt><dd>研究判断：图像理解评测；非原生OPC recipe agent；公开academic或方法实验不自动具有工厂校准、商业签核与独立盲测效力。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；一手正文/固定源码/发布数表静态核查，未运行模型、光刻/TCAD仿真或第三方评测代码。</dd>
+<dt>下一步核验</dt><dd>继续核完整任务/数据授权、原生工具与独立oracle、同源split、原始输出/轨迹和全部预算；未确认项保留为缺口。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://arxiv.org/html/2608.03078v1">https://arxiv.org/html/2608.03078v1</a></li>
+<li><a href="https://arxiv.org/pdf/2608.03078v1">https://arxiv.org/pdf/2608.03078v1</a></li>
+</ul></dd></dl></details>
+<details id="fab-ldu-localization"><summary>LDU-Bench / C：粗定位 · 制造/缺陷理解与review</summary><dl>
+<dt>版本/时间</dt><dd>arXiv2608.03078v1(2026-08-04)</dd>
+<dt>对象类型</dt><dd>论文benchmark分轨；完整数据/评分工件公开未确认</dd>
+<dt>模型工作的层次</dt><dd>图像理解评测；非原生OPC recipe agent</dd>
+<dt>输入</dt><dd>984个带mask空间标注的样本；模型接收图像，mask派生GT供评分。</dd>
+<dt>任务设定</dt><dd>输出缺陷xyxy框</dd>
+<dt>输出</dt><dd>可解析且合法的边界框</dd>
+<dt>考核指标</dt><dd>每图DICU=2*IoU*GTcoverage/(IoU+GTcoverage)，报告meanDICU；非法/无法解析框得0，留分母。它结合区域覆盖与IoU，不等分割mIoU或纳米EPE。 LCS_p=((S_A^p+S_B^p+S_C^p+S_D^p)/4)^(1/p)，主p=.5；输入各任务汇总分，不是逐图完整工程闭环成功率。表1六行与舍入容差内重算一致。 主文称输出上限统一1024，但附录Claude/MiniMax/Gemma为512、Qwen/GLM1024，GPT未暴露控制沿用endpoint默认；按实际adapter分列。温度0仅适用于暴露接口，重试数/超时各异；未确认总token/美元/图像费用。</dd>
+<dt>基线</dt><dd>论文六个完整MLLM与仅A/C的AnomalyGPT；TaskC另比整图框/中心框/随机框。结果为作者报告，不是本轮运行或当下完整市场最强榜。</dd>
+<dt>工具、数据与访问条件</dt><dd>全文与PDF可读，未定位作者具名数据/manifest/冻结prompt/alias与keyword评分表下载或代码仓库；不能仅据publicly releasable措辞标成完整公开数据集。真实IC-SEM图来源/再分发授权、跨fab/source分组split待核。</dd>
+<dt>限制与可比性</dt><dd>整图框GTcoverage=1却DICU仅约.0663，不能仅用coverage冒充定位。附录Gemma951/984合法框、Qwen982/984；缺框不能删掉。 四任务独立提示/评分以避免级联错误，非同一agent依次完成四步。A/B同1761图，C984、D532，合计5038是任务实例数，非5038独立图像；六模型30228实例及加AnomalyGPT32973复算一致。</dd>
+<dt>现实价值判断</dt><dd>研究判断：图像理解评测；非原生OPC recipe agent；公开academic或方法实验不自动具有工厂校准、商业签核与独立盲测效力。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；一手正文/固定源码/发布数表静态核查，未运行模型、光刻/TCAD仿真或第三方评测代码。</dd>
+<dt>下一步核验</dt><dd>继续核完整任务/数据授权、原生工具与独立oracle、同源split、原始输出/轨迹和全部预算；未确认项保留为缺口。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://arxiv.org/html/2608.03078v1">https://arxiv.org/html/2608.03078v1</a></li>
+<li><a href="https://arxiv.org/pdf/2608.03078v1">https://arxiv.org/pdf/2608.03078v1</a></li>
+</ul></dd></dl></details>
+<details id="fab-ldu-cause"><summary>LDU-Bench / D：图像条件原因归因 · 制造/缺陷理解与review</summary><dl>
+<dt>版本/时间</dt><dd>arXiv2608.03078v1(2026-08-04)</dd>
+<dt>对象类型</dt><dd>论文benchmark分轨；完整数据/评分工件公开未确认</dd>
+<dt>模型工作的层次</dt><dd>图像理解评测；非原生OPC recipe agent</dd>
+<dt>输入</dt><dd>532个专家review的图像条件cause参考；没有配套工艺日志、recipe/设备状态与时序记录。</dd>
+<dt>任务设定</dt><dd>预测cause标签并给简短可见证据解释</dd>
+<dt>输出</dt><dd>受控cause与rationale</dd>
+<dt>考核指标</dt><dd>Sem精确/alias=1、同supergroup=.5、其他0；S_D=.7*Sem+.3*KeyF1。固定标签/alias/keyword规则评分，主分无LLMjudge；EFS为人工抽样解释faithfulness诊断，不入LCS。 LCS_p=((S_A^p+S_B^p+S_C^p+S_D^p)/4)^(1/p)，主p=.5；输入各任务汇总分，不是逐图完整工程闭环成功率。表1六行与舍入容差内重算一致。 主文称输出上限统一1024，但附录Claude/MiniMax/Gemma为512、Qwen/GLM1024，GPT未暴露控制沿用endpoint默认；按实际adapter分列。温度0仅适用于暴露接口，重试数/超时各异；未确认总token/美元/图像费用。</dd>
+<dt>基线</dt><dd>论文六个完整MLLM与仅A/C的AnomalyGPT；TaskC另比整图框/中心框/随机框。结果为作者报告，不是本轮运行或当下完整市场最强榜。</dd>
+<dt>工具、数据与访问条件</dt><dd>全文与PDF可读，未定位作者具名数据/manifest/冻结prompt/alias与keyword评分表下载或代码仓库；不能仅据publicly releasable措辞标成完整公开数据集。真实IC-SEM图来源/再分发授权、跨fab/source分组split待核。</dd>
+<dt>限制与可比性</dt><dd>从可见图像匹配参考原因，不是完整工艺因果诊断、根因干预或recipe优化；未确认完整alias/keyword表公开。 四任务独立提示/评分以避免级联错误，非同一agent依次完成四步。A/B同1761图，C984、D532，合计5038是任务实例数，非5038独立图像；六模型30228实例及加AnomalyGPT32973复算一致。</dd>
+<dt>现实价值判断</dt><dd>研究判断：图像理解评测；非原生OPC recipe agent；公开academic或方法实验不自动具有工厂校准、商业签核与独立盲测效力。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；一手正文/固定源码/发布数表静态核查，未运行模型、光刻/TCAD仿真或第三方评测代码。</dd>
+<dt>下一步核验</dt><dd>继续核完整任务/数据授权、原生工具与独立oracle、同源split、原始输出/轨迹和全部预算；未确认项保留为缺口。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://arxiv.org/html/2608.03078v1">https://arxiv.org/html/2608.03078v1</a></li>
+<li><a href="https://arxiv.org/pdf/2608.03078v1">https://arxiv.org/pdf/2608.03078v1</a></li>
+</ul></dd></dl></details>
+<details id="litho-lithogrpo-protocol"><summary>LithoGRPO / flow+GRPO掩膜生成方法评测 · 制造/光刻仿真与掩模优化</summary><dl>
+<dt>版本/时间</dt><dd>arXiv2606.00228v1；ICML2026poster61189；repof694498f1523efb89381fd9fb8984247f166095e</dd>
+<dt>对象类型</dt><dd>复用LithoBench的方法实验；当前公开代码仅部分组件</dd>
+<dt>模型工作的层次</dt><dd>生成模型RL训练；非LLM工程工具agent</dd>
+<dt>输入</dt><dd>LithoBench MetalSet/StdMetal/ViaSet/StdContact目标/成对掩膜，原区域2048×2048nm²，处理为512²图。</dd>
+<dt>任务设定</dt><dd>预训练flow→SFT→GRPO，按L2/PVB/EPE/shot反馈训练生成掩膜。</dd>
+<dt>输出</dt><dd>二值掩膜与LithoBench的L2/PVB/EPE/传统shot/runtime。</dd>
+<dt>考核指标</dt><dd>reward为各指标除SFT末baseline值后的负均匀和；训练用fastshot，推理报告传统shot。EPE为15nm容差下的采样违规计数，可为0但仍有容差内误差。G6、约87M U-Net、默认1step；四RTX3090，每stage&lt;8h为论文开销，非统一agent评测硬budget。</dd>
+<dt>基线</dt><dd>同源LithoBench优化/学习算法与去RL/shot消融；fastshot130x是单组件速度，非整条OPC工程工作流130x。</dd>
+<dt>工具、数据与访问条件</dt><dd>repo固定f694498f1523efb89381fd9fb8984247f166095e，根MIT及vendored adabox MIT已读；完整tree17entries，当前README明确只发布fast/reference shot counter及例子，GRPO/prior/checkpoints/reward/simulator/end-to-end/dataset/eval列TODO。HF模型链接API本次超时，权重状态未确认，不能用链接代已发布。ICML官方poster页已保存并核题名。</dd>
+<dt>限制与可比性</dt><dd>StdContact从ViaSet模型再SFT/RL，不是纯zero-shot OOD；主文StdContact SFT50epochs而附表100，需固定实际配置后重比。fastoverlap rectangle set-cover与传统greedy分解不同；高rank相关不等数值/掩膜写入物理一致。所发fastcounter设CBC300s上限，随后直接计x=1而未核solverstatus，不能默认每次证明ILP最优。学术光刻模型，不是Calibre recipe评分。</dd>
+<dt>现实价值判断</dt><dd>研究判断：生成模型RL训练；非LLM工程工具agent；公开academic或方法实验不自动具有工厂校准、商业签核与独立盲测效力。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；一手正文/固定源码/发布数表静态核查，未运行模型、光刻/TCAD仿真或第三方评测代码。</dd>
+<dt>下一步核验</dt><dd>继续核完整任务/数据授权、原生工具与独立oracle、同源split、原始输出/轨迹和全部预算；未确认项保留为缺口。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://arxiv.org/html/2606.00228v1">https://arxiv.org/html/2606.00228v1</a></li>
+<li><a href="https://github.com/laiyao1/LithoGRPO/blob/f694498f1523efb89381fd9fb8984247f166095e/README.md">https://github.com/laiyao1/LithoGRPO/blob/f694498f1523efb89381fd9fb8984247f166095e/README.md</a></li>
+<li><a href="https://github.com/laiyao1/LithoGRPO/blob/f694498f1523efb89381fd9fb8984247f166095e/LICENSE">https://github.com/laiyao1/LithoGRPO/blob/f694498f1523efb89381fd9fb8984247f166095e/LICENSE</a></li>
+<li><a href="https://icml.cc/virtual/2026/poster/61189">https://icml.cc/virtual/2026/poster/61189</a></li>
+</ul></dd></dl></details>
+<details id="litho-binaryflow-final"><summary>Binary discrete-flow OPC / 冻结final raw N=1 · 制造/光刻仿真与掩模优化</summary><dl>
+<dt>版本/时间</dt><dd>repob971fdcab4e2ef024cdd8009c4d66c2e474d9497；manuscript暂无persistentID</dd>
+<dt>对象类型</dt><dd>公开方法代码/协议/数表；复用上游数据，weights未随包</dd>
+<dt>模型工作的层次</dt><dd>二值mask生成训练与固定终测</dd>
+<dt>输入</dt><dd>MetalSet成对训练，sortedbasename90/10；StdMetal271+ICCAD2013十图终测，上游固定LithoBench9c74e822。</dd>
+<dt>任务设定</dt><dd>64NFE CTMC二值采样，ST fine-tune后冻结step1500；256²mask nearest上采样到2048²评分，不做cleanup或选择。</dd>
+<dt>输出</dt><dd>逐cell/seed的EPE违规计数与汇总。</dd>
+<dt>考核指标</dt><dd>主seed42，其他43/44取三seed均值不是best-of3。公开281行重算：StdMetal2.642066与三seed2.766298；ICCAD2013 9.4与8.633333。仅为所发数表静态算术一致，无模型实跑。</dd>
+<dt>基线</dt><dd>相同architecture/protocol的pretrained vsST；终测rawN1不可与devcleanupbestof8直接比。</dd>
+<dt>工具、数据与访问条件</dt><dd>固定repob971fdcab4e2ef024cdd8009c4d66c2e474d9497原代码MIT，上游LithoBench另许可。20选定文件均Gitblob匹配。代码/冻结manifest/1024candidate行/13696subset行/281finalcell行公开；原图、生成mask、weights、W&amp;B与rawlogs刻意不包含。weights需联系作者并受上游授权；hash可核身份不等可下载。</dd>
+<dt>限制与可比性</dt><dd>完整训练/验证图像名单身份仍需上游工件核；无fab校准/DRC签核。checkpointSHA存在不证明训练数据授权或数值复现；论文版本与实际源一致性仅作者provenance声明。</dd>
+<dt>现实价值判断</dt><dd>研究判断：二值mask生成训练与固定终测；公开academic或方法实验不自动具有工厂校准、商业签核与独立盲测效力。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；一手正文/固定源码/发布数表静态核查，未运行模型、光刻/TCAD仿真或第三方评测代码。</dd>
+<dt>下一步核验</dt><dd>继续核完整任务/数据授权、原生工具与独立oracle、同源split、原始输出/轨迹和全部预算；未确认项保留为缺口。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://github.com/JaeminPark417/discrete-flow-matching-opc/blob/b971fdcab4e2ef024cdd8009c4d66c2e474d9497/README.md">https://github.com/JaeminPark417/discrete-flow-matching-opc/blob/b971fdcab4e2ef024cdd8009c4d66c2e474d9497/README.md</a></li>
+<li><a href="https://github.com/JaeminPark417/discrete-flow-matching-opc/blob/b971fdcab4e2ef024cdd8009c4d66c2e474d9497/protocols/final_evaluation.yaml">https://github.com/JaeminPark417/discrete-flow-matching-opc/blob/b971fdcab4e2ef024cdd8009c4d66c2e474d9497/protocols/final_evaluation.yaml</a></li>
+<li><a href="https://github.com/JaeminPark417/discrete-flow-matching-opc/blob/b971fdcab4e2ef024cdd8009c4d66c2e474d9497/results/final_epe_per_cell.csv">https://github.com/JaeminPark417/discrete-flow-matching-opc/blob/b971fdcab4e2ef024cdd8009c4d66c2e474d9497/results/final_epe_per_cell.csv</a></li>
+<li><a href="https://github.com/JaeminPark417/discrete-flow-matching-opc/blob/b971fdcab4e2ef024cdd8009c4d66c2e474d9497/scripts/evaluate_final.py">https://github.com/JaeminPark417/discrete-flow-matching-opc/blob/b971fdcab4e2ef024cdd8009c4d66c2e474d9497/scripts/evaluate_final.py</a></li>
+</ul></dd></dl></details>
+<details id="litho-binaryflow-capability"><summary>Binary discrete-flow OPC / 固定dev best-of-N与cleanup · 制造/光刻仿真与掩模优化</summary><dl>
+<dt>版本/时间</dt><dd>repob971fdcab4e2ef024cdd8009c4d66c2e474d9497</dd>
+<dt>对象类型</dt><dd>同方法开发集能力审计；非第二独立终测集</dd>
+<dt>模型工作的层次</dt><dd>固定候选集选择与制造代理指标</dd>
+<dt>输入</dt><dd>固定32devcells，每cell8候选，baseline/finetuned与raw/cleanup四设置共1024行。</dd>
+<dt>任务设定</dt><dd>以同一mask的2048²softEPE选择，按N1/2/4/8全部候选子集精确平均；cleanup为256²closingdisk2及删面积&lt;64的前景块。</dd>
+<dt>输出</dt><dd>选中candidate及EPE/PVB、256²row-scan shot/MRC proxies、validity。</dd>
+<dt>考核指标</dt><dd>13696subset行对应2模型×2paths×32cells×[C(8,1)+C(8,2)+C(8,4)+C(8,8)]。本轮独立重建全部子集与softEPE/tie-ID选择，0差异；cleanupfinetuned EPE N1 .34375→N8 .0625，非final-test结果。</dd>
+<dt>基线</dt><dd>pretrained/finetuned共随机数，raw/cleanup分列；officialEPEoracle lowerbound只是诊断，实际selector看softEPE。</dd>
+<dt>工具、数据与访问条件</dt><dd>固定repob971fdcab4e2ef024cdd8009c4d66c2e474d9497原代码MIT，上游LithoBench另许可。20选定文件均Gitblob匹配。代码/冻结manifest/1024candidate行/13696subset行/281finalcell行公开；原图、生成mask、weights、W&amp;B与rawlogs刻意不包含。weights需联系作者并受上游授权；hash可核身份不等可下载。</dd>
+<dt>限制与可比性</dt><dd>validnominal门是contourproxy&lt;2且MRCproxy≤5；低EPE与validity分别报，不能以0EPE称通过签核。dev候选数扩增有额外仿真/采样预算，不能等同单轮agent改进或32独立新IP。开发32名单与所发4×20heldouttier无交集已核，仍需完整源图划分核。</dd>
+<dt>现实价值判断</dt><dd>研究判断：固定候选集选择与制造代理指标；公开academic或方法实验不自动具有工厂校准、商业签核与独立盲测效力。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；一手正文/固定源码/发布数表静态核查，未运行模型、光刻/TCAD仿真或第三方评测代码。</dd>
+<dt>下一步核验</dt><dd>继续核完整任务/数据授权、原生工具与独立oracle、同源split、原始输出/轨迹和全部预算；未确认项保留为缺口。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://github.com/JaeminPark417/discrete-flow-matching-opc/blob/b971fdcab4e2ef024cdd8009c4d66c2e474d9497/protocols/capability_evaluation.yaml">https://github.com/JaeminPark417/discrete-flow-matching-opc/blob/b971fdcab4e2ef024cdd8009c4d66c2e474d9497/protocols/capability_evaluation.yaml</a></li>
+<li><a href="https://github.com/JaeminPark417/discrete-flow-matching-opc/blob/b971fdcab4e2ef024cdd8009c4d66c2e474d9497/results/capability_bestofn_subsets.csv">https://github.com/JaeminPark417/discrete-flow-matching-opc/blob/b971fdcab4e2ef024cdd8009c4d66c2e474d9497/results/capability_bestofn_subsets.csv</a></li>
+<li><a href="https://github.com/JaeminPark417/discrete-flow-matching-opc/blob/b971fdcab4e2ef024cdd8009c4d66c2e474d9497/results/capability_candidate_metrics.csv">https://github.com/JaeminPark417/discrete-flow-matching-opc/blob/b971fdcab4e2ef024cdd8009c4d66c2e474d9497/results/capability_candidate_metrics.csv</a></li>
+<li><a href="https://github.com/JaeminPark417/discrete-flow-matching-opc/blob/b971fdcab4e2ef024cdd8009c4d66c2e474d9497/scripts/evaluate_capability.py">https://github.com/JaeminPark417/discrete-flow-matching-opc/blob/b971fdcab4e2ef024cdd8009c4d66c2e474d9497/scripts/evaluate_capability.py</a></li>
+</ul></dd></dl></details>
 <h2 id="group-7">测试：模拟与混合信号缺陷仿真</h2><div class="tablewrap"><table><thead><tr><th>名称与版本</th><th>输入</th><th>任务与输出</th><th>指标与限制</th></tr></thead><tbody>
 <tr><td><a href="#analog-ieee-p2427">IEEE P2427 / ITC2017 AMS circuit set</a><br/><small>ITC2017 AMS v2.0/2.1/2.2包均已下载并静态核验；标准IEEE2427-2025于2026-01-09发布，旧包不自动等最终标准认证套件</small><br/><span class="tag">官方标准工作组电路集</span></td><td>350nm-derived典型+4corner模型、3.3V/27°C规格与SPICE/Verilog/TB。v2.0含9AMS功能（6复杂+3传输门）与42logic；v2.1加PLL/ADC及potential_defect_list，v2.2加VREG1并改TB/logic/BANDGAP并联折叠。五包中原AMS三包分别28/42/42文件，不当电路数。</td><td>验证故障模型/缺陷仿真/测试设计，不是默认尺寸优化题<p><strong>输出：</strong>电路响应、缺陷检出与测试评估</p></td><td>无官方统一模型排行榜。候选表每element按preLRL/preHRL两种缺陷记relative likelihood：README按面积µm²估值、未知100，单体截.01–100并按m倍增；这不是概率归一化或实测失效率。应独立报raw detected/defined defects、likelihood-weighted coverage、测试时长/仿真cost及故障状态，分母按固定表/阈值/工况。v2.1 BANDGAP46条LRL/HRL标签、权重和6732.322，v2.2为26条/6572.418，不可把两者coverage直接比较。<p class="muted">v2.2明确修LOGIC模型逻辑反相/名称与PLL/OPAMP/BANDGAP测试台，旧版可作历史协议但不能混输入/gold。本文标准状态已更新为正式发布，旧工作组网页P2427称呼保留为来源历史。缺陷表是prelayout设计意图、非全部layout桥连/寄生/参数失配，更非任意新工艺siliconyield；旧工艺不自动表示测试研究任务过时。</p></td></tr>
 <tr><td><a href="#analog-infineon-ads">Infineon AMS defect simulation benchmarks</a><br/><small>工作组ZIP v3/v4与current repo d1f5c9be021970e8c1fda5a2c5eea3987cb9667c分别静态核验，不按main冒充v4</small><br/><span class="tag">官方电路与仿真设置</span></td><td>BANDGAP/LDO/PLL/SARADC，v4加PHY；HSPICE/TB、nominal/fast/slow模型、VerilogA checker/spec文档。v3 ZIP65files且4电路各open/short表；v4 ZIP95files仅bandgap两表；currentmain134treeentries，bandgap/LDO/PLL有表、SARADC/PHY未见表，必须按发布物分轨。</td><td>复现实用模拟电路缺陷注入与检测实验<p><strong>输出：</strong>仿真响应与缺陷覆盖报告</p></td><td>bandgap原readme：nominal不得触发fail；故障仿真fail由0→1为detected，至stop仍0为undetected；convergence/timeout等仿真失败也归undetected，不准直接剔除坏run提高coverage。另报testnr定位、测试时长、失败率与完整缺陷表。表头Tag/Net/path-port/Model/terminal（short字段另核）是候选注入实体，非天然等概率实测样本；noncomment行数含header，不冒称所有都是独立defect。<p class="muted">v4删除表不是任务已解决，currentmain恢复部分表也不代表工作组v4已更新。PLL checker readme明确仅nominal验证，修改会影响defect结果；不能把singlecorner checker成功扩成全corner准确。bandgap读到的checker只按若干timer/spec阈值驱动fail，不能声称覆盖所有物理失效模式。固定基准故障覆盖不是实际生产testescape/FIT或良率。</p></td></tr>
@@ -12141,6 +12280,7 @@ body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:
 <tr><td><a href="#device-comphy-consistency">Comphy / BTI solver and release-consistency examples</a><br/><small>v1.0、v3.0分开；v2内部未发布；当前官网一致性说明</small><br/><span class="tag">器件仿真器示例/版本一致性实验，不是固定公共benchmark排行榜</span></td><td>1D MOS stack材料/几何、NMP trapband分布/defect采样、初始占据、温度与门电压随时间profile、时间步长/自洽模式；NBTI/PBTI，非电路级HCI通用输入</td><td>求解Poisson与NMP trap占据耦合，预测BTI阈值漂移及stress/recovery响应；或比较不同release/SCP/近似默认模式/步长收敛<p><strong>输出：</strong>ΔVth(V或mV)、surfacepotential、电场/电荷占据时序及solver runtime</p></td><td>示例比较相同结构/应力下ΔVth曲线及数值收敛，未发现统一RMSE阈值/固定题单总分。v3默认分步更新potential→rate→timepropagation，和v1完整SCP计算预算不同。比较软件自洽只证明数值一致性，不等实验物理校准；tutorial列−.404V到−.407V约−3mV，但prose写40mV，需以输入/原始结果复核<p class="muted">1D compactcharge-trapping模型不等全3D/全可靠性物理；没有工业PDK agingdeck标定时不能预测真实10年寿命精度。版本默认模式/采样随机性变化可影响结果；单条文档算术差异不据此否定整框架</p></td></tr>
 <tr><td><a href="#device-comphy-esid">Comphy v3 / ESiD trap-parameter extraction and extrapolation</a><br/><small>arXiv2212.11547 v3.0框架论文；2018 v1参考另版本</small><br/><span class="tag">实验曲线参数提取研究协议，与同软件数值回归分开</span></td><td>实验eMSM（extended measure-stress-measure）ΔVth时间曲线、多温度/应力profile，NMP动力学及候选trap能量/空间分布；论文还比较小器件TDDS单defect信息</td><td>ESiD从多缺陷叠加的曲线反演非负trap分布，用正则化约束抑制不物理解；已拟合条件与未见温度外推分别考核<p><strong>输出：</strong>trapband能量/位置分布及拟合/预测的ΔVth曲线、拟合误差/物理合理性</p></td><td>拟合errornorm与总defectdensity的L-curve选择regularization γ，数据有噪反演不唯一。论文例子用100/150°C拟合、外推50°C，与直接拟合50°C分开；低traincurve error不等温度泛化或参数真值恢复。未确认固定原始实验包、统一分数/units/scorer<p class="muted">charge-trap BTI不覆盖所有HCI/TDDB/EM；跨温度外推一组case不等跨工艺/材料泛化。实验物理数据与文档example不同来源，参数非唯一，不能只用数值接近判断机制正确</p></td></tr>
 <tr><td><a href="#device-esded">ESDED / emerging-device figure-digitized electrical curves</a><br/><small>IEEE Data Descriptions2026 DOI10.1109/IEEEDATA.2026.3664034；固定repo 1330af095a3ac240da9760a26cedd30acf44b798</small><br/><span class="tag">公开论文图表提取数据集，非固定评分/独立实测benchmark</span></td><td>GAA/Nanosheet/CFET/TFET论文原图、JSON metadata与Vgs/Ids曲线；全787JSON文件静态解析为1710曲线/171000点。目录78/387/297/25，不等独立器件数；精确字节去重后530JSON/1163曲线/116300点，238个非空来源DOI。</td><td>可定义图表数字化、给条件预测曲线、或以电气曲线提取compact参数；作者提供颜色提取/二维spline/轴校准/Excel转JSON工具，没有发现标准train/test manifest、统一scorer或既有agent提交协议。<p><strong>输出：</strong>预测或重建的电气曲线/模型参数；原始发布是论文figure-derived数值、原图/result图和metadata，不自动等于硅实测golden。</p></td><td>未发现作者统一benchmark分数/误差阈值；必须先逐原图确认电流绝对值/每宽度归一化及尺度，分别报告曲线/论文分组linear/log误差与物理约束。787文件有257重复冗余、102来源DOI跨目录，不可随机按文件split；344/1710曲线Vgs有重复/非单调，非缺失/非有限，须保留原序并审spline插值。<p class="muted">README器件约数不是当前JSON计数；多目录是交叉器件标签不是独立测试集。Node401/L190/W486文件为0，转JSON源码把nan写0，派生索引置unknown不作物理零。单位实证：9903594_74D原图mA/µm而JSON约.072..19.143，README写Ids A，不可当19A或未核effective width就换算；只修该条单位注释，不把全部记录批量换算。图表标签可来自测量/TCAD/模型，须逐论文溯源，不称统一实测；spline1000点再抽样形成100点不等100独立测量。</p></td></tr>
+<tr><td><a href="#device-agentic-iwo-calibration">Agentic TCAD / BG-IWO实验校准与模型迁移</a><br/><small>arXiv2609.12184v1(2026-09-10)</small><br/><span class="tag">实验方法案例；未确认独立公开benchmark包</span></td><td>实测bottom-gate In-W-O Id–Vg、固定2D器件结构与物理文献/SentaurusKB。校准用2%W/L1µm/Vd=.05与1V两曲线。</td><td>LLM看测量残差，提出有界参数组或新增物理模型；OFAT估敏感度+DFO-GN算数值步，人审核模型适用性与参数，Sentaurus求解。<p><strong>输出：</strong>固定calibrated deck、参数、逐步残差与bias/geometry测试结果。</p></td><td>J为两校准bias上log/linear-current RMSE及|ΔVth|、|Δlog10Ion|、|ΔSS|的固定归一化加权和；w=.25/.10/1/.20/.25。需收敛且J降低才接受；不可恢复数值失败单独记录、不参与更新。五次接受更新J2.589→.181≈14.3倍，非仅5次仿真；OFAT/被拒/恢复/人工耗时及token总预算未齐。<p class="muted">人工审批属于协议一部分，不能当无人agent。bias测试列.05/.1/.2/.5/1V，其中.05/1V也用于校准，不能称五个全heldoutbias；L2µm不重调。4%W另经再校准，是process-sensitive study，不是zero-shot迁移。校准有效参数非氧空位/微观trap唯一实测提取。</p></td></tr>
 </tbody></table></div>
 <details id="device-mesd"><summary>MESD / MOSFET electrical simulation data · 器件/电气模型与参数提取</summary><dl>
 <dt>版本/时间</dt><dd>固定repo5dcc2236ac5b5eeb6228503f544053c2a359b636；MESD；IEEE Data Descriptions2024</dd>
@@ -12298,6 +12438,24 @@ body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:
 <li><a href="https://github.com/SJTU-YONGFU-RESEARCH-GRP/ESDED-Emerging-Semiconductor-Device-Electrical-Dataset/tree/1330af095a3ac240da9760a26cedd30acf44b798">https://github.com/SJTU-YONGFU-RESEARCH-GRP/ESDED-Emerging-Semiconductor-Device-Electrical-Dataset/tree/1330af095a3ac240da9760a26cedd30acf44b798</a></li>
 <li><a href="https://github.com/SJTU-YONGFU-RESEARCH-GRP/ESDED-Emerging-Semiconductor-Device-Electrical-Dataset/blob/1330af095a3ac240da9760a26cedd30acf44b798/GAA/9903594_74D/9903594_74D.json">https://github.com/SJTU-YONGFU-RESEARCH-GRP/ESDED-Emerging-Semiconductor-Device-Electrical-Dataset/blob/1330af095a3ac240da9760a26cedd30acf44b798/GAA/9903594_74D/9903594_74D.json</a></li>
 <li><a href="https://github.com/SJTU-YONGFU-RESEARCH-GRP/ESDED-Emerging-Semiconductor-Device-Electrical-Dataset/blob/1330af095a3ac240da9760a26cedd30acf44b798/GAA/9903594_74D/74D.png">https://github.com/SJTU-YONGFU-RESEARCH-GRP/ESDED-Emerging-Semiconductor-Device-Electrical-Dataset/blob/1330af095a3ac240da9760a26cedd30acf44b798/GAA/9903594_74D/74D.png</a></li>
+</ul></dd></dl></details>
+<details id="device-agentic-iwo-calibration"><summary>Agentic TCAD / BG-IWO实验校准与模型迁移 · 器件与工艺/TCAD校准</summary><dl>
+<dt>版本/时间</dt><dd>arXiv2609.12184v1(2026-09-10)</dd>
+<dt>对象类型</dt><dd>实验方法案例；未确认独立公开benchmark包</dd>
+<dt>模型工作的层次</dt><dd>人工审核的器件物理模型选择/参数校准</dd>
+<dt>输入</dt><dd>实测bottom-gate In-W-O Id–Vg、固定2D器件结构与物理文献/SentaurusKB。校准用2%W/L1µm/Vd=.05与1V两曲线。</dd>
+<dt>任务设定</dt><dd>LLM看测量残差，提出有界参数组或新增物理模型；OFAT估敏感度+DFO-GN算数值步，人审核模型适用性与参数，Sentaurus求解。</dd>
+<dt>输出</dt><dd>固定calibrated deck、参数、逐步残差与bias/geometry测试结果。</dd>
+<dt>考核指标</dt><dd>J为两校准bias上log/linear-current RMSE及|ΔVth|、|Δlog10Ion|、|ΔSS|的固定归一化加权和；w=.25/.10/1/.20/.25。需收敛且J降低才接受；不可恢复数值失败单独记录、不参与更新。五次接受更新J2.589→.181≈14.3倍，非仅5次仿真；OFAT/被拒/恢复/人工耗时及token总预算未齐。</dd>
+<dt>基线</dt><dd>同一初始器件deck前后比较，未确认同预算专家/BO/纯DFO-GN或其他LLM独立对照。</dd>
+<dt>工具、数据与访问条件</dt><dd>Sentaurus W-2024.09-SP1与获准本地手册；作者报告GPT5.5及Codex/NeMo Agent Toolkit接口。全文可读；原始测量、deck、norm常数全表、RAG材料与完整轨迹公开未确认。作者博客为通用workflow示例，非实验复现包。</dd>
+<dt>限制与可比性</dt><dd>人工审批属于协议一部分，不能当无人agent。bias测试列.05/.1/.2/.5/1V，其中.05/1V也用于校准，不能称五个全heldoutbias；L2µm不重调。4%W另经再校准，是process-sensitive study，不是zero-shot迁移。校准有效参数非氧空位/微观trap唯一实测提取。</dd>
+<dt>现实价值判断</dt><dd>研究判断：人工审核的器件物理模型选择/参数校准；公开academic或方法实验不自动具有工厂校准、商业签核与独立盲测效力。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；一手正文/固定源码/发布数表静态核查，未运行模型、光刻/TCAD仿真或第三方评测代码。</dd>
+<dt>下一步核验</dt><dd>继续核完整任务/数据授权、原生工具与独立oracle、同源split、原始输出/轨迹和全部预算；未确认项保留为缺口。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://arxiv.org/html/2609.12184v1">https://arxiv.org/html/2609.12184v1</a></li>
+<li><a href="https://gyulab.github.io/blog/2026/agentic-workflow-tcad/">https://gyulab.github.io/blog/2026/agentic-workflow-tcad/</a></li>
 </ul></dd></dl></details>
 <h2 id="group-11">边界：PCB工程、板级射频与电磁仿真</h2><div class="tablewrap"><table><thead><tr><th>名称与版本</th><th>输入</th><th>任务与输出</th><th>指标与限制</th></tr></thead><tbody>
 <tr><td><a href="#boundary-emval-nf">EMVal-NF / PCB electromagnetic surrogate</a><br/><small>v0公开pack；protocol1.0.0</small><br/><span class="tag">公开500board demo与评测协议</span></td><td>8×8mm三层PCB几何/材料/ports/frequency；500板，1–20GHz共101频点；NF每板10000probe</td><td>从几何等预测复数E/H近场；NF/SP是同一500板的两track<p><strong>输出：</strong>E(V/m)/H(A/m)复向量</p></td><td>每板先评分、再board等权macro。global relativeL2、localrelativeerror中位数、复向量alignment中位数；最佳0/0/1，global更重强场<p class="muted">仅PCB边界附录；仿真gold非测量。协议定义public/private_standard为ID、private_challenge为geometryfamily OOD，但不据定义宣称私榜已开放。评测board即使ID也不得训练</p></td></tr>
@@ -12888,11 +13046,11 @@ body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:
 <tr><td>综合HLS<p>72条 / 35域内家族</p></td><td>经典逻辑综合、IWLS现代学习/精确综合、HLS程序/应用、代理预测、DSE/agent与FPGA CAD<p><a href="#synth-epfl">EPFL Combinational Benchmark Suite</a> · <a href="#synth-iwls25-weighted">IWLS2025 / 200 exact functions, AIG-only weighted old/new score</a> · <a href="#hls-hlsyn-inductive">HLSyn / inductive unseen-kernel prediction</a> · <a href="#hls-hlsdataset">HLSDataset</a> · <a href="#fpga-vtr">VTR benchmark circuits / full FPGA CAD flow</a> · <a href="#ara-acc-a3-bf16-exp">Chip-Bench ARA / a3-bf16-exp</a></p></td><td>有些原包取得但未执行CEC/HLS；数据多点并非独立IP，FPGA器件/工具版本跨域与真实后实现验收另核；PolyBench原始C包已取，部分派生HLS完整配置/标签仍待核。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
 <tr><td>数字后端<p>146条 / 93域内家族</p></td><td>划分/块规划/宏与cell布局、合法化、GR/DR、CTS/STA/sizing/MBFF/ECO、功耗/IR/EM、DRC/LVS工作流与agent<p><a href="#macro-ct">Circuit Training / AlphaChip public Ariane protocol</a> · <a href="#physical-ispd19">ISPD 2019 Initial Detailed Routing</a> · <a href="#physical-ispd26">ISPD 2026 Post-Placement Buffering and Sizing</a> · <a href="#pd-ispd10-cts">ISPD 2010 Clock Network Synthesis</a> · <a href="#pd-iccad25-incremental">ICCAD 2025 Problem C / joint sizing-buffering-relocation</a> · <a href="#be-posteda-drc-essential">PostEDA-Bench / DRC-Essential</a></p></td><td>历年已覆盖不等全部contest题目/最终checker均取得；部分旧链接失效、商业flow与PDK不可重建；proxy、原生修复、有限DRC与全签核严格分层。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
 <tr><td>模拟后端<p>15条 / 13域内家族</p></td><td>传统/语言版图、寄生感知、自动generator、后仿尺寸、IOring及memorycompiler原生基线<p><a href="#analog-align">ALIGN CircuitsDatabase/examples</a> · <a href="#analog-glayout-language">gLayout / MLCAD2024 human-language-to-layout evaluation</a> · <a href="#analog-autockt-pex">AutoCkt / Spectre-to-BAG post-layout transfer experiment</a> · <a href="#analog-amsio-bench">AMS-IO-Bench / wirebond AMS I/O-ring generation</a> · <a href="#memory-openram-native">OpenRAM / native SRAM compiler and verification baseline</a></p></td><td>固定工艺/模板往往承担大量先验；完整GDS/DRC/LVS/PEX与工艺授权、几何目标和电性能对应尚不能全独立复核。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
-<tr><td>制造光刻<p>61条 / 42域内家族</p></td><td>OPC/ILT求解、前向代理、SMO/随机性、recipe/工程助手、掩模写版、热点/SEM/晶圆模式/计量/良率/调度<p><a href="#litho-lithobench">LithoBench / Mask optimization</a> · <a href="#litho-vpevolve-commercial">VPEvolve / 主评测：Calibre recipe agent</a> · <a href="#litho-vpevolve-open-testbed">VPEvolve / 配套仿真资源（非独立 Agent benchmark）</a> · <a href="#litho-opc-engineer-assistant">Intelligent OPC Engineer Assistant</a> · <a href="#litho-culitho-industrial">cuLitho AC+AI / NVIDIA-imec industrial OPC experiment</a> · <a href="#litho-openlithohub">OpenLithoHub benchmarks/workflow</a> · <a href="#fab-mixedwm38">MixedWM38</a> · <a href="#fab-mimac2026-dispatch">MIMAC-2026 / synthetic fab dispatching specification and partial implementation</a></p></td><td>VPEvolve已有公开20窗口/代码的Calibre recipeagent协议，但商业model/deck与wafer闭环不公开；跨工艺/多工具/隐藏布局统一agent榜仍缺完整对照；SEM像素与电测不是同gold。部分官方原包/许可证/lot血缘未取，mock/合成/partialagent明确标记。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
+<tr><td>制造光刻<p>68条 / 43域内家族</p></td><td>OPC/ILT求解、前向代理、SMO/随机性、recipe/工程助手、掩模写版、热点/SEM/晶圆模式/计量/良率/调度<p><a href="#litho-lithobench">LithoBench / Mask optimization</a> · <a href="#litho-vpevolve-commercial">VPEvolve / 主评测：Calibre recipe agent</a> · <a href="#litho-vpevolve-open-testbed">VPEvolve / 配套仿真资源（非独立 Agent benchmark）</a> · <a href="#litho-opc-engineer-assistant">Intelligent OPC Engineer Assistant</a> · <a href="#litho-culitho-industrial">cuLitho AC+AI / NVIDIA-imec industrial OPC experiment</a> · <a href="#litho-openlithohub">OpenLithoHub benchmarks/workflow</a> · <a href="#fab-mixedwm38">MixedWM38</a> · <a href="#fab-mimac2026-dispatch">MIMAC-2026 / synthetic fab dispatching specification and partial implementation</a></p></td><td>VPEvolve已有公开20窗口/代码的Calibre recipeagent协议，但商业model/deck与wafer闭环不公开；跨工艺/多工具/隐藏布局统一agent榜仍缺完整对照；SEM像素与电测不是同gold。部分官方原包/许可证/lot血缘未取，mock/合成/partialagent明确标记。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
 <tr><td>模拟测试<p>3条 / 3域内家族</p></td><td>IEEE P2427/Infineon模拟缺陷仿真、AMS异常检测<p><a href="#analog-ieee-p2427">IEEE P2427 / ITC2017 AMS circuit set</a> · <a href="#analog-infineon-ads">Infineon AMS defect simulation benchmarks</a> · <a href="#analog-ams-anomaly">AMS-Anomaly-Dataset</a></p></td><td>analog fault模型、真实工艺缺陷、测量噪声/阈值/coverage与量产DPPM/良率不能互换；完整故障仿真和硅校准未执行。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
 <tr><td>数字测试<p>13条 / 11域内家族</p></td><td>ISCAS/ITC顺序与cut/scan变体、SoC调度、IJTAG网络、ATPG方法/工具、DFT生成器与真实后硅hook<p><a href="#test-itc99-seq">PoliTo ITC99 / I99T sequential</a> · <a href="#test-itc16-ijtag">ITC 2016 IEEE 1687 Networks</a> · <a href="#test-fan-atpg">NTU FAN_ATPG v2023 examples</a> · <a href="#test-deft">DEFT HTD-ATPG experiment</a> · <a href="#test-fuzzilicon">Fuzzilicon / real-x86 post-silicon microcode coverage experiments</a></p></td><td>历史fault lists多为未测试枚举，不是不可测gold；真实scan/ATE/诊断/压缩/DFT签核和硅故障分布缺统一公开验收；JAR/ATPG/硬件未运行。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
 <tr><td>封装芯粒热<p>20条 / 14域内家族</p></td><td>2.5D/3D实现、芯粒划分/互连/成本与资源DSE、热求解/代理/热感知布局<p><a href="#3d-open3d-mol">Open3DBench v1.1 / memory-on-logic</a> · <a href="#3d-taiwei-maintained-flow">TaiWei-Pin-3D / maintained public 3D flow and regression gates</a> · <a href="#chiplet-chipletpart">ChipletPart / cost-aware IP partitioning and technology assignment</a> · <a href="#chiplet-rapidchiplet-booksim">RapidChiplet / BookSim proxy validation and saturation protocol</a> · <a href="#thermal-thermedge-transient">ThermEDGe / transient thermal sequence prediction</a></p></td><td>公开sample/合成cost/热label不等实际组装硅校准；跨diePDK/RC/散热边界/EMIR/良率与全签核缺口显式保留。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
-<tr><td>器件<p>8条 / 5域内家族</p></td><td>I-V/C-V/参数提取、二极管/HEMT/器件模型、可靠性与模型一致性<p><a href="#device-mesd">MESD / MOSFET electrical simulation data</a> · <a href="#device-dfo-hemt">DFO compact-model extraction / 实测GaN-on-SiC HEMT</a> · <a href="#device-comphy-esid">Comphy v3 / ESiD trap-parameter extraction and extrapolation</a> · <a href="#device-esded">ESDED / emerging-device figure-digitized electrical curves</a></p></td><td>论文/模型/样例不等固定公共benchmark；部分model下载需注册，原测量与跨温/工艺gold不全，老化拟合不推全可靠性机制。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
+<tr><td>器件<p>9条 / 6域内家族</p></td><td>I-V/C-V/参数提取、二极管/HEMT/器件模型、可靠性与模型一致性<p><a href="#device-mesd">MESD / MOSFET electrical simulation data</a> · <a href="#device-dfo-hemt">DFO compact-model extraction / 实测GaN-on-SiC HEMT</a> · <a href="#device-comphy-esid">Comphy v3 / ESiD trap-parameter extraction and extrapolation</a> · <a href="#device-esded">ESDED / emerging-device figure-digitized electrical curves</a></p></td><td>论文/模型/样例不等固定公共benchmark；部分model下载需注册，原测量与跨温/工艺gold不全，老化拟合不推全可靠性机制。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
 <tr><td>板级工程与电磁<p>4条 / 3域内家族</p></td><td>KiCad PCB工程agent、近场/散射参数与稀疏矩阵相关公开验证，作为芯片范围边界材料<p><a href="#boundary-emval-nf">EMVal-NF / PCB electromagnetic surrogate</a> · <a href="#boundary-emval-sp">EMVal-SP / PCB electromagnetic surrogate</a> · <a href="#boundary-matrix-sparam">Matrix S-parameters dataset / matrix-based multi-port EM layouts</a></p></td><td>板级/天线EM与IC RF设计及工业封装SI/PI不合并；AEDL/Alpha-RF等候选尚未全部核成独立公共协议。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
 <tr><td>加速器映射<p>2条 / 2域内家族</p></td><td>wafer-scale固定架构placement/routing与物理场映射竞赛边界<p><a href="#pd-ispd20-wafer">ISPD 2020 Wafer-Scale Placement</a> · <a href="#pd-ispd21-wafer">ISPD 2021 Wafer-Scale Physics Modeling</a></p></td><td>在既有加速器上编译/映射不等制造一颗新芯片；架构/toolchain约束下指标不能套ASIC cell PPA。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
 <tr><td>成品性能<p>23条 / 13域内家族</p></td><td>SPEC/MLPerf/嵌入式/内存带宽/HPC/应用负载等，成品推理/训练与EDA能力分开<p><a href="#perf-spec-cpu2026">SPEC CPU 2026</a> · <a href="#perf-mlperf-inference-datacenter">MLPerf Inference / Datacenter Server/Offline</a> · <a href="#perf-mlperf-tiny-stream">MLPerf Tiny / Streaming Wakeword</a> · <a href="#perf-coremark">CoreMark</a> · <a href="#perf-hpcg">HPCG</a></p></td><td>不是所有芯片产品测试大全；Storage/graphics/通信/车规等仍有未逐协议覆盖候选，真实设备功率/计时/正式license规则未本地复现。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>

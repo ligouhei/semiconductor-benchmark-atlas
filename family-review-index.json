@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T05:56:56.145532+00:00",
+  "generated_at": "2026-10-20T06:05:17.053052+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 335,
-    "records": 589,
-    "records_with_any_field_audit_entry": 347,
-    "records_with_current_field_audit_snapshot": 314,
+    "families": 337,
+    "records": 597,
+    "records_with_any_field_audit_entry": 355,
+    "records_with_current_field_audit_snapshot": 322,
     "records_without_current_field_audit_snapshot": 275
   },
   "requirements_per_record": [
@@ -546,6 +546,35 @@
           "limitations": "工作负载导出的稳定/toggle模式可过拟合；功耗降低不等真实系统能效/全部负载或硅量测。商业formal结果是作者报告，source/脚本未独立运行；不同层次partition/多workload不当独立IP数。原生综合已CG但RTLcodingstyle仍有余量，支持具体增量而非通用全EDAagent已完成。 作者reportedA single9/13改善→combined12/13、B6/13→12/13，平均收益不是所有case都降；不能当公开可复现bench或wholechip所有工作负载结论。",
           "tools_and_access": "arXiv2606.17461v1全文可读，开源IP引用NVDLA/BlackParrot/CVDP/OpenCores/OpenTitan不等全部fixedinput/TB/agent/artifact已发布。当前未取得正式完整code/data/商业3nm库/PrimePower/formaldeck/原日志；私有两productiondesign未公开。",
           "industrial_value": "现有EDA已提供确定性综合/仿真/功耗与等价检查；模型价值需在同输入/约束/预算及更强原生基线上证明，不因商业工具存在宣称任务已解。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "Agentic BG-IWO experimental calibration",
+      "record_count": 1,
+      "records_with_current_field_audit": 1,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "device-agentic-iwo-calibration",
+          "name": "Agentic TCAD / BG-IWO实验校准与模型迁移",
+          "category": "器件与工艺/TCAD校准",
+          "artifact_type": "实验方法案例；未确认独立公开benchmark包",
+          "task_layer": "人工审核的器件物理模型选择/参数校准",
+          "evidence_status": "第二轮12h进行中；一手正文/固定源码/发布数表静态核查，未运行模型、光刻/TCAD仿真或第三方评测代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-litho-device-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "继续核完整任务/数据授权、原生工具与独立oracle、同源split、原始输出/轨迹和全部预算；未确认项保留为缺口。",
+          "limitations": "人工审批属于协议一部分，不能当无人agent。bias测试列.05/.1/.2/.5/1V，其中.05/1V也用于校准，不能称五个全heldoutbias；L2µm不重调。4%W另经再校准，是process-sensitive study，不是zero-shot迁移。校准有效参数非氧空位/微观trap唯一实测提取。",
+          "tools_and_access": "Sentaurus W-2024.09-SP1与获准本地手册；作者报告GPT5.5及Codex/NeMo Agent Toolkit接口。全文可读；原始测量、deck、norm常数全表、RAG材料与完整轨迹公开未确认。作者博客为通用workflow示例，非实验复现包。",
+          "industrial_value": "研究判断：人工审核的器件物理模型选择/参数校准；公开academic或方法实验不自动具有工厂校准、商业签核与独立盲测效力。"
         }
       ]
     },
@@ -7626,6 +7655,98 @@
       ]
     },
     {
+      "benchmark_family": "LDU-Bench",
+      "record_count": 4,
+      "records_with_current_field_audit": 4,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "fab-ldu-triage",
+          "name": "LDU-Bench / A：缺陷分流",
+          "category": "制造/缺陷理解与review",
+          "artifact_type": "论文benchmark分轨；完整数据/评分工件公开未确认",
+          "task_layer": "图像理解评测；非原生OPC recipe agent",
+          "evidence_status": "第二轮12h进行中；一手正文/固定源码/发布数表静态核查，未运行模型、光刻/TCAD仿真或第三方评测代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-litho-device-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "继续核完整任务/数据授权、原生工具与独立oracle、同源split、原始输出/轨迹和全部预算；未确认项保留为缺口。",
+          "limitations": "分类高分不推出形貌/定位/工艺因果能力。 四任务独立提示/评分以避免级联错误，非同一agent依次完成四步。A/B同1761图，C984、D532，合计5038是任务实例数，非5038独立图像；六模型30228实例及加AnomalyGPT32973复算一致。",
+          "tools_and_access": "全文与PDF可读，未定位作者具名数据/manifest/冻结prompt/alias与keyword评分表下载或代码仓库；不能仅据publicly releasable措辞标成完整公开数据集。真实IC-SEM图来源/再分发授权、跨fab/source分组split待核。",
+          "industrial_value": "研究判断：图像理解评测；非原生OPC recipe agent；公开academic或方法实验不自动具有工厂校准、商业签核与独立盲测效力。"
+        },
+        {
+          "id": "fab-ldu-morphology",
+          "name": "LDU-Bench / B：形貌类别",
+          "category": "制造/缺陷理解与review",
+          "artifact_type": "论文benchmark分轨；完整数据/评分工件公开未确认",
+          "task_layer": "图像理解评测；非原生OPC recipe agent",
+          "evidence_status": "第二轮12h进行中；一手正文/固定源码/发布数表静态核查，未运行模型、光刻/TCAD仿真或第三方评测代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-litho-device-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "继续核完整任务/数据授权、原生工具与独立oracle、同源split、原始输出/轨迹和全部预算；未确认项保留为缺口。",
+          "limitations": "类别定义跨fab可变；论文独立盲标一致性不等跨厂泛化。 四任务独立提示/评分以避免级联错误，非同一agent依次完成四步。A/B同1761图，C984、D532，合计5038是任务实例数，非5038独立图像；六模型30228实例及加AnomalyGPT32973复算一致。",
+          "tools_and_access": "全文与PDF可读，未定位作者具名数据/manifest/冻结prompt/alias与keyword评分表下载或代码仓库；不能仅据publicly releasable措辞标成完整公开数据集。真实IC-SEM图来源/再分发授权、跨fab/source分组split待核。",
+          "industrial_value": "研究判断：图像理解评测；非原生OPC recipe agent；公开academic或方法实验不自动具有工厂校准、商业签核与独立盲测效力。"
+        },
+        {
+          "id": "fab-ldu-localization",
+          "name": "LDU-Bench / C：粗定位",
+          "category": "制造/缺陷理解与review",
+          "artifact_type": "论文benchmark分轨；完整数据/评分工件公开未确认",
+          "task_layer": "图像理解评测；非原生OPC recipe agent",
+          "evidence_status": "第二轮12h进行中；一手正文/固定源码/发布数表静态核查，未运行模型、光刻/TCAD仿真或第三方评测代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-litho-device-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "继续核完整任务/数据授权、原生工具与独立oracle、同源split、原始输出/轨迹和全部预算；未确认项保留为缺口。",
+          "limitations": "整图框GTcoverage=1却DICU仅约.0663，不能仅用coverage冒充定位。附录Gemma951/984合法框、Qwen982/984；缺框不能删掉。 四任务独立提示/评分以避免级联错误，非同一agent依次完成四步。A/B同1761图，C984、D532，合计5038是任务实例数，非5038独立图像；六模型30228实例及加AnomalyGPT32973复算一致。",
+          "tools_and_access": "全文与PDF可读，未定位作者具名数据/manifest/冻结prompt/alias与keyword评分表下载或代码仓库；不能仅据publicly releasable措辞标成完整公开数据集。真实IC-SEM图来源/再分发授权、跨fab/source分组split待核。",
+          "industrial_value": "研究判断：图像理解评测；非原生OPC recipe agent；公开academic或方法实验不自动具有工厂校准、商业签核与独立盲测效力。"
+        },
+        {
+          "id": "fab-ldu-cause",
+          "name": "LDU-Bench / D：图像条件原因归因",
+          "category": "制造/缺陷理解与review",
+          "artifact_type": "论文benchmark分轨；完整数据/评分工件公开未确认",
+          "task_layer": "图像理解评测；非原生OPC recipe agent",
+          "evidence_status": "第二轮12h进行中；一手正文/固定源码/发布数表静态核查，未运行模型、光刻/TCAD仿真或第三方评测代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-litho-device-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "继续核完整任务/数据授权、原生工具与独立oracle、同源split、原始输出/轨迹和全部预算；未确认项保留为缺口。",
+          "limitations": "从可见图像匹配参考原因，不是完整工艺因果诊断、根因干预或recipe优化；未确认完整alias/keyword表公开。 四任务独立提示/评分以避免级联错误，非同一agent依次完成四步。A/B同1761图，C984、D532，合计5038是任务实例数，非5038独立图像；六模型30228实例及加AnomalyGPT32973复算一致。",
+          "tools_and_access": "全文与PDF可读，未定位作者具名数据/manifest/冻结prompt/alias与keyword评分表下载或代码仓库；不能仅据publicly releasable措辞标成完整公开数据集。真实IC-SEM图来源/再分发授权、跨fab/source分组split待核。",
+          "industrial_value": "研究判断：图像理解评测；非原生OPC recipe agent；公开academic或方法实验不自动具有工厂校准、商业签核与独立盲测效力。"
+        }
+      ]
+    },
+    {
       "benchmark_family": "LLM-DSE (HLSyn-derived protocol)",
       "record_count": 1,
       "records_with_current_field_audit": 0,
@@ -7890,8 +8011,8 @@
     },
     {
       "benchmark_family": "LithoBench",
-      "record_count": 2,
-      "records_with_current_field_audit": 2,
+      "record_count": 5,
+      "records_with_current_field_audit": 5,
       "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
       "records": [
         {
@@ -7946,6 +8067,69 @@
           "limitations": "paperMetal/Via90/10，StdMetal无finetune，StdContact可163微调/165test，非纯zero-shot。current文件排序切分与paper数据构造时随机化不是同一步，不能猜当前filename已随机；同host/空间tile相关需manifest。TableVia与headline数量不一致已保留，不冒称全包计数。PA不是通用accuracy；高代理拟合分不证明校准真实工艺或下游mask可制造。",
           "tools_and_access": "核心MIT，PyTorch/CUDA；本轮只静态阅读，不执行。ModelLitho本evaluate未给同步端到端runtime测量，需另固定timer；数据/光学核/布局上游授权另核。",
           "industrial_value": "适合固定物理模型代理；不证明真实工艺或下游OPC优化成功"
+        },
+        {
+          "id": "litho-lithogrpo-protocol",
+          "name": "LithoGRPO / flow+GRPO掩膜生成方法评测",
+          "category": "制造/光刻仿真与掩模优化",
+          "artifact_type": "复用LithoBench的方法实验；当前公开代码仅部分组件",
+          "task_layer": "生成模型RL训练；非LLM工程工具agent",
+          "evidence_status": "第二轮12h进行中；一手正文/固定源码/发布数表静态核查，未运行模型、光刻/TCAD仿真或第三方评测代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-litho-device-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "继续核完整任务/数据授权、原生工具与独立oracle、同源split、原始输出/轨迹和全部预算；未确认项保留为缺口。",
+          "limitations": "StdContact从ViaSet模型再SFT/RL，不是纯zero-shot OOD；主文StdContact SFT50epochs而附表100，需固定实际配置后重比。fastoverlap rectangle set-cover与传统greedy分解不同；高rank相关不等数值/掩膜写入物理一致。所发fastcounter设CBC300s上限，随后直接计x=1而未核solverstatus，不能默认每次证明ILP最优。学术光刻模型，不是Calibre recipe评分。",
+          "tools_and_access": "repo固定f694498f1523efb89381fd9fb8984247f166095e，根MIT及vendored adabox MIT已读；完整tree17entries，当前README明确只发布fast/reference shot counter及例子，GRPO/prior/checkpoints/reward/simulator/end-to-end/dataset/eval列TODO。HF模型链接API本次超时，权重状态未确认，不能用链接代已发布。ICML官方poster页已保存并核题名。",
+          "industrial_value": "研究判断：生成模型RL训练；非LLM工程工具agent；公开academic或方法实验不自动具有工厂校准、商业签核与独立盲测效力。"
+        },
+        {
+          "id": "litho-binaryflow-final",
+          "name": "Binary discrete-flow OPC / 冻结final raw N=1",
+          "category": "制造/光刻仿真与掩模优化",
+          "artifact_type": "公开方法代码/协议/数表；复用上游数据，weights未随包",
+          "task_layer": "二值mask生成训练与固定终测",
+          "evidence_status": "第二轮12h进行中；一手正文/固定源码/发布数表静态核查，未运行模型、光刻/TCAD仿真或第三方评测代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-litho-device-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "继续核完整任务/数据授权、原生工具与独立oracle、同源split、原始输出/轨迹和全部预算；未确认项保留为缺口。",
+          "limitations": "完整训练/验证图像名单身份仍需上游工件核；无fab校准/DRC签核。checkpointSHA存在不证明训练数据授权或数值复现；论文版本与实际源一致性仅作者provenance声明。",
+          "tools_and_access": "固定repob971fdcab4e2ef024cdd8009c4d66c2e474d9497原代码MIT，上游LithoBench另许可。20选定文件均Gitblob匹配。代码/冻结manifest/1024candidate行/13696subset行/281finalcell行公开；原图、生成mask、weights、W&B与rawlogs刻意不包含。weights需联系作者并受上游授权；hash可核身份不等可下载。",
+          "industrial_value": "研究判断：二值mask生成训练与固定终测；公开academic或方法实验不自动具有工厂校准、商业签核与独立盲测效力。"
+        },
+        {
+          "id": "litho-binaryflow-capability",
+          "name": "Binary discrete-flow OPC / 固定dev best-of-N与cleanup",
+          "category": "制造/光刻仿真与掩模优化",
+          "artifact_type": "同方法开发集能力审计；非第二独立终测集",
+          "task_layer": "固定候选集选择与制造代理指标",
+          "evidence_status": "第二轮12h进行中；一手正文/固定源码/发布数表静态核查，未运行模型、光刻/TCAD仿真或第三方评测代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-litho-device-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "继续核完整任务/数据授权、原生工具与独立oracle、同源split、原始输出/轨迹和全部预算；未确认项保留为缺口。",
+          "limitations": "validnominal门是contourproxy<2且MRCproxy≤5；低EPE与validity分别报，不能以0EPE称通过签核。dev候选数扩增有额外仿真/采样预算，不能等同单轮agent改进或32独立新IP。开发32名单与所发4×20heldouttier无交集已核，仍需完整源图划分核。",
+          "tools_and_access": "固定repob971fdcab4e2ef024cdd8009c4d66c2e474d9497原代码MIT，上游LithoBench另许可。20选定文件均Gitblob匹配。代码/冻结manifest/1024candidate行/13696subset行/281finalcell行公开；原图、生成mask、weights、W&B与rawlogs刻意不包含。weights需联系作者并受上游授权；hash可核身份不等可下载。",
+          "industrial_value": "研究判断：固定候选集选择与制造代理指标；公开academic或方法实验不自动具有工厂校准、商业签核与独立盲测效力。"
         }
       ]
     },
