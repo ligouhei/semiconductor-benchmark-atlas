@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T11:45:35.105462+00:00",
+  "generated_at": "2026-10-20T12:22:33.719389+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 382,
-    "records": 690,
-    "records_with_any_field_audit_entry": 449,
-    "records_with_current_field_audit_snapshot": 416,
+    "families": 387,
+    "records": 700,
+    "records_with_any_field_audit_entry": 459,
+    "records_with_current_field_audit_snapshot": 426,
     "records_without_current_field_audit_snapshot": 274
   },
   "requirements_per_record": [
@@ -2160,6 +2160,35 @@
           "limitations": "不能据README1000trials宣称完整1000任务公开可跑；缺修改版布局依赖限制端到端重现；与AnalogAgent相关技术不等全新独立训练语料。",
           "tools_and_access": "固定README/源码示例、BSD3LICENSE；README明确修改版布局工具submodule未提供，当前code用于illustration。需ngspice/Magic/Netgen/open_pdks等。",
           "industrial_value": "研究判断：PDK兼容网表生成→尺寸/偏置扩展→DRC/LVS/PEX/后仿；需要与原生工具或确定性流程同预算比较，成熟软件的存在不等该工程任务已解决。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "CDM agentic hardware synthesis",
+      "record_count": 1,
+      "records_with_current_field_audit": 1,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "rtl-cdm-supergates-method",
+          "name": "CDM supergates / multimodal hardware-agent method evaluation",
+          "category": "数字前端/RTL生成与数据",
+          "artifact_type": "一手公开索引页可读的方法选例；全文下载403未取得",
+          "task_layer": "协议/多模态spec→RTL/晶体管结构与验证",
+          "evidence_status": "第二轮12h进行中；一手论文/公开固定源码与数据652文件、数表静态核；CDM仅先前一手公开索引页，全文请求403未取得；未运行模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-openroad-protocol-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+          "limitations": "specderived与fallbacksmoke的oracle强度不同，需每caseoracle/跳过stage明细；compilepassingbest不应当全功能pass。CDMcustomlayout仍作者明确openfrontier，SVG/ITRS不是已完成制造布局。",
+          "tools_and_access": "本轮先前通过公开primary索引读取到正文/表格片段；directfullURL403后未绕过、未下载完整PDF。未定位官方完整28task/scorer/原始轨迹与匹配budget，保留较低artifactevidencelevel。",
+          "industrial_value": "研究判断：多模态到transistor结构先验的agent案例，真实缺口在完整语义与customlayout；不能把原生标准cellP&R成熟推论特殊CDM布局已解决。"
         }
       ]
     },
@@ -4631,6 +4660,98 @@
           "limitations": "同8chiplet单例两优化场景、对称初值和固定边界，不是大规模泛化榜；5°C代理偏差只在该模型例中校准，其他尺寸/工况须独立峰值及非重叠检测。ANSYS对照属作者报告而非本研究复现；无公开全数据/同预算SA/端到端runtime审计。",
           "tools_and_access": "论文可读/已下载，JAX/AD与商业ANSYS对照；未定位author公开solver/source/mesh/input/golden/split/scorer或完整license，不能称已有公开可直接复现benchmark。",
           "industrial_value": "可微物理求解与布局方法有研究价值，与神经热代理不同；不能把少量commercialoracle匹配当全工业布局/热任务已解决，现阶段作为机制与测量边界参考。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "EDA-Corpus OpenROAD tool data",
+      "record_count": 4,
+      "records_with_current_field_audit": 4,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "data-eda-corpus-qa-v1",
+          "name": "EDA Corpus v1 / OpenROAD question-answer data",
+          "category": "数字后端/工具知识脚本与交互agent",
+          "artifact_type": "公开单轮训练/知识QA数据；非P&R优化agent环境",
+          "task_layer": "工具知识/脚本/状态契约与反馈",
+          "evidence_status": "第二轮12h进行中；一手论文/公开固定源码与数据652文件、数表静态核；CDM仅先前一手公开索引页，全文请求403未取得；未运行模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-openroad-protocol-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+          "limitations": "原文198/590与当前196/581不同；仅195/196原QA exactpair在增强集能对上，可能修订/重写，不能据README说字节严格superset。没有固定题ID/原split完整metadata/全评分历史供本轮复算。",
+          "tools_and_access": "当前25Gitblobs全核、9组CSV/XLSX pairedcontents逐行一致；QA CSV含788尾部空行，不能用984物理行计样本。根CCBY4.0，保留归属；OpenROAD软件/原issues贡献与其他上游另核。",
+          "industrial_value": "研究判断：后端工具知识的真实公开数据资源，native工具解决执行而不自动解决文档解释；只能作为agent基础能力训练，不能宣称完整工业P&R agentbench。"
+        },
+        {
+          "id": "data-eda-corpus-ps-v1",
+          "name": "EDA Corpus v1 / OpenROAD Python prompt-script data",
+          "category": "数字后端/工具知识脚本与交互agent",
+          "artifact_type": "公开单轮代码训练数据；与QA同语料血缘",
+          "task_layer": "工具知识/脚本/状态契约与反馈",
+          "evidence_status": "第二轮12h进行中；一手论文/公开固定源码与数据652文件、数表静态核；CDM仅先前一手公开索引页，全文请求403未取得；未运行模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-openroad-protocol-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+          "limitations": "增强虽声明superset，但exactpair原396中仅159在增强943中直接对上，不能假设文件逐条包含。代码重复/模板/同设计分割会造成评测近重复，缺历史split不能武断认定已训练泄漏。",
+          "tools_and_access": "所有9CSV与XLSX有效对一致，尾空行剔除。根CCBY4.0可依条款研究/再用；OpenROADgitlink/设计和PDK另依赖，原API时效需固定。",
+          "industrial_value": "研究判断：有明确许可的工具脚本训练资源，适合学API/构建未来反馈任务；单轮reference不补成开放多轮agent轨迹。"
+        },
+        {
+          "id": "data-openroad-agent-correction-v2",
+          "name": "OpenROAD Agent / EDA-Corpus-v2 aligned error-feedback training data",
+          "category": "数字后端/工具知识脚本与交互agent",
+          "artifact_type": "真实公开错误脚本/工具消息/修正数据；非完整providerrollout",
+          "task_layer": "工具知识/脚本/状态契约与反馈",
+          "evidence_status": "第二轮12h进行中；一手论文/公开固定源码与数据652文件、数表静态核；CDM仅先前一手公开索引页，全文请求403未取得；未运行模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-openroad-protocol-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+          "limitations": "result目录仅README，无训练RL完整history/140trial原始交互；错码反馈矩阵不能称真实全长providertraces。DB末尾padding不计，TestSet140首行就是题（headerNone），不能错误少算一条。",
+          "tools_and_access": "29选定core/dataGitblobs全核，根BSD3、旧EDA-Corpus-CCBY4和PDK许可分开。RAG192API/24代码片段公开，设计tree含gcd/Nangate45与12ODB工件，但本轮未加载。modelweights仅列Drive入口未取。",
+          "industrial_value": "研究判断：较接近agent修复训练需要的真实工具反馈，是值得优先使用的资源；需标清观察、组合样本、原任务行与独立设计这四种数量。"
+        },
+        {
+          "id": "pd-openroad-agent-script",
+          "name": "OpenROAD Agent / execution-feedback script generation test",
+          "category": "数字后端/工具知识脚本与交互agent",
+          "artifact_type": "工具自纠正方法协议；复用上述数据/设计",
+          "task_layer": "工具知识/脚本/状态契约与反馈",
+          "evidence_status": "第二轮12h进行中；一手论文/公开固定源码与数据652文件、数表静态核；CDM仅先前一手公开索引页，全文请求403未取得；未运行模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-openroad-protocol-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+          "limitations": "只有错误模式检查不是独立goldoutput/设计差分验收；同题失败可能先改部分state。修复轮数截断、shell终止重启、maxwait与RAG边界影响成绩；无完整历史结果不能保证论文和currentclone一致。",
+          "tools_and_access": "代码/样例design/PDK资料公开，29corefiles静态读；实际OpenROADgitlink8d18347及Pythonizepatch需固定。No command分支返回4值而caller解包2，是静态发现的边界bug；未据此编造发生次数。",
+          "industrial_value": "研究判断：API报错恢复的实质agent任务，但原生优化器完成实际物理求解，研究价值在脚本/状态管理；需更强语义oracle才能评工业流程完成率。"
         }
       ]
     },
@@ -12212,6 +12333,56 @@
       ]
     },
     {
+      "benchmark_family": "ProtocolLLM protocol generation",
+      "record_count": 2,
+      "records_with_current_field_audit": 2,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "rtl-protocolllm-generation",
+          "name": "ProtocolLLM / SPI-I2C-UART-AXI one-shot generation",
+          "category": "数字前端/RTL生成与数据",
+          "artifact_type": "公开RTL协议生成评测；单轮vanilla/RAG",
+          "task_layer": "协议/多模态spec→RTL/晶体管结构与验证",
+          "evidence_status": "第二轮12h进行中；一手论文/公开固定源码与数据652文件、数表静态核；CDM仅先前一手公开索引页，全文请求403未取得；未运行模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-openroad-protocol-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+          "limitations": "有8个zero-byte extractedSV但rawanswer261fields均非空，不能称8个LLM无响应。currentPower(W)与paper mW应×1000，失败缺metric的availablemean不当全部designmean。paper有限波形不是形式全输入协议证明。",
+          "tools_and_access": "592selectedGitblobs核；221HDL/221metrics，102rawJSON+22refinedJSON；主repo未见UVM/testbench/逐例waveform标签，paper功能分不能由当前公开scorer完全复现。根统一LICENSE未定位，spec文件厂商许可另核。",
+          "industrial_value": "研究判断：协议时序比孤立module更接近SoC接口任务，尚有测试缺口；成熟IP存在不等新规格实现/集成已解决，但衡量LLM净价值应包含复用IP与等预算修复基线。"
+        },
+        {
+          "id": "data-protocolllm-generations",
+          "name": "ProtocolLLM / public generations and lint-refinement companion",
+          "category": "数字前端/RTL生成与数据",
+          "artifact_type": "同评测的输出/单轮修复数据；非独立bench",
+          "task_layer": "协议/多模态spec→RTL/晶体管结构与验证",
+          "evidence_status": "第二轮12h进行中；一手论文/公开固定源码与数据652文件、数表静态核；CDM仅先前一手公开索引页，全文请求403未取得；未运行模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-openroad-protocol-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+          "limitations": "rawJSON/HDL重复表示同一次生成不能重复统计两条；refined22是局部lint修复而非22独立完整agentepisodes。缺完整评测脚本/函数truth与成本，不宣称高质量全验证训练集。",
+          "tools_and_access": "592选定文件可读且hash匹配，但没有root明确统一license；作者公开artifact不自动提供商业训练许可。测试台缺失限制独立功能筛选。",
+          "industrial_value": "研究判断：比只有排行榜更有训练研究价值的可审阅输出数据，需用独立协议oracle重标注；无需LLM去替代lint/synth等原生功能。"
+        }
+      ]
+    },
+    {
       "benchmark_family": "PyHDL-Eval",
       "record_count": 2,
       "records_with_current_field_audit": 0,
@@ -13940,6 +14111,35 @@
       ]
     },
     {
+      "benchmark_family": "Semi-Sim supply chain simulation",
+      "record_count": 1,
+      "records_with_current_field_audit": 1,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "fab-semisim-reflectichain",
+          "name": "Semi-Sim / ReflectiChain policy-shock planning study",
+          "category": "制造/供应链决策",
+          "artifact_type": "论文描述的合成POMDP；不是工厂实测或已核公开任务包",
+          "task_layer": "供应链合成状态→干预/反馈/权重更新",
+          "evidence_status": "第二轮12h进行中；一手论文/公开固定源码与数据652文件、数表静态核；CDM仅先前一手公开索引页，全文请求403未取得；未运行模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-openroad-protocol-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+          "limitations": "重复数/seeds/统计分母不明，OR88.5不能硬按单30step反推整数成功次数。弱无操作基线、LLMcritic奖、模拟校准都限制真实价值；Paretooptimal作者措辞不是穷举前沿或真实供应链证明。",
+          "tools_and_access": "完整v1正文/公式可读，未定位6node参数/冲击任务列表/完整transition与actionparser、SC-WMweights、agentcode/episodehistory。BWI/OR/RCI标签与完整scorer定义需核，不称开放高保真工业数据。",
+          "industrial_value": "研究判断：半导体供应链agent合成环境候选，适合研究政策文本与状态规划；不等实时企业采购建议或已可直接训练的公开供应链轨迹。"
+        }
+      ]
+    },
+    {
       "benchmark_family": "SemiFA-930",
       "record_count": 2,
       "records_with_current_field_audit": 2,
@@ -14179,6 +14379,56 @@
           "limitations": "受限两处编辑与11模板，不是任意拓扑生成/完整层次电路/后版图PPA closure。高解出率仅对应作者冻结grid与分布。",
           "tools_and_access": "IEEE TCAD DOI10.1109/TCAD.2026.3729375，2026-08-31；本轮仅一手摘要/元数据，未取得全文/数据包/许可。",
           "industrial_value": "研究判断：LLM选候选位置+确定性枚举+SPICE反馈；需要与原生工具或确定性流程同预算比较，成熟软件的存在不等该工程任务已解决。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "Structural verification OpenROAD",
+      "record_count": 2,
+      "records_with_current_field_audit": 2,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "pd-structverify-singlestep",
+          "name": "Structural verification / single-step OpenROAD query-action",
+          "category": "数字后端/工具知识脚本与交互agent",
+          "artifact_type": "方法评测；执行无异常oracle，非独立物理优化基准",
+          "task_layer": "工具知识/脚本/状态契约与反馈",
+          "evidence_status": "第二轮12h进行中；一手论文/公开固定源码与数据652文件、数表静态核；CDM仅先前一手公开索引页，全文请求403未取得；未运行模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-openroad-protocol-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+          "limitations": "静态graphchecker证明覆盖的结构约束，不证明任意代码完全语义正确；LLMsemanticF1.918高于fullstaged.878，不能宣称full在每指标最好。reportedFPR20%与precision80%互补，缺混淆表不能认定标准FPR而非false-discoveryrate。",
+          "tools_and_access": "全文可读，未定位完整100prompt/graphGT/生成器/standalonechecker/逐runlogs。跨设计table报的是源设计配置复用，toolcall只算nativeOpenROAD，不含LLM/staticverifier费用。",
+          "industrial_value": "研究判断：可减少低效执行试错的agent编排方向，仍需独立设计状态/意图oracle与等预算匹配；原生typed API/静态schema能完成的检查应作为强基线。"
+        },
+        {
+          "id": "pd-structverify-multistep",
+          "name": "Structural verification / adversarial multi-step query-action",
+          "category": "数字后端/工具知识脚本与交互agent",
+          "artifact_type": "方法评测；执行无异常oracle，非独立物理优化基准",
+          "task_layer": "工具知识/脚本/状态契约与反馈",
+          "evidence_status": "第二轮12h进行中；一手论文/公开固定源码与数据652文件、数表静态核；CDM仅先前一手公开索引页，全文请求403未取得；未运行模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-openroad-protocol-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+          "limitations": "静态graphchecker证明覆盖的结构约束，不证明任意代码完全语义正确；LLMsemanticF1.918高于fullstaged.878，不能宣称full在每指标最好。reportedFPR20%与precision80%互补，缺混淆表不能认定标准FPR而非false-discoveryrate。",
+          "tools_and_access": "全文可读，未定位完整100prompt/graphGT/生成器/standalonechecker/逐runlogs。跨设计table报的是源设计配置复用，toolcall只算nativeOpenROAD，不含LLM/staticverifier费用。",
+          "industrial_value": "研究判断：可减少低效执行试错的agent编排方向，仍需独立设计状态/意图oracle与等预算匹配；原生typed API/静态schema能完成的检查应作为强基线。"
         }
       ]
     },

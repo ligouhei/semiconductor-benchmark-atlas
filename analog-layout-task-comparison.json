@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T11:45:34.296623+00:00",
+  "as_of": "2026-10-20T12:22:32.922978+00:00",
   "status": "task and input/label comparison, not a new benchmark or ranking",
   "scope": "模拟版图必须区分器件几何生成、网表到版图、寄生优化、语言调用、工具代理与完整工程。原生PCell/P&R、独立物理验收及全部成本决定模型研究价值；商业软件已有不等任务全部解决。",
   "items": [
