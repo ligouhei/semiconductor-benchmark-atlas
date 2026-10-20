@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T05:17:11.099271+00:00",
+  "generated_at": "2026-10-20T05:32:03.341916+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 326,
-    "records": 566,
-    "records_with_any_field_audit_entry": 324,
-    "records_with_current_field_audit_snapshot": 291,
+    "families": 331,
+    "records": 572,
+    "records_with_any_field_audit_entry": 330,
+    "records_with_current_field_audit_snapshot": 297,
     "records_without_current_field_audit_snapshot": 275
   },
   "requirements_per_record": [
@@ -4069,6 +4069,35 @@
           "limitations": "runtime Makefile /usr/bin/time包住router进程，含该进程read/write/startup，不同论文只计routingkernel不能直接合榜；public/final共享设计和不同placement/replication变体，并非28独立电路。OOC端口/时钟不需route可降低难度；1:9权重不是经过单位标准化的通用工业效用",
           "tools_and_access": "MIT竞赛framework、RapidWright/FPGAIF、Pythonwirelengthanalyzer；Vivado report_route_status用于重建验收，开发router非必须Vivado license但完整合法性验证需合法工具。13public和15final现有release入口，未下载全部",
           "industrial_value": "很适合作现代高性能router/并行算法基准；若用agent应定义可调参数/工具动作及下游合法性，而不是将router作者方法直接称agentbench"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "FPL26 Agentic FPGA Backend Optimization",
+      "record_count": 1,
+      "records_with_current_field_audit": 1,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "pd-fpl26-agentic-backend",
+          "name": "FPL26 / agentic post-route DCP optimization contest",
+          "category": "数字后端/FPGA后实现工程agent",
+          "artifact_type": "官方竞赛/公开DCP与validator；商业工具依赖",
+          "task_layer": "固定实现上的agent策略、ECO与原生物理优化编排",
+          "evidence_status": "第二轮12h研究进行中：已静态读取一手正文/选定公开源码；未运行模型、EDA或仿真。来源与字段映射见round2-first-protocol-field-evidence.json。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-first-protocol-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "固定完整输入/工具与评分器、budget与失败分母；补足记录中明确缺口；不从静态阅读推独立复现实验或工业签核。",
+          "limitations": "有限仿真不是完整形式证明；validatorSHA与DCP版本必须固定。mtime选择/失败与infraretry区别影响结果；上游设计/二进制DCP许可另核，包内LICENSE-BENCHMARKS已列多数IP的Apache2/BSD3/MIT归属，未见ISPD16单列归属；Vivado/其他依赖仍各自授权。",
+          "tools_and_access": "源码Apache2；Vivado2025.1、RapidWright、OpenRouter；runtime8vCPU/32GB。公开validator结构检查+默认1000向量/100precheck xsim，非formal全输入等价；有encryptedIP跳过分支，官方harness具体消费方式待核。",
+          "industrial_value": "研究判断：固定实现上的agent策略、ECO与原生物理优化编排。与原生工具、脚本及同预算搜索对照；工具成熟不自动消除这类工程能力需求。"
         }
       ]
     },
@@ -11300,6 +11329,64 @@
       ]
     },
     {
+      "benchmark_family": "Semibench Argonne",
+      "record_count": 1,
+      "records_with_current_field_audit": 1,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "fab-semibench-virtual-process",
+          "name": "Semibench / virtual semiconductor synthesis microtasks",
+          "category": "制造/虚拟工艺合成agent",
+          "artifact_type": "官方会议摘要确认的协议；完整数据/评分器未确认",
+          "task_layer": "虚拟ALD、溅射、RIE工具上的合成步骤规划",
+          "evidence_status": "第二轮12h研究进行中：已静态读取一手正文/选定公开源码；未运行模型、EDA或仿真。来源与字段映射见round2-first-protocol-field-evidence.json。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-first-protocol-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "固定完整输入/工具与评分器、budget与失败分母；补足记录中明确缺口；不从静态阅读推独立复现实验或工业签核。",
+          "limitations": "虚拟工艺不是fab实测或量产收益；不同于facebookresearch/SemiBench网页QA，应区分同名对象。",
+          "tools_and_access": "Argonne作者在AVS官方会议摘要披露；未确认正式代码、任务manifest和数据许可。",
+          "industrial_value": "研究判断：虚拟ALD、溅射、RIE工具上的合成步骤规划。与原生工具、脚本及同预算搜索对照；工具成熟不自动消除这类工程能力需求。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "Siemens Fuse NeMo characterization",
+      "record_count": 1,
+      "records_with_current_field_audit": 1,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "lib-siemens-nemo-characterization",
+          "name": "Siemens Fuse / NeMo Gym Liberty characterization study",
+          "category": "综合/标准单元表征agent",
+          "artifact_type": "厂商工程agent实验协议，非已核完整公共任务包",
+          "task_layer": "商业表征工具外层编排与Liberty工件验收",
+          "evidence_status": "第二轮12h研究进行中：已静态读取一手正文/选定公开源码；未运行模型、EDA或仿真。来源与字段映射见round2-first-protocol-field-evidence.json。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-first-protocol-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "固定完整输入/工具与评分器、budget与失败分母；补足记录中明确缺口；不从静态阅读推独立复现实验或工业签核。",
+          "limitations": "没有可核的独立heldout分割与全库结果；不称完整公共benchmark或第三方复现。商业工具输出强oracle仍需工件完整性与过程验证。",
+          "tools_and_access": "GF180公开不等SolidoAFS、agent环境、goldlib/容差/独立verifier公开。NeMoGym固定公开tree9277entries未见Siemens/Solido/Liberty命名路径，仅说明此次未定位对应实现。",
+          "industrial_value": "研究判断：商业表征工具外层编排与Liberty工件验收。与原生工具、脚本及同预算搜索对照；工具成熟不自动消除这类工程能力需求。"
+        }
+      ]
+    },
+    {
       "benchmark_family": "SpecRead",
       "record_count": 5,
       "records_with_current_field_audit": 0,
@@ -11778,6 +11865,35 @@
       ]
     },
     {
+      "benchmark_family": "TapeoutBench Simra",
+      "record_count": 1,
+      "records_with_current_field_audit": 1,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "analog-tapeoutbench-v01",
+          "name": "TapeoutBench v0.1 / thirteen tapeout-step tasks",
+          "category": "模拟后端/跨阶段工程agent",
+          "artifact_type": "厂商13任务结果/验收协议公开，完整任务包未确认",
+          "task_layer": "电路设计、版图修复/布线/创建、AMS整合和AES实现",
+          "evidence_status": "第二轮12h研究进行中：已静态读取一手正文/选定公开源码；未运行模型、EDA或仿真。来源与字段映射见round2-first-protocol-field-evidence.json。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-first-protocol-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "固定完整输入/工具与评分器、budget与失败分母；补足记录中明确缺口；不从静态阅读推独立复现实验或工业签核。",
+          "limitations": "作者披露296环境fault/109hostcontention重跑、105较晚validattempt丢弃；layoutcampaign另排6ratelimit/5nonzeroexit。source183scored与182selected分开；无误差条，不能把selectedruns当无重试全成本。",
+          "tools_and_access": "作者站点公开任务形状、公式和结果；本轮未发现完整brief/grader/容器下载。PyPI同名0.0.1仅1223bytewheel、声明underdevelopment，未验证与完整任务包关系。",
+          "industrial_value": "研究判断：电路设计、版图修复/布线/创建、AMS整合和AES实现。与原生工具、脚本及同预算搜索对照；工具成熟不自动消除这类工程能力需求。"
+        }
+      ]
+    },
+    {
       "benchmark_family": "Testyard hardware testing framework",
       "record_count": 1,
       "records_with_current_field_audit": 1,
@@ -11826,6 +11942,56 @@
           "limitations": "30任务含同源变体；主要单模块/单clock，CDC/存储为剩余缺口；匿名入口可访问不等完整包已取，精确搜索预算与功耗/能量归一实现仍待核。",
           "tools_and_access": "Yosys/SymbiYosys/LibreLane/OpenROAD/OpenSTA；论文提供anonymous.4open.science入口，本轮只取入口HTML未完整审计任务文件/许可/环境pin。",
           "industrial_value": "研究判断：根据时序报告改RTL，独立后布线验收；需要与原生工具或确定性流程同预算比较，成熟软件的存在不等该工程任务已解决。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "Timing Analysis Agent TDRG",
+      "record_count": 2,
+      "records_with_current_field_audit": 2,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "pd-timingagent-single",
+          "name": "Timing Analysis Agent / single-report diagnostic protocol",
+          "category": "数字后端/时序报告诊断agent",
+          "artifact_type": "工业报告方法评测；完整原件/独立grader未确认",
+          "task_layer": "报告检索、跨报告推理与诊断，不执行ECO",
+          "evidence_status": "第二轮12h研究进行中：已静态读取一手正文/选定公开源码；未运行模型、EDA或仿真。来源与字段映射见round2-first-protocol-field-evidence.json。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-first-protocol-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "固定完整输入/工具与评分器、budget与失败分母；补足记录中明确缺口；不从静态阅读推独立复现实验或工业签核。",
+          "limitations": "诊断正确不等工具执行修复/后布线PPA改善；TDRG已注入专家经验，不能将分数等同零先验模型泛化。",
+          "tools_and_access": "作者paper全文公开；工业原始报告/gold答案、固定环境与完整轨迹包未确认公开。",
+          "industrial_value": "研究判断：报告检索、跨报告推理与诊断，不执行ECO。与原生工具、脚本及同预算搜索对照；工具成熟不自动消除这类工程能力需求。"
+        },
+        {
+          "id": "pd-timingagent-multi",
+          "name": "Timing Analysis Agent / multi-report diagnostic protocol",
+          "category": "数字后端/时序报告诊断agent",
+          "artifact_type": "工业报告方法评测；完整原件/独立grader未确认",
+          "task_layer": "报告检索、跨报告推理与诊断，不执行ECO",
+          "evidence_status": "第二轮12h研究进行中：已静态读取一手正文/选定公开源码；未运行模型、EDA或仿真。来源与字段映射见round2-first-protocol-field-evidence.json。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-first-protocol-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "固定完整输入/工具与评分器、budget与失败分母；补足记录中明确缺口；不从静态阅读推独立复现实验或工业签核。",
+          "limitations": "诊断正确不等工具执行修复/后布线PPA改善；TDRG已注入专家经验，不能将分数等同零先验模型泛化。",
+          "tools_and_access": "作者paper全文公开；工业原始报告/gold答案、固定环境与完整轨迹包未确认公开。",
+          "industrial_value": "研究判断：报告检索、跨报告推理与诊断，不执行ECO。与原生工具、脚本及同预算搜索对照；工具成熟不自动消除这类工程能力需求。"
         }
       ]
     },
