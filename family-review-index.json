@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-20T05:44:29.447106+00:00",
+  "generated_at": "2026-10-20T05:47:31.945313+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {

@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T05:44:29.255451+00:00",
+  "as_of": "2026-10-20T05:47:31.709189+00:00",
   "status": "selected primary protocol comparison, not a universal signoff certification",
   "scope": "路由文件已生成、有限规则DRC为0、功能保持、时序/功耗达标、完整多corner与foundry签核分别是独立条件；不得用其中一个通过推其余全部通过。",
   "items": [

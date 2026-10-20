@@ -1,0 +1,15 @@
+{
+  "scope": "second12h active research local corrections; preserved Git history and primary evidence",
+  "items": [
+    {
+      "date": "2026-10-20",
+      "catalog_id": "hls-fpgagent-78",
+      "prior_public_commit": "ec4d64b8051db6f2267154fcbd1216374bc261d6",
+      "issue": "本研究上一版把论文摘要30.6%误记为表1简单均值重算值",
+      "correction": "按表1打印数值，三项mean absolute gains为16.9/26.68/30.26个百分点；摘要30.6%另列，未验证其聚合来源",
+      "evidence": "https://arxiv.org/html/2608.23630v1",
+      "local_arithmetic_audit": "round2/fpgagent-table-arithmetic.json",
+      "reproduction_claimed": false
+    }
+  ]
+}

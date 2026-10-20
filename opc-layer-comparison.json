@@ -1,6 +1,6 @@
 {
   "status": "task-layer comparison; proposals explicitly excluded from benchmark counts",
-  "as_of": "2026-10-20T05:44:28.725971+00:00",
+  "as_of": "2026-10-20T05:47:31.158672+00:00",
   "scope": "同一OPC相关名称可能覆盖不同输入/动作/oracle，不能合并为一个模型优化排行榜；表不证明所有公开OPC基准已穷尽",
   "items": [
     {

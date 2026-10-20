@@ -12127,7 +12127,7 @@
     "input": "94题筛选且部分接口调整后的78任务，规格/header；Vitis2022.2、U200/200MHz。",
     "task": "搜索kernel，用生成的C++验证程序修复，生成host及xclbin并运行。",
     "output": "kernel/host/xclbin与执行/功能结果。",
-    "metrics": "分别报可综合、可执行、功能正确比例；对zero-shot pass@10。pool4初始化后保留2、3轮；每题硬件build一次、约3–5h，完整LLM/工具成本未齐。按table计算平均提升16.9/26.7/30.6是百分点。",
+    "metrics": "分别报可综合、可执行、功能正确比例；对zero-shot pass@10。pool4初始化后保留2、3轮；每题硬件build一次、约3–5h，完整LLM/工具成本未齐。按表1所列值重算平均绝对增益为16.9/26.68/30.26个百分点；摘要的30.6%不能由该表简单均值复算，不将它冒充重算或本研究实测。",
     "baseline": "五模型zero-shot与框架、机制ablation；等候选数不自动等token/工具成本。",
     "tools_and_access": "论文全文已读；未确认改后78完整manifest/代码/独立gold与许可、实板rawrun。",
     "limitations": "功能反思和host测试包含模型生成expectedoutputs，独立oracle边界仍待核；不能据生成checker自洽推出任意输入正确。与原94及HLS-Eval默认Csim不同评分链。",

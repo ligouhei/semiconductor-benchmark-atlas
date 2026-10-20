@@ -1,6 +1,6 @@
 {
-  "status": "round2 active; source-based HLS capability comparison, not measured agent leaderboard",
-  "scope": "区分Csim、综合、RTLcosim、后PnR和实板；同源94/78、PolyBench与多次候选不叠加为独立IP；原paper与currentagent接口分开",
+  "status": "round2 active; primary-static HLS comparison, not measured model leaderboard",
+  "scope": "Csim/综合/RTLcosim/后PnR/实板分层；原paper/current接口、同源94/78/PolyBench、共同成功子集分别报告",
   "items": [
     {
       "catalog_id": "hls-hlseval-generation",
@@ -103,7 +103,7 @@
       "family": "HLS-Eval",
       "input": "94题筛选且部分接口调整后的78任务，规格/header；Vitis2022.2、U200/200MHz。",
       "task": "搜索kernel，用生成的C++验证程序修复，生成host及xclbin并运行。",
-      "metrics": "分别报可综合、可执行、功能正确比例；对zero-shot pass@10。pool4初始化后保留2、3轮；每题硬件build一次、约3–5h，完整LLM/工具成本未齐。按table计算平均提升16.9/26.7/30.6是百分点。",
+      "metrics": "分别报可综合、可执行、功能正确比例；对zero-shot pass@10。pool4初始化后保留2、3轮；每题硬件build一次、约3–5h，完整LLM/工具成本未齐。按表1所列值重算平均绝对增益为16.9/26.68/30.26个百分点；摘要的30.6%不能由该表简单均值复算，不将它冒充重算或本研究实测。",
       "native_baseline": "五模型zero-shot与框架、机制ablation；等候选数不自动等token/工具成本。",
       "tools_and_access": "论文全文已读；未确认改后78完整manifest/代码/独立gold与许可、实板rawrun。",
       "trajectory_access": "论文描述ErrorPool和运行经验，完整公开交互轨迹未确认",
@@ -111,7 +111,7 @@
       "source_snapshots": [
         {
           "id": "hls-fpgagent-78",
-          "record_sha256": "f6ec2b93597690f76874c84161ee79ae729759539ea9ea7eecc421533f5efe9e",
+          "record_sha256": "e6a251607ebc6f53f4c6a22bcf586211cc3c9ebe4755e4abff8c1e791f22317c",
           "primary_sources": "https://arxiv.org/html/2608.23630v1"
         }
       ]
@@ -213,11 +213,12 @@
     }
   ],
   "static_checks": {
-    "hlseval_config_audit": "202configs parse and match fixedGit; core122/accel80 with variants",
-    "bench4hls_metadata": "170 unique taskIDs each hasreference/TB path"
+    "hlseval_config_audit": "202 pinned TOML configs parse and match Git blobs; core122/accel80 include variants",
+    "bench4hls_metadata": "170 unique taskIDs each with reference/TB paths"
   },
-  "source_files": [
+  "local_audit_files_not_published": [
     "round2/hlseval-config-static-audit.json",
-    "round2/bench4hls-static-audit.json"
+    "round2/bench4hls-static-audit.json",
+    "round2/fpgagent-table-arithmetic.json"
   ]
 }
