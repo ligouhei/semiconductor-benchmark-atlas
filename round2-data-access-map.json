@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-10-20T08:53:43.443432+00:00",
+  "as_of": "2026-10-20T09:09:31.194111+00:00",
   "status": "第二轮12h进行中的数据/轨迹开放性核查，非完整市场清单或最终结论",
   "scope": "只覆盖本轮已保存一手核查的新增协议；训练样本、评测输入、模型权重、整理后记忆、生成采样轨迹与LLM工具交互轨迹分别描述",
-  "protocol_records": 78,
-  "families": 38,
+  "protocol_records": 80,
+  "families": 40,
   "items": [
     {
       "catalog_id": "lib-siemens-nemo-characterization",
@@ -939,6 +939,30 @@
       "trajectory_and_training_access": "公开7组121条稀疏improving design点（iter/parameters/performance/validation/objective/violations）、63heuristics/知识事实/拓扑tagging；不是全部尝试、完整LLM对话或可回放prompt/action/observation/cost轨迹。代码支持历史/仿真/LLMusage记录，不等论文完整5次运行数据已公开。",
       "limits": "currentweightedviolation只计min/max且跳缺失项，target另作单侧阈值/目标处理；fullfeasibility对missing返回False，两者不可替代。currentYAML会重新生成JSONsettings，需冻结有效配置。向量单位与case-specificspec定义不能只读字段power/ugb猜单位；不支持直接宣称PVT/PEX覆盖。",
       "primary_sources": "https://arxiv.org/html/2609.25873v1; https://github.com/aprilaihub/agentic-analog-sizing/tree/d4b59e00bb54029e952b5a38d519ab34665dcc02",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "be-evodrc-skill-evolution",
+      "name": "EvoDRC / layer-skill evolution for block-level DRC repair",
+      "family": "EvoDRC method on DAC26 DRC",
+      "object_identity": "复用既有DAC26七block的方法协议；非新独立数据集",
+      "task": "把版图分为≤2×2µm crop，按层skills调用ReAct修复agent；连接preview/DRCpreview/impactpreview辅助几何操作。逐leaf先连通硬门，再拼装全block DRC/连通；经DBsummary生成Markov/stateless两skilldraft并judge至多选一，模型权重固定。",
+      "available_materials_and_tools": "KLayout0.30.1/ASAP7真实deck；agent源BSD3header、无rootLICENSE单文件，上游PDK/benchmark许可另列。132blobs/完整tree/releases核；未执行KLayout/模型。paper费用$1152.23为作者API定价折算，86.4%在repair，不含完整CPU/人工CLA种子/工具成本。",
+      "trajectory_and_training_access": "132公开text/code blobs已核；初始CLA/cold-start技能和模板可用。当前完整tree149entries的data/只有.gitkeep，releases/tags均0；README描述输出目录不是已公开DB、逐crop原prompt/patch/DRV反馈与usage。没有据logger存在推断历史轨迹已公开。",
+      "limits": "连通是合并metal/via层上pin DFS，作者明确不是LVS，不证明逻辑/寄生/时序/功耗签核。Block1迭代DRV145→233显示非单调；controller所谓best注释实际last-good且emit判断!=broken，缺状态不可当已证通过。当前data占位、无全量历史DB；代码能力与已发布轨迹分开。",
+      "primary_sources": "https://arxiv.org/html/2607.20019v1; https://github.com/ASU-VDA-Lab/EvoDRC/tree/69a138b081b007772a39e643342d520ca656ce4f",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "fab-osat-rl-scheduling",
+      "name": "OSAT_RL / five-stage stochastic assembly-and-test scheduling",
+      "family": "OSAT_RL synthetic scheduling study",
+      "object_identity": "合成数值MARL环境与结果包；paper/public边界不同",
+      "task": "PPO+GAE数字policy；manager每6个5min步选FLOW/DUE_DATE/THROUGHPUT，worker选FIFO/SPT/EDD。reward完工收益−WIP/逾期/energy罚项按goal改变；输入local16维/global70维，不是LLM工具操作或真实MES生产。",
+      "available_materials_and_tools": "完整119tree/1branch/no tags/releases核；47text/code/CSVblobs匹配、官方reportmanifest25text条hash通过。公开结果真存在，README/PDF数值不全一致。root无LICENSE，论文开放获取与代码/数据训练授权分开；没有取得厂内生产记录。",
+      "trajectory_and_training_access": "公开synthetic仿真器/config、四架构checkpoint文件名、Independent1000episodehistory和1890run-levelKPI；47textblobs及25manifesthash已核。未下载/反序列化.pt，未运行模拟器/训练。不是LLM工具交互轨迹，也未见四模型完整state/action/rewardtransition包；root未定位LICENSE。",
+      "limits": "旧data30240mixedrows/final_output1080不代替canonical1890。168h due在6h下tardiness全0，Seasonal168h/Surge72–120h不充分覆盖；OEE是仿真proxy，energy_efficiency字段实为每完工能耗越低越好。paper称修正终点与Independent重训，当前主分支仍drain，不断言论文造假或已被独立复现。",
+      "primary_sources": "https://rsisinternational.org/journals/ijriss/view/benchmarking-multi-agent-reinforcement-learning-for-stochastic-osat-scheduling-a-reproducible-computational-study-for-semiconductor-operations-management; https://github.com/plmaihuy-cloud/OSAT_RL/tree/787e362f913104a6139b5dab7cb718ac06b387e9",
       "record_snapshot_matches_audit": true
     }
   ],

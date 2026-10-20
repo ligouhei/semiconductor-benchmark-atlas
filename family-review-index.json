@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T08:53:43.542507+00:00",
+  "generated_at": "2026-10-20T09:09:31.291424+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 360,
-    "records": 644,
-    "records_with_any_field_audit_entry": 402,
-    "records_with_current_field_audit_snapshot": 369,
+    "families": 362,
+    "records": 646,
+    "records_with_any_field_audit_entry": 404,
+    "records_with_current_field_audit_snapshot": 371,
     "records_without_current_field_audit_snapshot": 275
   },
   "requirements_per_record": [
@@ -4508,6 +4508,35 @@
           "limitations": "文档仍写预计2024年秋发布，不可据此声称2.0正式发布；release candidate与master不能混榜。size扣减后非正值、缺失程序和不同metric须处理",
           "tools_and_access": "公开仓库；User Guide GFDL1.2+，源程序各自许可证须逐项核；猜测根LICENSE返回404不说明项目无许可。未构建",
           "industrial_value": "比单小核更丰富的嵌入式架构/编译回归；应用代表性仍依目标系统"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "EvoDRC method on DAC26 DRC",
+      "record_count": 1,
+      "records_with_current_field_audit": 1,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "be-evodrc-skill-evolution",
+          "name": "EvoDRC / layer-skill evolution for block-level DRC repair",
+          "category": "后端/DRC修复与技能演化agent",
+          "artifact_type": "复用既有DAC26七block的方法协议；非新独立数据集",
+          "task_layer": "layout crop→几何patch→DRC/连通反馈→技能记忆",
+          "evidence_status": "第二轮12h进行中；一手正文/固定Git源码和数据静态核查，EvoDRC132/OSAT47 Gitblobs和1890行结果核查；未执行模型、EDA、仿真、形式工具或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-evodrc-osat-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需冻结逐trial的输入、agent版本、原始反馈/成功硬门/失败分母/成本与许可；论文成绩与当前配置不一致处需原始运行记录，不默改作者成绩。",
+          "limitations": "连通是合并metal/via层上pin DFS，作者明确不是LVS，不证明逻辑/寄生/时序/功耗签核。Block1迭代DRV145→233显示非单调；controller所谓best注释实际last-good且emit判断!=broken，缺状态不可当已证通过。当前data占位、无全量历史DB；代码能力与已发布轨迹分开。",
+          "tools_and_access": "KLayout0.30.1/ASAP7真实deck；agent源BSD3header、无rootLICENSE单文件，上游PDK/benchmark许可另列。132blobs/完整tree/releases核；未执行KLayout/模型。paper费用$1152.23为作者API定价折算，86.4%在repair，不含完整CPU/人工CLA种子/工具成本。",
+          "industrial_value": "研究判断：有工程价值的DRC工具编排/可验证记忆演化研究，底层几何checker继续作原生工具；七题规模/无硬wallbudget和不完整历史发布仍限制模型横向比较。"
         }
       ]
     },
@@ -10357,6 +10386,35 @@
           "limitations": "论文把iteration定义并行batch但表又用375/600/1000iteration，资源比较须从实际runlog消歧，不能自动解读成同数量独立flow。改clock约束需保护功能/性能条件；模型无关是接口特性非多模型实证",
           "tools_and_access": "BSD3；ORFS/PDK/工具可开源搭建，main实验Claude3.5Sonnet20241022，112vCPU/220GB。README默认6×50而论文25并行/JPEG12，复现配置须锁",
           "industrial_value": "真实调参贡献可测，但六小实例/时限/代理/compute需交代；不等同从零设计布局算法或完整工程agentbench"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "OSAT_RL synthetic scheduling study",
+      "record_count": 1,
+      "records_with_current_field_audit": 1,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "fab-osat-rl-scheduling",
+          "name": "OSAT_RL / five-stage stochastic assembly-and-test scheduling",
+          "category": "制造运营/封装测试排程",
+          "artifact_type": "合成数值MARL环境与结果包；paper/public边界不同",
+          "task_layer": "局部queue/machine观察→dispatch策略→仿真KPI",
+          "evidence_status": "第二轮12h进行中；一手正文/固定Git源码和数据静态核查，EvoDRC132/OSAT47 Gitblobs和1890行结果核查；未执行模型、EDA、仿真、形式工具或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-evodrc-osat-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需冻结逐trial的输入、agent版本、原始反馈/成功硬门/失败分母/成本与许可；论文成绩与当前配置不一致处需原始运行记录，不默改作者成绩。",
+          "limitations": "旧data30240mixedrows/final_output1080不代替canonical1890。168h due在6h下tardiness全0，Seasonal168h/Surge72–120h不充分覆盖；OEE是仿真proxy，energy_efficiency字段实为每完工能耗越低越好。paper称修正终点与Independent重训，当前主分支仍drain，不断言论文造假或已被独立复现。",
+          "tools_and_access": "完整119tree/1branch/no tags/releases核；47text/code/CSVblobs匹配、官方reportmanifest25text条hash通过。公开结果真存在，README/PDF数值不全一致。root无LICENSE，论文开放获取与代码/数据训练授权分开；没有取得厂内生产记录。",
+          "industrial_value": "研究判断：可审计的小型合成排程研究；可以研究MARL/原生规则在受控环境的差异，但当前版本差异与全量轨迹/许可缺口须解决后再作agent训练和生产价值判断。"
         }
       ]
     },

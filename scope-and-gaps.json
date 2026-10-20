@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T08:53:43.484590+00:00",
+  "as_of": "2026-10-20T09:09:31.234256+00:00",
   "status": "coverage inventory with explicit residual limits, not universal completeness/quality certification",
   "scope": "依据用户阶段划分逐项列已有覆盖与剩余限制；“所有可发现”按此次公开资料检索边界理解，不声称覆盖未公开工业bench或互联网全部材料。",
   "method": [
@@ -495,8 +495,8 @@
     },
     {
       "domain": "数字后端",
-      "record_count": 150,
-      "family_count": 95,
+      "record_count": 151,
+      "family_count": 96,
       "catalog_ids": [
         "physical-circuitnet",
         "physical-ispd18",
@@ -647,7 +647,8 @@
         "pd-hightide-flow-suite",
         "pd-hightide-agent-memory",
         "pd-grevolve-code-evolution",
-        "pd-grevolve-standalone-transfer"
+        "pd-grevolve-standalone-transfer",
+        "be-evodrc-skill-evolution"
       ],
       "covered_tasks": "划分/块规划/宏与cell布局、合法化、GR/DR、CTS/STA/sizing/MBFF/ECO、功耗/IR/EM、DRC/LVS工作流与agent",
       "remaining_limits": "历年已覆盖不等全部contest题目/最终checker均取得；部分旧链接失效、商业flow与PDK不可重建；proxy、原生修复、有限DRC与全签核严格分层。",
@@ -739,8 +740,8 @@
     },
     {
       "domain": "制造光刻",
-      "record_count": 72,
-      "family_count": 46,
+      "record_count": 73,
+      "family_count": 47,
       "catalog_ids": [
         "litho-lithobench",
         "litho-opc-engineer-assistant",
@@ -813,7 +814,8 @@
         "fab-fabbench-rag",
         "fab-supplybench-compass",
         "litho-arlo-method",
-        "boundary-eaa-microscopy"
+        "boundary-eaa-microscopy",
+        "fab-osat-rl-scheduling"
       ],
       "covered_tasks": "OPC/ILT求解、前向代理、SMO/随机性、recipe/工程助手、掩模写版、热点/SEM/晶圆模式/计量/良率/调度",
       "remaining_limits": "VPEvolve已有公开20窗口/代码的Calibre recipeagent协议，但商业model/deck与wafer闭环不公开；跨工艺/多工具/隐藏布局统一agent榜仍缺完整对照；SEM像素与电测不是同gold。部分官方原包/许可证/lot血缘未取，mock/合成/partialagent明确标记。",

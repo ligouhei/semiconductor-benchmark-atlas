@@ -1,0 +1,1481 @@
+{
+  "status": "round2 active; skillrepair and numericscheduling versionboundaries",
+  "protocols": [
+    {
+      "id": "be-evodrc-skill-evolution",
+      "benchmark_family": "EvoDRC method on DAC26 DRC",
+      "name": "EvoDRC / layer-skill evolution for block-level DRC repair",
+      "category": "后端/DRC修复与技能演化agent",
+      "artifact_type": "复用既有DAC26七block的方法协议；非新独立数据集",
+      "task_layer": "layout crop→几何patch→DRC/连通反馈→技能记忆",
+      "version": "arXiv2607.20019v1；repo69a138b /benchmarkgitlink72610ed",
+      "input": "DAC26七block的ASAP7 GDS/KLayoutPython layout、初始DRVreport、gold连通文件与DRM图；初始244/68/89/147/68/247/765，共1628DRV。额外CLA37DRV由人工修复用于生成初始skill，非第八heldout测试题。",
+      "task": "把版图分为≤2×2µm crop，按层skills调用ReAct修复agent；连接preview/DRCpreview/impactpreview辅助几何操作。逐leaf先连通硬门，再拼装全block DRC/连通；经DBsummary生成Markov/stateless两skilldraft并judge至多选一，模型权重固定。",
+      "output": "修复版图script与DRVs、各层经验/skill、patch及校验记录。current最终输出是最近连通未broken的assembly，不是全历史最小DRV；局部改进可导致全局退步。",
+      "metrics": "paper最多5outeriterations、零DRV早停，repairagent无walltime上限；一次iteration可许多crop/modelcalls。Table5 pooled净减少(1628−432)/1628=73.464%，不是73.5%设计clean或相对另一强工具的提升；逐block平均83.623%，clean2/7。最终109/8/0/22/0/18/275；须另报新增DRV。",
+      "baseline": "同Sonnet4.6medium三消融：无CLA经验、固定skills、wholeblock不分crop。wholeblock消融也clean2/7且在Block1/4/6更好，但pooled49.08%；不是全面优于所有任务。缺等budget原生几何/商业autoDRCfix对照，不据此称替代工业router。",
+      "tools_and_access": "KLayout0.30.1/ASAP7真实deck；agent源BSD3header、无rootLICENSE单文件，上游PDK/benchmark许可另列。132blobs/完整tree/releases核；未执行KLayout/模型。paper费用$1152.23为作者API定价折算，86.4%在repair，不含完整CPU/人工CLA种子/工具成本。",
+      "limitations": "连通是合并metal/via层上pin DFS，作者明确不是LVS，不证明逻辑/寄生/时序/功耗签核。Block1迭代DRV145→233显示非单调；controller所谓best注释实际last-good且emit判断!=broken，缺状态不可当已证通过。当前data占位、无全量历史DB；代码能力与已发布轨迹分开。",
+      "industrial_value": "研究判断：有工程价值的DRC工具编排/可验证记忆演化研究，底层几何checker继续作原生工具；七题规模/无硬wallbudget和不完整历史发布仍限制模型横向比较。",
+      "primary_sources": "https://arxiv.org/html/2607.20019v1; https://github.com/ASU-VDA-Lab/EvoDRC/tree/69a138b081b007772a39e643342d520ca656ce4f",
+      "evidence_status": "第二轮12h进行中；一手正文/固定Git源码和数据静态核查，EvoDRC132/OSAT47 Gitblobs和1890行结果核查；未执行模型、EDA、仿真、形式工具或第三方代码。",
+      "next_verification": "需冻结逐trial的输入、agent版本、原始反馈/成功硬门/失败分母/成本与许可；论文成绩与当前配置不一致处需原始运行记录，不默改作者成绩。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "fab-osat-rl-scheduling",
+      "benchmark_family": "OSAT_RL synthetic scheduling study",
+      "name": "OSAT_RL / five-stage stochastic assembly-and-test scheduling",
+      "category": "制造运营/封装测试排程",
+      "artifact_type": "合成数值MARL环境与结果包；paper/public边界不同",
+      "task_layer": "局部queue/machine观察→dispatch策略→仿真KPI",
+      "version": "IJRISS10.47772/IJRISS.2026.100800210 /2026-08-31；repo787e362",
+      "input": "五stage DieAttach/WireBond/Encapsulation/FinalTest/Quality，3/4/3/5/2machines；CSV配置productmix/demand/lognormalprocessing/MTBF-MTTR。27physicalscenario=3variability×3demand×3failure；每策略10rep、7policy共1890rows=270matchedblocks，非1890独立工厂。",
+      "task": "PPO+GAE数字policy；manager每6个5min步选FLOW/DUE_DATE/THROUGHPUT，worker选FIFO/SPT/EDD。reward完工收益−WIP/逾期/energy罚项按goal改变；输入local16维/global70维，不是LLM工具操作或真实MES生产。",
+      "output": "逐run throughput、makespan、meanflowtime、energy/completedjob、OEEproxy、tardiness、arrivals/completed；仅Independent有1000episodehistory，四checkpoint存在不证明多seed收敛。",
+      "metrics": "paper6h×1000trainingepisodes，claim终点不排空并对四KPI Friedmanp<.001；当前canonical1890重算五KPIp=.211/.579/.797/.638/.338，与currentreport全不显著一致。现公开metrics()在6h后强制FIFO排空，1889/1890makespan>6h且1890全部completed=arrivals；不能与paper严格终点结果合并。",
+      "baseline": "FIFO/SPT/EDD是强原生排程对照。paper也承认SPT最短flowtime、MARL不全面优；当前Indep19.6531/h vsFIFO19.6414/h，SPTflow.743638h，而paperIndep16.4932/h/SPT.5838h，必须固定版本。相同seed未保证同外生事件：当前270/270blocks各policyarrivals不同。",
+      "tools_and_access": "完整119tree/1branch/no tags/releases核；47text/code/CSVblobs匹配、官方reportmanifest25text条hash通过。公开结果真存在，README/PDF数值不全一致。root无LICENSE，论文开放获取与代码/数据训练授权分开；没有取得厂内生产记录。",
+      "limitations": "旧data30240mixedrows/final_output1080不代替canonical1890。168h due在6h下tardiness全0，Seasonal168h/Surge72–120h不充分覆盖；OEE是仿真proxy，energy_efficiency字段实为每完工能耗越低越好。paper称修正终点与Independent重训，当前主分支仍drain，不断言论文造假或已被独立复现。",
+      "industrial_value": "研究判断：可审计的小型合成排程研究；可以研究MARL/原生规则在受控环境的差异，但当前版本差异与全量轨迹/许可缺口须解决后再作agent训练和生产价值判断。",
+      "primary_sources": "https://rsisinternational.org/journals/ijriss/view/benchmarking-multi-agent-reinforcement-learning-for-stochastic-osat-scheduling-a-reproducible-computational-study-for-semiconductor-operations-management; https://github.com/plmaihuy-cloud/OSAT_RL/tree/787e362f913104a6139b5dab7cb718ac06b387e9",
+      "evidence_status": "第二轮12h进行中；一手正文/固定Git源码和数据静态核查，EvoDRC132/OSAT47 Gitblobs和1890行结果核查；未执行模型、EDA、仿真、形式工具或第三方代码。",
+      "next_verification": "需冻结逐trial的输入、agent版本、原始反馈/成功硬门/失败分母/成本与许可；论文成绩与当前配置不一致处需原始运行记录，不默改作者成绩。",
+      "retrieved_date": "2026-10-20"
+    }
+  ],
+  "audits": {
+    "evodrc": {
+      "as_of": "2026-10-20T09:09:04.905046+00:00",
+      "static_only": true,
+      "pinned_commit": "69a138b081b007772a39e643342d520ca656ce4f",
+      "benchmark_gitlink": "72610eddfa086270abebfda87fd24ec9612d687f",
+      "verified_gitblobs": 132,
+      "tree_entries": 149,
+      "root_license_file": false,
+      "license_evidence": "BSD3-Clause header in source/config; upstream benchmark/PDK independently licensed",
+      "data_files_current": [
+        "data/.gitkeep"
+      ],
+      "releases_count": 0,
+      "tags_count": 0,
+      "release_assets": [],
+      "paper_tables": {
+        "Table 1. Object editability classes and available operations.": [
+          [
+            "Class",
+            "Object type",
+            "Operation",
+            "Applicable scope"
+          ],
+          [
+            "A",
+            "Via structure",
+            "move_via",
+            "Move a via"
+          ],
+          [
+            "",
+            "delete_via",
+            "Delete a via"
+          ],
+          [
+            "",
+            "add_via",
+            "Add a via"
+          ],
+          [
+            "",
+            "resize_via_shape",
+            "Resize a metal polygon within a via structure"
+          ],
+          [
+            "",
+            "move_via_shape",
+            "Move a metal polygon within a via structure"
+          ],
+          [
+            "B",
+            "Polygon fully within the region",
+            "resize",
+            "Resize a polygon"
+          ],
+          [
+            "",
+            "move",
+            "Move a polygon"
+          ],
+          [
+            "",
+            "delete",
+            "Delete a polygon"
+          ],
+          [
+            "",
+            "add_vertex",
+            "Modify the shape of a polygon"
+          ],
+          [
+            "",
+            "add_polygon",
+            "Add a polygon"
+          ],
+          [
+            "C",
+            "Polygon cropped by the k ​ μ ​ m k\\,\\mu\\mathrm{m} window",
+            "resize_end",
+            "Shorten or elongate the open end"
+          ],
+          [
+            "D",
+            "Standard cell and polygons of other routing types",
+            "",
+            "No repair operation allowed"
+          ]
+        ],
+        "Table 2. Preview tools available during repair.": [
+          [
+            "Tool",
+            "Returned information"
+          ],
+          [
+            "Local DRC analysis",
+            "Run DRC on the selected repair region in a sandbox for fast region-local feedback. Reports whether the target DRV is cleared, remaining targets, and new DRVs with bounding boxes"
+          ],
+          [
+            "Connectivity check",
+            "Result of the full-design connectivity check and the seeds of broken nets"
+          ],
+          [
+            "Impact preview",
+            "Metal/via objects touching or overlapping an edited object, including each neighbor’s layer, kind, and editability"
+          ]
+        ],
+        "Table 3. Benchmark and CLA design characteristics.": [
+          [
+            "Design",
+            "#Insts.",
+            "Nets",
+            "Die area ( μ ​ m 2 \\mu\\mathrm{m}^{2} )",
+            "Core area ( μ ​ m 2 \\mu\\mathrm{m}^{2} )",
+            "Die W × H W\\times H ( μ ​ m \\mu\\mathrm{m} )",
+            "Core W × H W\\times H ( μ ​ m \\mu\\mathrm{m} )"
+          ],
+          [
+            "Block1",
+            "143",
+            "120",
+            "16.06",
+            "9.30",
+            "4.008 × 4.008 4.008\\times 4.008",
+            "3.132 × 2.970 3.132\\times 2.970"
+          ],
+          [
+            "Block2",
+            "62",
+            "43",
+            "8.99",
+            "4.08",
+            "2.998 × 2.998 2.998\\times 2.998",
+            "2.160 × 1.890 2.160\\times 1.890"
+          ],
+          [
+            "Block3",
+            "76",
+            "62",
+            "10.07",
+            "5.02",
+            "3.174 × 3.174 3.174\\times 3.174",
+            "2.322 × 2.160 2.322\\times 2.160"
+          ],
+          [
+            "Block4",
+            "107",
+            "81",
+            "13.45",
+            "7.58",
+            "3.668 × 3.668 3.668\\times 3.668",
+            "2.808 × 2.700 2.808\\times 2.700"
+          ],
+          [
+            "Block5",
+            "47",
+            "28",
+            "7.27",
+            "2.97",
+            "2.696 × 2.696 2.696\\times 2.696",
+            "1.836 × 1.620 1.836\\times 1.620"
+          ],
+          [
+            "Block6",
+            "155",
+            "101",
+            "17.94",
+            "11.02",
+            "4.236 × 4.236 4.236\\times 4.236",
+            "3.402 × 3.240 3.402\\times 3.240"
+          ],
+          [
+            "Block7",
+            "574",
+            "410",
+            "57.91",
+            "43.74",
+            "7.610 × 7.610 7.610\\times 7.610",
+            "6.750 × 6.480 6.750\\times 6.480"
+          ],
+          [
+            "CLA",
+            "52",
+            "229",
+            "4.818",
+            "2.712",
+            "2.195 × 2.195 2.195\\times 2.195",
+            "1.674 × 1.620 1.674\\times 1.620"
+          ]
+        ],
+        "Table 4. Initial DRV distribution by rule type.": [
+          [
+            "Rule",
+            "Block1",
+            "Block2",
+            "Block3",
+            "Block4",
+            "Block5",
+            "Block6",
+            "Block7",
+            "CLA"
+          ],
+          [
+            "M4.AUX.X",
+            "20",
+            "7",
+            "7",
+            "13",
+            "6",
+            "22",
+            "63",
+            "7"
+          ],
+          [
+            "V1.M1.EN.1",
+            "11",
+            "2",
+            "6",
+            "4",
+            "5",
+            "10",
+            "26",
+            "7"
+          ],
+          [
+            "V3.M4.AUX.2",
+            "–",
+            "–",
+            "–",
+            "–",
+            "–",
+            "–",
+            "–",
+            "7"
+          ],
+          [
+            "V0.M1.AUX.3",
+            "37",
+            "12",
+            "21",
+            "20",
+            "9",
+            "21",
+            "97",
+            "6"
+          ],
+          [
+            "M1.S.X",
+            "14",
+            "2",
+            "6",
+            "8",
+            "8",
+            "17",
+            "94",
+            "5"
+          ],
+          [
+            "M5.AUX.X",
+            "8",
+            "4",
+            "4",
+            "6",
+            "4",
+            "8",
+            "12",
+            "4"
+          ],
+          [
+            "M4.S.X",
+            "4",
+            "1",
+            "–",
+            "3",
+            "–",
+            "–",
+            "1",
+            "1"
+          ],
+          [
+            "V2.M3.AUX.2",
+            "72",
+            "24",
+            "27",
+            "51",
+            "21",
+            "78",
+            "225",
+            "–"
+          ],
+          [
+            "V4.M5.AUX.2",
+            "48",
+            "16",
+            "18",
+            "34",
+            "14",
+            "52",
+            "150",
+            "–"
+          ],
+          [
+            "V5.M6.AUX.2",
+            "24",
+            "–",
+            "–",
+            "6",
+            "–",
+            "32",
+            "72",
+            "–"
+          ],
+          [
+            "M3.S.X",
+            "2",
+            "–",
+            "–",
+            "1",
+            "1",
+            "3",
+            "15",
+            "–"
+          ],
+          [
+            "M6.AUX.X",
+            "3",
+            "–",
+            "–",
+            "1",
+            "–",
+            "4",
+            "6",
+            "–"
+          ],
+          [
+            "M2.S.X",
+            "1",
+            "–",
+            "–",
+            "–",
+            "–",
+            "–",
+            "4",
+            "–"
+          ],
+          [
+            "Rule types",
+            "12",
+            "8",
+            "7",
+            "11",
+            "8",
+            "10",
+            "12",
+            "7"
+          ],
+          [
+            "Total DRVs",
+            "244",
+            "68",
+            "89",
+            "147",
+            "68",
+            "247",
+            "765",
+            "37"
+          ]
+        ],
+        "Table 5. DRV count after each repair iteration for EvoDRC and the three ablation studies.": [
+          [
+            "Iter.",
+            "Block1",
+            "Block2",
+            "Block3",
+            "Block4",
+            "Block5",
+            "Block6",
+            "Block7"
+          ],
+          [
+            "E.",
+            "A.1",
+            "A.2",
+            "A.3",
+            "E.",
+            "A.1",
+            "A.2",
+            "A.3",
+            "E.",
+            "A.1",
+            "A.2",
+            "A.3",
+            "E.",
+            "A.1",
+            "A.2",
+            "A.3",
+            "E.",
+            "A.1",
+            "A.2",
+            "A.3",
+            "E.",
+            "A.1",
+            "A.2",
+            "A.3",
+            "E.",
+            "A.1",
+            "A.2",
+            "A.3"
+          ],
+          [
+            "0",
+            "244",
+            "68",
+            "89",
+            "147",
+            "68",
+            "247",
+            "765"
+          ],
+          [
+            "1",
+            "145",
+            "208",
+            "145",
+            "192",
+            "29",
+            "30",
+            "29",
+            "43",
+            "14",
+            "12",
+            "14",
+            "62",
+            "125",
+            "96",
+            "125",
+            "140",
+            "38",
+            "42",
+            "38",
+            "58",
+            "78",
+            "153",
+            "78",
+            "159",
+            "394",
+            "675",
+            "394",
+            "759"
+          ],
+          [
+            "2",
+            "233",
+            "201",
+            "198",
+            "165",
+            "18",
+            "26",
+            "18",
+            "30",
+            "5",
+            "4",
+            "6",
+            "51",
+            "112",
+            "87",
+            "77",
+            "89",
+            "39",
+            "35",
+            "27",
+            "47",
+            "49",
+            "137",
+            "73",
+            "66",
+            "374",
+            "613",
+            "368",
+            "759"
+          ],
+          [
+            "3",
+            "217",
+            "198",
+            "124",
+            "122",
+            "14",
+            "37",
+            "17",
+            "29",
+            "2",
+            "2",
+            "0",
+            "21",
+            "112",
+            "63",
+            "43",
+            "61",
+            "4",
+            "25",
+            "20",
+            "30",
+            "38",
+            "128",
+            "47",
+            "48",
+            "353",
+            "588",
+            "355",
+            "758"
+          ],
+          [
+            "4",
+            "129",
+            "199",
+            "124",
+            "115",
+            "16",
+            "26",
+            "17",
+            "18",
+            "0",
+            "0",
+            "—",
+            "0",
+            "101",
+            "56",
+            "36",
+            "42",
+            "2",
+            "19",
+            "4",
+            "16",
+            "23",
+            "128",
+            "23",
+            "36",
+            "284",
+            "602",
+            "357",
+            "684"
+          ],
+          [
+            "5",
+            "109",
+            "207",
+            "134",
+            "96",
+            "8",
+            "61",
+            "13",
+            "18",
+            "—",
+            "—",
+            "—",
+            "—",
+            "22",
+            "56",
+            "34",
+            "15",
+            "0",
+            "17",
+            "2",
+            "16",
+            "18",
+            "118",
+            "20",
+            "0",
+            "275",
+            "440",
+            "358",
+            "684"
+          ],
+          [
+            "Δ \\Delta",
+            "-135",
+            "-37",
+            "-110",
+            "-148",
+            "-60",
+            "-7",
+            "-55",
+            "-50",
+            "-89",
+            "-89",
+            "-89",
+            "-89",
+            "-125",
+            "-91",
+            "-113",
+            "-132",
+            "-68",
+            "-51",
+            "-66",
+            "-52",
+            "-229",
+            "-129",
+            "-227",
+            "-247",
+            "-490",
+            "-325",
+            "-407",
+            "-81"
+          ],
+          [
+            "-%",
+            "-55.3",
+            "-15.2",
+            "-45.1",
+            "-60.7",
+            "-88.2",
+            "-10.3",
+            "-80.9",
+            "-73.5",
+            "-100",
+            "-100",
+            "-100",
+            "-100",
+            "-85.0",
+            "-61.9",
+            "-76.9",
+            "-89.8",
+            "-100",
+            "-75.0",
+            "-97.1",
+            "-76.5",
+            "-92.7",
+            "-52.2",
+            "-91.9",
+            "-100",
+            "-64.1",
+            "-42.5",
+            "-53.2",
+            "-10.6"
+          ]
+        ],
+        "Table 6. EvoDRC LLM cost ($) per agent per each block ( 7 ) .": [
+          [
+            "Block",
+            "Repair",
+            "Skill Refiner",
+            "DB Summarizer",
+            "Skill Judge",
+            "Total"
+          ],
+          [
+            "Block1",
+            "144.57",
+            "9.33",
+            "10.85",
+            "3.01",
+            "167.76"
+          ],
+          [
+            "Block2",
+            "110.41",
+            "6.99",
+            "7.08",
+            "2.14",
+            "126.63"
+          ],
+          [
+            "Block3",
+            "50.45",
+            "7.11",
+            "6.26",
+            "1.97",
+            "65.79"
+          ],
+          [
+            "Block4",
+            "109.90",
+            "5.83",
+            "6.66",
+            "1.37",
+            "123.76"
+          ],
+          [
+            "Block5",
+            "65.71",
+            "9.04",
+            "6.69",
+            "2.69",
+            "84.14"
+          ],
+          [
+            "Block6",
+            "102.53",
+            "9.85",
+            "10.17",
+            "2.71",
+            "125.26"
+          ],
+          [
+            "Block7",
+            "411.76",
+            "13.70",
+            "25.29",
+            "8.14",
+            "458.89"
+          ],
+          [
+            "Total",
+            "995.33",
+            "61.85",
+            "73.00",
+            "22.03",
+            "1152.23"
+          ],
+          [
+            "%",
+            "86.4%",
+            "5.4%",
+            "6.3%",
+            "1.9%",
+            "100.0%"
+          ]
+        ],
+        "Table 7. Majority skill file evolution winner across all metal layers for each block and iteration.": [
+          [
+            "Iter",
+            "EvoDRC",
+            "Ablation 1",
+            "Ablation 3"
+          ],
+          [
+            "Block",
+            "Block",
+            "Block"
+          ],
+          [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ],
+          [
+            "1",
+            "D",
+            "D",
+            "S",
+            "D",
+            "D",
+            "D",
+            "D",
+            "D",
+            "D",
+            "D",
+            "D",
+            "D",
+            "D",
+            "D",
+            "D",
+            "D",
+            "D",
+            "D",
+            "D",
+            "D",
+            "D"
+          ],
+          [
+            "2",
+            "D",
+            "T",
+            "S",
+            "D",
+            "T",
+            "T",
+            "D",
+            "D",
+            "D",
+            "S",
+            "S",
+            "S",
+            "S",
+            "D",
+            "D",
+            "S",
+            "D",
+            "D",
+            "S",
+            "D",
+            "–"
+          ],
+          [
+            "3",
+            "S",
+            "S",
+            "S",
+            "–",
+            "T",
+            "S",
+            "S",
+            "D",
+            "S",
+            "T",
+            "S",
+            "S",
+            "S",
+            "D",
+            "D",
+            "D",
+            "D",
+            "D",
+            "S",
+            "T",
+            "D"
+          ],
+          [
+            "4",
+            "S",
+            "S",
+            "D",
+            "S",
+            "S",
+            "S",
+            "D",
+            "S",
+            "S",
+            "D",
+            "T",
+            "S",
+            "S",
+            "S",
+            "T",
+            "S",
+            "D",
+            "D",
+            "S",
+            "S",
+            "D"
+          ]
+        ],
+        "Table 8. Skill content evolution over iterations. Each row summarizes the content in the skill files for a repair iteration.": [
+          [
+            "Iter",
+            "Block3",
+            "Block5",
+            "Block7"
+          ],
+          [
+            "Cite",
+            "Sit.",
+            "Sug.",
+            "Warn",
+            "Cite",
+            "Sit.",
+            "Sug.",
+            "Warn",
+            "Cite",
+            "Sit.",
+            "Sug.",
+            "Warn"
+          ],
+          [
+            "1",
+            "0",
+            "25",
+            "24",
+            "46",
+            "0",
+            "25",
+            "24",
+            "46",
+            "0",
+            "25",
+            "24",
+            "46"
+          ],
+          [
+            "2",
+            "132",
+            "44",
+            "42",
+            "49",
+            "96",
+            "67",
+            "20",
+            "54",
+            "421",
+            "56",
+            "33",
+            "47"
+          ],
+          [
+            "3",
+            "207",
+            "38",
+            "42",
+            "56",
+            "230",
+            "70",
+            "28",
+            "67",
+            "498",
+            "77",
+            "31",
+            "57"
+          ],
+          [
+            "4",
+            "257",
+            "43",
+            "43",
+            "49",
+            "314",
+            "90",
+            "34",
+            "75",
+            "536",
+            "105",
+            "44",
+            "72"
+          ],
+          [
+            "5",
+            "—",
+            "—",
+            "—",
+            "—",
+            "405",
+            "95",
+            "33",
+            "75",
+            "525",
+            "108",
+            "62",
+            "81"
+          ]
+        ],
+        "Table 9. Iteration traces of the EvoDRC runs on Block 3, Block 5, and Block 7 over representative rule types.": [
+          [
+            "",
+            "M1.S.2",
+            "V2.M3.AUX.2",
+            "M5.AUX.3",
+            "V1.M1.EN.1"
+          ],
+          [
+            "Iter",
+            "B3",
+            "B5",
+            "B7",
+            "B3",
+            "B5",
+            "B7",
+            "B3",
+            "B5",
+            "B7",
+            "B3",
+            "B5",
+            "B7"
+          ],
+          [
+            "0",
+            "5",
+            "6",
+            "25",
+            "27",
+            "21",
+            "225",
+            "0",
+            "0",
+            "0",
+            "6",
+            "5",
+            "26"
+          ],
+          [
+            "1",
+            "1",
+            "1",
+            "16",
+            "0",
+            "13",
+            "225",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1",
+            "7"
+          ],
+          [
+            "2",
+            "0",
+            "0",
+            "12",
+            "0",
+            "6",
+            "225",
+            "0",
+            "13",
+            "0",
+            "0",
+            "0",
+            "4"
+          ],
+          [
+            "3",
+            "1",
+            "0",
+            "11",
+            "0",
+            "2",
+            "225",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "3"
+          ],
+          [
+            "4",
+            "0",
+            "0",
+            "11",
+            "0",
+            "0",
+            "153",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "5"
+          ],
+          [
+            "5",
+            "—",
+            "0",
+            "11",
+            "—",
+            "0",
+            "153",
+            "—",
+            "0",
+            "0",
+            "—",
+            "0",
+            "4"
+          ]
+        ]
+      },
+      "recomputed_table5": {
+        "EvoDRC": {
+          "final_counts": [
+            109,
+            8,
+            0,
+            22,
+            0,
+            18,
+            275
+          ],
+          "initial_total": 1628,
+          "final_total": 432,
+          "pooled_net_reduction_percent": 73.46437346437347,
+          "mean_block_reduction_percent": 83.62314496636215,
+          "clean_blocks": 2,
+          "per_block_reduction_percent": [
+            55.32786885245902,
+            88.23529411764706,
+            100.0,
+            85.03401360544218,
+            100.0,
+            92.71255060728745,
+            64.05228758169935
+          ]
+        },
+        "Ablation1": {
+          "final_counts": [
+            207,
+            61,
+            0,
+            56,
+            17,
+            118,
+            440
+          ],
+          "initial_total": 1628,
+          "final_total": 899,
+          "pooled_net_reduction_percent": 44.778869778869776,
+          "mean_block_reduction_percent": 51.010456393791785,
+          "clean_blocks": 1,
+          "per_block_reduction_percent": [
+            15.163934426229508,
+            10.294117647058824,
+            100.0,
+            61.904761904761905,
+            75.0,
+            52.22672064777328,
+            42.48366013071895
+          ]
+        },
+        "Ablation2": {
+          "final_counts": [
+            134,
+            13,
+            0,
+            34,
+            2,
+            20,
+            358
+          ],
+          "initial_total": 1628,
+          "final_total": 561,
+          "pooled_net_reduction_percent": 65.54054054054055,
+          "mean_block_reduction_percent": 77.85704862431498,
+          "clean_blocks": 1,
+          "per_block_reduction_percent": [
+            45.08196721311475,
+            80.88235294117646,
+            100.0,
+            76.87074829931973,
+            97.05882352941177,
+            91.90283400809717,
+            53.20261437908497
+          ]
+        },
+        "Ablation3": {
+          "final_counts": [
+            96,
+            18,
+            0,
+            15,
+            16,
+            0,
+            684
+          ],
+          "initial_total": 1628,
+          "final_total": 829,
+          "pooled_net_reduction_percent": 49.07862407862408,
+          "mean_block_reduction_percent": 73.00569876662608,
+          "clean_blocks": 2,
+          "per_block_reduction_percent": [
+            60.65573770491803,
+            73.52941176470588,
+            100.0,
+            89.79591836734694,
+            76.47058823529412,
+            100.0,
+            10.588235294117647
+          ]
+        }
+      },
+      "paper_model": "Claude Sonnet4.6 medium all agents",
+      "paper_budget": "max5outeriterations; earlystopzeroDRV; no repair-agent runtime limit, per crop/calls varied; not fixed5modelcalls or equalwallclock",
+      "paper_evaluation_scope": "7existingDAC26blocks ASAP7/KLayout0.30.1; CLA37DRVs manually repaired to seed skills; CLA not eighth heldout test",
+      "cost": {
+        "authors_total_USD": 1152.23,
+        "repair_agent_share_percent": 86.4,
+        "pricing_scope": "Authors nominal Sonnet4.6 API token/cache price; not own measured costs or full EDA/CPU/setup/manualseed campaign costs"
+      },
+      "static_findings": [
+        "data/.gitkeep only; README output tree is not downloadable historical DB/usage/trajectories",
+        "initial CLA/cold_start skills and prompts/code are available; curated notes not raw measured trace dataset",
+        "leaf gate rejects empty/missing/unparseable patches or connectivity breaks; whole block remeasures DRC+connectivity after assembly",
+        "connectivity is mergedmetal/via DFS to standardcell/IOpins; paper explicitly not LVS; does not establish full functional/electrical/timing/power signoff",
+        "controller tracks last connectivity-preserving assembled layout, not minimum-DRV best; accepts all nonbroken statuses incl unknown in emit condition; earlier iteration may be better",
+        "Table5 Block1 DRV145 to233 across iterations demonstrates nonmonotonic repair; no broad claim best-sofar monotonic convergence",
+        "main pooled reduction73.46% and clean2/7 differ from perblockmean83.62%; ablation3 also clean2/7, with better counts onBlock1/4/6 but worse pooled dueBlock7",
+        "current contest shared-unit arbitration has connectivity and nonincrease option; does not imply whole-round DRC monotonicity",
+        "native deterministic repair/commercial autoDRCfix not equalbudget baseline in this paper; ablations test components, not replacement of complete mature tool capability",
+        "newrule failures/addedDRVs must be reported separately; netcount reduction can hide newly introduced violations"
+      ]
+    },
+    "osat": {
+      "as_of": "2026-10-20T09:02:41.237111+00:00",
+      "static_only": true,
+      "repo": "plmaihuy-cloud/OSAT_RL",
+      "pinned_commit": "787e362f913104a6139b5dab7cb718ac06b387e9",
+      "verified_gitblobs": 47,
+      "checked_manifest_entries": 25,
+      "manifest_entries_total": 36,
+      "manifest_checks": [
+        {
+          "path": "report/anova_energy_efficiency.csv",
+          "matches": true
+        },
+        {
+          "path": "report/anova_flow_time.csv",
+          "matches": true
+        },
+        {
+          "path": "report/anova_makespan.csv",
+          "matches": true
+        },
+        {
+          "path": "report/anova_oee.csv",
+          "matches": true
+        },
+        {
+          "path": "report/anova_throughput.csv",
+          "matches": true
+        },
+        {
+          "path": "report/architecture_ranking.csv",
+          "matches": true
+        },
+        {
+          "path": "report/canonical_evaluation.csv",
+          "matches": true
+        },
+        {
+          "path": "report/data_audit.csv",
+          "matches": true
+        },
+        {
+          "path": "report/factorial_anova_all_metrics.csv",
+          "matches": true
+        },
+        {
+          "path": "report/friedman_policy_tests.csv",
+          "matches": true
+        },
+        {
+          "path": "report/hypothesis_verification.csv",
+          "matches": true
+        },
+        {
+          "path": "report/improvement_vs_fifo.csv",
+          "matches": true
+        },
+        {
+          "path": "report/paired_policy_comparisons.csv",
+          "matches": true
+        },
+        {
+          "path": "report/performance_summary.csv",
+          "matches": true
+        },
+        {
+          "path": "report/performance_summary_long.csv",
+          "matches": true
+        },
+        {
+          "path": "report/stability_analysis.csv",
+          "matches": true
+        },
+        {
+          "path": "report/statistical_analysis_report.txt",
+          "matches": true
+        },
+        {
+          "path": "report/training_convergence.csv",
+          "matches": true
+        },
+        {
+          "path": "report/training_history_independent.csv",
+          "matches": true
+        },
+        {
+          "path": "report/tukey_all_metrics.csv",
+          "matches": true
+        },
+        {
+          "path": "report/tukey_energy_efficiency.csv",
+          "matches": true
+        },
+        {
+          "path": "report/tukey_flow_time.csv",
+          "matches": true
+        },
+        {
+          "path": "report/tukey_makespan.csv",
+          "matches": true
+        },
+        {
+          "path": "report/tukey_oee.csv",
+          "matches": true
+        },
+        {
+          "path": "report/tukey_throughput.csv",
+          "matches": true
+        }
+      ],
+      "canonical": {
+        "rows": 1890,
+        "policies": [
+          "EDD",
+          "FIFO",
+          "Flat-MARL",
+          "H-MARL-CTDE",
+          "H-MARL-Indep",
+          "H-MARL-Value",
+          "SPT"
+        ],
+        "per_policy_rows": {
+          "EDD": 270,
+          "FIFO": 270,
+          "Flat-MARL": 270,
+          "H-MARL-CTDE": 270,
+          "H-MARL-Indep": 270,
+          "H-MARL-Value": 270,
+          "SPT": 270
+        },
+        "unique_physical_scenarios": 27,
+        "matched_replication_blocks": 270,
+        "all_completed_equals_arrivals": 1890,
+        "makespan_exceeds_6h": 1889,
+        "tardiness_nonzero": 0,
+        "blocks_with_different_arrival_counts_across_policies": 270
+      },
+      "recomputed_policy_means": {
+        "EDD": {
+          "throughput": 19.5635802469,
+          "makespan": 7.4265432099,
+          "flow_time": 0.7597187662,
+          "energy_efficiency": 3.9462750058,
+          "oee": 69.38452176
+        },
+        "FIFO": {
+          "throughput": 19.6413580247,
+          "makespan": 7.324691358,
+          "flow_time": 0.7642563767,
+          "energy_efficiency": 3.8941414773,
+          "oee": 69.706811413
+        },
+        "Flat-MARL": {
+          "throughput": 19.4432098765,
+          "makespan": 7.1901234568,
+          "flow_time": 0.7642298157,
+          "energy_efficiency": 3.8760864328,
+          "oee": 69.0753990258
+        },
+        "H-MARL-CTDE": {
+          "throughput": 19.6351851852,
+          "makespan": 7.2851851852,
+          "flow_time": 0.7483464583,
+          "energy_efficiency": 3.8840864043,
+          "oee": 69.70830226
+        },
+        "H-MARL-Indep": {
+          "throughput": 19.6530864198,
+          "makespan": 7.2608024691,
+          "flow_time": 0.7556483804,
+          "energy_efficiency": 3.8695900832,
+          "oee": 69.7680041967
+        },
+        "H-MARL-Value": {
+          "throughput": 19.4845679012,
+          "makespan": 7.3703703704,
+          "flow_time": 0.7683482928,
+          "energy_efficiency": 3.9467573058,
+          "oee": 69.0872475658
+        },
+        "SPT": {
+          "throughput": 19.5080246914,
+          "makespan": 7.2404320988,
+          "flow_time": 0.743638245,
+          "energy_efficiency": 3.8920576744,
+          "oee": 69.3405859812
+        }
+      },
+      "summary_max_abs_difference": 1.4210854715202004e-14,
+      "recomputed_friedman": [
+        {
+          "metric": "throughput",
+          "statistic": 8.38793103448301,
+          "pvalue": 0.21103737585840815,
+          "matched_blocks": 270
+        },
+        {
+          "metric": "makespan",
+          "statistic": 4.727272727272583,
+          "pvalue": 0.5792375027095646,
+          "matched_blocks": 270
+        },
+        {
+          "metric": "flow_time",
+          "statistic": 3.0942175495353634,
+          "pvalue": 0.7969320567771417,
+          "matched_blocks": 270
+        },
+        {
+          "metric": "energy_efficiency",
+          "statistic": 4.2847896440127125,
+          "pvalue": 0.6381971378864357,
+          "matched_blocks": 270
+        },
+        {
+          "metric": "oee",
+          "statistic": 6.8211464452097275,
+          "pvalue": 0.3377047798616821,
+          "matched_blocks": 270
+        }
+      ],
+      "historical_or_training_rows": {
+        "data/all_evaluations_dt5.csv": 30240,
+        "final_output/all_evaluations.csv": 1080,
+        "final_output/history_independent.csv": 1000,
+        "report/training_history_independent.csv": 1000
+      },
+      "paper_current_conflicts": [
+        "paper no post6hdrain/extraarrival vs public metrics()explicit FIFOdrain max5000steps; afterdrain restoreclock butretaincompletion/energy/busytime",
+        "canonical performance/report H-MARL-Indep throughput19.6531 vs paper16.4932; currentFIFO19.6414; sourceversion/runoutputsneedalign",
+        "allcurrentFriedmanp>.2 vs paperfourKPIs p<.001; currentreport explicitly H1/H2notsupported; no silentlycombinepaperclaim/currentCSV",
+        "paper lateboundarycorrectedandIndependentPPOretrained; publicsource/outputhere retainolderdrainingsemantics, no claim this reruns correctedpaper",
+        "same scenario/replication seed, but policymodifies order/countofsharedRNGdraws; actualarrivalsdifferamongpoliciesinmanyblocks, not strictlyidenticalexogenousworkload"
+      ],
+      "static_findings": [
+        "5stages DieAttach/WireBond/Encapsulation/FinalTest/Quality with 3/4/3/5/2machines, synthetic CSVparameters; no factory MES/tooloperationdata",
+        "workerlocalobs8+5stageonehot+3goal=16,global13*5+5=70; manager3goals FLOW/DUE_DATE/THROUGHPUT; workers3dispatchactions FIFO/SPT/EDD",
+        "defaultmanagerinterval6steps=30min, dt5min; PPO+GAE agentnumericRL notLLMtoolusingagent",
+        "processingtime lognormal/failureMTBF-MTTR/productmix/arrivalstochastic; inferencepolicychoosesheuristic, not directmachinephysicsoptimization",
+        "training1000episodes andseveralcheckpoints listed; onlyIndependent1000rowhistory, no fullstate/action/rewardtransitiontraces orfourarchitecturemultiseedtraininghistory",
+        "stored checkpoints .pt deliberatelynotdownloaded/unpickled; filenameexistence notproof of convergence orcanonicalalgorithmimplementation",
+        "planned due168h vs6heval ->tardinessall0 notusefuldiscriminator; Seasonal168h andSurge72-120h requirehorizonvariationaudit",
+        "OEEproxy viaavailability*clippedutilization*completionratio notcertifiedfactoryOEE; energy_efficiency isenergypercompletedjob lowerbetter",
+        "noLICENSEfileinfulltree; paperCC/publicreadability notautomaticcode/data commercialtrainingpermission",
+        "legacy30240mixedrows/1080all_evaluations notnewindependentcanonicalcases; report1890 is27scenarios×10reps×7policies"
+      ]
+    }
+  }
+}
