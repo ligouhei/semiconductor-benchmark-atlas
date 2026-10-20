@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T11:21:16.173555+00:00",
+  "generated_at": "2026-10-20T11:45:35.105462+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 380,
-    "records": 684,
-    "records_with_any_field_audit_entry": 443,
-    "records_with_current_field_audit_snapshot": 410,
+    "families": 382,
+    "records": 690,
+    "records_with_any_field_audit_entry": 449,
+    "records_with_current_field_audit_snapshot": 416,
     "records_without_current_field_audit_snapshot": 274
   },
   "requirements_per_record": [
@@ -4573,6 +4573,35 @@
           "limitations": "word-level标签正确不保证geometry语义/完整脚本执行正确。正文新增2830与实验2840生成数据计数略异，训练总2970/原130需manifest消歧；模板派生需group split",
           "tools_and_access": "原论文公开；原数据/代码/完整labels与license未定位；规则源PDK许可分别核",
           "industrial_value": "历史信息抽取补充；作为现代LLM规则生成主bench时验收强度不足，不据高tokenF1宣称任务已解"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "DS2SC-Agent chiplet models",
+      "record_count": 1,
+      "records_with_current_field_audit": 1,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "arch-ds2sc-model-generation",
+          "name": "DS2SC-Agent / datasheet-to-SystemC three-domain demonstrations",
+          "category": "数字前端/微体系结构与RTL优化",
+          "artifact_type": "数字/模拟/RF行为模型方法演示；非固定大型benchmark",
+          "task_layer": "微体系结构/策略源码与配置→仿真反馈/性能预测",
+          "evidence_status": "第二轮12h进行中；一手最新版/历史正文、公开harness36文件及问题元数据、论文数表静态核；未运行模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-quarch-ds2sc-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+          "limitations": "FFT仅roundtrip不排除成对一致的归一化/置换错误甚至identity实现，需独立频域reference。相同IR中的parser错误可能传进代码与TB；没有hiddenindependentoracle，不把生成TB的PASS视datasheet全语义证明。",
+          "tools_and_access": "公开PDF与src入口均为PDF-only，无可核模型/IR/TB/完整history代码包链接。三份原始datasheet版本须另取得并核厂商许可；本轮未运行生成或仿真。",
+          "industrial_value": "研究判断：现实长文档到行为抽象有工程价值；应分数字协议/模拟电学/RF静态拟合检验，人工预填和统一测试边界必须公开，不能宣称三demo证明任意芯粒系统端到端自动建模。"
         }
       ]
     },
@@ -12217,6 +12246,119 @@
           "limitations": "论文明确只用DSL Python仿真，不能翻译到RTL的Python代码也可能通过；Verilog不可综合构造也可能通过。故function-simulation pass不等可综合/时序/物理达标。参考与自身比较只检查测试连接，不能独立证明参考符合自然语言。旧云端点已变更，需换endpoint并锁模型",
           "tools_and_access": "MIT仓库与Zenodo元数据已核；公开tree的dataset参考_ref.v已移除以降低爬取训练，仍有prompt/TB/Python tests。作者指向Zenodo约350.8MB artifact含参考及固定环境；元数据已取，artifact本体尚未下载。固定Icarus12/Verilator5.020/Python3.12.3及DSL版本",
           "industrial_value": "适合作跨语言功能行为/语言样板敏感性补充基准；需增加可综合性和工程规模才可支撑生产设计结论。语法模板生成已有软件能力，但规格语义闭环仍需评测"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "QuArch architecture reasoning",
+      "record_count": 5,
+      "records_with_current_field_audit": 5,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "arch-quarch-mcq",
+          "name": "QuArch v1.0 / architecture recall MCQ",
+          "category": "数字前端/微体系结构与RTL优化",
+          "artifact_type": "知识QA；非工具agent闭环",
+          "task_layer": "微体系结构/策略源码与配置→仿真反馈/性能预测",
+          "evidence_status": "第二轮12h进行中；一手最新版/历史正文、公开harness36文件及问题元数据、论文数表静态核；未运行模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-quarch-ds2sc-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+          "limitations": "无法用22公开样例独立核全部2671ID、分割、去重与榜单；空响应跳过仅源码风险，无完整publishedrun不能认定实际已导致虚高。2025v0.1与v1.0同家族历史扩展，非两套独立新题库。",
+          "tools_and_access": "固定harness2df47346含64Gitfiles/99tree；本轮选36files逐Gitblob匹配，publicsubset只有20FRQ+2MCQ明文题，17encryptedanswerfiles与题图文件树可见。没有取/解密答案或申请key；完整2671题与GT需作者accessagreement、禁止未经授权再分发/训练使用，privateholdout用于榜单。root统一代码LICENSE未定位。",
+          "industrial_value": "研究判断：适合测架构知识基础与模型路由，不能直接回答agent是否能设计芯片或调用EDA；固定旧知识题可作辅助而非唯一工业效能指标。"
+        },
+        {
+          "id": "arch-quarch-frq",
+          "name": "QuArch v1.0 / free-response reasoning QA",
+          "category": "数字前端/微体系结构与RTL优化",
+          "artifact_type": "多模态概念推理；非执行代码/仿真agent主榜",
+          "task_layer": "微体系结构/策略源码与配置→仿真反馈/性能预测",
+          "evidence_status": "第二轮12h进行中；一手最新版/历史正文、公开harness36文件及问题元数据、论文数表静态核；未运行模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-quarch-ds2sc-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+          "limitations": "主表十/十一model文字口径与扩展表30model分开，不编总run数。QA设计/实现标签不表示生成artifact经过原生simulator验证；模型harness/判题器/date要固定，三种judge的性能数不能混成同一榜。",
+          "tools_and_access": "固定harness2df47346含64Gitfiles/99tree；本轮选36files逐Gitblob匹配，publicsubset只有20FRQ+2MCQ明文题，17encryptedanswerfiles与题图文件树可见。没有取/解密答案或申请key；完整2671题与GT需作者accessagreement、禁止未经授权再分发/训练使用，privateholdout用于榜单。root统一代码LICENSE未定位。",
+          "industrial_value": "研究判断：能测无工具概念推理、图表解析和缺假设等问题，工业使用应配独立执行/模拟/物理oracle，而不是以LLMjudge替代全部电学和时序。"
+        },
+        {
+          "id": "arch-quarch-v01",
+          "name": "QuArch v0.1 / historical architecture knowledge QA",
+          "category": "数字前端/微体系结构与RTL优化",
+          "artifact_type": "早期同家族协议；被v1.0扩展",
+          "task_layer": "微体系结构/策略源码与配置→仿真反馈/性能预测",
+          "evidence_status": "第二轮12h进行中；一手最新版/历史正文、公开harness36文件及问题元数据、论文数表静态核；未运行模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-quarch-ds2sc-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+          "limitations": "“1547旧MCQ=1547新MCQ”数量一致不证明逐条完全同文件，需完整IDs/hash才能下结论；旧版微调允许性不自动延伸到新版gatedeval资料。",
+          "tools_and_access": "旧项目URL https://harvard-edge.github.io/QuArch/ 见原文，当前主入口quarch.ai与harness另列；未取得旧版完整发行的全部题/分割/hash，不把2026subset证明2025完整开放。",
+          "industrial_value": "研究判断：保留版本血缘，避免旧名/近似题量/agents措辞造成独立bench重复或错误训练可用性判断。"
+        },
+        {
+          "id": "arch-quarch-memory-codesign",
+          "name": "QuArch / memory hierarchy SFT transfer experiment",
+          "category": "数字前端/微体系结构与RTL优化",
+          "artifact_type": "同家族下游工具交互方法实验；非2671题全agent化",
+          "task_layer": "微体系结构/策略源码与配置→仿真反馈/性能预测",
+          "evidence_status": "第二轮12h进行中；一手最新版/历史正文、公开harness36文件及问题元数据、论文数表静态核；未运行模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-quarch-ds2sc-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+          "limitations": "最佳area从全20trials挑，与success概率是不同指标；完整重试/失败、设计合法性/数值精度/延迟约束和oracle配置待核。代码/判题源码可读不等训练样本可下载/商用。",
+          "tools_and_access": "固定harness2df47346含64Gitfiles/99tree；本轮选36files逐Gitblob匹配，publicsubset只有20FRQ+2MCQ明文题，17encryptedanswerfiles与题图文件树可见。没有取/解密答案或申请key；完整2671题与GT需作者accessagreement、禁止未经授权再分发/训练使用，privateholdout用于榜单。root统一代码LICENSE未定位。 未定位完整case1任务/冻结oracle/676SFT文件/120trial histories，论文成绩不能当本轮复跑。",
+          "industrial_value": "研究判断：少量有针对性推理数据可能改善agent与原生工具交互，但有明显成功率/最好结果权衡，应测试同预算nativeDSE而非只比基础模型。"
+        },
+        {
+          "id": "arch-quarch-dram-control",
+          "name": "QuArch / DRAM controller design correlation experiment",
+          "category": "数字前端/微体系结构与RTL优化",
+          "artifact_type": "三model×四workload下游设计实验",
+          "task_layer": "微体系结构/策略源码与配置→仿真反馈/性能预测",
+          "evidence_status": "第二轮12h进行中；一手最新版/历史正文、公开harness36文件及问题元数据、论文数表静态核；未运行模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-quarch-ds2sc-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+          "limitations": "只有3个模型且各在4任务重复，12点并非12独立model，相关与模型规模/API/harness可能共变；未从图估造原始点值或重复计算p当已独立验证。",
+          "tools_and_access": "固定harness2df47346含64Gitfiles/99tree；本轮选36files逐Gitblob匹配，publicsubset只有20FRQ+2MCQ明文题，17encryptedanswerfiles与题图文件树可见。没有取/解密答案或申请key；完整2671题与GT需作者accessagreement、禁止未经授权再分发/训练使用，privateholdout用于榜单。root统一代码LICENSE未定位。 未取得4workload明确版本/全部controller history/配置scorer，保留作者报告与证据缺口。",
+          "industrial_value": "研究判断：补充QA与实际DSE相关性证据，适合拓展agent任务；工业判断仍需完整设计约束和原生强优化器基线。"
         }
       ]
     },

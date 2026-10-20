@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T11:21:15.830531+00:00",
+  "as_of": "2026-10-20T11:45:34.754086+00:00",
   "status": "selected static protocol comparison; not an ATPG performance ranking",
   "scope": "故障模型、折叠权重、检测类别/不可测分类、观察点、时序与训练权限相同时，覆盖率/成本才有可比性；各类协议不合成一个总分。",
   "items": [

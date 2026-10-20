@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-10-20T11:21:16.071963+00:00",
+  "as_of": "2026-10-20T11:45:35.002322+00:00",
   "status": "第二轮12h进行中的数据/轨迹开放性核查，非完整市场清单或最终结论",
   "scope": "只覆盖本轮已保存一手核查的新增协议；训练样本、评测输入、模型权重、整理后记忆、生成采样轨迹与LLM工具交互轨迹分别描述",
-  "protocol_records": 118,
-  "families": 59,
+  "protocol_records": 124,
+  "families": 61,
   "items": [
     {
       "catalog_id": "lib-siemens-nemo-characterization",
@@ -1419,6 +1419,78 @@
       "trajectory_and_training_access": "paper只述agent构建token/接受率与固定制品schema，未定位完整每repo build/repair actions、拒绝候选/历史工具日志；core subsets不是额外交互训练数据。",
       "limits": "构建gate确保静态/不崩溃/ROI兼容，并不自动证明改依赖/裁剪feature后仍保留应用语义。subset在同30配置选取与验证，未见独立heldoutconfig集；singlethread/SE/AVXfree有选择偏差，不称已覆盖OS/GPU/多线程。",
       "primary_sources": "https://arxiv.org/html/2610.09447v1; https://arxiv.org/src/2610.09447v1",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "arch-quarch-mcq",
+      "name": "QuArch v1.0 / architecture recall MCQ",
+      "family": "QuArch architecture reasoning",
+      "object_identity": "知识QA；非工具agent闭环",
+      "task": "zero-shot架构expert问答，以A/B/C/D收尾，修复boxed/选项文本parser处理响应。主paper每题n3generations，非三轮工具反馈；Archipedia>1Btoken是建题背景语料，不是当前可下载benchmark或完整agent训练数据。",
+      "available_materials_and_tools": "固定harness2df47346含64Gitfiles/99tree；本轮选36files逐Gitblob匹配，publicsubset只有20FRQ+2MCQ明文题，17encryptedanswerfiles与题图文件树可见。没有取/解密答案或申请key；完整2671题与GT需作者accessagreement、禁止未经授权再分发/训练使用，privateholdout用于榜单。root统一代码LICENSE未定位。",
+      "trajectory_and_training_access": "公开20FRQ/2MCQ输入样例与harness源码；完整题/加密GT需授权，本轮不解密。不提供完整模型回答、judge judgments或工具交互训练轨迹，QA训练许可与源码可读取不同。",
+      "limits": "无法用22公开样例独立核全部2671ID、分割、去重与榜单；空响应跳过仅源码风险，无完整publishedrun不能认定实际已导致虚高。2025v0.1与v1.0同家族历史扩展，非两套独立新题库。",
+      "primary_sources": "https://arxiv.org/html/2510.22087v3; https://github.com/harvard-edge/quarch-eval/tree/2df4734692f9783a9978d4d4698ff25f391ced41; https://quarch.ai/",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "arch-quarch-frq",
+      "name": "QuArch v1.0 / free-response reasoning QA",
+      "family": "QuArch architecture reasoning",
+      "object_identity": "多模态概念推理；非执行代码/仿真agent主榜",
+      "task": "模型答reasoning/design/implementation问题；外部Claude3.7SonnetThinking参考GT评Correct/PartiallyCorrect/Incorrect，每答最多3judge多数决、partial降为incorrect。不实际执行回答内的设计代码或综合。",
+      "available_materials_and_tools": "固定harness2df47346含64Gitfiles/99tree；本轮选36files逐Gitblob匹配，publicsubset只有20FRQ+2MCQ明文题，17encryptedanswerfiles与题图文件树可见。没有取/解密答案或申请key；完整2671题与GT需作者accessagreement、禁止未经授权再分发/训练使用，privateholdout用于榜单。root统一代码LICENSE未定位。",
+      "trajectory_and_training_access": "公开20FRQ/2MCQ输入样例与harness源码；完整题/加密GT需授权，本轮不解密。不提供完整模型回答、judge judgments或工具交互训练轨迹，QA训练许可与源码可读取不同。",
+      "limits": "主表十/十一model文字口径与扩展表30model分开，不编总run数。QA设计/实现标签不表示生成artifact经过原生simulator验证；模型harness/判题器/date要固定，三种judge的性能数不能混成同一榜。",
+      "primary_sources": "https://arxiv.org/html/2510.22087v3; https://github.com/harvard-edge/quarch-eval/tree/2df4734692f9783a9978d4d4698ff25f391ced41; https://quarch.ai/",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "arch-quarch-v01",
+      "name": "QuArch v0.1 / historical architecture knowledge QA",
+      "family": "QuArch architecture reasoning",
+      "object_identity": "早期同家族协议；被v1.0扩展",
+      "task": "zero-shot不额外context、扮架构expert选四个之一；另用训练划分微调小模型。论文标题AIagents不是多步环境或工具调用评测。",
+      "available_materials_and_tools": "旧项目URL https://harvard-edge.github.io/QuArch/ 见原文，当前主入口quarch.ai与harness另列；未取得旧版完整发行的全部题/分割/hash，不把2026subset证明2025完整开放。",
+      "trajectory_and_training_access": "旧文称训练QA划分/微调；本轮未取得完整旧训练文件，不能据新版加密资料构造训练集。",
+      "limits": "“1547旧MCQ=1547新MCQ”数量一致不证明逐条完全同文件，需完整IDs/hash才能下结论；旧版微调允许性不自动延伸到新版gatedeval资料。",
+      "primary_sources": "https://arxiv.org/html/2501.01892v2; https://arxiv.org/html/2510.22087v3; https://github.com/harvard-edge/quarch-eval/tree/2df4734692f9783a9978d4d4698ff25f391ced41; https://quarch.ai/",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "arch-quarch-memory-codesign",
+      "name": "QuArch / memory hierarchy SFT transfer experiment",
+      "family": "QuArch architecture reasoning",
+      "object_identity": "同家族下游工具交互方法实验；非2671题全agent化",
+      "task": "Gemma3-27B/Llama3.3-70B各base/SFTconfig1/SFTconfig2，20trials/condition、每trial10design-simulator turns。Accelergy/架构工具估area/energy，至少一次area≤15000µm²且energy≤1mJ为trial成功；成功率不是200proposal中成功比例。",
+      "available_materials_and_tools": "固定harness2df47346含64Gitfiles/99tree；本轮选36files逐Gitblob匹配，publicsubset只有20FRQ+2MCQ明文题，17encryptedanswerfiles与题图文件树可见。没有取/解密答案或申请key；完整2671题与GT需作者accessagreement、禁止未经授权再分发/训练使用，privateholdout用于榜单。root统一代码LICENSE未定位。 未定位完整case1任务/冻结oracle/676SFT文件/120trial histories，论文成绩不能当本轮复跑。",
+      "trajectory_and_training_access": "论文676条单轮SFT语料≠工具rollout；120trials最多1200proposal的完整动作/反馈/JSON/成本未定位。",
+      "limits": "最佳area从全20trials挑，与success概率是不同指标；完整重试/失败、设计合法性/数值精度/延迟约束和oracle配置待核。代码/判题源码可读不等训练样本可下载/商用。",
+      "primary_sources": "https://arxiv.org/html/2510.22087v3; https://github.com/harvard-edge/quarch-eval/tree/2df4734692f9783a9978d4d4698ff25f391ced41; https://quarch.ai/",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "arch-quarch-dram-control",
+      "name": "QuArch / DRAM controller design correlation experiment",
+      "family": "QuArch architecture reasoning",
+      "object_identity": "三model×四workload下游设计实验",
+      "task": "每model-workload十轮独立search，每轮40proposalbudget；选每run最好controller，按workload归一化inversepower能效，关联模型在QuArch-Reasoning的得分。",
+      "available_materials_and_tools": "固定harness2df47346含64Gitfiles/99tree；本轮选36files逐Gitblob匹配，publicsubset只有20FRQ+2MCQ明文题，17encryptedanswerfiles与题图文件树可见。没有取/解密答案或申请key；完整2671题与GT需作者accessagreement、禁止未经授权再分发/训练使用，privateholdout用于榜单。root统一代码LICENSE未定位。 未取得4workload明确版本/全部controller history/配置scorer，保留作者报告与证据缺口。",
+      "trajectory_and_training_access": "未定位120searchruns/最多4800proposal的原始orderedactions-observations；只有论文图/协议，不列为已下载训练数据。",
+      "limits": "只有3个模型且各在4任务重复，12点并非12独立model，相关与模型规模/API/harness可能共变；未从图估造原始点值或重复计算p当已独立验证。",
+      "primary_sources": "https://arxiv.org/html/2510.22087v3; https://github.com/harvard-edge/quarch-eval/tree/2df4734692f9783a9978d4d4698ff25f391ced41; https://quarch.ai/",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "arch-ds2sc-model-generation",
+      "name": "DS2SC-Agent / datasheet-to-SystemC three-domain demonstrations",
+      "family": "DS2SC-Agent chiplet models",
+      "object_identity": "数字/模拟/RF行为模型方法演示；非固定大型benchmark",
+      "task": "四角色解析/代码/TB/调试，Gemini3Flash，temperature.2/.4/.4/.3。GCC/SystemC2.3.3/SystemCAMS2.3.4编译/仿真反馈；同IR驱动代码与TB，debug改语法与行为。PA直接提供G/Psat与稀疏curvepoints，拟合Rapp smoothness，不是从原图全自动提完参数。",
+      "available_materials_and_tools": "公开PDF与src入口均为PDF-only，无可核模型/IR/TB/完整history代码包链接。三份原始datasheet版本须另取得并核厂商许可；本轮未运行生成或仿真。",
+      "trajectory_and_training_access": "未定位原始datasheet/全部IR/模型/TB/output/troubleshootingtrajectory的冻结公开包；paper仅示范图、单FFT表与曲线，不能当三条完整可训练agentrollouts。",
+      "limits": "FFT仅roundtrip不排除成对一致的归一化/置换错误甚至identity实现，需独立频域reference。相同IR中的parser错误可能传进代码与TB；没有hiddenindependentoracle，不把生成TB的PASS视datasheet全语义证明。",
+      "primary_sources": "https://arxiv.org/abs/2603.21190; https://arxiv.org/pdf/2603.21190v1",
       "record_snapshot_matches_audit": true
     }
   ],

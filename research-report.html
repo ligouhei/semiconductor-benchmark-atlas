@@ -2,14 +2,14 @@
 <html lang="zh-CN"><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>芯片行业 benchmark 分类研究 · 工作稿</title><style>
 body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:0}main{max-width:1400px;margin:auto;padding:36px}h1,h2,h3{line-height:1.35}h1{font-size:32px}h2{margin-top:40px;border-top:2px solid #ced9e4;padding-top:24px}a{color:#075ca8}table{border-collapse:collapse;background:white;width:100%;font-size:14px}th,td{border:1px solid #dbe2ea;padding:12px;vertical-align:top;text-align:left}th{background:#eaf0f7}td:first-child{min-width:160px}nav,.note{background:#e8f0fa;border-radius:10px;padding:20px}details{background:white;border:1px solid #d5e0ec;margin:12px 0;padding:16px;border-radius:8px}summary{font-weight:650;cursor:pointer}dt{font-weight:bold;margin-top:12px}dd{margin-left:0}small,.muted{color:#58697b}.tag{display:inline-block;padding:2px 8px;border-radius:5px;background:#e8eff7;font-size:12px}.tablewrap{overflow:auto}@media print{body{background:white}main{padding:0}details{break-inside:avoid}nav{display:none}a{color:#203044}td{font-size:10px}}
 </style><main><p><a href="index.html">← 返回交互式 Benchmark 表格</a></p><h1>芯片行业 benchmark 分类研究</h1>
-<p class="muted">工作稿 · 研究起点 2026-10-19 · 生成时间 2026-10-20T19:21+08:00（北京时间）</p>
+<p class="muted">工作稿 · 研究起点 2026-10-19 · 生成时间 2026-10-20T19:45+08:00（北京时间）</p>
 <div class="note"><a href="agentic-research.html">Agentic 续查专题：11项新增研究对象与开放边界</a> · <a href="agentic-followup.json">结构化协议</a></div>
 <div class="note"><a href="round2-research.html">第二轮12小时续研（进行中）：首批新增协议与证据边界</a> · <a href="round2-research-update.json">结构化增量</a></div>
-<div class="note"><strong>研究仍在进行。</strong>本稿包含 684 条任务/版本记录，归并为 380 个家族/对象。记录中也包含公开数据集、方法实验、工具示例和内部评测线索；这些数量不能解释为同等成熟的独立公开 benchmark 数量。12 小时研究尚未完成，待核验字段均保留，完整覆盖与最终优先级尚待补齐。</div>
+<div class="note"><strong>研究仍在进行。</strong>本稿包含 690 条任务/版本记录，归并为 382 个家族/对象。记录中也包含公开数据集、方法实验、工具示例和内部评测线索；这些数量不能解释为同等成熟的独立公开 benchmark 数量。12 小时研究尚未完成，待核验字段均保留，完整覆盖与最终优先级尚待补齐。</div>
 <div class="note"><strong>补订说明：</strong>2026-10-20补订：原12小时清单遗漏VPEvolve，OPC agentic覆盖审核不充分。现补入商业Calibre recipeagent协议与开放光学testbed两轨（同一家族），并更正此前容易被理解为该方向没有已有评测的表述。此补订发生在原12小时交付之后；目录仍不是全行业穷尽证明。 本次另续查新增11项研究对象（含待开放/部分协议），详见Agentic专题；VPEvolve配套testbed已显式标记非独立Agent benchmark。 <a href="research-corrections.json">更正记录</a></div>
 <p>本研究围绕芯片设计与制造中的工作任务分类。每条记录回答：给模型什么、让它完成什么、交付什么、由谁按什么指标评分，以及成熟软件已经覆盖到哪一层。成品 CPU/GPU 与微体系结构性能负载在边界组单列：其输入是程序、模型和运行数据，不是设计规格、网表或工艺规则；不直接证明EDA能力。</p>
 <p><a href="research-overview.html">从简明阅读总览开始</a> · <a href="benchmark-catalog-zh.csv">中文列名CSV</a></p><nav><strong>分类索引</strong><ol>
-<li><a href="#group-0">数字前端：RTL 生成、理解与工程任务</a> · 103 条</li>
+<li><a href="#group-0">数字前端：RTL 生成、理解与工程任务</a> · 109 条</li>
 <li><a href="#group-1">数字验证：断言、形式证明、修复与安全</a> · 67 条</li>
 <li><a href="#group-2">模拟前端：感知、推理、拓扑、尺寸与规格闭环</a> · 103 条</li>
 <li><a href="#group-3">综合、HLS 与 FPGA 加速器</a> · 72 条</li>
@@ -24,7 +24,7 @@ body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:
 <li><a href="#group-12">边界：既有加速器上的工作负载映射</a> · 2 条</li>
 <li><a href="#group-13">边界：成品性能与微体系结构工作负载</a> · 23 条</li>
 </ol><a href="catalog.csv">下载 CSV</a> · <a href="catalog.json">下载 JSON</a> · 进度与未完成事项（本地研究附件） · <a href="#coverage-limits">已有覆盖与具体缺口</a></nav>
-<p>来源存档与完整性索引（本地研究附件）：18025 条检索/下载记录，17310 个本地文件完成哈希核对，完整性异常 0 项。584/684 条目录记录至少有一个精确URL或相同GitHub repo/ref/path的存档关联。此比例不是研究准确率：入口链接与实际论文/脚本常不同，完整逐字段证据映射仍待补，下载与哈希匹配也不等事实已被来源支持。</p>
+<p>来源存档与完整性索引（本地研究附件）：18100 条检索/下载记录，17381 个本地文件完成哈希核对，完整性异常 0 项。590/690 条目录记录至少有一个精确URL或相同GitHub repo/ref/path的存档关联。此比例不是研究准确率：入口链接与实际论文/脚本常不同，完整逐字段证据映射仍待补，下载与哈希匹配也不等事实已被来源支持。</p>
 <h2>分类与判断方法</h2><p>按“领域阶段 × 任务层次 × 证据成熟度”交叉归类。任务层次包括底层数值或组合优化、性能预测与代理模型、固定工具参数调优、多步工具工作流，以及端到端工程闭环。公开可下载代码、公开可下载数据、可重建标签、独立受保护评分和可商用，分别核验。</p><p>时效性从工艺/规模/规则、基线强度、信息条件、独立评价及实际约束判断。经典基准可以仍适合算法研究；新发布的基准也可能只有弱检查器、内部数据或未完整发布的流程。研究价值判断是分析结论，和来源中直接报告的事实分开。</p>
 <h2>目前已核实的关键区别</h2><ul>
 <li>维护替代与任务饱和分开：<a href="#rtl-masterrtl-power">MasterRTL</a> 作者已明确停止旧仓库维护并推荐 RTL-Timer，因此新工作应优先检查后继实现。此证据支持实现版本替代，不能证明早期功耗预测已解决；其功耗特征还需要 EDA 提取活动率，与纯 RTL 输入分轨。</li>
@@ -707,6 +707,12 @@ body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:
 <tr><td><a href="#arch-agenticarchitect-v1">Agentic Architect v1 / historical 11-trace study</a><br/><small>2604.25083v1（2026-04-28）；勿作为最新榜</small><br/><span class="tag">历史协议；已由v2显著改写评测与约束</span></td><td>11SPEC06/17traces，25Mwarmup+50Mmeasure；4GHz4wide128ROB基础，branch6wide352ROB20cyclepenalty。Mockingjay/SHiP、VA-AMPM、HashedPerceptron种子，OpenEvolve/AdaEvolve每run100iter。</td><td>改策略C++并编译/超时门控；repl/pref reward IPC*10000−LLCmiss/1000，branch IPC*10000−MPKI*200。与新版GMIPC/IPCperW与area/powergate不同。<p><strong>输出：</strong>best设计和各域速度/状态存储，非三个新独立CPU workloaddatasets。</p></td><td>v1 prefetch1.76×no-pref、seed1.59、SMS1.55；作者称+17/+21%是归一化数之差，同base相除实际+10.69/+13.55%。replacement1.062vsMockingjay1.056；state783vs168KB约4.66×，不能仅报速度+.6%。<p class="muted">版本过时指本方法更新了协议，不是预取/branch任务已被工具永久解决。旧版百分比与statecost仅供历史审计，不拿作新版现状。</p></td></tr>
 <tr><td><a href="#arch-openbench-universe">BenchmarkAnything / OpenBench workload construction and Universe</a><br/><small>2610.09447v1（2026-10-07）</small><br/><span class="tag">agent构建CPU工作负载的方法与suite；非架构agent能力榜</span></td><td>272acceptedapplications/14domains。输入repo需求/官方或文档化publicinput，agent收集/构建static singlethread x86 ELF，禁AVX/AVX2/AVX512，gem5 SE验证。注意与旧同名Perl BenchmarkAnything项目无关。</td><td>MiniMaxM2.5检索/去重/依赖修复/构建并用Ralph repairloop反复过gate；binary static、nativeexit0、足够1Bwarmup+100MROI，再gem5兼容性验证。可修改build/deps而非优化芯片布局。<p><strong>输出：</strong>应有sourcepin/buildflags/inputprovenance/staticbinary/runwrapper/gem5invocation，可固定回放不再调用LLM。当前完整272项制品/manifest下载未定位，论文包23文件是TeX/图。</p></td><td>作者报93%构建成功，缺完整候选拒绝manifest不能由272倒推精确分母；token均值.03M/median.021M，不含1.5TB数据/全部simulator计算成本。272×30配置profiles是characterization，不是8160不同agent任务。<p class="muted">构建gate确保静态/不崩溃/ROI兼容，并不自动证明改依赖/裁剪feature后仍保留应用语义。subset在同30配置选取与验证，未见独立heldoutconfig集；singlethread/SE/AVXfree有选择偏差，不称已覆盖OS/GPU/多线程。</p></td></tr>
 <tr><td><a href="#arch-openbench-core">OpenBench / Core-8 and Core-23 subsets</a><br/><small>2610.09447v1（2026-10-07）</small><br/><span class="tag">同272workload的配套子集；非新agent任务集</span></td><td>272acceptedapplications/14domains。输入repo需求/官方或文档化publicinput，agent收集/构建static singlethread x86 ELF，禁AVX/AVX2/AVX512，gem5 SE验证。注意与旧同名Perl BenchmarkAnything项目无关。</td><td>Core8从30维IPC profiles经PCA/Pearsondistance+kmedoids挑8medoids；Core23含Core8再greedy加15，固定同30config校核。<p><strong>输出：</strong>Core8：mlc-like/hashbrown/stb-bench/mbedtls/box2d-v3/minimap2/Fairy-Stockfish/HPCCG；Core23为同Universe嵌套子集。</p></td><td>Core8在30profileconfigs上rankSpearman.989，平均/p90/max误差3.14/6.54/9.10%；Core23 .83/2.06/2.31%。tSNE hull为SPEC的2.12/2.13倍是二维所选嵌入指标，不是全世界workload覆盖率。<p class="muted">构建gate确保静态/不崩溃/ROI兼容，并不自动证明改依赖/裁剪feature后仍保留应用语义。subset在同30配置选取与验证，未见独立heldoutconfig集；singlethread/SE/AVXfree有选择偏差，不称已覆盖OS/GPU/多线程。</p></td></tr>
+<tr><td><a href="#arch-quarch-mcq">QuArch v1.0 / architecture recall MCQ</a><br/><small>2510.22087v3（2026-08-08），ICML2026</small><br/><span class="tag">知识QA；非工具agent闭环</span></td><td>v1.0共2671QA，其中1547四选MCQ与1124FRQ；13topic、四primaryskills Recall/Analyze/Design/Implement，optionalsecondary不重复计题。来源1547synthetic-humanvalidated与1124crowdsourced/exam，不能把来源数量直接当两独立benchmark。</td><td>zero-shot架构expert问答，以A/B/C/D收尾，修复boxed/选项文本parser处理响应。主paper每题n3generations，非三轮工具反馈；Archipedia&gt;1Btoken是建题背景语料，不是当前可下载benchmark或完整agent训练数据。<p><strong>输出：</strong>模型选择、pergenerationcorrectness、按topic/skill拆分；知识准确率不等硬件设计/工具操作成功率。</p></td><td>paper报告n3各generationcorrect平均来估Pass@1，非best-of3。源码MCQcli日志用anycorrect报best-ofk，report.py则每题meanattempts再跨题平均，两个输出不可互换。当前worker空响应continue/emptyattempt不入report，完整expectedmanifest须另核失败分母。<p class="muted">无法用22公开样例独立核全部2671ID、分割、去重与榜单；空响应跳过仅源码风险，无完整publishedrun不能认定实际已导致虚高。2025v0.1与v1.0同家族历史扩展，非两套独立新题库。</p></td></tr>
+<tr><td><a href="#arch-quarch-frq">QuArch v1.0 / free-response reasoning QA</a><br/><small>2510.22087v3（2026-08-08）</small><br/><span class="tag">多模态概念推理；非执行代码/仿真agent主榜</span></td><td>1124FRQ、题context/text/diagram；整库2123textonly+548multimodal。QuArch-Reasoning由primaryAnalyze/Design/Implement定义，与FRQ格式不强行等同；近1000分析、140设计/实现是作者概要。</td><td>模型答reasoning/design/implementation问题；外部Claude3.7SonnetThinking参考GT评Correct/PartiallyCorrect/Incorrect，每答最多3judge多数决、partial降为incorrect。不实际执行回答内的设计代码或综合。<p><strong>输出：</strong>n3studentresponses及judge labels/reasons；skill分数与题量分母。Hiddenholdout防污染是作者机制，本轮未取得其题内容/实际运行。</p></td><td>主榜pergenerationaccuracy（每题c/3再平均），不是有一个答对就Pass@3。FRQreport无judgment/无majority的response排除evaluated分母，全题无有效judge则不入均值；需要完整coverage与失败计数。<p class="muted">主表十/十一model文字口径与扩展表30model分开，不编总run数。QA设计/实现标签不表示生成artifact经过原生simulator验证；模型harness/判题器/date要固定，三种judge的性能数不能混成同一榜。</p></td></tr>
+<tr><td><a href="#arch-quarch-v01">QuArch v0.1 / historical architecture knowledge QA</a><br/><small>2501.01892v2（2025-01-06），body1547/abstract约1500</small><br/><span class="tag">早期同家族协议；被v1.0扩展</span></td><td>正文明确1547四选知识QA、13topic；Archipedia超过1Btokens用来建题，GPT4o生成候选、LLM过滤与3expert验证。abstract1500为近似说法，不据其称缺47题。</td><td>zero-shot不额外context、扮架构expert选四个之一；另用训练划分微调小模型。论文标题AIagents不是多步环境或工具调用评测。<p><strong>输出：</strong>选择准确率和按topic拆分；fine-tuning提升对应留出QA准确率，不是PPA/工具交互训练收益。</p></td><td>当时model39–84%、&lt;10B最好约72%，fine-tuning报5.4–8.3个百分点范围需原表/base分开；不能把原最大84%与2026新model91%推算同协议技术进步。<p class="muted">“1547旧MCQ=1547新MCQ”数量一致不证明逐条完全同文件，需完整IDs/hash才能下结论；旧版微调允许性不自动延伸到新版gatedeval资料。</p></td></tr>
+<tr><td><a href="#arch-quarch-memory-codesign">QuArch / memory hierarchy SFT transfer experiment</a><br/><small>2510.22087v3 Section4.4/AppendixB.6</small><br/><span class="tag">同家族下游工具交互方法实验；非2671题全agent化</span></td><td>矩阵乘加速器固定baseline不满足目标，模型改hardware cachehierarchy与softwaredataflow/tiling/layout。45相关textFRQ筛出的676SFTsamples=541现有回答+135GPT5.2解释；非676不同题或agent轨迹。</td><td>Gemma3-27B/Llama3.3-70B各base/SFTconfig1/SFTconfig2，20trials/condition、每trial10design-simulator turns。Accelergy/架构工具估area/energy，至少一次area≤15000µm²且energy≤1mJ为trial成功；成功率不是200proposal中成功比例。<p><strong>输出：</strong>每trial最佳可行area与trialSR；配置1三epochs/LR1e−6，配置2四epochs/LR2e−6及其他超参改变，不是仅额外epoch。</p></td><td>Llama base11/20=55%、cfg1 19/20=95%、cfg2 7/20=35%；Gemma6/20=30%、14/20=70%、10/20=50%。cfg1提升都是40pp，非相对40%。Llama最佳area7246.78→7275.78(cfg1略坏)/3637.89(cfg2约1.99×省area)；Gemma6728.49→6695.84/3608.89(约1.86×)。<p class="muted">最佳area从全20trials挑，与success概率是不同指标；完整重试/失败、设计合法性/数值精度/延迟约束和oracle配置待核。代码/判题源码可读不等训练样本可下载/商用。</p></td></tr>
+<tr><td><a href="#arch-quarch-dram-control">QuArch / DRAM controller design correlation experiment</a><br/><small>2510.22087v3 AppendixB.7</small><br/><span class="tag">三model×四workload下游设计实验</span></td><td>固定DRAMtrace/workloads四组、controller knobs scheduling/refresh等。GPT5/ClaudeSonnet4/Llama4Maverick，要求先分析trace再提configuration；DRAMSys作为原生反馈工具。</td><td>每model-workload十轮独立search，每轮40proposalbudget；选每run最好controller，按workload归一化inversepower能效，关联模型在QuArch-Reasoning的得分。<p><strong>输出：</strong>12个model-workload均值点、跨重复bestdesign能效与相关图；最多4800designproposals不等4800独立模型。</p></td><td>作者Pearson r=.726/p=.007来自3×4聚合点；不是每个candidate的独立相关。评分inversepower与固定workload条件相关，若不约束latency/正确性，不能等同全系统perfwatt提高。<p class="muted">只有3个模型且各在4任务重复，12点并非12独立model，相关与模型规模/API/harness可能共变；未从图估造原始点值或重复计算p当已独立验证。</p></td></tr>
+<tr><td><a href="#arch-ds2sc-model-generation">DS2SC-Agent / datasheet-to-SystemC three-domain demonstrations</a><br/><small>2603.21190v1（2026-03-22）</small><br/><span class="tag">数字/模拟/RF行为模型方法演示；非固定大型benchmark</span></td><td>三case：AMD XilinxFFT v9.1 PG109(96页)、Micrel/MicrochipSY88923V limitingamp(6页)、QorvoQPM2239PA(18页)。输入除rawPDF还含人工预填SpecIR：latency/gain/supply、标准寄存器接口、预设测试情景及&lt;FILL&gt;锚点。</td><td>四角色解析/代码/TB/调试，Gemini3Flash，temperature.2/.4/.4/.3。GCC/SystemC2.3.3/SystemCAMS2.3.4编译/仿真反馈；同IR驱动代码与TB，debug改语法与行为。PA直接提供G/Psat与稀疏curvepoints，拟合Rapp smoothness，不是从原图全自动提完参数。<p><strong>输出：</strong>SpecIRJSON、SystemC.h/main.cpp、stimulus/CSV与PASS/FAIL，属行为抽象，不输出晶体管/RF完整模型或芯片物理设计。</p></td><td>FFT输入1..8八点经FFT→IFFT回放，残差最大约4.4e−16；LA测linear/clamp/disable；PA静态PinPout sweep偏差&lt;1dB。三精选case无多seed成功率/总失败分母，不写100%所有生成成功。<p class="muted">FFT仅roundtrip不排除成对一致的归一化/置换错误甚至identity实现，需独立频域reference。相同IR中的parser错误可能传进代码与TB；没有hiddenindependentoracle，不把生成TB的PASS视datasheet全语义证明。</p></td></tr>
 </tbody></table></div>
 <details id="rtl-verilogeval-v1"><summary>VerilogEval v1 · 数字前端/RTL生成</summary><dl>
 <dt>版本/时间</dt><dd>ICCAD2023；release/1.0.0当前commit 4fa0ac4ed70ff1685114c25cd2e4c17cbba6a0c4</dd>
@@ -2704,6 +2710,120 @@ body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:
 <dt>一手来源</dt><dd><ul>
 <li><a href="https://arxiv.org/html/2610.09447v1">https://arxiv.org/html/2610.09447v1</a></li>
 <li><a href="https://arxiv.org/src/2610.09447v1">https://arxiv.org/src/2610.09447v1</a></li>
+</ul></dd></dl></details>
+<details id="arch-quarch-mcq"><summary>QuArch v1.0 / architecture recall MCQ · 数字前端/微体系结构与RTL优化</summary><dl>
+<dt>版本/时间</dt><dd>2510.22087v3（2026-08-08），ICML2026</dd>
+<dt>对象类型</dt><dd>知识QA；非工具agent闭环</dd>
+<dt>模型工作的层次</dt><dd>微体系结构/策略源码与配置→仿真反馈/性能预测</dd>
+<dt>输入</dt><dd>v1.0共2671QA，其中1547四选MCQ与1124FRQ；13topic、四primaryskills Recall/Analyze/Design/Implement，optionalsecondary不重复计题。来源1547synthetic-humanvalidated与1124crowdsourced/exam，不能把来源数量直接当两独立benchmark。</dd>
+<dt>任务设定</dt><dd>zero-shot架构expert问答，以A/B/C/D收尾，修复boxed/选项文本parser处理响应。主paper每题n3generations，非三轮工具反馈；Archipedia&gt;1Btoken是建题背景语料，不是当前可下载benchmark或完整agent训练数据。</dd>
+<dt>输出</dt><dd>模型选择、pergenerationcorrectness、按topic/skill拆分；知识准确率不等硬件设计/工具操作成功率。</dd>
+<dt>考核指标</dt><dd>paper报告n3各generationcorrect平均来估Pass@1，非best-of3。源码MCQcli日志用anycorrect报best-ofk，report.py则每题meanattempts再跨题平均，两个输出不可互换。当前worker空响应continue/emptyattempt不入report，完整expectedmanifest须另核失败分母。</dd>
+<dt>基线</dt><dd>当前paper Recall约84–91%，比Reasoning高；旧2025最高84%属于另一model/date/题协议。不能把知识recall较高推成架构agent任务饱和，工具使用/无反馈预测另由ArchEval测试。</dd>
+<dt>工具、数据与访问条件</dt><dd>固定harness2df47346含64Gitfiles/99tree；本轮选36files逐Gitblob匹配，publicsubset只有20FRQ+2MCQ明文题，17encryptedanswerfiles与题图文件树可见。没有取/解密答案或申请key；完整2671题与GT需作者accessagreement、禁止未经授权再分发/训练使用，privateholdout用于榜单。root统一代码LICENSE未定位。</dd>
+<dt>限制与可比性</dt><dd>无法用22公开样例独立核全部2671ID、分割、去重与榜单；空响应跳过仅源码风险，无完整publishedrun不能认定实际已导致虚高。2025v0.1与v1.0同家族历史扩展，非两套独立新题库。</dd>
+<dt>现实价值判断</dt><dd>研究判断：适合测架构知识基础与模型路由，不能直接回答agent是否能设计芯片或调用EDA；固定旧知识题可作辅助而非唯一工业效能指标。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；一手最新版/历史正文、公开harness36文件及问题元数据、论文数表静态核；未运行模型、仿真或EDA。</dd>
+<dt>下一步核验</dt><dd>取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://arxiv.org/html/2510.22087v3">https://arxiv.org/html/2510.22087v3</a></li>
+<li><a href="https://github.com/harvard-edge/quarch-eval/tree/2df4734692f9783a9978d4d4698ff25f391ced41">https://github.com/harvard-edge/quarch-eval/tree/2df4734692f9783a9978d4d4698ff25f391ced41</a></li>
+<li><a href="https://quarch.ai/">https://quarch.ai/</a></li>
+</ul></dd></dl></details>
+<details id="arch-quarch-frq"><summary>QuArch v1.0 / free-response reasoning QA · 数字前端/微体系结构与RTL优化</summary><dl>
+<dt>版本/时间</dt><dd>2510.22087v3（2026-08-08）</dd>
+<dt>对象类型</dt><dd>多模态概念推理；非执行代码/仿真agent主榜</dd>
+<dt>模型工作的层次</dt><dd>微体系结构/策略源码与配置→仿真反馈/性能预测</dd>
+<dt>输入</dt><dd>1124FRQ、题context/text/diagram；整库2123textonly+548multimodal。QuArch-Reasoning由primaryAnalyze/Design/Implement定义，与FRQ格式不强行等同；近1000分析、140设计/实现是作者概要。</dd>
+<dt>任务设定</dt><dd>模型答reasoning/design/implementation问题；外部Claude3.7SonnetThinking参考GT评Correct/PartiallyCorrect/Incorrect，每答最多3judge多数决、partial降为incorrect。不实际执行回答内的设计代码或综合。</dd>
+<dt>输出</dt><dd>n3studentresponses及judge labels/reasons；skill分数与题量分母。Hiddenholdout防污染是作者机制，本轮未取得其题内容/实际运行。</dd>
+<dt>考核指标</dt><dd>主榜pergenerationaccuracy（每题c/3再平均），不是有一个答对就Pass@3。FRQreport无judgment/无majority的response排除evaluated分母，全题无有效judge则不入均值；需要完整coverage与失败计数。</dd>
+<dt>基线</dt><dd>人/Claude一致率(453+374)/925=89.405%；Gemini(461+354)/925=88.108%、Qwen(468+337)/925=87.027%。三候选judge会改排名/数值，89%agreement不是GT准确率89%。Claude-human这里singlejudge而另两个consensus，作者注明不可无条件同协议比较。</dd>
+<dt>工具、数据与访问条件</dt><dd>固定harness2df47346含64Gitfiles/99tree；本轮选36files逐Gitblob匹配，publicsubset只有20FRQ+2MCQ明文题，17encryptedanswerfiles与题图文件树可见。没有取/解密答案或申请key；完整2671题与GT需作者accessagreement、禁止未经授权再分发/训练使用，privateholdout用于榜单。root统一代码LICENSE未定位。</dd>
+<dt>限制与可比性</dt><dd>主表十/十一model文字口径与扩展表30model分开，不编总run数。QA设计/实现标签不表示生成artifact经过原生simulator验证；模型harness/判题器/date要固定，三种judge的性能数不能混成同一榜。</dd>
+<dt>现实价值判断</dt><dd>研究判断：能测无工具概念推理、图表解析和缺假设等问题，工业使用应配独立执行/模拟/物理oracle，而不是以LLMjudge替代全部电学和时序。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；一手最新版/历史正文、公开harness36文件及问题元数据、论文数表静态核；未运行模型、仿真或EDA。</dd>
+<dt>下一步核验</dt><dd>取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://arxiv.org/html/2510.22087v3">https://arxiv.org/html/2510.22087v3</a></li>
+<li><a href="https://github.com/harvard-edge/quarch-eval/tree/2df4734692f9783a9978d4d4698ff25f391ced41">https://github.com/harvard-edge/quarch-eval/tree/2df4734692f9783a9978d4d4698ff25f391ced41</a></li>
+<li><a href="https://quarch.ai/">https://quarch.ai/</a></li>
+</ul></dd></dl></details>
+<details id="arch-quarch-v01"><summary>QuArch v0.1 / historical architecture knowledge QA · 数字前端/微体系结构与RTL优化</summary><dl>
+<dt>版本/时间</dt><dd>2501.01892v2（2025-01-06），body1547/abstract约1500</dd>
+<dt>对象类型</dt><dd>早期同家族协议；被v1.0扩展</dd>
+<dt>模型工作的层次</dt><dd>微体系结构/策略源码与配置→仿真反馈/性能预测</dd>
+<dt>输入</dt><dd>正文明确1547四选知识QA、13topic；Archipedia超过1Btokens用来建题，GPT4o生成候选、LLM过滤与3expert验证。abstract1500为近似说法，不据其称缺47题。</dd>
+<dt>任务设定</dt><dd>zero-shot不额外context、扮架构expert选四个之一；另用训练划分微调小模型。论文标题AIagents不是多步环境或工具调用评测。</dd>
+<dt>输出</dt><dd>选择准确率和按topic拆分；fine-tuning提升对应留出QA准确率，不是PPA/工具交互训练收益。</dd>
+<dt>考核指标</dt><dd>当时model39–84%、&lt;10B最好约72%，fine-tuning报5.4–8.3个百分点范围需原表/base分开；不能把原最大84%与2026新model91%推算同协议技术进步。</dd>
+<dt>基线</dt><dd>旧封闭/开放模型与当时训练方案；2026v1.0加入1124FRQ/多模态/独立榜单协议，数值不可直接串成同时间曲线。</dd>
+<dt>工具、数据与访问条件</dt><dd>旧项目URL https://harvard-edge.github.io/QuArch/ 见原文，当前主入口quarch.ai与harness另列；未取得旧版完整发行的全部题/分割/hash，不把2026subset证明2025完整开放。</dd>
+<dt>限制与可比性</dt><dd>“1547旧MCQ=1547新MCQ”数量一致不证明逐条完全同文件，需完整IDs/hash才能下结论；旧版微调允许性不自动延伸到新版gatedeval资料。</dd>
+<dt>现实价值判断</dt><dd>研究判断：保留版本血缘，避免旧名/近似题量/agents措辞造成独立bench重复或错误训练可用性判断。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；一手最新版/历史正文、公开harness36文件及问题元数据、论文数表静态核；未运行模型、仿真或EDA。</dd>
+<dt>下一步核验</dt><dd>取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://arxiv.org/html/2501.01892v2">https://arxiv.org/html/2501.01892v2</a></li>
+<li><a href="https://arxiv.org/html/2510.22087v3">https://arxiv.org/html/2510.22087v3</a></li>
+<li><a href="https://github.com/harvard-edge/quarch-eval/tree/2df4734692f9783a9978d4d4698ff25f391ced41">https://github.com/harvard-edge/quarch-eval/tree/2df4734692f9783a9978d4d4698ff25f391ced41</a></li>
+<li><a href="https://quarch.ai/">https://quarch.ai/</a></li>
+</ul></dd></dl></details>
+<details id="arch-quarch-memory-codesign"><summary>QuArch / memory hierarchy SFT transfer experiment · 数字前端/微体系结构与RTL优化</summary><dl>
+<dt>版本/时间</dt><dd>2510.22087v3 Section4.4/AppendixB.6</dd>
+<dt>对象类型</dt><dd>同家族下游工具交互方法实验；非2671题全agent化</dd>
+<dt>模型工作的层次</dt><dd>微体系结构/策略源码与配置→仿真反馈/性能预测</dd>
+<dt>输入</dt><dd>矩阵乘加速器固定baseline不满足目标，模型改hardware cachehierarchy与softwaredataflow/tiling/layout。45相关textFRQ筛出的676SFTsamples=541现有回答+135GPT5.2解释；非676不同题或agent轨迹。</dd>
+<dt>任务设定</dt><dd>Gemma3-27B/Llama3.3-70B各base/SFTconfig1/SFTconfig2，20trials/condition、每trial10design-simulator turns。Accelergy/架构工具估area/energy，至少一次area≤15000µm²且energy≤1mJ为trial成功；成功率不是200proposal中成功比例。</dd>
+<dt>输出</dt><dd>每trial最佳可行area与trialSR；配置1三epochs/LR1e−6，配置2四epochs/LR2e−6及其他超参改变，不是仅额外epoch。</dd>
+<dt>考核指标</dt><dd>Llama base11/20=55%、cfg1 19/20=95%、cfg2 7/20=35%；Gemma6/20=30%、14/20=70%、10/20=50%。cfg1提升都是40pp，非相对40%。Llama最佳area7246.78→7275.78(cfg1略坏)/3637.89(cfg2约1.99×省area)；Gemma6728.49→6695.84/3608.89(约1.86×)。</dd>
+<dt>基线</dt><dd>同基础model有无相关SFT；6conditions共120trials、最多1200proposals但仅一个canonicaldesignproblem。cfg1的95%SR与cfg2的1.99×bestarea不可合并为同一个最强配置；Llama cfg2SR还低于base。</dd>
+<dt>工具、数据与访问条件</dt><dd>固定harness2df47346含64Gitfiles/99tree；本轮选36files逐Gitblob匹配，publicsubset只有20FRQ+2MCQ明文题，17encryptedanswerfiles与题图文件树可见。没有取/解密答案或申请key；完整2671题与GT需作者accessagreement、禁止未经授权再分发/训练使用，privateholdout用于榜单。root统一代码LICENSE未定位。 未定位完整case1任务/冻结oracle/676SFT文件/120trial histories，论文成绩不能当本轮复跑。</dd>
+<dt>限制与可比性</dt><dd>最佳area从全20trials挑，与success概率是不同指标；完整重试/失败、设计合法性/数值精度/延迟约束和oracle配置待核。代码/判题源码可读不等训练样本可下载/商用。</dd>
+<dt>现实价值判断</dt><dd>研究判断：少量有针对性推理数据可能改善agent与原生工具交互，但有明显成功率/最好结果权衡，应测试同预算nativeDSE而非只比基础模型。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；一手最新版/历史正文、公开harness36文件及问题元数据、论文数表静态核；未运行模型、仿真或EDA。</dd>
+<dt>下一步核验</dt><dd>取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://arxiv.org/html/2510.22087v3">https://arxiv.org/html/2510.22087v3</a></li>
+<li><a href="https://github.com/harvard-edge/quarch-eval/tree/2df4734692f9783a9978d4d4698ff25f391ced41">https://github.com/harvard-edge/quarch-eval/tree/2df4734692f9783a9978d4d4698ff25f391ced41</a></li>
+<li><a href="https://quarch.ai/">https://quarch.ai/</a></li>
+</ul></dd></dl></details>
+<details id="arch-quarch-dram-control"><summary>QuArch / DRAM controller design correlation experiment · 数字前端/微体系结构与RTL优化</summary><dl>
+<dt>版本/时间</dt><dd>2510.22087v3 AppendixB.7</dd>
+<dt>对象类型</dt><dd>三model×四workload下游设计实验</dd>
+<dt>模型工作的层次</dt><dd>微体系结构/策略源码与配置→仿真反馈/性能预测</dd>
+<dt>输入</dt><dd>固定DRAMtrace/workloads四组、controller knobs scheduling/refresh等。GPT5/ClaudeSonnet4/Llama4Maverick，要求先分析trace再提configuration；DRAMSys作为原生反馈工具。</dd>
+<dt>任务设定</dt><dd>每model-workload十轮独立search，每轮40proposalbudget；选每run最好controller，按workload归一化inversepower能效，关联模型在QuArch-Reasoning的得分。</dd>
+<dt>输出</dt><dd>12个model-workload均值点、跨重复bestdesign能效与相关图；最多4800designproposals不等4800独立模型。</dd>
+<dt>考核指标</dt><dd>作者Pearson r=.726/p=.007来自3×4聚合点；不是每个candidate的独立相关。评分inversepower与固定workload条件相关，若不约束latency/正确性，不能等同全系统perfwatt提高。</dd>
+<dt>基线</dt><dd>同nativeDRAMSys/固定预算不同model；不是SFT因果实验，也不能只凭3种模型的相关证明QA能力是所有工程agent的充分条件。</dd>
+<dt>工具、数据与访问条件</dt><dd>固定harness2df47346含64Gitfiles/99tree；本轮选36files逐Gitblob匹配，publicsubset只有20FRQ+2MCQ明文题，17encryptedanswerfiles与题图文件树可见。没有取/解密答案或申请key；完整2671题与GT需作者accessagreement、禁止未经授权再分发/训练使用，privateholdout用于榜单。root统一代码LICENSE未定位。 未取得4workload明确版本/全部controller history/配置scorer，保留作者报告与证据缺口。</dd>
+<dt>限制与可比性</dt><dd>只有3个模型且各在4任务重复，12点并非12独立model，相关与模型规模/API/harness可能共变；未从图估造原始点值或重复计算p当已独立验证。</dd>
+<dt>现实价值判断</dt><dd>研究判断：补充QA与实际DSE相关性证据，适合拓展agent任务；工业判断仍需完整设计约束和原生强优化器基线。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；一手最新版/历史正文、公开harness36文件及问题元数据、论文数表静态核；未运行模型、仿真或EDA。</dd>
+<dt>下一步核验</dt><dd>取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://arxiv.org/html/2510.22087v3">https://arxiv.org/html/2510.22087v3</a></li>
+<li><a href="https://github.com/harvard-edge/quarch-eval/tree/2df4734692f9783a9978d4d4698ff25f391ced41">https://github.com/harvard-edge/quarch-eval/tree/2df4734692f9783a9978d4d4698ff25f391ced41</a></li>
+<li><a href="https://quarch.ai/">https://quarch.ai/</a></li>
+</ul></dd></dl></details>
+<details id="arch-ds2sc-model-generation"><summary>DS2SC-Agent / datasheet-to-SystemC three-domain demonstrations · 数字前端/微体系结构与RTL优化</summary><dl>
+<dt>版本/时间</dt><dd>2603.21190v1（2026-03-22）</dd>
+<dt>对象类型</dt><dd>数字/模拟/RF行为模型方法演示；非固定大型benchmark</dd>
+<dt>模型工作的层次</dt><dd>微体系结构/策略源码与配置→仿真反馈/性能预测</dd>
+<dt>输入</dt><dd>三case：AMD XilinxFFT v9.1 PG109(96页)、Micrel/MicrochipSY88923V limitingamp(6页)、QorvoQPM2239PA(18页)。输入除rawPDF还含人工预填SpecIR：latency/gain/supply、标准寄存器接口、预设测试情景及&lt;FILL&gt;锚点。</dd>
+<dt>任务设定</dt><dd>四角色解析/代码/TB/调试，Gemini3Flash，temperature.2/.4/.4/.3。GCC/SystemC2.3.3/SystemCAMS2.3.4编译/仿真反馈；同IR驱动代码与TB，debug改语法与行为。PA直接提供G/Psat与稀疏curvepoints，拟合Rapp smoothness，不是从原图全自动提完参数。</dd>
+<dt>输出</dt><dd>SpecIRJSON、SystemC.h/main.cpp、stimulus/CSV与PASS/FAIL，属行为抽象，不输出晶体管/RF完整模型或芯片物理设计。</dd>
+<dt>考核指标</dt><dd>FFT输入1..8八点经FFT→IFFT回放，残差最大约4.4e−16；LA测linear/clamp/disable；PA静态PinPout sweep偏差&lt;1dB。三精选case无多seed成功率/总失败分母，不写100%所有生成成功。</dd>
+<dt>基线</dt><dd>作者称直接baseline工具不可比，缺matchedsingleprompt/人工建模/原生数值fit对照。原生Rappfit、SystemC编译/仿真完成数值/执行；LLM承担spec映射和编排。</dd>
+<dt>工具、数据与访问条件</dt><dd>公开PDF与src入口均为PDF-only，无可核模型/IR/TB/完整history代码包链接。三份原始datasheet版本须另取得并核厂商许可；本轮未运行生成或仿真。</dd>
+<dt>限制与可比性</dt><dd>FFT仅roundtrip不排除成对一致的归一化/置换错误甚至identity实现，需独立频域reference。相同IR中的parser错误可能传进代码与TB；没有hiddenindependentoracle，不把生成TB的PASS视datasheet全语义证明。</dd>
+<dt>现实价值判断</dt><dd>研究判断：现实长文档到行为抽象有工程价值；应分数字协议/模拟电学/RF静态拟合检验，人工预填和统一测试边界必须公开，不能宣称三demo证明任意芯粒系统端到端自动建模。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；一手最新版/历史正文、公开harness36文件及问题元数据、论文数表静态核；未运行模型、仿真或EDA。</dd>
+<dt>下一步核验</dt><dd>取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://arxiv.org/abs/2603.21190">https://arxiv.org/abs/2603.21190</a></li>
+<li><a href="https://arxiv.org/pdf/2603.21190v1">https://arxiv.org/pdf/2603.21190v1</a></li>
 </ul></dd></dl></details>
 <h2 id="group-1">数字验证：断言、形式证明、修复与安全</h2><div class="tablewrap"><table><thead><tr><th>名称与版本</th><th>输入</th><th>任务与输出</th><th>指标与限制</th></tr></thead><tbody>
 <tr><td><a href="#verify-fveval-human">FVEval NL2SVA-Human</a><br/><small>原paper2024/25；冻结root 141afe7dcf03a0b86547b94657d9d610b6087724</small><br/><span class="tag">公开题集+形式评测</span></td><td>79row/13design TB（counter/四arbiter/多个fifo/fsm/ram等）；原CSV43种完全相同prompt文本、47种完全相同ref文本和13TB，重复跨TB不自动等语义重复题。task_id字段仅38种，正式UID加design_name与trial后区分，不误报79ID冲突。给NL描述/信号/参数/部分TB、ICL或CoT按配置选择。</td><td>生成指定SVA，先把原TB+ref+模型assertion组合做语法elaboration，再clear-all调用PEC比较reference/model性质；不是证明参考性质在原RTL上成立。<p><strong>输出：</strong>SVA断言</p></td><td>syntax=未匹配小写“syntax error”；strict=functionality仅stdout含Full equivalence；relaxed=full或任何方向implies均1，未识别为0。方向不区分，relaxed不等同样强规格。Human取expression按tb_reset)末段/第一个);截断，信号从prompt单引号词和outputTB参数名收集；Tcl把clk/rst实参均传空字符串，内部默认/parameter语义在opaque核心未核。另报evaluate BLEU/ROUGE-L/exactmatch，不替代语义。pass_at_k实现1−C(n−c,k)/C(n,k)的无放回估计，c必须来自同一明确二元gate。<p class="muted">当前wrapper只返回stdout，不按returncode/stderr硬门计分且subprocess无timeout，父processjoin也无限期；缺TASK_ID使评估抛错，child无queue输出需与expectedmanifest核齐，不能默默按收到行算分。syntax只查“syntax error”字样，缺此字符串得1不构成成功elaboration证明。以上是源码边界，未证明任何已发表结果发生错计。 79row非79独立IP、相同family不同约束宜同group；本参考等价只在已定义的信号/表达式/PEC语义下。原时钟/reset外层未传不能擅自声称保持原TB所有assumptions；未知/timeout没有full/implies不当proven。</p></td></tr>
@@ -14760,7 +14880,7 @@ body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:
 <li><a href="https://github.com/mlcommons/mlperf_client/blob/13b7680725891ff16eefcdb28aed1a97d637c412/rules/MLPerf_Client_Rules.md">https://github.com/mlcommons/mlperf_client/blob/13b7680725891ff16eefcdb28aed1a97d637c412/rules/MLPerf_Client_Rules.md</a></li>
 </ul></dd></dl></details>
 <h2 id="coverage-limits">已有覆盖与具体缺口</h2><p>依据用户阶段划分逐项列已有覆盖与剩余限制；“所有可发现”按此次公开资料检索边界理解，不声称覆盖未公开工业bench或互联网全部材料。 <a href="scope-and-gaps.json">结构化范围说明</a>。</p><ul><li>以官方规则/作者论文/固定源码/原包为证据；搜索摘要仅作发现线索。</li><li>只运行自写下载/文本/JSON/归档元数据/哈希/静态审计与报告生成，不执行下载源code、模型、EDA、仿真或硬件。</li><li>领域覆盖、对象身份、逐字段证据、独立验收、商业可用性和饱和判断分开；缺源/失链/401/许可/opaque限制保留。</li><li>同一IP多版本/多flow/多设计点按协议记录，归并家族；记录数量不是同等成熟独立benchmark数。</li><li>已知历史协议修订按具体版本标注；未有足够证据把任何整家族宣称已被软件彻底解决。</li></ul><div class="tablewrap"><table><tr><th>领域 / 目录记录数</th><th>已有任务覆盖</th><th>尚未解决的访问、协议与验收限制</th></tr>
-<tr><td>数字前端<p>103条 / 45域内家族</p></td><td>RTL与VHDL生成/理解/修复、跨模块工程、微架构优化、规格一致性与功耗/PPA预测；单轮生成与多步agent分别记录<p><a href="#rtl-verilogeval-v2">VerilogEval v2</a> · <a href="#rtl-hwe-arch-v2">HWE Bench / FeSens architecture V2</a> · <a href="#rtl-cvdp-agentic">CVDP / agentic project workflow</a> · <a href="#ara-cpu-level2">Chip-Bench ARA / CPU Level 2</a> · <a href="#ara-network-n3">Chip-Bench ARA / n3-pcie-switch</a></p></td><td>近期大套件完整harness/隐藏数据/许可未全公开；CPU/PCIe规范完成不等全ASIC实现，训练语料与评测集关系、跨family泛化需持续核。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
+<tr><td>数字前端<p>109条 / 47域内家族</p></td><td>RTL与VHDL生成/理解/修复、跨模块工程、微架构优化、规格一致性与功耗/PPA预测；单轮生成与多步agent分别记录<p><a href="#rtl-verilogeval-v2">VerilogEval v2</a> · <a href="#rtl-hwe-arch-v2">HWE Bench / FeSens architecture V2</a> · <a href="#rtl-cvdp-agentic">CVDP / agentic project workflow</a> · <a href="#ara-cpu-level2">Chip-Bench ARA / CPU Level 2</a> · <a href="#ara-network-n3">Chip-Bench ARA / n3-pcie-switch</a></p></td><td>近期大套件完整harness/隐藏数据/许可未全公开；CPU/PCIe规范完成不等全ASIC实现，训练语料与评测集关系、跨family泛化需持续核。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
 <tr><td>数字验证<p>67条 / 48域内家族</p></td><td>SVA/NL翻译/RTL到性质、形式证明、UVM/coverage闭环、mutation、安全/鲁棒性与EDA工具语义回归<p><a href="#verify-fveval-human">FVEval NL2SVA-Human</a> · <a href="#verify-fveval-design">FVEval Design2SVA</a> · <a href="#verify-security-assertions">(Security) Assertions by LLMs</a> · <a href="#verify-chibench-tool-corpus">ChiBench / real-world Verilog tool-testing corpus</a> · <a href="#ver-haven-uvm">HAVEN / protocol-template and coverage-guided DSL UVM suite</a></p></td><td>证明强度/方向/undetermined/vacuity与mutation敏感性不等价；opaque PEC、commercialformal和完整hiddenoracle限制单列，静态wrapper审计不等复现实验。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
 <tr><td>模拟前端<p>103条 / 49域内家族</p></td><td>电路图感知、拓扑/结构、尺寸、预测/检索、长程规格闭环、RF与存储电路/稀有失效；方法实验和成熟bench分身份<p><a href="#analog-longhorizon">Analog Design Bench (Long-Horizon)</a> · <a href="#analog-sganalog-sizing">SGAnalog / 17-task device sizing: 10 fidelity + 7 survival</a> · <a href="#analog-analogmaster-image-layout">AnalogMaster / 15-circuit image-to-layout method evaluation</a> · <a href="#memory-openyield-rare-yield">OpenYield / rare-event yield-estimation research track</a> · <a href="#rf-cobra">COBRA / surrogate-assisted RF circuit optimization workflow</a></p></td><td>多数开源spec/模型仍简化，真实PDK/全PVT/MC/寄生/测量gold有缺口；高识别/收敛/nominalFoM不能推完整电性能。部分agent论文尚未完整发布。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
 <tr><td>综合HLS<p>72条 / 35域内家族</p></td><td>经典逻辑综合、IWLS现代学习/精确综合、HLS程序/应用、代理预测、DSE/agent与FPGA CAD<p><a href="#synth-epfl">EPFL Combinational Benchmark Suite</a> · <a href="#synth-iwls25-weighted">IWLS2025 / 200 exact functions, AIG-only weighted old/new score</a> · <a href="#hls-hlsyn-inductive">HLSyn / inductive unseen-kernel prediction</a> · <a href="#hls-hlsdataset">HLSDataset</a> · <a href="#fpga-vtr">VTR benchmark circuits / full FPGA CAD flow</a> · <a href="#ara-acc-a3-bf16-exp">Chip-Bench ARA / a3-bf16-exp</a></p></td><td>有些原包取得但未执行CEC/HLS；数据多点并非独立IP，FPGA器件/工具版本跨域与真实后实现验收另核；PolyBench原始C包已取，部分派生HLS完整配置/标签仍待核。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>

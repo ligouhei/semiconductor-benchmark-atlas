@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T11:21:16.113668+00:00",
+  "as_of": "2026-10-20T11:45:35.044168+00:00",
   "status": "coverage inventory with explicit residual limits, not universal completeness/quality certification",
   "scope": "依据用户阶段划分逐项列已有覆盖与剩余限制；“所有可发现”按此次公开资料检索边界理解，不声称覆盖未公开工业bench或互联网全部材料。",
   "method": [
@@ -12,8 +12,8 @@
   "items": [
     {
       "domain": "数字前端",
-      "record_count": 103,
-      "family_count": 45,
+      "record_count": 109,
+      "family_count": 47,
       "catalog_ids": [
         "rtl-verilogeval-v1",
         "rtl-verilogeval-v2",
@@ -117,7 +117,13 @@
         "arch-agenticarchitect-v2",
         "arch-agenticarchitect-v1",
         "arch-openbench-universe",
-        "arch-openbench-core"
+        "arch-openbench-core",
+        "arch-quarch-mcq",
+        "arch-quarch-frq",
+        "arch-quarch-v01",
+        "arch-quarch-memory-codesign",
+        "arch-quarch-dram-control",
+        "arch-ds2sc-model-generation"
       ],
       "covered_tasks": "RTL与VHDL生成/理解/修复、跨模块工程、微架构优化、规格一致性与功耗/PPA预测；单轮生成与多步agent分别记录",
       "remaining_limits": "近期大套件完整harness/隐藏数据/许可未全公开；CPU/PCIe规范完成不等全ASIC实现，训练语料与评测集关系、跨family泛化需持续核。",

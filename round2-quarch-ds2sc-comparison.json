@@ -1,0 +1,299 @@
+{
+  "status": "round2 active; knowledgeQA vs simulatortransfer vs datasheetbehavioralmodels",
+  "protocols": [
+    {
+      "id": "arch-quarch-mcq",
+      "benchmark_family": "QuArch architecture reasoning",
+      "name": "QuArch v1.0 / architecture recall MCQ",
+      "category": "数字前端/微体系结构与RTL优化",
+      "artifact_type": "知识QA；非工具agent闭环",
+      "task_layer": "微体系结构/策略源码与配置→仿真反馈/性能预测",
+      "version": "2510.22087v3（2026-08-08），ICML2026",
+      "input": "v1.0共2671QA，其中1547四选MCQ与1124FRQ；13topic、四primaryskills Recall/Analyze/Design/Implement，optionalsecondary不重复计题。来源1547synthetic-humanvalidated与1124crowdsourced/exam，不能把来源数量直接当两独立benchmark。",
+      "task": "zero-shot架构expert问答，以A/B/C/D收尾，修复boxed/选项文本parser处理响应。主paper每题n3generations，非三轮工具反馈；Archipedia>1Btoken是建题背景语料，不是当前可下载benchmark或完整agent训练数据。",
+      "output": "模型选择、pergenerationcorrectness、按topic/skill拆分；知识准确率不等硬件设计/工具操作成功率。",
+      "metrics": "paper报告n3各generationcorrect平均来估Pass@1，非best-of3。源码MCQcli日志用anycorrect报best-ofk，report.py则每题meanattempts再跨题平均，两个输出不可互换。当前worker空响应continue/emptyattempt不入report，完整expectedmanifest须另核失败分母。",
+      "baseline": "当前paper Recall约84–91%，比Reasoning高；旧2025最高84%属于另一model/date/题协议。不能把知识recall较高推成架构agent任务饱和，工具使用/无反馈预测另由ArchEval测试。",
+      "tools_and_access": "固定harness2df47346含64Gitfiles/99tree；本轮选36files逐Gitblob匹配，publicsubset只有20FRQ+2MCQ明文题，17encryptedanswerfiles与题图文件树可见。没有取/解密答案或申请key；完整2671题与GT需作者accessagreement、禁止未经授权再分发/训练使用，privateholdout用于榜单。root统一代码LICENSE未定位。",
+      "limitations": "无法用22公开样例独立核全部2671ID、分割、去重与榜单；空响应跳过仅源码风险，无完整publishedrun不能认定实际已导致虚高。2025v0.1与v1.0同家族历史扩展，非两套独立新题库。",
+      "industrial_value": "研究判断：适合测架构知识基础与模型路由，不能直接回答agent是否能设计芯片或调用EDA；固定旧知识题可作辅助而非唯一工业效能指标。",
+      "primary_sources": "https://arxiv.org/html/2510.22087v3; https://github.com/harvard-edge/quarch-eval/tree/2df4734692f9783a9978d4d4698ff25f391ced41; https://quarch.ai/",
+      "evidence_status": "第二轮12h进行中；一手最新版/历史正文、公开harness36文件及问题元数据、论文数表静态核；未运行模型、仿真或EDA。",
+      "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "arch-quarch-frq",
+      "benchmark_family": "QuArch architecture reasoning",
+      "name": "QuArch v1.0 / free-response reasoning QA",
+      "category": "数字前端/微体系结构与RTL优化",
+      "artifact_type": "多模态概念推理；非执行代码/仿真agent主榜",
+      "task_layer": "微体系结构/策略源码与配置→仿真反馈/性能预测",
+      "version": "2510.22087v3（2026-08-08）",
+      "input": "1124FRQ、题context/text/diagram；整库2123textonly+548multimodal。QuArch-Reasoning由primaryAnalyze/Design/Implement定义，与FRQ格式不强行等同；近1000分析、140设计/实现是作者概要。",
+      "task": "模型答reasoning/design/implementation问题；外部Claude3.7SonnetThinking参考GT评Correct/PartiallyCorrect/Incorrect，每答最多3judge多数决、partial降为incorrect。不实际执行回答内的设计代码或综合。",
+      "output": "n3studentresponses及judge labels/reasons；skill分数与题量分母。Hiddenholdout防污染是作者机制，本轮未取得其题内容/实际运行。",
+      "metrics": "主榜pergenerationaccuracy（每题c/3再平均），不是有一个答对就Pass@3。FRQreport无judgment/无majority的response排除evaluated分母，全题无有效judge则不入均值；需要完整coverage与失败计数。",
+      "baseline": "人/Claude一致率(453+374)/925=89.405%；Gemini(461+354)/925=88.108%、Qwen(468+337)/925=87.027%。三候选judge会改排名/数值，89%agreement不是GT准确率89%。Claude-human这里singlejudge而另两个consensus，作者注明不可无条件同协议比较。",
+      "tools_and_access": "固定harness2df47346含64Gitfiles/99tree；本轮选36files逐Gitblob匹配，publicsubset只有20FRQ+2MCQ明文题，17encryptedanswerfiles与题图文件树可见。没有取/解密答案或申请key；完整2671题与GT需作者accessagreement、禁止未经授权再分发/训练使用，privateholdout用于榜单。root统一代码LICENSE未定位。",
+      "limitations": "主表十/十一model文字口径与扩展表30model分开，不编总run数。QA设计/实现标签不表示生成artifact经过原生simulator验证；模型harness/判题器/date要固定，三种judge的性能数不能混成同一榜。",
+      "industrial_value": "研究判断：能测无工具概念推理、图表解析和缺假设等问题，工业使用应配独立执行/模拟/物理oracle，而不是以LLMjudge替代全部电学和时序。",
+      "primary_sources": "https://arxiv.org/html/2510.22087v3; https://github.com/harvard-edge/quarch-eval/tree/2df4734692f9783a9978d4d4698ff25f391ced41; https://quarch.ai/",
+      "evidence_status": "第二轮12h进行中；一手最新版/历史正文、公开harness36文件及问题元数据、论文数表静态核；未运行模型、仿真或EDA。",
+      "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "arch-quarch-v01",
+      "benchmark_family": "QuArch architecture reasoning",
+      "name": "QuArch v0.1 / historical architecture knowledge QA",
+      "category": "数字前端/微体系结构与RTL优化",
+      "artifact_type": "早期同家族协议；被v1.0扩展",
+      "task_layer": "微体系结构/策略源码与配置→仿真反馈/性能预测",
+      "version": "2501.01892v2（2025-01-06），body1547/abstract约1500",
+      "input": "正文明确1547四选知识QA、13topic；Archipedia超过1Btokens用来建题，GPT4o生成候选、LLM过滤与3expert验证。abstract1500为近似说法，不据其称缺47题。",
+      "task": "zero-shot不额外context、扮架构expert选四个之一；另用训练划分微调小模型。论文标题AIagents不是多步环境或工具调用评测。",
+      "output": "选择准确率和按topic拆分；fine-tuning提升对应留出QA准确率，不是PPA/工具交互训练收益。",
+      "metrics": "当时model39–84%、<10B最好约72%，fine-tuning报5.4–8.3个百分点范围需原表/base分开；不能把原最大84%与2026新model91%推算同协议技术进步。",
+      "baseline": "旧封闭/开放模型与当时训练方案；2026v1.0加入1124FRQ/多模态/独立榜单协议，数值不可直接串成同时间曲线。",
+      "tools_and_access": "旧项目URL https://harvard-edge.github.io/QuArch/ 见原文，当前主入口quarch.ai与harness另列；未取得旧版完整发行的全部题/分割/hash，不把2026subset证明2025完整开放。",
+      "limitations": "“1547旧MCQ=1547新MCQ”数量一致不证明逐条完全同文件，需完整IDs/hash才能下结论；旧版微调允许性不自动延伸到新版gatedeval资料。",
+      "industrial_value": "研究判断：保留版本血缘，避免旧名/近似题量/agents措辞造成独立bench重复或错误训练可用性判断。",
+      "primary_sources": "https://arxiv.org/html/2501.01892v2; https://arxiv.org/html/2510.22087v3; https://github.com/harvard-edge/quarch-eval/tree/2df4734692f9783a9978d4d4698ff25f391ced41; https://quarch.ai/",
+      "evidence_status": "第二轮12h进行中；一手最新版/历史正文、公开harness36文件及问题元数据、论文数表静态核；未运行模型、仿真或EDA。",
+      "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "arch-quarch-memory-codesign",
+      "benchmark_family": "QuArch architecture reasoning",
+      "name": "QuArch / memory hierarchy SFT transfer experiment",
+      "category": "数字前端/微体系结构与RTL优化",
+      "artifact_type": "同家族下游工具交互方法实验；非2671题全agent化",
+      "task_layer": "微体系结构/策略源码与配置→仿真反馈/性能预测",
+      "version": "2510.22087v3 Section4.4/AppendixB.6",
+      "input": "矩阵乘加速器固定baseline不满足目标，模型改hardware cachehierarchy与softwaredataflow/tiling/layout。45相关textFRQ筛出的676SFTsamples=541现有回答+135GPT5.2解释；非676不同题或agent轨迹。",
+      "task": "Gemma3-27B/Llama3.3-70B各base/SFTconfig1/SFTconfig2，20trials/condition、每trial10design-simulator turns。Accelergy/架构工具估area/energy，至少一次area≤15000µm²且energy≤1mJ为trial成功；成功率不是200proposal中成功比例。",
+      "output": "每trial最佳可行area与trialSR；配置1三epochs/LR1e−6，配置2四epochs/LR2e−6及其他超参改变，不是仅额外epoch。",
+      "metrics": "Llama base11/20=55%、cfg1 19/20=95%、cfg2 7/20=35%；Gemma6/20=30%、14/20=70%、10/20=50%。cfg1提升都是40pp，非相对40%。Llama最佳area7246.78→7275.78(cfg1略坏)/3637.89(cfg2约1.99×省area)；Gemma6728.49→6695.84/3608.89(约1.86×)。",
+      "baseline": "同基础model有无相关SFT；6conditions共120trials、最多1200proposals但仅一个canonicaldesignproblem。cfg1的95%SR与cfg2的1.99×bestarea不可合并为同一个最强配置；Llama cfg2SR还低于base。",
+      "tools_and_access": "固定harness2df47346含64Gitfiles/99tree；本轮选36files逐Gitblob匹配，publicsubset只有20FRQ+2MCQ明文题，17encryptedanswerfiles与题图文件树可见。没有取/解密答案或申请key；完整2671题与GT需作者accessagreement、禁止未经授权再分发/训练使用，privateholdout用于榜单。root统一代码LICENSE未定位。 未定位完整case1任务/冻结oracle/676SFT文件/120trial histories，论文成绩不能当本轮复跑。",
+      "limitations": "最佳area从全20trials挑，与success概率是不同指标；完整重试/失败、设计合法性/数值精度/延迟约束和oracle配置待核。代码/判题源码可读不等训练样本可下载/商用。",
+      "industrial_value": "研究判断：少量有针对性推理数据可能改善agent与原生工具交互，但有明显成功率/最好结果权衡，应测试同预算nativeDSE而非只比基础模型。",
+      "primary_sources": "https://arxiv.org/html/2510.22087v3; https://github.com/harvard-edge/quarch-eval/tree/2df4734692f9783a9978d4d4698ff25f391ced41; https://quarch.ai/",
+      "evidence_status": "第二轮12h进行中；一手最新版/历史正文、公开harness36文件及问题元数据、论文数表静态核；未运行模型、仿真或EDA。",
+      "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "arch-quarch-dram-control",
+      "benchmark_family": "QuArch architecture reasoning",
+      "name": "QuArch / DRAM controller design correlation experiment",
+      "category": "数字前端/微体系结构与RTL优化",
+      "artifact_type": "三model×四workload下游设计实验",
+      "task_layer": "微体系结构/策略源码与配置→仿真反馈/性能预测",
+      "version": "2510.22087v3 AppendixB.7",
+      "input": "固定DRAMtrace/workloads四组、controller knobs scheduling/refresh等。GPT5/ClaudeSonnet4/Llama4Maverick，要求先分析trace再提configuration；DRAMSys作为原生反馈工具。",
+      "task": "每model-workload十轮独立search，每轮40proposalbudget；选每run最好controller，按workload归一化inversepower能效，关联模型在QuArch-Reasoning的得分。",
+      "output": "12个model-workload均值点、跨重复bestdesign能效与相关图；最多4800designproposals不等4800独立模型。",
+      "metrics": "作者Pearson r=.726/p=.007来自3×4聚合点；不是每个candidate的独立相关。评分inversepower与固定workload条件相关，若不约束latency/正确性，不能等同全系统perfwatt提高。",
+      "baseline": "同nativeDRAMSys/固定预算不同model；不是SFT因果实验，也不能只凭3种模型的相关证明QA能力是所有工程agent的充分条件。",
+      "tools_and_access": "固定harness2df47346含64Gitfiles/99tree；本轮选36files逐Gitblob匹配，publicsubset只有20FRQ+2MCQ明文题，17encryptedanswerfiles与题图文件树可见。没有取/解密答案或申请key；完整2671题与GT需作者accessagreement、禁止未经授权再分发/训练使用，privateholdout用于榜单。root统一代码LICENSE未定位。 未取得4workload明确版本/全部controller history/配置scorer，保留作者报告与证据缺口。",
+      "limitations": "只有3个模型且各在4任务重复，12点并非12独立model，相关与模型规模/API/harness可能共变；未从图估造原始点值或重复计算p当已独立验证。",
+      "industrial_value": "研究判断：补充QA与实际DSE相关性证据，适合拓展agent任务；工业判断仍需完整设计约束和原生强优化器基线。",
+      "primary_sources": "https://arxiv.org/html/2510.22087v3; https://github.com/harvard-edge/quarch-eval/tree/2df4734692f9783a9978d4d4698ff25f391ced41; https://quarch.ai/",
+      "evidence_status": "第二轮12h进行中；一手最新版/历史正文、公开harness36文件及问题元数据、论文数表静态核；未运行模型、仿真或EDA。",
+      "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "arch-ds2sc-model-generation",
+      "benchmark_family": "DS2SC-Agent chiplet models",
+      "name": "DS2SC-Agent / datasheet-to-SystemC three-domain demonstrations",
+      "category": "数字前端/微体系结构与RTL优化",
+      "artifact_type": "数字/模拟/RF行为模型方法演示；非固定大型benchmark",
+      "task_layer": "微体系结构/策略源码与配置→仿真反馈/性能预测",
+      "version": "2603.21190v1（2026-03-22）",
+      "input": "三case：AMD XilinxFFT v9.1 PG109(96页)、Micrel/MicrochipSY88923V limitingamp(6页)、QorvoQPM2239PA(18页)。输入除rawPDF还含人工预填SpecIR：latency/gain/supply、标准寄存器接口、预设测试情景及<FILL>锚点。",
+      "task": "四角色解析/代码/TB/调试，Gemini3Flash，temperature.2/.4/.4/.3。GCC/SystemC2.3.3/SystemCAMS2.3.4编译/仿真反馈；同IR驱动代码与TB，debug改语法与行为。PA直接提供G/Psat与稀疏curvepoints，拟合Rapp smoothness，不是从原图全自动提完参数。",
+      "output": "SpecIRJSON、SystemC.h/main.cpp、stimulus/CSV与PASS/FAIL，属行为抽象，不输出晶体管/RF完整模型或芯片物理设计。",
+      "metrics": "FFT输入1..8八点经FFT→IFFT回放，残差最大约4.4e−16；LA测linear/clamp/disable；PA静态PinPout sweep偏差<1dB。三精选case无多seed成功率/总失败分母，不写100%所有生成成功。",
+      "baseline": "作者称直接baseline工具不可比，缺matchedsingleprompt/人工建模/原生数值fit对照。原生Rappfit、SystemC编译/仿真完成数值/执行；LLM承担spec映射和编排。",
+      "tools_and_access": "公开PDF与src入口均为PDF-only，无可核模型/IR/TB/完整history代码包链接。三份原始datasheet版本须另取得并核厂商许可；本轮未运行生成或仿真。",
+      "limitations": "FFT仅roundtrip不排除成对一致的归一化/置换错误甚至identity实现，需独立频域reference。相同IR中的parser错误可能传进代码与TB；没有hiddenindependentoracle，不把生成TB的PASS视datasheet全语义证明。",
+      "industrial_value": "研究判断：现实长文档到行为抽象有工程价值；应分数字协议/模拟电学/RF静态拟合检验，人工预填和统一测试边界必须公开，不能宣称三demo证明任意芯粒系统端到端自动建模。",
+      "primary_sources": "https://arxiv.org/abs/2603.21190; https://arxiv.org/pdf/2603.21190v1",
+      "evidence_status": "第二轮12h进行中；一手最新版/历史正文、公开harness36文件及问题元数据、论文数表静态核；未运行模型、仿真或EDA。",
+      "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+      "retrieved_date": "2026-10-20"
+    }
+  ],
+  "static_audit": {
+    "as_of": "2026-10-20T11:37:29.512081+00:00",
+    "static_only": true,
+    "pinned_harness": "2df4734692f9783a9978d4d4698ff25f391ced41",
+    "verified_selected_blobs": 36,
+    "public_harness_tree_files": 64,
+    "public_frq": 20,
+    "public_mcq": 2,
+    "frq_unique_ids": 20,
+    "encrypted_answer_files_not_downloaded": 17,
+    "question_images_in_tree": 13,
+    "quarch_versions": {
+      "v01": "2501.01892v2 Jan6 2025;abstract1500rounded/body1547MCQ",
+      "v10": "2510.22087v3 Aug8 2026;2671=1547MCQ+1124FRQ;2123text548multimodal;13topics/primaryskill4"
+    },
+    "gated_access": "FullQAandGTrequiresauthoraccessagreement; privateholdoutremainunreleased. PublicsubsetanswersFernetencrypted; notdownloaded/decrypted, nokeysrequested,noAPIevaluation. NoencryptedpayloadorrawQAredistribution.",
+    "scoring": {
+      "paper": "meanpergenerationcorrectnessn3;FRQeachanswerup3judgeconsensus,PARTIALLY-CORRECTroundedincorrect",
+      "mcq_cli": "logsbest-of-k(anycorrect)accuracy, defaultk1; report.pyseparatelymeanattemptsperquestion",
+      "missing": "MCQemptyresponsecontinue/emptygroupnoattemptsexcludedbyreport;FRQmissingjudgment/nomajoritynotinevaluateddenominator. Needcompleteexpectedmanifest/coverage, actualpublishedimpactunknownwithoutresults"
+    },
+    "case1": {
+      "trials_per_condition": 20,
+      "turns": 10,
+      "hard_gates": {
+        "area_max_um2": 15000,
+        "energy_max_mJ": 1
+      },
+      "SFT_questions": 45,
+      "SFT_samples": 676,
+      "original_student_responses": 541,
+      "teacher_explanations": 135,
+      "conditions": [
+        {
+          "model": "Llama3.3-70B",
+          "variant": "base",
+          "success": 11,
+          "trials": 20,
+          "area_um2": 7246.78,
+          "success_percent": 55.00000000000001
+        },
+        {
+          "model": "Llama3.3-70B",
+          "variant": "config1",
+          "success": 19,
+          "trials": 20,
+          "area_um2": 7275.78,
+          "success_percent": 95.0
+        },
+        {
+          "model": "Llama3.3-70B",
+          "variant": "config2",
+          "success": 7,
+          "trials": 20,
+          "area_um2": 3637.89,
+          "success_percent": 35.0
+        },
+        {
+          "model": "Gemma3-27B",
+          "variant": "base",
+          "success": 6,
+          "trials": 20,
+          "area_um2": 6728.49,
+          "success_percent": 30.0
+        },
+        {
+          "model": "Gemma3-27B",
+          "variant": "config1",
+          "success": 14,
+          "trials": 20,
+          "area_um2": 6695.84,
+          "success_percent": 70.0
+        },
+        {
+          "model": "Gemma3-27B",
+          "variant": "config2",
+          "success": 10,
+          "trials": 20,
+          "area_um2": 3608.89,
+          "success_percent": 50.0
+        }
+      ],
+      "best_area_ratio": {
+        "llama": 1.9920283461017239,
+        "gemma": 1.8644209161265652
+      },
+      "config1_success_gain_pp": {
+        "llama": 40,
+        "gemma": 40
+      },
+      "config1_success_relative_gain_percent": {
+        "llama": 72.72727272727273,
+        "gemma": 133.33333333333334
+      },
+      "findings": [
+        "Config1reliability+40percentagepointsnot40percentrelative",
+        "LlamaConfig1bestareaworse7275.78>7246.78despitesuccess95vs55percent",
+        "Config2area1.99/1.86xbetterbutLlamaSR35<55base;cannotcombineConfig1SRandConfig2bestareaintooneconfiguration",
+        "120trialsandupto1200designproposalsacrosssixconditions, not1200independenttasks;SFT676samplesarenot676toolinteractiontrajectories"
+      ]
+    },
+    "case2": {
+      "models": 3,
+      "workloads": 4,
+      "repeats": 10,
+      "proposal_budget": 40,
+      "max_proposals": 4800,
+      "metric": "bestnormalizedinversepower",
+      "reported_pearson_r": 0.726,
+      "reported_p": 0.007,
+      "findings": [
+        "4workloads×3modelpoints=12aggregatesnotall4800proposalsindependentcorrelationpoints",
+        "CorrelationnotcausalproofQAnecessary/sufficientforallarchitecturetakenalone; nativeDRAMSysfixedspaceandbudgetneeded"
+      ]
+    },
+    "judge_matrix_rechecks": {
+      "claude_human": {
+        "total": 925,
+        "agreement": 0.894054054054054
+      },
+      "gemini_human": {
+        "total": 925,
+        "agreement": 0.8810810810810811
+      },
+      "qwen_human": {
+        "total": 925,
+        "agreement": 0.8702702702702703
+      },
+      "claude_gemini": {
+        "total": 79113,
+        "agreement": 0.9040865597310177
+      },
+      "claude_qwen": {
+        "total": 81978,
+        "agreement": 0.9121227646441729
+      },
+      "gemini_qwen": {
+        "total": 79018,
+        "agreement": 0.8977954390138956
+      }
+    },
+    "ds2sc": {
+      "arxiv": "2603.21190v1",
+      "examples": 3,
+      "model": "Gemini3Flash",
+      "roles": 4,
+      "temperatures": [
+        0.2,
+        0.4,
+        0.4,
+        0.3
+      ],
+      "native_stack": "GCC,SystemC2.3.3,SystemCAMS2.3.4",
+      "inputs": {
+        "fft": "AMD XilinxPG109v9.1 96pages",
+        "la": "Micrel/MicrochipSY88923V6pages",
+        "pa": "QorvoQPM2239RevC18pages"
+      },
+      "findings": [
+        "RawdatasheetplusmanuallyprefilledSpecIRwithfixedlatency/gain/supply/interfaces/testcases, notrawPDFonlyunconstrainedgeneration",
+        "PAtemplateprovidesG/Psatandsparsecurvepoints;Rappsmoothnessfitnotfullyautonomousvisualcurveextraction",
+        "FFT8point1..8roundtripresidual<=4.4e-16butFFTIFFTcomposedidentityalonecannotruleoutmutuallyconsistentnormalization/permutationoridentityerrors; needsindependentfrequencydomainreference",
+        "LAlinear/clamp/disableandPA<1dBselectedsweepvalidationnotallPVT/RFphase/memory/transientfullmodeltruth",
+        "SameSpecIRusedforcodeandTBcanpropagateparsererror; validationnotindependentdatasheetgoldunlesshiddenreferenceprovided",
+        "No matchedbaseline/repeatedSR/cost/iterations/fullreleasedPDFIRmodelsTBtraceslocated; 3selecteddemosnot100percentallgenerationSR"
+      ]
+    }
+  }
+}
