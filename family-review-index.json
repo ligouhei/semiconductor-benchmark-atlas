@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T07:19:11.284904+00:00",
+  "generated_at": "2026-10-20T07:28:48.932099+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 344,
-    "records": 612,
-    "records_with_any_field_audit_entry": 370,
-    "records_with_current_field_audit_snapshot": 337,
+    "families": 346,
+    "records": 615,
+    "records_with_any_field_audit_entry": 373,
+    "records_with_current_field_audit_snapshot": 340,
     "records_without_current_field_audit_snapshot": 275
   },
   "requirements_per_record": [
@@ -9614,6 +9614,35 @@
       ]
     },
     {
+      "benchmark_family": "NVIDIA HORIZON RTL method",
+      "record_count": 1,
+      "records_with_current_field_audit": 1,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "rtl-nvidia-horizon-method",
+          "name": "NVIDIA HORIZON / repository-evolution method evaluation",
+          "category": "数字前端/仓库级RTL工程agent",
+          "artifact_type": "复用四个现有benchmark家族的组合方法评测；非新独立RTL数据集",
+          "task_layer": "固定模型在git worktree内按执行反馈生成/修复并保存最佳通过工件",
+          "evidence_status": "第二轮12h进行中；固定论文版本/表格与数值口径静态核验，未执行模型、EDA、仿真或形式证明。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-saarthi-horizon-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "继续核冻结任务/原始轨迹/预算/许可与独立验收；未发布或此次未定位的材料明确保留缺口，方法实验不当新独立公共数据集。",
+          "limitations": "一轮包含多个编辑/工具调用，外步数不是totalmodelcalls；只汇总到earliest-best不含后续消耗。完整wall/费用/重试/环境开销、独立随机/隐藏终验与跨源分割缺口保留。不能借用同名orinlabs公开HuggingFace traces充当NVIDIA本工作release。",
+          "tools_and_access": "论文报告总209.9Mtokens约91%cachedinput，非免费token或总USD成本；CVDP203.9M占97.14%。表显示值合计210.0M与209.9M差.1M在逐项舍入容差，不当错误更正。完整authorruntime/projectpack/全部通过+拒绝轨迹和训练许可此次未定位；Gitbuffer可用于训练是架构描述，不是已取得开放语料。",
+          "industrial_value": "研究判断：展示执行反馈下仓库工程收敛与高token长尾；不证明agentic芯片设计已解决，亦不说明商业EDA成熟已消除工程编排需求。"
+        }
+      ]
+    },
+    {
       "benchmark_family": "NetlistBench",
       "record_count": 3,
       "records_with_current_field_audit": 0,
@@ -12144,6 +12173,56 @@
           "limitations": "逻辑而非电气模型，论文指出不建模周期内瞬态/门延迟/物理相邻故障；预处理寄存器pass-through/移除时序loop，迭代轮次须单独配置，不等任意无限时序证明。faultmodel手动输入/期望可漏工况",
           "tools_and_access": "Apache2公开代码、示例netlists/faultconfig和Nangate45模型生成流程，已静态读；Python/PySAT等依赖版本需锁，源PDK/IP许可另核。未反序列化任何外部pickle/执行故障分析",
           "industrial_value": "可用于鲁棒性验证/自动faultspec或countermeasure设计agent的验收工具，公开案例适合作补充；本身不是已有LLMagentbenchmark，也不能据软件存在推断现实故障已消除"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "Saarthi formal-verification method",
+      "record_count": 2,
+      "records_with_current_field_audit": 2,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "verify-saarthi-2025",
+          "name": "Saarthi 2025 / fifteen-design method evaluation",
+          "category": "数字验证/性质生成与formal工作流agent",
+          "artifact_type": "工业方法15设计评测；完整统一公共任务包未定位，非新独立开源benchmark",
+          "task_layer": "规格/RTL→vPlan/SVA→证明/CEX/coverage反馈",
+          "evidence_status": "第二轮12h进行中；固定论文版本/表格与数值口径静态核验，未执行模型、EDA、仿真或形式证明。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-saarthi-horizon-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "继续核冻结任务/原始轨迹/预算/许可与独立验收；未发布或此次未定位的材料明确保留缺口，方法实验不当新独立公共数据集。",
+          "limitations": "允许HIL与自动流程分别计；脚本能启动formal或properties被prove，均不证明性质与规格语义一致。作者明确提及vacuous/冗余性质、context截断、虚构信号等。不把15设计×模型×列当同等独立芯片数。",
+          "tools_and_access": "原文/示例agent配置公开；作者称CadenceJasper，实际toolbuild/约束/完整属性、所有prompt/tool/失败轨迹与再训练许可未确认。arXiv分发许可不等工业RTL/规则库/代码再利用授权。",
+          "industrial_value": "研究判断：工业formal编排方法证据；具有现实任务价值但尚非此次可独立复算的完整公共bench。"
+        },
+        {
+          "id": "verify-saarthi-2026",
+          "name": "Saarthi 2026 / six-design KPI, HIL and coverage protocols",
+          "category": "数字验证/性质生成与formal工作流agent",
+          "artifact_type": "同6设计上的三种方法协议；混合私有/复用CVDP输入，非三套新数据集",
+          "task_layer": "rulebook/GraphRAG辅助性质生成、人工反馈与自动coverage迭代",
+          "evidence_status": "第二轮12h进行中；固定论文版本/表格与数值口径静态核验，未执行模型、EDA、仿真或形式证明。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-saarthi-horizon-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "继续核冻结任务/原始轨迹/预算/许可与独立验收；未发布或此次未定位的材料明确保留缺口，方法实验不当新独立公共数据集。",
+          "limitations": "覆盖与proven分母、tool具体build/constraints及隐藏gold未固定；原文提vacuitywarnings回路不等独立测全部性质语义。HIL工时/各轮全token/失败成本未披露；同设计反复改prompt/规则，未证明跨IP独立泛化。",
+          "tools_and_access": "全文三张数表已解析，旧2025及新2026版本分开；AutoGen/GraphRAG开源不等本方法代码/规则库/工业输入开源。作者站静态bundle把Saarthi链接到arXiv，GitHub按钮属于其他SoC/ML项目，不当Saarthi release。完整HIL语料/多agent轨迹/许可未定位。",
+          "industrial_value": "研究判断：可用于研究工业性质工程和反馈闭环，三轨应在同输入血缘下比较；原生形式工具成熟不自动解决规格到性质与覆盖问题。"
         }
       ]
     },

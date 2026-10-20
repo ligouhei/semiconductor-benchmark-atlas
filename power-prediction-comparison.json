@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T07:19:10.930144+00:00",
+  "as_of": "2026-10-20T07:28:48.580335+00:00",
   "status": "task and input/label comparison, not a new benchmark or ranking",
   "scope": "功耗标签、模型可见信息、测试对象与指标空间必须一致才能比较。商业工具标签、真实板测和代理引导搜索分别列示。",
   "items": [

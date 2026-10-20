@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-10-20T07:19:11.190226+00:00",
+  "as_of": "2026-10-20T07:28:48.840276+00:00",
   "status": "第二轮12h进行中的数据/轨迹开放性核查，非完整市场清单或最终结论",
   "scope": "只覆盖本轮已保存一手核查的新增协议；训练样本、评测输入、模型权重、整理后记忆、生成采样轨迹与LLM工具交互轨迹分别描述",
-  "protocol_records": 46,
-  "families": 21,
+  "protocol_records": 49,
+  "families": 23,
   "items": [
     {
       "catalog_id": "lib-siemens-nemo-characterization",
@@ -555,6 +555,42 @@
       "trajectory_and_training_access": "公开frozen任务汇总、74选定源码/数表与少量demo；不是完整156×5候选/原始LLM多步messages，re-score token0不代表生成0成本。315mockPPA与真实OpenLane2/8行分开。",
       "limits": "两个gold统一填0/填1的caremask相同位不足普遍保证对所有独立undef组合不敏感；仅为静态数学局限，不称此次实际结果存在利用。dontcare启发式和有限depth/settle/clock约束需分开；Wilson区间不覆盖系统性oracle错误。PPA训练315行全mock，另2行rawOpenLane、8行/4设计策略表；timing_ns实际负worstslack非直接pathdelay，okTrue非完整DRC/时序签核，慢PPA反馈完整agentloop仍future。",
       "primary_sources": "https://github.com/loversky02/rtl-gauntlet/tree/f899353f7d5a4b594a859b7ac3a1906a87e61fd9; https://github.com/loversky02/rtl-gauntlet/blob/f899353f7d5a4b594a859b7ac3a1906a87e61fd9/rtl_gauntlet/equiv.py; https://github.com/loversky02/rtl-gauntlet/blob/f899353f7d5a4b594a859b7ac3a1906a87e61fd9/scripts/report_cis.py; https://yosyshq.readthedocs.io/projects/yosys/en/v0.51/cmd/sat.html; https://yosyshq.readthedocs.io/projects/yosys/en/0.45/cmd/setundef.html",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "verify-saarthi-2025",
+      "name": "Saarthi 2025 / fifteen-design method evaluation",
+      "family": "Saarthi formal-verification method",
+      "object_identity": "工业方法15设计评测；完整统一公共任务包未定位，非新独立开源benchmark",
+      "task": "多agent生成vPlan与性质、编译证明、分析CEX、添加性质改coverage；迭代失败可请求人工修复后继续。",
+      "available_materials_and_tools": "原文/示例agent配置公开；作者称CadenceJasper，实际toolbuild/约束/完整属性、所有prompt/tool/失败轨迹与再训练许可未确认。arXiv分发许可不等工业RTL/规则库/代码再利用授权。",
+      "trajectory_and_training_access": "论文展示配置/输出示例，未定位全15设计逐步交互/完整task+gold+budget训练集。",
+      "limits": "允许HIL与自动流程分别计；脚本能启动formal或properties被prove，均不证明性质与规格语义一致。作者明确提及vacuous/冗余性质、context截断、虚构信号等。不把15设计×模型×列当同等独立芯片数。",
+      "primary_sources": "https://arxiv.org/html/2502.16662v2",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "verify-saarthi-2026",
+      "name": "Saarthi 2026 / six-design KPI, HIL and coverage protocols",
+      "family": "Saarthi formal-verification method",
+      "object_identity": "同6设计上的三种方法协议；混合私有/复用CVDP输入，非三套新数据集",
+      "task": "①KPI初始性质生成、最多5次syntaxfix；②coverageagent后人工给定向反馈再评；③GPT5无人工迭代最多5轮补coverage；CEX RCA超过3轮可转HIL，不能把完整框架称无人工预算流程。",
+      "available_materials_and_tools": "全文三张数表已解析，旧2025及新2026版本分开；AutoGen/GraphRAG开源不等本方法代码/规则库/工业输入开源。作者站静态bundle把Saarthi链接到arXiv，GitHub按钮属于其他SoC/ML项目，不当Saarthi release。完整HIL语料/多agent轨迹/许可未定位。",
+      "trajectory_and_training_access": "作者描述HIL收集纠正prompt/context/error/resolution，但未取得完整公开语料、逐步轨迹和训练授权；描述数据构建不等已发布数据集。",
+      "limits": "覆盖与proven分母、tool具体build/constraints及隐藏gold未固定；原文提vacuitywarnings回路不等独立测全部性质语义。HIL工时/各轮全token/失败成本未披露；同设计反复改prompt/规则，未证明跨IP独立泛化。",
+      "primary_sources": "https://arxiv.org/html/2603.03175v1; https://keerthankopparam.com/",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "rtl-nvidia-horizon-method",
+      "name": "NVIDIA HORIZON / repository-evolution method evaluation",
+      "family": "NVIDIA HORIZON RTL method",
+      "object_identity": "复用四个现有benchmark家族的组合方法评测；非新独立RTL数据集",
+      "task": "GPT5.3固定、论文全部singleagent；编辑仓库/运行nativeharness、通过则gitcommit否则记录失败并迭代。iteration0是第一个agent外步，不是单模型Pass@1；CID002最长82步。",
+      "available_materials_and_tools": "论文报告总209.9Mtokens约91%cachedinput，非免费token或总USD成本；CVDP203.9M占97.14%。表显示值合计210.0M与209.9M差.1M在逐项舍入容差，不当错误更正。完整authorruntime/projectpack/全部通过+拒绝轨迹和训练许可此次未定位；Gitbuffer可用于训练是架构描述，不是已取得开放语料。",
+      "trajectory_and_training_access": "论文定义git-traced正负经验buffer，完整原始tool/action/feedback和trainingrelease未定位；orinlabs/horizon是无关同名对象，不归入本论文数据。",
+      "limits": "一轮包含多个编辑/工具调用，外步数不是totalmodelcalls；只汇总到earliest-best不含后续消耗。完整wall/费用/重试/环境开销、独立随机/隐藏终验与跨源分割缺口保留。不能借用同名orinlabs公开HuggingFace traces充当NVIDIA本工作release。",
+      "primary_sources": "https://arxiv.org/html/2606.28279v1",
       "record_snapshot_matches_audit": true
     }
   ],

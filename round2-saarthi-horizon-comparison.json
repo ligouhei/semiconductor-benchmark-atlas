@@ -1,0 +1,1689 @@
+{
+  "status": "round2 active; methodversions and publishedtables only, notindependentnewdatasetclaims",
+  "protocols": [
+    {
+      "id": "verify-saarthi-2025",
+      "benchmark_family": "Saarthi formal-verification method",
+      "name": "Saarthi 2025 / fifteen-design method evaluation",
+      "category": "数字验证/性质生成与formal工作流agent",
+      "artifact_type": "工业方法15设计评测；完整统一公共任务包未定位，非新独立开源benchmark",
+      "task_layer": "规格/RTL→vPlan/SVA→证明/CEX/coverage反馈",
+      "version": "arXiv2502.16662v2 /2025-03-01；v1/v2三KPI表相同",
+      "input": "15个basic/intermediate/advanced各5设计，从Accumulator/ALU/FSM到FIFO/LFSR/CRC、Boothmultiplier/RV32I/PID/arbiter；规格与RTL为输入，未定位统一冻结manifest及完整源/规格包。",
+      "task": "多agent生成vPlan与性质、编译证明、分析CEX、添加性质改coverage；迭代失败可请求人工修复后继续。",
+      "output": "SVA/绑定、证明与coverage报告、CEX分析/修复、文档。",
+      "metrics": "作者定义端到端run成功率、formal coverage、生成性质proven比例；表按Pass@1/2/3分三组数值，未取得标准组合pass@k采样/估计协议。around40%efficacy为论文概述，不能当公开15题固定一次成功率。性质proven不等规格覆盖/无vacuity；数量和coverage可分离。逐题token/wall/human预算未固定公开。",
+      "baseline": "GPT4o/GPT4Turbo/Llama3-70B在同类设计的结果；无同预算原生脚本/人工工程工时受控对照。原生CadenceJasper承担性质证明；应评模型把规格转换为正确且有覆盖力性质/诊断的贡献。",
+      "tools_and_access": "原文/示例agent配置公开；作者称CadenceJasper，实际toolbuild/约束/完整属性、所有prompt/tool/失败轨迹与再训练许可未确认。arXiv分发许可不等工业RTL/规则库/代码再利用授权。",
+      "limitations": "允许HIL与自动流程分别计；脚本能启动formal或properties被prove，均不证明性质与规格语义一致。作者明确提及vacuous/冗余性质、context截断、虚构信号等。不把15设计×模型×列当同等独立芯片数。",
+      "industrial_value": "研究判断：工业formal编排方法证据；具有现实任务价值但尚非此次可独立复算的完整公共bench。",
+      "primary_sources": "https://arxiv.org/html/2502.16662v2",
+      "evidence_status": "第二轮12h进行中；固定论文版本/表格与数值口径静态核验，未执行模型、EDA、仿真或形式证明。",
+      "next_verification": "继续核冻结任务/原始轨迹/预算/许可与独立验收；未发布或此次未定位的材料明确保留缺口，方法实验不当新独立公共数据集。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "verify-saarthi-2026",
+      "benchmark_family": "Saarthi formal-verification method",
+      "name": "Saarthi 2026 / six-design KPI, HIL and coverage protocols",
+      "category": "数字验证/性质生成与formal工作流agent",
+      "artifact_type": "同6设计上的三种方法协议；混合私有/复用CVDP输入，非三套新数据集",
+      "task_layer": "rulebook/GraphRAG辅助性质生成、人工反馈与自动coverage迭代",
+      "version": "arXiv2603.03175v1 /2026-03-03；DVCon2026",
+      "input": "6设计：inhouse ECC/Automotive IP；CVDP MemoryScheduler/AXI4Lite/CICDecimator；外部FloatMultiplier。KPI表使用GPT4.1/GPT5/Llama3.3三模型；同六设计复用到HIL和5轮自动迭代，不能当18独立IP。",
+      "task": "①KPI初始性质生成、最多5次syntaxfix；②coverageagent后人工给定向反馈再评；③GPT5无人工迭代最多5轮补coverage；CEX RCA超过3轮可转HIL，不能把完整框架称无人工预算流程。",
+      "output": "SVA/元数据/绑定、编译/证明与覆盖报告；作者描述收集人工纠正的prompt/context/error/resolution语料。",
+      "metrics": "KPI统计性质数、首轮编译成功、修复次数、proven比例、coverage；Pass@列非已核标准pass@k。HIL与noHIL分列，不把人力改善归零样本自动模型。自动迭代6例中4例最后可用coverage较首轮下降：ECC-1.02pp(3轮后tokencrash)、Automotive-7.87pp、Memory-.44pp、CIC-8.77pp；AXI+3.57pp、Float+17.73pp。性质数增加不等coverage closure。",
+      "baseline": "rulebook/GraphRAG/coverageagent的增强方法对三模型和人工反馈协议；摘要70%accuracy改善/50%feweriterations缺可固定旧版配对原始runs/预算分母，未独立复算。formal求解由EDA内核执行，需语义gold、vacuity/overconstraint/mutation和同预算原生模板/人工baseline。",
+      "tools_and_access": "全文三张数表已解析，旧2025及新2026版本分开；AutoGen/GraphRAG开源不等本方法代码/规则库/工业输入开源。作者站静态bundle把Saarthi链接到arXiv，GitHub按钮属于其他SoC/ML项目，不当Saarthi release。完整HIL语料/多agent轨迹/许可未定位。",
+      "limitations": "覆盖与proven分母、tool具体build/constraints及隐藏gold未固定；原文提vacuitywarnings回路不等独立测全部性质语义。HIL工时/各轮全token/失败成本未披露；同设计反复改prompt/规则，未证明跨IP独立泛化。",
+      "industrial_value": "研究判断：可用于研究工业性质工程和反馈闭环，三轨应在同输入血缘下比较；原生形式工具成熟不自动解决规格到性质与覆盖问题。",
+      "primary_sources": "https://arxiv.org/html/2603.03175v1; https://keerthankopparam.com/",
+      "evidence_status": "第二轮12h进行中；固定论文版本/表格与数值口径静态核验，未执行模型、EDA、仿真或形式证明。",
+      "next_verification": "继续核冻结任务/原始轨迹/预算/许可与独立验收；未发布或此次未定位的材料明确保留缺口，方法实验不当新独立公共数据集。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "rtl-nvidia-horizon-method",
+      "benchmark_family": "NVIDIA HORIZON RTL method",
+      "name": "NVIDIA HORIZON / repository-evolution method evaluation",
+      "category": "数字前端/仓库级RTL工程agent",
+      "artifact_type": "复用四个现有benchmark家族的组合方法评测；非新独立RTL数据集",
+      "task_layer": "固定模型在git worktree内按执行反馈生成/修复并保存最佳通过工件",
+      "version": "arXiv2606.28279v1 /2026-06-26；与orinlabs/horizon长记忆bench不同",
+      "input": "结构化Markdown harness→bootstrap生成projectpack；输入ChipBench、RTLLM2、VerilogEvalv2及CVDP九generation类别(002/003/004/005/007/012/013/014/016)。共12suite/category行，非12独立数据集；未取得精确冻结全题manifest。",
+      "task": "GPT5.3固定、论文全部singleagent；编辑仓库/运行nativeharness、通过则gitcommit否则记录失败并迭代。iteration0是第一个agent外步，不是单模型Pass@1；CID002最长82步。",
+      "output": "通过RTL/verification工件、git diff/commit/notes/evaluator日志和理论正负经验buffer；不训练/更新RL权重。",
+      "metrics": "best-so-far通过率至earliest-best，不是单次成功率。100%含把1个ChipBench原harness仍不通过题按作者spec-harnessdefect计resolved；原始通过与调整后解决分开。CID012 pass100%但平均coverage97.9%；CID014 coverage100%只对60parsedlogs，另7缺report，非67/67有coverage或完整语义证明。",
+      "baseline": "单固定GPT5.3/hostEPYC9334-32core512GB的逐迭代进展，无受控同预算多agent baseline。nativeopen工具与CID012–014商业simulator提供反馈；评测终验同harness可见，作者明确承认over-solving/rewardhacking风险。PPA/QoR改善留future。",
+      "tools_and_access": "论文报告总209.9Mtokens约91%cachedinput，非免费token或总USD成本；CVDP203.9M占97.14%。表显示值合计210.0M与209.9M差.1M在逐项舍入容差，不当错误更正。完整authorruntime/projectpack/全部通过+拒绝轨迹和训练许可此次未定位；Gitbuffer可用于训练是架构描述，不是已取得开放语料。",
+      "limitations": "一轮包含多个编辑/工具调用，外步数不是totalmodelcalls；只汇总到earliest-best不含后续消耗。完整wall/费用/重试/环境开销、独立随机/隐藏终验与跨源分割缺口保留。不能借用同名orinlabs公开HuggingFace traces充当NVIDIA本工作release。",
+      "industrial_value": "研究判断：展示执行反馈下仓库工程收敛与高token长尾；不证明agentic芯片设计已解决，亦不说明商业EDA成熟已消除工程编排需求。",
+      "primary_sources": "https://arxiv.org/html/2606.28279v1",
+      "evidence_status": "第二轮12h进行中；固定论文版本/表格与数值口径静态核验，未执行模型、EDA、仿真或形式证明。",
+      "next_verification": "继续核冻结任务/原始轨迹/预算/许可与独立验收；未发布或此次未定位的材料明确保留缺口，方法实验不当新独立公共数据集。",
+      "retrieved_date": "2026-10-20"
+    }
+  ],
+  "static_audit": {
+    "as_of": "2026-10-20T07:28:25.600977+00:00",
+    "scope": "source-byte hashes, primary table extraction and published-value arithmetic; no runtime, model or verification execution",
+    "source_checks": [
+      {
+        "file": "evidence/round2-formal62_saarthi_v2.txt",
+        "sha256": "537b47d80c408d0746e1e73a394a827d6e682a72dd300f2982c94d34a71c6af8"
+      },
+      {
+        "file": "evidence/round2-formal62_horizon.txt",
+        "sha256": "d6134402ab9149e862c7808be653cf935f2a72bc51ec8cbed96c07715937c203"
+      },
+      {
+        "file": "evidence/round2-saarthi67_saarthi_original.txt",
+        "sha256": "cbfa208b12efa3e461fafb7ffa0ae75bcc06ca4ec0b6fc0873809885a64145b7"
+      },
+      {
+        "file": "evidence/round2-saarthi67_saarthi_abs.txt",
+        "sha256": "54ed70263f2cb8860091f7632107098002e6490ce7dbe64a8ffbf02fcbe8bbf9"
+      },
+      {
+        "file": "evidence/round2-saarthi67_horizon_abs.txt",
+        "sha256": "5326477abcfb5576122d02d73208cd6db03d2e84bfdfb0fcf7ea2e32fe864203"
+      },
+      {
+        "file": "evidence/round2-saarthiauthor68_author_site.txt",
+        "sha256": "63fcf5d9d27d8f1ecca7ce4720eb82682dd5152b59ffbaa736bca35de547b56c"
+      },
+      {
+        "file": "evidence/round2-saarthi69_author_js.txt",
+        "sha256": "ec7506eb98a1204e848dc9319314849d2fb96893b1c41bd8dcf689c6fecfcc68"
+      },
+      {
+        "file": "evidence/round2-saarthi70_saarthi_original_v2.txt",
+        "sha256": "b455b8f214ccf645603d055307f1c0209fd0dde9606a1ad62d9005c7a7a7f639"
+      },
+      {
+        "file": "evidence/round2-saarthi69_saarthi_original_abs.txt",
+        "sha256": "b64a65d660c6429700f392c5943b0d137b60afbb66dc0323e6b0e061419351a3"
+      }
+    ],
+    "saarthi": {
+      "paper_versions": {
+        "original": "2502.16662v2 /2025-03-01; v1/v2 three KPI tables identical",
+        "enhanced": "2603.03175v1 /2026-03-03"
+      },
+      "original_design_cases": 15,
+      "original_kpi_tables": {
+        "Accumulator": {
+          "# Properties": [
+            "11",
+            "4",
+            "9",
+            "13",
+            "10",
+            "0",
+            "12",
+            "6",
+            "0"
+          ],
+          "% Proven": [
+            "45.45%",
+            "50%",
+            "44.44%",
+            "53.85%",
+            "70%",
+            "0%",
+            "33.33%",
+            "16.67%",
+            "0%"
+          ],
+          "% Coverage": [
+            "81.82%",
+            "80.95%",
+            "77.78%",
+            "80%",
+            "84%",
+            "0%",
+            "80.77%",
+            "83.58%",
+            "0%"
+          ]
+        },
+        "8-bit ALU": {
+          "# Properties": [
+            "10",
+            "5",
+            "18",
+            "13",
+            "13",
+            "0",
+            "16",
+            "14",
+            "0"
+          ],
+          "% Proven": [
+            "20%",
+            "20%",
+            "27.78%",
+            "7.69%",
+            "92.31%",
+            "0%",
+            "37.50%",
+            "14.29%",
+            "0%"
+          ],
+          "% Coverage": [
+            "93.29%",
+            "94.33%",
+            "90.53%",
+            "95.54%",
+            "87.59%",
+            "0%",
+            "92.68%",
+            "93.13%",
+            "0%"
+          ]
+        },
+        "Edge detector": {
+          "# Properties": [
+            "6",
+            "8",
+            "7",
+            "5",
+            "7",
+            "8",
+            "7",
+            "9",
+            "10"
+          ],
+          "% Proven": [
+            "33.33%",
+            "62.50%",
+            "14.29%",
+            "40%",
+            "71.43%",
+            "75%",
+            "28.57%",
+            "44.44%",
+            "40%"
+          ],
+          "% Coverage": [
+            "60%",
+            "60%",
+            "53.85%",
+            "50%",
+            "72.73%",
+            "75%",
+            "50%",
+            "73.33%",
+            "70.59%"
+          ]
+        },
+        "4-state FSM": {
+          "# Properties": [
+            "6",
+            "5",
+            "9",
+            "9",
+            "9",
+            "7",
+            "9",
+            "8",
+            "8"
+          ],
+          "% Proven": [
+            "100%",
+            "100%",
+            "88.89%",
+            "100%",
+            "77.78%",
+            "57.14%",
+            "100%",
+            "100%",
+            "75%"
+          ],
+          "% Coverage": [
+            "82.22%",
+            "80.95%",
+            "65.23%",
+            "52.94%",
+            "83.33%",
+            "78.74%",
+            "75%",
+            "75.59%",
+            "71.25%"
+          ]
+        },
+        "Up-down counter": {
+          "# Properties": [
+            "6",
+            "8",
+            "8",
+            "9",
+            "8",
+            "8",
+            "9",
+            "0",
+            "8"
+          ],
+          "% Proven": [
+            "33%",
+            "75%",
+            "88%",
+            "33%",
+            "25%",
+            "25%",
+            "26%",
+            "0%",
+            "75%"
+          ],
+          "% Coverage": [
+            "56%",
+            "69%",
+            "0%",
+            "53%",
+            "71%",
+            "79%",
+            "81%",
+            "0%",
+            "7%"
+          ]
+        },
+        "Sync. FIFO": {
+          "# Properties": [
+            "20",
+            "12",
+            "12",
+            "22",
+            "13",
+            "7",
+            "6",
+            "9",
+            "13"
+          ],
+          "% Proven": [
+            "55%",
+            "41.67%",
+            "8.33%",
+            "59.09%",
+            "23.08%",
+            "28.57%",
+            "50%",
+            "33.33%",
+            "30.77%"
+          ],
+          "% Coverage": [
+            "91.67%",
+            "58.71%",
+            "91.66%",
+            "92%",
+            "73.08%",
+            "71.43%",
+            "50%",
+            "87.50%",
+            "84.62%"
+          ]
+        },
+        "FSM controller": {
+          "# Properties": [
+            "29",
+            "4",
+            "0",
+            "30",
+            "6",
+            "0",
+            "31",
+            "10",
+            "0"
+          ],
+          "% Proven": [
+            "48.28%",
+            "75%",
+            "0%",
+            "43.33%",
+            "33.33%",
+            "0%",
+            "52.38%",
+            "20%",
+            "0%"
+          ],
+          "% Coverage": [
+            "72.41%",
+            "42.86%",
+            "0%",
+            "68.97%",
+            "84.62%",
+            "0%",
+            "70%",
+            "73.68%",
+            "0%"
+          ]
+        },
+        "Priority encoder": {
+          "# Properties": [
+            "14",
+            "11",
+            "12",
+            "7",
+            "12",
+            "16",
+            "4",
+            "10",
+            "11"
+          ],
+          "% Proven": [
+            "79%",
+            "55%",
+            "17%",
+            "71%",
+            "33%",
+            "38%",
+            "50%",
+            "40%",
+            "18%"
+          ],
+          "% Coverage": [
+            "87%",
+            "82%",
+            "83%",
+            "25%",
+            "82%",
+            "87%",
+            "50%",
+            "70%",
+            "78%"
+          ]
+        },
+        "16-bit LFSR": {
+          "# Properties": [
+            "5",
+            "5",
+            "6",
+            "6",
+            "5",
+            "6",
+            "5",
+            "5",
+            "0"
+          ],
+          "% Proven": [
+            "40%",
+            "80%",
+            "67%",
+            "50%",
+            "40%",
+            "33%",
+            "40%",
+            "40%",
+            "0%"
+          ],
+          "% Coverage": [
+            "50%",
+            "65%",
+            "44%",
+            "40%",
+            "43%",
+            "67%",
+            "40%",
+            "71%",
+            "0%"
+          ]
+        },
+        "CRC generator": {
+          "# Properties": [
+            "8",
+            "6",
+            "7",
+            "4",
+            "7",
+            "5",
+            "8",
+            "6",
+            "10"
+          ],
+          "% Proven": [
+            "25%",
+            "33%",
+            "46%",
+            "50%",
+            "43%",
+            "40%",
+            "38%",
+            "50%",
+            "60%"
+          ],
+          "% Coverage": [
+            "80%",
+            "67%",
+            "37%",
+            "50%",
+            "57%",
+            "63%",
+            "67%",
+            "67%",
+            "75%"
+          ]
+        },
+        "Booth multiplier": {
+          "# Properties": [
+            "10",
+            "9",
+            "9",
+            "16",
+            "4",
+            "10",
+            "24",
+            "6",
+            "9"
+          ],
+          "% Proven": [
+            "30%",
+            "44.44%",
+            "22.22%",
+            "25%",
+            "50%",
+            "50%",
+            "33%",
+            "33.33%",
+            "22.22%"
+          ],
+          "% Coverage": [
+            "43%",
+            "77.78%",
+            "77.78%",
+            "73%",
+            "42.86%",
+            "90%",
+            "65%",
+            "66.67%",
+            "88.89%"
+          ]
+        },
+        "Pipelined adder": {
+          "# Properties": [
+            "13",
+            "7",
+            "7",
+            "10",
+            "10",
+            "0",
+            "14",
+            "7",
+            "0"
+          ],
+          "% Proven": [
+            "31%",
+            "42.86%",
+            "28.57%",
+            "40%",
+            "40%",
+            "0%",
+            "21%",
+            "85.71%",
+            "0%"
+          ],
+          "% Coverage": [
+            "68%",
+            "57.14%",
+            "83.33%",
+            "44%",
+            "70%",
+            "0%",
+            "31%",
+            "13.33%",
+            "0%"
+          ]
+        },
+        "RV32I core": {
+          "# Properties": [
+            "12",
+            "14",
+            "10",
+            "14",
+            "14",
+            "12",
+            "14",
+            "14",
+            "10"
+          ],
+          "% Proven": [
+            "50%",
+            "44.43%",
+            "30.02%",
+            "55%",
+            "54.24%",
+            "35%",
+            "70%",
+            "75%",
+            "44.32%"
+          ],
+          "% Coverage": [
+            "80%",
+            "82%",
+            "50%",
+            "82%",
+            "82%",
+            "51%",
+            "82%",
+            "82%",
+            "53%"
+          ]
+        },
+        "PID Controller": {
+          "# Properties": [
+            "5",
+            "2",
+            "0",
+            "1",
+            "4",
+            "0",
+            "5",
+            "2",
+            "0"
+          ],
+          "% Proven": [
+            "80.30%",
+            "50%",
+            "0%",
+            "100%",
+            "25%",
+            "0%",
+            "20%",
+            "50%",
+            "0%"
+          ],
+          "% Coverage": [
+            "46.77%",
+            "13.60%",
+            "0%",
+            "9.40%",
+            "17.69%",
+            "0%",
+            "44.53%",
+            "42.97%",
+            "0%"
+          ]
+        },
+        "Round robin arbiter": {
+          "# Properties": [
+            "10",
+            "7",
+            "7",
+            "12",
+            "6",
+            "0",
+            "26",
+            "4",
+            "0"
+          ],
+          "% Proven": [
+            "50%",
+            "57%",
+            "29%",
+            "42%",
+            "33%",
+            "0%",
+            "22%",
+            "25%",
+            "0%"
+          ],
+          "% Coverage": [
+            "87%",
+            "50%",
+            "67%",
+            "73%",
+            "89%",
+            "0%",
+            "86%",
+            "78%",
+            "0%"
+          ]
+        }
+      },
+      "enhanced_design_cases": 6,
+      "enhanced_kpi": {
+        "ECC": {
+          "# Assertions": [
+            "19",
+            "28",
+            "14",
+            "25",
+            "32",
+            "6",
+            "25",
+            "48",
+            "12"
+          ],
+          "1st generation": [
+            "No",
+            "Yes",
+            "No",
+            "Yes",
+            "Yes",
+            "Yes",
+            "No",
+            "Yes",
+            "Yes"
+          ],
+          "# attempts to fix": [
+            "1",
+            "0",
+            "2",
+            "0",
+            "0",
+            "0",
+            "2",
+            "0",
+            "0"
+          ],
+          "% Proven": [
+            "71.86%",
+            "89.28%",
+            "57.14%",
+            "64.00%",
+            "75.00%",
+            "33.33%",
+            "64.00%",
+            "81.25%",
+            "50.00%"
+          ],
+          "% Coverage": [
+            "62.67%",
+            "58.57%",
+            "68.01%",
+            "60.21%",
+            "61.86%",
+            "2.18%",
+            "58.15%",
+            "93.74%",
+            "43.90%"
+          ]
+        },
+        "Automotive IP": {
+          "# Assertions": [
+            "36",
+            "58",
+            "9",
+            "64",
+            "76",
+            "16",
+            "45",
+            "54",
+            "11"
+          ],
+          "1st generation": [
+            "No",
+            "No",
+            "No",
+            "No",
+            "No",
+            "No",
+            "No",
+            "No",
+            "No"
+          ],
+          "# attempts to fix": [
+            "4",
+            "3",
+            "5",
+            "5",
+            "3",
+            "5",
+            "3",
+            "3",
+            "5"
+          ],
+          "% Proven": [
+            "50%",
+            "84.48%",
+            "22.22%",
+            "50%",
+            "56.57%",
+            "18.75%",
+            "48.88%",
+            "55.55%",
+            "45.45%"
+          ],
+          "% Coverage": [
+            "64.29%",
+            "80.99%",
+            "6.99%",
+            "76.6%",
+            "77.02%",
+            "8.96%",
+            "72.75%",
+            "80.38%",
+            "42.44%"
+          ]
+        },
+        "Memory Scheduler [ 30 ]": {
+          "# Assertions": [
+            "24",
+            "22",
+            "13",
+            "16",
+            "28",
+            "7",
+            "23",
+            "29",
+            "17"
+          ],
+          "1st generation": [
+            "No",
+            "No",
+            "No",
+            "Yes",
+            "Yes",
+            "Yes",
+            "No",
+            "No",
+            "Yes"
+          ],
+          "# attempts to fix": [
+            "2",
+            "2",
+            "3",
+            "0",
+            "0",
+            "0",
+            "1",
+            "1",
+            "0"
+          ],
+          "% Proven": [
+            "35.71%",
+            "40.91%",
+            "30.77%",
+            "50.00%",
+            "32.14%",
+            "71.43%",
+            "21.74%",
+            "32.01%",
+            "17.65%"
+          ],
+          "% Coverage": [
+            "42.93%",
+            "54.73%",
+            "39.47%",
+            "43.32%",
+            "58.21%",
+            "44.20%",
+            "46.39%",
+            "48.86%",
+            "37.30%"
+          ]
+        },
+        "AXI4Lite [ 30 ]": {
+          "# Assertions": [
+            "69",
+            "139",
+            "39",
+            "75",
+            "87",
+            "60",
+            "74",
+            "117",
+            "92"
+          ],
+          "1st generation": [
+            "No",
+            "No",
+            "No",
+            "No",
+            "No",
+            "No",
+            "No",
+            "No",
+            "No"
+          ],
+          "# attempts to fix": [
+            "5",
+            "3",
+            "5",
+            "5",
+            "3",
+            "5",
+            "3",
+            "3",
+            "5"
+          ],
+          "% Proven": [
+            "46.37%",
+            "72.66%",
+            "64.10%",
+            "40%",
+            "68.96%",
+            "45.00%",
+            "62.16%",
+            "61.15%",
+            "23.90%"
+          ],
+          "% Coverage": [
+            "31.29%",
+            "44.06%",
+            "32.83%",
+            "35%",
+            "50%",
+            "36.42%",
+            "41.51%",
+            "41.18%",
+            "37.16%"
+          ]
+        },
+        "CIC Decimator [ 30 ]": {
+          "# Assertions": [
+            "16",
+            "36",
+            "10",
+            "16",
+            "37",
+            "10",
+            "19",
+            "30",
+            "10"
+          ],
+          "1st generation": [
+            "Yes",
+            "Yes",
+            "No",
+            "Yes",
+            "No",
+            "Yes",
+            "Yes",
+            "Yes",
+            "No"
+          ],
+          "# attempts to fix": [
+            "0",
+            "0",
+            "1",
+            "0",
+            "1",
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          "% Proven": [
+            "62.5%",
+            "75%",
+            "40%",
+            "31.25%",
+            "91.89%",
+            "30%",
+            "52.63%",
+            "86.67%",
+            "30%"
+          ],
+          "% Coverage": [
+            "66.67%",
+            "74.45%",
+            "50%",
+            "52.14%",
+            "77.39%",
+            "18.22%",
+            "56.67%",
+            "72.86%",
+            "48.42%"
+          ]
+        },
+        "Float Multiplier": {
+          "# Assertions": [
+            "19",
+            "49",
+            "10",
+            "17",
+            "42",
+            "0",
+            "23",
+            "57",
+            "15"
+          ],
+          "1st generation": [
+            "Yes",
+            "Yes",
+            "Yes",
+            "Yes",
+            "Yes",
+            "No",
+            "Yes",
+            "No",
+            "Yes"
+          ],
+          "# attempts to fix": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "3",
+            "0",
+            "2",
+            "0"
+          ],
+          "% Proven": [
+            "10.53%",
+            "51.02%",
+            "20%",
+            "23.53%",
+            "30.95%",
+            "0%",
+            "17.39%",
+            "42.11%",
+            "6.67%"
+          ],
+          "% Coverage": [
+            "4.97%",
+            "65.37%",
+            "12.14%",
+            "19.96%",
+            "83.71%",
+            "0%",
+            "9.44%",
+            "78.48%",
+            "3.15%"
+          ]
+        }
+      },
+      "hil_table": {
+        "ECC": {
+          "# Assertions": [
+            "53",
+            "66",
+            "19",
+            "53",
+            "60",
+            "19"
+          ],
+          "% Proven": [
+            "84.90%",
+            "78.80%",
+            "68.42%",
+            "96.06%",
+            "80.00%",
+            "84.21%"
+          ],
+          "% Coverage": [
+            "89.31%",
+            "92.83%",
+            "90.63%",
+            "98.05%",
+            "95.22%",
+            "92.53%"
+          ]
+        },
+        "Automotive IP": {
+          "# Assertions": [
+            "36",
+            "58",
+            "19",
+            "36",
+            "58",
+            "19"
+          ],
+          "% Proven": [
+            "50%",
+            "84.48%",
+            "26.31%",
+            "72.22%",
+            "93.10%",
+            "63.15%"
+          ],
+          "% Coverage": [
+            "64.29%",
+            "80.99%",
+            "38.87%",
+            "73.91%",
+            "85.94%",
+            "64.91%"
+          ]
+        },
+        "Memory Scheduler": {
+          "# Assertions": [
+            "27",
+            "35",
+            "36",
+            "27",
+            "35",
+            "36"
+          ],
+          "% Proven": [
+            "62.96%",
+            "48.57%",
+            "33.33%",
+            "85.19%",
+            "57.14%",
+            "55.56%"
+          ],
+          "% Coverage": [
+            "42.35%",
+            "50.00%",
+            "41.11%",
+            "61.54%",
+            "62.02%",
+            "45.65%"
+          ]
+        },
+        "AXI4Lite": {
+          "# Assertions": [
+            "101",
+            "139",
+            "3",
+            "101",
+            "139",
+            "3"
+          ],
+          "% Proven": [
+            "70.29%",
+            "72.66%",
+            "33.33%",
+            "85.10%",
+            "83.45%",
+            "66.66%"
+          ],
+          "% Coverage": [
+            "38.90%",
+            "44.06%",
+            "28.23%",
+            "61.56%",
+            "67.06%",
+            "31.12%"
+          ]
+        },
+        "CIC Decimator": {
+          "# Assertions": [
+            "28",
+            "53",
+            "28",
+            "28",
+            "53",
+            "28"
+          ],
+          "% Proven": [
+            "67.86%",
+            "81.13%",
+            "50%",
+            "100%",
+            "100%",
+            "100%"
+          ],
+          "% Coverage": [
+            "79.69%",
+            "73.14%",
+            "55.64%",
+            "91.20%",
+            "91.60%",
+            "91.32%"
+          ]
+        },
+        "Float Multiplier": {
+          "# Assertions": [
+            "88",
+            "126",
+            "10",
+            "88",
+            "126",
+            "10"
+          ],
+          "% Proven": [
+            "79.55%",
+            "61.91%",
+            "20%",
+            "100%",
+            "100%",
+            "100%"
+          ],
+          "% Coverage": [
+            "27.46%",
+            "64.72%",
+            "12.23%",
+            "67.57%",
+            "92.83%",
+            "74.68%"
+          ]
+        }
+      },
+      "autonomous_table": {
+        "ECC": {
+          "# Assertions": [
+            "312",
+            "318",
+            "1258",
+            "N/A",
+            "N/A"
+          ],
+          "% Proven": [
+            "91.67%",
+            "92.12%",
+            "97.93%",
+            "N/A",
+            "N/A"
+          ],
+          "% Coverage": [
+            "88.89%",
+            "86.86%",
+            "87.87%",
+            "N/A",
+            "N/A"
+          ]
+        },
+        "Automotive IP": {
+          "# Assertions": [
+            "59",
+            "71",
+            "134",
+            "185",
+            "233"
+          ],
+          "% Proven": [
+            "81.35%",
+            "77.46%",
+            "85.82%",
+            "87.75%",
+            "89.69%"
+          ],
+          "% Coverage": [
+            "80.56%",
+            "79.95%",
+            "75.14%",
+            "74.31%",
+            "72.69%"
+          ]
+        },
+        "Memory Scheduler": {
+          "# Assertions": [
+            "35",
+            "36",
+            "37",
+            "37",
+            "37"
+          ],
+          "% Proven": [
+            "40.00%",
+            "41.12%",
+            "43.24%",
+            "42.50%",
+            "43.80%"
+          ],
+          "% Coverage": [
+            "55.64%",
+            "56.10%",
+            "55.85%",
+            "56.40%",
+            "55.20%"
+          ]
+        },
+        "AXI4Lite": {
+          "# Assertions": [
+            "104",
+            "145",
+            "165",
+            "199",
+            "232"
+          ],
+          "% Proven": [
+            "62.50%",
+            "58.62%",
+            "59.39%",
+            "59.29%",
+            "59.99%"
+          ],
+          "% Coverage": [
+            "45.36%",
+            "45.36%",
+            "47.21%",
+            "52.99%",
+            "48.93%"
+          ]
+        },
+        "CIC Decimator": {
+          "# Assertions": [
+            "53",
+            "63",
+            "86",
+            "116",
+            "203"
+          ],
+          "% Proven": [
+            "81.13%",
+            "79.37%",
+            "80.23%",
+            "81.90%",
+            "80.30%"
+          ],
+          "% Coverage": [
+            "73.14%",
+            "74.77%",
+            "72.34%",
+            "72.44%",
+            "64.37%"
+          ]
+        },
+        "Float Multiplier": {
+          "# Assertions": [
+            "126",
+            "148",
+            "201",
+            "244",
+            "264"
+          ],
+          "% Proven": [
+            "61.91%",
+            "57.43%",
+            "67.66%",
+            "60.25%",
+            "58.71%"
+          ],
+          "% Coverage": [
+            "64.72%",
+            "71.60%",
+            "75.09%",
+            "76.84%",
+            "82.45%"
+          ]
+        }
+      },
+      "autonomous_coverage_changes": [
+        {
+          "design": "ECC",
+          "first_coverage_percent": 88.89,
+          "last_available_iteration": 3,
+          "last_available_coverage_percent": 87.87,
+          "coverage_change_percentage_points": -1.02,
+          "first_assertions": 312,
+          "last_available_assertions": 1258,
+          "coverage_values": [
+            88.89,
+            86.86,
+            87.87,
+            null,
+            null
+          ],
+          "assertion_counts": [
+            312,
+            318,
+            1258,
+            null,
+            null
+          ]
+        },
+        {
+          "design": "Automotive IP",
+          "first_coverage_percent": 80.56,
+          "last_available_iteration": 5,
+          "last_available_coverage_percent": 72.69,
+          "coverage_change_percentage_points": -7.87,
+          "first_assertions": 59,
+          "last_available_assertions": 233,
+          "coverage_values": [
+            80.56,
+            79.95,
+            75.14,
+            74.31,
+            72.69
+          ],
+          "assertion_counts": [
+            59,
+            71,
+            134,
+            185,
+            233
+          ]
+        },
+        {
+          "design": "Memory Scheduler",
+          "first_coverage_percent": 55.64,
+          "last_available_iteration": 5,
+          "last_available_coverage_percent": 55.2,
+          "coverage_change_percentage_points": -0.44,
+          "first_assertions": 35,
+          "last_available_assertions": 37,
+          "coverage_values": [
+            55.64,
+            56.1,
+            55.85,
+            56.4,
+            55.2
+          ],
+          "assertion_counts": [
+            35,
+            36,
+            37,
+            37,
+            37
+          ]
+        },
+        {
+          "design": "AXI4Lite",
+          "first_coverage_percent": 45.36,
+          "last_available_iteration": 5,
+          "last_available_coverage_percent": 48.93,
+          "coverage_change_percentage_points": 3.57,
+          "first_assertions": 104,
+          "last_available_assertions": 232,
+          "coverage_values": [
+            45.36,
+            45.36,
+            47.21,
+            52.99,
+            48.93
+          ],
+          "assertion_counts": [
+            104,
+            145,
+            165,
+            199,
+            232
+          ]
+        },
+        {
+          "design": "CIC Decimator",
+          "first_coverage_percent": 73.14,
+          "last_available_iteration": 5,
+          "last_available_coverage_percent": 64.37,
+          "coverage_change_percentage_points": -8.77,
+          "first_assertions": 53,
+          "last_available_assertions": 203,
+          "coverage_values": [
+            73.14,
+            74.77,
+            72.34,
+            72.44,
+            64.37
+          ],
+          "assertion_counts": [
+            53,
+            63,
+            86,
+            116,
+            203
+          ]
+        },
+        {
+          "design": "Float Multiplier",
+          "first_coverage_percent": 64.72,
+          "last_available_iteration": 5,
+          "last_available_coverage_percent": 82.45,
+          "coverage_change_percentage_points": 17.73,
+          "first_assertions": 126,
+          "last_available_assertions": 264,
+          "coverage_values": [
+            64.72,
+            71.6,
+            75.09,
+            76.84,
+            82.45
+          ],
+          "assertion_counts": [
+            126,
+            148,
+            201,
+            244,
+            264
+          ]
+        }
+      ],
+      "autonomous_cases_with_lower_last_available_coverage": 4,
+      "source_boundary": "6 cases include2inhouse,3publicCVDP,1externalfloatmultiplier; no6independentreleaseddataset claim",
+      "pass_label_boundary": "table columns named Pass@1/2/3 contain different assertion counts/proven/coverage. Nostandard combinatorialpass@k formula/frozen samplemanifest obtained; do notconvert into bestofk successprobability.",
+      "hil_boundary": "human corrections collected into a corpus by authors, but complete prompts/context/patches/traces and reusablelicense not located; corpus-logging description is not data release.",
+      "abstract_claim_boundary": "70% accuracyimprovement/50%feweriterations are authorabstractclaims; no matched frozenold-v-new cohort and cost denominator for independent recomputation.",
+      "tool_boundary": "original paper names CadenceJasper; exactenhancedpaper commercialtool/build/config notfixed. AutoGen/GraphRAG upstream openness is notSaarthiendtoend release."
+    },
+    "horizon": {
+      "paper": "2606.28279v1 /2026-06-26",
+      "suite_category_rows": 12,
+      "pass_table": [
+        [
+          "Suite/category",
+          "Evaluation focus",
+          "EDA",
+          "Iter. 0 b",
+          "Final iter.",
+          "HORIZON"
+        ],
+        [
+          "ChipBench",
+          "Mixed RTL generation tasks",
+          "Open",
+          "20.0",
+          "5",
+          "100.0 a"
+        ],
+        [
+          "RTLLM-2.0",
+          "Natural-language spec to RTL",
+          "Open",
+          "78.0",
+          "2",
+          "100.0"
+        ],
+        [
+          "Verilog-Evalv2",
+          "HDLBits-style Verilog generation",
+          "Open",
+          "86.2",
+          "2",
+          "100.0"
+        ],
+        [
+          "CVDP CID 002",
+          "RTL code completion",
+          "Open",
+          "3.2",
+          "82",
+          "100.0"
+        ],
+        [
+          "CVDP CID 003",
+          "Natural-language spec to RTL",
+          "Open",
+          "19.2",
+          "24",
+          "100.0"
+        ],
+        [
+          "CVDP CID 004",
+          "RTL code modification",
+          "Open",
+          "10.9",
+          "36",
+          "100.0"
+        ],
+        [
+          "CVDP CID 005",
+          "Spec-to-RTL module reuse",
+          "Open",
+          "9.1",
+          "14",
+          "100.0"
+        ],
+        [
+          "CVDP CID 007",
+          "Linting / QoR improvement",
+          "Open",
+          "0.0",
+          "24",
+          "100.0"
+        ],
+        [
+          "CVDP CID 012",
+          "Test-plan to stimulus generation",
+          "Comm.",
+          "47.8",
+          "32",
+          "100.0"
+        ],
+        [
+          "CVDP CID 013",
+          "Test-plan to checker generation",
+          "Comm.",
+          "3.8",
+          "19",
+          "100.0"
+        ],
+        [
+          "CVDP CID 014",
+          "Test-plan to assertion generation",
+          "Comm.",
+          "79.1",
+          "1",
+          "100.0"
+        ],
+        [
+          "CVDP CID 016",
+          "Debugging and bug fixing",
+          "Open",
+          "25.7",
+          "13",
+          "100.0"
+        ],
+        [
+          "Overall",
+          "All evaluated RTL benchmarks",
+          "",
+          "47.8",
+          "",
+          "100.0"
+        ]
+      ],
+      "token_table": [
+        [
+          "Suite/category",
+          "Iter.",
+          "Tokens (M)",
+          "Share"
+        ],
+        [
+          "ChipBench",
+          "5",
+          "2.8",
+          "1.3%"
+        ],
+        [
+          "RTLLM-2.0",
+          "2",
+          "1.3",
+          "0.6%"
+        ],
+        [
+          "Verilog-Evalv2",
+          "2",
+          "2.0",
+          "1.0%"
+        ],
+        [
+          "CVDP CID 002",
+          "82",
+          "56.0",
+          "26.7%"
+        ],
+        [
+          "CVDP CID 003",
+          "24",
+          "38.0",
+          "18.1%"
+        ],
+        [
+          "CVDP CID 004",
+          "36",
+          "23.7",
+          "11.3%"
+        ],
+        [
+          "CVDP CID 005",
+          "14",
+          "9.1",
+          "4.4%"
+        ],
+        [
+          "CVDP CID 007",
+          "24",
+          "21.6",
+          "10.3%"
+        ],
+        [
+          "CVDP CID 012",
+          "32",
+          "32.2",
+          "15.3%"
+        ],
+        [
+          "CVDP CID 013",
+          "19",
+          "14.2",
+          "6.7%"
+        ],
+        [
+          "CVDP CID 014",
+          "1",
+          "0.3",
+          "0.1%"
+        ],
+        [
+          "CVDP CID 016",
+          "13",
+          "8.8",
+          "4.2%"
+        ],
+        [
+          "Total",
+          "",
+          "209.9",
+          "100.0%"
+        ]
+      ],
+      "coverage_table": [
+        [
+          "Category",
+          "Iter. 0 pass a",
+          "Iter. 0 cov. a",
+          "Best iter.",
+          "Best pass",
+          "Best cov."
+        ],
+        [
+          "CVDP CID 012",
+          "47.8%",
+          "86.5%",
+          "32",
+          "100.0%",
+          "97.9%"
+        ],
+        [
+          "CVDP CID 014",
+          "79.1%",
+          "98.1%",
+          "1",
+          "100.0%",
+          "100.0%"
+        ]
+      ],
+      "sum_printed_token_rows_million": "210.0",
+      "printed_total_tokens_million": "209.9",
+      "rounding_consistent": true,
+      "legacy_printed_sum_million": "6.1",
+      "cvdp_printed_sum_million": "203.9",
+      "cvdp_token_fraction_of_reported_total_percent": 97.1414959504526,
+      "reported_cached_input_fraction": 0.91,
+      "not_billable_cost": "cached input is not free noroutputcost; total209.9M tokens excludeEDA/infrastructure/human/parallelism accounting.",
+      "coverage": {
+        "cid014_parsed_logs": 60,
+        "cid014_missing_logs": 7,
+        "cid014_total_designs_implied": 67,
+        "parsed_log_fraction": 0.8955223880597015,
+        "coverage_mean_scope": "100%over60parsedrows only; not67/67 usablecoverage orfullsemanticproof",
+        "cid012_best_pass_percent": 100,
+        "cid012_best_mean_coverage_percent": 97.9
+      },
+      "chipbench_boundary": "one nonpassingoriginalharness task countedresolved after authors identify spec-harnessdefect; keep originalpass andadjustedresolution separate; exactcohortcount notin table, do notinvent rawfraction.",
+      "iteration_boundary": "iter0=firstagentouterstep notsinglemodelpass@1; bestsofar completion mayneed82iterations CID002; nofixedper-tasktokenorwall budget list obtained.",
+      "data_boundary": "git-traced experience buffer described as suitablefortraining; completeauthorruntime/projectpacks/frozenrunmanifest/fullpositive+negative traces notlocated. No RLweightupdates performed; GPT5.3fixed singleagent. Not orinlabs/horizon memorybench."
+    },
+    "release_search": "authorportfolio staticbundle linksSaarthi onlytoarxiv; GitHublinksare personalprofile/SoC/MLprojects, notverifiedSaarthirelease. No authorcode available claim from ambiguous ViewonGitHub.",
+    "remaining": [
+      "independent semantic/vacuity/overconstraint/mutationoracle forSaarthi properties",
+      "fullcampign inputs,allfailures/cost,hiddeneval andlicenses",
+      "sourceversion/PDK/toolconfigs andactualtrainingdata access"
+    ]
+  }
+}
