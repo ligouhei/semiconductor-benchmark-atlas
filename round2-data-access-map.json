@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-10-20T15:19:20.757025+00:00",
+  "as_of": "2026-10-20T15:54:56.426607+00:00",
   "status": "第二轮12h进行中的数据/轨迹开放性核查，非完整市场清单或最终结论",
   "scope": "只覆盖本轮已保存一手核查的新增协议；训练样本、评测输入、模型权重、整理后记忆、生成采样轨迹与LLM工具交互轨迹分别描述",
-  "protocol_records": 158,
-  "families": 75,
+  "protocol_records": 165,
+  "families": 78,
   "items": [
     {
       "catalog_id": "lib-siemens-nemo-characterization",
@@ -1899,6 +1899,90 @@
       "trajectory_and_training_access": "仅论文workflow例图和聚合table；未取得原始多轮LLM/action-observation/searchhistory。",
       "limits": "v2CEPE方法/RTLLM9PPA与v1明显不同。PPA表五方法ALU/PE数值列完全相同，可能共享/排版需原工件解释，不据此认定实际任务重复；Timing全负，正文称slack，不能当negativephysicaldelay或已timingclosure。库/工艺/约束/全部候选成本未齐。 有限TB通过不等全规格/全PVT/物理签核；“industrialstandards”作者措辞不替独立验收。",
       "primary_sources": "https://arxiv.org/html/2504.03723v2; https://www.aspdac.com/aspdac2026/pdf/ASP-DAC_2026_Full_Program.pdf; https://doi.org/10.1109/ASP-DAC66049.2026.11420713",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "device-tritondft-accuracy",
+      "name": "DFTBench / TritonDFT accuracy–cost parameter selection",
+      "family": "TritonDFT DFTBench",
+      "object_identity": "材料密度泛函agentbenchmark；非晶圆制程或测试DFT",
+      "task": "Plan–Execute–Refine选择ecut/kmesh/spin/HubbardU/vdW等参数，QE7.4执行vc-relax/SCF/bandgap/DOS；与专家严格convergencereference比较。nativeQE负责物理解算，agent负责计算方案/恢复。",
+      "available_materials_and_tools": "作者v2全文/62core与benchmarkfiles固定Git核。v1为73unique、v2为68；current10类×10=100materialmentions、80exactformula/87exactinfo，不能当同一冻结68材料包。100条ground_truth/parameters/metadata均空，10questiontemplates可形成1000模板实例，但GT缺失不能复算论文准确率。根LICENSE未定位，QE/赝势/数据库权利另核。",
+      "trajectory_and_training_access": "当前100材料模板缺GT、无完整paper68材料的参数/仿真/消息history；不能当开放已验证SFT轨迹。",
+      "limits": "currentcompare只遍历evaluation，空evaluation返回(None,True)且caller记录all_exact_match；这是空精确字段比较，不是电学通过。metric按全records分母平均可缺失字段影响；无GT/完整runs不能复现paper排行榜。",
+      "primary_sources": "https://arxiv.org/html/2603.03372v2; https://github.com/Leo9660/TritonDFT/tree/6868e866a635e8fb0d91f60e3ee2bb98840e5c14",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "device-tritondft-hpc",
+      "name": "DFTBench / HPC parallelization and setup overhead",
+      "family": "TritonDFT DFTBench",
+      "object_identity": "同材料集的执行效率分轨；非独立数据",
+      "task": "短MPI探测约30s后配置np/nk/ntg等并行参数，避免kpointdivisibility/oversubscription；区别modelplanningoverhead、DFTexecutiontime与APItoken费。",
+      "available_materials_and_tools": "作者v2全文/62core与benchmarkfiles固定Git核。v1为73unique、v2为68；current10类×10=100materialmentions、80exactformula/87exactinfo，不能当同一冻结68材料包。100条ground_truth/parameters/metadata均空，10questiontemplates可形成1000模板实例，但GT缺失不能复算论文准确率。根LICENSE未定位，QE/赝势/数据库权利另核。",
+      "trajectory_and_training_access": "corelogger/runner可读，paper全部8model×材料×core预算轨迹未定位。",
+      "limits": "不同core/材料/并行参数可比性和所有失败/超时ledger未公开匹配；半导体物性参考与runtimebenchmark不是同oracle。current仓库已扩展VASP/cluster/web功能，不自动代表paperQE设置。",
+      "primary_sources": "https://arxiv.org/html/2603.03372v2; https://github.com/Leo9660/TritonDFT/tree/6868e866a635e8fb0d91f60e3ee2bb98840e5c14",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "data-tritondft-template-corpus",
+      "name": "DFTBench current / material-question templates without filled ground truth",
+      "family": "TritonDFT DFTBench",
+      "object_identity": "公开任务构造资源；不能称已验证完整benchmark包",
+      "task": "由模板×材料生成自然语言计算任务，默认LDA赝势提示、可overrides；不执行loader，本轮静态重数。1000是潜在模板实例数，不是1000已独立跑通的计算或新材料。",
+      "available_materials_and_tools": "作者v2全文/62core与benchmarkfiles固定Git核。v1为73unique、v2为68；current10类×10=100materialmentions、80exactformula/87exactinfo，不能当同一冻结68材料包。100条ground_truth/parameters/metadata均空，10questiontemplates可形成1000模板实例，但GT缺失不能复算论文准确率。根LICENSE未定位，QE/赝势/数据库权利另核。",
+      "trajectory_and_training_access": "公开输入模板/结构描述，完整GT/最终results/真实LLMtooltrace未取得。",
+      "limits": "SCFinputmetrics函数placeholder；relax比较和日志存在不等端到端物性truth已发布。根许可/MaterialsProject/赝势依赖需逐层核，网站只发派生统计。",
+      "primary_sources": "https://arxiv.org/html/2603.03372v2; https://github.com/Leo9660/TritonDFT/tree/6868e866a635e8fb0d91f60e3ee2bb98840e5c14",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "device-autodft-vaspbench",
+      "name": "AutoDFT / VASPBench 34-task closed-loop completion",
+      "family": "AutoDFT VASP workflows",
+      "object_identity": "论文评测；完整author任务包/评分器未定位",
+      "task": "七角色planner/stepparameter/translation/monitor/recovery/reflection/postprocess闭环，nativeVASP6.4.0求解；每task一次run，200ktoken/最多15steps、每失败step3recovery、step4h超时。需要合法VASP/POTCAR。",
+      "available_materials_and_tools": "作者两版全文/34task表/20材料表可读，未定位官方匹配code/taskpack/scorer/全rawtraceURL。paper称releasedbenchmark，但实际获取未核；VASPbinary/POTCAR/赝势明确不分发。仿真资源与许可自备。",
+      "trajectory_and_training_access": "论文有过程示例/聚合调用与budget，没有完整34或20材料逐轮LLM/VASP交互开放payload。",
+      "limits": "Appendix GPTfull9.38Mtokens/34≈275.9k，对主表130k/task和200k/workflowcap不齐；同一run计算上限34×200k=6.8M，需ledger解释retry/accounting/版本，不能称费用全部复算。RuleBased正文另写24/34，表采用23。successful-onlyMAE不等全部任务有效；一遍run缺统计稳定性。",
+      "primary_sources": "https://arxiv.org/html/2605.26179v2; https://arxiv.org/abs/2605.26179",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "device-autodft-mp20",
+      "name": "AutoDFT / 20-material property fidelity subset",
+      "family": "AutoDFT VASP workflows",
+      "object_identity": "论文评测；完整author任务包/评分器未定位",
+      "task": "七角色planner/stepparameter/translation/monitor/recovery/reflection/postprocess闭环，nativeVASP6.4.0求解；每task一次run，200ktoken/最多15steps、每失败step3recovery、step4h超时。需要合法VASP/POTCAR。",
+      "available_materials_and_tools": "作者两版全文/34task表/20材料表可读，未定位官方匹配code/taskpack/scorer/全rawtraceURL。paper称releasedbenchmark，但实际获取未核；VASPbinary/POTCAR/赝势明确不分发。仿真资源与许可自备。",
+      "trajectory_and_training_access": "论文有过程示例/聚合调用与budget，没有完整34或20材料逐轮LLM/VASP交互开放payload。",
+      "limits": "Appendix GPTfull9.38Mtokens/34≈275.9k，对主表130k/task和200k/workflowcap不齐；同一run计算上限34×200k=6.8M，需ledger解释retry/accounting/版本，不能称费用全部复算。RuleBased正文另写24/34，表采用23。successful-onlyMAE不等全部任务有效；一遍run缺统计稳定性。",
+      "primary_sources": "https://arxiv.org/html/2605.26179v2; https://arxiv.org/abs/2605.26179",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "device-xdft-v1",
+      "name": "XDFT / historical 124-candidate diagnosis v1",
+      "family": "XDFT semiconductor mechanism diagnosis",
+      "object_identity": "材料物理机制agent方法评测；两版cohort不同",
+      "task": "41预设hypothesisclasses、十轮上限、Beta后验+LLMadvisor+元素filter；原子编辑/磁序/U/结构等VASP检验；此版实际library静态，generatehypothesis未用。",
+      "available_materials_and_tools": "v2HTML404、官方PDF成功可读；v1称URLonpublication、SupplementTableS2，但本轮未定位可获取code/hypothesislibrary/frozeninputs/完整SI或runledger。不把arxiv全文公开当VASP资产/训练轨迹公开；本轮未运行计算。",
+      "trajectory_and_training_access": "论文过程与聚合轨迹数；v2的345selections和v1S2表都未取得完整可训练action/observationpayload。",
+      "limits": "八infra失败被排除，报告真实endtoend时应另列；1500GPUh为作者计算成本，完整ledger未取得。99.9%formalphysicaltruth不成立，v1旧结果只作历史不代表最新版。",
+      "primary_sources": "https://arxiv.org/pdf/2604.26703v2; https://arxiv.org/pdf/2604.26703v1; https://arxiv.org/abs/2604.26703",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "device-xdft-v2",
+      "name": "XDFT / source-audited anomaly mechanism search v2",
+      "family": "XDFT semiconductor mechanism diagnosis",
+      "object_identity": "材料物理机制agent方法评测；两版cohort不同",
+      "task": "reasoner选hypothesiscard→manipulator编译intervention→VASP模拟→comparator对预注册observable/criterion判断，更新统计先验/semanticrules和必要时生成新card。",
+      "available_materials_and_tools": "v2HTML404、官方PDF成功可读；v1称URLonpublication、SupplementTableS2，但本轮未定位可获取code/hypothesislibrary/frozeninputs/完整SI或runledger。不把arxiv全文公开当VASP资产/训练轨迹公开；本轮未运行计算。",
+      "trajectory_and_training_access": "论文过程与聚合轨迹数；v2的345selections和v1S2表都未取得完整可训练action/observationpayload。",
+      "limits": "v2题名、作者、cohort和实验改变，不沿用v1的124/70/90或1500GPUh预算。精确numerictolerance/全部stepbudget与SI尚缺；singleGPUwall限制导致未解不一定机制错误；支持机制随observable/结构/近似/criterion而变。",
+      "primary_sources": "https://arxiv.org/pdf/2604.26703v2; https://arxiv.org/pdf/2604.26703v1; https://arxiv.org/abs/2604.26703",
       "record_snapshot_matches_audit": true
     }
   ],

@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T15:19:20.239632+00:00",
+  "as_of": "2026-10-20T15:54:55.881016+00:00",
   "status": "HLS input, oracle, stage and budget comparison, not a new benchmark or ranking",
   "scope": "HLS需按程序套件、数据生成框架、给定点预测、未见内核/适配、设计空间搜索和验证覆盖分层。HLS估计、实现报告、真实板测与功能gold不同；成熟编译器自动优化是原生基线，模型须对相同输入/约束/成本与独立终态验收证明增益。",
   "items": [

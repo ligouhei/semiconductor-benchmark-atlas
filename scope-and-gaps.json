@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T15:19:20.800646+00:00",
+  "as_of": "2026-10-20T15:54:56.470760+00:00",
   "status": "coverage inventory with explicit residual limits, not universal completeness/quality certification",
   "scope": "依据用户阶段划分逐项列已有覆盖与剩余限制；“所有可发现”按此次公开资料检索边界理解，不声称覆盖未公开工业bench或互联网全部材料。",
   "method": [
@@ -1070,8 +1070,8 @@
     },
     {
       "domain": "器件",
-      "record_count": 19,
-      "family_count": 10,
+      "record_count": 26,
+      "family_count": 13,
       "catalog_ids": [
         "device-mesd",
         "device-mesd2.0",
@@ -1091,7 +1091,14 @@
         "device-agapi-known-property",
         "device-agapi-defhyp",
         "device-agapi-workflow-repeat",
-        "device-agapi-grounding"
+        "device-agapi-grounding",
+        "device-tritondft-accuracy",
+        "device-tritondft-hpc",
+        "data-tritondft-template-corpus",
+        "device-autodft-vaspbench",
+        "device-autodft-mp20",
+        "device-xdft-v1",
+        "device-xdft-v2"
       ],
       "covered_tasks": "I-V/C-V/参数提取、二极管/HEMT/器件模型、可靠性与模型一致性",
       "remaining_limits": "论文/模型/样例不等固定公共benchmark；部分model下载需注册，原测量与跨温/工艺gold不全，老化拟合不推全可靠性机制。",

@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T15:19:20.861631+00:00",
+  "generated_at": "2026-10-20T15:54:56.539402+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 396,
-    "records": 724,
-    "records_with_any_field_audit_entry": 483,
-    "records_with_current_field_audit_snapshot": 450,
+    "families": 399,
+    "records": 731,
+    "records_with_any_field_audit_entry": 490,
+    "records_with_current_field_audit_snapshot": 457,
     "records_without_current_field_audit_snapshot": 274
   },
   "requirements_per_record": [
@@ -2008,6 +2008,56 @@
           "limitations": "迁移不在PEX重训也不等零训练成本，schematic预训练需计。PVT取最差是paper描述，corner/type/规则和数据完整清单未取得；不得从publicNGSpice .02容差代码推断privatePEX使用完全相同checker。schematic与PEX PM目标范围不同、负gm拓扑也非public两级普通opamp，40LVS不等40完全流片签核。",
           "tools_and_access": "BAG/Spectre与TSMC16nm技术授权/PDK依赖；README未发布对应完整Spectre流程，当前repo仅NGSpice环境。未取得40输入/完整generator/PEX decks或原日志，因此原paper方法实验与公共可复现benchmark分层。",
           "industrial_value": "体现使用原生参数化layout/PEX工具的策略迁移，适合工程agentworkflow借鉴；未发布完整公共oracle，不能作为开放主榜。商业工具与专家generator承担关键工作，模型增益应单独证明。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "AutoDFT VASP workflows",
+      "record_count": 2,
+      "records_with_current_field_audit": 2,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "device-autodft-vaspbench",
+          "name": "AutoDFT / VASPBench 34-task closed-loop completion",
+          "category": "器件/半导体材料计算与密度泛函agent（边界）",
+          "artifact_type": "论文评测；完整author任务包/评分器未定位",
+          "task_layer": "密度泛函DFT工具编排/物理机制；不是design-for-test",
+          "evidence_status": "第二轮12h进行中；82选定Gitblobs、最新论文/版本与自写JSON/数表核；未运行VASP/QE/ATPG/LLM。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-dft-boundaries-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得匹配冻结材料/任务与独立物理reference、完整候选/失败/预算ledger和明确许可；按源材料分割，不把本边界类当芯片全流程签核。",
+          "limitations": "Appendix GPTfull9.38Mtokens/34≈275.9k，对主表130k/task和200k/workflowcap不齐；同一run计算上限34×200k=6.8M，需ledger解释retry/accounting/版本，不能称费用全部复算。RuleBased正文另写24/34，表采用23。successful-onlyMAE不等全部任务有效；一遍run缺统计稳定性。",
+          "tools_and_access": "作者两版全文/34task表/20材料表可读，未定位官方匹配code/taskpack/scorer/全rawtraceURL。paper称releasedbenchmark，但实际获取未核；VASPbinary/POTCAR/赝势明确不分发。仿真资源与许可自备。",
+          "industrial_value": "研究判断：说明原生VASP做数值求解，agent价值在失败恢复与workflow动态修改；材料计算边界任务，不等ASIC设计/OPC/工厂控制。"
+        },
+        {
+          "id": "device-autodft-mp20",
+          "name": "AutoDFT / 20-material property fidelity subset",
+          "category": "器件/半导体材料计算与密度泛函agent（边界）",
+          "artifact_type": "论文评测；完整author任务包/评分器未定位",
+          "task_layer": "密度泛函DFT工具编排/物理机制；不是design-for-test",
+          "evidence_status": "第二轮12h进行中；82选定Gitblobs、最新论文/版本与自写JSON/数表核；未运行VASP/QE/ATPG/LLM。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-dft-boundaries-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得匹配冻结材料/任务与独立物理reference、完整候选/失败/预算ledger和明确许可；按源材料分割，不把本边界类当芯片全流程签核。",
+          "limitations": "Appendix GPTfull9.38Mtokens/34≈275.9k，对主表130k/task和200k/workflowcap不齐；同一run计算上限34×200k=6.8M，需ledger解释retry/accounting/版本，不能称费用全部复算。RuleBased正文另写24/34，表采用23。successful-onlyMAE不等全部任务有效；一遍run缺统计稳定性。",
+          "tools_and_access": "作者两版全文/34task表/20材料表可读，未定位官方匹配code/taskpack/scorer/全rawtraceURL。paper称releasedbenchmark，但实际获取未核；VASPbinary/POTCAR/赝势明确不分发。仿真资源与许可自备。",
+          "industrial_value": "研究判断：说明原生VASP做数值求解，agent价值在失败恢复与workflow动态修改；材料计算边界任务，不等ASIC设计/OPC/工厂控制。"
         }
       ]
     },
@@ -15777,6 +15827,77 @@
       ]
     },
     {
+      "benchmark_family": "TritonDFT DFTBench",
+      "record_count": 3,
+      "records_with_current_field_audit": 3,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "device-tritondft-accuracy",
+          "name": "DFTBench / TritonDFT accuracy–cost parameter selection",
+          "category": "器件/半导体材料计算与密度泛函agent（边界）",
+          "artifact_type": "材料密度泛函agentbenchmark；非晶圆制程或测试DFT",
+          "task_layer": "密度泛函DFT工具编排/物理机制；不是design-for-test",
+          "evidence_status": "第二轮12h进行中；82选定Gitblobs、最新论文/版本与自写JSON/数表核；未运行VASP/QE/ATPG/LLM。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-dft-boundaries-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得匹配冻结材料/任务与独立物理reference、完整候选/失败/预算ledger和明确许可；按源材料分割，不把本边界类当芯片全流程签核。",
+          "limitations": "currentcompare只遍历evaluation，空evaluation返回(None,True)且caller记录all_exact_match；这是空精确字段比较，不是电学通过。metric按全records分母平均可缺失字段影响；无GT/完整runs不能复现paper排行榜。",
+          "tools_and_access": "作者v2全文/62core与benchmarkfiles固定Git核。v1为73unique、v2为68；current10类×10=100materialmentions、80exactformula/87exactinfo，不能当同一冻结68材料包。100条ground_truth/parameters/metadata均空，10questiontemplates可形成1000模板实例，但GT缺失不能复算论文准确率。根LICENSE未定位，QE/赝势/数据库权利另核。",
+          "industrial_value": "研究判断：物理求解器已经成熟，agent净价值在昂贵参数/工具编排和精度成本权衡；半导体材料相关但与电路/OPC层不同。"
+        },
+        {
+          "id": "device-tritondft-hpc",
+          "name": "DFTBench / HPC parallelization and setup overhead",
+          "category": "器件/半导体材料计算与密度泛函agent（边界）",
+          "artifact_type": "同材料集的执行效率分轨；非独立数据",
+          "task_layer": "密度泛函DFT工具编排/物理机制；不是design-for-test",
+          "evidence_status": "第二轮12h进行中；82选定Gitblobs、最新论文/版本与自写JSON/数表核；未运行VASP/QE/ATPG/LLM。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-dft-boundaries-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得匹配冻结材料/任务与独立物理reference、完整候选/失败/预算ledger和明确许可；按源材料分割，不把本边界类当芯片全流程签核。",
+          "limitations": "不同core/材料/并行参数可比性和所有失败/超时ledger未公开匹配；半导体物性参考与runtimebenchmark不是同oracle。current仓库已扩展VASP/cluster/web功能，不自动代表paperQE设置。",
+          "tools_and_access": "作者v2全文/62core与benchmarkfiles固定Git核。v1为73unique、v2为68；current10类×10=100materialmentions、80exactformula/87exactinfo，不能当同一冻结68材料包。100条ground_truth/parameters/metadata均空，10questiontemplates可形成1000模板实例，但GT缺失不能复算论文准确率。根LICENSE未定位，QE/赝势/数据库权利另核。",
+          "industrial_value": "研究判断：符合昂贵工具agent编排研究，但HPC收益已存在原生专家调优，LLM需证明等预算增量。"
+        },
+        {
+          "id": "data-tritondft-template-corpus",
+          "name": "DFTBench current / material-question templates without filled ground truth",
+          "category": "器件/半导体材料计算与密度泛函agent（边界）",
+          "artifact_type": "公开任务构造资源；不能称已验证完整benchmark包",
+          "task_layer": "密度泛函DFT工具编排/物理机制；不是design-for-test",
+          "evidence_status": "第二轮12h进行中；82选定Gitblobs、最新论文/版本与自写JSON/数表核；未运行VASP/QE/ATPG/LLM。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-dft-boundaries-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得匹配冻结材料/任务与独立物理reference、完整候选/失败/预算ledger和明确许可；按源材料分割，不把本边界类当芯片全流程签核。",
+          "limitations": "SCFinputmetrics函数placeholder；relax比较和日志存在不等端到端物性truth已发布。根许可/MaterialsProject/赝势依赖需逐层核，网站只发派生统计。",
+          "tools_and_access": "作者v2全文/62core与benchmarkfiles固定Git核。v1为73unique、v2为68；current10类×10=100materialmentions、80exactformula/87exactinfo，不能当同一冻结68材料包。100条ground_truth/parameters/metadata均空，10questiontemplates可形成1000模板实例，但GT缺失不能复算论文准确率。根LICENSE未定位，QE/赝势/数据库权利另核。",
+          "industrial_value": "研究判断：适合学任务schema与构造未来可复现环境，当前不推荐标为“直接可训练的全验证agent数据”。"
+        }
+      ]
+    },
+    {
       "benchmark_family": "Trust-Hub",
       "record_count": 2,
       "records_with_current_field_audit": 2,
@@ -16814,6 +16935,56 @@
           "limitations": "24core AMD7965WX/RTX4090/CUDA11.8作者设置；性能数字未独立复现。LUT celldelay+RC/AT/RAT传播与更高保真工业CCS/SI/MCMM/exception语义范围不自动相同；本文没有充分独立工业gold精度证据支撑以速度替换签核。INSTA部分闭源且精度目标不同，相关数字仅参考。 新reduction修同步/race及非结合浮点改变TNS，不能把差异全归模型策略或等价同频调用；更快引擎使更多反馈是系统贡献。",
           "tools_and_access": "已下载arXiv2603.28381v1完整论文；9设计来自ICCAD2015八superblue和2025 aes_cipher_top，不称全新独立IP集合。本文未找到正式作者完整code/artifact入口，未得匹配全部库/RC/约束/脚本；输入复用contest开放不等方法实现完整开放。",
           "industrial_value": "工业STA引擎与GBA/PBA早已存在，但速度/模型精度/迭代预算有研究余量；任务输入不同必须分榜，算法实验不能自动支持工程agent或全签核替代结论。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "XDFT semiconductor mechanism diagnosis",
+      "record_count": 2,
+      "records_with_current_field_audit": 2,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "device-xdft-v1",
+          "name": "XDFT / historical 124-candidate diagnosis v1",
+          "category": "器件/半导体材料计算与密度泛函agent（边界）",
+          "artifact_type": "材料物理机制agent方法评测；两版cohort不同",
+          "task_layer": "密度泛函DFT工具编排/物理机制；不是design-for-test",
+          "evidence_status": "第二轮12h进行中；82选定Gitblobs、最新论文/版本与自写JSON/数表核；未运行VASP/QE/ATPG/LLM。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-dft-boundaries-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得匹配冻结材料/任务与独立物理reference、完整候选/失败/预算ledger和明确许可；按源材料分割，不把本边界类当芯片全流程签核。",
+          "limitations": "八infra失败被排除，报告真实endtoend时应另列；1500GPUh为作者计算成本，完整ledger未取得。99.9%formalphysicaltruth不成立，v1旧结果只作历史不代表最新版。",
+          "tools_and_access": "v2HTML404、官方PDF成功可读；v1称URLonpublication、SupplementTableS2，但本轮未定位可获取code/hypothesislibrary/frozeninputs/完整SI或runledger。不把arxiv全文公开当VASP资产/训练轨迹公开；本轮未运行计算。",
+          "industrial_value": "研究判断：半导体材料异常诊断的agentic任务，成熟VASP只执行候选物理方案，模型仍需选择机制/设计区分实验；属于材料计算边界，不当电路前端/测试DFT。"
+        },
+        {
+          "id": "device-xdft-v2",
+          "name": "XDFT / source-audited anomaly mechanism search v2",
+          "category": "器件/半导体材料计算与密度泛函agent（边界）",
+          "artifact_type": "材料物理机制agent方法评测；两版cohort不同",
+          "task_layer": "密度泛函DFT工具编排/物理机制；不是design-for-test",
+          "evidence_status": "第二轮12h进行中；82选定Gitblobs、最新论文/版本与自写JSON/数表核；未运行VASP/QE/ATPG/LLM。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-dft-boundaries-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得匹配冻结材料/任务与独立物理reference、完整候选/失败/预算ledger和明确许可；按源材料分割，不把本边界类当芯片全流程签核。",
+          "limitations": "v2题名、作者、cohort和实验改变，不沿用v1的124/70/90或1500GPUh预算。精确numerictolerance/全部stepbudget与SI尚缺；singleGPUwall限制导致未解不一定机制错误；支持机制随observable/结构/近似/criterion而变。",
+          "tools_and_access": "v2HTML404、官方PDF成功可读；v1称URLonpublication、SupplementTableS2，但本轮未定位可获取code/hypothesislibrary/frozeninputs/完整SI或runledger。不把arxiv全文公开当VASP资产/训练轨迹公开；本轮未运行计算。",
+          "industrial_value": "研究判断：半导体材料异常诊断的agentic任务，成熟VASP只执行候选物理方案，模型仍需选择机制/设计区分实验；属于材料计算边界，不当电路前端/测试DFT。"
         }
       ]
     },

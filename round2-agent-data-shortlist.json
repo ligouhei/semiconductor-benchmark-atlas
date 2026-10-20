@@ -1,6 +1,6 @@
 {
   "status": "第二轮12小时仍在进行；静态核查清单，不是训练授权或模型实验结果",
-  "as_of": "2026-10-20T15:19:19.499991+00:00",
+  "as_of": "2026-10-20T15:54:55.152848+00:00",
   "scope": "只发布派生研究摘要；原始轨迹/问题/答案/凭据不随网站重发。",
   "records": [
     {
@@ -394,6 +394,30 @@
         "https://github.com/cornell-zhang/heurigym/tree/a4cf0460152eb798f1b3a797ef22a08192661bf5",
         "https://huggingface.co/datasets/heurigen/heurigen-data",
         "https://cornell-zhang.github.io/heurigym/"
+      ]
+    },
+    {
+      "name": "DFTBench current / material-question templates without filled ground truth",
+      "catalog_ids": [
+        "data-tritondft-template-corpus",
+        "device-tritondft-accuracy",
+        "device-autodft-vaspbench",
+        "device-xdft-v2"
+      ],
+      "data_kind": "材料密度泛函agent任务模板／完整轨迹待取得",
+      "quantity": "Triton current100categorymentions/80formula strings/10templates，100条GTdict全空；AutoDFT34+MP20/XDFT112为论文cohort。",
+      "authenticity": "物理参数/任务构造与论文过程，不能当design-for-test或LLM真实全长trajectory。",
+      "availability": "Triton62core/datafiles核，AutoDFT最新v2与XDFT两版PDF已读；匹配冻结GT/全runledger未取得。",
+      "license_note": "TritonrootLICENSE未定位；QE/VASP/POTCAR/材料数据库另有各自条款，论文可读不等原始训练数据许可。",
+      "caution": "Triton68/73/current100mentions不同；XDFTv2改112，不沿用v1的70/90。AutoDFT200kcap/130kper-task/9.38M总token口径未齐。",
+      "sources": [
+        "https://arxiv.org/html/2603.03372v2",
+        "https://github.com/Leo9660/TritonDFT/tree/6868e866a635e8fb0d91f60e3ee2bb98840e5c14",
+        "https://arxiv.org/html/2605.26179v2",
+        "https://arxiv.org/abs/2605.26179",
+        "https://arxiv.org/pdf/2604.26703v2",
+        "https://arxiv.org/pdf/2604.26703v1",
+        "https://arxiv.org/abs/2604.26703"
       ]
     }
   ]

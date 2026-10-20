@@ -1,6 +1,6 @@
 {
   "status": "第二轮12小时仍在进行；静态核查清单，不是训练授权或模型实验结果",
-  "as_of": "2026-10-20T15:19:19.499991+00:00",
+  "as_of": "2026-10-20T15:54:55.152848+00:00",
   "scope": "只发布派生研究摘要；原始轨迹/问题/答案/凭据不随网站重发。",
   "records": [
     {
@@ -166,6 +166,17 @@
       "missing": "未定位冻结任务包、真实fab/lot数据、独立scorer、测得runledger或公开训练轨迹；64candidate/1840WIP等UIscenario数不能当真实benchmark测量。",
       "sources": [
         "https://www.waferira.com/"
+      ],
+      "counted_as_new_benchmark": false
+    },
+    {
+      "name": "DFTAgent / digital fault testing",
+      "status": "ATPG工具编排框架／固定agentbenchmark未核",
+      "verified": "官方ff6f0ee96f4f6117cce59df7f784b3683d69b159；20core/outputblobs核，5tool/deepseekchat+AtalantaWSL。8native.testreports可读，coverage95.741–100%，不是8LLMepisodes。这里DFT为design-for-test。",
+      "missing": "正式MDPIpaper403后未绕过；repo独立文档可读但未定位固定agent任务/故障注入scenario、匹配runledger/正式LLM成功率，test_dft_agent仅测reportparser。rootLICENSE缺；未取.env/venv，不当成熟开放新bench。",
+      "sources": [
+        "https://github.com/ame-shiro/DFTAgent/tree/ff6f0ee96f4f6117cce59df7f784b3683d69b159",
+        "https://www.mdpi.com/2076-3417/15/21/11390"
       ],
       "counted_as_new_benchmark": false
     }

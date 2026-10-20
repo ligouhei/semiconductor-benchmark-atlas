@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN"><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>芯片 benchmark 研究 · 阅读总览</title><style>body{font:16px/1.7 system-ui,sans-serif;margin:0;color:#203044;background:#f4f7fa}main{max-width:1250px;margin:auto;padding:32px}h1,h2{line-height:1.35}a{color:#075ba5}nav,.note{padding:18px;background:#e7effa;border-radius:10px;margin:18px 0}table{width:100%;border-collapse:collapse;background:white;font-size:14px}th,td{border:1px solid #d6e1eb;text-align:left;vertical-align:top;padding:12px}th{background:#e8eef5}small{color:#536375}.scroll{overflow:auto}@media print{main{padding:0}body{background:white}a{color:inherit}}</style><main><p><a href="index.html">← 返回交互式 Benchmark 表格</a></p><h1>芯片行业 benchmark：阅读总览</h1>
-<p>研究进行中 · 12小时尚未完成。完整目录 724 条任务/版本记录，归为 396 个家族/对象；包含工具素材、方法实验与私有评测线索，数量不等于同等成熟的独立公开基准。</p>
+<p>研究进行中 · 12小时尚未完成。完整目录 731 条任务/版本记录，归为 399 个家族/对象；包含工具素材、方法实验与私有评测线索，数量不等于同等成熟的独立公开基准。</p>
 <div class="note"><strong>补订说明：</strong>2026-10-20补订：原12小时清单遗漏VPEvolve，OPC agentic覆盖审核不充分。现补入商业Calibre recipeagent协议与开放光学testbed两轨（同一家族），并更正此前容易被理解为该方向没有已有评测的表述。此补订发生在原12小时交付之后；目录仍不是全行业穷尽证明。 本次另续查新增11项研究对象（含待开放/部分协议），详见Agentic专题；VPEvolve配套testbed已显式标记非独立Agent benchmark。 <a href="research-corrections.json">更正记录</a></div>
 <nav><a href="research-report.html">完整分类报告与逐条详解</a> · <a href="benchmark-catalog-zh.csv">中文列名CSV</a> · <a href="catalog.csv">原字段CSV</a> · <a href="catalog.json">JSON</a> · <a href="research-report.html#coverage-limits">已有覆盖与具体缺口</a></nav>
 <div class="note">先确定要证明的能力，再比较相同输入、约束、工具、预算和独立验收。软件已经能执行某一步，只能说明必须采用强原生基线；不能据此认定任务最优、过时或没有模型研究价值。本研究是公开资料与实现的静态分析，未运行模型、EDA、仿真或硬件。</div>
@@ -15,7 +15,7 @@
 <tr><td><a href="research-report.html#group-7">模拟测试</a></td><td>3</td><td>IEEE P2427/Infineon模拟缺陷仿真、AMS异常检测</td></tr>
 <tr><td><a href="research-report.html#group-8">数字测试</a></td><td>13</td><td>ISCAS/ITC顺序与cut/scan变体、SoC调度、IJTAG网络、ATPG方法/工具、DFT生成器与真实后硅hook</td></tr>
 <tr><td><a href="research-report.html#group-9">封装芯粒热</a></td><td>20</td><td>2.5D/3D实现、芯粒划分/互连/成本与资源DSE、热求解/代理/热感知布局</td></tr>
-<tr><td><a href="research-report.html#group-10">器件</a></td><td>19</td><td>I-V/C-V/参数提取、二极管/HEMT/器件模型、可靠性与模型一致性</td></tr>
+<tr><td><a href="research-report.html#group-10">器件</a></td><td>26</td><td>I-V/C-V/参数提取、二极管/HEMT/器件模型、可靠性与模型一致性</td></tr>
 <tr><td><a href="research-report.html#group-11">板级工程与电磁</a></td><td>6</td><td>KiCad PCB工程agent、近场/散射参数与稀疏矩阵相关公开验证，作为芯片范围边界材料</td></tr>
 <tr><td><a href="research-report.html#group-12">加速器映射</a></td><td>3</td><td>wafer-scale固定架构placement/routing与物理场映射竞赛边界</td></tr>
 <tr><td><a href="research-report.html#group-13">成品性能</a></td><td>23</td><td>SPEC/MLPerf/嵌入式/内存带宽/HPC/应用负载等，成品推理/训练与EDA能力分开</td></tr>
