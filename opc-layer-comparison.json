@@ -1,6 +1,6 @@
 {
   "status": "task-layer comparison; proposals explicitly excluded from benchmark counts",
-  "as_of": "2026-10-20T00:45:35.781756+00:00",
+  "as_of": "2026-10-20T04:39:18.849639+00:00",
   "scope": "同一OPC相关名称可能覆盖不同输入/动作/oracle，不能合并为一个模型优化排行榜；表不证明所有公开OPC基准已穷尽",
   "items": [
     {
@@ -178,13 +178,49 @@
       ]
     },
     {
+      "layer": "商业Calibre recipeagent与经验演化（已有协议）",
+      "catalog_ids": [
+        "litho-vpevolve-commercial"
+      ],
+      "input_contract": "20FreePDK45裁剪窗口/R0/固定测点/工艺模型与手册；空SkillBank",
+      "allowed_change": "actor全局/局部/诊断；reflector+curator检索并修订经验，模型权重不更新",
+      "independent_oracle": "Calibre独立测量Max/Top10/MeanEPE及PVB；MRC/SRAF=0、Mean/PVB≤102%R0，完成且Max改善≥.1nm",
+      "cost_boundary": "10searchtrial共享动作、失败计入+1endpointrepeat，R0另计；OPC预算相同但LLM请求不同",
+      "valid_claim_and_current_tool_boundary": "已存在具体商业工具闭环方法评测，原清单漏项已纠正；公开代码/GDS不含Calibre/商业model/手册，不能称无依赖复现，也不等跨工艺统一工业主榜",
+      "source_snapshots": [
+        {
+          "id": "litho-vpevolve-commercial",
+          "record_sha256": "f0f4dd14199aad99c5c60fe30375f0c0e9e03439fdb23af1f4271657db0c35df",
+          "primary_sources": "https://arxiv.org/abs/2609.32473; https://arxiv.org/pdf/2609.32473v1; https://github.com/True-Litianyi/VPEVOLVE_code; https://github.com/True-Litianyi/VPEVOLVE_code/blob/5d7bbdd189be450179a423c4df2409643239bc76/README.md"
+        }
+      ]
+    },
+    {
+      "layer": "开放解析光学与光阻testbed（与商业agent分轨）",
+      "catalog_ids": [
+        "litho-vpevolve-open-testbed"
+      ],
+      "input_contract": "同20窗口/mask/像素与analytic193nm模型",
+      "allowed_change": "forward/resist或gradientmask示例，无商业recipe纠正pipeline",
+      "independent_oracle": "开放解析模型不等商业gold；如新建bench需独立固定EPE/PVB/MRC和失败验收",
+      "cost_boundary": "生成/栅格/仿真/优化全成本；不能套CalibrepaperSR",
+      "valid_claim_and_current_tool_boundary": "开源仿真与数据材料，非单凭probability梯度即完成原商业agent任务",
+      "source_snapshots": [
+        {
+          "id": "litho-vpevolve-open-testbed",
+          "record_sha256": "7a1be888fd116010a123785cedf4021acc9a28ea36df107fbb82bfe4ea068a14",
+          "primary_sources": "https://arxiv.org/abs/2609.32473; https://arxiv.org/pdf/2609.32473v1; https://github.com/True-Litianyi/VPEVOLVE_code; https://github.com/True-Litianyi/VPEVOLVE_code/blob/5d7bbdd189be450179a423c4df2409643239bc76/README.md"
+        }
+      ]
+    },
+    {
       "layer": "完整工具workflow agent（建议协议）",
       "catalog_ids": [],
       "input_contract": "真实工程文件/文档/交付要求/受控故障，tools与checker受保护",
       "allowed_change": "选择工具、改合法recipe、读日志诊断/恢复并交付",
       "independent_oracle": "隐藏布局/独立固定测点/物理模型/MRC与报告一致性",
       "cost_boundary": "全部模型/工具/license/失败重试/人工介入+最终独立验证",
-      "valid_claim_and_current_tool_boundary": "本研究建议尚未建立/执行，不能计公开benchmark；商业工具的编排功能已有，agent仍须比native flow/专家脚本",
+      "valid_claim_and_current_tool_boundary": "本行是跨工具/受控故障/隐藏验收的扩展建议，尚未建立/执行，不计实际benchmark；不能据此否认上列VPEvolve已存在具体商业recipeagent协议；仍须比nativeflow/专家脚本",
       "source_snapshots": []
     },
     {

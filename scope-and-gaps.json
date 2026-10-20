@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T00:45:36.467503+00:00",
+  "as_of": "2026-10-20T04:39:19.518529+00:00",
   "status": "coverage inventory with explicit residual limits, not universal completeness/quality certification",
   "scope": "依据用户阶段划分逐项列已有覆盖与剩余限制；“所有可发现”按此次公开资料检索边界理解，不声称覆盖未公开工业bench或互联网全部材料。",
   "method": [
@@ -668,8 +668,8 @@
     },
     {
       "domain": "制造光刻",
-      "record_count": 57,
-      "family_count": 39,
+      "record_count": 59,
+      "family_count": 40,
       "catalog_ids": [
         "litho-lithobench",
         "litho-opc-engineer-assistant",
@@ -727,16 +727,28 @@
         "litho-unitho-generation",
         "litho-unitho-rule-detection",
         "litho-iccad19-tnsb-htc",
-        "fab-mimac2026-dispatch"
+        "fab-mimac2026-dispatch",
+        "litho-vpevolve-commercial",
+        "litho-vpevolve-open-testbed"
       ],
       "covered_tasks": "OPC/ILT求解、前向代理、SMO/随机性、recipe/工程助手、掩模写版、热点/SEM/晶圆模式/计量/良率/调度",
-      "remaining_limits": "Calibre/Proteus生产deck/wafer闭环与通用OPCagent独立基准缺公开完整对照；SEM像素与电测不是同gold。部分官方原包/许可证/lot血缘未取，mock/合成/partialagent明确标记。",
+      "remaining_limits": "VPEvolve已有公开20窗口/代码的Calibre recipeagent协议，但商业model/deck与wafer闭环不公开；跨工艺/多工具/隐藏布局统一agent榜仍缺完整对照；SEM像素与电测不是同gold。部分官方原包/许可证/lot血缘未取，mock/合成/partialagent明确标记。",
       "evidence_boundary": "已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。",
       "source_snapshots": [
         {
           "id": "litho-lithobench",
           "record_sha256": "3b84961898aaeb33716270a19f6a7e46f5f0f9b97051201f8a830214e89819f3",
           "primary_sources": "https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/README.md; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/lithobench/model.py; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/lithobench/evaluate.py; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/lithobench/dataset.py; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/pyilt/evaluation.py; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/pycommon/glp.py; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/pylitho/exact.py; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/benchmark/ICCAD2013/M1_test1.glp; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/benchmark/ICCAD2013/M1_test10.glp; https://proceedings.neurips.cc/paper_files/paper/2023/file/604b9fa9e1c16284e6517d923cf9ff20-Paper-Datasets_and_Benchmarks.pdf"
+        },
+        {
+          "id": "litho-vpevolve-commercial",
+          "record_sha256": "f0f4dd14199aad99c5c60fe30375f0c0e9e03439fdb23af1f4271657db0c35df",
+          "primary_sources": "https://arxiv.org/abs/2609.32473; https://arxiv.org/pdf/2609.32473v1; https://github.com/True-Litianyi/VPEVOLVE_code; https://github.com/True-Litianyi/VPEVOLVE_code/blob/5d7bbdd189be450179a423c4df2409643239bc76/README.md"
+        },
+        {
+          "id": "litho-vpevolve-open-testbed",
+          "record_sha256": "7a1be888fd116010a123785cedf4021acc9a28ea36df107fbb82bfe4ea068a14",
+          "primary_sources": "https://arxiv.org/abs/2609.32473; https://arxiv.org/pdf/2609.32473v1; https://github.com/True-Litianyi/VPEVOLVE_code; https://github.com/True-Litianyi/VPEVOLVE_code/blob/5d7bbdd189be450179a423c4df2409643239bc76/README.md"
         },
         {
           "id": "litho-opc-engineer-assistant",

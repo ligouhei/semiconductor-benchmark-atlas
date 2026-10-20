@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T00:45:36.520119+00:00",
+  "generated_at": "2026-10-20T04:39:19.571587+00:00",
   "status": "research delivery family navigation with explicit open questions; not full tool qualification",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 314,
-    "records": 553,
-    "records_with_any_field_audit_entry": 322,
-    "records_with_current_field_audit_snapshot": 291,
+    "families": 315,
+    "records": 555,
+    "records_with_any_field_audit_entry": 324,
+    "records_with_current_field_audit_snapshot": 293,
     "records_without_current_field_audit_snapshot": 262
   },
   "requirements_per_record": [
@@ -12171,6 +12171,56 @@
           "limitations": "主分许多题仅要求GHDL编译；不是所有题均有功能test，更非ASIC/FPGA PPA/安全认证。公开GitHub预训练污染无法排除；spec/summary由模型辅助生成且仅约10%人工审阅。context128k/16k/2k随model不同，是输入权限/截断差异，不是同上下文纯模型比较；gen temp.2/topk50/topp1，Reflexion/CoDes另计迭代成本。",
           "tools_and_access": "全文可读，当前未取得作者正式数据下载入口/完整runner/source；第三方页面“codereleased”非一手证明。原repo许可与生成taskspec/TB汇编许可分别核；GHDL/VUnit/Cocotb版本与逐repoMakefile需锁。",
           "industrial_value": "适合检验编译以外的结构与语义、跨文件推理及原生工具配合；商业/开源工具执行并不代表模型已完成设计或任务饱和。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "VPEvolve",
+      "record_count": 2,
+      "records_with_current_field_audit": 2,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "litho-vpevolve-commercial",
+          "name": "VPEvolve / Calibre recipe-development agent benchmark",
+          "category": "制造/OPC recipe与工程agent",
+          "artifact_type": "公开方法代码/版图上的分轨评测协议；商业依赖与开源testbed分开",
+          "task_layer": "商业工具外层recipe编辑、空间诊断与经验演化agent；内层OPC仍由Calibre执行",
+          "evidence_status": "已读完整primary paper方法/实验/附录和公开固定README/NOTICE/ApacheLICENSE/cases/目标验收源码；20GDS本地公开source snapshot与实时publicGitblob和manifestSHA256逐项一致。未读/使用本地私有运行结果，未执行Calibre、模型或开源simulator。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "vpevolve-correction-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "锁Calibre/tool版本、合法processmodel/deck/手册、模型与全部请求/失败预算、R0/固定测点和endpointrepeat；取raw报告重算每案例Max/Mean/PVB/硬约束，区分开源analytic testbed与原商业实验、10trial与100trial/pairedcontinuation、empty-start与历史seededbank。",
+          "limitations": "每case1seed/20同源窗口，作者100%不证明跨节点/多工具/多seed普遍成功；这是有具体商业agent协议的研究benchmark，不应因方法名而漏计，也不等通用工业统一榜。物理/recipe被固定，缺公开商业model/deck仍限制复现。100trial只两案例且用另一模型；部分恢复扩展模型请求额度，需保留实际成本。paired续跑bootstrap区间跨0，不能称所有机制增益已统计显著。nominal最大EPE目标+受限PVB，不等wafer实测签核。",
+          "tools_and_access": "public348treeentries含agent/experiment/src/config、20GDS/R0、standaloneoptical/resist simulator，Apache2且ACE提示模板保留其许可。原商业实验需自备Calibre及license、兼容光学/光阻模型和工艺手册；上述不随repo分发。Python3.12+/Node24+/Pi；主paper Qwen3.6-27B四H100，跨模型与100trial另设置。完整流程代码公开不代表无授权可复现原数值。",
+          "industrial_value": "直接对应用户要求的“软件内化OPC优化以后，模型做recipe工程和agent闭环”的评测对象。Calibre内部求解成熟不消除规则新增、空间诊断、失败恢复与经验复用任务；此对象应作为OPC agent重点实例，保留商业依赖边界。"
+        },
+        {
+          "id": "litho-vpevolve-open-testbed",
+          "name": "VPEvolve / open optical-resist simulation testbed",
+          "category": "制造/OPC recipe与工程agent",
+          "artifact_type": "公开方法代码/版图上的分轨评测协议；商业依赖与开源testbed分开",
+          "task_layer": "开放forward/resist仿真与可微mask优化示例；不冒充Calibre recipeagent得分",
+          "evidence_status": "已读完整primary paper方法/实验/附录和公开固定README/NOTICE/ApacheLICENSE/cases/目标验收源码；20GDS本地公开source snapshot与实时publicGitblob和manifestSHA256逐项一致。未读/使用本地私有运行结果，未执行Calibre、模型或开源simulator。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "vpevolve-correction-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "锁Calibre/tool版本、合法processmodel/deck/手册、模型与全部请求/失败预算、R0/固定测点和endpointrepeat；取raw报告重算每案例Max/Mean/PVB/硬约束，区分开源analytic testbed与原商业实验、10trial与100trial/pairedcontinuation、empty-start与历史seededbank。",
+          "limitations": "与commercial条目共用20窗口，不新增20独立IP。preset是analytic配置，不是随附foundry/Calibre校准模型；开放光学sim可用不等commercialrecipe主实验可无依赖复现。原始论文的layer-quality阈值/商业MRC/SRAF验收不可用近似图像loss替代。",
+          "tools_and_access": "公开simulator独立README/LICENSE/NOTICE/modes/layouts与tests；Apache2，自备PyTorch，无须商业Calibre来研究forward/resist。mode可重建但本研究只读源码/元数据，不运行构建或仿真。",
+          "industrial_value": "作为开放仿真/数据素材值得收录，同时明确其和完整商业agent闭环的证据强度不同，避免将“有开源testbed”说成“原工业结果已复现”。"
         }
       ]
     },
