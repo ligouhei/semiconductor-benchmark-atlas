@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T16:55:13.699791+00:00",
+  "as_of": "2026-10-20T17:12:04.842362+00:00",
   "status": "第二轮12h进行中；静态源码、数据schema和原始结果表核查，未执行优化器",
   "family": "FPL26 Agentic FPGA Backend Optimization",
   "identity": "同一竞赛协议下的五个方法实现，不新增五套独立benchmark；PACT的35设计方法实验另标artifact缺口",

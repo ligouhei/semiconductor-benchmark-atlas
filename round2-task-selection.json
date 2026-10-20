@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T16:50:32.843069+00:00",
+  "as_of": "2026-10-20T17:12:03.666073+00:00",
   "status": "第二轮12小时研究进行中",
   "interpretation": "以下为基于已核资料的研究选择判断，不是本轮跑模型所得成绩或覆盖行业全部任务的证明。",
   "principle": "成熟软件提供某项求解能力，不能直接推出含该工具的工程任务已解决。应分清：求解器本身、工具控制/编排、工程闭环、独立物理验收。",
@@ -624,6 +624,24 @@
         "https://github.com/advaitParanjpe/agentic-rtl-security/tree/d9208cd0a48d1ad4d05841976b9d626c6195ba1d",
         "https://arxiv.org/html/2603.05689v1",
         "https://arxiv.org/abs/2603.05689"
+      ]
+    },
+    {
+      "domain": "封装芯粒",
+      "title": "架构级Chiplet策略引导与数值DSE",
+      "catalog_ids": [
+        "chiplet-llmbo-3d",
+        "chiplet-llmbo-25d-transfer"
+      ],
+      "native_capability": "BO/EHVI、CPU/GPU/互连仿真和HotSpot提供数值候选、性能与早期稳态热反馈。",
+      "remaining_agent_task": "根据已有Pareto和反馈调整参数方向/搜索先验，分配昂贵仿真预算；不是替换BO数值优化。",
+      "research_use": "适合meta-optimization研究，优先冻结设计空间、strongBO及跨新架构heldout。",
+      "acceptance_required": "HVreference/归一化、ADRS参考集、全部不可行与失败分母、相同simcost和完整训练摊销；最终封装签核另做。",
+      "data_readiness": "论文18432配置/6000历史prompts与6000trainval划分已核数表；完整payload/LLMtooltrace未取得。",
+      "evidence_limits": "摘要13.3/9.3%对较弱MCT，最强基线仅1.78/3.10%；全部采样温度低于85，不能推热约束分支或真实封装可靠性已验证。",
+      "primary_sources": [
+        "https://arxiv.org/html/2610.14612v1",
+        "https://arxiv.org/abs/2610.14612"
       ]
     }
   ]

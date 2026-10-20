@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T16:55:13.821626+00:00",
+  "as_of": "2026-10-20T17:12:04.970429+00:00",
   "status": "coverage inventory with explicit residual limits, not universal completeness/quality certification",
   "scope": "依据用户阶段划分逐项列已有覆盖与剩余限制；“所有可发现”按此次公开资料检索边界理解，不声称覆盖未公开工业bench或互联网全部材料。",
   "method": [
@@ -1016,8 +1016,8 @@
     },
     {
       "domain": "封装芯粒热",
-      "record_count": 20,
-      "family_count": 14,
+      "record_count": 23,
+      "family_count": 16,
       "catalog_ids": [
         "thermal-hotspot",
         "thermal-3dice",
@@ -1038,7 +1038,10 @@
         "thermal-thermedge-static",
         "thermal-thermedge-transient",
         "3d-rosettastone2-pin3d-paper",
-        "3d-taiwei-maintained-flow"
+        "3d-taiwei-maintained-flow",
+        "chiplet-llmbo-3d",
+        "chiplet-llmbo-25d-transfer",
+        "chiplet-mahl-generation"
       ],
       "covered_tasks": "2.5D/3D实现、芯粒划分/互连/成本与资源DSE、热求解/代理/热感知布局",
       "remaining_limits": "公开sample/合成cost/热label不等实际组装硅校准；跨diePDK/RC/散热边界/EMIR/良率与全签核缺口显式保留。",
@@ -1189,12 +1192,13 @@
     },
     {
       "domain": "光子集成电路",
-      "record_count": 3,
-      "family_count": 3,
+      "record_count": 4,
+      "family_count": 4,
       "catalog_ids": [
         "photonic-picopilot-script",
         "photonic-vortex100-agent",
-        "photonic-tum-router-suite"
+        "photonic-tum-router-suite",
+        "photonic-metachat-nanophotonics"
       ],
       "covered_tasks": "PIC工具脚本生成、原生波导路由/交叉/几何验收与多目标全波逆设计agent",
       "remaining_limits": "普通A*路由工件不是LLM轨迹；商业FDTD/PDK/权重、冻结prompt/功能比较器与全部成本ledger尚未齐。Vortex100多prompt复用十波段约束，单个实测case不代表全任务制样。",

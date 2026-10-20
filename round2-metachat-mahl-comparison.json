@@ -1,0 +1,119 @@
+{
+  "status": "round2 active; MetaChat QA/API and MAHL chiplet generation, not full physical signoff",
+  "protocols": [
+    {
+      "id": "photonic-metachat-nanophotonics",
+      "name": "Stanford nanophotonics / MetaChat knowledge and tool reasoning",
+      "benchmark_family": "MetaChat Stanford nanophotonics",
+      "category": "光子集成电路/知识计算与工具调用agent",
+      "artifact_type": "作者公开QA/API评测；非101个物理优化验收",
+      "task_layer": "多步推理/材料SQL/计算与API参数构建；LLMjudge终验",
+      "version": "ScienceAdvances11 eadx8006(2025)；Gite66deddbc96e4fe3e78837e069c44a4d15cf558c",
+      "input": "四Stanford研究生贡献问题、expectedapproach/answer/difficulty/contributor；paper101题，current correctedJSON实际100uniqueIDs/100prompts，但metadata.total_problems仍101。分类29single-step/25multi-step/6directfunction/15multistepfunction/25materialsearch。",
+      "task": "AIM designagent结合Python计算/SymPy、materials expert通过SQL查询refractiveindex.info数据库和设计API；temp0，最多三次solve早停。benchmark designapi.py做缺值/数值校验后返回WAVEYNET_API调用字符串，完整webapp另调用surrogate/optimization；不能混成测了所有问题的光学闭环。",
+      "output": "数值答案、材料/数据库答案、正确API调用字符串与过程；训练FiLMWaveYNet的电磁场数据是另一资源，不是agenttrajectory。",
+      "metrics": "paper最高GPT4o81.0%为pass@3；currentrunner每题最多3次成功即停，分母actual100。GPT4o judge matches_expected为成功门，approach_matches另报不强制；judge抽取numeric时自写2%relative容差，expected0需exact。JSONparse/运行异常记failed；全部失败attempts_needed循环可记4，非真调用4次。没有完整结果不能重算paper81%。",
+      "baseline": "同GPT4o standardassistant/COT/tools/materials/AIM消融，七LLM driver比较；检索材料/数值工具原生已有能力。API字符串正确是工程接口能力，不等优化出的结构达电磁指标。",
+      "tools_and_access": "33selectedGitblobs全部hash核，100题公开输入/gold与grader/runner可读；GitrootLICENSE未定位，Zenodo15802727元数据CCBY4另列。作者训练/验证电磁数据另在Stanford入口（本轮timeout）。Zenodo168,971,093B归档MD5匹配：95files/399,305,033B，含weights（未反序列化）、同100题且字节与Git一致、材料SQLite（read-only核1220materials记录/636581measurements），不是完整270k电磁场训练payload或LLM交互。",
+      "limitations": "paper101/current100和静态示例API/真实webapp不同；judge自己抽取值/单位/比较可出错，approachflag不入主gate。当前源码有logger不证明全部七模型providerlogs已公开；API题groundtruth不能放进solver上下文。近实时surrogate速度不证明任何新物理域/制造结果。",
+      "industrial_value": "研究判断：有真实公开任务/判分代码，适合photonic计算/工具grounding诊断；物理优化端应另引FDFD独立验收，避免让LLMjudgedAPI分数替代光学成功。",
+      "primary_sources": "https://github.com/jonfanlab/metachat/tree/e66deddbc96e4fe3e78837e069c44a4d15cf558c; https://doi.org/10.1126/sciadv.adx8006; https://zenodo.org/records/15802727",
+      "evidence_status": "最新版本/原文/固定Git与自写JSON静态核；未运行模型/仿真/EDA。",
+      "next_verification": "取得对应冻结版本的全部任务、独立验收器和所有候选/失败/成本ledger，按源任务划分，核许可再决定训练或复现。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "chiplet-mahl-generation",
+      "name": "MAHL / hierarchical chiplet generation and mixed analytical DSE",
+      "benchmark_family": "MAHL hierarchical chiplet generation",
+      "category": "封装/芯粒/层级RTL生成与AI映射agent",
+      "artifact_type": "论文方法评测；simpleRTL复用ROME，chiplet三工作负载",
+      "task_layer": "层级代码/多线程调试与架构DSE；非完整封装签核",
+      "version": "2508.14053v2(2025-10-09)；v1/v2十张HTML表一致",
+      "input": "DatasetI复用ROME七类simpleRTL，table展示六例；DatasetII为BERT/LLaMA/GPT三AI工作负载映射到systolicarray/activation/buffers/AIB2NoP，32/64尺寸与units/bandwidth配置。不是三颗已量产chiplet。",
+      "task": "六agent分解算法层级、检索已验模块、生成RTL、Diverseflow校验修复、LLM coarseDSE+分析fineDSE与反馈。两thread一有一无noise30%，curb5；simpledebug1轮、chipletdebug5轮；coarse80configs。",
+      "output": "通过syntax/functionaltest的模块/层级RTL、架构配置、合成PPA；oneBERTcompactchiplet在Sky130/OpenROAD版图演示，不等全部TSMC28结果完整布局布线。",
+      "metrics": "Pass@1/5按1−C(n−c,k)/C(n,k)，simple n10/chiplet n20，最多Pass5=.72为GPT4o-BERThighperformance特例，非所有任务72%单次。PPA报告energyµJ/latencyns/areamm²/powerdensitymWmm⁻²。GPT4o highmode BERTlatency2812.58→1806.54ns但area182.25→236.81mm²；compactLLaMAarea25→1.61mm²同时latency682904.83→2660426.90ns约3.90×，不把缩面积当全指标优。",
+      "baseline": "N/H/HR/ND/HD/HRD消融；GPT4o/Llama3.3-70B/Gemma3-27B与CLARIE专家分析DSE。原生Icarus/DC/分析模型承担执行和数值估计，LLM负责构造/编排；动态检索库增长要冻结比较状态。",
+      "tools_and_access": "最新作者v2全文和十表可读；本轮未定位官方冻结RTL/全部TB/检索库/80configs原始评估或完整provider轨迹。TSMC28/DesignCompiler商业依赖；Sky130/OpenROAD只一layoutcase。paper公开不等PDK/任务或生成训练数据授权。",
+      "limitations": "generatedTB/参考和测试覆盖语义、全成本/并发调试试验分母未由独立包复核；Pass5部分源自rounding/20samples，非闭合硅或封装结果。高performance和compact不同约束、同源三负载，不能把其中的最优指标拼为单候选。",
+      "industrial_value": "研究判断：层级RTL/AI映射与混合DSE的工程方向有价值，但应补隐藏独立TB、功能与真实P&R/NoP/热硬门；原生工具成熟不代表整合任务解决，示例成功也不证明全新架构泛化。",
+      "primary_sources": "https://arxiv.org/html/2508.14053v2; https://arxiv.org/abs/2508.14053",
+      "evidence_status": "最新版本/原文/固定Git与自写JSON静态核；未运行模型/仿真/EDA。",
+      "next_verification": "取得对应冻结版本的全部任务、独立验收器和所有候选/失败/成本ledger，按源任务划分，核许可再决定训练或复现。",
+      "retrieved_date": "2026-10-20"
+    }
+  ],
+  "static_audit": {
+    "as_of": "2026-10-20T17:06:16.170229+00:00",
+    "static_only": true,
+    "metachat": {
+      "paper_DOI": "10.1126/sciadv.adx8006",
+      "paper_tasks": 101,
+      "current_Git_commit": "e66deddbc96e4fe3e78837e069c44a4d15cf558c",
+      "verified_selected_git_blobs": 33,
+      "current_tasks": 100,
+      "unique_ids": 100,
+      "unique_prompts": 100,
+      "type_counts": {
+        "single_step": 29,
+        "multi_step": 25,
+        "direct_function_call": 6,
+        "multi_step_function_call": 15,
+        "material_search": 25
+      },
+      "grade": "GPT4o match_expected; numeric2percentrelative if reported; zero exact; approach_matches separately recorded, not main success gate",
+      "attempts": "up to3/earlystop; failed loop attempt counter may become4; exceptions retained as failed in denominator",
+      "physical_design_API": "evaluation api.py only numeric validation then returns API string; webapp physicaloptimizer separate",
+      "raw_model_outputs_obtained": false,
+      "Git_root_license_unlocated": true,
+      "zenodo_metadata_license": "CCBY4",
+      "credential_pattern_flags": 0,
+      "missing_or_blocked": "Stanforddata URL timedout; no bypass; fullunderlyingmaterialsDB notobtained",
+      "zenodo_archive": {
+        "bytes": 168971093,
+        "MD5_matches_official": true,
+        "file_count": 95,
+        "uncompressed_bytes": 399305033,
+        "scope": "Static inventory only; not executed or bulk mirrored to publication",
+        "question_records": 100,
+        "question_bytes_equal_current_git": true,
+        "metadata_count": 101,
+        "SQLite_inventories": [
+          {
+            "member": "metachat_code/metachat/tools/material_db/materials.db",
+            "table_counts": {
+              "materials": 1220,
+              "material_references": 1220,
+              "authors": 1092,
+              "reference_authors": 4465,
+              "specs": 1220,
+              "measurements": 636581,
+              "material_formulas": 523
+            },
+            "read_only": true
+          }
+        ]
+      }
+    },
+    "mahl": {
+      "paper_version": "2508.14053v2 (2025-10-09)",
+      "datasetI": "ROME-derived simple RTL types7; table6 examples",
+      "datasetII": "BERT/LLaMA/GPT chiplet algorithm mapping",
+      "validation": "syntax plusfunctionaltests; notformal-equivalence orfullchipletpackage signoff",
+      "simple_trials": 10,
+      "chiplet_trials": 20,
+      "threads": 2,
+      "debug_iterations_simple": 1,
+      "debug_iterations_chiplet": 5,
+      "coarse_DSE_configs": 80,
+      "symbolic_noise_percent": 30,
+      "top_reported_Pass5": 0.72,
+      "TSMC28_synthesis": "DesignCompiler",
+      "single_layout_demo": "BERTcompact Sky130/OpenROAD",
+      "full_frozen_tasks_and_traces_obtained": false,
+      "v1_v2_all_tables_equal": true,
+      "latest_history_checked": true
+    }
+  }
+}

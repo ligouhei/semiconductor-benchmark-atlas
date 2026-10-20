@@ -1,0 +1,196 @@
+{
+  "status": "round2 active; chiplet in-domain/transfer DSE and native BO versus LLM policies",
+  "protocols": [
+    {
+      "id": "chiplet-llmbo-3d",
+      "name": "LLM-Augmented BO / 3D in-domain policy-guided DSE",
+      "benchmark_family": "LLM-Augmented BO chiplet DSE",
+      "category": "封装/芯粒/LLM策略与贝叶斯架构探索",
+      "artifact_type": "论文方法评测分轨；未取得冻结独立公开benchmark包",
+      "task_layer": "LLM定性方向策略→BO候选选择→架构与热代理反馈；非版图签核",
+      "version": "2610.14612v1（2026-10-10）；两架构同一方法家族",
+      "input": "1ARM hostCPU+3PTX480 GPU、3D package，computeintensive MLP inference workload。2000采样3D配置构造6000历史prompt（每history10–40designs），4800train/1200validation。 两空间同11参数（6CPU/2GPU/3NoC），候选数乘积18432；它们是配置点，不是18432独立chiplet。",
+      "task": "模型读Pareto集/最大HV贡献anchor/前轮反馈，给各参数increase/decrease/keep方向；P-EHVI在符合方向的subspace将EHVI×9(λ8)，全局候选仍可选。Sniper/GPGPUSim+扩展LegoSim数值评估power/CPI/interconnectdelay，HotSpot固定floorplan估steady-state热；温度>85°C排除。不是LLM直接预测精确PPA或替代BO。",
+      "output": "可行Pareto配置集、HV/ADRS、在线模拟/优化时间和热峰值；训练策略reward与最终DSE指标另列。",
+      "metrics": "HV.8356对最强已列baseline.8210=+1.78%，摘要13.3%对MCT.7376；ADRS.0983对最强.0986改善.30%，表28.7%对MCT.1378。 HV为相对worstreference支配volume高优；ADRS为referencePareto到foundset最近L2均值低优。5seeds同10initial+30iterations，LLM每seed另5repeats。所有报告采样温度低于85°C（3D45.6–68.4、2.5D42.3–61.8），热约束在这些样本未形成淘汰。",
+      "baseline": "XGBoost/BOOMExplorer/MCTExplorer、LLAMBO和LLMDSE用Qwen235B/GPT5.4；3D消融standardBO EHVI .7428/.1272、BaseLLM .7764/.1525、ADPR .8117/.1486，最终.8356/.0983，需同时比较HV和ADRS。BO是主要原生数值引擎，不能把全部搜索能力算模型贡献。",
+      "tools_and_access": "作者v1全文/四数表与版本history可读，本轮未定位官方extendedLegoSim、18432配置标签、6000prompts、modelcheckpoint、冻结oracle/scorer或完整LLM工具轨迹。Qwen2.5-7B GRPO offline8A800×20h；训练reward .2结构tags+.2合法方向+.6相对最大TMHI，TMHI依offline配置outcome，不是online无成本oracle。原生工具/上游数据许可另核。",
+      "limitations": "全文残留2018/DOI占位是模板内容，不当正式发表证据。未取得数据包，HV归一化/referencepoint精确数值、ADRS参考集/单位/全部失败分母与30轮实际候选次数待核；在线runtime不含一次性训练和全空间预计算。3D6000历史随机80/20不证明底层配置全不重合；2.5D迁移同时改architecture/workload，不能分别归因。热筛查非signoff且表中全部可行，未证实拒绝分支有效性。",
+      "industrial_value": "研究判断：适合昂贵数值工具的策略/预算编排；应与同预算strongBO比较，报告一次性训练摊销与heldout设计。18K配置覆盖和HV改善不等工业封装热/IR/布线/性能全签核，也不证明模型需要继续优化原生BO已处理的每个数值步骤。",
+      "primary_sources": "https://arxiv.org/html/2610.14612v1; https://arxiv.org/abs/2610.14612",
+      "evidence_status": "第二轮作者最新v1与参数空间/四表算术静态核；未运行第三方模拟器/BO/LLM。",
+      "next_verification": "取得固定配置/准确HVreference与归一化、全失败/预算ledger、heldout分组和训练数据许可；独立复算HV/ADRS及同预算nativeBO再判净收益。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "chiplet-llmbo-25d-transfer",
+      "name": "LLM-Augmented BO / 2.5D no-retraining transfer",
+      "benchmark_family": "LLM-Augmented BO chiplet DSE",
+      "category": "封装/芯粒/LLM策略与贝叶斯架构探索",
+      "artifact_type": "论文方法评测分轨；未取得冻结独立公开benchmark包",
+      "task_layer": "LLM定性方向策略→BO候选选择→架构与热代理反馈；非版图签核",
+      "version": "2610.14612v1（2026-10-10）；两架构同一方法家族",
+      "input": "1ARM hostCPU+2PTX480 GPU、2.5D interposer，parallel matrixmultiply workload；不参与fine-tuning，只作relatedarchitecture迁移。 两空间同11参数（6CPU/2GPU/3NoC），候选数乘积18432；它们是配置点，不是18432独立chiplet。",
+      "task": "模型读Pareto集/最大HV贡献anchor/前轮反馈，给各参数increase/decrease/keep方向；P-EHVI在符合方向的subspace将EHVI×9(λ8)，全局候选仍可选。Sniper/GPGPUSim+扩展LegoSim数值评估power/CPI/interconnectdelay，HotSpot固定floorplan估steady-state热；温度>85°C排除。不是LLM直接预测精确PPA或替代BO。",
+      "output": "可行Pareto配置集、HV/ADRS、在线模拟/优化时间和热峰值；训练策略reward与最终DSE指标另列。",
+      "metrics": "HV.8051对最强已列baseline.7809=+3.10%，摘要+9.3%对MCT.7366；ADRS.0835对最强.0859改善2.79%，表32.6%对MCT.1239。 HV为相对worstreference支配volume高优；ADRS为referencePareto到foundset最近L2均值低优。5seeds同10initial+30iterations，LLM每seed另5repeats。所有报告采样温度低于85°C（3D45.6–68.4、2.5D42.3–61.8），热约束在这些样本未形成淘汰。",
+      "baseline": "XGBoost/BOOMExplorer/MCTExplorer、LLAMBO和LLMDSE用Qwen235B/GPT5.4；3D消融standardBO EHVI .7428/.1272、BaseLLM .7764/.1525、ADPR .8117/.1486，最终.8356/.0983，需同时比较HV和ADRS。BO是主要原生数值引擎，不能把全部搜索能力算模型贡献。",
+      "tools_and_access": "作者v1全文/四数表与版本history可读，本轮未定位官方extendedLegoSim、18432配置标签、6000prompts、modelcheckpoint、冻结oracle/scorer或完整LLM工具轨迹。Qwen2.5-7B GRPO offline8A800×20h；训练reward .2结构tags+.2合法方向+.6相对最大TMHI，TMHI依offline配置outcome，不是online无成本oracle。原生工具/上游数据许可另核。",
+      "limitations": "全文残留2018/DOI占位是模板内容，不当正式发表证据。未取得数据包，HV归一化/referencepoint精确数值、ADRS参考集/单位/全部失败分母与30轮实际候选次数待核；在线runtime不含一次性训练和全空间预计算。3D6000历史随机80/20不证明底层配置全不重合；2.5D迁移同时改architecture/workload，不能分别归因。热筛查非signoff且表中全部可行，未证实拒绝分支有效性。",
+      "industrial_value": "研究判断：适合昂贵数值工具的策略/预算编排；应与同预算strongBO比较，报告一次性训练摊销与heldout设计。18K配置覆盖和HV改善不等工业封装热/IR/布线/性能全签核，也不证明模型需要继续优化原生BO已处理的每个数值步骤。",
+      "primary_sources": "https://arxiv.org/html/2610.14612v1; https://arxiv.org/abs/2610.14612",
+      "evidence_status": "第二轮作者最新v1与参数空间/四表算术静态核；未运行第三方模拟器/BO/LLM。",
+      "next_verification": "取得固定配置/准确HVreference与归一化、全失败/预算ledger、heldout分组和训练数据许可；独立复算HV/ADRS及同预算nativeBO再判净收益。",
+      "retrieved_date": "2026-10-20"
+    }
+  ],
+  "static_audit": {
+    "as_of": "2026-10-20T16:59:44.722164+00:00",
+    "static_only": true,
+    "thirdparty_executed": false,
+    "primary_version": "2610.14612v1",
+    "parameter_cardinalities": [
+      2,
+      2,
+      4,
+      4,
+      2,
+      2,
+      3,
+      2,
+      2,
+      3,
+      2
+    ],
+    "configurations": 18432,
+    "tasks": [
+      "3D 1CPU+3GPU MLP in-domain",
+      "2.5D 1CPU+2GPU matrixmultiply no-retraining transfer"
+    ],
+    "table_HV": {
+      "3D": [
+        0.7509,
+        0.7466,
+        0.7376,
+        0.7881,
+        0.7549,
+        0.821,
+        0.8209,
+        0.8356
+      ],
+      "2.5D": [
+        0.7502,
+        0.763,
+        0.7366,
+        0.7732,
+        0.7809,
+        0.7564,
+        0.7638,
+        0.8051
+      ]
+    },
+    "table_ADRS": {
+      "3D": [
+        0.1116,
+        0.1028,
+        0.1378,
+        0.1129,
+        0.0986,
+        0.1405,
+        0.1417,
+        0.0983
+      ],
+      "2.5D": [
+        0.1239,
+        0.0859,
+        0.1239,
+        0.1175,
+        0.1095,
+        0.1315,
+        0.1289,
+        0.0835
+      ]
+    },
+    "threshold_C": 85,
+    "evaluated_peak_C": {
+      "3D": [
+        45.6,
+        68.4
+      ],
+      "2.5D": [
+        42.3,
+        61.8
+      ]
+    },
+    "all_reported_sampled_thermal_points_feasible": true,
+    "training": {
+      "source_3D_configurations": 2000,
+      "history_sizes": [
+        10,
+        40
+      ],
+      "prompts": 6000,
+      "train": 4800,
+      "validation": 1200,
+      "model": "Qwen2.5-7B-Instruct",
+      "GRPO": true,
+      "A800_count": 8,
+      "wall_hours": 20
+    },
+    "evaluation": {
+      "initial_designs": 10,
+      "iterations": 30,
+      "random_seeds": 5,
+      "LLM_repetitions_per_seed": 5,
+      "all_design_costs_oracle_calls_independently_reconstructed": false
+    },
+    "availability": {
+      "full_taskpack": false,
+      "standalone_scorer": false,
+      "extended_LegoSim_code": false,
+      "complete_training_or_tool_traces": false
+    },
+    "limitations": [
+      "HV normalization and referencepoint values not sufficiently frozen in retrieved artifact; paper formula alone is not complete runnable scorer.",
+      "Thermal constraints inactive in all reported evaluated samples; no demonstrated infeasibility rejection branch in the stated table.",
+      "Offline training and full-space simulation generation excluded from online runtime.",
+      "Conference2018/DOIplaceholder are template residue, not publication metadata.",
+      "No claim that 18,432 configurations are independent sourcechip designs."
+    ],
+    "primary_source_tables": [
+      "(1) HV ​ ( f r ​ e ​ f , Ω ) = Volume ​ ( ⋃ 𝒙 ∈ Ω ∏ i = 1 m [ f i ​ ( 𝒙 ) , f i r ​ e ​ f ] ) , \\text{HV}(f^{ref},\\Omega)=\\text{Volume}\\left(\\bigcup_{\\bm{x}\\in\\Omega}\\prod_{i=1}^{m}[f_{i}(\\bm{x}),f_{i}^{ref}]\\right),",
+      "(2) ADRS ​ ( Γ , Ω ) = 1 | Γ | ​ ∑ γ ∈ Γ min ω ∈ Ω ⁡ ‖ γ − ω ‖ 2 , \\text{ADRS}(\\Gamma,\\Omega)=\\frac{1}{|\\Gamma|}\\sum_{\\gamma\\in\\Gamma}\\min_{\\omega\\in\\Omega}||\\gamma-\\omega||_{2},",
+      "(3) 𝒙 t ∗ = arg ⁡ max 𝒙 ∈ Ω t ​ [ HV ⁡ ( Ω t ) − HV ⁡ ( Ω t ∖ { 𝒙 } ) ] . \\bm{x}_{t}^{*}=\\underset{\\bm{x}\\in\\Omega_{t}}{\\arg\\max}\\left[\\mathrm{HV}(\\Omega_{t})-\\mathrm{HV}(\\Omega_{t}\\setminus\\{\\bm{x}\\})\\right].",
+      "(4) R total = α ​ R think + β ​ R answer + γ ​ R gain . R_{\\text{total}}=\\alpha R_{\\text{think}}+\\beta R_{\\text{answer}}+\\gamma R_{\\text{gain}}.",
+      "(5) R think = | T correct | | T req | , R_{\\text{think}}=\\frac{|T_{\\text{correct}}|}{|T_{\\text{req}}|},",
+      "(6) R answer = { 0 , Incorrect Format | P valid | | P | , Otherwise R_{\\text{answer}}=\\left\\{\\begin{array}[]{cl}0,&\\text{Incorrect Format}\\\\\n\\frac{|P_{\\text{valid}}|}{|P|},&\\text{Otherwise}\\end{array}\\right.",
+      "(7) TMHI ​ ( 𝒂 ) = HV ​ ( Ω t ∪ 𝕐 𝒂 ) − HV ​ ( Ω t ) . \\text{TMHI}(\\bm{a})=\\text{HV}(\\Omega_{t}\\cup\\mathbb{Y}_{\\bm{a}})-\\text{HV}(\\Omega_{t}).",
+      "(8) R gain = TMHI ​ ( 𝒂 LLM ) max 𝒂 ′ ∈ 𝒜 ⁡ TMHI ​ ( 𝒂 ′ ) . R_{\\text{gain}}=\\frac{\\text{TMHI}(\\bm{a}_{\\text{LLM}})}{\\max_{\\bm{a^{\\prime}}\\in\\mathcal{A}}\\text{TMHI}(\\bm{a^{\\prime}})}.",
+      "(9) EHVI ​ ( 𝒙 | 𝔻 ) \\displaystyle\\text{EHVI}(\\bm{x}|\\mathbb{D}) = 𝔼 G ​ P ​ [ HV ​ ( 𝔻 ∪ { 𝒙 } ) − HV ​ ( 𝔻 ) ] , \\displaystyle=\\mathbb{E}_{GP}[\\text{HV}(\\mathbb{D}\\cup\\{\\bm{x}\\})-\\text{HV}(\\mathbb{D})], P-EHVI ​ ( 𝒙 | 𝔻 ) \\displaystyle\\text{P-EHVI}(\\bm{x}|\\mathbb{D}) = EHVI ​ ( 𝒙 | 𝔻 ) ⋅ ( 1 + λ ⋅ I ⁡ ( 𝒙 ∈ 𝒳 𝒂 ) ) , \\displaystyle=\\text{EHVI}(\\bm{x}|\\mathbb{D})\\cdot\\left(1+\\lambda\\cdot I(\\bm{x}\\in\\mathcal{X}_{\\bm{a}}\\right)),",
+      "Module Parameters Candidates GPU CoresPerCluster 1, 2 CacheModel 0, 1 CPU DispatchWidth 1, 2, 3, 4 ROBSize 32, 64, 96, 128 ICacheSize 32, 64 ICacheAssociativity 4, 8 DCacheSize 32, 64, 128 DCacheAssociativity 4, 8 Network RoutingBuffer 6, 12 FlitSize 2, 4, 8 NumVC 2, 4",
+      "Dataset Metric XGBoost BOOM Explorer MCT Explorer LLAMBO (w/Qwen) LLAMBO (w/GPT) LLM-DSE (w/Qwen) LLM-DSE (w/GPT) Ours 3D chiplet HV ↑ \\uparrow 0.7509 0.7466 0.7376 0.7881 0.7549 0.8210 0.8209 0.8356 ( ↑13.3% ) ADRS ↓ \\downarrow 0.1116 0.1028 0.1378 0.1129 0.0986 0.1405 0.1417 0.0983 ( ↓28.7% ) 2.5D chiplet HV ↑ \\uparrow 0.7502 0.7630 0.7366 0.7732 0.7809 0.7564 0.7638 0.8051 ( ↑ 9.3% ) ADRS ↓ \\downarrow 0.1239 0.0859 0.1239 0.1175 0.1095 0.1315 0.1289 0.0835 ( ↓32.6% )",
+      "Dataset T lim T_{\\mathrm{lim}} ( ∘ C {}^{\\circ}\\mathrm{C} ) Sampled T peak T_{\\mathrm{peak}} ( ∘ C {}^{\\circ}\\mathrm{C} ) Pareto T peak max T_{\\mathrm{peak}}^{\\max} ( ∘ C {}^{\\circ}\\mathrm{C} ) 2.5D chiplet 85 [42.3,   61.8] 57.9 3D chiplet 85 [45.6,   68.4] 63.7",
+      "Method Hypervolume ↑ \\uparrow ADRS ↓ \\downarrow Standard BO 0.7428 0.1272 Base LLM 0.7764 0.1525 LLM w/ ADPR 0.8117 0.1486 LLM w/ Sim-FT 0.7979 0.1610 LLM w/ Sim-FT + ADPR 0.8247 0.1247 Ours (Gain-Aware FT + ADPR) 0.8356 0.0983"
+    ],
+    "HV_relative_gains": {
+      "3D": {
+        "against_worst_baseline": 13.286334056399118,
+        "against_best_baseline": 1.7783191230207107
+      },
+      "2.5D": {
+        "against_worst_baseline": 9.299484116209623,
+        "against_best_baseline": 3.098988346779352
+      }
+    },
+    "ADRS_relative_reductions": {
+      "3D": {
+        "against_MCT": 28.664731494920176,
+        "against_best_baseline": 0.3042596348884328
+      },
+      "2.5D": {
+        "against_MCT": 32.60694108151735,
+        "against_best_baseline": 2.7939464493597197
+      }
+    }
+  }
+}

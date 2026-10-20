@@ -1,6 +1,6 @@
 {
   "status": "第二轮12小时仍在进行；静态核查清单，不是训练授权或模型实验结果",
-  "as_of": "2026-10-20T16:50:32.805604+00:00",
+  "as_of": "2026-10-20T17:12:03.631670+00:00",
   "scope": "只发布派生研究摘要；原始轨迹/问题/答案/凭据不随网站重发。",
   "records": [
     {
@@ -456,6 +456,43 @@
         "https://arxiv.org/abs/2608.01791",
         "https://arxiv.org/pdf/2608.20688v1",
         "https://arxiv.org/abs/2608.20688"
+      ]
+    },
+    {
+      "name": "LLM-Augmented BO / 3D in-domain policy-guided DSE",
+      "catalog_ids": [
+        "chiplet-llmbo-3d",
+        "chiplet-llmbo-25d-transfer"
+      ],
+      "data_kind": "论文数值探索历史prompt与策略GRPO；完整payload未取得",
+      "quantity": "18432配置空间；2000个3D配置构造6000histories，4800train/1200validation，2.5D另作迁移。",
+      "authenticity": "每history10–40已评估design+reference方向策略；不是6000独立chiplet或完整provider消息。",
+      "availability": "作者最新全文与四数表可读，参数空间乘积和相对最强基线提升重算；未取得完整输入/标签/模型/工具ledger。",
+      "license_note": "论文/工具/设计/训练数据权利分别核；没有下载到代码与数据LICENSE，不当可商用训练授权。",
+      "caution": "3D随机history split不证明底层配置不重合；GRPO训练中offline TMHI oracle与在线可见历史要隔离，费用含8A800×20h另计。",
+      "sources": [
+        "https://arxiv.org/html/2610.14612v1",
+        "https://arxiv.org/abs/2610.14612"
+      ]
+    },
+    {
+      "name": "Stanford nanophotonics / MetaChat knowledge and tool reasoning",
+      "catalog_ids": [
+        "photonic-metachat-nanophotonics",
+        "chiplet-mahl-generation"
+      ],
+      "data_kind": "公开QA/API题与论文生成协议；非完整provider轨迹",
+      "quantity": "MetaChatcurrent100题(29/25/6/15/25五类)，paper101；MAHLsimpleRTL复用ROME，chiplet三AI负载。",
+      "authenticity": "MetaChat输入/gold/approach和grader可读，API评测为字符串构造；电磁场训练集另属surrogate数据，不是LLMtrajectory。",
+      "availability": "33selectedMetachatGitblobs核；169MBZenodo归档MD5匹配，同100题字节一致；材料SQLite含1220records/636581measurements，weights只列清单未反序列化。MAHLv2表与v1一致；完整模型run未取得。",
+      "license_note": "MetaChatGitrootLICENSE未定位、Zenodo元数据CCBY4；材料数据库/工具/预训练模型与上游权利另核。",
+      "caution": "81%为pass@3；生成代码或合成PPA不代表所有物理硬门过关；不把gold/专家expectedapproach喂给solver。",
+      "sources": [
+        "https://github.com/jonfanlab/metachat/tree/e66deddbc96e4fe3e78837e069c44a4d15cf558c",
+        "https://doi.org/10.1126/sciadv.adx8006",
+        "https://zenodo.org/records/15802727",
+        "https://arxiv.org/html/2508.14053v2",
+        "https://arxiv.org/abs/2508.14053"
       ]
     }
   ]

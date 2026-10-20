@@ -1,5 +1,6 @@
 {
-  "as_of": "2026-10-20T16:56:04.684662+00:00",
+  "as_of": "2026-10-20T17:15:38.228797+00:00",
+  "catalog_sha256": "dc89e3f3a09ae882b829e2db3fd78cd32b325dfe7de22101f10b78c97f55249d",
   "status": "本轮仍在进行，尚未触发完成时间门",
   "research_period": {
     "start_utc": "2026-10-20T05:23:20Z",
@@ -7,21 +8,21 @@
     "minimum_seconds": 43200,
     "earliest_completion_beijing": "2026-10-21T01:23:20+08:00",
     "completed_utc": null,
-    "elapsed_seconds_to_receipt": 41564.684662,
+    "elapsed_seconds_to_receipt": 42738.228797,
     "time_gate_satisfied": false
   },
   "counts": {
     "baseline_records": 566,
-    "current_records": 737,
-    "added_task_version_protocols": 171,
+    "current_records": 741,
+    "added_task_version_protocols": 175,
     "revised_baseline_records": 2,
     "baseline_family_objects": 326,
-    "current_family_objects": 404,
-    "new_family_objects": 78,
-    "family_objects_covered_by_added_protocols": 83,
-    "curated_data_groups": 24,
+    "current_family_objects": 407,
+    "new_family_objects": 81,
+    "family_objects_covered_by_added_protocols": 86,
+    "curated_data_groups": 26,
     "excluded_candidate_frameworks": 17,
-    "task_selection_groups": 26
+    "task_selection_groups": 27
   },
   "revised_baseline_ids": [
     "fab-euv-ovl-syn-v11",
@@ -1208,15 +1209,53 @@
         "https://arxiv.org/html/2603.05689v1",
         "https://arxiv.org/abs/2603.05689"
       ]
+    },
+    {
+      "family": "LLM-Augmented BO chiplet DSE",
+      "protocol_ids": [
+        "chiplet-llmbo-3d",
+        "chiplet-llmbo-25d-transfer"
+      ],
+      "protocol_count": 2,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2610.14612v1",
+        "https://arxiv.org/abs/2610.14612"
+      ]
+    },
+    {
+      "family": "MetaChat Stanford nanophotonics",
+      "protocol_ids": [
+        "photonic-metachat-nanophotonics"
+      ],
+      "protocol_count": 1,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://github.com/jonfanlab/metachat/tree/e66deddbc96e4fe3e78837e069c44a4d15cf558c",
+        "https://doi.org/10.1126/sciadv.adx8006",
+        "https://zenodo.org/records/15802727"
+      ]
+    },
+    {
+      "family": "MAHL hierarchical chiplet generation",
+      "protocol_ids": [
+        "chiplet-mahl-generation"
+      ],
+      "protocol_count": 1,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2508.14053v2",
+        "https://arxiv.org/abs/2508.14053"
+      ]
     }
   ],
   "source_accounting": {
-    "as_of": "2026-10-20T16:56:04.572507+00:00",
-    "round2_manifest_files": 202,
-    "retrieval_records": 13340,
-    "downloaded_records": 12855,
-    "unique_downloaded_sha256": 11612,
-    "failed_or_other_records": 485,
+    "as_of": "2026-10-20T17:12:03.792182+00:00",
+    "round2_manifest_files": 207,
+    "retrieval_records": 13386,
+    "downloaded_records": 12900,
+    "unique_downloaded_sha256": 11649,
+    "failed_or_other_records": 486,
     "scope": "Saved round2 retrieval manifests include code files, repeated requests, PDFs, archives and metadata; these counts are not independent papers, benchmarks or datasets.",
     "malformed_manifest_files": []
   },
@@ -1235,7 +1274,7 @@
     "repository": "https://github.com/ligouhei/semiconductor-benchmark-atlas"
   },
   "interpretation": [
-    "171 task/version protocols are not 171 independent datasets; families also include method/resource objects.",
+    "175 task/version protocols are not 175 independent datasets; families also include method/resource objects.",
     "VPEvolve remains one family with commercial recipe-agent protocol and companion open simulationresource, sharing 20 GDS windows.",
     "Native software capability does not prove the corresponding engineering-agent task solved; compare matched oracles/budgets andindependent hard gates.",
     "QA/reasoning, direct numerical optimization, tool orchestration, algorithm source evolution and closed-loop physical acceptance remain distinct.",

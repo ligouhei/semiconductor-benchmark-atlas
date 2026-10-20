@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T16:55:13.881931+00:00",
+  "generated_at": "2026-10-20T17:12:05.034912+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 404,
-    "records": 737,
-    "records_with_any_field_audit_entry": 496,
-    "records_with_current_field_audit_snapshot": 463,
+    "families": 407,
+    "records": 741,
+    "records_with_any_field_audit_entry": 500,
+    "records_with_current_field_audit_snapshot": 467,
     "records_without_current_field_audit_snapshot": 274
   },
   "requirements_per_record": [
@@ -9742,6 +9742,56 @@
       ]
     },
     {
+      "benchmark_family": "LLM-Augmented BO chiplet DSE",
+      "record_count": 2,
+      "records_with_current_field_audit": 2,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "chiplet-llmbo-3d",
+          "name": "LLM-Augmented BO / 3D in-domain policy-guided DSE",
+          "category": "封装/芯粒/LLM策略与贝叶斯架构探索",
+          "artifact_type": "论文方法评测分轨；未取得冻结独立公开benchmark包",
+          "task_layer": "LLM定性方向策略→BO候选选择→架构与热代理反馈；非版图签核",
+          "evidence_status": "第二轮作者最新v1与参数空间/四表算术静态核；未运行第三方模拟器/BO/LLM。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-chipletbo-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得固定配置/准确HVreference与归一化、全失败/预算ledger、heldout分组和训练数据许可；独立复算HV/ADRS及同预算nativeBO再判净收益。",
+          "limitations": "全文残留2018/DOI占位是模板内容，不当正式发表证据。未取得数据包，HV归一化/referencepoint精确数值、ADRS参考集/单位/全部失败分母与30轮实际候选次数待核；在线runtime不含一次性训练和全空间预计算。3D6000历史随机80/20不证明底层配置全不重合；2.5D迁移同时改architecture/workload，不能分别归因。热筛查非signoff且表中全部可行，未证实拒绝分支有效性。",
+          "tools_and_access": "作者v1全文/四数表与版本history可读，本轮未定位官方extendedLegoSim、18432配置标签、6000prompts、modelcheckpoint、冻结oracle/scorer或完整LLM工具轨迹。Qwen2.5-7B GRPO offline8A800×20h；训练reward .2结构tags+.2合法方向+.6相对最大TMHI，TMHI依offline配置outcome，不是online无成本oracle。原生工具/上游数据许可另核。",
+          "industrial_value": "研究判断：适合昂贵数值工具的策略/预算编排；应与同预算strongBO比较，报告一次性训练摊销与heldout设计。18K配置覆盖和HV改善不等工业封装热/IR/布线/性能全签核，也不证明模型需要继续优化原生BO已处理的每个数值步骤。"
+        },
+        {
+          "id": "chiplet-llmbo-25d-transfer",
+          "name": "LLM-Augmented BO / 2.5D no-retraining transfer",
+          "category": "封装/芯粒/LLM策略与贝叶斯架构探索",
+          "artifact_type": "论文方法评测分轨；未取得冻结独立公开benchmark包",
+          "task_layer": "LLM定性方向策略→BO候选选择→架构与热代理反馈；非版图签核",
+          "evidence_status": "第二轮作者最新v1与参数空间/四表算术静态核；未运行第三方模拟器/BO/LLM。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-chipletbo-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得固定配置/准确HVreference与归一化、全失败/预算ledger、heldout分组和训练数据许可；独立复算HV/ADRS及同预算nativeBO再判净收益。",
+          "limitations": "全文残留2018/DOI占位是模板内容，不当正式发表证据。未取得数据包，HV归一化/referencepoint精确数值、ADRS参考集/单位/全部失败分母与30轮实际候选次数待核；在线runtime不含一次性训练和全空间预计算。3D6000历史随机80/20不证明底层配置全不重合；2.5D迁移同时改architecture/workload，不能分别归因。热筛查非signoff且表中全部可行，未证实拒绝分支有效性。",
+          "tools_and_access": "作者v1全文/四数表与版本history可读，本轮未定位官方extendedLegoSim、18432配置标签、6000prompts、modelcheckpoint、冻结oracle/scorer或完整LLM工具轨迹。Qwen2.5-7B GRPO offline8A800×20h；训练reward .2结构tags+.2合法方向+.6相对最大TMHI，TMHI依offline配置outcome，不是online无成本oracle。原生工具/上游数据许可另核。",
+          "industrial_value": "研究判断：适合昂贵数值工具的策略/预算编排；应与同预算strongBO比较，报告一次性训练摊销与heldout设计。18K配置覆盖和HV改善不等工业封装热/IR/布线/性能全签核，也不证明模型需要继续优化原生BO已处理的每个数值步骤。"
+        }
+      ]
+    },
+    {
       "benchmark_family": "LLM-DSE (HLSyn-derived protocol)",
       "record_count": 1,
       "records_with_current_field_audit": 0,
@@ -10375,6 +10425,35 @@
           "limitations": "2022作者论文报告40nm ΔΣ ADC及SAR-ADC硅验证，不能推出所有公开sample或模型输出均上硅。top-level Flow.run在routeOnly后直接return True，所读函数未显式集成独立DRC/LVS/PEX/多corner验收；这不是断言底层router无内部规则检查。README adc2 routing issue是该版本样例限制，不证明全工具已失效。ADC文档同段320GHz与pin320MHz冲突须核TB/波形，不能静默猜改。",
           "tools_and_access": "MAGICAL及MAGICAL-CIRCUITS root均已读BSD3；toprepo依赖固定gitlink的IdeaPlaceEx/ConstGen/anaroute/device_generation，子组件与外部依赖许可/版本另核，不能只锁top-level。工艺/尺寸样例声明非专有PDK信息，README指Python3.7及旧Docker recipe；未运行/拉镜像。",
           "industrial_value": "作为模拟layout自动化强baseline和任务输入资源仍有价值；用于agent主结论前补独立评分、端到端计时和真实工艺验收，不能据商业/开源flow已有判布局任务过时。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "MAHL hierarchical chiplet generation",
+      "record_count": 1,
+      "records_with_current_field_audit": 1,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "chiplet-mahl-generation",
+          "name": "MAHL / hierarchical chiplet generation and mixed analytical DSE",
+          "category": "封装/芯粒/层级RTL生成与AI映射agent",
+          "artifact_type": "论文方法评测；simpleRTL复用ROME，chiplet三工作负载",
+          "task_layer": "层级代码/多线程调试与架构DSE；非完整封装签核",
+          "evidence_status": "最新版本/原文/固定Git与自写JSON静态核；未运行模型/仿真/EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-metachat-mahl-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得对应冻结版本的全部任务、独立验收器和所有候选/失败/成本ledger，按源任务划分，核许可再决定训练或复现。",
+          "limitations": "generatedTB/参考和测试覆盖语义、全成本/并发调试试验分母未由独立包复核；Pass5部分源自rounding/20samples，非闭合硅或封装结果。高performance和compact不同约束、同源三负载，不能把其中的最优指标拼为单候选。",
+          "tools_and_access": "最新作者v2全文和十表可读；本轮未定位官方冻结RTL/全部TB/检索库/80configs原始评估或完整provider轨迹。TSMC28/DesignCompiler商业依赖；Sky130/OpenROAD只一layoutcase。paper公开不等PDK/任务或生成训练数据授权。",
+          "industrial_value": "研究判断：层级RTL/AI映射与混合DSE的工程方向有价值，但应补隐藏独立TB、功能与真实P&R/NoP/热硬门；原生工具成熟不代表整合任务解决，示例成功也不证明全新架构泛化。"
         }
       ]
     },
@@ -11258,6 +11337,35 @@
           "limitations": "README26150(sample_dirs与unique_matrices同数)，完整浅树目录实际26710：10/10100/3400/6100/7100；第三/第五组比README多400/160。26710个目录名互不重复，不等独立证明矩阵内容唯一或所有仿真成功。ports.json同时有port1/port2和三个boundary_port，NPZ0..2与物理激励的映射未取得生成器验证。layout_mask.enabled=false，不能按其family=T/L/U/Z声称真实形状受此限制。",
           "tools_and_access": "公开GitHub，实际LICENSE为CC BY4.0，需署名、链接许可和标明修改；API license other/NOASSERTION不能覆盖实际文件。安全解析NPY/NPZ均allow_pickle=False，未运行第三方代码或EM求解器。未找到已核实的完整求解器/网格/边界/收敛配置。",
           "industrial_value": "适合板级电磁代理的公开补充素材，几何尺度和材料条件与片上RF无源器件/OPC不同。成熟EM软件是标签oracle与强基线，不代表该学习任务自动过时；无统一scorer时不列为已成熟排行榜。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "MetaChat Stanford nanophotonics",
+      "record_count": 1,
+      "records_with_current_field_audit": 1,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "photonic-metachat-nanophotonics",
+          "name": "Stanford nanophotonics / MetaChat knowledge and tool reasoning",
+          "category": "光子集成电路/知识计算与工具调用agent",
+          "artifact_type": "作者公开QA/API评测；非101个物理优化验收",
+          "task_layer": "多步推理/材料SQL/计算与API参数构建；LLMjudge终验",
+          "evidence_status": "最新版本/原文/固定Git与自写JSON静态核；未运行模型/仿真/EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-metachat-mahl-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得对应冻结版本的全部任务、独立验收器和所有候选/失败/成本ledger，按源任务划分，核许可再决定训练或复现。",
+          "limitations": "paper101/current100和静态示例API/真实webapp不同；judge自己抽取值/单位/比较可出错，approachflag不入主gate。当前源码有logger不证明全部七模型providerlogs已公开；API题groundtruth不能放进solver上下文。近实时surrogate速度不证明任何新物理域/制造结果。",
+          "tools_and_access": "33selectedGitblobs全部hash核，100题公开输入/gold与grader/runner可读；GitrootLICENSE未定位，Zenodo15802727元数据CCBY4另列。作者训练/验证电磁数据另在Stanford入口（本轮timeout）。Zenodo168,971,093B归档MD5匹配：95files/399,305,033B，含weights（未反序列化）、同100题且字节与Git一致、材料SQLite（read-only核1220materials记录/636581measurements），不是完整270k电磁场训练payload或LLM交互。",
+          "industrial_value": "研究判断：有真实公开任务/判分代码，适合photonic计算/工具grounding诊断；物理优化端应另引FDFD独立验收，避免让LLMjudgedAPI分数替代光学成功。"
         }
       ]
     },

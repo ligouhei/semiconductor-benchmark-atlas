@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-10-20T16:55:13.778651+00:00",
+  "as_of": "2026-10-20T17:12:04.923037+00:00",
   "status": "第二轮12h进行中的数据/轨迹开放性核查，非完整市场清单或最终结论",
   "scope": "只覆盖本轮已保存一手核查的新增协议；训练样本、评测输入、模型权重、整理后记忆、生成采样轨迹与LLM工具交互轨迹分别描述",
-  "protocol_records": 171,
-  "families": 83,
+  "protocol_records": 175,
+  "families": 86,
   "items": [
     {
       "catalog_id": "lib-siemens-nemo-characterization",
@@ -2055,6 +2055,54 @@
       "trajectory_and_training_access": "未取得完整LLM消息/工具轨迹；方法主要源码RAG分析。",
       "limits": "14正例中含人工注入，不全是自然产品缺陷；无cleannegative大样本不能推falsepositive/TNR或产业安全保证。ROUGE-L高是snippet词序吻合，不是漏洞实证、等价修复或可利用性；未取得逐题输出无法重算表内判定。",
       "primary_sources": "https://arxiv.org/html/2603.05689v1; https://arxiv.org/abs/2603.05689",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "chiplet-llmbo-3d",
+      "name": "LLM-Augmented BO / 3D in-domain policy-guided DSE",
+      "family": "LLM-Augmented BO chiplet DSE",
+      "object_identity": "论文方法评测分轨；未取得冻结独立公开benchmark包",
+      "task": "模型读Pareto集/最大HV贡献anchor/前轮反馈，给各参数increase/decrease/keep方向；P-EHVI在符合方向的subspace将EHVI×9(λ8)，全局候选仍可选。Sniper/GPGPUSim+扩展LegoSim数值评估power/CPI/interconnectdelay，HotSpot固定floorplan估steady-state热；温度>85°C排除。不是LLM直接预测精确PPA或替代BO。",
+      "available_materials_and_tools": "作者v1全文/四数表与版本history可读，本轮未定位官方extendedLegoSim、18432配置标签、6000prompts、modelcheckpoint、冻结oracle/scorer或完整LLM工具轨迹。Qwen2.5-7B GRPO offline8A800×20h；训练reward .2结构tags+.2合法方向+.6相对最大TMHI，TMHI依offline配置outcome，不是online无成本oracle。原生工具/上游数据许可另核。",
+      "trajectory_and_training_access": "6000探索历史prompt/GRPO训练声称来自paper，完整原始语料/LLM工具动作反馈和costledger未取得；不当已公开可训练数据。",
+      "limits": "全文残留2018/DOI占位是模板内容，不当正式发表证据。未取得数据包，HV归一化/referencepoint精确数值、ADRS参考集/单位/全部失败分母与30轮实际候选次数待核；在线runtime不含一次性训练和全空间预计算。3D6000历史随机80/20不证明底层配置全不重合；2.5D迁移同时改architecture/workload，不能分别归因。热筛查非signoff且表中全部可行，未证实拒绝分支有效性。",
+      "primary_sources": "https://arxiv.org/html/2610.14612v1; https://arxiv.org/abs/2610.14612",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "chiplet-llmbo-25d-transfer",
+      "name": "LLM-Augmented BO / 2.5D no-retraining transfer",
+      "family": "LLM-Augmented BO chiplet DSE",
+      "object_identity": "论文方法评测分轨；未取得冻结独立公开benchmark包",
+      "task": "模型读Pareto集/最大HV贡献anchor/前轮反馈，给各参数increase/decrease/keep方向；P-EHVI在符合方向的subspace将EHVI×9(λ8)，全局候选仍可选。Sniper/GPGPUSim+扩展LegoSim数值评估power/CPI/interconnectdelay，HotSpot固定floorplan估steady-state热；温度>85°C排除。不是LLM直接预测精确PPA或替代BO。",
+      "available_materials_and_tools": "作者v1全文/四数表与版本history可读，本轮未定位官方extendedLegoSim、18432配置标签、6000prompts、modelcheckpoint、冻结oracle/scorer或完整LLM工具轨迹。Qwen2.5-7B GRPO offline8A800×20h；训练reward .2结构tags+.2合法方向+.6相对最大TMHI，TMHI依offline配置outcome，不是online无成本oracle。原生工具/上游数据许可另核。",
+      "trajectory_and_training_access": "6000探索历史prompt/GRPO训练声称来自paper，完整原始语料/LLM工具动作反馈和costledger未取得；不当已公开可训练数据。",
+      "limits": "全文残留2018/DOI占位是模板内容，不当正式发表证据。未取得数据包，HV归一化/referencepoint精确数值、ADRS参考集/单位/全部失败分母与30轮实际候选次数待核；在线runtime不含一次性训练和全空间预计算。3D6000历史随机80/20不证明底层配置全不重合；2.5D迁移同时改architecture/workload，不能分别归因。热筛查非signoff且表中全部可行，未证实拒绝分支有效性。",
+      "primary_sources": "https://arxiv.org/html/2610.14612v1; https://arxiv.org/abs/2610.14612",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "photonic-metachat-nanophotonics",
+      "name": "Stanford nanophotonics / MetaChat knowledge and tool reasoning",
+      "family": "MetaChat Stanford nanophotonics",
+      "object_identity": "作者公开QA/API评测；非101个物理优化验收",
+      "task": "AIM designagent结合Python计算/SymPy、materials expert通过SQL查询refractiveindex.info数据库和设计API；temp0，最多三次solve早停。benchmark designapi.py做缺值/数值校验后返回WAVEYNET_API调用字符串，完整webapp另调用surrogate/optimization；不能混成测了所有问题的光学闭环。",
+      "available_materials_and_tools": "33selectedGitblobs全部hash核，100题公开输入/gold与grader/runner可读；GitrootLICENSE未定位，Zenodo15802727元数据CCBY4另列。作者训练/验证电磁数据另在Stanford入口（本轮timeout）。Zenodo168,971,093B归档MD5匹配：95files/399,305,033B，含weights（未反序列化）、同100题且字节与Git一致、材料SQLite（read-only核1220materials记录/636581measurements），不是完整270k电磁场训练payload或LLM交互。",
+      "trajectory_and_training_access": "公开100问题/gold/工具源码；完整模型消息/反馈/成本轨迹尚未取得。",
+      "limits": "paper101/current100和静态示例API/真实webapp不同；judge自己抽取值/单位/比较可出错，approachflag不入主gate。当前源码有logger不证明全部七模型providerlogs已公开；API题groundtruth不能放进solver上下文。近实时surrogate速度不证明任何新物理域/制造结果。",
+      "primary_sources": "https://github.com/jonfanlab/metachat/tree/e66deddbc96e4fe3e78837e069c44a4d15cf558c; https://doi.org/10.1126/sciadv.adx8006; https://zenodo.org/records/15802727",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "chiplet-mahl-generation",
+      "name": "MAHL / hierarchical chiplet generation and mixed analytical DSE",
+      "family": "MAHL hierarchical chiplet generation",
+      "object_identity": "论文方法评测；simpleRTL复用ROME，chiplet三工作负载",
+      "task": "六agent分解算法层级、检索已验模块、生成RTL、Diverseflow校验修复、LLM coarseDSE+分析fineDSE与反馈。两thread一有一无noise30%，curb5；simpledebug1轮、chipletdebug5轮；coarse80configs。",
+      "available_materials_and_tools": "最新作者v2全文和十表可读；本轮未定位官方冻结RTL/全部TB/检索库/80configs原始评估或完整provider轨迹。TSMC28/DesignCompiler商业依赖；Sky130/OpenROAD只一layoutcase。paper公开不等PDK/任务或生成训练数据授权。",
+      "trajectory_and_training_access": "仅论文过程与聚合表；未取得完整尝试、失败、LLM工具反馈和费用轨迹。",
+      "limits": "generatedTB/参考和测试覆盖语义、全成本/并发调试试验分母未由独立包复核；Pass5部分源自rounding/20samples，非闭合硅或封装结果。高performance和compact不同约束、同源三负载，不能把其中的最优指标拼为单候选。",
+      "primary_sources": "https://arxiv.org/html/2508.14053v2; https://arxiv.org/abs/2508.14053",
       "record_snapshot_matches_audit": true
     }
   ],
