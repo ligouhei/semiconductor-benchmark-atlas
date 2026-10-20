@@ -1,0 +1,849 @@
+{
+  "status": "round2 active; primary tables/figures and arithmetic only",
+  "protocols": [
+    {
+      "id": "verify-saarthi-coverage-companion",
+      "benchmark_family": "Saarthi formal-verification method",
+      "name": "Saarthi coverage agents / five-design ablation",
+      "category": "数字验证/coverage闭环agent",
+      "artifact_type": "同Saarthi设计子集上的coverageagent消融方法；非新独立任务库",
+      "task_layer": "uncoveredRTL位置分析→生成性质→formal coverage反馈",
+      "version": "arXiv2603.03147v2 /2026-03-24；与2603.03175增强Saarthi论文分开",
+      "input": "ECC/Automotive两个inhouse设计与CVDP CICDecimator/AXI4Lite/MemoryScheduler三设计，合计5；与Saarthi2026六设计大幅重合，不重计独立IP。",
+      "task": "CoverageHoleAnalyzer抽取未覆盖位置，SVAPropertyGenerator补性质/绑定，重跑formal；比较同设计/模型有无该coverageagent。框架可HIL，本文表结果明确noHIL。",
+      "output": "补充SVA和更新formal proven/coverage报告。",
+      "metrics": "5设计×3模型=15个有无agent对。proven=已证明性质/生成性质，coverage为工具formalcoverage；15对coverage均上升，静态复算范围+2.56至+33.06pp，不能把正文约10–20%当全部一致相对增益。6对proven比例下降，增加coverage并不自动使性质更正确；无全规格独立gold与所有失败/运行成本分母。",
+      "baseline": "GPT4.1/GPT5/Llama3.3，各自有无coverageagents的配对消融；非另三套数据。精确toolbuild、固定随机seed、人时/时间预算和独立语义/vacuity/mutation标准待核。",
+      "tools_and_access": "最新v2全文/数表公开；原始RTL/spec、全部生成属性和修改/工具反馈链、冻结coverage脚本/许可未定位。上游CVDP公开不等本5例工业工作流全可复现。",
+      "limitations": "工具coverage提高不等规格完整性/无错误性质/工业签核；错误和重复属性、位置抽取误差可能改变证明比例。与Saarthi增强论文不同受控表须分别看，不能把同一批case计成独立泛化证据。",
+      "industrial_value": "研究判断：补足formalcoverage工程任务的消融协议；原生引擎负责求解，agent需比较是否正确定位空洞并补有意义性质。",
+      "primary_sources": "https://arxiv.org/html/2603.03147v2",
+      "evidence_status": "第二轮12h进行中；固定一手版本、表格与原图视觉/算术核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+      "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "verify-rwopd-fveval",
+      "benchmark_family": "FVEval",
+      "name": "RWOPD / FVEval evaluation and PEC-filter training study",
+      "category": "数字验证/NL到SVA训练与等价评测",
+      "artifact_type": "复用CodeV/FVEval的训练方法与待发布PEC实现；非新独立eval数据集",
+      "task_layer": "单轮SVA采样→等价/蕴含过滤→教师蒸馏；不同于工程工具agent交互",
+      "version": "arXiv2605.13501v1 /2026-05-13",
+      "input": "主训练作者称81640行CodeV-SVA split，验证slice来自train；评测FVEval Human79(62C1/6C2/11C3)、Machine300(189/94/17)。39914master/46887mixed及Machine派生paraphrase为辅助诊断/负对照，不能拼成独立干净主训练集。",
+      "task": "7Bstudent从SFTseed采SVA rollout；14Bteacher给dense forwardKL；PEC-equivalent与单向蕴含按1/.6/.4权重更新LoRA，未支持/错误不产生RWOPD梯度；GRPO/IPO是不同基线。C3活性UNSUPPORTED，RLVF可给syntaxvalid .15，不等验证通过。",
+      "output": "SVA候选、PEC verdict、LoRA/checkpoint和采样训练轨迹；原始实验工件开放性另列。",
+      "metrics": "最终JasperGold prop_eq_checker给标准组合估计pass@k=1−C(n−c,k)/C(n,k)，按任务均值；Human RWOPD78.8/92.4/93.4、Machine87.0/97.9/98.8为作者pass1/5/10。训练openPEC有限片段strict与relax/compile指标不同；Human PEC子集67排11liveness+1timeout，不能替换79题分母。144/379基线greedy输出被openPEC判等价且作者报告JG均认可，不是所有训练rollout健全性证明。",
+      "baseline": "同SFTseed对RS-SFT、7GRPO/2IPO、OPD、RWOPD；主headline一seed，bootstrap为任务重采样不代替训练seed重复。单H200、7B+LoRA/14Bteacher；n采样/超时/完整allrunmanifest待代码核。strict-PEC有限fragment与最终商业完整协议不能混作同一个榜。",
+      "tools_and_access": "论文称PEC、compilegate、validationtracker及code在camera-ready再发布；此次未找到作者repo/完整rollout下载链接。公开上游模型/数据不代表本方法checkpoint/feedback已发布。最终榜依赖JasperGold/VCS授权；paperCCBY4不自动授权未发布代码/各上游数据。",
+      "limitations": "归一化compilegate可把liveness改##1、range固定、参数设4/函数stub0，只能读为wrapperlint通过，不能推原性质语义保留或真实RTL正确。单向蕴含不等价，方向标签与stricter/weaker注释需按实际实现契约确认。81640/79/300五键0重合是作者报告，未独立取得本实验frozenrows核算；WaveformLens10pairpilot是futurework，不当主结果agentbench。",
+      "industrial_value": "研究判断：重要的训练反馈/语义评分方向，但当前新开放资源仍待发布；不要把模型采样rollout叫完整多步工程agent轨迹。",
+      "primary_sources": "https://arxiv.org/html/2605.13501v1",
+      "evidence_status": "第二轮12h进行中；固定一手版本、表格与原图视觉/算术核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+      "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "verify-refevo-systemc",
+      "benchmark_family": "RefEvo SystemC method",
+      "name": "RefEvo / SystemC reference-model co-evolution study",
+      "category": "数字验证/SystemC参考模型生成agent",
+      "artifact_type": "20模块方法评测；完整任务/终验/轨迹包未定位",
+      "task_layer": "spec+可选legacyasset→SystemCmodel/TB共同修复→外部RTL比对",
+      "version": "arXiv2604.24218v1 /2026-04-27",
+      "input": "作者整理20module，来源OpenCores/GenBen/XuanTie，含AXIDMA/FFT/Keccak/FPU等，spec经资深工程师审核。未给取得可下载的20case manifest/全部spec/gold/stimulus；正文说五模型，Fig3实际有六模型(另GPT O3)。",
+      "task": "planner拆解任务；modeler生成SystemC、verifier生成TB；arbiter依据固定spec与仿真反馈决定修模型或TB。循环可改TB的agent判断与最终外部评分必须区分。",
+      "output": "SystemCreference model、TB/执行计划与仿真日志；文本锚定保留spec。",
+      "metrics": "作者报告Gemini2.5Pro/GPT5.1最高95%通过；Fig3六模型4模式值已视觉核，缺逐trialCSV/seed/失效/超时和预算分母，不推独立复现。Fig7三类token11983→4497、63644→11608、107332→33392，省62.47/81.76/68.89%；71.04%是三比例均值，三组token合并省72.95%，不是全20case总成本。",
+      "baseline": "Naive单次、FlowOnly结构化但不修复、FixedTB可修模型禁改TB、RefEvo可改两者。ClaudeOpus4.1图中15→85为+70pp，非全模型统一提升。nativecompiler/SystemC仿真承担反馈，需同预算独立正确TB与冻结gold检验agent贡献。",
+      "tools_and_access": "全文/作者原图可读，所核图与算式留证。论文另称SystemVerilogDPI联仿在相同stimuli下把生成model比GoldenRTL作groundtruth；完整DPIchecker/stimuli隔离/隐藏性、所有候选与模型对话、代码/数据许可未定位。仅上游T-Head链接不等本20case包发布。",
+      "limitations": "arbiter说equivalent不是形式等价证明；可改TB通过不自动打破共同幻觉。外部DPI有限stimuli也非全行为证明；无冻结终验工件不能核是否独立于共同演化。100%SpecRecall是关键约束/完整文本保留的定义，非100%功能正确；token压缩三例不能替代全工程费用。",
+      "industrial_value": "研究判断：参考模型工程有价值的agent方法方向；暂列方法实验与待核任务包，不把上游开源RTL当本方法完整训练trace。",
+      "primary_sources": "https://arxiv.org/html/2604.24218v1",
+      "evidence_status": "第二轮12h进行中；固定一手版本、表格与原图视觉/算术核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+      "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+      "retrieved_date": "2026-10-20"
+    }
+  ],
+  "static_audit": {
+    "as_of": "2026-10-20T07:36:32.484662+00:00",
+    "scope": "primary text/tables, visually reviewed fourauthorfigures, count and ratio arithmetic only; no EDA/model/harness execution",
+    "source_checks": [
+      {
+        "file": "evidence/round2-coverage72_coverage_v2.txt",
+        "sha256": "5f3a2a79231e1cbe439ab75ee4a130d6044fc67a9fe95148cec3702188ce1b57"
+      },
+      {
+        "file": "evidence/round2-verification71_coverage_abs.txt",
+        "sha256": "cef44fad6271347b6c0888321926a52c2b2243fc4736292b5e39868f52c5ca8b"
+      },
+      {
+        "file": "evidence/round2-verification71_rwopd_paper.txt",
+        "sha256": "9f59b25e882e6c8e973bb12fc94070481a115d5845ef4c715a0af6941bf1c281"
+      },
+      {
+        "file": "evidence/round2-verification71_rwopd_abs.txt",
+        "sha256": "c67f5c71ee68777eaae6ddc526537cb530c399475cdf0b02e3427d75a9b34bce"
+      },
+      {
+        "file": "evidence/round2-verification71_refevo_paper.txt",
+        "sha256": "38003c7fe3ae8722bbf92ad8833157848e9aacd59def72ae6c41c013efe2e837"
+      },
+      {
+        "file": "evidence/round2-verification71_refevo_abs.txt",
+        "sha256": "1ba7e9982b08f861754b5cb06d6e2109c26cbeee1ff14d7980df47f94dfe6d82"
+      },
+      {
+        "file": "evidence/round2-refevo74_S1_F1_0.txt",
+        "sha256": "55366e417a065e063dcfddd6bcd3f34db1d1f978bf80e9447dff3b3ae176ced8"
+      },
+      {
+        "file": "evidence/round2-refevo74_S3_F3_0.txt",
+        "sha256": "6f46490d3a53321dcbc48f63a21097035202fd7e862da0578d5840b501a40d88"
+      },
+      {
+        "file": "evidence/round2-refevo74_S3_F5_0.txt",
+        "sha256": "caedb9947acefff14320bc6bed6fae1c22585d74c026e043307b77fc37ede3bd"
+      },
+      {
+        "file": "evidence/round2-refevo74_S4_F7_0.txt",
+        "sha256": "6438848a920e23c6ad7751a0db2f648ff849b2281841cc174ab2b3bbc9adffb8"
+      }
+    ],
+    "coverage_companion": {
+      "version": "2603.03147v2 /2026-03-24",
+      "same_family": "Saarthi",
+      "cases": 5,
+      "models": 3,
+      "with_without_agent_table": {
+        "ECC": {
+          "# Properties": [
+            40.0,
+            23.0,
+            15.0,
+            110.0,
+            35.0,
+            41.0
+          ],
+          "Proven (%)": [
+            90.0,
+            95.65,
+            73.33,
+            83.36,
+            80.0,
+            60.97
+          ],
+          "Coverage (%)": [
+            61.72,
+            70.3,
+            70.71,
+            89.3,
+            92.11,
+            89.6
+          ]
+        },
+        "CIC Decimator [ 15 ]": {
+          "# Properties": [
+            13.0,
+            28.0,
+            10.0,
+            28.0,
+            33.0,
+            17.0
+          ],
+          "Proven (%)": [
+            61.5,
+            53.57,
+            50.0,
+            82.14,
+            78.78,
+            52.94
+          ],
+          "Coverage (%)": [
+            63.98,
+            71.54,
+            52.38,
+            74.32,
+            81.04,
+            66.39
+          ]
+        },
+        "AXI4LITE [ 15 ]": {
+          "# Properties": [
+            35.0,
+            38.0,
+            20.0,
+            101.0,
+            80.0,
+            77.0
+          ],
+          "Proven (%)": [
+            57.14,
+            55.26,
+            20.0,
+            64.35,
+            42.45,
+            51.94
+          ],
+          "Coverage (%)": [
+            27.87,
+            45.85,
+            24.82,
+            36.63,
+            53.59,
+            51.29
+          ]
+        },
+        "Automotive IP": {
+          "# Properties": [
+            27.0,
+            35.0,
+            2.0,
+            53.0,
+            89.0,
+            19.0
+          ],
+          "Proven (%)": [
+            74.07,
+            62.22,
+            50.0,
+            77.35,
+            51.68,
+            26.31
+          ],
+          "Coverage (%)": [
+            80.48,
+            72.67,
+            5.81,
+            83.04,
+            79.05,
+            38.87
+          ]
+        },
+        "Memory Scheduler [ 15 ]": {
+          "# Properties": [
+            28.0,
+            22.0,
+            30.0,
+            53.0,
+            103.0,
+            47.0
+          ],
+          "Proven (%)": [
+            53.57,
+            45.45,
+            26.66,
+            73.58,
+            90.29,
+            29.78
+          ],
+          "Coverage (%)": [
+            50.88,
+            46.39,
+            46.45,
+            68.82,
+            67.91,
+            49.41
+          ]
+        }
+      },
+      "paired_changes": [
+        {
+          "design": "ECC",
+          "model": "GPT4.1",
+          "coverage_pp": 27.58,
+          "proven_pp": -6.64
+        },
+        {
+          "design": "ECC",
+          "model": "GPT5",
+          "coverage_pp": 21.81,
+          "proven_pp": -15.65
+        },
+        {
+          "design": "ECC",
+          "model": "Llama3.3",
+          "coverage_pp": 18.89,
+          "proven_pp": -12.36
+        },
+        {
+          "design": "CIC Decimator [ 15 ]",
+          "model": "GPT4.1",
+          "coverage_pp": 10.34,
+          "proven_pp": 20.64
+        },
+        {
+          "design": "CIC Decimator [ 15 ]",
+          "model": "GPT5",
+          "coverage_pp": 9.5,
+          "proven_pp": 25.21
+        },
+        {
+          "design": "CIC Decimator [ 15 ]",
+          "model": "Llama3.3",
+          "coverage_pp": 14.01,
+          "proven_pp": 2.94
+        },
+        {
+          "design": "AXI4LITE [ 15 ]",
+          "model": "GPT4.1",
+          "coverage_pp": 8.76,
+          "proven_pp": 7.21
+        },
+        {
+          "design": "AXI4LITE [ 15 ]",
+          "model": "GPT5",
+          "coverage_pp": 7.74,
+          "proven_pp": -12.81
+        },
+        {
+          "design": "AXI4LITE [ 15 ]",
+          "model": "Llama3.3",
+          "coverage_pp": 26.47,
+          "proven_pp": 31.94
+        },
+        {
+          "design": "Automotive IP",
+          "model": "GPT4.1",
+          "coverage_pp": 2.56,
+          "proven_pp": 3.28
+        },
+        {
+          "design": "Automotive IP",
+          "model": "GPT5",
+          "coverage_pp": 6.38,
+          "proven_pp": -10.54
+        },
+        {
+          "design": "Automotive IP",
+          "model": "Llama3.3",
+          "coverage_pp": 33.06,
+          "proven_pp": -23.69
+        },
+        {
+          "design": "Memory Scheduler [ 15 ]",
+          "model": "GPT4.1",
+          "coverage_pp": 17.94,
+          "proven_pp": 20.01
+        },
+        {
+          "design": "Memory Scheduler [ 15 ]",
+          "model": "GPT5",
+          "coverage_pp": 21.52,
+          "proven_pp": 44.84
+        },
+        {
+          "design": "Memory Scheduler [ 15 ]",
+          "model": "Llama3.3",
+          "coverage_pp": 2.96,
+          "proven_pp": 3.12
+        }
+      ],
+      "coverage_pp_min": 2.56,
+      "coverage_pp_max": 33.06,
+      "proven_rate_decreased_pairs": 6,
+      "interpretation": "15个design-model对全部coverage上升，但范围2.56–33.06pp，不把正文约10–20%当每例一致相对提升。五设计与同日SaarthiAGI工作大幅复用，非独立新数据集。论文称这些结果noHIL；完整工作流可HIL，人工改善不能与此混用。"
+    },
+    "rwopd": {
+      "version": "2605.13501v1 /2026-05-13",
+      "reused_family": "FVEval/CodeV-SVA",
+      "primary_tables": {
+        "S5.T1": [
+          [
+            "",
+            "NL2SVA-Human",
+            "NL2SVA-Machine"
+          ],
+          [
+            "Model",
+            "compile@1",
+            "pass@1",
+            "pass@5",
+            "pass@10",
+            "compile@1",
+            "pass@1",
+            "pass@5",
+            "pass@10"
+          ],
+          [
+            "Advanced General-Purpose Models"
+          ],
+          [
+            "DeepSeek-R1-671B",
+            "78.5",
+            "74.6",
+            "90.3",
+            "90.4",
+            "84.3",
+            "81.0",
+            "93.3",
+            "94.3"
+          ],
+          [
+            "GPT-5",
+            "75.9",
+            "71.8",
+            "90.2",
+            "92.7",
+            "85.3",
+            "81.8",
+            "93.2",
+            "94.3"
+          ],
+          [
+            "DeepSeek-V3.1-671B",
+            "67.1",
+            "63.1",
+            "81.4",
+            "84.9",
+            "87.0",
+            "83.8",
+            "92.9",
+            "93.6"
+          ],
+          [
+            "GPT-4o",
+            "68.4",
+            "64.1",
+            "75.2",
+            "78.1",
+            "72.0",
+            "68.5",
+            "81.3",
+            "83.7"
+          ],
+          [
+            "Specialized RTL Generation Models"
+          ],
+          [
+            "RTLCoder-DS-v1.1-6.7B",
+            "30.4",
+            "25.9",
+            "58.8",
+            "65.8",
+            "25.0",
+            "21.7",
+            "54.8",
+            "60.8"
+          ],
+          [
+            "CodeV-R1-Qwen-7B",
+            "29.1",
+            "25.2",
+            "55.8",
+            "61.6",
+            "41.0",
+            "37.4",
+            "76.6",
+            "83.0"
+          ],
+          [
+            "CodeV-SVA-8B",
+            "75.9",
+            "72.0",
+            "88.8",
+            "90.4",
+            "87.0",
+            "83.5",
+            "96.3",
+            "97.2"
+          ],
+          [
+            "CodeV-SVA-14B (teacher)",
+            "79.7",
+            "75.8",
+            "89.4",
+            "90.4",
+            "87.3",
+            "84.0",
+            "94.9",
+            "95.8"
+          ],
+          [
+            "Open-Source Foundation Models"
+          ],
+          [
+            "Qwen3-8B",
+            "36.7",
+            "32.3",
+            "71.6",
+            "74.0",
+            "50.0",
+            "46.1",
+            "88.0",
+            "90.5"
+          ],
+          [
+            "Qwen3-14B",
+            "65.8",
+            "61.6",
+            "86.1",
+            "87.7",
+            "79.0",
+            "75.3",
+            "92.7",
+            "94.3"
+          ],
+          [
+            "Ours (7B+LoRA student, 0.53% trainable)"
+          ],
+          [
+            "Qwen2.5-Coder-7B zero-shot",
+            "29.1",
+            "25.3",
+            "58.2",
+            "65.8",
+            "25.0",
+            "21.7",
+            "54.7",
+            "60.7"
+          ],
+          [
+            "+ Curriculum SFT, replay 50%",
+            "74.7",
+            "70.9",
+            "87.3",
+            "88.6",
+            "86.7",
+            "83.3",
+            "96.0",
+            "97.0"
+          ],
+          [
+            "+ RS-SFT (filter, no teacher)",
+            "76.0",
+            "73.4",
+            "88.0",
+            "89.2",
+            "87.0",
+            "83.7",
+            "96.0",
+            "97.0"
+          ],
+          [
+            "+ GRPO (best of 9 RL configs)",
+            "78.5",
+            "74.7",
+            "88.6",
+            "89.9",
+            "87.0",
+            "83.7",
+            "94.7",
+            "95.7"
+          ],
+          [
+            "+ OPD from CodeV-SVA-14B",
+            "84.8",
+            "77.2",
+            "89.9",
+            "91.1",
+            "89.3",
+            "85.3",
+            "96.3",
+            "97.3"
+          ],
+          [
+            "+ RWOPD from CodeV-SVA-14B",
+            "91.1",
+            "78.8",
+            "92.4",
+            "93.4",
+            "90.7",
+            "87.0",
+            "97.9",
+            "98.8"
+          ]
+        ],
+        "S5.T2": [
+          [
+            "Model",
+            "Human pass@1",
+            "Human pass@5",
+            "Human pass@10",
+            "Machine pass@1",
+            "Machine pass@5",
+            "Machine pass@10"
+          ],
+          [
+            "CodeV-SVA-14B",
+            "67.1–84.8",
+            "82.3–96.2",
+            "83.5–97.5",
+            "80.0–88.3",
+            "92.3–97.3",
+            "93.7–98.0"
+          ],
+          [
+            "SFT-50% seed",
+            "60.8–81.0",
+            "79.7–94.9",
+            "82.3–96.2",
+            "79.0–87.7",
+            "93.7–98.3",
+            "95.0–99.0"
+          ],
+          [
+            "OPD",
+            "68.4–86.1",
+            "83.5–96.2",
+            "84.8–97.5",
+            "81.3–89.3",
+            "94.3–98.3",
+            "95.7–99.0"
+          ],
+          [
+            "RWOPD",
+            "69.6–87.3",
+            "86.1–98.7",
+            "87.3–98.7",
+            "83.3–90.7",
+            "96.3–99.7",
+            "97.7–100.0"
+          ]
+        ],
+        "A1.T4": [
+          [
+            "Held-out file",
+            "Rows",
+            "C1",
+            "C2",
+            "C3"
+          ],
+          [
+            "nl2sva_human.jsonl",
+            "79",
+            "62",
+            "6",
+            "11"
+          ],
+          [
+            "nl2sva_machine.jsonl",
+            "300",
+            "189",
+            "94",
+            "17"
+          ]
+        ],
+        "A6.T5": [
+          [
+            "①",
+            "②",
+            "Verdict",
+            "Interpretation"
+          ],
+          [
+            "PASS",
+            "PASS",
+            "EQUIVALENT",
+            "p 1 ≡ p 2 p_{1}\\equiv p_{2}"
+          ],
+          [
+            "PASS",
+            "FAIL",
+            "IMPLIES_REF_TO_LM",
+            "LM is strictly stricter than reference"
+          ],
+          [
+            "FAIL",
+            "PASS",
+            "IMPLIES_LM_TO_REF",
+            "LM is strictly more permissive"
+          ],
+          [
+            "FAIL",
+            "FAIL",
+            "NOT_EQUIVALENT",
+            "semantically distinct"
+          ]
+        ],
+        "A9.T7": [
+          [
+            "Held-out file",
+            "Rows",
+            "Row hash",
+            "SVA body",
+            "RTL body",
+            "Module name",
+            "NL exact"
+          ],
+          [
+            "nl2sva_human.jsonl",
+            "79",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "nl2sva_machine.jsonl",
+            "300",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        ],
+        "A9.T8": [
+          [
+            "Engine",
+            "Wrapper / normalize",
+            "Pass count",
+            "Pass rate"
+          ],
+          [
+            "Verilator",
+            "raw, no normalize",
+            "2,235",
+            "5.6%"
+          ],
+          [
+            "Verilator",
+            "R1–R16, conditional replace",
+            "8,219",
+            "20.6%"
+          ],
+          [
+            "VCS",
+            "raw, no normalize",
+            "10,569",
+            "26.5%"
+          ],
+          [
+            "VCS",
+            "R1–R16, conditional replace",
+            "16,565",
+            "41.5%"
+          ],
+          [
+            "VCS",
+            "R1–R17, unconditional replace",
+            "30,215",
+            "75.7%"
+          ],
+          [
+            "VCS",
+            "+ parameter / function / MDA wrapper",
+            "30,200",
+            "75.7%"
+          ],
+          [
+            "VCS",
+            "+ clock-aware wrapper",
+            "31,357",
+            "78.6%"
+          ]
+        ]
+      },
+      "benchmark_rows": 379,
+      "human_rows": 79,
+      "machine_rows": 300,
+      "human_open_supported_subset": 67,
+      "human_abstentions": {
+        "liveness": 11,
+        "other_timeout": 1
+      },
+      "train_rows_author_claim": 81640,
+      "aux_master_rows": 39914,
+      "aux_mixed_grpo_rows": 46887,
+      "regenerated_nl_rows": 8469,
+      "missing_nl_original_rows": 9086,
+      "regenerated_fraction_given_those_counts": 0.9320933303984151,
+      "reported_995percent_denominator": "作者文本99.5%与8469/9086的93.21%非同一可重算比率；请求/成功/过滤后行等分母未给，保留未确认。",
+      "oracle_agreement": {
+        "greedy_outputs": 379,
+        "strict_open_equivalent": 144,
+        "jg_disagreed_on_accepted": 0,
+        "interpretation": "作者基线greedy输出上的有限交叉验证，不是独立代码核查/所有训练rollout或有限BMC到unbounded的证明"
+      },
+      "oracle_split": "headlineJasperGold pass@k uses bidirectional equivalence; trainingPEC boundedsubset reward/one-sided diagnostics are differentoracle/denominator",
+      "compile_gate": "liveness→##1、ranges固定化、freeinputwrapper/参数4/函数0是lint诊断归一化，不是原SVA语义保持证明；不能从normalizecompile通过推真实RTL行为正确。",
+      "relation_boundary": "PEC使用candidate,reference输入并做双向检查；REF_TO_LM/LM_TO_REF标签、stricter/weaker注释应按真实实现契约澄清，单向蕴含不是等价。正文的方向标签不可直接当通常逻辑箭头推强弱。",
+      "release": "论文明确camera-ready再发布code、PEC/compilegate/validationtracker；当前v1无authorcode/model/rollout下载链接，尚未取得完整训练或推理反馈trace。",
+      "training_scope": "主81640CodeV训练split声明与79/300五类hash零重合；本次未取得该实验准确frozenmanifests独立重算。辅助池含NL2SVA-Machine派生paraphrase负对照，不与主headline训练混算。",
+      "one_seed": true,
+      "limited_feedback": "C3livenessUNSUPPORTED不获RWOPD梯度，RLVF则syntaxvalid给.15；C3提升作者解释为SFTseed与保护，非新学活性证明。WaveformLens10pairpilot未来工作，不是主结果多步agentbench。"
+    },
+    "refevo": {
+      "version": "2604.24218v1 /2026-04-27",
+      "modules_author_claim": 20,
+      "prose_models": 5,
+      "figure3_models": 6,
+      "figure3_model_percentages": {
+        "Gemini2.5Pro": [
+          5,
+          35,
+          80,
+          95
+        ],
+        "GPT5.1": [
+          10,
+          35,
+          75,
+          95
+        ],
+        "ClaudeOpus4.1": [
+          10,
+          15,
+          55,
+          85
+        ],
+        "GPT4.1": [
+          0,
+          20,
+          70,
+          75
+        ],
+        "Qwen3-235B": [
+          5,
+          5,
+          65,
+          70
+        ],
+        "GPT O3": [
+          5,
+          25,
+          30,
+          50
+        ]
+      },
+      "figure3_order": [
+        "Naive",
+        "FlowOnly",
+        "FixedTB",
+        "RefEvo"
+      ],
+      "figure3_provenance": "read fromprimary PNG bars; nofulltrialCSV, cannotclaimindependentrerun",
+      "figure7_token_values": [
+        {
+          "scale": "Simple",
+          "baseline": 11983,
+          "anchor": 4497,
+          "saved": 7486,
+          "saving_percent": 62.47183509972461
+        },
+        {
+          "scale": "Medium",
+          "baseline": 63644,
+          "anchor": 11608,
+          "saved": 52036,
+          "saving_percent": 81.76104581735906
+        },
+        {
+          "scale": "Complex",
+          "baseline": 107332,
+          "anchor": 33392,
+          "saved": 73940,
+          "saving_percent": 68.88905452241643
+        }
+      ],
+      "figure7_mean_percent": 71.04064514650003,
+      "figure7_total_weighted_percent": 72.94639782683552,
+      "figure7_interpretation": "71.04%是三类百分比的算术均值，按此三组totaltoken合并为72.95%；均非已核全20module全retry总成本。",
+      "oracle_boundary": "loop的arbiter是根据spec判断并可改模型/TB；论文另称GoldenRTL+SystemVerilogDPI co-simulation作groundtruthvalidation。二者分开，缺完整stimulus/hiddenblindness/预算/所有failurelog，不把可改TB通过当独立形式等价。",
+      "release": "原文仅链接T-Head上游来源，未定位完整20manifest/specs/referencepack/generatedmodels/TBs/checker/traces及本工作许可。",
+      "spec_recall": "全规格文本锚定/关键约束保留定义，不是独立测得全功能正确率。"
+    }
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T07:28:48.878142+00:00",
+  "as_of": "2026-10-20T07:38:36.164464+00:00",
   "status": "coverage inventory with explicit residual limits, not universal completeness/quality certification",
   "scope": "依据用户阶段划分逐项列已有覆盖与剩余限制；“所有可发现”按此次公开资料检索边界理解，不声称覆盖未公开工业bench或互联网全部材料。",
   "method": [
@@ -133,8 +133,8 @@
     },
     {
       "domain": "数字验证",
-      "record_count": 62,
-      "family_count": 45,
+      "record_count": 65,
+      "family_count": 46,
       "catalog_ids": [
         "verify-fveval-human",
         "verify-fveval-machine",
@@ -197,7 +197,10 @@
         "verify-bttf-waveform-agent",
         "verify-rtl-gauntlet",
         "verify-saarthi-2025",
-        "verify-saarthi-2026"
+        "verify-saarthi-2026",
+        "verify-saarthi-coverage-companion",
+        "verify-rwopd-fveval",
+        "verify-refevo-systemc"
       ],
       "covered_tasks": "SVA/NL翻译/RTL到性质、形式证明、UVM/coverage闭环、mutation、安全/鲁棒性与EDA工具语义回归",
       "remaining_limits": "证明强度/方向/undetermined/vacuity与mutation敏感性不等价；opaque PEC、commercialformal和完整hiddenoracle限制单列，静态wrapper审计不等复现实验。",

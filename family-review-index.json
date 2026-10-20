@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T07:28:48.932099+00:00",
+  "generated_at": "2026-10-20T07:38:36.219947+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 346,
-    "records": 615,
-    "records_with_any_field_audit_entry": 373,
-    "records_with_current_field_audit_snapshot": 340,
+    "families": 347,
+    "records": 618,
+    "records_with_any_field_audit_entry": 376,
+    "records_with_current_field_audit_snapshot": 343,
     "records_without_current_field_audit_snapshot": 275
   },
   "requirements_per_record": [
@@ -4587,8 +4587,8 @@
     },
     {
       "benchmark_family": "FVEval",
-      "record_count": 3,
-      "records_with_current_field_audit": 3,
+      "record_count": 4,
+      "records_with_current_field_audit": 4,
       "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
       "records": [
         {
@@ -4653,6 +4653,27 @@
           "limitations": "当前wrapper只返回stdout，不按returncode/stderr硬门计分且subprocess无timeout，父processjoin也无限期；缺TASK_ID使评估抛错，child无queue输出需与expectedmanifest核齐，不能默默按收到行算分。syntax只查“syntax error”字样，缺此字符串得1不构成成功elaboration证明。以上是源码边界，未证明任何已发表结果发生错计。 promptsingleassert不是断言数/非平凡性强制；有效真性质不等覆盖设计规格，可轻易存在无信息量真性质但本轮未执行示例。当前Design2SVALauncher在num_cases循环外初始化user_prompt，循环内继续追加question/先前plan-model，因此trials上下文不一定相同独立；不能不审原paper运行配置就指称历史成绩受同问题影响。证明时间limit不等完整hostdeadline/LLMtool总成本。",
           "tools_and_access": "Apache2根LICENSE已读；完整181entry/158blob归档逐Gitblobhash匹配，4CSV全部静态取到571rows；不是571独立真实设计。CadenceJasper/jg商业依赖和许可另核，未执行formal/模型/生成器。PEC核心2889B .tcle为不可读编码/二进制，仅外层Tcl/API文档可审，不尝试解码或声称全源码可验证。",
           "industrial_value": "能测RTL理解和可证明性质提议，但和NL2SVA、整机功能覆盖/漏洞检出是不同能力；formal/nativeverification已有，模型要证明高价值性质/真实缺陷发现与审查效率。"
+        },
+        {
+          "id": "verify-rwopd-fveval",
+          "name": "RWOPD / FVEval evaluation and PEC-filter training study",
+          "category": "数字验证/NL到SVA训练与等价评测",
+          "artifact_type": "复用CodeV/FVEval的训练方法与待发布PEC实现；非新独立eval数据集",
+          "task_layer": "单轮SVA采样→等价/蕴含过滤→教师蒸馏；不同于工程工具agent交互",
+          "evidence_status": "第二轮12h进行中；固定一手版本、表格与原图视觉/算术核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-verification-followups-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+          "limitations": "归一化compilegate可把liveness改##1、range固定、参数设4/函数stub0，只能读为wrapperlint通过，不能推原性质语义保留或真实RTL正确。单向蕴含不等价，方向标签与stricter/weaker注释需按实际实现契约确认。81640/79/300五键0重合是作者报告，未独立取得本实验frozenrows核算；WaveformLens10pairpilot是futurework，不当主结果agentbench。",
+          "tools_and_access": "论文称PEC、compilegate、validationtracker及code在camera-ready再发布；此次未找到作者repo/完整rollout下载链接。公开上游模型/数据不代表本方法checkpoint/feedback已发布。最终榜依赖JasperGold/VCS授权；paperCCBY4不自动授权未发布代码/各上游数据。",
+          "industrial_value": "研究判断：重要的训练反馈/语义评分方向，但当前新开放资源仍待发布；不要把模型采样rollout叫完整多步工程agent轨迹。"
         }
       ]
     },
@@ -11522,6 +11543,35 @@
       ]
     },
     {
+      "benchmark_family": "RefEvo SystemC method",
+      "record_count": 1,
+      "records_with_current_field_audit": 1,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "verify-refevo-systemc",
+          "name": "RefEvo / SystemC reference-model co-evolution study",
+          "category": "数字验证/SystemC参考模型生成agent",
+          "artifact_type": "20模块方法评测；完整任务/终验/轨迹包未定位",
+          "task_layer": "spec+可选legacyasset→SystemCmodel/TB共同修复→外部RTL比对",
+          "evidence_status": "第二轮12h进行中；固定一手版本、表格与原图视觉/算术核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-verification-followups-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+          "limitations": "arbiter说equivalent不是形式等价证明；可改TB通过不自动打破共同幻觉。外部DPI有限stimuli也非全行为证明；无冻结终验工件不能核是否独立于共同演化。100%SpecRecall是关键约束/完整文本保留的定义，非100%功能正确；token压缩三例不能替代全工程费用。",
+          "tools_and_access": "全文/作者原图可读，所核图与算式留证。论文另称SystemVerilogDPI联仿在相同stimuli下把生成model比GoldenRTL作groundtruth；完整DPIchecker/stimuli隔离/隐藏性、所有候选与模型对话、代码/数据许可未定位。仅上游T-Head链接不等本20case包发布。",
+          "industrial_value": "研究判断：参考模型工程有价值的agent方法方向；暂列方法实验与待核任务包，不把上游开源RTL当本方法完整训练trace。"
+        }
+      ]
+    },
+    {
       "benchmark_family": "Rodinia",
       "record_count": 1,
       "records_with_current_field_audit": 0,
@@ -12178,8 +12228,8 @@
     },
     {
       "benchmark_family": "Saarthi formal-verification method",
-      "record_count": 2,
-      "records_with_current_field_audit": 2,
+      "record_count": 3,
+      "records_with_current_field_audit": 3,
       "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
       "records": [
         {
@@ -12223,6 +12273,27 @@
           "limitations": "覆盖与proven分母、tool具体build/constraints及隐藏gold未固定；原文提vacuitywarnings回路不等独立测全部性质语义。HIL工时/各轮全token/失败成本未披露；同设计反复改prompt/规则，未证明跨IP独立泛化。",
           "tools_and_access": "全文三张数表已解析，旧2025及新2026版本分开；AutoGen/GraphRAG开源不等本方法代码/规则库/工业输入开源。作者站静态bundle把Saarthi链接到arXiv，GitHub按钮属于其他SoC/ML项目，不当Saarthi release。完整HIL语料/多agent轨迹/许可未定位。",
           "industrial_value": "研究判断：可用于研究工业性质工程和反馈闭环，三轨应在同输入血缘下比较；原生形式工具成熟不自动解决规格到性质与覆盖问题。"
+        },
+        {
+          "id": "verify-saarthi-coverage-companion",
+          "name": "Saarthi coverage agents / five-design ablation",
+          "category": "数字验证/coverage闭环agent",
+          "artifact_type": "同Saarthi设计子集上的coverageagent消融方法；非新独立任务库",
+          "task_layer": "uncoveredRTL位置分析→生成性质→formal coverage反馈",
+          "evidence_status": "第二轮12h进行中；固定一手版本、表格与原图视觉/算术核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-verification-followups-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+          "limitations": "工具coverage提高不等规格完整性/无错误性质/工业签核；错误和重复属性、位置抽取误差可能改变证明比例。与Saarthi增强论文不同受控表须分别看，不能把同一批case计成独立泛化证据。",
+          "tools_and_access": "最新v2全文/数表公开；原始RTL/spec、全部生成属性和修改/工具反馈链、冻结coverage脚本/许可未定位。上游CVDP公开不等本5例工业工作流全可复现。",
+          "industrial_value": "研究判断：补足formalcoverage工程任务的消融协议；原生引擎负责求解，agent需比较是否正确定位空洞并补有意义性质。"
         }
       ]
     },

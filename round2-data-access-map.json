@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-10-20T07:28:48.840276+00:00",
+  "as_of": "2026-10-20T07:38:36.125290+00:00",
   "status": "第二轮12h进行中的数据/轨迹开放性核查，非完整市场清单或最终结论",
   "scope": "只覆盖本轮已保存一手核查的新增协议；训练样本、评测输入、模型权重、整理后记忆、生成采样轨迹与LLM工具交互轨迹分别描述",
-  "protocol_records": 49,
-  "families": 23,
+  "protocol_records": 52,
+  "families": 25,
   "items": [
     {
       "catalog_id": "lib-siemens-nemo-characterization",
@@ -591,6 +591,42 @@
       "trajectory_and_training_access": "论文定义git-traced正负经验buffer，完整原始tool/action/feedback和trainingrelease未定位；orinlabs/horizon是无关同名对象，不归入本论文数据。",
       "limits": "一轮包含多个编辑/工具调用，外步数不是totalmodelcalls；只汇总到earliest-best不含后续消耗。完整wall/费用/重试/环境开销、独立随机/隐藏终验与跨源分割缺口保留。不能借用同名orinlabs公开HuggingFace traces充当NVIDIA本工作release。",
       "primary_sources": "https://arxiv.org/html/2606.28279v1",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "verify-saarthi-coverage-companion",
+      "name": "Saarthi coverage agents / five-design ablation",
+      "family": "Saarthi formal-verification method",
+      "object_identity": "同Saarthi设计子集上的coverageagent消融方法；非新独立任务库",
+      "task": "CoverageHoleAnalyzer抽取未覆盖位置，SVAPropertyGenerator补性质/绑定，重跑formal；比较同设计/模型有无该coverageagent。框架可HIL，本文表结果明确noHIL。",
+      "available_materials_and_tools": "最新v2全文/数表公开；原始RTL/spec、全部生成属性和修改/工具反馈链、冻结coverage脚本/许可未定位。上游CVDP公开不等本5例工业工作流全可复现。",
+      "trajectory_and_training_access": "方法描述和配对数表可读；完整多agent对话/修改/证明反馈数据与训练许可未取得。",
+      "limits": "工具coverage提高不等规格完整性/无错误性质/工业签核；错误和重复属性、位置抽取误差可能改变证明比例。与Saarthi增强论文不同受控表须分别看，不能把同一批case计成独立泛化证据。",
+      "primary_sources": "https://arxiv.org/html/2603.03147v2",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "verify-rwopd-fveval",
+      "name": "RWOPD / FVEval evaluation and PEC-filter training study",
+      "family": "FVEval",
+      "object_identity": "复用CodeV/FVEval的训练方法与待发布PEC实现；非新独立eval数据集",
+      "task": "7Bstudent从SFTseed采SVA rollout；14Bteacher给dense forwardKL；PEC-equivalent与单向蕴含按1/.6/.4权重更新LoRA，未支持/错误不产生RWOPD梯度；GRPO/IPO是不同基线。C3活性UNSUPPORTED，RLVF可给syntaxvalid .15，不等验证通过。",
+      "available_materials_and_tools": "论文称PEC、compilegate、validationtracker及code在camera-ready再发布；此次未找到作者repo/完整rollout下载链接。公开上游模型/数据不代表本方法checkpoint/feedback已发布。最终榜依赖JasperGold/VCS授权；paperCCBY4不自动授权未发布代码/各上游数据。",
+      "trajectory_and_training_access": "单轮student SVA生成+verdict训练rollouts在论文描述；实际完整候选/教师分布/PEC反馈语料与checkpoint未取得；工程工具多步trace并未作为主评测。",
+      "limits": "归一化compilegate可把liveness改##1、range固定、参数设4/函数stub0，只能读为wrapperlint通过，不能推原性质语义保留或真实RTL正确。单向蕴含不等价，方向标签与stricter/weaker注释需按实际实现契约确认。81640/79/300五键0重合是作者报告，未独立取得本实验frozenrows核算；WaveformLens10pairpilot是futurework，不当主结果agentbench。",
+      "primary_sources": "https://arxiv.org/html/2605.13501v1",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "verify-refevo-systemc",
+      "name": "RefEvo / SystemC reference-model co-evolution study",
+      "family": "RefEvo SystemC method",
+      "object_identity": "20模块方法评测；完整任务/终验/轨迹包未定位",
+      "task": "planner拆解任务；modeler生成SystemC、verifier生成TB；arbiter依据固定spec与仿真反馈决定修模型或TB。循环可改TB的agent判断与最终外部评分必须区分。",
+      "available_materials_and_tools": "全文/作者原图可读，所核图与算式留证。论文另称SystemVerilogDPI联仿在相同stimuli下把生成model比GoldenRTL作groundtruth；完整DPIchecker/stimuli隔离/隐藏性、所有候选与模型对话、代码/数据许可未定位。仅上游T-Head链接不等本20case包发布。",
+      "trajectory_and_training_access": "论文图表/演化机制公开，未取得完整20任务、多模型每轮code/TB/tool反馈、拒绝链与数据训练授权。",
+      "limits": "arbiter说equivalent不是形式等价证明；可改TB通过不自动打破共同幻觉。外部DPI有限stimuli也非全行为证明；无冻结终验工件不能核是否独立于共同演化。100%SpecRecall是关键约束/完整文本保留的定义，非100%功能正确；token压缩三例不能替代全工程费用。",
+      "primary_sources": "https://arxiv.org/html/2604.24218v1",
       "record_snapshot_matches_audit": true
     }
   ],
