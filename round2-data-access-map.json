@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-10-20T08:20:12.783403+00:00",
+  "as_of": "2026-10-20T08:30:24.880989+00:00",
   "status": "第二轮12h进行中的数据/轨迹开放性核查，非完整市场清单或最终结论",
   "scope": "只覆盖本轮已保存一手核查的新增协议；训练样本、评测输入、模型权重、整理后记忆、生成采样轨迹与LLM工具交互轨迹分别描述",
-  "protocol_records": 67,
-  "families": 32,
+  "protocol_records": 72,
+  "families": 35,
   "items": [
     {
       "catalog_id": "lib-siemens-nemo-characterization",
@@ -807,6 +807,66 @@
       "trajectory_and_training_access": "当前代码Apache2、156VerilogEval输入/gold示例可取；TurnLog/输出保存不等历史全prompt/tool/reward/cost轨迹公开。HF V/P9B publiccards明确gated须登录/接受条件，未访问受限files，不称权重已下载验证；64.4KPython训练集/GRPOrollout未在当前tree定位。",
       "limits": "训练correctfix奖金要求两者修复后相对gold正确，故paper“nogolden”仅部署推理；不能拿team一致训练奖励当独立验证。87K/25K/36K/3.4K是同源流水线拆分，非多个独立新数据集。",
       "primary_sources": "https://arxiv.org/html/2605.12857v1; https://github.com/zhongkaiyu/ChipMATE/tree/d94087b5159aea482648b26398a2ffb164246671; https://huggingface.co/core12345/ChipMATE-V-9B; https://huggingface.co/core12345/ChipMATE-P-9B",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "data-circuitformer-analog",
+      "name": "CircuitFormer 2026 / annotated analog netlist corpus",
+      "family": "CircuitFormer analog topology 2026",
+      "object_identity": "教材图/页面VLM提取的语料；非完整agent轨迹或工业PDK任务库",
+      "task": "DocLayoutYOLO裁图/过滤，Gemini3借整页上下文生成拓扑与名称说明，再Ngspice筛syntax/nonconvergence；自动descriptions不是独立人工gold。含20SPICE器件类型，paper328565components，最多139元件/图。",
+      "available_materials_and_tools": "公开HFcard保存；API/raw和公共datasetserver多次网络超时，未取得全原件，不冒称实数复核。未定位本工作完整训练/CKT/model发布；hustvl/CircuitFormer2023是另一拥塞/DRC预测工作，不能拿它补此repo。",
+      "trajectory_and_training_access": "公开HFcard/预览、索引说明与论文；raw/API/datasets-server本环境多次超时，未取得完整index/固定SHA/训练对实数。图+自动描述+netlist是单轮训练资源，不是action/observation/reward工程agenttrace；未定位完整100judgepack/模型/CKTvocab，upstream教材图像条款单核。",
+      "limits": "NoX-only允许J/T与card排除清单矛盾，当前有效过滤集/元件支持需核；公开教材来源不自动授所有图文再训练/重分发许可。Ngspice判断与图文语义标注均可有误，不用simvalid当专家审核全量。",
+      "primary_sources": "https://arxiv.org/html/2605.05773v1; https://huggingface.co/datasets/touhid314/cktformer-dataset",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "analog-circuitbench100",
+      "name": "CircuitBench-100 / natural-language analog topology generation",
+      "family": "CircuitFormer analog topology 2026",
+      "object_identity": "同CircuitFormer家族100prompt评测；人工/LLM语义judge非数值spec签核",
+      "task": "生成满足功能类别/描述的模拟拓扑；不要求exactstring/graph同构，不直接优化尺寸/版图/频响目标。训练topologytokenizer去除数值和器件model名。",
+      "available_materials_and_tools": "论文table/类目数和HFdataset公开说明已读；未取得完整raw100样本输出/人工judgement rubric/评审一致性/所有seed/费用/模型tokenizer工件。HF数据包公开不自动证明独立evalpack已发布。",
+      "trajectory_and_training_access": "公开HFcard/预览、索引说明与论文；raw/API/datasets-server本环境多次超时，未取得完整index/固定SHA/训练对实数。图+自动描述+netlist是单轮训练资源，不是action/observation/reward工程agenttrace；未定位完整100judgepack/模型/CKTvocab，upstream教材图像条款单核。",
+      "limits": "human功能判断、syntax/convergence与真实spec性能/工艺可制造性不同；训练/评测共同教材/拓扑血缘与模型先验需排除。本文CircuitFormer与2023同名模型分开，避免误接来源。",
+      "primary_sources": "https://arxiv.org/html/2605.05773v1; https://huggingface.co/datasets/touhid314/cktformer-dataset",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "analog-vlm-cad-sizing-v5",
+      "name": "VLM-CAD v5 / multimodal sizing with strict and relaxed gates",
+      "family": "VLM-CAD method",
+      "object_identity": "6topology×2spec方法评测；旧版局部100%不可当新版全规格率",
+      "task": "Image2Net图转graph+JSON，VLM理解连接/规格，DCOP最多10iter、inference-only最多40，转ExTuRBO up-to3worker各400sim以warmseed优化；ARD GP汇总相关敏感性作解释。",
+      "available_materials_and_tools": "仅一手全文/数表/appendix；未定位完整本工作pack。Miller Table5 power68.321标mW、target.15mW，但按µW读才复算UC2.405，按literalmW约457.423，保留单位冲突不默改。",
+      "trajectory_and_training_access": "v5论文/appendix规格、统计和提示机制可读；未给作者本工作完整agentcode/122test/2268train/60run原始metrics/多轮trace/许可下载链接。上游Image2Net/CI2N公开不等本版本全复现工件，122不替代CI2N原104。",
+      "limits": "MillerA所示lowestUC仍gain53.180<54、PM48.703<60两项miss，与同设置Table4 Relaxed5/5需rawtrialid解释。current论文历史结果未独立rerun，不能据此量化全部分数影响。ARD重要性非因果解释，PTM非工业foundry PDK，难规格仍大量失败。",
+      "primary_sources": "https://arxiv.org/html/2601.07315v5; https://arxiv.org/html/2601.07315v1",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "analog-vlm-cad-structural-v5",
+      "name": "VLM-CAD v5 / 122-schematic structural reasoning evaluation",
+      "family": "VLM-CAD method",
+      "object_identity": "同VLM-CAD家族独立感知任务；非电路电性能成功率",
+      "task": "比较专用Image2Net与四个通用VLM的type label和拓扑连接恢复，前者监督训练而后者零样本；同时看label和graph，不能单项宣称全面取代。",
+      "available_materials_and_tools": "v5表2/appendix给明确评分；未定位所有graphedit脚本/逐图判断、固定模型快照/全60sizing轨迹。此任务无需SPICE，不能拿其F或graphscore当尺寸性能/功能等价率。",
+      "trajectory_and_training_access": "v5论文/appendix规格、统计和提示机制可读；未给作者本工作完整agentcode/122test/2268train/60run原始metrics/多轮trace/许可下载链接。上游Image2Net/CI2N公开不等本版本全复现工件，122不替代CI2N原104。",
+      "limits": "familydisjoint为作者声明，需真实manifest复查；GED编辑代价/器件类型/端口对称性设置影响score，图转换器也可能错。上游CI2N资源开放性单独核，不承诺全VLM-CAD框架开源。",
+      "primary_sources": "https://arxiv.org/html/2601.07315v5; https://arxiv.org/html/2601.07315v1",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "rf-rfampdesigner-lna",
+      "name": "RFAmpDesigner / stage-aware LNA resource-allocation agent",
+      "family": "RFAmpDesigner method",
+      "object_identity": "固定三stageLNA十spec方法bench；商业PDK/工具依赖，非十独立芯片",
+      "task": "agent用current/gain/noise/linearity概念分资源，调用active选型、匹配、bandplanning、fullchain等subtools；scikitPSO/SA和Spectre/OCEAN优化数值。RAG经验存储/parallel/refiner辅助，不是LLM直接发全部器件尺寸或完整EMlayout。",
+      "available_materials_and_tools": "全文task/toolspec表可读，但仅通用GA/BO/scikit依赖链接，未给本工作完整代码/10任务pack/LUT/原多agent回放与许可。依赖TSMCN65、Calibre、CadenceSpectre/OCEAN授权；本文已有表不等可训练轨迹。",
+      "trajectory_and_training_access": "公开论文toolschema/10spec/5run汇总，RAG与经验数据库仅描述；未取得可下载LUT、完整多步action/simulation/失败/成本trace或训练许可。commercialPDK与EDA依赖另列。",
+      "limits": "inputIP1dB−15dBm+gain25−1≈outputOP1dB9dBm，两表input/output口径不要误判冲突。作者称相同simulationbudget却缺全部calls ledger；硬timeout失败和成功条件费用须保留，<$0.5是作者特定LLM费用非产业全成本。泛化PA/拓扑迁移属futurework。",
+      "primary_sources": "https://arxiv.org/html/2605.10093v1",
       "record_snapshot_matches_audit": true
     }
   ],

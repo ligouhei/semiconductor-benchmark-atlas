@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T08:20:12.880228+00:00",
+  "generated_at": "2026-10-20T08:30:24.977020+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 354,
-    "records": 633,
-    "records_with_any_field_audit_entry": 391,
-    "records_with_current_field_audit_snapshot": 358,
+    "families": 357,
+    "records": 638,
+    "records_with_any_field_audit_entry": 396,
+    "records_with_current_field_audit_snapshot": 363,
     "records_without_current_field_audit_snapshot": 275
   },
   "requirements_per_record": [
@@ -3179,6 +3179,56 @@
           "limitations": "原Nature、历史Ariane scratch、2024 20TPU checkpoint+DP三协议不同；权重/seed/选择规则/预训练/所有attempt与native成本需分报。currentcost density1而TILOS重算.5，不能合榜；DP默认targetdensity.425/iteration1000/CPU8threads/legalizeFalse/routabilityFalse，gin可覆盖，不是完整合法化或route验收。SoftMacroPlacer默认每次place timeout300s可关闭，optimize_using_dreamplace helper明确关闭；非整个训练/流程总时限。converged用最终iteration<stage总iteration的启发式，source自注不能仅靠此判定，非QoR/合法性证明。dp_regioning=None依据has_area_constraint；TILOS改False/3000s是另配置，某binary缺函数的报告未独立执行确认。CD默认最多2epochs、seed123、k=5邻域、相对改善<.001可早停，native softplacer参与且默认拒绝cost变差softmoves；其收益和成本单列。hMETIS许可与external PLCbinary/PDK另核；static仅检引用和计数，未检几何重叠/合法性/真实PPA。",
           "tools_and_access": "Apache2Python、TensorFlow/TF-Agents/Reverb/DREAMPlace；PlacementCost调用外部plc_wrapper_main binary经socket，源码/许可与Python分别核。main现有20TPUblock预训练checkpoint；旧ARIANE文档仍称未公开，须按release分开",
           "industrial_value": "重要macro算法对象与强既有流程；适合研究学习迁移/工程编排，但公开单例proxy不能证明完整工业布局能力或任务已饱和"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "CircuitFormer analog topology 2026",
+      "record_count": 2,
+      "records_with_current_field_audit": 2,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "data-circuitformer-analog",
+          "name": "CircuitFormer 2026 / annotated analog netlist corpus",
+          "category": "模拟前端/图文到拓扑训练数据",
+          "artifact_type": "教材图/页面VLM提取的语料；非完整agent轨迹或工业PDK任务库",
+          "task_layer": "schematic/page→description/name+SPICEnetlist",
+          "evidence_status": "第二轮12h进行中；固定一手版本、表格/公开card与计数/单位算术核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-analog-expansion-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+          "limitations": "NoX-only允许J/T与card排除清单矛盾，当前有效过滤集/元件支持需核；公开教材来源不自动授所有图文再训练/重分发许可。Ngspice判断与图文语义标注均可有误，不用simvalid当专家审核全量。",
+          "tools_and_access": "公开HFcard保存；API/raw和公共datasetserver多次网络超时，未取得全原件，不冒称实数复核。未定位本工作完整训练/CKT/model发布；hustvl/CircuitFormer2023是另一拥塞/DRC预测工作，不能拿它补此repo。",
+          "industrial_value": "研究判断：较大规模模拟拓扑单轮学习资源线索；应先冻结索引/去重、人工gold与使用条款，不能称已有完整工业模拟agent训练数据。"
+        },
+        {
+          "id": "analog-circuitbench100",
+          "name": "CircuitBench-100 / natural-language analog topology generation",
+          "category": "模拟前端/自然语言到电路拓扑",
+          "artifact_type": "同CircuitFormer家族100prompt评测；人工/LLM语义judge非数值spec签核",
+          "task_layer": "NLprompt→可非唯一拓扑→manualreference功能判断",
+          "evidence_status": "第二轮12h进行中；固定一手版本、表格/公开card与计数/单位算术核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-analog-expansion-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+          "limitations": "human功能判断、syntax/convergence与真实spec性能/工艺可制造性不同；训练/评测共同教材/拓扑血缘与模型先验需排除。本文CircuitFormer与2023同名模型分开，避免误接来源。",
+          "tools_and_access": "论文table/类目数和HFdataset公开说明已读；未取得完整raw100样本输出/人工judgement rubric/评审一致性/所有seed/费用/模型tokenizer工件。HF数据包公开不自动证明独立evalpack已发布。",
+          "industrial_value": "研究判断：补足NL→analogtopology评测方向，但还需数值规格、固定模拟testbench、预算与独立gold，不能将83%当完整芯片设计成功率。"
         }
       ]
     },
@@ -11287,6 +11337,35 @@
       ]
     },
     {
+      "benchmark_family": "RFAmpDesigner method",
+      "record_count": 1,
+      "records_with_current_field_audit": 1,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "rf-rfampdesigner-lna",
+          "name": "RFAmpDesigner / stage-aware LNA resource-allocation agent",
+          "category": "模拟前端/RF多级LNA尺寸与工具编排",
+          "artifact_type": "固定三stageLNA十spec方法bench；商业PDK/工具依赖，非十独立芯片",
+          "task_layer": "TSMCN65拓扑/LUT+RFspec→分stage预算→PSO/SA/Spectre",
+          "evidence_status": "第二轮12h进行中；固定一手版本、表格/公开card与计数/单位算术核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-analog-expansion-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+          "limitations": "inputIP1dB−15dBm+gain25−1≈outputOP1dB9dBm，两表input/output口径不要误判冲突。作者称相同simulationbudget却缺全部calls ledger；硬timeout失败和成功条件费用须保留，<$0.5是作者特定LLM费用非产业全成本。泛化PA/拓扑迁移属futurework。",
+          "tools_and_access": "全文task/toolspec表可读，但仅通用GA/BO/scikit依赖链接，未给本工作完整代码/10任务pack/LUT/原多agent回放与许可。依赖TSMCN65、Calibre、CadenceSpectre/OCEAN授权；本文已有表不等可训练轨迹。",
+          "industrial_value": "研究判断：RF工程agent的实质是编排专家工具与高/低保真搜索；有明确原生工具增强对照，但当前是待完整release的方法实验，非现成开放RF agent训练集。"
+        }
+      ]
+    },
+    {
       "benchmark_family": "RFSchemBench",
       "record_count": 1,
       "records_with_current_field_audit": 1,
@@ -14040,6 +14119,56 @@
           "limitations": "主分许多题仅要求GHDL编译；不是所有题均有功能test，更非ASIC/FPGA PPA/安全认证。公开GitHub预训练污染无法排除；spec/summary由模型辅助生成且仅约10%人工审阅。context128k/16k/2k随model不同，是输入权限/截断差异，不是同上下文纯模型比较；gen temp.2/topk50/topp1，Reflexion/CoDes另计迭代成本。",
           "tools_and_access": "全文可读，当前未取得作者正式数据下载入口/完整runner/source；第三方页面“codereleased”非一手证明。原repo许可与生成taskspec/TB汇编许可分别核；GHDL/VUnit/Cocotb版本与逐repoMakefile需锁。",
           "industrial_value": "适合检验编译以外的结构与语义、跨文件推理及原生工具配合；商业/开源工具执行并不代表模型已完成设计或任务饱和。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "VLM-CAD method",
+      "record_count": 2,
+      "records_with_current_field_audit": 2,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "analog-vlm-cad-sizing-v5",
+          "name": "VLM-CAD v5 / multimodal sizing with strict and relaxed gates",
+          "category": "模拟前端/多模态器件尺寸agent",
+          "artifact_type": "6topology×2spec方法评测；旧版局部100%不可当新版全规格率",
+          "task_layer": "schematic/netlist/spec→Image2Net→DCOP/LLM→ExTuRBO",
+          "evidence_status": "第二轮12h进行中；固定一手版本、表格/公开card与计数/单位算术核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-analog-expansion-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+          "limitations": "MillerA所示lowestUC仍gain53.180<54、PM48.703<60两项miss，与同设置Table4 Relaxed5/5需rawtrialid解释。current论文历史结果未独立rerun，不能据此量化全部分数影响。ARD重要性非因果解释，PTM非工业foundry PDK，难规格仍大量失败。",
+          "tools_and_access": "仅一手全文/数表/appendix；未定位完整本工作pack。Miller Table5 power68.321标mW、target.15mW，但按µW读才复算UC2.405，按literalmW约457.423，保留单位冲突不默改。",
+          "industrial_value": "研究判断：多模态理解与数值搜索编排有用，但工程达标率应看Strict/固定全规格和真实总预算；放宽验收/旧版特例不可替代签核。"
+        },
+        {
+          "id": "analog-vlm-cad-structural-v5",
+          "name": "VLM-CAD v5 / 122-schematic structural reasoning evaluation",
+          "category": "模拟前端/电路图语义与连通图重建",
+          "artifact_type": "同VLM-CAD家族独立感知任务；非电路电性能成功率",
+          "task_layer": "noisy schematic→type label+connectivity graph",
+          "evidence_status": "第二轮12h进行中；固定一手版本、表格/公开card与计数/单位算术核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-analog-expansion-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+          "limitations": "familydisjoint为作者声明，需真实manifest复查；GED编辑代价/器件类型/端口对称性设置影响score，图转换器也可能错。上游CI2N资源开放性单独核，不承诺全VLM-CAD框架开源。",
+          "tools_and_access": "v5表2/appendix给明确评分；未定位所有graphedit脚本/逐图判断、固定模型快照/全60sizing轨迹。此任务无需SPICE，不能拿其F或graphscore当尺寸性能/功能等价率。",
+          "industrial_value": "研究判断：为模拟前端视觉解析提供一项可读评测协议；感知准确率与设计agent能力分开，原生parser/图算法负责连接约束。"
         }
       ]
     },
