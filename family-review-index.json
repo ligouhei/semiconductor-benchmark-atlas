@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T07:38:36.219947+00:00",
+  "generated_at": "2026-10-20T07:50:34.554774+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 347,
-    "records": 618,
-    "records_with_any_field_audit_entry": 376,
-    "records_with_current_field_audit_snapshot": 343,
+    "families": 349,
+    "records": 622,
+    "records_with_any_field_audit_entry": 380,
+    "records_with_current_field_audit_snapshot": 347,
     "records_without_current_field_audit_snapshot": 275
   },
   "requirements_per_record": [
@@ -3496,6 +3496,35 @@
           "limitations": "总数论文Table1为806+7043+157=8006，正文两处把Perception写890（会合8090），本记录保留矛盾不静默修正。题数不等独立电路/IP。Analysis七类数和六level数各合7043，不是全8006的另一套总数。教材/课程公开题存在记忆风险，synthetic新生成不自动证明去重无污染。",
           "tools_and_access": "作者repo公开合成生成与symbolic评测，代码MIT已读LICENSE；Lcapy/SymPy/LaTeX/ngspice/PySpice。完整benchmark在论文supplement及作者HF armanakbari4/CircuitSense入口，HF原始card/API请求本轮均超时，未核全数据与独立数据许可。第三方happynewyue镜像不能自动视为作者版本。",
           "industrial_value": "适合视觉到数学模型的诊断和工程推理研究；高分不自动代表完整PDK设计、PVT/版图后验或工业签核。商业EDA可求解已知网表，仍需对视觉转换/推理增益作公平分轨比较。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "CktEvo",
+      "record_count": 1,
+      "records_with_current_field_audit": 1,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "rtl-cktevo-repoevolution",
+          "name": "CktEvo / repository RTL evolution with native synthesis baseline",
+          "category": "数字前端/仓库级RTL面积时序优化",
+          "artifact_type": "benchmark+reference方法论文；当前仅部分初始设计包开放",
+          "task_layer": "跨文件RTL改写→综合STA/Formality→archive进化",
+          "evidence_status": "第二轮12h进行中；固定一手版本、100个Gitblob、JSONL schema与表格算术核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-rtlbenchls-cktevo-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+          "limitations": "论文生产级/原生已饱和表述不等独立验证工业最优；若与open源比较须保持tool/PDK/约束/预算，不能把10.50%推广商业签核。当前缺audio与全部workflow是局部发布缺口，保留论文11例，不用当前10改写历史分母。",
+          "tools_and_access": "当前203tree条目完整，初始10设计源码可取；root无LICENSE，ethmac局部有LICENSE，不自动授权全部上游训练。未见完整框架/SDC/逐次候选/工具反馈、allfailure成本、seed与精确toolbuild，不能称整条开源复现。",
+          "industrial_value": "研究判断：直接体现商业综合原生基线怎样缩小模型优化空间；仍需先进节点/route与重复seed、同预算超参数优化基线验证泛化。"
         }
       ]
     },
@@ -11106,6 +11135,77 @@
           "limitations": "原runtime拆解实测每step5.46s，其中I/O77.16%=4.21s；paper扣除I/O的1.25s是为对比RL计算+仿真并讨论独立引擎的条件，不能当当前实际GDS交换流程延迟。hybrid1.58倍用达到最优历史EPE的时间，不是固定完整预算时间；训练/初始化/最终verification须另计。188via大case和几张metal扩展示意不等验证全chip/一般复杂polygon，paper明确跨clip耦合仍待解决。测点/工艺/MRC和数据split未完整获得，不称通用LLM工程agent或真实wafer/PPA benchmark。",
           "tools_and_access": "Python/PyTorch，i7-5930K3.5GHz+RTX3090；实验需Calibre SRAF/lithosim/GDSII交换。正文未足以锁生产Calibre build、校准deck/工艺模型参数与完整公开数据/训练artifact。商业依赖许可单独要求，不因paper可读认完整可复现。",
           "industrial_value": "适合特定mask底层求解与非可微物理指标优化的方法对照。RL agent只是策略优化器，现成solver已有执行能力后，新研究须比较当前强引擎/同预算搜索及质量约束；不能由软件存在判已解决，亦不能把此论文名agent当工程工作流benchmark。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "RTL-BenchLS",
+      "record_count": 3,
+      "records_with_current_field_audit": 3,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "rtl-benchls-roundtrip",
+          "name": "RTL-BenchLS / RTL→abstract→RTL round-trip",
+          "category": "数字前端/RTL重建与推理",
+          "artifact_type": "同家族第一协议；公开任务和结果标签，非工具agent轨迹库",
+          "task_layer": "两次生成的信息保留测量，非独立spec-to-RTL",
+          "evidence_status": "第二轮12h进行中；固定一手版本、100个Gitblob、JSONL schema与表格算术核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-rtlbenchls-cktevo-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+          "limitations": "论文r为去注释字符比，当前runner是近似token预算且最少256/最多4096，不是字符硬限制。代码固定分母420，换slice/limit须重算；self-equivalence仅过滤工具可处理性，不证明spec正确。完整toolbuild/总成本/seed/原log未取得。",
+          "tools_and_access": "数据/嵌入formal脚本及代码可读，data/results CCBY4、frameworkMIT，上游RTL保留原license；商业Conformal/JasperGold（可替换Formality）需许可。CLI默认noop恒True仅开发，必须显式真实verifier。嵌入脚本有旧input/rtl路径而reference写golden.v/revised.v，尚需适配；不宣称clone即复现。",
+          "industrial_value": "研究判断：新的公开大规模语义压缩/重建测试；适合研究信息保留，不冒充完全从独立工程需求生成或多步agent成功率。"
+        },
+        {
+          "id": "rtl-benchls-masked",
+          "name": "RTL-BenchLS / compress-then-reconstruct masked content",
+          "category": "数字前端/上下文RTL补全",
+          "artifact_type": "同家族第二协议；答案描述阶段可见gold，非完全盲infilling",
+          "task_layer": "goldblock→短描述→context恢复",
+          "evidence_status": "第二轮12h进行中；固定一手版本、100个Gitblob、JSONL schema与表格算术核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-rtlbenchls-cktevo-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+          "limitations": "描述阶段可见gold属于此任务设定，不能称hidden-answer agentrepair；paper正文公式/提示的可见性需按当前release明确。reference parser仅substring/独立proven行，未核全部property finalsummary/退出码，部署前需scorer适配；静态代码问题不等论文已被证明误判。",
+          "tools_and_access": "数据/嵌入formal脚本及代码可读，data/results CCBY4、frameworkMIT，上游RTL保留原license；商业Conformal/JasperGold（可替换Formality）需许可。CLI默认noop恒True仅开发，必须显式真实verifier。嵌入脚本有旧input/rtl路径而reference写golden.v/revised.v，尚需适配；不宣称clone即复现。",
+          "industrial_value": "研究判断：可用于上下文推理和语义压缩恢复；若评盲补全/agent自主查错，应另固定输入权限与预算。"
+        },
+        {
+          "id": "rtl-benchls-repoissue",
+          "name": "RTL-BenchLS / real GitHub issue-fix reasoning",
+          "category": "数字验证/仓库issue驱动RTL修复",
+          "artifact_type": "同家族第三协议；108个真实issue-PR元数据与goldcommit",
+          "task_layer": "issue+buggy模块→修复→对maintainergold等价",
+          "evidence_status": "第二轮12h进行中；固定一手版本、100个Gitblob、JSONL schema与表格算术核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-rtlbenchls-cktevo-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+          "limitations": "原文称过滤单文件≤50changedLoC，同时描述goldfix平均+42/−29且可数百行，筛选粒度/口径需原manifest澄清。当前runner按输出posedge/negedge推checker类型、取首module为top；无完整依赖装配/冻结约束/逐次log，paper正式流程与模板不可等同。",
+          "tools_and_access": "数据/嵌入formal脚本及代码可读，data/results CCBY4、frameworkMIT，上游RTL保留原license；商业Conformal/JasperGold（可替换Formality）需许可。CLI默认noop恒True仅开发，必须显式真实verifier。嵌入脚本有旧input/rtl路径而reference写golden.v/revised.v，尚需适配；不宣称clone即复现。",
+          "industrial_value": "研究判断：有价值的真实issue修复任务与公开gold修订；适合严格隔离gold的agent扩展，但当前基线不是完整工程agentbench。"
         }
       ]
     },

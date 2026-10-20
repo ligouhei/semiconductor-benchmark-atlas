@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-10-20T07:38:36.125290+00:00",
+  "as_of": "2026-10-20T07:50:34.457048+00:00",
   "status": "第二轮12h进行中的数据/轨迹开放性核查，非完整市场清单或最终结论",
   "scope": "只覆盖本轮已保存一手核查的新增协议；训练样本、评测输入、模型权重、整理后记忆、生成采样轨迹与LLM工具交互轨迹分别描述",
-  "protocol_records": 52,
-  "families": 25,
+  "protocol_records": 56,
+  "families": 27,
   "items": [
     {
       "catalog_id": "lib-siemens-nemo-characterization",
@@ -627,6 +627,54 @@
       "trajectory_and_training_access": "论文图表/演化机制公开，未取得完整20任务、多模型每轮code/TB/tool反馈、拒绝链与数据训练授权。",
       "limits": "arbiter说equivalent不是形式等价证明；可改TB通过不自动打破共同幻觉。外部DPI有限stimuli也非全行为证明；无冻结终验工件不能核是否独立于共同演化。100%SpecRecall是关键约束/完整文本保留的定义，非100%功能正确；token压缩三例不能替代全工程费用。",
       "primary_sources": "https://arxiv.org/html/2604.24218v1",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "rtl-benchls-roundtrip",
+      "name": "RTL-BenchLS / RTL→abstract→RTL round-trip",
+      "family": "RTL-BenchLS",
+      "object_identity": "同家族第一协议；公开任务和结果标签，非工具agent轨迹库",
+      "task": "比较NL(r=.5/1)、diagram-NL、Python/C、freeform抽象的重建；当前runner实现plainNL两阶段，不能当所有论文分轨完整实现。",
+      "available_materials_and_tools": "数据/嵌入formal脚本及代码可读，data/results CCBY4、frameworkMIT，上游RTL保留原license；商业Conformal/JasperGold（可替换Formality）需许可。CLI默认noop恒True仅开发，必须显式真实verifier。嵌入脚本有旧input/rtl路径而reference写golden.v/revised.v，尚需适配；不宣称clone即复现。",
+      "trajectory_and_training_access": "当前公开RTL/任务/嵌入脚本与6模型×3任务逐例pass/fail标签；18结果文件无生成RTL/messages，不是完整抽象、工具原log、失败修复/对话轨迹；有代码输出选项不等历史trace已发布。",
+      "limits": "论文r为去注释字符比，当前runner是近似token预算且最少256/最多4096，不是字符硬限制。代码固定分母420，换slice/limit须重算；self-equivalence仅过滤工具可处理性，不证明spec正确。完整toolbuild/总成本/seed/原log未取得。",
+      "primary_sources": "https://arxiv.org/html/2606.08976v1; https://github.com/hkust-zhiyao/RTL-BenchLS/tree/5a8d15a7818b7925034850092dae9c48cd5e3c80",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "rtl-benchls-masked",
+      "name": "RTL-BenchLS / compress-then-reconstruct masked content",
+      "family": "RTL-BenchLS",
+      "object_identity": "同家族第二协议；答案描述阶段可见gold，非完全盲infilling",
+      "task": "LLM先把golden缺失块概括为3–10词description，再按description恢复缺失逻辑，并拼回第一个[MASKED]位置；区别于没有任何gold派生提示的纯补全。",
+      "available_materials_and_tools": "数据/嵌入formal脚本及代码可读，data/results CCBY4、frameworkMIT，上游RTL保留原license；商业Conformal/JasperGold（可替换Formality）需许可。CLI默认noop恒True仅开发，必须显式真实verifier。嵌入脚本有旧input/rtl路径而reference写golden.v/revised.v，尚需适配；不宣称clone即复现。",
+      "trajectory_and_training_access": "当前公开RTL/任务/嵌入脚本与6模型×3任务逐例pass/fail标签；18结果文件无生成RTL/messages，不是完整抽象、工具原log、失败修复/对话轨迹；有代码输出选项不等历史trace已发布。",
+      "limits": "描述阶段可见gold属于此任务设定，不能称hidden-answer agentrepair；paper正文公式/提示的可见性需按当前release明确。reference parser仅substring/独立proven行，未核全部property finalsummary/退出码，部署前需scorer适配；静态代码问题不等论文已被证明误判。",
+      "primary_sources": "https://arxiv.org/html/2606.08976v1; https://github.com/hkust-zhiyao/RTL-BenchLS/tree/5a8d15a7818b7925034850092dae9c48cd5e3c80",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "rtl-benchls-repoissue",
+      "name": "RTL-BenchLS / real GitHub issue-fix reasoning",
+      "family": "RTL-BenchLS",
+      "object_identity": "同家族第三协议；108个真实issue-PR元数据与goldcommit",
+      "task": "生成修复完整模块，golden由maintainer修复revision得到；当前单次生成，非自主检索整个仓库/多轮EDA反馈。goldpatch须对模型隔离。",
+      "available_materials_and_tools": "数据/嵌入formal脚本及代码可读，data/results CCBY4、frameworkMIT，上游RTL保留原license；商业Conformal/JasperGold（可替换Formality）需许可。CLI默认noop恒True仅开发，必须显式真实verifier。嵌入脚本有旧input/rtl路径而reference写golden.v/revised.v，尚需适配；不宣称clone即复现。",
+      "trajectory_and_training_access": "当前公开RTL/任务/嵌入脚本与6模型×3任务逐例pass/fail标签；18结果文件无生成RTL/messages，不是完整抽象、工具原log、失败修复/对话轨迹；有代码输出选项不等历史trace已发布。",
+      "limits": "原文称过滤单文件≤50changedLoC，同时描述goldfix平均+42/−29且可数百行，筛选粒度/口径需原manifest澄清。当前runner按输出posedge/negedge推checker类型、取首module为top；无完整依赖装配/冻结约束/逐次log，paper正式流程与模板不可等同。",
+      "primary_sources": "https://arxiv.org/html/2606.08976v1; https://github.com/hkust-zhiyao/RTL-BenchLS/tree/5a8d15a7818b7925034850092dae9c48cd5e3c80",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "rtl-cktevo-repoevolution",
+      "name": "CktEvo / repository RTL evolution with native synthesis baseline",
+      "family": "CktEvo",
+      "object_identity": "benchmark+reference方法论文；当前仅部分初始设计包开放",
+      "task": "保持Φ约束和原功能，LLM跨文件优化；syntax快速筛与完整综合/STA、Formality硬门，失败rectification、MAP-Elites archive和parent/inspiration采样；默认优化area×delay，不优化power。",
+      "available_materials_and_tools": "当前203tree条目完整，初始10设计源码可取；root无LICENSE，ethmac局部有LICENSE，不自动授权全部上游训练。未见完整框架/SDC/逐次候选/工具反馈、allfailure成本、seed与精确toolbuild，不能称整条开源复现。",
+      "trajectory_and_training_access": "当前仅10设计初始RTL及局部license；闭环参考框架/原始prompt-action-EDA-observation/reward、失败迭代和费用数据未公开定位。",
+      "limits": "论文生产级/原生已饱和表述不等独立验证工业最优；若与open源比较须保持tool/PDK/约束/预算，不能把10.50%推广商业签核。当前缺audio与全部workflow是局部发布缺口，保留论文11例，不用当前10改写历史分母。",
+      "primary_sources": "https://arxiv.org/html/2603.08718v1; https://github.com/cure-lab/cktevo/tree/2f1abe75cc48437378bd8832517048ba64d53149",
       "record_snapshot_matches_audit": true
     }
   ],
