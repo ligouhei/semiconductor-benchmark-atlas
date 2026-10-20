@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T07:02:50.451054+00:00",
+  "as_of": "2026-10-20T07:11:34.235945+00:00",
   "status": "task and input/label comparison, not a new benchmark or ranking",
   "scope": "时序任务按输入权限、计算阶段、目标/单位/有效对象和独立oracle分层。RTL预测、布线前预测、弧延迟求解、给定参考弧传播、模型提取与工程优化不能用同一个相关性或速度榜替代。",
   "items": [

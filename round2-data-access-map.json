@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-10-20T07:02:51.007756+00:00",
+  "as_of": "2026-10-20T07:11:34.793807+00:00",
   "status": "第二轮12h进行中的数据/轨迹开放性核查，非完整市场清单或最终结论",
   "scope": "只覆盖本轮已保存一手核查的新增协议；训练样本、评测输入、模型权重、整理后记忆、生成采样轨迹与LLM工具交互轨迹分别描述",
-  "protocol_records": 43,
-  "families": 19,
+  "protocol_records": 45,
+  "families": 20,
   "items": [
     {
       "catalog_id": "lib-siemens-nemo-characterization",
@@ -519,6 +519,30 @@
       "trajectory_and_training_access": "2069个逐步消息JSON（690/690/689），69重复任务/三prompt方法组；含assistant actions/tool反馈/结果评分与token统计，不是逐action外部reward或独立holdout训练集。根AGPL3与上游KG CCBYNCSA4.0分开。",
       "limits": "有限固定KG上的query正确不等最新供应链实况、采购决策、fab物理或OPC优化。分数为作者发布表静态重聚合，未执行查询/独立重算gold；notebook引用外部evaluate_sparql_queries.py及未固定gold目录，当前repo无该checker源码。原始query失败和自报success分母必须保留，训练/评测同69题需隔离。",
       "primary_sources": "https://ceur-ws.org/Vol-3996/paper-5.pdf; https://github.com/wintechis/compass/tree/0c2184af6a4770a473235ab896540528c43cf38f; https://github.com/wintechis/supplybench",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "litho-arlo-method",
+      "name": "ARLO / LithoBench numerical-mask RL study",
+      "family": "LithoBench",
+      "object_identity": "现有LithoBench上的方法实验；关键指标口径冲突未消解，非新数据集或LLM agent benchmark",
+      "task": "连续灰度mask M上每像素动作ΔM∈[-.1,.1]，仿真读L2/PVB/EPE/复杂度后PPO refinement，再阈值化；非自然语言工具调用或完整工程recipe。",
+      "available_materials_and_tools": "全文及作者机构VoR公开；数据upon reasonable request，未定位完整作者code/weights/split/逐轮训练反馈。作者称重配EUV kernels而非fab校准，OpenHT/PyLitho名称/工艺corner设置需固定实际实现。机构PDF网页可读，两次本地下载SSL失败，未声称有本地PDF字节hash。",
+      "trajectory_and_training_access": "PPO mask-refinement策略轨迹不同于LLM工具交互；本次未取得完整训练/推理轨迹，输入LithoBench公开不等作者训练结果已公开。",
+      "limits": "正文称EPE104/shot1037更高，table7为1.8/192更低，改变方法排名和复杂度代价判断，须作者/原始结果澄清。MRC/最小线宽/spacing只是未来扩展，shot代理不等实际fracture和mask写版验收；不采信论文production-ready字样为工业验证。",
+      "primary_sources": "https://www.nature.com/articles/s41598-026-43555-z; https://shura.shu.ac.uk/37129/8/Akmal-AdaptiveReinforcementLearning%28VoR%29.pdf",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "boundary-eaa-microscopy",
+      "name": "EAA / microscopy runtime and small evaluation protocols",
+      "family": "Experiment Automation Agents EAA",
+      "object_identity": "公开runtime与微型方法评测；材料表征边界，非半导体fab基准套件",
+      "task": "顺序调用采集tool并终止；或直接视觉读坐标/位移。框架支持LLM编排和纯逻辑BO/配准工作流，所核analytical focusing明确logicinsteadLLM。",
+      "available_materials_and_tools": "当前完整tree228entries/168files，15selectedGitblobs匹配；SQLite消息/checkpoint持久化实现公开，不等实际原始session训练集发布。树中未定位微评测CSV/JSONL/SQLite结果；论文dataavailability仅称演示视频附文。未见项目自身LICENSE或三个所核pyproject license，唯一LICENSE属第三方MathJax，不外推为EAA再利用授权。",
+      "trajectory_and_training_access": "代码提供SQLite transcript/checkpoint和图像路径保存；当前固定tree没有完整公开微评测/实际case原始交互语料，视频和token汇总不等可训练多步trace。",
+      "limits": "5模型×10trial的简单采集已在作者设置饱和，但不证明复杂实验/新硬件/焦点闭环饱和。表中case聚焦15kinput/7koutput与约$.1属作者特定案例估计，不含完整人时/硬件/失败成本。理论工具可操作、logger可记录与完整任务/轨迹可训练三者分开；不作为fab计量/良率工业签核。",
+      "primary_sources": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13633048/; https://github.com/AdvancedPhotonSource/EAA/tree/738960330cb66b3cf195d7e261def2e89ef5f9a8",
       "record_snapshot_matches_audit": true
     }
   ],

@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T07:02:51.101749+00:00",
+  "generated_at": "2026-10-20T07:11:34.887069+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 343,
-    "records": 609,
-    "records_with_any_field_audit_entry": 367,
-    "records_with_current_field_audit_snapshot": 334,
+    "families": 344,
+    "records": 611,
+    "records_with_any_field_audit_entry": 369,
+    "records_with_current_field_audit_snapshot": 336,
     "records_without_current_field_audit_snapshot": 275
   },
   "requirements_per_record": [
@@ -4248,6 +4248,35 @@
       ]
     },
     {
+      "benchmark_family": "Experiment Automation Agents EAA",
+      "record_count": 1,
+      "records_with_current_field_audit": 1,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "boundary-eaa-microscopy",
+          "name": "EAA / microscopy runtime and small evaluation protocols",
+          "category": "制造/材料显微与实验工具agent（边界）",
+          "artifact_type": "公开runtime与微型方法评测；材料表征边界，非半导体fab基准套件",
+          "task_layer": "显微采集、图像定位/配准与BO聚焦工具编排",
+          "evidence_status": "第二轮12h进行中；一手全文与选定源码/计数/表值静态核查，未执行LLM、RL、仿真或第三方实验代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-arlo-eaa-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "固定完整数据/评分器/模型与预算、分割和复现资产；存在内部口径差异时保留各版本，不以缺原始数据支持工业通过结论。",
+          "limitations": "5模型×10trial的简单采集已在作者设置饱和，但不证明复杂实验/新硬件/焦点闭环饱和。表中case聚焦15kinput/7koutput与约$.1属作者特定案例估计，不含完整人时/硬件/失败成本。理论工具可操作、logger可记录与完整任务/轨迹可训练三者分开；不作为fab计量/良率工业签核。",
+          "tools_and_access": "当前完整tree228entries/168files，15selectedGitblobs匹配；SQLite消息/checkpoint持久化实现公开，不等实际原始session训练集发布。树中未定位微评测CSV/JSONL/SQLite结果；论文dataavailability仅称演示视频附文。未见项目自身LICENSE或三个所核pyproject license，唯一LICENSE属第三方MathJax，不外推为EAA再利用授权。",
+          "industrial_value": "研究判断：有助理解视觉工程agent应调用现成数值工具的位置；涉及材料显微/同步辐射，与芯片设计和真实制造recipe单列边界。"
+        }
+      ]
+    },
+    {
       "benchmark_family": "FAB-Bench FutureFab",
       "record_count": 1,
       "records_with_current_field_audit": 1,
@@ -8282,8 +8311,8 @@
     },
     {
       "benchmark_family": "LithoBench",
-      "record_count": 5,
-      "records_with_current_field_audit": 5,
+      "record_count": 6,
+      "records_with_current_field_audit": 6,
       "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
       "records": [
         {
@@ -8401,6 +8430,27 @@
           "limitations": "validnominal门是contourproxy<2且MRCproxy≤5；低EPE与validity分别报，不能以0EPE称通过签核。dev候选数扩增有额外仿真/采样预算，不能等同单轮agent改进或32独立新IP。开发32名单与所发4×20heldouttier无交集已核，仍需完整源图划分核。",
           "tools_and_access": "固定repob971fdcab4e2ef024cdd8009c4d66c2e474d9497原代码MIT，上游LithoBench另许可。20选定文件均Gitblob匹配。代码/冻结manifest/1024candidate行/13696subset行/281finalcell行公开；原图、生成mask、weights、W&B与rawlogs刻意不包含。weights需联系作者并受上游授权；hash可核身份不等可下载。",
           "industrial_value": "研究判断：固定候选集选择与制造代理指标；公开academic或方法实验不自动具有工厂校准、商业签核与独立盲测效力。"
+        },
+        {
+          "id": "litho-arlo-method",
+          "name": "ARLO / LithoBench numerical-mask RL study",
+          "category": "制造/光刻/代理仿真引导OPC优化",
+          "artifact_type": "现有LithoBench上的方法实验；关键指标口径冲突未消解，非新数据集或LLM agent benchmark",
+          "task_layer": "神经初始mask+PPO像素透射率更新，不做Calibre recipe/tool工程编排",
+          "evidence_status": "第二轮12h进行中；一手全文与选定源码/计数/表值静态核查，未执行LLM、RL、仿真或第三方实验代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-arlo-eaa-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "固定完整数据/评分器/模型与预算、分割和复现资产；存在内部口径差异时保留各版本，不以缺原始数据支持工业通过结论。",
+          "limitations": "正文称EPE104/shot1037更高，table7为1.8/192更低，改变方法排名和复杂度代价判断，须作者/原始结果澄清。MRC/最小线宽/spacing只是未来扩展，shot代理不等实际fracture和mask写版验收；不采信论文production-ready字样为工业验证。",
+          "tools_and_access": "全文及作者机构VoR公开；数据upon reasonable request，未定位完整作者code/weights/split/逐轮训练反馈。作者称重配EUV kernels而非fab校准，OpenHT/PyLitho名称/工艺corner设置需固定实际实现。机构PDF网页可读，两次本地下载SSL失败，未声称有本地PDF字节hash。",
+          "industrial_value": "研究判断：mask数值优化仍可比较研究价值，但这份材料当前不能支持一致的工业收益排名，也不提供LLM recipe-agent轨迹。"
         }
       ]
     },

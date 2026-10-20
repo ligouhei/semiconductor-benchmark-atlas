@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T07:02:51.046790+00:00",
+  "as_of": "2026-10-20T07:11:34.831774+00:00",
   "status": "coverage inventory with explicit residual limits, not universal completeness/quality certification",
   "scope": "依据用户阶段划分逐项列已有覆盖与剩余限制；“所有可发现”按此次公开资料检索边界理解，不声称覆盖未公开工业bench或互联网全部材料。",
   "method": [
@@ -706,8 +706,8 @@
     },
     {
       "domain": "制造光刻",
-      "record_count": 70,
-      "family_count": 45,
+      "record_count": 72,
+      "family_count": 46,
       "catalog_ids": [
         "litho-lithobench",
         "litho-opc-engineer-assistant",
@@ -778,7 +778,9 @@
         "litho-binaryflow-final",
         "litho-binaryflow-capability",
         "fab-fabbench-rag",
-        "fab-supplybench-compass"
+        "fab-supplybench-compass",
+        "litho-arlo-method",
+        "boundary-eaa-microscopy"
       ],
       "covered_tasks": "OPC/ILT求解、前向代理、SMO/随机性、recipe/工程助手、掩模写版、热点/SEM/晶圆模式/计量/良率/调度",
       "remaining_limits": "VPEvolve已有公开20窗口/代码的Calibre recipeagent协议，但商业model/deck与wafer闭环不公开；跨工艺/多工具/隐藏布局统一agent榜仍缺完整对照；SEM像素与电测不是同gold。部分官方原包/许可证/lot血缘未取，mock/合成/partialagent明确标记。",

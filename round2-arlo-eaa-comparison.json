@@ -1,0 +1,205 @@
+{
+  "status": "round2 active; numericalRL and experimentmicrotests distinguished",
+  "protocols": [
+    {
+      "id": "litho-arlo-method",
+      "benchmark_family": "LithoBench",
+      "name": "ARLO / LithoBench numerical-mask RL study",
+      "category": "制造/光刻/代理仿真引导OPC优化",
+      "artifact_type": "现有LithoBench上的方法实验；关键指标口径冲突未消解，非新数据集或LLM agent benchmark",
+      "task_layer": "神经初始mask+PPO像素透射率更新，不做Calibre recipe/tool工程编排",
+      "version": "ScientificReports16:13589 / DOI10.1038/s41598-026-43555-z；2026-03-15；作者公开VoR读取",
+      "input": "target tile、工艺核/光阻模型与初始U-Net输出。消融称10000张256²metal tile按80/10/10划分，但无冻结manifest/源IP隔离证据。作者四subset数相加133323，与声明总133496差173；不作为官方LithoBench题量更正。",
+      "task": "连续灰度mask M上每像素动作ΔM∈[-.1,.1]，仿真读L2/PVB/EPE/复杂度后PPO refinement，再阈值化；非自然语言工具调用或完整工程recipe。",
+      "output": "优化mask与仿真PPA类数值指标；未给完整可审计训练/评测trace。",
+      "metrics": "论文同时给未归一平方和与除N²的L2/PVB；EPE平方和公式与nm距离表述、奖励table1/式5/消融描述尚不一致。已发表table7：ARLO L2.032/PVB7.4/EPE1.8/shot192；GAN .155/12.2/2.9/368，算得L2降79.35%、PVB降39.34%。但正文/结论另给25703/4970/104/1037及GAN41372/19156/25/368，摘要37.8%/74%接近该raw口径，无法与table7共同换算。",
+      "baseline": "GAN-OPC/CFNO/DLN/RL-ILT/CAMO；需固定同一kernel/scorer/训练分割/预算。作者称主实验RTX3050、消融A100；.035s/256²patch含forward+10refinement仿真为作者声明，不是完整layout runtime或独立重跑；无商业签核OPC同预算对照。",
+      "tools_and_access": "全文及作者机构VoR公开；数据upon reasonable request，未定位完整作者code/weights/split/逐轮训练反馈。作者称重配EUV kernels而非fab校准，OpenHT/PyLitho名称/工艺corner设置需固定实际实现。机构PDF网页可读，两次本地下载SSL失败，未声称有本地PDF字节hash。",
+      "limitations": "正文称EPE104/shot1037更高，table7为1.8/192更低，改变方法排名和复杂度代价判断，须作者/原始结果澄清。MRC/最小线宽/spacing只是未来扩展，shot代理不等实际fracture和mask写版验收；不采信论文production-ready字样为工业验证。",
+      "industrial_value": "研究判断：mask数值优化仍可比较研究价值，但这份材料当前不能支持一致的工业收益排名，也不提供LLM recipe-agent轨迹。",
+      "primary_sources": "https://www.nature.com/articles/s41598-026-43555-z; https://shura.shu.ac.uk/37129/8/Akmal-AdaptiveReinforcementLearning%28VoR%29.pdf",
+      "evidence_status": "第二轮12h进行中；一手全文与选定源码/计数/表值静态核查，未执行LLM、RL、仿真或第三方实验代码。",
+      "next_verification": "固定完整数据/评分器/模型与预算、分割和复现资产；存在内部口径差异时保留各版本，不以缺原始数据支持工业通过结论。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "boundary-eaa-microscopy",
+      "benchmark_family": "Experiment Automation Agents EAA",
+      "name": "EAA / microscopy runtime and small evaluation protocols",
+      "category": "制造/材料显微与实验工具agent（边界）",
+      "artifact_type": "公开runtime与微型方法评测；材料表征边界，非半导体fab基准套件",
+      "task_layer": "显微采集、图像定位/配准与BO聚焦工具编排",
+      "version": "npjComputationalMaterials2026 / DOI10.1038/s41524-026-02213-8；currentrepo738960330cb66b3cf195d7e261def2e89ef5f9a8",
+      "input": "三种微评测：①dummytool按方格采4张256²图像，5模型×10trial；②同一512²cameraman加红十字中心(140,80)，5模型×10trial；③30张XRF图各施(-3,3)整数随机位移，比较模型估位移与phasecorrelation。另展示聚焦/featuresearch/交互采集三个实际case。",
+      "task": "顺序调用采集tool并终止；或直接视觉读坐标/位移。框架支持LLM编排和纯逻辑BO/配准工作流，所核analytical focusing明确logicinsteadLLM。",
+      "output": "采集调用与图像、报告坐标/位移、聚焦FWHM/参数和会话记录能力。",
+      "metrics": "采集hit=命中expectedcalls/40，五模型均100%；是特定4call微任务，不是全实验成功率。十字error用pixel坐标误差，重复同图不是50独立图片；GPT4o约32px、Gemma31B约13px、Gemini3ProPreview均值<5px为作者图/文结果。30图配准GPT5平均欧氏误差3px，phasecorrelation30/30正确。温度1，第三方与本地推理路径不同，latency非受控模型速度比较。",
+      "baseline": "同微任务五VLM；配准直接算法为原生baseline。公开代码已有纯逻辑聚焦、BO和registration路径，因此应比较agent选工具/恢复与确定性实验脚本，不把原生配准/BO求解全归模型。",
+      "tools_and_access": "当前完整tree228entries/168files，15selectedGitblobs匹配；SQLite消息/checkpoint持久化实现公开，不等实际原始session训练集发布。树中未定位微评测CSV/JSONL/SQLite结果；论文dataavailability仅称演示视频附文。未见项目自身LICENSE或三个所核pyproject license，唯一LICENSE属第三方MathJax，不外推为EAA再利用授权。",
+      "limitations": "5模型×10trial的简单采集已在作者设置饱和，但不证明复杂实验/新硬件/焦点闭环饱和。表中case聚焦15kinput/7koutput与约$.1属作者特定案例估计，不含完整人时/硬件/失败成本。理论工具可操作、logger可记录与完整任务/轨迹可训练三者分开；不作为fab计量/良率工业签核。",
+      "industrial_value": "研究判断：有助理解视觉工程agent应调用现成数值工具的位置；涉及材料显微/同步辐射，与芯片设计和真实制造recipe单列边界。",
+      "primary_sources": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13633048/; https://github.com/AdvancedPhotonSource/EAA/tree/738960330cb66b3cf195d7e261def2e89ef5f9a8",
+      "evidence_status": "第二轮12h进行中；一手全文与选定源码/计数/表值静态核查，未执行LLM、RL、仿真或第三方实验代码。",
+      "next_verification": "固定完整数据/评分器/模型与预算、分割和复现资产；存在内部口径差异时保留各版本，不以缺原始数据支持工业通过结论。",
+      "retrieved_date": "2026-10-20"
+    }
+  ],
+  "static_audit": {
+    "as_of": "2026-10-20T07:09:27.253562+00:00",
+    "scope": "static primary fulltexts,15Gitblobs and arithmetic only; no source execution",
+    "arlo": {
+      "identity": "existingLithoBench method, neural/PPO numericalmask refinement; noLLMtoolagent",
+      "paper": "https://www.nature.com/articles/s41598-026-43555-z",
+      "pdf_table_source": "https://shura.shu.ac.uk/37129/8/Akmal-AdaptiveReinforcementLearning%28VoR%29.pdf#page=14",
+      "pdf_table_provenance": "primary author institutional published-version PDF read through web; both filesystem PDF requests failed SSL and were retained, so no local PDF-byte verification claim",
+      "table7": {
+        "GAN-OPC": {
+          "l2": 0.155,
+          "pvb": 12.2,
+          "epe": 2.9,
+          "shots": 368,
+          "runtime_s": 0.98
+        },
+        "CFNO": {
+          "l2": 0.054,
+          "pvb": 7.2,
+          "epe": 2.5,
+          "shots": 279,
+          "runtime_s": 0.45
+        },
+        "DLN": {
+          "l2": 0.045,
+          "pvb": 10.2,
+          "epe": 4.5,
+          "shots": 650,
+          "runtime_s": 0.095
+        },
+        "RL-ILT": {
+          "l2": 0.042,
+          "pvb": 9.5,
+          "epe": 1.9,
+          "shots": 800,
+          "runtime_s": 0.08
+        },
+        "CAMO": {
+          "l2": 0.04,
+          "pvb": 8.2,
+          "epe": 4.1,
+          "shots": 614,
+          "runtime_s": 0.336
+        },
+        "ARLO": {
+          "l2": 0.032,
+          "pvb": 7.4,
+          "epe": 1.8,
+          "shots": 192,
+          "runtime_s": 0.035
+        }
+      },
+      "table7_reduction_percent": {
+        "GAN-OPC": {
+          "l2": 79.35483870967742,
+          "pvb": 39.34426229508196,
+          "epe": 37.93103448275862,
+          "shots": 47.82608695652174
+        },
+        "CFNO": {
+          "l2": 40.74074074074073,
+          "pvb": -2.7777777777777803,
+          "epe": 28.0,
+          "shots": 31.182795698924732
+        },
+        "DLN": {
+          "l2": 28.888888888888886,
+          "pvb": 27.450980392156854,
+          "epe": 60.0,
+          "shots": 70.46153846153847
+        },
+        "RL-ILT": {
+          "l2": 23.809523809523814,
+          "pvb": 22.105263157894733,
+          "epe": 5.2631578947368345,
+          "shots": 76.0
+        }
+      },
+      "prose_alternative_numbers": {
+        "arlo_l2": 25703,
+        "gan_l2": 41372,
+        "arlo_pvb": 4970,
+        "gan_pvb": 19156,
+        "arlo_epe": 104,
+        "gan_epe": 25,
+        "arlo_shots": 1037,
+        "gan_shots": 368
+      },
+      "prose_reductions": {
+        "l2": 37.873440974572176,
+        "pvb": 74.05512633117561
+      },
+      "dataset_declared_total": 133496,
+      "dataset_four_named_subsets_sum": 133323,
+      "dataset_sum_difference": 173,
+      "conflicts": [
+        "表7ARLO EPE1.8/shot192而comparative/conclusion104/1037；并非一致的改善/代价排序。",
+        "表7GAN L2 .155→.032/PVB12.2→7.4算得79.35%/39.34%，不能复算摘要37.8%/74.0%；正文另一raw口径能算近摘要值，未给与表7的共同转换。",
+        "奖励table1、公式5、ablation描述不相同；EPE公式8为平方和而后文按nm称距离，尚缺一致scorer。",
+        "四subset合计133323与正文总133496差173，不据此修改官方LithoBench题量。"
+      ],
+      "access": "data upon reasonable request；未确认作者完整code/weights/tilesplit/原始结果和训练trajectory公开；不将公开LithoBench输入当作ARLO训练轨迹。"
+    },
+    "eaa": {
+      "paper": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13633048/",
+      "repo": "https://github.com/AdvancedPhotonSource/EAA",
+      "commit": "738960330cb66b3cf195d7e261def2e89ef5f9a8",
+      "complete_tree_entries": 228,
+      "files": 168,
+      "own_project_license_fields": {
+        "pyproject.toml": null,
+        "packages/eaa-core/pyproject.toml": null,
+        "packages/eaa-imaging/pyproject.toml": null
+      },
+      "license_named_paths": [
+        "packages/eaa-core/src/eaa_core/gui/static/mathjax/LICENSE"
+      ],
+      "current_published_data_candidates": [],
+      "paper_microtests": [
+        {
+          "task": "dummyimage acquisition",
+          "models": 5,
+          "trials_per_model": 10,
+          "expected_calls_per_trial": 4,
+          "expected_calls_per_model": 40,
+          "reported_hit_rate_all_models": 1.0,
+          "interpretation": "特定4call微任务饱和，不等全实验/焦点收敛100%"
+        },
+        {
+          "task": "singlecrosshair localization",
+          "models": 5,
+          "trials_per_model": 10,
+          "image_shape": [
+            512,
+            512
+          ],
+          "true_marker_xy": [
+            140,
+            80
+          ],
+          "metric": "coordinate error pixels; sameoneimage repeated, nolargeheldoutimages"
+        },
+        {
+          "task": "registration",
+          "image_pairs": 30,
+          "integer_shift_range": [
+            -3,
+            3
+          ],
+          "gpt5_mean_euclidean_error_pixels": 3.0,
+          "phase_correlation_correct_pairs": 30,
+          "interpretation": "原生phasecorrelation已可解本微任务；agent应调用算法而非由nativevision估位移"
+        }
+      ],
+      "runtime_vs_dataset": "SQLite transcript/checkpoint persistence and BO/analytical focusing code public; logger not actual published sessions. Current tree has no rawbenchmark CSV/JSONL/DB result corpus.",
+      "boundaries": "材料显微/同步辐射边界研究，非fab产线计量签核；三案例token表不是三个benchmark的完整成本/成功率。"
+    }
+  }
+}
