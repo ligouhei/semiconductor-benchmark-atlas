@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T06:49:14.609425+00:00",
+  "generated_at": "2026-10-20T06:54:43.973339+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 340,
-    "records": 606,
-    "records_with_any_field_audit_entry": 364,
-    "records_with_current_field_audit_snapshot": 331,
+    "families": 342,
+    "records": 608,
+    "records_with_any_field_audit_entry": 366,
+    "records_with_current_field_audit_snapshot": 333,
     "records_without_current_field_audit_snapshot": 275
   },
   "requirements_per_record": [
@@ -4248,6 +4248,35 @@
       ]
     },
     {
+      "benchmark_family": "FAB-Bench FutureFab",
+      "record_count": 1,
+      "records_with_current_field_audit": 1,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "fab-fabbench-rag",
+          "name": "FAB-Bench / manufacturing knowledge RAG QA",
+          "category": "制造/工艺知识检索与问答",
+          "artifact_type": "论文定义的200QA与RAG评测；当前数据仓库404，非已核可下载工具agent任务包",
+          "task_layer": "文献/专利/标准检索、跨文档回答；不执行fab工艺",
+          "evidence_status": "第二轮12h进行中；一手全文与附录静态阅读、计数/公式/公开访问状态核对；未运行第三方代码、LLM、EDA或仿真。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-fab-mcp-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "继续核完整任务、冻结评分器、轨迹与成本硬上限；不可获取处明确保留限制，不以论文示例代替完整可下载数据。",
+          "limitations": "六维均值随context共变，论文aggregate相关.90–.99，不称独立统计样本；下游human–judge相关校准未完成。专家18QA/条件验证的是生成质量，不能当全部200题人工金标准。启发式ContextUtilization不等检索忠实性直接验证；问答好不等recipe安全或物理工艺达标。",
+          "tools_and_access": "论文与附录含提示/rubric；作者GitHub链接及API、README、summary、ROB001本次均404。搜索缓存介绍过QAs/200JSON，不据此称当前包可下载；数据、源文献/SEMI标准与训练再利用许可未确认。",
+          "industrial_value": "研究判断：适合企业工艺知识检索诊断；与OPC mask求解、recipe工程agent和MES状态操作区分。"
+        }
+      ]
+    },
+    {
       "benchmark_family": "FALCON",
       "record_count": 3,
       "records_with_current_field_audit": 3,
@@ -5668,6 +5697,35 @@
           "limitations": "公开bug清单造成答案暴露；同家族跨年设计重用影响split。OpenPiton上游介绍不等同具体安全任务配置。",
           "tools_and_access": "庞大SoC；仿真路径VCS、部分FPGA Vivado；按子工程许可证",
           "industrial_value": "安全验证有持续价值；需隐藏变体/真实新bug才能评未见问题"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "Hardware Design MCP Tool Calling",
+      "record_count": 1,
+      "records_with_current_field_audit": 1,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "rtl-hardware-mcp-stateful",
+          "name": "Hardware Design MCP / stateful component-editing benchmark",
+          "category": "数字前端/状态化组件编辑agent",
+          "artifact_type": "私有工具复刻上的论文方法评测；明确不发布server与完整任务",
+          "task_layer": "嵌入式硬件组件/VLNV/端口/参数/连接编辑，非RTL综合与PPA",
+          "evidence_status": "第二轮12h进行中；一手全文与附录静态阅读、计数/公式/公开访问状态核对；未运行第三方代码、LLM、EDA或仿真。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-fab-mcp-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "继续核完整任务、冻结评分器、轨迹与成本硬上限；不可获取处明确保留限制，不以论文示例代替完整可下载数据。",
+          "limitations": "每题gold重置防止错误传播，故非整段session自由累积错误/自救成功率；EVCR不按错误严重性加权。99%callcoverage可同时有错误/多余操作，零TFR也可能完全沉默。未测系统latency；多server仅3模型，不能推工业工具全工作流泛化或芯片功能/物理签核。",
+          "tools_and_access": "论文与代表性案例/完整系统prompt公开；作者明确server实现和完整tasks因proprietary workflow/component specs均不能发布。MCP server仅复刻状态依赖、不调用生产API。论文CCBYSA4.0不授权未发布工具和任务；完整轨迹/模型输出训练许可未取得。",
+          "industrial_value": "研究判断：组件工具接口、状态记忆与依赖编排的窄任务；生产工具自动化尚需实API、状态验收和预算对照。"
         }
       ]
     },

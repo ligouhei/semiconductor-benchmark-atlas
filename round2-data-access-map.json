@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-10-20T06:49:14.515127+00:00",
+  "as_of": "2026-10-20T06:54:43.879123+00:00",
   "status": "第二轮12h进行中的数据/轨迹开放性核查，非完整市场清单或最终结论",
   "scope": "只覆盖本轮已保存一手核查的新增协议；训练样本、评测输入、模型权重、整理后记忆、生成采样轨迹与LLM工具交互轨迹分别描述",
-  "protocol_records": 40,
-  "families": 16,
+  "protocol_records": 42,
+  "families": 18,
   "items": [
     {
       "catalog_id": "lib-siemens-nemo-characterization",
@@ -483,6 +483,30 @@
       "trajectory_and_training_access": "37条带why/metrics/ok的整理后尺寸探索记录与14版图iteration工件可读；非37条完整agentrollout，无全量prompt/tool/token/human-time保证",
       "limits": "当前scorecard/README/历史定义不同须选正式JSON；37条不是全部原始LLM会话。PEX忽略MIMplate环境和结/衬底C，RCmesh存在重复性散布；LVS未覆盖unusedpin，复现同简化模型不等独立物理签核。子仓库完整tree未见LICENSE，商业/训练再用权限未确认；不把MC100样本当硅片yield。",
       "primary_sources": "https://github.com/MacAnalog/dn-003-afe-lpf-250hz-ihp130/blob/cc24b6db5523be530f1143cbf383ccd38b246f46/README.md; https://github.com/MacAnalog/dn-003-afe-lpf-250hz-ihp130/blob/cc24b6db5523be530f1143cbf383ccd38b246f46/doc/sizing-history/rounds.json; https://github.com/MacAnalog/dn-003-afe-lpf-250hz-ihp130/blob/cc24b6db5523be530f1143cbf383ccd38b246f46/signoff/pre-pvt/scorecard.json; https://github.com/MacAnalog/dn-003-afe-lpf-250hz-ihp130/blob/cc24b6db5523be530f1143cbf383ccd38b246f46/layout/H12-pdk-cap/scorecard_post.json; https://github.com/MacAnalog/dn-003-afe-lpf-250hz-ihp130/blob/cc24b6db5523be530f1143cbf383ccd38b246f46/layout/H12-pdk-cap/REVIEW.yaml",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "fab-fabbench-rag",
+      "name": "FAB-Bench / manufacturing knowledge RAG QA",
+      "family": "FAB-Bench FutureFab",
+      "object_identity": "论文定义的200QA与RAG评测；当前数据仓库404，非已核可下载工具agent任务包",
+      "task": "固定query与知识库，RAG检索后回答；without_kb模式实际注入goldcontext、绕过检索，供诊断生成阶段，不是无上下文baseline。",
+      "available_materials_and_tools": "论文与附录含提示/rubric；作者GitHub链接及API、README、summary、ROB001本次均404。搜索缓存介绍过QAs/200JSON，不据此称当前包可下载；数据、源文献/SEMI标准与训练再利用许可未确认。",
+      "trajectory_and_training_access": "200QA为单轮query/context/reference资源的作者声明；当前原始包404，未取得完整多步tool trajectory/训练许可。",
+      "limits": "六维均值随context共变，论文aggregate相关.90–.99，不称独立统计样本；下游human–judge相关校准未完成。专家18QA/条件验证的是生成质量，不能当全部200题人工金标准。启发式ContextUtilization不等检索忠实性直接验证；问答好不等recipe安全或物理工艺达标。",
+      "primary_sources": "https://arxiv.org/html/2605.26476v1; https://github.com/FuturefabAI/FAB-Bench",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "rtl-hardware-mcp-stateful",
+      "name": "Hardware Design MCP / stateful component-editing benchmark",
+      "family": "Hardware Design MCP Tool Calling",
+      "object_identity": "私有工具复刻上的论文方法评测；明确不发布server与完整任务",
+      "task": "读取自然语言请求和tool schema，按依赖创建/检查/删除/保存/加载组件；无效请求应不调用。每题后清除agent改动，回放gold调用至该题恢复下一题canonical状态。",
+      "available_materials_and_tools": "论文与代表性案例/完整系统prompt公开；作者明确server实现和完整tasks因proprietary workflow/component specs均不能发布。MCP server仅复刻状态依赖、不调用生产API。论文CCBYSA4.0不授权未发布工具和任务；完整轨迹/模型输出训练许可未取得。",
+      "trajectory_and_training_access": "作者明确不公开server与完整tasks；附录有示例和prompts，不是可下载完整评测/训练交互集。",
+      "limits": "每题gold重置防止错误传播，故非整段session自由累积错误/自救成功率；EVCR不按错误严重性加权。99%callcoverage可同时有错误/多余操作，零TFR也可能完全沉默。未测系统latency；多server仅3模型，不能推工业工具全工作流泛化或芯片功能/物理签核。",
+      "primary_sources": "https://arxiv.org/html/2608.26199v1",
       "record_snapshot_matches_audit": true
     }
   ],

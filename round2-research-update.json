@@ -1,13 +1,13 @@
 {
   "status": "第二轮12小时研究进行中，非最终交付",
   "round": 2,
-  "updated_beijing": "2026-10-20T14:49:13+08:00",
+  "updated_beijing": "2026-10-20T14:54:42+08:00",
   "start_beijing": "2026-10-20T13:23:20+08:00",
   "earliest_completion_beijing": "2026-10-21T01:23:20+08:00",
   "baseline_records": 566,
   "baseline_families": 326,
-  "current_records": 606,
-  "current_families": 340,
+  "current_records": 608,
+  "current_families": 342,
   "added_protocols": [
     {
       "id": "lib-siemens-nemo-characterization",
@@ -848,6 +848,48 @@
       "next_verification": "冻结完整输入/测量版本/任务目标与可改面，分别核PVT/MC/电路语义/物理完整性、完整agent轨迹、失败分母/全部成本及各层许可。",
       "industrial_value": "研究判断：固定拓扑尺寸优化、PVT再设计和布局审核；已有确定性gm/ID、优化器和验收工具可作强基线。工程数据丰富不等独立大规模agent能力榜或已闭合全部物理签核。",
       "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "fab-fabbench-rag",
+      "name": "FAB-Bench / manufacturing knowledge RAG QA",
+      "benchmark_family": "FAB-Bench FutureFab",
+      "category": "制造/工艺知识检索与问答",
+      "artifact_type": "论文定义的200QA与RAG评测；当前数据仓库404，非已核可下载工具agent任务包",
+      "task_layer": "文献/专利/标准检索、跨文档回答；不执行fab工艺",
+      "version": "arXiv2605.26476v1 / 2026-05-26；2026-10-20访问核查",
+      "input": "论文称从150+论文、70+专利及SEMI标准、约347Mtoken/188topic语料生成1300+候选后选200QA：ROB59、MULTI90、GEN51。语料规模为作者声明，当前无完整manifest可核；正文问答格式50/50与搜索缓存README118/82有差异，不当作已核实际比例。",
+      "task": "固定query与知识库，RAG检索后回答；without_kb模式实际注入goldcontext、绕过检索，供诊断生成阶段，不是无上下文baseline。",
+      "output": "自然语言回答、来源/上下文及六维judge结果。",
+      "metrics": "GPT-4.1-mini经DeepEval G-Eval按Completeness/Depth/Factuality/Relevance/ContextUtilization/SupportQuality六rubric0–10，结果归一化0–1；不是二值工艺成功率。4K–32K十一context/output配置，输出1K/2K/4K，另Qwen72B64K/128K。200×4×11×6=52800评分观测，不是52800独立题；未明确逐题总费用/超时/失败分母。",
+      "baseline": "AnythingLLM内四模型与上下文配置；跨RAGFlow/MaxKB/Metaso诊断。固定检索默认maxsnippets4、threshold.25；显式TF-IDFvsdense消融未做。Metaso模型不可配且部分框架用启发式猜source，因此非完全同模型/同oracle对照。",
+      "tools_and_access": "论文与附录含提示/rubric；作者GitHub链接及API、README、summary、ROB001本次均404。搜索缓存介绍过QAs/200JSON，不据此称当前包可下载；数据、源文献/SEMI标准与训练再利用许可未确认。",
+      "limitations": "六维均值随context共变，论文aggregate相关.90–.99，不称独立统计样本；下游human–judge相关校准未完成。专家18QA/条件验证的是生成质量，不能当全部200题人工金标准。启发式ContextUtilization不等检索忠实性直接验证；问答好不等recipe安全或物理工艺达标。",
+      "industrial_value": "研究判断：适合企业工艺知识检索诊断；与OPC mask求解、recipe工程agent和MES状态操作区分。",
+      "primary_sources": "https://arxiv.org/html/2605.26476v1; https://github.com/FuturefabAI/FAB-Bench",
+      "retrieved_date": "2026-10-20",
+      "evidence_status": "第二轮12h进行中；一手全文与附录静态阅读、计数/公式/公开访问状态核对；未运行第三方代码、LLM、EDA或仿真。",
+      "next_verification": "继续核完整任务、冻结评分器、轨迹与成本硬上限；不可获取处明确保留限制，不以论文示例代替完整可下载数据。"
+    },
+    {
+      "id": "rtl-hardware-mcp-stateful",
+      "name": "Hardware Design MCP / stateful component-editing benchmark",
+      "benchmark_family": "Hardware Design MCP Tool Calling",
+      "category": "数字前端/状态化组件编辑agent",
+      "artifact_type": "私有工具复刻上的论文方法评测；明确不发布server与完整任务",
+      "task_layer": "嵌入式硬件组件/VLNV/端口/参数/连接编辑，非RTL综合与PPA",
+      "version": "arXiv2608.26199v1 / 2026-08-25",
+      "input": "14工具：7adder/3getter/4delete-save-load；六core各40题=240题次，含1call/2call/3–5call依赖、History、Errors、Cross。两noise各60=120题次，复用80个Easy/Hard题并插入40外部Git/GDB题次；Errors另20错拼Hard意图，不能合称360独立题。",
+      "task": "读取自然语言请求和tool schema，按依赖创建/检查/删除/保存/加载组件；无效请求应不调用。每题后清除agent改动，回放gold调用至该题恢复下一题canonical状态。",
+      "output": "调用序列及工具状态变化，对照带tool/argument的期望调用。",
+      "metrics": "ECC=正确成功期望calls/期望calls，每期望最多匹配一次，参数全匹配、匹配不计顺序但server拒绝依赖错误；空gold任务排除ECC。EVCR=额外成功/所有成功，TFR=失败/所有call，无call两者为0；NCA=应不调用且无call任务/全部应不调用任务。best配置ECC.990不等完整任务99%通过；该模型NCA.80=16/20。逐题time/turn/token/cost硬限未明确。",
+      "baseline": "七本地Ollama4bit模型；ReAct每模型16种history/prompt/tool配置搜索后选best，非outofbox成绩。Plan-and-Act可用更强Gemma26B planner帮助弱worker，不作同模型/同成本纯架构消融。需另补直接原生编辑脚本/模板baseline。",
+      "tools_and_access": "论文与代表性案例/完整系统prompt公开；作者明确server实现和完整tasks因proprietary workflow/component specs均不能发布。MCP server仅复刻状态依赖、不调用生产API。论文CCBYSA4.0不授权未发布工具和任务；完整轨迹/模型输出训练许可未取得。",
+      "limitations": "每题gold重置防止错误传播，故非整段session自由累积错误/自救成功率；EVCR不按错误严重性加权。99%callcoverage可同时有错误/多余操作，零TFR也可能完全沉默。未测系统latency；多server仅3模型，不能推工业工具全工作流泛化或芯片功能/物理签核。",
+      "industrial_value": "研究判断：组件工具接口、状态记忆与依赖编排的窄任务；生产工具自动化尚需实API、状态验收和预算对照。",
+      "primary_sources": "https://arxiv.org/html/2608.26199v1",
+      "retrieved_date": "2026-10-20",
+      "evidence_status": "第二轮12h进行中；一手全文与附录静态阅读、计数/公式/公开访问状态核对；未运行第三方代码、LLM、EDA或仿真。",
+      "next_verification": "继续核完整任务、冻结评分器、轨迹与成本硬上限；不可获取处明确保留限制，不以论文示例代替完整可下载数据。"
     }
   ],
   "scope": "公开资料/任务/代码的静态研究；未运行模型、EDA或仿真。当前仅为阶段性增量，不声称完成全范围或12小时。",
@@ -873,10 +915,12 @@
     "SpiceXplorer公开PAM-4三轮800条optimizer trial与LPF37条整理后尺寸记录/14版图iteration；它们不是完整LLM对话。PAM量测/奖励跨轮变更，LPF保留acceptedcorner miss与PEX/LVS边界。",
     "Analog-DB/platform根许可为PolyForm Noncommercial，各上游条目另列许可；两个案例子仓库未定位LICENSE，不能把公开可读取等同商业训练授权。",
     "FPL26五个前列方法已逐源码核：规则/原生工具与LLM贡献需分开。RouteAgents获评分tag有44行开发run摘要，不是逐步交互；主分支已移除seed且修正缺陷。",
-    "PACT两份35行reference表均27train/8test，但完整DCP/rawrun/基线runner未齐；DATuner表26/35时长超过1h，不自动构成正式竞赛等预算基线。"
+    "PACT两份35行reference表均27train/8test，但完整DCP/rawrun/基线runner未齐；DATuner表26/35时长超过1h，不自动构成正式竞赛等预算基线。",
+    "FAB-Bench为200道制造知识RAG QA，六维LLMjudge不是工艺操作成功率；作者仓库/API与原始条目本次404，搜索缓存的发布描述不能替代当前可获取证明。",
+    "硬件MCP评测14工具、六core与两noise共360题次但大量复用；每题后gold回放重置，ECC.990不是端到端session成功率；完整server/tasks作者明确不公开。"
   ],
   "limits": [
-    "本轮新增40条任务/版本协议，不等同数量的成熟公共数据集；TimingAnalysis、HLS-Eval、ChatHLS与FIXME各分轨按同家族登记。",
+    "本轮新增42条任务/版本协议，不等同数量的成熟公共数据集；TimingAnalysis、HLS-Eval、ChatHLS与FIXME各分轨按同家族登记。",
     "FPL26原包743289124bytes与官方SHA256匹配，19DCP逐文件匹配包内SHA256SUM；只核字节/元数据，不加载执行DCP。",
     "HLS-Eval202configs已核固定Git身份，含同源变体；Bench4HLS170个task各有reference/TB路径。",
     "其他候选仍在查证；后续会继续增补原生工具基线、交互轨迹和评分隔离。"

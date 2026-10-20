@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T06:49:14.555644+00:00",
+  "as_of": "2026-10-20T06:54:43.918716+00:00",
   "status": "coverage inventory with explicit residual limits, not universal completeness/quality certification",
   "scope": "依据用户阶段划分逐项列已有覆盖与剩余限制；“所有可发现”按此次公开资料检索边界理解，不声称覆盖未公开工业bench或互联网全部材料。",
   "method": [
@@ -12,8 +12,8 @@
   "items": [
     {
       "domain": "数字前端",
-      "record_count": 82,
-      "family_count": 34,
+      "record_count": 83,
+      "family_count": 35,
       "catalog_ids": [
         "rtl-verilogeval-v1",
         "rtl-verilogeval-v2",
@@ -96,7 +96,8 @@
         "fv-fixme-tbgen",
         "fv-fixme-svagen",
         "fv-fixme-rtlfix-text",
-        "fv-fixme-rtlfix-mm"
+        "fv-fixme-rtlfix-mm",
+        "rtl-hardware-mcp-stateful"
       ],
       "covered_tasks": "RTL与VHDL生成/理解/修复、跨模块工程、微架构优化、规格一致性与功耗/PPA预测；单轮生成与多步agent分别记录",
       "remaining_limits": "近期大套件完整harness/隐藏数据/许可未全公开；CPU/PCIe规范完成不等全ASIC实现，训练语料与评测集关系、跨family泛化需持续核。",
@@ -705,8 +706,8 @@
     },
     {
       "domain": "制造光刻",
-      "record_count": 68,
-      "family_count": 43,
+      "record_count": 69,
+      "family_count": 44,
       "catalog_ids": [
         "litho-lithobench",
         "litho-opc-engineer-assistant",
@@ -775,7 +776,8 @@
         "fab-ldu-cause",
         "litho-lithogrpo-protocol",
         "litho-binaryflow-final",
-        "litho-binaryflow-capability"
+        "litho-binaryflow-capability",
+        "fab-fabbench-rag"
       ],
       "covered_tasks": "OPC/ILT求解、前向代理、SMO/随机性、recipe/工程助手、掩模写版、热点/SEM/晶圆模式/计量/良率/调度",
       "remaining_limits": "VPEvolve已有公开20窗口/代码的Calibre recipeagent协议，但商业model/deck与wafer闭环不公开；跨工艺/多工具/隐藏布局统一agent榜仍缺完整对照；SEM像素与电测不是同gold。部分官方原包/许可证/lot血缘未取，mock/合成/partialagent明确标记。",

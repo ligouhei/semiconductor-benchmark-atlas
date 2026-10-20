@@ -1,0 +1,135 @@
+{
+  "status": "round2 active; papers and access receipts only, no execution",
+  "protocols": [
+    {
+      "id": "fab-fabbench-rag",
+      "name": "FAB-Bench / manufacturing knowledge RAG QA",
+      "benchmark_family": "FAB-Bench FutureFab",
+      "category": "制造/工艺知识检索与问答",
+      "artifact_type": "论文定义的200QA与RAG评测；当前数据仓库404，非已核可下载工具agent任务包",
+      "task_layer": "文献/专利/标准检索、跨文档回答；不执行fab工艺",
+      "version": "arXiv2605.26476v1 / 2026-05-26；2026-10-20访问核查",
+      "input": "论文称从150+论文、70+专利及SEMI标准、约347Mtoken/188topic语料生成1300+候选后选200QA：ROB59、MULTI90、GEN51。语料规模为作者声明，当前无完整manifest可核；正文问答格式50/50与搜索缓存README118/82有差异，不当作已核实际比例。",
+      "task": "固定query与知识库，RAG检索后回答；without_kb模式实际注入goldcontext、绕过检索，供诊断生成阶段，不是无上下文baseline。",
+      "output": "自然语言回答、来源/上下文及六维judge结果。",
+      "metrics": "GPT-4.1-mini经DeepEval G-Eval按Completeness/Depth/Factuality/Relevance/ContextUtilization/SupportQuality六rubric0–10，结果归一化0–1；不是二值工艺成功率。4K–32K十一context/output配置，输出1K/2K/4K，另Qwen72B64K/128K。200×4×11×6=52800评分观测，不是52800独立题；未明确逐题总费用/超时/失败分母。",
+      "baseline": "AnythingLLM内四模型与上下文配置；跨RAGFlow/MaxKB/Metaso诊断。固定检索默认maxsnippets4、threshold.25；显式TF-IDFvsdense消融未做。Metaso模型不可配且部分框架用启发式猜source，因此非完全同模型/同oracle对照。",
+      "tools_and_access": "论文与附录含提示/rubric；作者GitHub链接及API、README、summary、ROB001本次均404。搜索缓存介绍过QAs/200JSON，不据此称当前包可下载；数据、源文献/SEMI标准与训练再利用许可未确认。",
+      "limitations": "六维均值随context共变，论文aggregate相关.90–.99，不称独立统计样本；下游human–judge相关校准未完成。专家18QA/条件验证的是生成质量，不能当全部200题人工金标准。启发式ContextUtilization不等检索忠实性直接验证；问答好不等recipe安全或物理工艺达标。",
+      "industrial_value": "研究判断：适合企业工艺知识检索诊断；与OPC mask求解、recipe工程agent和MES状态操作区分。",
+      "primary_sources": "https://arxiv.org/html/2605.26476v1; https://github.com/FuturefabAI/FAB-Bench",
+      "retrieved_date": "2026-10-20",
+      "evidence_status": "第二轮12h进行中；一手全文与附录静态阅读、计数/公式/公开访问状态核对；未运行第三方代码、LLM、EDA或仿真。",
+      "next_verification": "继续核完整任务、冻结评分器、轨迹与成本硬上限；不可获取处明确保留限制，不以论文示例代替完整可下载数据。"
+    },
+    {
+      "id": "rtl-hardware-mcp-stateful",
+      "name": "Hardware Design MCP / stateful component-editing benchmark",
+      "benchmark_family": "Hardware Design MCP Tool Calling",
+      "category": "数字前端/状态化组件编辑agent",
+      "artifact_type": "私有工具复刻上的论文方法评测；明确不发布server与完整任务",
+      "task_layer": "嵌入式硬件组件/VLNV/端口/参数/连接编辑，非RTL综合与PPA",
+      "version": "arXiv2608.26199v1 / 2026-08-25",
+      "input": "14工具：7adder/3getter/4delete-save-load；六core各40题=240题次，含1call/2call/3–5call依赖、History、Errors、Cross。两noise各60=120题次，复用80个Easy/Hard题并插入40外部Git/GDB题次；Errors另20错拼Hard意图，不能合称360独立题。",
+      "task": "读取自然语言请求和tool schema，按依赖创建/检查/删除/保存/加载组件；无效请求应不调用。每题后清除agent改动，回放gold调用至该题恢复下一题canonical状态。",
+      "output": "调用序列及工具状态变化，对照带tool/argument的期望调用。",
+      "metrics": "ECC=正确成功期望calls/期望calls，每期望最多匹配一次，参数全匹配、匹配不计顺序但server拒绝依赖错误；空gold任务排除ECC。EVCR=额外成功/所有成功，TFR=失败/所有call，无call两者为0；NCA=应不调用且无call任务/全部应不调用任务。best配置ECC.990不等完整任务99%通过；该模型NCA.80=16/20。逐题time/turn/token/cost硬限未明确。",
+      "baseline": "七本地Ollama4bit模型；ReAct每模型16种history/prompt/tool配置搜索后选best，非outofbox成绩。Plan-and-Act可用更强Gemma26B planner帮助弱worker，不作同模型/同成本纯架构消融。需另补直接原生编辑脚本/模板baseline。",
+      "tools_and_access": "论文与代表性案例/完整系统prompt公开；作者明确server实现和完整tasks因proprietary workflow/component specs均不能发布。MCP server仅复刻状态依赖、不调用生产API。论文CCBYSA4.0不授权未发布工具和任务；完整轨迹/模型输出训练许可未取得。",
+      "limitations": "每题gold重置防止错误传播，故非整段session自由累积错误/自救成功率；EVCR不按错误严重性加权。99%callcoverage可同时有错误/多余操作，零TFR也可能完全沉默。未测系统latency；多server仅3模型，不能推工业工具全工作流泛化或芯片功能/物理签核。",
+      "industrial_value": "研究判断：组件工具接口、状态记忆与依赖编排的窄任务；生产工具自动化尚需实API、状态验收和预算对照。",
+      "primary_sources": "https://arxiv.org/html/2608.26199v1",
+      "retrieved_date": "2026-10-20",
+      "evidence_status": "第二轮12h进行中；一手全文与附录静态阅读、计数/公式/公开访问状态核对；未运行第三方代码、LLM、EDA或仿真。",
+      "next_verification": "继续核完整任务、冻结评分器、轨迹与成本硬上限；不可获取处明确保留限制，不以论文示例代替完整可下载数据。"
+    }
+  ],
+  "static_audit": {
+    "as_of": "2026-10-20T06:53:32.016405+00:00",
+    "scope": "primary-paper static reading and arithmetic only; public repository access failures retained; no agent/EDA execution",
+    "papers": {
+      "fabbench_paper": {
+        "file": "evidence/round2-fabmcp49_fabbench_paper.txt",
+        "sha256": "d50bb9562f2e78e0790827b5b6165dcdd098ccee9d8014ecb7dbe8544c45a7a3",
+        "title": "FAB-Bench: A Framework for Adaptive RAG Benchmarking in Semiconductor Manufacturing",
+        "html_tables": 22
+      },
+      "mcp_hardware_paper": {
+        "file": "evidence/round2-fabmcp49_mcp_hardware_paper.txt",
+        "sha256": "73d30429c22d35696ca44ada4e245687cde64814bc91b86ae7840e1dae9d16be",
+        "title": "Benchmarking AI Agents for Hardware Design Automation via MCP Tool Calling",
+        "html_tables": 10
+      }
+    },
+    "fab": {
+      "protocol_qa": 200,
+      "types": {
+        "ROB": 59,
+        "MULTI": 90,
+        "GEN": 51
+      },
+      "domain_term_sum": 431,
+      "metric_observations_for_4models_11configs_6metrics": 52800,
+      "interpretation": "52800重复metric observation来自同一200题，不是52800独立问题或无相关统计样本。正文50/50问答格式声明与搜索缓存README118/82有版本差异，原始200JSON当前404无法核实际分布。",
+      "repository_current_access": [
+        {
+          "url": "https://api.github.com/repos/FuturefabAI/FAB-Bench",
+          "status": "failed",
+          "error": "HTTP Error 404: Not Found",
+          "retrieved_at": "2026-10-20T06:50:10.288680+00:00"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/FuturefabAI/FAB-Bench/main/README.md",
+          "status": "failed",
+          "error": "HTTP Error 404: Not Found",
+          "retrieved_at": "2026-10-20T06:52:25.712986+00:00"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/FuturefabAI/FAB-Bench/main/QAs/_benchmark_summary.json",
+          "status": "failed",
+          "error": "HTTP Error 404: Not Found",
+          "retrieved_at": "2026-10-20T06:52:25.766527+00:00"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/FuturefabAI/FAB-Bench/main/QAs/1_retrieval_robustness/ROB_001.json",
+          "status": "failed",
+          "error": "HTTP Error 404: Not Found",
+          "retrieved_at": "2026-10-20T06:52:25.689626+00:00"
+        },
+        {
+          "url": "https://github.com/FuturefabAI/FAB-Bench",
+          "status": "failed",
+          "error": "HTTP Error 404: Not Found",
+          "retrieved_at": "2026-10-20T06:52:26.054727+00:00"
+        }
+      ],
+      "judge": "GPT-4.1-mini / DeepEval G-Eval；六rubric维度0–10，结果表多为归一化0–1；未完成下游human–judge相关校准。",
+      "cross_framework": "未暴露source的系统改用术语/措辞启发式，ContextUtilization测量定义不完全相同；Metaso模型无法固定，不能称所有框架严格同模型。"
+    },
+    "mcp": {
+      "core_suites": 6,
+      "core_task_appearances": 240,
+      "noise_suites": 2,
+      "noise_task_appearances": 120,
+      "total_suite_task_appearances": 360,
+      "reused_design_appearances_in_noise": 80,
+      "external_appearances_in_noise": 40,
+      "tools": 14,
+      "react_configurations_per_model": 16,
+      "models": 7,
+      "interpretation": "360为suite中的题次；noise复用80个Easy/Hard题，Errors又有20个Hard意图的错拼配对，不称360独立题。",
+      "canonical_state": "每题后丢弃agent突变，再回放期望调用至该任务以恢复下题canonical状态；因此不测整段session自由错误累积/恢复。",
+      "best_reported_ecc": 0.99,
+      "best_model_no_call_accuracy": 0.8,
+      "no_call_denominator": 20,
+      "implied_correct_abstentions": 16,
+      "interpretation_results": "best配置ECC99%不是99%完整任务/新工具迁移成功率；同模型no-call为16/20。EVCR/TFR零调用时0须联合ECC/NCA读。",
+      "access": "论文明确server与tasks均不公开，仅附代表性案例和prompt；论文CC BY-SA4.0不意味着未发布任务/代码已授权。"
+    },
+    "residual_limits": [
+      "精确运行turn/token/timeout与成本硬上限未在所核全文明确，不臆造。",
+      "未确认FAB当前200QA/scorer/sourcecorpus许可；不绕过404或依赖搜索缓存宣称可下载。",
+      "MCP replica不调用生产API，不作RTL功能/PPA、布局布线或全芯片成功率评价。"
+    ]
+  }
+}
