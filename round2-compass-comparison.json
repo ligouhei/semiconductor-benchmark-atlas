@@ -1,0 +1,558 @@
+{
+  "status": "round2 active; full public trajectory schema and released score arithmetic only",
+  "protocols": [
+    {
+      "id": "fab-supplybench-compass",
+      "name": "COMPASS / SupplyBench-based query-agent trajectories",
+      "benchmark_family": "SupplyBench",
+      "category": "制造/供应链知识图谱查询agent",
+      "artifact_type": "公开KGQA方法实验与逐步轨迹；复用SupplyBench，不是新工艺操作任务集",
+      "task_layer": "企业/供应链知识图谱的检索、结构探索与SPARQL查询，不执行制造工具",
+      "version": "COMPASS CAiSE2025 workshop；repo0c2184af6a4770a473235ab896540528c43cf38f；引用SupplyBench v0.1，current另为v0.3",
+      "input": "半导体供应链企业/地点/财务/人员/合作关系图谱；COMPASS取69个1–4triple-pattern查询，论文/README称33755triples。current SupplyBench已改schema/namespace，67个question/query YAML，不能直接替换原69题gold。",
+      "task": "GvD ReAct调用search、deref/describe、query并决定success/fail；COMPASS人工分析行为后修改动作限制和阶段切换prompt，在同69题各重复10次。公开690/690/689份轨迹，不是2069独立任务。",
+      "output": "SPARQL、resultset及system/user/assistant/actions/tool完整消息、运行摘要；发布30份detailed与30份summary评分表，以及前两组事件日志（base XES688trace、raw690，不能当完全一一对应）。",
+      "metrics": "外部resultset precision/recall/F1/EM，不按SPARQL字面匹配；自报SUCCESS不等F1正确。已静态复算三组690行的overall F1均值0.3243/0.3699/0.3444；自报成功比例0.6855/0.6464/0.6681。phase组有1行缺prediction但保留69题分母为0。overall与evaluation_size有效query子集、success_only分开。论文max10cycles，实测iteration与工具calls不同；记录max_tokens1024/temperature0不等完整总token/费用硬限。",
+      "baseline": "base prompt vs action restriction vs phase definition；同69题用于行为分析/改prompt后再测，不是heldout泛化。两种provider混用：base全690AcademicCloud；restriction621/69、phase330/359为AcademicCloud/Fireworks，不能将全部差异单归prompt因果效应；另需直接Text2SPARQL/模板与同预算工具agent基线。",
+      "tools_and_access": "全部2069轨迹与60结果表静态取得，2139个选定Gitblob匹配。消息含assistant动作和tool反馈，适合过程分析/反馈行为研究；没有逐action独立reward。COMPASS根AGPL3、SupplyBench CCBYNCSA4.0、论文CCBY4.0分别；原图谱/轨迹衍生与商业训练授权不可从论文许可推得。原始数据/路径/机器标识不在图谱仓库再分发。",
+      "limitations": "有限固定KG上的query正确不等最新供应链实况、采购决策、fab物理或OPC优化。分数为作者发布表静态重聚合，未执行查询/独立重算gold；notebook引用外部evaluate_sparql_queries.py及未固定gold目录，当前repo无该checker源码。原始query失败和自报success分母必须保留，训练/评测同69题需隔离。",
+      "industrial_value": "研究判断：当前新增中有真实多步tool消息的公开研究材料；范围是供应链知识检索，应与合成fab运营、工艺仿真和制造recipe分层。",
+      "primary_sources": "https://ceur-ws.org/Vol-3996/paper-5.pdf; https://github.com/wintechis/compass/tree/0c2184af6a4770a473235ab896540528c43cf38f; https://github.com/wintechis/supplybench",
+      "evidence_status": "第二轮12h进行中；全2069轨迹schema、固定Git身份与30组结果重聚合静态核验；未执行模型、查询器或第三方notebook。",
+      "next_verification": "继续固定原v0.1图谱与gold、外部checker/agent实现与版本、全部费用/延迟单位和数据使用授权；不将current67题替代旧69题。",
+      "retrieved_date": "2026-10-20"
+    }
+  ],
+  "static_audit": {
+    "as_of": "2026-10-20T07:02:49.604335+00:00",
+    "scope": "all2069publishedtrajectories+30detailed/summary pairs static read; no LLM/SPARQL/EDA/upstream notebook execution",
+    "compass_commit": "0c2184af6a4770a473235ab896540528c43cf38f",
+    "supplybench_current_commit": "d080972f144edd7080ea3f0e7234def1039765fa",
+    "git_blob_checks": 2139,
+    "git_blob_matches": 2139,
+    "event_logs": [
+      {
+        "path": "data/event-logs/0_base_prompt_all.xes",
+        "traces": 688,
+        "events": 6753
+      },
+      {
+        "path": "data/event-logs/1_prompt_with_action_restrictions_all.xes",
+        "traces": 690,
+        "events": 6207
+      }
+    ],
+    "supplybench_current_question_count": 67,
+    "trajectory_files": 2069,
+    "messages": 36503,
+    "role_counts": {
+      "system": 4138,
+      "user": 2069,
+      "assistant": 12041,
+      "tool": 17321,
+      "control": 934
+    },
+    "action_counts": {
+      "search": 6264,
+      "deref": 6204,
+      "query": 5532,
+      "success": 1389,
+      "fail": 690
+    },
+    "trajectory_groups": [
+      {
+        "group": "0-iteration-base-prompt",
+        "files": 690,
+        "unique_question_strings": 69,
+        "states": {
+          "SUCCESS": 473,
+          "FAIL": 216,
+          "TERMINATE": 1
+        },
+        "iterations_min": 3,
+        "iterations_max": 12,
+        "models": {
+          "llama-3.3-70b-instruct": 690
+        },
+        "providers": {
+          "chat-ai.academiccloud.de": 690
+        },
+        "temperatures": {
+          "0": 690
+        },
+        "max_tokens": {
+          "1024": 690
+        },
+        "total_prompt_tokens": 34283133,
+        "total_completion_tokens": 606244,
+        "tool_message_rows": 6065,
+        "interpretation": "tokens为记录的请求/完成token总量，含重复context；无独立费用核算。未发布原始内容/本地路径/机器标识。"
+      },
+      {
+        "group": "1-iteration-prompt-with-action-restrictions",
+        "files": 690,
+        "unique_question_strings": 69,
+        "states": {
+          "SUCCESS": 446,
+          "FAIL": 243,
+          "TERMINATE": 1
+        },
+        "iterations_min": 4,
+        "iterations_max": 12,
+        "models": {
+          "llama-3.3-70b-instruct": 621,
+          "accounts/fireworks/models/llama-v3p3-70b-instruct": 69
+        },
+        "providers": {
+          "chat-ai.academiccloud.de": 621,
+          "api.fireworks.ai": 69
+        },
+        "temperatures": {
+          "0": 690
+        },
+        "max_tokens": {
+          "1024": 690
+        },
+        "total_prompt_tokens": 36135446,
+        "total_completion_tokens": 587100,
+        "tool_message_rows": 5518,
+        "interpretation": "tokens为记录的请求/完成token总量，含重复context；无独立费用核算。未发布原始内容/本地路径/机器标识。"
+      },
+      {
+        "group": "2-iteration-prompt-with-phase-definition",
+        "files": 689,
+        "unique_question_strings": 69,
+        "states": {
+          "SUCCESS": 461,
+          "FAIL": 227,
+          "TERMINATE": 1
+        },
+        "iterations_min": 4,
+        "iterations_max": 12,
+        "models": {
+          "accounts/fireworks/models/llama-v3p3-70b-instruct": 359,
+          "llama-3.3-70b-instruct": 330
+        },
+        "providers": {
+          "api.fireworks.ai": 359,
+          "chat-ai.academiccloud.de": 330
+        },
+        "temperatures": {
+          "0": 689
+        },
+        "max_tokens": {
+          "1024": 689
+        },
+        "total_prompt_tokens": 38698621,
+        "total_completion_tokens": 617925,
+        "tool_message_rows": 5738,
+        "interpretation": "tokens为记录的请求/完成token总量，含重复context；无独立费用核算。未发布原始内容/本地路径/机器标识。"
+      }
+    ],
+    "score_groups": [
+      {
+        "group": "0-iteration-base-prompt",
+        "runs": 10,
+        "evaluation_rows": 690,
+        "unique_gold_names": 69,
+        "f1_all_rows": 0.3242887590229098,
+        "em_all_rows": 0.2753623188405797,
+        "self_reported_success_rate": 0.6855072463768116,
+        "missing_prediction_rows": 0,
+        "self_success_zero_f1_rows": 201,
+        "f1_by_pattern": {
+          "four triple patterns": {
+            "rows": 140,
+            "mean": 0.20174692736230126
+          },
+          "one triple pattern": {
+            "rows": 130,
+            "mean": 0.6574968485954804
+          },
+          "three triple patterns": {
+            "rows": 270,
+            "mean": 0.1605893449341501
+          },
+          "two triple patterns": {
+            "rows": 150,
+            "mean": 0.4445397363030175
+          }
+        },
+        "run_summaries": [
+          {
+            "run": "run-0",
+            "rows": 69,
+            "reported_evaluation_size": 68,
+            "mean_f1": 0.291038734798215,
+            "self_success_rate": 0.7246376811594203,
+            "missing_prediction_rows": 0,
+            "f1_zero_rows": 44,
+            "self_success_zero_f1_rows": 26
+          },
+          {
+            "run": "run-1",
+            "rows": 69,
+            "reported_evaluation_size": 69,
+            "mean_f1": 0.29322029030685404,
+            "self_success_rate": 0.7246376811594203,
+            "missing_prediction_rows": 0,
+            "f1_zero_rows": 43,
+            "self_success_zero_f1_rows": 24
+          },
+          {
+            "run": "run-2",
+            "rows": 69,
+            "reported_evaluation_size": 68,
+            "mean_f1": 0.338150340027333,
+            "self_success_rate": 0.7391304347826086,
+            "missing_prediction_rows": 0,
+            "f1_zero_rows": 38,
+            "self_success_zero_f1_rows": 20
+          },
+          {
+            "run": "run-3",
+            "rows": 69,
+            "reported_evaluation_size": 66,
+            "mean_f1": 0.2890272468284689,
+            "self_success_rate": 0.6521739130434783,
+            "missing_prediction_rows": 0,
+            "f1_zero_rows": 44,
+            "self_success_zero_f1_rows": 21
+          },
+          {
+            "run": "run-4",
+            "rows": 69,
+            "reported_evaluation_size": 68,
+            "mean_f1": 0.33929489090675513,
+            "self_success_rate": 0.6521739130434783,
+            "missing_prediction_rows": 0,
+            "f1_zero_rows": 42,
+            "self_success_zero_f1_rows": 19
+          },
+          {
+            "run": "run-5",
+            "rows": 69,
+            "reported_evaluation_size": 69,
+            "mean_f1": 0.3326423863458065,
+            "self_success_rate": 0.6956521739130435,
+            "missing_prediction_rows": 0,
+            "f1_zero_rows": 42,
+            "self_success_zero_f1_rows": 21
+          },
+          {
+            "run": "run-6",
+            "rows": 69,
+            "reported_evaluation_size": 66,
+            "mean_f1": 0.284689084376398,
+            "self_success_rate": 0.6231884057971014,
+            "missing_prediction_rows": 0,
+            "f1_zero_rows": 43,
+            "self_success_zero_f1_rows": 17
+          },
+          {
+            "run": "run-7",
+            "rows": 69,
+            "reported_evaluation_size": 68,
+            "mean_f1": 0.36874628816784416,
+            "self_success_rate": 0.6811594202898551,
+            "missing_prediction_rows": 0,
+            "f1_zero_rows": 38,
+            "self_success_zero_f1_rows": 16
+          },
+          {
+            "run": "run-8",
+            "rows": 69,
+            "reported_evaluation_size": 65,
+            "mean_f1": 0.37932822987450254,
+            "self_success_rate": 0.6666666666666666,
+            "missing_prediction_rows": 0,
+            "f1_zero_rows": 39,
+            "self_success_zero_f1_rows": 16
+          },
+          {
+            "run": "run-9",
+            "rows": 69,
+            "reported_evaluation_size": 67,
+            "mean_f1": 0.3267500985969209,
+            "self_success_rate": 0.6956521739130435,
+            "missing_prediction_rows": 0,
+            "f1_zero_rows": 41,
+            "self_success_zero_f1_rows": 21
+          }
+        ]
+      },
+      {
+        "group": "1-iteration-prompt-with-action-restrictions",
+        "runs": 10,
+        "evaluation_rows": 690,
+        "unique_gold_names": 69,
+        "f1_all_rows": 0.36987736667265,
+        "em_all_rows": 0.30869565217391304,
+        "self_reported_success_rate": 0.6463768115942029,
+        "missing_prediction_rows": 0,
+        "self_success_zero_f1_rows": 140,
+        "f1_by_pattern": {
+          "four triple patterns": {
+            "rows": 140,
+            "mean": 0.15688911405243927
+          },
+          "one triple pattern": {
+            "rows": 130,
+            "mean": 0.6996296129828818
+          },
+          "three triple patterns": {
+            "rows": 270,
+            "mean": 0.25854864641304676
+          },
+          "two triple patterns": {
+            "rows": 150,
+            "mean": 0.4832728187832648
+          }
+        },
+        "run_summaries": [
+          {
+            "run": "run-0",
+            "rows": 69,
+            "reported_evaluation_size": 67,
+            "mean_f1": 0.403580116294937,
+            "self_success_rate": 0.6521739130434783,
+            "missing_prediction_rows": 0,
+            "f1_zero_rows": 36,
+            "self_success_zero_f1_rows": 12
+          },
+          {
+            "run": "run-1",
+            "rows": 69,
+            "reported_evaluation_size": 67,
+            "mean_f1": 0.33006123463271037,
+            "self_success_rate": 0.6231884057971014,
+            "missing_prediction_rows": 0,
+            "f1_zero_rows": 38,
+            "self_success_zero_f1_rows": 14
+          },
+          {
+            "run": "run-2",
+            "rows": 69,
+            "reported_evaluation_size": 67,
+            "mean_f1": 0.33820351178024205,
+            "self_success_rate": 0.5942028985507246,
+            "missing_prediction_rows": 0,
+            "f1_zero_rows": 39,
+            "self_success_zero_f1_rows": 11
+          },
+          {
+            "run": "run-3",
+            "rows": 69,
+            "reported_evaluation_size": 69,
+            "mean_f1": 0.40391150395907227,
+            "self_success_rate": 0.6666666666666666,
+            "missing_prediction_rows": 0,
+            "f1_zero_rows": 36,
+            "self_success_zero_f1_rows": 13
+          },
+          {
+            "run": "run-4",
+            "rows": 69,
+            "reported_evaluation_size": 69,
+            "mean_f1": 0.39393295373040227,
+            "self_success_rate": 0.6521739130434783,
+            "missing_prediction_rows": 0,
+            "f1_zero_rows": 37,
+            "self_success_zero_f1_rows": 14
+          },
+          {
+            "run": "run-5",
+            "rows": 69,
+            "reported_evaluation_size": 69,
+            "mean_f1": 0.3754528063098082,
+            "self_success_rate": 0.6086956521739131,
+            "missing_prediction_rows": 0,
+            "f1_zero_rows": 38,
+            "self_success_zero_f1_rows": 11
+          },
+          {
+            "run": "run-6",
+            "rows": 69,
+            "reported_evaluation_size": 68,
+            "mean_f1": 0.3524998901608964,
+            "self_success_rate": 0.6811594202898551,
+            "missing_prediction_rows": 0,
+            "f1_zero_rows": 40,
+            "self_success_zero_f1_rows": 18
+          },
+          {
+            "run": "run-7",
+            "rows": 69,
+            "reported_evaluation_size": 68,
+            "mean_f1": 0.4016604309768363,
+            "self_success_rate": 0.6666666666666666,
+            "missing_prediction_rows": 0,
+            "f1_zero_rows": 39,
+            "self_success_zero_f1_rows": 16
+          },
+          {
+            "run": "run-8",
+            "rows": 69,
+            "reported_evaluation_size": 67,
+            "mean_f1": 0.3285788408305922,
+            "self_success_rate": 0.6231884057971014,
+            "missing_prediction_rows": 0,
+            "f1_zero_rows": 41,
+            "self_success_zero_f1_rows": 15
+          },
+          {
+            "run": "run-9",
+            "rows": 69,
+            "reported_evaluation_size": 68,
+            "mean_f1": 0.37089237805100267,
+            "self_success_rate": 0.6956521739130435,
+            "missing_prediction_rows": 0,
+            "f1_zero_rows": 35,
+            "self_success_zero_f1_rows": 16
+          }
+        ]
+      },
+      {
+        "group": "2-iteration-prompt-with-phase-definition",
+        "runs": 10,
+        "evaluation_rows": 690,
+        "unique_gold_names": 69,
+        "f1_all_rows": 0.34435733803751983,
+        "em_all_rows": 0.2855072463768116,
+        "self_reported_success_rate": 0.6681159420289855,
+        "missing_prediction_rows": 1,
+        "self_success_zero_f1_rows": 165,
+        "f1_by_pattern": {
+          "four triple patterns": {
+            "rows": 140,
+            "mean": 0.1444847868950346
+          },
+          "one triple pattern": {
+            "rows": 130,
+            "mean": 0.7277972362768216
+          },
+          "three triple patterns": {
+            "rows": 270,
+            "mean": 0.19714645213768078
+          },
+          "two triple patterns": {
+            "rows": 150,
+            "mean": 0.46357006858282146
+          }
+        },
+        "run_summaries": [
+          {
+            "run": "run-0",
+            "rows": 69,
+            "reported_evaluation_size": 67,
+            "mean_f1": 0.3682262648649823,
+            "self_success_rate": 0.6811594202898551,
+            "missing_prediction_rows": 0,
+            "f1_zero_rows": 38,
+            "self_success_zero_f1_rows": 17
+          },
+          {
+            "run": "run-1",
+            "rows": 69,
+            "reported_evaluation_size": 69,
+            "mean_f1": 0.40834184199082485,
+            "self_success_rate": 0.6811594202898551,
+            "missing_prediction_rows": 0,
+            "f1_zero_rows": 34,
+            "self_success_zero_f1_rows": 14
+          },
+          {
+            "run": "run-2",
+            "rows": 69,
+            "reported_evaluation_size": 69,
+            "mean_f1": 0.34417725142664285,
+            "self_success_rate": 0.6666666666666666,
+            "missing_prediction_rows": 0,
+            "f1_zero_rows": 40,
+            "self_success_zero_f1_rows": 18
+          },
+          {
+            "run": "run-3",
+            "rows": 69,
+            "reported_evaluation_size": 66,
+            "mean_f1": 0.3645055654641342,
+            "self_success_rate": 0.6811594202898551,
+            "missing_prediction_rows": 1,
+            "f1_zero_rows": 40,
+            "self_success_zero_f1_rows": 18
+          },
+          {
+            "run": "run-4",
+            "rows": 69,
+            "reported_evaluation_size": 69,
+            "mean_f1": 0.33033095351296093,
+            "self_success_rate": 0.6811594202898551,
+            "missing_prediction_rows": 0,
+            "f1_zero_rows": 38,
+            "self_success_zero_f1_rows": 16
+          },
+          {
+            "run": "run-5",
+            "rows": 69,
+            "reported_evaluation_size": 69,
+            "mean_f1": 0.33718513419273044,
+            "self_success_rate": 0.6376811594202898,
+            "missing_prediction_rows": 0,
+            "f1_zero_rows": 40,
+            "self_success_zero_f1_rows": 16
+          },
+          {
+            "run": "run-6",
+            "rows": 69,
+            "reported_evaluation_size": 69,
+            "mean_f1": 0.38659289798854163,
+            "self_success_rate": 0.7101449275362319,
+            "missing_prediction_rows": 0,
+            "f1_zero_rows": 34,
+            "self_success_zero_f1_rows": 14
+          },
+          {
+            "run": "run-7",
+            "rows": 69,
+            "reported_evaluation_size": 68,
+            "mean_f1": 0.2860635978009168,
+            "self_success_rate": 0.6811594202898551,
+            "missing_prediction_rows": 0,
+            "f1_zero_rows": 43,
+            "self_success_zero_f1_rows": 22
+          },
+          {
+            "run": "run-8",
+            "rows": 69,
+            "reported_evaluation_size": 69,
+            "mean_f1": 0.31146407997231984,
+            "self_success_rate": 0.6231884057971014,
+            "missing_prediction_rows": 0,
+            "f1_zero_rows": 40,
+            "self_success_zero_f1_rows": 14
+          },
+          {
+            "run": "run-9",
+            "rows": 69,
+            "reported_evaluation_size": 67,
+            "mean_f1": 0.3066857931611444,
+            "self_success_rate": 0.6376811594202898,
+            "missing_prediction_rows": 0,
+            "f1_zero_rows": 41,
+            "self_success_zero_f1_rows": 16
+          }
+        ]
+      }
+    ],
+    "recorded_prediction_joins_missing": [],
+    "credential_named_string_flags": 0,
+    "limits": [
+      "69重复题的三个prompt/10run不是2069独立任务；原始trajectory包含反馈但非逐action外部reward标注。",
+      "resultsetF1与self SUCCESS分开；所有69行含不可用query/缺prediction保留overall分母，evaluation_size子集不等全题通过数。",
+      "phase组模型host与前两组不同，提示优化并非已证完全受控的同部署因果对照。",
+      "同一69题分析行为后改prompt再测，非预注册heldout测试；费用/完整最终checker源码依赖另核。",
+      "COMPASS根AGPL3、SupplyBench CCBYNCSA4.0与paperCCBY4.0分别；不将代码许可自动外推图谱商业训练授权。",
+      "当前SupplyBench查询/图谱已演变到后续版本；COMPASS引用v0.1，未以current替代原始gold。"
+    ]
+  }
+}

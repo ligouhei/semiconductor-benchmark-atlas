@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T06:54:43.973339+00:00",
+  "generated_at": "2026-10-20T07:02:51.101749+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 342,
-    "records": 608,
-    "records_with_any_field_audit_entry": 366,
-    "records_with_current_field_audit_snapshot": 333,
+    "families": 343,
+    "records": 609,
+    "records_with_any_field_audit_entry": 367,
+    "records_with_current_field_audit_snapshot": 334,
     "records_without_current_field_audit_snapshot": 275
   },
   "requirements_per_record": [
@@ -12333,6 +12333,35 @@
           "limitations": "受限两处编辑与11模板，不是任意拓扑生成/完整层次电路/后版图PPA closure。高解出率仅对应作者冻结grid与分布。",
           "tools_and_access": "IEEE TCAD DOI10.1109/TCAD.2026.3729375，2026-08-31；本轮仅一手摘要/元数据，未取得全文/数据包/许可。",
           "industrial_value": "研究判断：LLM选候选位置+确定性枚举+SPICE反馈；需要与原生工具或确定性流程同预算比较，成熟软件的存在不等该工程任务已解决。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "SupplyBench",
+      "record_count": 1,
+      "records_with_current_field_audit": 1,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "fab-supplybench-compass",
+          "name": "COMPASS / SupplyBench-based query-agent trajectories",
+          "category": "制造/供应链知识图谱查询agent",
+          "artifact_type": "公开KGQA方法实验与逐步轨迹；复用SupplyBench，不是新工艺操作任务集",
+          "task_layer": "企业/供应链知识图谱的检索、结构探索与SPARQL查询，不执行制造工具",
+          "evidence_status": "第二轮12h进行中；全2069轨迹schema、固定Git身份与30组结果重聚合静态核验；未执行模型、查询器或第三方notebook。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-compass-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "继续固定原v0.1图谱与gold、外部checker/agent实现与版本、全部费用/延迟单位和数据使用授权；不将current67题替代旧69题。",
+          "limitations": "有限固定KG上的query正确不等最新供应链实况、采购决策、fab物理或OPC优化。分数为作者发布表静态重聚合，未执行查询/独立重算gold；notebook引用外部evaluate_sparql_queries.py及未固定gold目录，当前repo无该checker源码。原始query失败和自报success分母必须保留，训练/评测同69题需隔离。",
+          "tools_and_access": "全部2069轨迹与60结果表静态取得，2139个选定Gitblob匹配。消息含assistant动作和tool反馈，适合过程分析/反馈行为研究；没有逐action独立reward。COMPASS根AGPL3、SupplyBench CCBYNCSA4.0、论文CCBY4.0分别；原图谱/轨迹衍生与商业训练授权不可从论文许可推得。原始数据/路径/机器标识不在图谱仓库再分发。",
+          "industrial_value": "研究判断：当前新增中有真实多步tool消息的公开研究材料；范围是供应链知识检索，应与合成fab运营、工艺仿真和制造recipe分层。"
         }
       ]
     },

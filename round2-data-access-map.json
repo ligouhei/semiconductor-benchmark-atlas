@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-10-20T06:54:43.879123+00:00",
+  "as_of": "2026-10-20T07:02:51.007756+00:00",
   "status": "第二轮12h进行中的数据/轨迹开放性核查，非完整市场清单或最终结论",
   "scope": "只覆盖本轮已保存一手核查的新增协议；训练样本、评测输入、模型权重、整理后记忆、生成采样轨迹与LLM工具交互轨迹分别描述",
-  "protocol_records": 42,
-  "families": 18,
+  "protocol_records": 43,
+  "families": 19,
   "items": [
     {
       "catalog_id": "lib-siemens-nemo-characterization",
@@ -507,6 +507,18 @@
       "trajectory_and_training_access": "作者明确不公开server与完整tasks；附录有示例和prompts，不是可下载完整评测/训练交互集。",
       "limits": "每题gold重置防止错误传播，故非整段session自由累积错误/自救成功率；EVCR不按错误严重性加权。99%callcoverage可同时有错误/多余操作，零TFR也可能完全沉默。未测系统latency；多server仅3模型，不能推工业工具全工作流泛化或芯片功能/物理签核。",
       "primary_sources": "https://arxiv.org/html/2608.26199v1",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "fab-supplybench-compass",
+      "name": "COMPASS / SupplyBench-based query-agent trajectories",
+      "family": "SupplyBench",
+      "object_identity": "公开KGQA方法实验与逐步轨迹；复用SupplyBench，不是新工艺操作任务集",
+      "task": "GvD ReAct调用search、deref/describe、query并决定success/fail；COMPASS人工分析行为后修改动作限制和阶段切换prompt，在同69题各重复10次。公开690/690/689份轨迹，不是2069独立任务。",
+      "available_materials_and_tools": "全部2069轨迹与60结果表静态取得，2139个选定Gitblob匹配。消息含assistant动作和tool反馈，适合过程分析/反馈行为研究；没有逐action独立reward。COMPASS根AGPL3、SupplyBench CCBYNCSA4.0、论文CCBY4.0分别；原图谱/轨迹衍生与商业训练授权不可从论文许可推得。原始数据/路径/机器标识不在图谱仓库再分发。",
+      "trajectory_and_training_access": "2069个逐步消息JSON（690/690/689），69重复任务/三prompt方法组；含assistant actions/tool反馈/结果评分与token统计，不是逐action外部reward或独立holdout训练集。根AGPL3与上游KG CCBYNCSA4.0分开。",
+      "limits": "有限固定KG上的query正确不等最新供应链实况、采购决策、fab物理或OPC优化。分数为作者发布表静态重聚合，未执行查询/独立重算gold；notebook引用外部evaluate_sparql_queries.py及未固定gold目录，当前repo无该checker源码。原始query失败和自报success分母必须保留，训练/评测同69题需隔离。",
+      "primary_sources": "https://ceur-ws.org/Vol-3996/paper-5.pdf; https://github.com/wintechis/compass/tree/0c2184af6a4770a473235ab896540528c43cf38f; https://github.com/wintechis/supplybench",
       "record_snapshot_matches_audit": true
     }
   ],

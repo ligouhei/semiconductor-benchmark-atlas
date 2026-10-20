@@ -1,13 +1,13 @@
 {
   "status": "第二轮12小时研究进行中，非最终交付",
   "round": 2,
-  "updated_beijing": "2026-10-20T14:54:42+08:00",
+  "updated_beijing": "2026-10-20T15:02:50+08:00",
   "start_beijing": "2026-10-20T13:23:20+08:00",
   "earliest_completion_beijing": "2026-10-21T01:23:20+08:00",
   "baseline_records": 566,
   "baseline_families": 326,
-  "current_records": 608,
-  "current_families": 342,
+  "current_records": 609,
+  "current_families": 343,
   "added_protocols": [
     {
       "id": "lib-siemens-nemo-characterization",
@@ -890,6 +890,27 @@
       "retrieved_date": "2026-10-20",
       "evidence_status": "第二轮12h进行中；一手全文与附录静态阅读、计数/公式/公开访问状态核对；未运行第三方代码、LLM、EDA或仿真。",
       "next_verification": "继续核完整任务、冻结评分器、轨迹与成本硬上限；不可获取处明确保留限制，不以论文示例代替完整可下载数据。"
+    },
+    {
+      "id": "fab-supplybench-compass",
+      "name": "COMPASS / SupplyBench-based query-agent trajectories",
+      "benchmark_family": "SupplyBench",
+      "category": "制造/供应链知识图谱查询agent",
+      "artifact_type": "公开KGQA方法实验与逐步轨迹；复用SupplyBench，不是新工艺操作任务集",
+      "task_layer": "企业/供应链知识图谱的检索、结构探索与SPARQL查询，不执行制造工具",
+      "version": "COMPASS CAiSE2025 workshop；repo0c2184af6a4770a473235ab896540528c43cf38f；引用SupplyBench v0.1，current另为v0.3",
+      "input": "半导体供应链企业/地点/财务/人员/合作关系图谱；COMPASS取69个1–4triple-pattern查询，论文/README称33755triples。current SupplyBench已改schema/namespace，67个question/query YAML，不能直接替换原69题gold。",
+      "task": "GvD ReAct调用search、deref/describe、query并决定success/fail；COMPASS人工分析行为后修改动作限制和阶段切换prompt，在同69题各重复10次。公开690/690/689份轨迹，不是2069独立任务。",
+      "output": "SPARQL、resultset及system/user/assistant/actions/tool完整消息、运行摘要；发布30份detailed与30份summary评分表，以及前两组事件日志（base XES688trace、raw690，不能当完全一一对应）。",
+      "metrics": "外部resultset precision/recall/F1/EM，不按SPARQL字面匹配；自报SUCCESS不等F1正确。已静态复算三组690行的overall F1均值0.3243/0.3699/0.3444；自报成功比例0.6855/0.6464/0.6681。phase组有1行缺prediction但保留69题分母为0。overall与evaluation_size有效query子集、success_only分开。论文max10cycles，实测iteration与工具calls不同；记录max_tokens1024/temperature0不等完整总token/费用硬限。",
+      "baseline": "base prompt vs action restriction vs phase definition；同69题用于行为分析/改prompt后再测，不是heldout泛化。两种provider混用：base全690AcademicCloud；restriction621/69、phase330/359为AcademicCloud/Fireworks，不能将全部差异单归prompt因果效应；另需直接Text2SPARQL/模板与同预算工具agent基线。",
+      "tools_and_access": "全部2069轨迹与60结果表静态取得，2139个选定Gitblob匹配。消息含assistant动作和tool反馈，适合过程分析/反馈行为研究；没有逐action独立reward。COMPASS根AGPL3、SupplyBench CCBYNCSA4.0、论文CCBY4.0分别；原图谱/轨迹衍生与商业训练授权不可从论文许可推得。原始数据/路径/机器标识不在图谱仓库再分发。",
+      "limitations": "有限固定KG上的query正确不等最新供应链实况、采购决策、fab物理或OPC优化。分数为作者发布表静态重聚合，未执行查询/独立重算gold；notebook引用外部evaluate_sparql_queries.py及未固定gold目录，当前repo无该checker源码。原始query失败和自报success分母必须保留，训练/评测同69题需隔离。",
+      "industrial_value": "研究判断：当前新增中有真实多步tool消息的公开研究材料；范围是供应链知识检索，应与合成fab运营、工艺仿真和制造recipe分层。",
+      "primary_sources": "https://ceur-ws.org/Vol-3996/paper-5.pdf; https://github.com/wintechis/compass/tree/0c2184af6a4770a473235ab896540528c43cf38f; https://github.com/wintechis/supplybench",
+      "evidence_status": "第二轮12h进行中；全2069轨迹schema、固定Git身份与30组结果重聚合静态核验；未执行模型、查询器或第三方notebook。",
+      "next_verification": "继续固定原v0.1图谱与gold、外部checker/agent实现与版本、全部费用/延迟单位和数据使用授权；不将current67题替代旧69题。",
+      "retrieved_date": "2026-10-20"
     }
   ],
   "scope": "公开资料/任务/代码的静态研究；未运行模型、EDA或仿真。当前仅为阶段性增量，不声称完成全范围或12小时。",
@@ -917,10 +938,12 @@
     "FPL26五个前列方法已逐源码核：规则/原生工具与LLM贡献需分开。RouteAgents获评分tag有44行开发run摘要，不是逐步交互；主分支已移除seed且修正缺陷。",
     "PACT两份35行reference表均27train/8test，但完整DCP/rawrun/基线runner未齐；DATuner表26/35时长超过1h，不自动构成正式竞赛等预算基线。",
     "FAB-Bench为200道制造知识RAG QA，六维LLMjudge不是工艺操作成功率；作者仓库/API与原始条目本次404，搜索缓存的发布描述不能替代当前可获取证明。",
-    "硬件MCP评测14工具、六core与两noise共360题次但大量复用；每题后gold回放重置，ECC.990不是端到端session成功率；完整server/tasks作者明确不公开。"
+    "硬件MCP评测14工具、六core与两noise共360题次但大量复用；每题后gold回放重置，ECC.990不是端到端session成功率；完整server/tasks作者明确不公开。",
+    "COMPASS在SupplyBench69重复问题上公开2069条逐步轨迹，36503条消息/17321条tool反馈；根AGPL3与上游图谱CCBYNCSA4.0分开，不能当2069独立任务。",
+    "COMPASS三组完整690行评分的overallF1重算为.3243/.3699/.3444，自报SUCCESS约.6855/.6464/.6681；base有201条自报SUCCESS但F1为0。1条缺prediction仍保留分母；两种服务端点混用且同题上改prompt，非严格heldout因果比较。"
   ],
   "limits": [
-    "本轮新增42条任务/版本协议，不等同数量的成熟公共数据集；TimingAnalysis、HLS-Eval、ChatHLS与FIXME各分轨按同家族登记。",
+    "本轮新增43条任务/版本协议，不等同数量的成熟公共数据集；TimingAnalysis、HLS-Eval、ChatHLS与FIXME各分轨按同家族登记。",
     "FPL26原包743289124bytes与官方SHA256匹配，19DCP逐文件匹配包内SHA256SUM；只核字节/元数据，不加载执行DCP。",
     "HLS-Eval202configs已核固定Git身份，含同源变体；Bench4HLS170个task各有reference/TB路径。",
     "其他候选仍在查证；后续会继续增补原生工具基线、交互轨迹和评分隔离。"
