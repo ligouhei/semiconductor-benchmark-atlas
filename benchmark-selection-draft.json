@@ -1,6 +1,6 @@
 {
   "status": "provisional; active 12-hour research not complete",
-  "as_of": "2026-10-20T16:29:27.041736+00:00",
+  "as_of": "2026-10-20T16:55:12.826991+00:00",
   "coverage": "按任务目的整理的选型草案；不是对全部家族完成成熟度审计，未独立运行任何bench。",
   "selection_rules": [
     "先确定要证明模型读规格、生成/修复、预测、底层求解，还是工具agent能力，再选同一层输入和验收。",

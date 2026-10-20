@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-10-20T16:29:27.989563+00:00",
+  "as_of": "2026-10-20T16:55:13.778651+00:00",
   "status": "第二轮12h进行中的数据/轨迹开放性核查，非完整市场清单或最终结论",
   "scope": "只覆盖本轮已保存一手核查的新增协议；训练样本、评测输入、模型权重、整理后记忆、生成采样轨迹与LLM工具交互轨迹分别描述",
-  "protocol_records": 165,
-  "families": 78,
+  "protocol_records": 171,
+  "families": 83,
   "items": [
     {
       "catalog_id": "lib-siemens-nemo-characterization",
@@ -1983,6 +1983,78 @@
       "trajectory_and_training_access": "论文过程与聚合轨迹数；v2的345selections和v1S2表都未取得完整可训练action/observationpayload。",
       "limits": "v2题名、作者、cohort和实验改变，不沿用v1的124/70/90或1500GPUh预算。精确numerictolerance/全部stepbudget与SI尚缺；singleGPUwall限制导致未解不一定机制错误；支持机制随observable/结构/近似/criterion而变。",
       "primary_sources": "https://arxiv.org/pdf/2604.26703v2; https://arxiv.org/pdf/2604.26703v1; https://arxiv.org/abs/2604.26703",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "photonic-picopilot-script",
+      "name": "PICopilot / 48-task photonic tool-script generation",
+      "family": "PICopilot photonic scripting",
+      "object_identity": "论文方法评测；非直接器件逆设计或开放完整任务包",
+      "task": "planner分解→各功能generator→synthesizer→evaluator；Qwen3-Coder编程、DeepSeekV3.2其余角色，EmbeddingGemma+BM25/summary RRF；k5每query，最多3反馈轮，无设计师反馈。内部evaluator用AST/Pyflakes+LLM检查，不执行昂贵FDTD；最终评测另执行脚本与专家参考功能对照。",
+      "available_materials_and_tools": "作者全文可读；本轮未定位匹配官方code、48完整输入/参考脚本/独立功能比较器/15次输出或消息轨迹。不能误配同名coder/picopilot VSCode项目；商业Lumerical与PDK另需合法授权。",
+      "trajectory_and_training_access": "未取得完整provider或工具交互数据。",
+      "limits": "参考脚本功能等价的精确比较规则/容差未公开核；专家手册summary构建成本未计入每题生成价。48任务解决与93.9%单次表现须并列；没有跨新工具版本或真正工业PIC设计饱和证据。",
+      "primary_sources": "https://arxiv.org/html/2608.01791v3; https://arxiv.org/abs/2608.01791",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "photonic-vortex100-agent",
+      "name": "Vortex100 / multi-objective vortex-photonic design agent",
+      "family": "VortexChat Vortex100",
+      "object_identity": "论文100自然语言任务；十组波段约束同源",
+      "task": "LLaMA3.1-70B ReAct(temp.2/context64K)调OAMDiff初始拓扑、GBR伴随梯度细化、StructureTester商业FDTD；根据反馈改参数/目标函数或脚本，最多50toolcalls；不是由LLM替代Maxwell求解器。",
+      "available_materials_and_tools": "官方PDF可读；未定位冻结100prompt/输入结构/完整候选轨迹、scorer、SI全部成本ledger或代码包。Ansys Lumerical FDTD商业工具、自有diffusion训练集/权重依赖另核，paper公开不等训练资产公开。",
+      "trajectory_and_training_access": "未取得完整100任务LLM/FDTD交互ledger。",
+      "limits": "ten bands与多prompt相关性需分组；实测器件只支持所选case。wall/GPU/CPU统计覆盖边界需原始ledger，不直接相加或用GPU.01h推整个任务廉价；波段采样通过不证明连续全谱或制造全容差。",
+      "primary_sources": "https://arxiv.org/pdf/2608.20688v1; https://arxiv.org/abs/2608.20688",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "verify-rtl-security-discovery",
+      "name": "Agentic RTL Security / sanitized MMIO discovery campaign",
+      "family": "Agentic RTL Security educational testbed",
+      "object_identity": "小型课程testbed；固定选例run，非成熟行业大榜",
+      "task": "quota/coverage调度→假设排序→control/attack trace→critic→状态机前置规划→schema校验→Icarus clean与每bugvariant仿真→确定性缩减/聚类；Gpt4oMini选定engineermode计划7次，含修订实际10条。",
+      "available_materials_and_tools": "固定Git50全部blobs已核，代码/RTL/TB/选定JSON report和4最小trace可读；未定位rootLICENSE。Python/Icarus本轮未运行，非真实产品漏洞发现，未取APIsecret。",
+      "trajectory_and_training_access": "实际结构化候选/仿真反馈report可读；不是完整provider-native trace。",
+      "limits": "教育mini-SoC及10手工seed只是一源design；选定单run不是无偏均值/多seed置信区间。runreport含gold buglabels，不能直接作为solver检索上下文；状态机5/8→2/7异分母不作因果成功率。",
+      "primary_sources": "https://github.com/advaitParanjpe/agentic-rtl-security/tree/d9208cd0a48d1ad4d05841976b9d626c6195ba1d",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "data-rtl-security-campaign",
+      "name": "Agentic RTL Security / selected campaign records and minimized traces",
+      "family": "Agentic RTL Security educational testbed",
+      "object_identity": "同一testbed配套选定run；不是独立新电路库",
+      "task": "离线重聚合oracle/失败分母/候选和最终reproducer；若训练，按源设计和campaign分组，隔离goldlabels、bugenabledvariants和测试目标。不是运行新LLM benchmark。",
+      "available_materials_and_tools": "固定50blobs全部hash核；资料可读但rootLICENSE未定位；provider消息、tokenusage、工具stdout全文与模型reasoning完整性未证明，不重发原始代码/trace。",
+      "trajectory_and_training_access": "真实选定结构化run；原始42模型输出与完整billing未取得。",
+      "limits": "仅一个小型source-design/campaign，不能把10条当10独立SoC或广泛产业轨迹。字段内部的SECRET_KEY是合成寄存器名，非实际API凭据；原始report含goldlabels，数据隔离必要。",
+      "primary_sources": "https://github.com/advaitParanjpe/agentic-rtl-security/tree/d9208cd0a48d1ad4d05841976b9d626c6195ba1d",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "photonic-tum-router-suite",
+      "name": "TUMPhotonicRouter / optical-routing algorithm and native run archive",
+      "family": "TUMPhotonicRouter suite",
+      "object_identity": "原生算法回归/研究testbed；非LLMagent排行榜",
+      "task": "Rust A*与quickpaths/ripuprepair，Python几何realization与optional路径长度匹配/加热器电连接；比lidar-pure、guided与preplacedcrossinggrids。Agent开发文档存在不代表测试时LLM自主调用工具。",
+      "available_materials_and_tools": "56selectedGitblobs核；release38,022,672B SHA256与GitHubdigest完全匹配，152文件/113,286,848B含27GDS、27metrics、27logs和43验证JSON。rootLICENSE未定位，上游genericPDK/gdsfactory权利另核；无LLMprovidertrace。",
+      "trajectory_and_training_access": "原生路由日志/GDS/JSON可读，不是LLM交互轨迹。",
+      "limits": "归档是作者运行而非独立复现。没有执行Rust/Python/仿真或重新几何解析；0几何错误不证明全波光学性能或foundryDRC/signoff；cost每phase范围不同，不能把routerloop加速直接当总设计时间。",
+      "primary_sources": "https://github.com/hibenj/TUMPhotonicRouter/tree/ac4127dedbee1e8667640a113262939d05880571; https://github.com/hibenj/TUMPhotonicRouter/releases/tag/date2027-results",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "verify-securerag-rtl",
+      "name": "SecureRAG-RTL / CWE retrieval and vulnerable-snippet localization",
+      "family": "SecureRAG-RTL vulnerability study",
+      "object_identity": "14脆弱模块论文方法评测；非闭环形式证明benchmark",
+      "task": "RTL摘要/签名→多字段semantic检索CWE→DetectionAgent输出可疑snippet，18模型zero-shot前后RAG对照；不是agent自主调用仿真或证明漏洞可利用。",
+      "available_materials_and_tools": "作者原文可读，当前未定位官方14完整任务包/代码/独立判分器/18模型输出与调用成本；摘要用willrelease，不能改写为本轮已取得开放训练数据。论文CCBY4不替上游RTL/知识库和模型输出许可。",
+      "trajectory_and_training_access": "未取得完整LLM消息/工具轨迹；方法主要源码RAG分析。",
+      "limits": "14正例中含人工注入，不全是自然产品缺陷；无cleannegative大样本不能推falsepositive/TNR或产业安全保证。ROUGE-L高是snippet词序吻合，不是漏洞实证、等价修复或可利用性；未取得逐题输出无法重算表内判定。",
+      "primary_sources": "https://arxiv.org/html/2603.05689v1; https://arxiv.org/abs/2603.05689",
       "record_snapshot_matches_audit": true
     }
   ],

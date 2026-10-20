@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T16:28:36.068625+00:00",
+  "as_of": "2026-10-20T16:50:32.843069+00:00",
   "status": "第二轮12小时研究进行中",
   "interpretation": "以下为基于已核资料的研究选择判断，不是本轮跑模型所得成绩或覆盖行业全部任务的证明。",
   "principle": "成熟软件提供某项求解能力，不能直接推出含该工具的工程任务已解决。应分清：求解器本身、工具控制/编排、工程闭环、独立物理验收。",
@@ -581,6 +581,49 @@
         "https://zenodo.org/records/7791592",
         "https://arxiv.org/html/2306.08888v1",
         "https://github.com/srivatsankrishnan/oss-arch-gym/tree/53f745af87b256794c0cd712c2b8e77aab74b4a6"
+      ]
+    },
+    {
+      "domain": "光子集成电路",
+      "title": "工具脚本、原生路由与电磁设计闭环",
+      "catalog_ids": [
+        "photonic-picopilot-script",
+        "photonic-tum-router-suite",
+        "photonic-vortex100-agent"
+      ],
+      "native_capability": "gdsfactory/Lumerical脚本API、A*路由和伴随优化已承担几何/全波数值求解。",
+      "remaining_agent_task": "写对工具脚本、选择初值/策略、恢复失败并在昂贵仿真预算内满足全部物理门。",
+      "research_use": "脚本生成、算法源码优化和物理闭环分别研究；不要把普通router称LLMagentbench。",
+      "acceptance_required": "执行功能验收、完整路由覆盖与几何门、电磁效率/纯度/带宽分别保留；总toolbudget与原生optimizer匹配。",
+      "data_readiness": "TUM27native runs/11groups工件已取；PICopilot48任务和Vortex100完整任务/轨迹未取得。",
+      "evidence_limits": "PICopilot48solved≠单次100%；Vortex100百prompt共十波段约束；27native静态报告一致不等本轮独立运行或foundry签核。",
+      "primary_sources": [
+        "https://arxiv.org/html/2608.01791v3",
+        "https://arxiv.org/abs/2608.01791",
+        "https://github.com/hibenj/TUMPhotonicRouter/tree/ac4127dedbee1e8667640a113262939d05880571",
+        "https://github.com/hibenj/TUMPhotonicRouter/releases/tag/date2027-results",
+        "https://arxiv.org/pdf/2608.20688v1",
+        "https://arxiv.org/abs/2608.20688"
+      ]
+    },
+    {
+      "domain": "数字验证",
+      "title": "隐藏目标安全测试生成与漏洞RAG定位",
+      "catalog_ids": [
+        "verify-rtl-security-discovery",
+        "data-rtl-security-campaign",
+        "verify-securerag-rtl"
+      ],
+      "native_capability": "仿真执行给定trace、形式工具检查给定性质；检索/文本相似度可以辅助源码定位。",
+      "remaining_agent_task": "从policy构造区分clean/buggy的激励和前置状态，避免模型错误预期、自报漏洞或只复制已知目标。",
+      "research_use": "小型testbed适合研究动作/反馈与critic，14正例RAG适合知识诊断；不足以独立宣称工业安全覆盖。",
+      "acceptance_required": "validtrace+cleanpass+bugfail、异常/超时另计；统一random/LLM oracle与实际attempt/tool预算，ROUGE-L另报。",
+      "data_readiness": "选定gpt4omini campaign10结构化records已核、raw42模型输出未取；SecureRAG14完整题包/outputs未取得。",
+      "evidence_limits": "one educationalSoC/10seedbugs不是10产品；计划7+修订3需全计。fuzzbaseline clean_pass写死而非同cleanrun，4/10和6/10不可直接判优劣。",
+      "primary_sources": [
+        "https://github.com/advaitParanjpe/agentic-rtl-security/tree/d9208cd0a48d1ad4d05841976b9d626c6195ba1d",
+        "https://arxiv.org/html/2603.05689v1",
+        "https://arxiv.org/abs/2603.05689"
       ]
     }
   ]

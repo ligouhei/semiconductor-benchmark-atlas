@@ -1,6 +1,6 @@
 {
   "status": "第二轮12小时仍在进行；静态核查清单，不是训练授权或模型实验结果",
-  "as_of": "2026-10-20T16:31:34.528291+00:00",
+  "as_of": "2026-10-20T16:50:32.805604+00:00",
   "scope": "只发布派生研究摘要；原始轨迹/问题/答案/凭据不随网站重发。",
   "records": [
     {
@@ -418,6 +418,44 @@
         "https://arxiv.org/pdf/2604.26703v2",
         "https://arxiv.org/pdf/2604.26703v1",
         "https://arxiv.org/abs/2604.26703"
+      ]
+    },
+    {
+      "name": "Agentic RTL Security / selected campaign records and minimized traces",
+      "catalog_ids": [
+        "data-rtl-security-campaign",
+        "verify-rtl-security-discovery"
+      ],
+      "data_kind": "真实选定结构化候选/工具反馈；非完整provider消息",
+      "quantity": "一个教育SoC/10手工seedbugs；7planned+3refinements=10records，4confirmed/3notdetected/2cleanfailed/1invalidrefinement。",
+      "authenticity": "frozen gpt4omini run含planner/critic/controlattack/仿真返回码/reflection/最小化；是选定课程run，不是多seed无偏平均。",
+      "availability": "50全部Gitblobs核，4minimizedtrace共8ops减到6；raw_output_count42但42原始模型输出未在库中取得。",
+      "license_note": "根LICENSE未定位；公共可读不等商用训练授权，goldbuglabels与heldout输入须隔离。",
+      "caution": "4/10发现与random6/10不可直接比较：fuzzwrapper不做相同clean gate且预算不同；10records不是10独立SoC。",
+      "sources": [
+        "https://github.com/advaitParanjpe/agentic-rtl-security/tree/d9208cd0a48d1ad4d05841976b9d626c6195ba1d"
+      ]
+    },
+    {
+      "name": "TUMPhotonicRouter / optical-routing algorithm and native run archive",
+      "catalog_ids": [
+        "photonic-tum-router-suite",
+        "photonic-picopilot-script",
+        "photonic-vortex100-agent"
+      ],
+      "data_kind": "原生光子布线工件与论文agent协议；非完整LLM轨迹",
+      "quantity": "TUMrelease38.02MB/152files/11designgroups/27runs，含27GDS和43验证JSON；PICopilot48scripts与Vortex100另为论文任务。",
+      "authenticity": "TUM是原生A*路由运行日志，不是LLMtrace；PICopilot内部静态反馈、Vortex全波反馈为两种不同loop。",
+      "availability": "106selectedGitblobs合计核；routerarchive SHA256与release一致，27source-table指标匹配；两篇agent冻结任务/完整ledger未取得。",
+      "license_note": "两代码库rootLICENSE未定位；Lumerical/PDK/模型权重与训练拓扑另有条款，论文许可不自动授权任务资产。",
+      "caution": "PICopilot48solved要求15次中≥3正确，单次93.9%；Vortex100复用十组波段约束，71%联合过门不等100不同规格/全部制样。",
+      "sources": [
+        "https://github.com/hibenj/TUMPhotonicRouter/tree/ac4127dedbee1e8667640a113262939d05880571",
+        "https://github.com/hibenj/TUMPhotonicRouter/releases/tag/date2027-results",
+        "https://arxiv.org/html/2608.01791v3",
+        "https://arxiv.org/abs/2608.01791",
+        "https://arxiv.org/pdf/2608.20688v1",
+        "https://arxiv.org/abs/2608.20688"
       ]
     }
   ]

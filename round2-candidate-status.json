@@ -1,6 +1,6 @@
 {
   "status": "第二轮12小时仍在进行；静态核查清单，不是训练授权或模型实验结果",
-  "as_of": "2026-10-20T16:31:34.528291+00:00",
+  "as_of": "2026-10-20T16:50:32.805604+00:00",
   "scope": "只发布派生研究摘要；原始轨迹/问题/答案/凭据不随网站重发。",
   "records": [
     {
@@ -167,6 +167,17 @@
       "sources": [
         "https://github.com/ame-shiro/DFTAgent/tree/ff6f0ee96f4f6117cce59df7f784b3683d69b159",
         "https://www.mdpi.com/2076-3417/15/21/11390"
+      ],
+      "counted_as_new_benchmark": false
+    },
+    {
+      "name": "PhotonClaw",
+      "status": "agent自著工作流声明／当前仓库为空",
+      "verified": "作者clawRxiv条目声明modeconversion/powersplitting/demultiplexing三类MEEP工作流；仓库SebastianBoehler/photonclaw存在，API size0，HEAD/tree均409emptyrepo。",
+      "missing": "未取得所称manifests/工具实现/冻结results/优化budget与完整数据；不能凭agent自著摘要声称实际MEEP结果已独立核。不是已发布成熟光子agentbenchmark。",
+      "sources": [
+        "https://www.clawrxiv.io/abs/2603.00416",
+        "https://github.com/SebastianBoehler/photonclaw"
       ],
       "counted_as_new_benchmark": false
     }

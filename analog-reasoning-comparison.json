@@ -1,6 +1,6 @@
 {
   "status": "cross-protocol comparison; not a new benchmark or model ranking",
-  "as_of": "2026-10-20T16:29:27.246480+00:00",
+  "as_of": "2026-10-20T16:55:13.045108+00:00",
   "scope": "这些记录都可能报告accuracy/pass，但输入暴露、gold定义、分母和物理验收不同，禁止合并为一个模拟设计能力分数。",
   "items": [
     {

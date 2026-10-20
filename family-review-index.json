@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T16:29:28.095913+00:00",
+  "generated_at": "2026-10-20T16:55:13.881931+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 399,
-    "records": 731,
-    "records_with_any_field_audit_entry": 490,
-    "records_with_current_field_audit_snapshot": 457,
+    "families": 404,
+    "records": 737,
+    "records_with_any_field_audit_entry": 496,
+    "records_with_current_field_audit_snapshot": 463,
     "records_without_current_field_audit_snapshot": 274
   },
   "requirements_per_record": [
@@ -875,6 +875,56 @@
           "limitations": "人工审批属于协议一部分，不能当无人agent。bias测试列.05/.1/.2/.5/1V，其中.05/1V也用于校准，不能称五个全heldoutbias；L2µm不重调。4%W另经再校准，是process-sensitive study，不是zero-shot迁移。校准有效参数非氧空位/微观trap唯一实测提取。",
           "tools_and_access": "Sentaurus W-2024.09-SP1与获准本地手册；作者报告GPT5.5及Codex/NeMo Agent Toolkit接口。全文可读；原始测量、deck、norm常数全表、RAG材料与完整轨迹公开未确认。作者博客为通用workflow示例，非实验复现包。",
           "industrial_value": "研究判断：人工审核的器件物理模型选择/参数校准；公开academic或方法实验不自动具有工厂校准、商业签核与独立盲测效力。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "Agentic RTL Security educational testbed",
+      "record_count": 2,
+      "records_with_current_field_audit": 2,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "verify-rtl-security-discovery",
+          "name": "Agentic RTL Security / sanitized MMIO discovery campaign",
+          "category": "数字验证/硬件安全与测试生成agent",
+          "artifact_type": "小型课程testbed；固定选例run，非成熟行业大榜",
+          "task_layer": "隐藏种子bug名称的策略测试生成→仿真差分oracle",
+          "evidence_status": "第二轮静态核验：原文、固定Git与自写JSON/归档数表检查；未运行第三方agent/EDA/电磁仿真。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-photonic-security-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得匹配冻结任务、独立验收器与完整失败/预算记录，明确代码/数据/工具许可；按源设计和物理规格分割；本轮没有复跑模型。",
+          "limitations": "教育mini-SoC及10手工seed只是一源design；选定单run不是无偏均值/多seed置信区间。runreport含gold buglabels，不能直接作为solver检索上下文；状态机5/8→2/7异分母不作因果成功率。",
+          "tools_and_access": "固定Git50全部blobs已核，代码/RTL/TB/选定JSON report和4最小trace可读；未定位rootLICENSE。Python/Icarus本轮未运行，非真实产品漏洞发现，未取APIsecret。",
+          "industrial_value": "研究判断：可用作trace生成、critic与oracle边界的小规模实验；原生仿真做判定，agent需证明与相同预算/同clean gate随机和模板策略的增量。"
+        },
+        {
+          "id": "data-rtl-security-campaign",
+          "name": "Agentic RTL Security / selected campaign records and minimized traces",
+          "category": "数字验证/agent候选与工具反馈数据",
+          "artifact_type": "同一testbed配套选定run；不是独立新电路库",
+          "task_layer": "结构化决策/候选/仿真反馈与可训练数据边界",
+          "evidence_status": "第二轮静态核验：原文、固定Git与自写JSON/归档数表检查；未运行第三方agent/EDA/电磁仿真。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-photonic-security-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得匹配冻结任务、独立验收器与完整失败/预算记录，明确代码/数据/工具许可；按源设计和物理规格分割；本轮没有复跑模型。",
+          "limitations": "仅一个小型source-design/campaign，不能把10条当10独立SoC或广泛产业轨迹。字段内部的SECRET_KEY是合成寄存器名，非实际API凭据；原始report含goldlabels，数据隔离必要。",
+          "tools_and_access": "固定50blobs全部hash核；资料可读但rootLICENSE未定位；provider消息、tokenusage、工具stdout全文与模型reasoning完整性未证明，不重发原始代码/trace。",
+          "industrial_value": "研究判断：比仅最终代码更接近动作—反馈数据，规模小且许可未明；优先用于研究结构而非宣称现成可商用训练集。"
         }
       ]
     },
@@ -12521,6 +12571,35 @@
       ]
     },
     {
+      "benchmark_family": "PICopilot photonic scripting",
+      "record_count": 1,
+      "records_with_current_field_audit": 1,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "photonic-picopilot-script",
+          "name": "PICopilot / 48-task photonic tool-script generation",
+          "category": "光子集成电路/工具脚本与RAG工程agent",
+          "artifact_type": "论文方法评测；非直接器件逆设计或开放完整任务包",
+          "task_layer": "自然语言→Python工具API脚本；生成反馈与最终执行验收分开",
+          "evidence_status": "第二轮静态核验：原文、固定Git与自写JSON/归档数表检查；未运行第三方agent/EDA/电磁仿真。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-photonic-security-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得匹配冻结任务、独立验收器与完整失败/预算记录，明确代码/数据/工具许可；按源设计和物理规格分割；本轮没有复跑模型。",
+          "limitations": "参考脚本功能等价的精确比较规则/容差未公开核；专家手册summary构建成本未计入每题生成价。48任务解决与93.9%单次表现须并列；没有跨新工具版本或真正工业PIC设计饱和证据。",
+          "tools_and_access": "作者全文可读；本轮未定位匹配官方code、48完整输入/参考脚本/独立功能比较器/15次输出或消息轨迹。不能误配同名coder/picopilot VSCode项目；商业Lumerical与PDK另需合法授权。",
+          "industrial_value": "研究判断：原生API成熟并不消除需求到正确工作流脚本的任务；适合API grounding/RAG评测，但应补独立执行验收和总仿真预算。"
+        }
+      ]
+    },
+    {
       "benchmark_family": "PROTON",
       "record_count": 2,
       "records_with_current_field_audit": 0,
@@ -14664,6 +14743,35 @@
       ]
     },
     {
+      "benchmark_family": "SecureRAG-RTL vulnerability study",
+      "record_count": 1,
+      "records_with_current_field_audit": 1,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "verify-securerag-rtl",
+          "name": "SecureRAG-RTL / CWE retrieval and vulnerable-snippet localization",
+          "category": "数字验证/硬件漏洞检索与定位",
+          "artifact_type": "14脆弱模块论文方法评测；非闭环形式证明benchmark",
+          "task_layer": "RAG知识增强/源码snippet检测；无仿真或SAT独立安全验收",
+          "evidence_status": "第二轮静态核验：原文、固定Git与自写JSON/归档数表检查；未运行第三方agent/EDA/电磁仿真。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-photonic-security-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得匹配冻结任务、独立验收器与完整失败/预算记录，明确代码/数据/工具许可；按源设计和物理规格分割；本轮没有复跑模型。",
+          "limitations": "14正例中含人工注入，不全是自然产品缺陷；无cleannegative大样本不能推falsepositive/TNR或产业安全保证。ROUGE-L高是snippet词序吻合，不是漏洞实证、等价修复或可利用性；未取得逐题输出无法重算表内判定。",
+          "tools_and_access": "作者原文可读，当前未定位官方14完整任务包/代码/独立判分器/18模型输出与调用成本；摘要用willrelease，不能改写为本轮已取得开放训练数据。论文CCBY4不替上游RTL/知识库和模型输出许可。",
+          "industrial_value": "研究判断：可研究领域知识检索/漏洞定位；原生工具能验证部分性质但需要性质构建。这个方法评测不能替代隐藏目标的可执行安全test-generation benchmark。"
+        }
+      ]
+    },
+    {
       "benchmark_family": "Semi-AD",
       "record_count": 1,
       "records_with_current_field_audit": 0,
@@ -15377,6 +15485,35 @@
           "limitations": "531是配置不是531独立设计；1045reports还含testbench情景，不应扩增独立样本分母。heldout仅accu16/mul8/cmp8/traffic/seqdet/bshift六类小design，需核与训练功能family相似度。作者称轻改保持功能但未见LEC统一证据，合成成功不等所有变体正确。OpenCores54GB VCD未发布，仅可合法本地再生成；已发布660VCD并不证明模型全部活动输入可直接复现。",
           "tools_and_access": "repo冻结tree9766entries/7144blobs约469MB，tree不截断，未下载全包。DC/PTPX V2023.12、VCS；README声明TSMC28HPC+12track SS .81V125°C、ZeroWireload，不是实片测量。未见.db/.lib文件但不是全法律审计；复建标签需要合法商业库/工具。OpenCores按原项目许可，README无整个derived corpus统一LICENSE，不能替其他部分推授权。",
           "industrial_value": "提供有价值的带活动率功耗数据起点；在输入/label/单位/源设计holdout明确前不称成熟统一bench。成熟商业PTPX是标签工具，不证明早期代理预测任务已解决。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "TUMPhotonicRouter suite",
+      "record_count": 1,
+      "records_with_current_field_audit": 1,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "photonic-tum-router-suite",
+          "name": "TUMPhotonicRouter / optical-routing algorithm and native run archive",
+          "category": "光子集成电路/物理布线与几何验证",
+          "artifact_type": "原生算法回归/研究testbed；非LLMagent排行榜",
+          "task_layer": "布局netlist→光波导布线/交叉/长度与几何验收",
+          "evidence_status": "第二轮静态核验：原文、固定Git与自写JSON/归档数表检查；未运行第三方agent/EDA/电磁仿真。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-photonic-security-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得匹配冻结任务、独立验收器与完整失败/预算记录，明确代码/数据/工具许可；按源设计和物理规格分割；本轮没有复跑模型。",
+          "limitations": "归档是作者运行而非独立复现。没有执行Rust/Python/仿真或重新几何解析；0几何错误不证明全波光学性能或foundryDRC/signoff；cost每phase范围不同，不能把routerloop加速直接当总设计时间。",
+          "tools_and_access": "56selectedGitblobs核；release38,022,672B SHA256与GitHubdigest完全匹配，152文件/113,286,848B含27GDS、27metrics、27logs和43验证JSON。rootLICENSE未定位，上游genericPDK/gdsfactory权利另核；无LLMprovidertrace。",
+          "industrial_value": "研究判断：成熟native光学路由baseline与可改算法环境；若研究agent，应另冻结可改源码/预算/heldoutnetlist与独立checker，而非重复做A*已解决的小demo。"
         }
       ]
     },
@@ -16783,6 +16920,35 @@
           "limitations": "Yosys同时用作前端/参考/形式solver，相关共错风险要独立复核。nativeoption含X容许与timeout语义，不能把check返回路径直接等同全输入无条件证明。旧XST维护结论不能扩散为整个benchmark已无用。",
           "tools_and_access": "ISC；README列Vivado2018.3/Quartus17.0/ISE14.7及LEC8.1/DC2009等历史版本。XST/ISIM默认禁用理由明确是作者称Xilinx不再修该工具bug，属于具体维护证据；不是证明所有FPGA工具已解决。",
           "industrial_value": "强native表达式/位宽回归是模型测试生成应比较的baseline；已知老bug仍可作兼容性回归，但不足证明新工具/agent发现能力。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "VortexChat Vortex100",
+      "record_count": 1,
+      "records_with_current_field_audit": 1,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "photonic-vortex100-agent",
+          "name": "Vortex100 / multi-objective vortex-photonic design agent",
+          "category": "光子集成电路/电磁逆设计与闭环工具agent",
+          "artifact_type": "论文100自然语言任务；十组波段约束同源",
+          "task_layer": "模型编排原生生成器/伴随优化/全波电磁反馈",
+          "evidence_status": "第二轮静态核验：原文、固定Git与自写JSON/归档数表检查；未运行第三方agent/EDA/电磁仿真。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-photonic-security-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得匹配冻结任务、独立验收器与完整失败/预算记录，明确代码/数据/工具许可；按源设计和物理规格分割；本轮没有复跑模型。",
+          "limitations": "ten bands与多prompt相关性需分组；实测器件只支持所选case。wall/GPU/CPU统计覆盖边界需原始ledger，不直接相加或用GPU.01h推整个任务廉价；波段采样通过不证明连续全谱或制造全容差。",
+          "tools_and_access": "官方PDF可读；未定位冻结100prompt/输入结构/完整候选轨迹、scorer、SI全部成本ledger或代码包。Ansys Lumerical FDTD商业工具、自有diffusion训练集/权重依赖另核，paper公开不等训练资产公开。",
+          "industrial_value": "研究判断：适合昂贵物理优化工具编排，原生伴随优化已做低层更新，agent待证明的增量是初值/策略/失败恢复及多目标收敛；不属于Calibre OPC。"
         }
       ]
     },

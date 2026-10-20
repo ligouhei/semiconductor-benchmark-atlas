@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T16:29:28.032851+00:00",
+  "as_of": "2026-10-20T16:55:13.821626+00:00",
   "status": "coverage inventory with explicit residual limits, not universal completeness/quality certification",
   "scope": "依据用户阶段划分逐项列已有覆盖与剩余限制；“所有可发现”按此次公开资料检索边界理解，不声称覆盖未公开工业bench或互联网全部材料。",
   "method": [
@@ -169,8 +169,8 @@
     },
     {
       "domain": "数字验证",
-      "record_count": 67,
-      "family_count": 48,
+      "record_count": 70,
+      "family_count": 50,
       "catalog_ids": [
         "verify-fveval-human",
         "verify-fveval-machine",
@@ -238,7 +238,10 @@
         "verify-rwopd-fveval",
         "verify-refevo-systemc",
         "rtl-benchls-repoissue",
-        "data-chipmate-python-reference"
+        "data-chipmate-python-reference",
+        "verify-rtl-security-discovery",
+        "data-rtl-security-campaign",
+        "verify-securerag-rtl"
       ],
       "covered_tasks": "SVA/NL翻译/RTL到性质、形式证明、UVM/coverage闭环、mutation、安全/鲁棒性与EDA工具语义回归",
       "remaining_limits": "证明强度/方向/undetermined/vacuity与mutation敏感性不等价；opaque PEC、commercialformal和完整hiddenoracle限制单列，静态wrapper审计不等复现实验。",
@@ -1181,6 +1184,36 @@
           "id": "pd-ispd21-wafer",
           "record_sha256": "102ad9f54d2dd1bb775f1acbcf052f6ff855207230943629ea2bcdc129b8374f",
           "primary_sources": "https://www.ispd.cc/contests/21/index.html; https://www.ispd.cc/slides/2021/protected/13_1_Groeneveld.pdf"
+        }
+      ]
+    },
+    {
+      "domain": "光子集成电路",
+      "record_count": 3,
+      "family_count": 3,
+      "catalog_ids": [
+        "photonic-picopilot-script",
+        "photonic-vortex100-agent",
+        "photonic-tum-router-suite"
+      ],
+      "covered_tasks": "PIC工具脚本生成、原生波导路由/交叉/几何验收与多目标全波逆设计agent",
+      "remaining_limits": "普通A*路由工件不是LLM轨迹；商业FDTD/PDK/权重、冻结prompt/功能比较器与全部成本ledger尚未齐。Vortex100多prompt复用十波段约束，单个实测case不代表全任务制样。",
+      "evidence_boundary": "已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。",
+      "source_snapshots": [
+        {
+          "id": "photonic-picopilot-script",
+          "record_sha256": "f23e03f6f6badac6961de811480040360c87eff230eac8ea95b546468828514a",
+          "primary_sources": "https://arxiv.org/html/2608.01791v3; https://arxiv.org/abs/2608.01791"
+        },
+        {
+          "id": "photonic-tum-router-suite",
+          "record_sha256": "4c32c006c6d0418f0d0320dad7ab4694213592a0b89dc5675a6f1b261a41558c",
+          "primary_sources": "https://github.com/hibenj/TUMPhotonicRouter/tree/ac4127dedbee1e8667640a113262939d05880571; https://github.com/hibenj/TUMPhotonicRouter/releases/tag/date2027-results"
+        },
+        {
+          "id": "photonic-vortex100-agent",
+          "record_sha256": "8407bb9d28d8d028120f12b745936d9a17423bfdc1c7112c76aa61b8a218c12f",
+          "primary_sources": "https://arxiv.org/pdf/2608.20688v1; https://arxiv.org/abs/2608.20688"
         }
       ]
     },
