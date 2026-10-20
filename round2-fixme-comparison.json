@@ -1,0 +1,228 @@
+{
+  "status": "round2 active; current-source static audit, no execution",
+  "pinned_commit": "e875437fbb11590b71775b32d3579726d702cfc6",
+  "paper_versions": {
+    "arxiv_v1": "180 tasks / 6 domains",
+    "AAAI2026": "747 tasks / 5 families"
+  },
+  "current_tree_summary": {
+    "case_directories": 482,
+    "default_config_mode": "T",
+    "default_text_directories": 427,
+    "all_mode_directories": 482,
+    "summary": {
+      "SpeCom/Text": {
+        "directories": 98,
+        "metadata_complete": 98,
+        "missing_spec": 0,
+        "ambiguous_rtl": 53
+      },
+      "SpeCom/MultiModal": {
+        "directories": 51,
+        "metadata_complete": 1,
+        "missing_spec": 50,
+        "ambiguous_rtl": 0
+      },
+      "MGen/Text": {
+        "directories": 80,
+        "metadata_complete": 80,
+        "missing_spec": 26,
+        "ambiguous_rtl": 53
+      },
+      "MGen/MultiModal": {
+        "directories": 1,
+        "metadata_complete": 1,
+        "missing_spec": 0,
+        "ambiguous_rtl": 0
+      },
+      "TBGen/Text": {
+        "directories": 107,
+        "metadata_complete": 106,
+        "missing_spec": 0,
+        "ambiguous_rtl": 0
+      },
+      "TBGen/MultiModal": {
+        "directories": 1,
+        "metadata_complete": 1,
+        "missing_spec": 0,
+        "ambiguous_rtl": 0
+      },
+      "SVAGen/Text": {
+        "directories": 40,
+        "metadata_complete": 40,
+        "missing_spec": 0,
+        "ambiguous_rtl": 0
+      },
+      "SVAGen/MultiModal": {
+        "directories": 1,
+        "metadata_complete": 1,
+        "missing_spec": 0,
+        "ambiguous_rtl": 0
+      },
+      "RTLFix/Text": {
+        "directories": 102,
+        "metadata_complete": 102,
+        "missing_spec": 102,
+        "ambiguous_rtl": 0
+      },
+      "RTLFix/MultiModal": {
+        "directories": 1,
+        "metadata_complete": 1,
+        "missing_spec": 0,
+        "ambiguous_rtl": 0
+      }
+    },
+    "limits": [
+      "Only direct-file Git-tree paths checked; no third-party code or tools executed.",
+      "Metadata completeness is neither content validity nor successful compilation/proof.",
+      "SpeCom and RTLFix Text do not consume separate spec files in current loader. MGen can use supplied RTL/TB without separate spec.",
+      "Filename rules independently mirrored from the selected helpers; ambiguous RTL selection needs content-level module/interface inspection.",
+      "No claim that current repository reproduces the paper results or contains all 747 tasks."
+    ]
+  },
+  "reference_integrity": {
+    "total": 102,
+    "git_blobs_matched": 102,
+    "valid_old_new_pairs": 101,
+    "issues": [
+      {
+        "path": "data/RTLFix/L2/Text/29/ref52.json",
+        "blob_match": true,
+        "old_nonempty": false,
+        "new_nonempty": true,
+        "warnings": [
+          "empty_old_code"
+        ]
+      }
+    ],
+    "limits": "Static structured reference integrity only; no correctness or completeness proof of expected edits."
+  },
+  "protocols": [
+    {
+      "id": "fv-fixme-specom",
+      "name": "FIXME / SpeCom：规格理解（Text/PDF）",
+      "category": "数字前端/功能验证",
+      "artifact_type": "同一公开验证benchmark的协议分轨；非独立六套数据集",
+      "task_layer": "回答规格理解选择题",
+      "version": "AAAI2026；当前repo e875437fbb11590b71775b32d3579726d702cfc6",
+      "input": "正式149=98Text+51MM；当前目录数相同，Text用q*.txt，MM还用PDF页面与提取文字；ref*.txt只用于评分，不进prompt。",
+      "task": "回答规格理解选择题",
+      "output": "选项及逐候选匹配结果",
+      "metrics": "当前评分器提取选项并与reference匹配；functional_pass此处是答题正确，不是RTL仿真。 当前默认每题独立生成5候选，先生成再验收，无依据把它叫工具反馈自修复agent。Pass@1看首候选、Pass@5看前5至少一次通过，为经验best-of-5；并非无放回组合估计。API失败熔断可跳过余题，汇总分母仅含已完成题，须连同selected/completed/skipped披露。配置case_timeout=200未在所选main调度读取，不将它当已证实的整题硬时限；API120s、formal200s分别是所配置阶段时限。",
+      "tools_and_access": "固定repo公开代码和部分数据；完整tree未见LICENSE文件，不能据可读认定可训练/再分发授权。MGen/TBGen/RTLFixMM需商业VCS，SVAGen还需VC Static；本轮未装或运行。原arXiv2507.04276v1为180题/6类；正式AAAI2026为747题/5类，不能混用。当前完整Git tree有482个case目录：427Text+55MultiModal；默认eval_config为T，只扫描427Text。目录存在不代表输入完整或成功运行。",
+      "primary_sources": "https://ojs.aaai.org/index.php/AAAI/article/view/37079; https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluators/specom_eval.py; https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/llm_client.py; https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/config.py",
+      "evidence_status": "第二轮12h进行中；论文版本、固定tree/源码及102份RTLFix参考JSON静态审计，未执行模型/VCS/形式工具。",
+      "limitations": "当前51个MM目录只有1个含直接PDF文件，其他50只有q/ref；loader找不到PDF会警告并继续，不能将输出当完成51题图文理解。Text q可能自包含，勿将缺独立spec视为所有Text无效。 当前源码可保存每候选响应、compile/simulation/formal日志及JSON报告；这不证明完整公开多步交互轨迹集。数据构建使用多agent也不等评测对象是agent。",
+      "next_verification": "锁定完整任务manifest、缺失PDF、文件选择和参考修复；公开/隐藏测试隔离、工具版本、失败分母与训练再分发许可分别核。",
+      "industrial_value": "研究判断：适合将规格理解、模型/TB/SVA生成与RTL修复分开评测；已有VCS/形式工具负责验收，不意味着任务生成已解决。通过现有验收器不自动证明测试充分性或工业签核。",
+      "baseline": "同题同模态、同候选数、同token/工具时间的模型基线；Text片段匹配不可与MM仿真通过率直接合并比较，论文旧版本结果不能套当前快照。",
+      "retrieved_date": "2026-10-20",
+      "benchmark_family": "FIXME"
+    },
+    {
+      "id": "fv-fixme-mgen",
+      "name": "FIXME / MGen：C++参考模型与DPI",
+      "category": "数字前端/功能验证",
+      "artifact_type": "同一公开验证benchmark的协议分轨；非独立六套数据集",
+      "task_layer": "根据现有RTL/接口生成C++参考模型",
+      "version": "AAAI2026；当前repo e875437fbb11590b71775b32d3579726d702cfc6",
+      "input": "正式111=80Text+31MM；当前80Text+1MM。输入RTL、已有TB和可用规格；当前26Text没有独立*spec*.txt，但仍可基于RTL/TB生成，不直接判无效。",
+      "task": "根据现有RTL/接口生成C++参考模型",
+      "output": "dut.cpp与自动DPI wrapper、VCS编译/仿真日志",
+      "metrics": "VCS联合编译C++/SV；有ref.v时替换参考模型，否则wrapper替换DUT顶层，用原TB运行。有限TB通过非形式等价。 当前默认每题独立生成5候选，先生成再验收，无依据把它叫工具反馈自修复agent。Pass@1看首候选、Pass@5看前5至少一次通过，为经验best-of-5；并非无放回组合估计。API失败熔断可跳过余题，汇总分母仅含已完成题，须连同selected/completed/skipped披露。配置case_timeout=200未在所选main调度读取，不将它当已证实的整题硬时限；API120s、formal200s分别是所配置阶段时限。",
+      "tools_and_access": "固定repo公开代码和部分数据；完整tree未见LICENSE文件，不能据可读认定可训练/再分发授权。MGen/TBGen/RTLFixMM需商业VCS，SVAGen还需VC Static；本轮未装或运行。原arXiv2507.04276v1为180题/6类；正式AAAI2026为747题/5类，不能混用。当前完整Git tree有482个case目录：427Text+55MultiModal；默认eval_config为T，只扫描427Text。目录存在不代表输入完整或成功运行。",
+      "primary_sources": "https://ojs.aaai.org/index.php/AAAI/article/view/37079; https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluators/mgen_eval.py; https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/simulation/vcs_runner.py; https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/utils/file_finder.py",
+      "evidence_status": "第二轮12h进行中；论文版本、固定tree/源码及102份RTLFix参考JSON静态审计，未执行模型/VCS/形式工具。",
+      "limitations": "当前53个Text目录有多RTL候选，通用finder按字母选首个，需逐题核DUT/ref角色。通用仿真判定为exit0且(存在PASS类标记或无错误正则)；未强制逐输出外部对照。不应据字段名functional_pass推任意输入正确。 当前源码可保存每候选响应、compile/simulation/formal日志及JSON报告；这不证明完整公开多步交互轨迹集。数据构建使用多agent也不等评测对象是agent。",
+      "next_verification": "锁定完整任务manifest、缺失PDF、文件选择和参考修复；公开/隐藏测试隔离、工具版本、失败分母与训练再分发许可分别核。",
+      "industrial_value": "研究判断：适合将规格理解、模型/TB/SVA生成与RTL修复分开评测；已有VCS/形式工具负责验收，不意味着任务生成已解决。通过现有验收器不自动证明测试充分性或工业签核。",
+      "baseline": "同题同模态、同候选数、同token/工具时间的模型基线；Text片段匹配不可与MM仿真通过率直接合并比较，论文旧版本结果不能套当前快照。",
+      "retrieved_date": "2026-10-20",
+      "benchmark_family": "FIXME"
+    },
+    {
+      "id": "fv-fixme-tbgen",
+      "name": "FIXME / TBGen：测试平台生成",
+      "category": "数字前端/功能验证",
+      "artifact_type": "同一公开验证benchmark的协议分轨；非独立六套数据集",
+      "task_layer": "生成可编译运行且自检查的SystemVerilog测试平台",
+      "version": "AAAI2026；当前repo e875437fbb11590b71775b32d3579726d702cfc6",
+      "input": "正式158=107Text+51MM；当前107Text+1MM。模型看到规格和DUT RTL，生成完整dut_tb顶层。",
+      "task": "生成可编译运行且自检查的SystemVerilog测试平台",
+      "output": "生成TB及VCS编译/仿真/coverage报告",
+      "metrics": "syntax为VCS编译通过；functional继承通用exit0且(PASS标记或无error正则)；coverage单独记录，当前路径未设最低覆盖/变异检出率成功硬门。 当前默认每题独立生成5候选，先生成再验收，无依据把它叫工具反馈自修复agent。Pass@1看首候选、Pass@5看前5至少一次通过，为经验best-of-5；并非无放回组合估计。API失败熔断可跳过余题，汇总分母仅含已完成题，须连同selected/completed/skipped披露。配置case_timeout=200未在所选main调度读取，不将它当已证实的整题硬时限；API120s、formal200s分别是所配置阶段时限。",
+      "tools_and_access": "固定repo公开代码和部分数据；完整tree未见LICENSE文件，不能据可读认定可训练/再分发授权。MGen/TBGen/RTLFixMM需商业VCS，SVAGen还需VC Static；本轮未装或运行。原arXiv2507.04276v1为180题/6类；正式AAAI2026为747题/5类，不能混用。当前完整Git tree有482个case目录：427Text+55MultiModal；默认eval_config为T，只扫描427Text。目录存在不代表输入完整或成功运行。",
+      "primary_sources": "https://ojs.aaai.org/index.php/AAAI/article/view/37079; https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluators/tbgen_eval.py; https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluators/code_base.py; https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/simulation/vcs_runner.py; https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/utils/file_finder.py",
+      "evidence_status": "第二轮12h进行中；论文版本、固定tree/源码及102份RTLFix参考JSON静态审计，未执行模型/VCS/形式工具。",
+      "limitations": "提示要求计数器和有效断言不等评分器执行了充分性检查；当前无强制mutant评测。tbu.v被通用finder的名称含tb规则排除，107Text目录中有1题缺可匹配DUT；这是文件选择障碍，非模型失败证据。 当前源码可保存每候选响应、compile/simulation/formal日志及JSON报告；这不证明完整公开多步交互轨迹集。数据构建使用多agent也不等评测对象是agent。",
+      "next_verification": "锁定完整任务manifest、缺失PDF、文件选择和参考修复；公开/隐藏测试隔离、工具版本、失败分母与训练再分发许可分别核。",
+      "industrial_value": "研究判断：适合将规格理解、模型/TB/SVA生成与RTL修复分开评测；已有VCS/形式工具负责验收，不意味着任务生成已解决。通过现有验收器不自动证明测试充分性或工业签核。",
+      "baseline": "同题同模态、同候选数、同token/工具时间的模型基线；Text片段匹配不可与MM仿真通过率直接合并比较，论文旧版本结果不能套当前快照。",
+      "retrieved_date": "2026-10-20",
+      "benchmark_family": "FIXME"
+    },
+    {
+      "id": "fv-fixme-svagen",
+      "name": "FIXME / SVAGen：断言生成与形式验证",
+      "category": "数字前端/功能验证",
+      "artifact_type": "同一公开验证benchmark的协议分轨；非独立六套数据集",
+      "task_layer": "生成并插入SVA断言，通过语法与形式检查",
+      "version": "AAAI2026；当前repo e875437fbb11590b71775b32d3579726d702cfc6",
+      "input": "正式61=40Text+21MM；当前40Text+1MM。规格、DUT RTL，要求仅输出并发assert property片段。",
+      "task": "生成并插入SVA断言，通过语法与形式检查",
+      "output": "插入后RTL、Tcl、syntax和formal日志/状态",
+      "metrics": "先VCS语法，再VC Static；有最终计数时found>0且proven≥found并无falsified才pass；inconclusive/timeout/tool缺失记error。若无summary，runner回退按proven等文字解析。 当前默认每题独立生成5候选，先生成再验收，无依据把它叫工具反馈自修复agent。Pass@1看首候选、Pass@5看前5至少一次通过，为经验best-of-5；并非无放回组合估计。API失败熔断可跳过余题，汇总分母仅含已完成题，须连同selected/completed/skipped披露。配置case_timeout=200未在所选main调度读取，不将它当已证实的整题硬时限；API120s、formal200s分别是所配置阶段时限。",
+      "tools_and_access": "固定repo公开代码和部分数据；完整tree未见LICENSE文件，不能据可读认定可训练/再分发授权。MGen/TBGen/RTLFixMM需商业VCS，SVAGen还需VC Static；本轮未装或运行。原arXiv2507.04276v1为180题/6类；正式AAAI2026为747题/5类，不能混用。当前完整Git tree有482个case目录：427Text+55MultiModal；默认eval_config为T，只扫描427Text。目录存在不代表输入完整或成功运行。",
+      "primary_sources": "https://ojs.aaai.org/index.php/AAAI/article/view/37079; https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluators/svagen_eval.py; https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/simulation/fv_runner.py; https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/llm_client.py",
+      "evidence_status": "第二轮12h进行中；论文版本、固定tree/源码及102份RTLFix参考JSON静态审计，未执行模型/VCS/形式工具。",
+      "limitations": "当前检查至少含assert property；prompt禁止恒真、assume和无关属性，但所选验收路径未独立强制非空洞性/规格覆盖/缺陷检出能力。证明生成属性成立不等这些属性完整表达规格；不能把formal_pass当RTL实现等价证明。 当前源码可保存每候选响应、compile/simulation/formal日志及JSON报告；这不证明完整公开多步交互轨迹集。数据构建使用多agent也不等评测对象是agent。",
+      "next_verification": "锁定完整任务manifest、缺失PDF、文件选择和参考修复；公开/隐藏测试隔离、工具版本、失败分母与训练再分发许可分别核。",
+      "industrial_value": "研究判断：适合将规格理解、模型/TB/SVA生成与RTL修复分开评测；已有VCS/形式工具负责验收，不意味着任务生成已解决。通过现有验收器不自动证明测试充分性或工业签核。",
+      "baseline": "同题同模态、同候选数、同token/工具时间的模型基线；Text片段匹配不可与MM仿真通过率直接合并比较，论文旧版本结果不能套当前快照。",
+      "retrieved_date": "2026-10-20",
+      "benchmark_family": "FIXME"
+    },
+    {
+      "id": "fv-fixme-rtlfix-text",
+      "name": "FIXME / RTLFix Text：参考修改片段匹配",
+      "category": "数字前端/功能验证",
+      "artifact_type": "同一公开验证benchmark的协议分轨；非独立六套数据集",
+      "task_layer": "输出单处修复的old/new片段",
+      "version": "AAAI2026；当前repo e875437fbb11590b71775b32d3579726d702cfc6",
+      "input": "正式及当前102Text；q*.txt给问题，ref*.json优先于ref*.txt，仅评分读取。102JSON全部Git blob校验一致。",
+      "task": "输出单处修复的old/new片段",
+      "output": "修改建议文本及old_code_hit/new_code_hit",
+      "metrics": "删除空白、注释与代码围栏后，gold old_code与new_code均作为子串命中输出才pass；不编译或执行修复。当前102结构化参考中101对非空，L2/Text/29/ref52.json缺old_code，会报reference error。 当前默认每题独立生成5候选，先生成再验收，无依据把它叫工具反馈自修复agent。Pass@1看首候选、Pass@5看前5至少一次通过，为经验best-of-5；并非无放回组合估计。API失败熔断可跳过余题，汇总分母仅含已完成题，须连同selected/completed/skipped披露。配置case_timeout=200未在所选main调度读取，不将它当已证实的整题硬时限；API120s、formal200s分别是所配置阶段时限。",
+      "tools_and_access": "固定repo公开代码和部分数据；完整tree未见LICENSE文件，不能据可读认定可训练/再分发授权。MGen/TBGen/RTLFixMM需商业VCS，SVAGen还需VC Static；本轮未装或运行。原arXiv2507.04276v1为180题/6类；正式AAAI2026为747题/5类，不能混用。当前完整Git tree有482个case目录：427Text+55MultiModal；默认eval_config为T，只扫描427Text。目录存在不代表输入完整或成功运行。",
+      "primary_sources": "https://ojs.aaai.org/index.php/AAAI/article/view/37079; https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluators/rtlfix_eval.py; https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluator.py; https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/llm_client.py",
+      "evidence_status": "第二轮12h进行中；论文版本、固定tree/源码及102份RTLFix参考JSON静态审计，未执行模型/VCS/形式工具。",
+      "limitations": "替代但正确的修复不保证获分，文本同时包含gold两片段也不证明修复真正应用。1条空参考已明确隔离标注，原始证据保留；不能把它当模型修复失败。正式论文debug描述与当前文本匹配实现分开。 当前源码可保存每候选响应、compile/simulation/formal日志及JSON报告；这不证明完整公开多步交互轨迹集。数据构建使用多agent也不等评测对象是agent。",
+      "next_verification": "锁定完整任务manifest、缺失PDF、文件选择和参考修复；公开/隐藏测试隔离、工具版本、失败分母与训练再分发许可分别核。",
+      "industrial_value": "研究判断：适合将规格理解、模型/TB/SVA生成与RTL修复分开评测；已有VCS/形式工具负责验收，不意味着任务生成已解决。通过现有验收器不自动证明测试充分性或工业签核。",
+      "baseline": "同题同模态、同候选数、同token/工具时间的模型基线；Text片段匹配不可与MM仿真通过率直接合并比较，论文旧版本结果不能套当前快照。",
+      "retrieved_date": "2026-10-20",
+      "benchmark_family": "FIXME"
+    },
+    {
+      "id": "fv-fixme-rtlfix-mm",
+      "name": "FIXME / RTLFix MultiModal：完整RTL修复与TB验收",
+      "category": "数字前端/功能验证",
+      "artifact_type": "同一公开验证benchmark的协议分轨；非独立六套数据集",
+      "task_layer": "输出完整修复RTL，保留模块接口",
+      "version": "AAAI2026；当前repo e875437fbb11590b71775b32d3579726d702cfc6",
+      "input": "正式166MM；当前只有L1/1这1个case，提供PDF规格、buggy RTL及测试平台相关输入。",
+      "task": "输出完整修复RTL，保留模块接口",
+      "output": "完整RTL与VCS编译/仿真报告",
+      "metrics": "VCS编译后执行提供的TB；return_code=0且日志含配置ALL TESTS PASSED才functional_pass。与Text片段匹配是不同验收协议。 当前默认每题独立生成5候选，先生成再验收，无依据把它叫工具反馈自修复agent。Pass@1看首候选、Pass@5看前5至少一次通过，为经验best-of-5；并非无放回组合估计。API失败熔断可跳过余题，汇总分母仅含已完成题，须连同selected/completed/skipped披露。配置case_timeout=200未在所选main调度读取，不将它当已证实的整题硬时限；API120s、formal200s分别是所配置阶段时限。",
+      "tools_and_access": "固定repo公开代码和部分数据；完整tree未见LICENSE文件，不能据可读认定可训练/再分发授权。MGen/TBGen/RTLFixMM需商业VCS，SVAGen还需VC Static；本轮未装或运行。原arXiv2507.04276v1为180题/6类；正式AAAI2026为747题/5类，不能混用。当前完整Git tree有482个case目录：427Text+55MultiModal；默认eval_config为T，只扫描427Text。目录存在不代表输入完整或成功运行。",
+      "primary_sources": "https://ojs.aaai.org/index.php/AAAI/article/view/37079; https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluators/rtlfix_eval.py; https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluator.py; https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/configs/eval_config.yaml",
+      "evidence_status": "第二轮12h进行中；论文版本、固定tree/源码及102份RTLFix参考JSON静态审计，未执行模型/VCS/形式工具。",
+      "limitations": "仅有限TB，不是形式等价；当前1例不能当166题已公开或完整MM榜。工具/许可不可用及超时需与修复错误分开。 当前源码可保存每候选响应、compile/simulation/formal日志及JSON报告；这不证明完整公开多步交互轨迹集。数据构建使用多agent也不等评测对象是agent。",
+      "next_verification": "锁定完整任务manifest、缺失PDF、文件选择和参考修复；公开/隐藏测试隔离、工具版本、失败分母与训练再分发许可分别核。",
+      "industrial_value": "研究判断：适合将规格理解、模型/TB/SVA生成与RTL修复分开评测；已有VCS/形式工具负责验收，不意味着任务生成已解决。通过现有验收器不自动证明测试充分性或工业签核。",
+      "baseline": "同题同模态、同候选数、同token/工具时间的模型基线；Text片段匹配不可与MM仿真通过率直接合并比较，论文旧版本结果不能套当前快照。",
+      "retrieved_date": "2026-10-20",
+      "benchmark_family": "FIXME"
+    }
+  ]
+}

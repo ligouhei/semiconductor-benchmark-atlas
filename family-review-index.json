@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T05:47:31.945313+00:00",
+  "generated_at": "2026-10-20T05:56:56.145532+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 334,
-    "records": 583,
-    "records_with_any_field_audit_entry": 341,
-    "records_with_current_field_audit_snapshot": 308,
+    "families": 335,
+    "records": 589,
+    "records_with_any_field_audit_entry": 347,
+    "records_with_current_field_audit_snapshot": 314,
     "records_without_current_field_audit_snapshot": 275
   },
   "requirements_per_record": [
@@ -4146,6 +4146,140 @@
           "limitations": "Blacklisted检测逻辑/信号和模型粒度直接限制安全结论；符号全输入不等无限时序/物理故障覆盖，轮次展开及faultplacement须锁。论文90Mfault/50min headline依model/优化，不能代替同条件现代solver比较。aggressive模式速度结果不可与保正确模式共称相同证明",
           "tools_and_access": "公开源码/17.nl和config已取元数据/README，CUDD3/Boost依赖版本需锁。自定义LICENSE明确限非商业用途及衍生工作源码/署名条件，不等MIT/Apache；未编译运行。ePrint原PDF本轮403，未绕过，用原作者README/配置核当前实现，不宣称全文已读",
           "industrial_value": "可用于countermeasure设计与验证工程、构造toolagent验收；不是因为已有工具就无需模型，但LLM新增价值应落在规格建模/设计/工具维护，须合法许可和严格oracle"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "FIXME",
+      "record_count": 6,
+      "records_with_current_field_audit": 6,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "fv-fixme-specom",
+          "name": "FIXME / SpeCom：规格理解（Text/PDF）",
+          "category": "数字前端/功能验证",
+          "artifact_type": "同一公开验证benchmark的协议分轨；非独立六套数据集",
+          "task_layer": "回答规格理解选择题",
+          "evidence_status": "第二轮12h进行中；论文版本、固定tree/源码及102份RTLFix参考JSON静态审计，未执行模型/VCS/形式工具。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-fixme-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "锁定完整任务manifest、缺失PDF、文件选择和参考修复；公开/隐藏测试隔离、工具版本、失败分母与训练再分发许可分别核。",
+          "limitations": "当前51个MM目录只有1个含直接PDF文件，其他50只有q/ref；loader找不到PDF会警告并继续，不能将输出当完成51题图文理解。Text q可能自包含，勿将缺独立spec视为所有Text无效。 当前源码可保存每候选响应、compile/simulation/formal日志及JSON报告；这不证明完整公开多步交互轨迹集。数据构建使用多agent也不等评测对象是agent。",
+          "tools_and_access": "固定repo公开代码和部分数据；完整tree未见LICENSE文件，不能据可读认定可训练/再分发授权。MGen/TBGen/RTLFixMM需商业VCS，SVAGen还需VC Static；本轮未装或运行。原arXiv2507.04276v1为180题/6类；正式AAAI2026为747题/5类，不能混用。当前完整Git tree有482个case目录：427Text+55MultiModal；默认eval_config为T，只扫描427Text。目录存在不代表输入完整或成功运行。",
+          "industrial_value": "研究判断：适合将规格理解、模型/TB/SVA生成与RTL修复分开评测；已有VCS/形式工具负责验收，不意味着任务生成已解决。通过现有验收器不自动证明测试充分性或工业签核。"
+        },
+        {
+          "id": "fv-fixme-mgen",
+          "name": "FIXME / MGen：C++参考模型与DPI",
+          "category": "数字前端/功能验证",
+          "artifact_type": "同一公开验证benchmark的协议分轨；非独立六套数据集",
+          "task_layer": "根据现有RTL/接口生成C++参考模型",
+          "evidence_status": "第二轮12h进行中；论文版本、固定tree/源码及102份RTLFix参考JSON静态审计，未执行模型/VCS/形式工具。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-fixme-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "锁定完整任务manifest、缺失PDF、文件选择和参考修复；公开/隐藏测试隔离、工具版本、失败分母与训练再分发许可分别核。",
+          "limitations": "当前53个Text目录有多RTL候选，通用finder按字母选首个，需逐题核DUT/ref角色。通用仿真判定为exit0且(存在PASS类标记或无错误正则)；未强制逐输出外部对照。不应据字段名functional_pass推任意输入正确。 当前源码可保存每候选响应、compile/simulation/formal日志及JSON报告；这不证明完整公开多步交互轨迹集。数据构建使用多agent也不等评测对象是agent。",
+          "tools_and_access": "固定repo公开代码和部分数据；完整tree未见LICENSE文件，不能据可读认定可训练/再分发授权。MGen/TBGen/RTLFixMM需商业VCS，SVAGen还需VC Static；本轮未装或运行。原arXiv2507.04276v1为180题/6类；正式AAAI2026为747题/5类，不能混用。当前完整Git tree有482个case目录：427Text+55MultiModal；默认eval_config为T，只扫描427Text。目录存在不代表输入完整或成功运行。",
+          "industrial_value": "研究判断：适合将规格理解、模型/TB/SVA生成与RTL修复分开评测；已有VCS/形式工具负责验收，不意味着任务生成已解决。通过现有验收器不自动证明测试充分性或工业签核。"
+        },
+        {
+          "id": "fv-fixme-tbgen",
+          "name": "FIXME / TBGen：测试平台生成",
+          "category": "数字前端/功能验证",
+          "artifact_type": "同一公开验证benchmark的协议分轨；非独立六套数据集",
+          "task_layer": "生成可编译运行且自检查的SystemVerilog测试平台",
+          "evidence_status": "第二轮12h进行中；论文版本、固定tree/源码及102份RTLFix参考JSON静态审计，未执行模型/VCS/形式工具。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-fixme-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "锁定完整任务manifest、缺失PDF、文件选择和参考修复；公开/隐藏测试隔离、工具版本、失败分母与训练再分发许可分别核。",
+          "limitations": "提示要求计数器和有效断言不等评分器执行了充分性检查；当前无强制mutant评测。tbu.v被通用finder的名称含tb规则排除，107Text目录中有1题缺可匹配DUT；这是文件选择障碍，非模型失败证据。 当前源码可保存每候选响应、compile/simulation/formal日志及JSON报告；这不证明完整公开多步交互轨迹集。数据构建使用多agent也不等评测对象是agent。",
+          "tools_and_access": "固定repo公开代码和部分数据；完整tree未见LICENSE文件，不能据可读认定可训练/再分发授权。MGen/TBGen/RTLFixMM需商业VCS，SVAGen还需VC Static；本轮未装或运行。原arXiv2507.04276v1为180题/6类；正式AAAI2026为747题/5类，不能混用。当前完整Git tree有482个case目录：427Text+55MultiModal；默认eval_config为T，只扫描427Text。目录存在不代表输入完整或成功运行。",
+          "industrial_value": "研究判断：适合将规格理解、模型/TB/SVA生成与RTL修复分开评测；已有VCS/形式工具负责验收，不意味着任务生成已解决。通过现有验收器不自动证明测试充分性或工业签核。"
+        },
+        {
+          "id": "fv-fixme-svagen",
+          "name": "FIXME / SVAGen：断言生成与形式验证",
+          "category": "数字前端/功能验证",
+          "artifact_type": "同一公开验证benchmark的协议分轨；非独立六套数据集",
+          "task_layer": "生成并插入SVA断言，通过语法与形式检查",
+          "evidence_status": "第二轮12h进行中；论文版本、固定tree/源码及102份RTLFix参考JSON静态审计，未执行模型/VCS/形式工具。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-fixme-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "锁定完整任务manifest、缺失PDF、文件选择和参考修复；公开/隐藏测试隔离、工具版本、失败分母与训练再分发许可分别核。",
+          "limitations": "当前检查至少含assert property；prompt禁止恒真、assume和无关属性，但所选验收路径未独立强制非空洞性/规格覆盖/缺陷检出能力。证明生成属性成立不等这些属性完整表达规格；不能把formal_pass当RTL实现等价证明。 当前源码可保存每候选响应、compile/simulation/formal日志及JSON报告；这不证明完整公开多步交互轨迹集。数据构建使用多agent也不等评测对象是agent。",
+          "tools_and_access": "固定repo公开代码和部分数据；完整tree未见LICENSE文件，不能据可读认定可训练/再分发授权。MGen/TBGen/RTLFixMM需商业VCS，SVAGen还需VC Static；本轮未装或运行。原arXiv2507.04276v1为180题/6类；正式AAAI2026为747题/5类，不能混用。当前完整Git tree有482个case目录：427Text+55MultiModal；默认eval_config为T，只扫描427Text。目录存在不代表输入完整或成功运行。",
+          "industrial_value": "研究判断：适合将规格理解、模型/TB/SVA生成与RTL修复分开评测；已有VCS/形式工具负责验收，不意味着任务生成已解决。通过现有验收器不自动证明测试充分性或工业签核。"
+        },
+        {
+          "id": "fv-fixme-rtlfix-text",
+          "name": "FIXME / RTLFix Text：参考修改片段匹配",
+          "category": "数字前端/功能验证",
+          "artifact_type": "同一公开验证benchmark的协议分轨；非独立六套数据集",
+          "task_layer": "输出单处修复的old/new片段",
+          "evidence_status": "第二轮12h进行中；论文版本、固定tree/源码及102份RTLFix参考JSON静态审计，未执行模型/VCS/形式工具。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-fixme-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "锁定完整任务manifest、缺失PDF、文件选择和参考修复；公开/隐藏测试隔离、工具版本、失败分母与训练再分发许可分别核。",
+          "limitations": "替代但正确的修复不保证获分，文本同时包含gold两片段也不证明修复真正应用。1条空参考已明确隔离标注，原始证据保留；不能把它当模型修复失败。正式论文debug描述与当前文本匹配实现分开。 当前源码可保存每候选响应、compile/simulation/formal日志及JSON报告；这不证明完整公开多步交互轨迹集。数据构建使用多agent也不等评测对象是agent。",
+          "tools_and_access": "固定repo公开代码和部分数据；完整tree未见LICENSE文件，不能据可读认定可训练/再分发授权。MGen/TBGen/RTLFixMM需商业VCS，SVAGen还需VC Static；本轮未装或运行。原arXiv2507.04276v1为180题/6类；正式AAAI2026为747题/5类，不能混用。当前完整Git tree有482个case目录：427Text+55MultiModal；默认eval_config为T，只扫描427Text。目录存在不代表输入完整或成功运行。",
+          "industrial_value": "研究判断：适合将规格理解、模型/TB/SVA生成与RTL修复分开评测；已有VCS/形式工具负责验收，不意味着任务生成已解决。通过现有验收器不自动证明测试充分性或工业签核。"
+        },
+        {
+          "id": "fv-fixme-rtlfix-mm",
+          "name": "FIXME / RTLFix MultiModal：完整RTL修复与TB验收",
+          "category": "数字前端/功能验证",
+          "artifact_type": "同一公开验证benchmark的协议分轨；非独立六套数据集",
+          "task_layer": "输出完整修复RTL，保留模块接口",
+          "evidence_status": "第二轮12h进行中；论文版本、固定tree/源码及102份RTLFix参考JSON静态审计，未执行模型/VCS/形式工具。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-fixme-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "锁定完整任务manifest、缺失PDF、文件选择和参考修复；公开/隐藏测试隔离、工具版本、失败分母与训练再分发许可分别核。",
+          "limitations": "仅有限TB，不是形式等价；当前1例不能当166题已公开或完整MM榜。工具/许可不可用及超时需与修复错误分开。 当前源码可保存每候选响应、compile/simulation/formal日志及JSON报告；这不证明完整公开多步交互轨迹集。数据构建使用多agent也不等评测对象是agent。",
+          "tools_and_access": "固定repo公开代码和部分数据；完整tree未见LICENSE文件，不能据可读认定可训练/再分发授权。MGen/TBGen/RTLFixMM需商业VCS，SVAGen还需VC Static；本轮未装或运行。原arXiv2507.04276v1为180题/6类；正式AAAI2026为747题/5类，不能混用。当前完整Git tree有482个case目录：427Text+55MultiModal；默认eval_config为T，只扫描427Text。目录存在不代表输入完整或成功运行。",
+          "industrial_value": "研究判断：适合将规格理解、模型/TB/SVA生成与RTL修复分开评测；已有VCS/形式工具负责验收，不意味着任务生成已解决。通过现有验收器不自动证明测试充分性或工业签核。"
         }
       ]
     },

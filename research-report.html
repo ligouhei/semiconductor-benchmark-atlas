@@ -2,14 +2,14 @@
 <html lang="zh-CN"><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>芯片行业 benchmark 分类研究 · 工作稿</title><style>
 body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:0}main{max-width:1400px;margin:auto;padding:36px}h1,h2,h3{line-height:1.35}h1{font-size:32px}h2{margin-top:40px;border-top:2px solid #ced9e4;padding-top:24px}a{color:#075ca8}table{border-collapse:collapse;background:white;width:100%;font-size:14px}th,td{border:1px solid #dbe2ea;padding:12px;vertical-align:top;text-align:left}th{background:#eaf0f7}td:first-child{min-width:160px}nav,.note{background:#e8f0fa;border-radius:10px;padding:20px}details{background:white;border:1px solid #d5e0ec;margin:12px 0;padding:16px;border-radius:8px}summary{font-weight:650;cursor:pointer}dt{font-weight:bold;margin-top:12px}dd{margin-left:0}small,.muted{color:#58697b}.tag{display:inline-block;padding:2px 8px;border-radius:5px;background:#e8eff7;font-size:12px}.tablewrap{overflow:auto}@media print{body{background:white}main{padding:0}details{break-inside:avoid}nav{display:none}a{color:#203044}td{font-size:10px}}
 </style><main><p><a href="index.html">← 返回交互式 Benchmark 表格</a></p><h1>芯片行业 benchmark 分类研究</h1>
-<p class="muted">工作稿 · 研究起点 2026-10-19 · 生成时间 2026-10-20T13:47+08:00（北京时间）</p>
+<p class="muted">工作稿 · 研究起点 2026-10-19 · 生成时间 2026-10-20T13:57+08:00（北京时间）</p>
 <div class="note"><a href="agentic-research.html">Agentic 续查专题：11项新增研究对象与开放边界</a> · <a href="agentic-followup.json">结构化协议</a></div>
 <div class="note"><a href="round2-research.html">第二轮12小时续研（进行中）：首批新增协议与证据边界</a> · <a href="round2-research-update.json">结构化增量</a></div>
-<div class="note"><strong>研究仍在进行。</strong>本稿包含 583 条任务/版本记录，归并为 334 个家族/对象。记录中也包含公开数据集、方法实验、工具示例和内部评测线索；这些数量不能解释为同等成熟的独立公开 benchmark 数量。12 小时研究尚未完成，待核验字段均保留，完整覆盖与最终优先级尚待补齐。</div>
+<div class="note"><strong>研究仍在进行。</strong>本稿包含 589 条任务/版本记录，归并为 335 个家族/对象。记录中也包含公开数据集、方法实验、工具示例和内部评测线索；这些数量不能解释为同等成熟的独立公开 benchmark 数量。12 小时研究尚未完成，待核验字段均保留，完整覆盖与最终优先级尚待补齐。</div>
 <div class="note"><strong>补订说明：</strong>2026-10-20补订：原12小时清单遗漏VPEvolve，OPC agentic覆盖审核不充分。现补入商业Calibre recipeagent协议与开放光学testbed两轨（同一家族），并更正此前容易被理解为该方向没有已有评测的表述。此补订发生在原12小时交付之后；目录仍不是全行业穷尽证明。 本次另续查新增11项研究对象（含待开放/部分协议），详见Agentic专题；VPEvolve配套testbed已显式标记非独立Agent benchmark。 <a href="research-corrections.json">更正记录</a></div>
 <p>本研究围绕芯片设计与制造中的工作任务分类。每条记录回答：给模型什么、让它完成什么、交付什么、由谁按什么指标评分，以及成熟软件已经覆盖到哪一层。成品 CPU/GPU 与微体系结构性能负载在边界组单列：其输入是程序、模型和运行数据，不是设计规格、网表或工艺规则；不直接证明EDA能力。</p>
 <p><a href="research-overview.html">从简明阅读总览开始</a> · <a href="benchmark-catalog-zh.csv">中文列名CSV</a></p><nav><strong>分类索引</strong><ol>
-<li><a href="#group-0">数字前端：RTL 生成、理解与工程任务</a> · 76 条</li>
+<li><a href="#group-0">数字前端：RTL 生成、理解与工程任务</a> · 82 条</li>
 <li><a href="#group-1">数字验证：断言、形式证明、修复与安全</a> · 59 条</li>
 <li><a href="#group-2">模拟前端：感知、推理、拓扑、尺寸与规格闭环</a> · 81 条</li>
 <li><a href="#group-3">综合、HLS 与 FPGA 加速器</a> · 72 条</li>
@@ -24,7 +24,7 @@ body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:
 <li><a href="#group-12">边界：既有加速器上的工作负载映射</a> · 2 条</li>
 <li><a href="#group-13">边界：成品性能与微体系结构工作负载</a> · 23 条</li>
 </ol><a href="catalog.csv">下载 CSV</a> · <a href="catalog.json">下载 JSON</a> · 进度与未完成事项（本地研究附件） · <a href="#coverage-limits">已有覆盖与具体缺口</a></nav>
-<p>来源存档与完整性索引（本地研究附件）：6559 条检索/下载记录，6303 个本地文件完成哈希核对，完整性异常 0 项。486/583 条目录记录至少有一个精确URL或相同GitHub repo/ref/path的存档关联。此比例不是研究准确率：入口链接与实际论文/脚本常不同，完整逐字段证据映射仍待补，下载与哈希匹配也不等事实已被来源支持。</p>
+<p>来源存档与完整性索引（本地研究附件）：6687 条检索/下载记录，6431 个本地文件完成哈希核对，完整性异常 0 项。492/589 条目录记录至少有一个精确URL或相同GitHub repo/ref/path的存档关联。此比例不是研究准确率：入口链接与实际论文/脚本常不同，完整逐字段证据映射仍待补，下载与哈希匹配也不等事实已被来源支持。</p>
 <h2>分类与判断方法</h2><p>按“领域阶段 × 任务层次 × 证据成熟度”交叉归类。任务层次包括底层数值或组合优化、性能预测与代理模型、固定工具参数调优、多步工具工作流，以及端到端工程闭环。公开可下载代码、公开可下载数据、可重建标签、独立受保护评分和可商用，分别核验。</p><p>时效性从工艺/规模/规则、基线强度、信息条件、独立评价及实际约束判断。经典基准可以仍适合算法研究；新发布的基准也可能只有弱检查器、内部数据或未完整发布的流程。研究价值判断是分析结论，和来源中直接报告的事实分开。</p>
 <h2>目前已核实的关键区别</h2><ul>
 <li>维护替代与任务饱和分开：<a href="#rtl-masterrtl-power">MasterRTL</a> 作者已明确停止旧仓库维护并推荐 RTL-Timer，因此新工作应优先检查后继实现。此证据支持实现版本替代，不能证明早期功耗预测已解决；其功耗特征还需要 EDA 提取活动率，与纯 RTL 输入分轨。</li>
@@ -680,6 +680,12 @@ body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:
 <tr><td><a href="#rtl-autogate-large">AUTOGATE / NVDLA partitions and BlackParrot</a><br/><small>2026-10-20原文/current固定工件；具体hash与范围见工具/输入</small><br/><span class="tag">既有设计/题库上的方法评测或评价框架，不自动增加独立IP</span></td><td>NVDLA PartitionC/M/A/P层次模块与dc_6x8x192训练workload、dc_35x22x54外测；BlackParrot为Dhrystone输入</td><td>按powerbottleneck选module并分层改写合并；NVDLA在Workload1优化、Workload2验transfer，BlackParrot在固定Dhrystone评<p><strong>输出：</strong>改写RTL、formal与timing结果、SAIF/功耗/面积和迭代轨迹</p></td><td>相对原RTL的dynamicpower与area变化，total/static/dynamic按表分报；功耗由gatelevelSAIF→PrimePower，商业3nm-class库，clock为designspec或缺省1ns；native自动CG最激进、minbitwidth4。正式等价和timing门独立于power，CGcoverage/efficiency/ICG数不等functionalcoverage。<p class="muted">工作负载导出的稳定/toggle模式可过拟合；功耗降低不等真实系统能效/全部负载或硅量测。商业formal结果是作者报告，source/脚本未独立运行；不同层次partition/多workload不当独立IP数。原生综合已CG但RTLcodingstyle仍有余量，支持具体增量而非通用全EDAagent已完成。 两NVDLAworkload与四partition不能当8独立设计；BlackParrot单workload没有同等跨workload证据。</p></td></tr>
 <tr><td><a href="#rtl-autogate-private">AUTOGATE / 2 proprietary production designs</a><br/><small>2026-10-20原文/current固定工件；具体hash与范围见工具/输入</small><br/><span class="tag">既有设计/题库上的方法评测或评价框架，不自动增加独立IP</span></td><td>私有高优化DesignA/B，各13workloads；原RTL/库/活动未公开</td><td>比较只用Workload1与combined-workloadFGCG优化的迁移，所有结果为私有方法实验<p><strong>输出：</strong>改写RTL、formal与timing结果、SAIF/功耗/面积和迭代轨迹</p></td><td>相对原RTL的dynamicpower与area变化，total/static/dynamic按表分报；功耗由gatelevelSAIF→PrimePower，商业3nm-class库，clock为designspec或缺省1ns；native自动CG最激进、minbitwidth4。正式等价和timing门独立于power，CGcoverage/efficiency/ICG数不等functionalcoverage。<p class="muted">工作负载导出的稳定/toggle模式可过拟合；功耗降低不等真实系统能效/全部负载或硅量测。商业formal结果是作者报告，source/脚本未独立运行；不同层次partition/多workload不当独立IP数。原生综合已CG但RTLcodingstyle仍有余量，支持具体增量而非通用全EDAagent已完成。 作者reportedA single9/13改善→combined12/13、B6/13→12/13，平均收益不是所有case都降；不能当公开可复现bench或wholechip所有工作负载结论。</p></td></tr>
 <tr><td><a href="#rtl-rtllm-paper30">RTLLM / ASP-DAC original paper v3 30-design study</a><br/><small>arXiv2308.05345v3 (2023-11-11)/ASP-DAC2024，正文与表明确30题；不等current50</small><br/><span class="tag">原始方法/题库实验协议，历史分母与current开源实现分开</span></td><td>原文30 commondesign的NL功能+module/IO名称宽度，附手工reference与TB供评分；原始题目manifest未逐一与current50作版本映射。</td><td>每model每题query5次，无人工修复或额外纠错query；selfplanning方法先生成计划/建议再把计划+原spec生成RTL，额外调用成本单列。<p><strong>输出：</strong>每题5份RTL、syntax个数、any5功能状态及post-synthesis PPA对照表。</p></td><td>syntax=五次正确语法数；func=至少一个语法正确候选过TB，不是五次成功比例。DC compile_ultra的cellarea µm²、power µW、WNS ns；作者刻意设极高clock使所有WNS负便于比较，不自动视为正常目标timingclosure失败。TableIV可显示syntax正确但功能错的红色PPA，但最佳绿色/优胜计数只限syntax+func均正确；不拿错误电路小area赢正确设计。<p class="muted">原题历史实验教育/有限功能范围，不等工业未见RTL泛化；paper30、legacyREADME29与v2/2.1 50为不同版本信息。WNS刻意负与真实签核目标不同，postmappower/area不等postroute/silicon；PPA选样与全部5trial成本需锁。currenthelper的N+1均值和正marker风险不能无证追认历史paper实际错分。</p></td></tr>
+<tr><td><a href="#fv-fixme-specom">FIXME / SpeCom：规格理解（Text/PDF）</a><br/><small>AAAI2026；当前repo e875437fbb11590b71775b32d3579726d702cfc6</small><br/><span class="tag">同一公开验证benchmark的协议分轨；非独立六套数据集</span></td><td>正式149=98Text+51MM；当前目录数相同，Text用q*.txt，MM还用PDF页面与提取文字；ref*.txt只用于评分，不进prompt。</td><td>回答规格理解选择题<p><strong>输出：</strong>选项及逐候选匹配结果</p></td><td>当前评分器提取选项并与reference匹配；functional_pass此处是答题正确，不是RTL仿真。 当前默认每题独立生成5候选，先生成再验收，无依据把它叫工具反馈自修复agent。Pass@1看首候选、Pass@5看前5至少一次通过，为经验best-of-5；并非无放回组合估计。API失败熔断可跳过余题，汇总分母仅含已完成题，须连同selected/completed/skipped披露。配置case_timeout=200未在所选main调度读取，不将它当已证实的整题硬时限；API120s、formal200s分别是所配置阶段时限。<p class="muted">当前51个MM目录只有1个含直接PDF文件，其他50只有q/ref；loader找不到PDF会警告并继续，不能将输出当完成51题图文理解。Text q可能自包含，勿将缺独立spec视为所有Text无效。 当前源码可保存每候选响应、compile/simulation/formal日志及JSON报告；这不证明完整公开多步交互轨迹集。数据构建使用多agent也不等评测对象是agent。</p></td></tr>
+<tr><td><a href="#fv-fixme-mgen">FIXME / MGen：C++参考模型与DPI</a><br/><small>AAAI2026；当前repo e875437fbb11590b71775b32d3579726d702cfc6</small><br/><span class="tag">同一公开验证benchmark的协议分轨；非独立六套数据集</span></td><td>正式111=80Text+31MM；当前80Text+1MM。输入RTL、已有TB和可用规格；当前26Text没有独立*spec*.txt，但仍可基于RTL/TB生成，不直接判无效。</td><td>根据现有RTL/接口生成C++参考模型<p><strong>输出：</strong>dut.cpp与自动DPI wrapper、VCS编译/仿真日志</p></td><td>VCS联合编译C++/SV；有ref.v时替换参考模型，否则wrapper替换DUT顶层，用原TB运行。有限TB通过非形式等价。 当前默认每题独立生成5候选，先生成再验收，无依据把它叫工具反馈自修复agent。Pass@1看首候选、Pass@5看前5至少一次通过，为经验best-of-5；并非无放回组合估计。API失败熔断可跳过余题，汇总分母仅含已完成题，须连同selected/completed/skipped披露。配置case_timeout=200未在所选main调度读取，不将它当已证实的整题硬时限；API120s、formal200s分别是所配置阶段时限。<p class="muted">当前53个Text目录有多RTL候选，通用finder按字母选首个，需逐题核DUT/ref角色。通用仿真判定为exit0且(存在PASS类标记或无错误正则)；未强制逐输出外部对照。不应据字段名functional_pass推任意输入正确。 当前源码可保存每候选响应、compile/simulation/formal日志及JSON报告；这不证明完整公开多步交互轨迹集。数据构建使用多agent也不等评测对象是agent。</p></td></tr>
+<tr><td><a href="#fv-fixme-tbgen">FIXME / TBGen：测试平台生成</a><br/><small>AAAI2026；当前repo e875437fbb11590b71775b32d3579726d702cfc6</small><br/><span class="tag">同一公开验证benchmark的协议分轨；非独立六套数据集</span></td><td>正式158=107Text+51MM；当前107Text+1MM。模型看到规格和DUT RTL，生成完整dut_tb顶层。</td><td>生成可编译运行且自检查的SystemVerilog测试平台<p><strong>输出：</strong>生成TB及VCS编译/仿真/coverage报告</p></td><td>syntax为VCS编译通过；functional继承通用exit0且(PASS标记或无error正则)；coverage单独记录，当前路径未设最低覆盖/变异检出率成功硬门。 当前默认每题独立生成5候选，先生成再验收，无依据把它叫工具反馈自修复agent。Pass@1看首候选、Pass@5看前5至少一次通过，为经验best-of-5；并非无放回组合估计。API失败熔断可跳过余题，汇总分母仅含已完成题，须连同selected/completed/skipped披露。配置case_timeout=200未在所选main调度读取，不将它当已证实的整题硬时限；API120s、formal200s分别是所配置阶段时限。<p class="muted">提示要求计数器和有效断言不等评分器执行了充分性检查；当前无强制mutant评测。tbu.v被通用finder的名称含tb规则排除，107Text目录中有1题缺可匹配DUT；这是文件选择障碍，非模型失败证据。 当前源码可保存每候选响应、compile/simulation/formal日志及JSON报告；这不证明完整公开多步交互轨迹集。数据构建使用多agent也不等评测对象是agent。</p></td></tr>
+<tr><td><a href="#fv-fixme-svagen">FIXME / SVAGen：断言生成与形式验证</a><br/><small>AAAI2026；当前repo e875437fbb11590b71775b32d3579726d702cfc6</small><br/><span class="tag">同一公开验证benchmark的协议分轨；非独立六套数据集</span></td><td>正式61=40Text+21MM；当前40Text+1MM。规格、DUT RTL，要求仅输出并发assert property片段。</td><td>生成并插入SVA断言，通过语法与形式检查<p><strong>输出：</strong>插入后RTL、Tcl、syntax和formal日志/状态</p></td><td>先VCS语法，再VC Static；有最终计数时found&gt;0且proven≥found并无falsified才pass；inconclusive/timeout/tool缺失记error。若无summary，runner回退按proven等文字解析。 当前默认每题独立生成5候选，先生成再验收，无依据把它叫工具反馈自修复agent。Pass@1看首候选、Pass@5看前5至少一次通过，为经验best-of-5；并非无放回组合估计。API失败熔断可跳过余题，汇总分母仅含已完成题，须连同selected/completed/skipped披露。配置case_timeout=200未在所选main调度读取，不将它当已证实的整题硬时限；API120s、formal200s分别是所配置阶段时限。<p class="muted">当前检查至少含assert property；prompt禁止恒真、assume和无关属性，但所选验收路径未独立强制非空洞性/规格覆盖/缺陷检出能力。证明生成属性成立不等这些属性完整表达规格；不能把formal_pass当RTL实现等价证明。 当前源码可保存每候选响应、compile/simulation/formal日志及JSON报告；这不证明完整公开多步交互轨迹集。数据构建使用多agent也不等评测对象是agent。</p></td></tr>
+<tr><td><a href="#fv-fixme-rtlfix-text">FIXME / RTLFix Text：参考修改片段匹配</a><br/><small>AAAI2026；当前repo e875437fbb11590b71775b32d3579726d702cfc6</small><br/><span class="tag">同一公开验证benchmark的协议分轨；非独立六套数据集</span></td><td>正式及当前102Text；q*.txt给问题，ref*.json优先于ref*.txt，仅评分读取。102JSON全部Git blob校验一致。</td><td>输出单处修复的old/new片段<p><strong>输出：</strong>修改建议文本及old_code_hit/new_code_hit</p></td><td>删除空白、注释与代码围栏后，gold old_code与new_code均作为子串命中输出才pass；不编译或执行修复。当前102结构化参考中101对非空，L2/Text/29/ref52.json缺old_code，会报reference error。 当前默认每题独立生成5候选，先生成再验收，无依据把它叫工具反馈自修复agent。Pass@1看首候选、Pass@5看前5至少一次通过，为经验best-of-5；并非无放回组合估计。API失败熔断可跳过余题，汇总分母仅含已完成题，须连同selected/completed/skipped披露。配置case_timeout=200未在所选main调度读取，不将它当已证实的整题硬时限；API120s、formal200s分别是所配置阶段时限。<p class="muted">替代但正确的修复不保证获分，文本同时包含gold两片段也不证明修复真正应用。1条空参考已明确隔离标注，原始证据保留；不能把它当模型修复失败。正式论文debug描述与当前文本匹配实现分开。 当前源码可保存每候选响应、compile/simulation/formal日志及JSON报告；这不证明完整公开多步交互轨迹集。数据构建使用多agent也不等评测对象是agent。</p></td></tr>
+<tr><td><a href="#fv-fixme-rtlfix-mm">FIXME / RTLFix MultiModal：完整RTL修复与TB验收</a><br/><small>AAAI2026；当前repo e875437fbb11590b71775b32d3579726d702cfc6</small><br/><span class="tag">同一公开验证benchmark的协议分轨；非独立六套数据集</span></td><td>正式166MM；当前只有L1/1这1个case，提供PDF规格、buggy RTL及测试平台相关输入。</td><td>输出完整修复RTL，保留模块接口<p><strong>输出：</strong>完整RTL与VCS编译/仿真报告</p></td><td>VCS编译后执行提供的TB；return_code=0且日志含配置ALL TESTS PASSED才functional_pass。与Text片段匹配是不同验收协议。 当前默认每题独立生成5候选，先生成再验收，无依据把它叫工具反馈自修复agent。Pass@1看首候选、Pass@5看前5至少一次通过，为经验best-of-5；并非无放回组合估计。API失败熔断可跳过余题，汇总分母仅含已完成题，须连同selected/completed/skipped披露。配置case_timeout=200未在所选main调度读取，不将它当已证实的整题硬时限；API120s、formal200s分别是所配置阶段时限。<p class="muted">仅有限TB，不是形式等价；当前1例不能当166题已公开或完整MM榜。工具/许可不可用及超时需与修复错误分开。 当前源码可保存每候选响应、compile/simulation/formal日志及JSON报告；这不证明完整公开多步交互轨迹集。数据构建使用多agent也不等评测对象是agent。</p></td></tr>
 </tbody></table></div>
 <details id="rtl-verilogeval-v1"><summary>VerilogEval v1 · 数字前端/RTL生成</summary><dl>
 <dt>版本/时间</dt><dd>ICCAD2023；release/1.0.0当前commit 4fa0ac4ed70ff1685114c25cd2e4c17cbba6a0c4</dd>
@@ -2173,6 +2179,127 @@ body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:
 <dt>一手来源</dt><dd><ul>
 <li><a href="https://arxiv.org/pdf/2308.05345">https://arxiv.org/pdf/2308.05345</a></li>
 <li><a href="https://arxiv.org/abs/2308.05345">https://arxiv.org/abs/2308.05345</a></li>
+</ul></dd></dl></details>
+<details id="fv-fixme-specom"><summary>FIXME / SpeCom：规格理解（Text/PDF） · 数字前端/功能验证</summary><dl>
+<dt>版本/时间</dt><dd>AAAI2026；当前repo e875437fbb11590b71775b32d3579726d702cfc6</dd>
+<dt>对象类型</dt><dd>同一公开验证benchmark的协议分轨；非独立六套数据集</dd>
+<dt>模型工作的层次</dt><dd>回答规格理解选择题</dd>
+<dt>输入</dt><dd>正式149=98Text+51MM；当前目录数相同，Text用q*.txt，MM还用PDF页面与提取文字；ref*.txt只用于评分，不进prompt。</dd>
+<dt>任务设定</dt><dd>回答规格理解选择题</dd>
+<dt>输出</dt><dd>选项及逐候选匹配结果</dd>
+<dt>考核指标</dt><dd>当前评分器提取选项并与reference匹配；functional_pass此处是答题正确，不是RTL仿真。 当前默认每题独立生成5候选，先生成再验收，无依据把它叫工具反馈自修复agent。Pass@1看首候选、Pass@5看前5至少一次通过，为经验best-of-5；并非无放回组合估计。API失败熔断可跳过余题，汇总分母仅含已完成题，须连同selected/completed/skipped披露。配置case_timeout=200未在所选main调度读取，不将它当已证实的整题硬时限；API120s、formal200s分别是所配置阶段时限。</dd>
+<dt>基线</dt><dd>同题同模态、同候选数、同token/工具时间的模型基线；Text片段匹配不可与MM仿真通过率直接合并比较，论文旧版本结果不能套当前快照。</dd>
+<dt>工具、数据与访问条件</dt><dd>固定repo公开代码和部分数据；完整tree未见LICENSE文件，不能据可读认定可训练/再分发授权。MGen/TBGen/RTLFixMM需商业VCS，SVAGen还需VC Static；本轮未装或运行。原arXiv2507.04276v1为180题/6类；正式AAAI2026为747题/5类，不能混用。当前完整Git tree有482个case目录：427Text+55MultiModal；默认eval_config为T，只扫描427Text。目录存在不代表输入完整或成功运行。</dd>
+<dt>限制与可比性</dt><dd>当前51个MM目录只有1个含直接PDF文件，其他50只有q/ref；loader找不到PDF会警告并继续，不能将输出当完成51题图文理解。Text q可能自包含，勿将缺独立spec视为所有Text无效。 当前源码可保存每候选响应、compile/simulation/formal日志及JSON报告；这不证明完整公开多步交互轨迹集。数据构建使用多agent也不等评测对象是agent。</dd>
+<dt>现实价值判断</dt><dd>研究判断：适合将规格理解、模型/TB/SVA生成与RTL修复分开评测；已有VCS/形式工具负责验收，不意味着任务生成已解决。通过现有验收器不自动证明测试充分性或工业签核。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；论文版本、固定tree/源码及102份RTLFix参考JSON静态审计，未执行模型/VCS/形式工具。</dd>
+<dt>下一步核验</dt><dd>锁定完整任务manifest、缺失PDF、文件选择和参考修复；公开/隐藏测试隔离、工具版本、失败分母与训练再分发许可分别核。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://ojs.aaai.org/index.php/AAAI/article/view/37079">https://ojs.aaai.org/index.php/AAAI/article/view/37079</a></li>
+<li><a href="https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluators/specom_eval.py">https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluators/specom_eval.py</a></li>
+<li><a href="https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/llm_client.py">https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/llm_client.py</a></li>
+<li><a href="https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/config.py">https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/config.py</a></li>
+</ul></dd></dl></details>
+<details id="fv-fixme-mgen"><summary>FIXME / MGen：C++参考模型与DPI · 数字前端/功能验证</summary><dl>
+<dt>版本/时间</dt><dd>AAAI2026；当前repo e875437fbb11590b71775b32d3579726d702cfc6</dd>
+<dt>对象类型</dt><dd>同一公开验证benchmark的协议分轨；非独立六套数据集</dd>
+<dt>模型工作的层次</dt><dd>根据现有RTL/接口生成C++参考模型</dd>
+<dt>输入</dt><dd>正式111=80Text+31MM；当前80Text+1MM。输入RTL、已有TB和可用规格；当前26Text没有独立*spec*.txt，但仍可基于RTL/TB生成，不直接判无效。</dd>
+<dt>任务设定</dt><dd>根据现有RTL/接口生成C++参考模型</dd>
+<dt>输出</dt><dd>dut.cpp与自动DPI wrapper、VCS编译/仿真日志</dd>
+<dt>考核指标</dt><dd>VCS联合编译C++/SV；有ref.v时替换参考模型，否则wrapper替换DUT顶层，用原TB运行。有限TB通过非形式等价。 当前默认每题独立生成5候选，先生成再验收，无依据把它叫工具反馈自修复agent。Pass@1看首候选、Pass@5看前5至少一次通过，为经验best-of-5；并非无放回组合估计。API失败熔断可跳过余题，汇总分母仅含已完成题，须连同selected/completed/skipped披露。配置case_timeout=200未在所选main调度读取，不将它当已证实的整题硬时限；API120s、formal200s分别是所配置阶段时限。</dd>
+<dt>基线</dt><dd>同题同模态、同候选数、同token/工具时间的模型基线；Text片段匹配不可与MM仿真通过率直接合并比较，论文旧版本结果不能套当前快照。</dd>
+<dt>工具、数据与访问条件</dt><dd>固定repo公开代码和部分数据；完整tree未见LICENSE文件，不能据可读认定可训练/再分发授权。MGen/TBGen/RTLFixMM需商业VCS，SVAGen还需VC Static；本轮未装或运行。原arXiv2507.04276v1为180题/6类；正式AAAI2026为747题/5类，不能混用。当前完整Git tree有482个case目录：427Text+55MultiModal；默认eval_config为T，只扫描427Text。目录存在不代表输入完整或成功运行。</dd>
+<dt>限制与可比性</dt><dd>当前53个Text目录有多RTL候选，通用finder按字母选首个，需逐题核DUT/ref角色。通用仿真判定为exit0且(存在PASS类标记或无错误正则)；未强制逐输出外部对照。不应据字段名functional_pass推任意输入正确。 当前源码可保存每候选响应、compile/simulation/formal日志及JSON报告；这不证明完整公开多步交互轨迹集。数据构建使用多agent也不等评测对象是agent。</dd>
+<dt>现实价值判断</dt><dd>研究判断：适合将规格理解、模型/TB/SVA生成与RTL修复分开评测；已有VCS/形式工具负责验收，不意味着任务生成已解决。通过现有验收器不自动证明测试充分性或工业签核。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；论文版本、固定tree/源码及102份RTLFix参考JSON静态审计，未执行模型/VCS/形式工具。</dd>
+<dt>下一步核验</dt><dd>锁定完整任务manifest、缺失PDF、文件选择和参考修复；公开/隐藏测试隔离、工具版本、失败分母与训练再分发许可分别核。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://ojs.aaai.org/index.php/AAAI/article/view/37079">https://ojs.aaai.org/index.php/AAAI/article/view/37079</a></li>
+<li><a href="https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluators/mgen_eval.py">https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluators/mgen_eval.py</a></li>
+<li><a href="https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/simulation/vcs_runner.py">https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/simulation/vcs_runner.py</a></li>
+<li><a href="https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/utils/file_finder.py">https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/utils/file_finder.py</a></li>
+</ul></dd></dl></details>
+<details id="fv-fixme-tbgen"><summary>FIXME / TBGen：测试平台生成 · 数字前端/功能验证</summary><dl>
+<dt>版本/时间</dt><dd>AAAI2026；当前repo e875437fbb11590b71775b32d3579726d702cfc6</dd>
+<dt>对象类型</dt><dd>同一公开验证benchmark的协议分轨；非独立六套数据集</dd>
+<dt>模型工作的层次</dt><dd>生成可编译运行且自检查的SystemVerilog测试平台</dd>
+<dt>输入</dt><dd>正式158=107Text+51MM；当前107Text+1MM。模型看到规格和DUT RTL，生成完整dut_tb顶层。</dd>
+<dt>任务设定</dt><dd>生成可编译运行且自检查的SystemVerilog测试平台</dd>
+<dt>输出</dt><dd>生成TB及VCS编译/仿真/coverage报告</dd>
+<dt>考核指标</dt><dd>syntax为VCS编译通过；functional继承通用exit0且(PASS标记或无error正则)；coverage单独记录，当前路径未设最低覆盖/变异检出率成功硬门。 当前默认每题独立生成5候选，先生成再验收，无依据把它叫工具反馈自修复agent。Pass@1看首候选、Pass@5看前5至少一次通过，为经验best-of-5；并非无放回组合估计。API失败熔断可跳过余题，汇总分母仅含已完成题，须连同selected/completed/skipped披露。配置case_timeout=200未在所选main调度读取，不将它当已证实的整题硬时限；API120s、formal200s分别是所配置阶段时限。</dd>
+<dt>基线</dt><dd>同题同模态、同候选数、同token/工具时间的模型基线；Text片段匹配不可与MM仿真通过率直接合并比较，论文旧版本结果不能套当前快照。</dd>
+<dt>工具、数据与访问条件</dt><dd>固定repo公开代码和部分数据；完整tree未见LICENSE文件，不能据可读认定可训练/再分发授权。MGen/TBGen/RTLFixMM需商业VCS，SVAGen还需VC Static；本轮未装或运行。原arXiv2507.04276v1为180题/6类；正式AAAI2026为747题/5类，不能混用。当前完整Git tree有482个case目录：427Text+55MultiModal；默认eval_config为T，只扫描427Text。目录存在不代表输入完整或成功运行。</dd>
+<dt>限制与可比性</dt><dd>提示要求计数器和有效断言不等评分器执行了充分性检查；当前无强制mutant评测。tbu.v被通用finder的名称含tb规则排除，107Text目录中有1题缺可匹配DUT；这是文件选择障碍，非模型失败证据。 当前源码可保存每候选响应、compile/simulation/formal日志及JSON报告；这不证明完整公开多步交互轨迹集。数据构建使用多agent也不等评测对象是agent。</dd>
+<dt>现实价值判断</dt><dd>研究判断：适合将规格理解、模型/TB/SVA生成与RTL修复分开评测；已有VCS/形式工具负责验收，不意味着任务生成已解决。通过现有验收器不自动证明测试充分性或工业签核。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；论文版本、固定tree/源码及102份RTLFix参考JSON静态审计，未执行模型/VCS/形式工具。</dd>
+<dt>下一步核验</dt><dd>锁定完整任务manifest、缺失PDF、文件选择和参考修复；公开/隐藏测试隔离、工具版本、失败分母与训练再分发许可分别核。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://ojs.aaai.org/index.php/AAAI/article/view/37079">https://ojs.aaai.org/index.php/AAAI/article/view/37079</a></li>
+<li><a href="https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluators/tbgen_eval.py">https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluators/tbgen_eval.py</a></li>
+<li><a href="https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluators/code_base.py">https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluators/code_base.py</a></li>
+<li><a href="https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/simulation/vcs_runner.py">https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/simulation/vcs_runner.py</a></li>
+<li><a href="https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/utils/file_finder.py">https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/utils/file_finder.py</a></li>
+</ul></dd></dl></details>
+<details id="fv-fixme-svagen"><summary>FIXME / SVAGen：断言生成与形式验证 · 数字前端/功能验证</summary><dl>
+<dt>版本/时间</dt><dd>AAAI2026；当前repo e875437fbb11590b71775b32d3579726d702cfc6</dd>
+<dt>对象类型</dt><dd>同一公开验证benchmark的协议分轨；非独立六套数据集</dd>
+<dt>模型工作的层次</dt><dd>生成并插入SVA断言，通过语法与形式检查</dd>
+<dt>输入</dt><dd>正式61=40Text+21MM；当前40Text+1MM。规格、DUT RTL，要求仅输出并发assert property片段。</dd>
+<dt>任务设定</dt><dd>生成并插入SVA断言，通过语法与形式检查</dd>
+<dt>输出</dt><dd>插入后RTL、Tcl、syntax和formal日志/状态</dd>
+<dt>考核指标</dt><dd>先VCS语法，再VC Static；有最终计数时found&gt;0且proven≥found并无falsified才pass；inconclusive/timeout/tool缺失记error。若无summary，runner回退按proven等文字解析。 当前默认每题独立生成5候选，先生成再验收，无依据把它叫工具反馈自修复agent。Pass@1看首候选、Pass@5看前5至少一次通过，为经验best-of-5；并非无放回组合估计。API失败熔断可跳过余题，汇总分母仅含已完成题，须连同selected/completed/skipped披露。配置case_timeout=200未在所选main调度读取，不将它当已证实的整题硬时限；API120s、formal200s分别是所配置阶段时限。</dd>
+<dt>基线</dt><dd>同题同模态、同候选数、同token/工具时间的模型基线；Text片段匹配不可与MM仿真通过率直接合并比较，论文旧版本结果不能套当前快照。</dd>
+<dt>工具、数据与访问条件</dt><dd>固定repo公开代码和部分数据；完整tree未见LICENSE文件，不能据可读认定可训练/再分发授权。MGen/TBGen/RTLFixMM需商业VCS，SVAGen还需VC Static；本轮未装或运行。原arXiv2507.04276v1为180题/6类；正式AAAI2026为747题/5类，不能混用。当前完整Git tree有482个case目录：427Text+55MultiModal；默认eval_config为T，只扫描427Text。目录存在不代表输入完整或成功运行。</dd>
+<dt>限制与可比性</dt><dd>当前检查至少含assert property；prompt禁止恒真、assume和无关属性，但所选验收路径未独立强制非空洞性/规格覆盖/缺陷检出能力。证明生成属性成立不等这些属性完整表达规格；不能把formal_pass当RTL实现等价证明。 当前源码可保存每候选响应、compile/simulation/formal日志及JSON报告；这不证明完整公开多步交互轨迹集。数据构建使用多agent也不等评测对象是agent。</dd>
+<dt>现实价值判断</dt><dd>研究判断：适合将规格理解、模型/TB/SVA生成与RTL修复分开评测；已有VCS/形式工具负责验收，不意味着任务生成已解决。通过现有验收器不自动证明测试充分性或工业签核。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；论文版本、固定tree/源码及102份RTLFix参考JSON静态审计，未执行模型/VCS/形式工具。</dd>
+<dt>下一步核验</dt><dd>锁定完整任务manifest、缺失PDF、文件选择和参考修复；公开/隐藏测试隔离、工具版本、失败分母与训练再分发许可分别核。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://ojs.aaai.org/index.php/AAAI/article/view/37079">https://ojs.aaai.org/index.php/AAAI/article/view/37079</a></li>
+<li><a href="https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluators/svagen_eval.py">https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluators/svagen_eval.py</a></li>
+<li><a href="https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/simulation/fv_runner.py">https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/simulation/fv_runner.py</a></li>
+<li><a href="https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/llm_client.py">https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/llm_client.py</a></li>
+</ul></dd></dl></details>
+<details id="fv-fixme-rtlfix-text"><summary>FIXME / RTLFix Text：参考修改片段匹配 · 数字前端/功能验证</summary><dl>
+<dt>版本/时间</dt><dd>AAAI2026；当前repo e875437fbb11590b71775b32d3579726d702cfc6</dd>
+<dt>对象类型</dt><dd>同一公开验证benchmark的协议分轨；非独立六套数据集</dd>
+<dt>模型工作的层次</dt><dd>输出单处修复的old/new片段</dd>
+<dt>输入</dt><dd>正式及当前102Text；q*.txt给问题，ref*.json优先于ref*.txt，仅评分读取。102JSON全部Git blob校验一致。</dd>
+<dt>任务设定</dt><dd>输出单处修复的old/new片段</dd>
+<dt>输出</dt><dd>修改建议文本及old_code_hit/new_code_hit</dd>
+<dt>考核指标</dt><dd>删除空白、注释与代码围栏后，gold old_code与new_code均作为子串命中输出才pass；不编译或执行修复。当前102结构化参考中101对非空，L2/Text/29/ref52.json缺old_code，会报reference error。 当前默认每题独立生成5候选，先生成再验收，无依据把它叫工具反馈自修复agent。Pass@1看首候选、Pass@5看前5至少一次通过，为经验best-of-5；并非无放回组合估计。API失败熔断可跳过余题，汇总分母仅含已完成题，须连同selected/completed/skipped披露。配置case_timeout=200未在所选main调度读取，不将它当已证实的整题硬时限；API120s、formal200s分别是所配置阶段时限。</dd>
+<dt>基线</dt><dd>同题同模态、同候选数、同token/工具时间的模型基线；Text片段匹配不可与MM仿真通过率直接合并比较，论文旧版本结果不能套当前快照。</dd>
+<dt>工具、数据与访问条件</dt><dd>固定repo公开代码和部分数据；完整tree未见LICENSE文件，不能据可读认定可训练/再分发授权。MGen/TBGen/RTLFixMM需商业VCS，SVAGen还需VC Static；本轮未装或运行。原arXiv2507.04276v1为180题/6类；正式AAAI2026为747题/5类，不能混用。当前完整Git tree有482个case目录：427Text+55MultiModal；默认eval_config为T，只扫描427Text。目录存在不代表输入完整或成功运行。</dd>
+<dt>限制与可比性</dt><dd>替代但正确的修复不保证获分，文本同时包含gold两片段也不证明修复真正应用。1条空参考已明确隔离标注，原始证据保留；不能把它当模型修复失败。正式论文debug描述与当前文本匹配实现分开。 当前源码可保存每候选响应、compile/simulation/formal日志及JSON报告；这不证明完整公开多步交互轨迹集。数据构建使用多agent也不等评测对象是agent。</dd>
+<dt>现实价值判断</dt><dd>研究判断：适合将规格理解、模型/TB/SVA生成与RTL修复分开评测；已有VCS/形式工具负责验收，不意味着任务生成已解决。通过现有验收器不自动证明测试充分性或工业签核。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；论文版本、固定tree/源码及102份RTLFix参考JSON静态审计，未执行模型/VCS/形式工具。</dd>
+<dt>下一步核验</dt><dd>锁定完整任务manifest、缺失PDF、文件选择和参考修复；公开/隐藏测试隔离、工具版本、失败分母与训练再分发许可分别核。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://ojs.aaai.org/index.php/AAAI/article/view/37079">https://ojs.aaai.org/index.php/AAAI/article/view/37079</a></li>
+<li><a href="https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluators/rtlfix_eval.py">https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluators/rtlfix_eval.py</a></li>
+<li><a href="https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluator.py">https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluator.py</a></li>
+<li><a href="https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/llm_client.py">https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/llm_client.py</a></li>
+</ul></dd></dl></details>
+<details id="fv-fixme-rtlfix-mm"><summary>FIXME / RTLFix MultiModal：完整RTL修复与TB验收 · 数字前端/功能验证</summary><dl>
+<dt>版本/时间</dt><dd>AAAI2026；当前repo e875437fbb11590b71775b32d3579726d702cfc6</dd>
+<dt>对象类型</dt><dd>同一公开验证benchmark的协议分轨；非独立六套数据集</dd>
+<dt>模型工作的层次</dt><dd>输出完整修复RTL，保留模块接口</dd>
+<dt>输入</dt><dd>正式166MM；当前只有L1/1这1个case，提供PDF规格、buggy RTL及测试平台相关输入。</dd>
+<dt>任务设定</dt><dd>输出完整修复RTL，保留模块接口</dd>
+<dt>输出</dt><dd>完整RTL与VCS编译/仿真报告</dd>
+<dt>考核指标</dt><dd>VCS编译后执行提供的TB；return_code=0且日志含配置ALL TESTS PASSED才functional_pass。与Text片段匹配是不同验收协议。 当前默认每题独立生成5候选，先生成再验收，无依据把它叫工具反馈自修复agent。Pass@1看首候选、Pass@5看前5至少一次通过，为经验best-of-5；并非无放回组合估计。API失败熔断可跳过余题，汇总分母仅含已完成题，须连同selected/completed/skipped披露。配置case_timeout=200未在所选main调度读取，不将它当已证实的整题硬时限；API120s、formal200s分别是所配置阶段时限。</dd>
+<dt>基线</dt><dd>同题同模态、同候选数、同token/工具时间的模型基线；Text片段匹配不可与MM仿真通过率直接合并比较，论文旧版本结果不能套当前快照。</dd>
+<dt>工具、数据与访问条件</dt><dd>固定repo公开代码和部分数据；完整tree未见LICENSE文件，不能据可读认定可训练/再分发授权。MGen/TBGen/RTLFixMM需商业VCS，SVAGen还需VC Static；本轮未装或运行。原arXiv2507.04276v1为180题/6类；正式AAAI2026为747题/5类，不能混用。当前完整Git tree有482个case目录：427Text+55MultiModal；默认eval_config为T，只扫描427Text。目录存在不代表输入完整或成功运行。</dd>
+<dt>限制与可比性</dt><dd>仅有限TB，不是形式等价；当前1例不能当166题已公开或完整MM榜。工具/许可不可用及超时需与修复错误分开。 当前源码可保存每候选响应、compile/simulation/formal日志及JSON报告；这不证明完整公开多步交互轨迹集。数据构建使用多agent也不等评测对象是agent。</dd>
+<dt>现实价值判断</dt><dd>研究判断：适合将规格理解、模型/TB/SVA生成与RTL修复分开评测；已有VCS/形式工具负责验收，不意味着任务生成已解决。通过现有验收器不自动证明测试充分性或工业签核。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；论文版本、固定tree/源码及102份RTLFix参考JSON静态审计，未执行模型/VCS/形式工具。</dd>
+<dt>下一步核验</dt><dd>锁定完整任务manifest、缺失PDF、文件选择和参考修复；公开/隐藏测试隔离、工具版本、失败分母与训练再分发许可分别核。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://ojs.aaai.org/index.php/AAAI/article/view/37079">https://ojs.aaai.org/index.php/AAAI/article/view/37079</a></li>
+<li><a href="https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluators/rtlfix_eval.py">https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluators/rtlfix_eval.py</a></li>
+<li><a href="https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluator.py">https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluator.py</a></li>
+<li><a href="https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/configs/eval_config.yaml">https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/configs/eval_config.yaml</a></li>
 </ul></dd></dl></details>
 <h2 id="group-1">数字验证：断言、形式证明、修复与安全</h2><div class="tablewrap"><table><thead><tr><th>名称与版本</th><th>输入</th><th>任务与输出</th><th>指标与限制</th></tr></thead><tbody>
 <tr><td><a href="#verify-fveval-human">FVEval NL2SVA-Human</a><br/><small>原paper2024/25；冻结root 141afe7dcf03a0b86547b94657d9d610b6087724</small><br/><span class="tag">公开题集+形式评测</span></td><td>79row/13design TB（counter/四arbiter/多个fifo/fsm/ram等）；原CSV43种完全相同prompt文本、47种完全相同ref文本和13TB，重复跨TB不自动等语义重复题。task_id字段仅38种，正式UID加design_name与trial后区分，不误报79ID冲突。给NL描述/信号/参数/部分TB、ICL或CoT按配置选择。</td><td>生成指定SVA，先把原TB+ref+模型assertion组合做语法elaboration，再clear-all调用PEC比较reference/model性质；不是证明参考性质在原RTL上成立。<p><strong>输出：</strong>SVA断言</p></td><td>syntax=未匹配小写“syntax error”；strict=functionality仅stdout含Full equivalence；relaxed=full或任何方向implies均1，未识别为0。方向不区分，relaxed不等同样强规格。Human取expression按tb_reset)末段/第一个);截断，信号从prompt单引号词和outputTB参数名收集；Tcl把clk/rst实参均传空字符串，内部默认/parameter语义在opaque核心未核。另报evaluate BLEU/ROUGE-L/exactmatch，不替代语义。pass_at_k实现1−C(n−c,k)/C(n,k)的无放回估计，c必须来自同一明确二元gate。<p class="muted">当前wrapper只返回stdout，不按returncode/stderr硬门计分且subprocess无timeout，父processjoin也无限期；缺TASK_ID使评估抛错，child无queue输出需与expectedmanifest核齐，不能默默按收到行算分。syntax只查“syntax error”字样，缺此字符串得1不构成成功elaboration证明。以上是源码边界，未证明任何已发表结果发生错计。 79row非79独立IP、相同family不同约束宜同group；本参考等价只在已定义的信号/表达式/PEC语义下。原时钟/reset外层未传不能擅自声称保持原TB所有assumptions；未知/timeout没有full/implies不当proven。</p></td></tr>
@@ -12755,7 +12882,7 @@ body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:
 <li><a href="https://github.com/mlcommons/mlperf_client/blob/13b7680725891ff16eefcdb28aed1a97d637c412/rules/MLPerf_Client_Rules.md">https://github.com/mlcommons/mlperf_client/blob/13b7680725891ff16eefcdb28aed1a97d637c412/rules/MLPerf_Client_Rules.md</a></li>
 </ul></dd></dl></details>
 <h2 id="coverage-limits">已有覆盖与具体缺口</h2><p>依据用户阶段划分逐项列已有覆盖与剩余限制；“所有可发现”按此次公开资料检索边界理解，不声称覆盖未公开工业bench或互联网全部材料。 <a href="scope-and-gaps.json">结构化范围说明</a>。</p><ul><li>以官方规则/作者论文/固定源码/原包为证据；搜索摘要仅作发现线索。</li><li>只运行自写下载/文本/JSON/归档元数据/哈希/静态审计与报告生成，不执行下载源code、模型、EDA、仿真或硬件。</li><li>领域覆盖、对象身份、逐字段证据、独立验收、商业可用性和饱和判断分开；缺源/失链/401/许可/opaque限制保留。</li><li>同一IP多版本/多flow/多设计点按协议记录，归并家族；记录数量不是同等成熟独立benchmark数。</li><li>已知历史协议修订按具体版本标注；未有足够证据把任何整家族宣称已被软件彻底解决。</li></ul><div class="tablewrap"><table><tr><th>领域 / 目录记录数</th><th>已有任务覆盖</th><th>尚未解决的访问、协议与验收限制</th></tr>
-<tr><td>数字前端<p>76条 / 33域内家族</p></td><td>RTL与VHDL生成/理解/修复、跨模块工程、微架构优化、规格一致性与功耗/PPA预测；单轮生成与多步agent分别记录<p><a href="#rtl-verilogeval-v2">VerilogEval v2</a> · <a href="#rtl-hwe-arch-v2">HWE Bench / FeSens architecture V2</a> · <a href="#rtl-cvdp-agentic">CVDP / agentic project workflow</a> · <a href="#ara-cpu-level2">Chip-Bench ARA / CPU Level 2</a> · <a href="#ara-network-n3">Chip-Bench ARA / n3-pcie-switch</a></p></td><td>近期大套件完整harness/隐藏数据/许可未全公开；CPU/PCIe规范完成不等全ASIC实现，训练语料与评测集关系、跨family泛化需持续核。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
+<tr><td>数字前端<p>82条 / 34域内家族</p></td><td>RTL与VHDL生成/理解/修复、跨模块工程、微架构优化、规格一致性与功耗/PPA预测；单轮生成与多步agent分别记录<p><a href="#rtl-verilogeval-v2">VerilogEval v2</a> · <a href="#rtl-hwe-arch-v2">HWE Bench / FeSens architecture V2</a> · <a href="#rtl-cvdp-agentic">CVDP / agentic project workflow</a> · <a href="#ara-cpu-level2">Chip-Bench ARA / CPU Level 2</a> · <a href="#ara-network-n3">Chip-Bench ARA / n3-pcie-switch</a></p></td><td>近期大套件完整harness/隐藏数据/许可未全公开；CPU/PCIe规范完成不等全ASIC实现，训练语料与评测集关系、跨family泛化需持续核。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
 <tr><td>数字验证<p>59条 / 43域内家族</p></td><td>SVA/NL翻译/RTL到性质、形式证明、UVM/coverage闭环、mutation、安全/鲁棒性与EDA工具语义回归<p><a href="#verify-fveval-human">FVEval NL2SVA-Human</a> · <a href="#verify-fveval-design">FVEval Design2SVA</a> · <a href="#verify-security-assertions">(Security) Assertions by LLMs</a> · <a href="#verify-chibench-tool-corpus">ChiBench / real-world Verilog tool-testing corpus</a> · <a href="#ver-haven-uvm">HAVEN / protocol-template and coverage-guided DSL UVM suite</a></p></td><td>证明强度/方向/undetermined/vacuity与mutation敏感性不等价；opaque PEC、commercialformal和完整hiddenoracle限制单列，静态wrapper审计不等复现实验。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
 <tr><td>模拟前端<p>81条 / 39域内家族</p></td><td>电路图感知、拓扑/结构、尺寸、预测/检索、长程规格闭环、RF与存储电路/稀有失效；方法实验和成熟bench分身份<p><a href="#analog-longhorizon">Analog Design Bench (Long-Horizon)</a> · <a href="#analog-sganalog-sizing">SGAnalog / 17-task device sizing: 10 fidelity + 7 survival</a> · <a href="#analog-analogmaster-image-layout">AnalogMaster / 15-circuit image-to-layout method evaluation</a> · <a href="#memory-openyield-rare-yield">OpenYield / rare-event yield-estimation research track</a> · <a href="#rf-cobra">COBRA / surrogate-assisted RF circuit optimization workflow</a></p></td><td>多数开源spec/模型仍简化，真实PDK/全PVT/MC/寄生/测量gold有缺口；高识别/收敛/nominalFoM不能推完整电性能。部分agent论文尚未完整发布。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
 <tr><td>综合HLS<p>72条 / 35域内家族</p></td><td>经典逻辑综合、IWLS现代学习/精确综合、HLS程序/应用、代理预测、DSE/agent与FPGA CAD<p><a href="#synth-epfl">EPFL Combinational Benchmark Suite</a> · <a href="#synth-iwls25-weighted">IWLS2025 / 200 exact functions, AIG-only weighted old/new score</a> · <a href="#hls-hlsyn-inductive">HLSyn / inductive unseen-kernel prediction</a> · <a href="#hls-hlsdataset">HLSDataset</a> · <a href="#fpga-vtr">VTR benchmark circuits / full FPGA CAD flow</a> · <a href="#ara-acc-a3-bf16-exp">Chip-Bench ARA / a3-bf16-exp</a></p></td><td>有些原包取得但未执行CEC/HLS；数据多点并非独立IP，FPGA器件/工具版本跨域与真实后实现验收另核；PolyBench原始C包已取，部分派生HLS完整配置/标签仍待核。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
