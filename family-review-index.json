@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T06:15:00.400510+00:00",
+  "generated_at": "2026-10-20T06:24:13.890866+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 338,
-    "records": 600,
-    "records_with_any_field_audit_entry": 358,
-    "records_with_current_field_audit_snapshot": 325,
+    "families": 339,
+    "records": 602,
+    "records_with_any_field_audit_entry": 360,
+    "records_with_current_field_audit_snapshot": 327,
     "records_without_current_field_audit_snapshot": 275
   },
   "requirements_per_record": [
@@ -5682,6 +5682,56 @@
           "limitations": "主342模块来自同BaseJump STL、层次0–9，有共享子模块不是342独立项目；deep28pairs只27unique modules且是主集辅助子集，不能算额外28主设计。参数组合/classification/limit.json随golden固定，不能任意缩减fault集合提高成绩；agent改善自身可证性可能仍漏规格/增强空真，S3无C3不能外推bug忠实度。goldenpipeline与受试agent权限分开；release清除了少量包含rawVCF日志的agentprompt，完全重建轨迹需合法工具重跑",
           "tools_and_access": "repo35ace852，公开pipeline/metriccollectors和NDA清理后的artifacts；递归tree截断已补root，未全下载。Synopsys VC Formal商业许可/FPV/FTA/COV/FC；BaseJumpRTL上游许可与新脚本/数据条款分别核，root未见LICENSE；已读Tier1/C3/agentcollector",
           "industrial_value": "是真正工具agent轨但范围是property迭代；适合研究闭环，不等修复RTL或完整SoC DVagent"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "HighTide",
+      "record_count": 2,
+      "records_with_current_field_audit": 2,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "pd-hightide-flow-suite",
+          "name": "HighTide / 现代设计与63个设计-平台配置",
+          "category": "后端/RTL到GDS与流程配置",
+          "artifact_type": "公开VLSI输入/配置suite；agent辅助策展，不等agent评测挑战",
+          "task_layer": "固定上游RTL/转译/patch与平台配置运行RTL→综合→floorplan/place/CTS/route/final；亦可导出portable inputcontract",
+          "evidence_status": "第二轮12h进行中；论文/current固定配置/决策记忆/导出及汇总路径静态审计，未运行Bazel、EDA、第三方测试或skills。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-hightide-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "核完整实际结果矩阵/冻结输入包、各源IP与variant血缘、功能与物理硬门、原生默认flow对照、全部agent/工具预算与rawtrace。",
+          "limitations": "63是声明配置，不是63独立IP或已全通过。NVDLA决策日志明确记录asap7partition_c到_final但WNS仍负。论文提DRC/LVS/STA验收，当前展示路径与功能充分性应另核。FakeRAM缺内部逻辑/物理GDS允许空，面积/功耗是近似，不能当真实SRAM签核；优化SDC/容量需冻结公平合同。导出workflow存在，但所核26Q3release无自定义assets；网站结果表两次超时，未确认全矩阵。",
+          "tools_and_access": "固定repo157644588d12732779acfc0d34ece49ed9b39bbb；rootBSD3，设计/工具/PDK各自上游许可。完整tree1253entries；100选定文件Gitblob全部匹配。Bazel/ORFS/OpenROAD等固定依赖，45个设计及辅助http_archive均写SHA256；仍有bazel-orfs与bsg_fakeram工具gitlink，不把无设计submodule误写成无任何submodule。",
+          "industrial_value": "研究判断：现代RTL/多HDL/多平台输入和流程经验可用于后端研究；现成OpenROAD执行替代手工操作，不意味着配置选择、跨工具一致性和硬约束收敛已解决。"
+        },
+        {
+          "id": "pd-hightide-agent-memory",
+          "name": "HighTide / 13个skill与17份决策记忆（非独立benchmark）",
+          "category": "后端/RTL到GDS与流程配置",
+          "artifact_type": "同suite配套agent策展/检索记忆资源；非第二套独立数据集",
+          "task_layer": "agent借助检索记忆新增/移植/调试设计，修改flow/SDC/物理配置/FakeRAM并记录理由；optimize-ppa路径要求保持上游RTL固定",
+          "evidence_status": "第二轮12h进行中；论文/current固定配置/决策记忆/导出及汇总路径静态审计，未运行Bazel、EDA、第三方测试或skills。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-hightide-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "核完整实际结果矩阵/冻结输入包、各源IP与variant血缘、功能与物理硬门、原生默认flow对照、全部agent/工具预算与rawtrace。",
+          "limitations": "DECISIONS是整理后的结果/理由，不是全部成功失败尝试的原始对话。没有逐stepprompt-action-observation/token-cost manifest/replay corpus确认。raw技能文档可辅助工程agent，但不能把13份skill当13条已验证rollout或把策展agent效果当模型能力榜。",
+          "tools_and_access": "固定repo157644588d12732779acfc0d34ece49ed9b39bbb；rootBSD3，设计/工具/PDK各自上游许可。完整tree1253entries；100选定文件Gitblob全部匹配。Bazel/ORFS/OpenROAD等固定依赖，45个设计及辅助http_archive均写SHA256；仍有bazel-orfs与bsg_fakeram工具gitlink，不把无设计submodule误写成无任何submodule。",
+          "industrial_value": "研究判断：现代RTL/多HDL/多平台输入和流程经验可用于后端研究；现成OpenROAD执行替代手工操作，不意味着配置选择、跨工具一致性和硬约束收敛已解决。"
         }
       ]
     },
