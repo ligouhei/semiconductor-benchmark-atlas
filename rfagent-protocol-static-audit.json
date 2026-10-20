@@ -1,0 +1,163 @@
+{
+  "as_of": "2026-10-19T21:39:26.253058+00:00",
+  "status": "selected static file/AST and saved-outcome arithmetic audit",
+  "frozen_tree_sha": "592d40c7a209a8e6435ffa9cf85c9b7876ebec4f",
+  "test_variants": {
+    "10": {
+      "rows": 1000,
+      "unique_ids": 1000,
+      "unique_questions": 1000,
+      "answers": {
+        "B": 577,
+        "C": 222,
+        "A": 170,
+        "D": 20,
+        "None": 3,
+        "AC": 1,
+        "": 4,
+        "ABCD": 1,
+        "AD": 1,
+        "V": 1
+      }
+    },
+    "11": {
+      "rows": 1000,
+      "unique_ids": 1000,
+      "unique_questions": 1000,
+      "answers": {
+        "B": 577,
+        "C": 222,
+        "A": 170,
+        "D": 20,
+        "None": 3,
+        "AC": 1,
+        "": 4,
+        "ABCD": 1,
+        "AD": 1,
+        "V": 1
+      }
+    },
+    "12": {
+      "rows": 1000,
+      "unique_ids": 1000,
+      "unique_questions": 1000,
+      "answers": {
+        "B": 577,
+        "C": 222,
+        "A": 170,
+        "D": 20,
+        "None": 3,
+        "AC": 1,
+        "": 4,
+        "ABCD": 1,
+        "AD": 1,
+        "V": 1
+      }
+    },
+    "13": {
+      "rows": 1000,
+      "unique_ids": 1000,
+      "unique_questions": 1000,
+      "answers": {
+        "B": 577,
+        "C": 222,
+        "A": 170,
+        "D": 20,
+        "None": 3,
+        "AC": 1,
+        "": 4,
+        "ABCD": 1,
+        "AD": 1,
+        "V": 1
+      }
+    }
+  },
+  "version_comparison": [
+    {
+      "files": [
+        10,
+        12
+      ],
+      "same_ids": 178,
+      "same_question_byid": 0,
+      "same_answer_byid": 62,
+      "exact_question_overlap": 1000
+    },
+    {
+      "files": [
+        12,
+        11
+      ],
+      "same_ids": 1000,
+      "same_question_byid": 868,
+      "same_answer_byid": 1000,
+      "exact_question_overlap": 868
+    },
+    {
+      "files": [
+        11,
+        13
+      ],
+      "same_ids": 1000,
+      "same_question_byid": 1000,
+      "same_answer_byid": 1000,
+      "exact_question_overlap": 1000
+    }
+  ],
+  "selected_train": {
+    "files": [
+      "rfagent_protocol2_3.txt",
+      "rfagent_protocol2_4.txt"
+    ],
+    "rows": 4086,
+    "unique_questions": 4086,
+    "exact_test_question_overlap_ids": [
+      815
+    ],
+    "test_id_overlap": [
+      815
+    ],
+    "scope": "One current mc train_fixed version only, not proof all paper runs trained on this file"
+  },
+  "majority_B_full_N_accuracy": 0.577,
+  "saved_RAG_outcome": {
+    "rows": 1000,
+    "gold_answer_sequence_matches_final": true,
+    "metrics": [
+      {
+        "field": "GPT 4o with Basic RAG Answer",
+        "correct": 930,
+        "total": 1000,
+        "accuracy": 0.93,
+        "type": "arithmetic on saved extracted outcome only, not inference or extractor rerun"
+      },
+      {
+        "field": "GPT 4o with Hybrid RAG Answer",
+        "correct": 912,
+        "total": 1000,
+        "accuracy": 0.912,
+        "type": "arithmetic on saved extracted outcome only, not inference or extractor rerun"
+      },
+      {
+        "field": "GPT 4o Answer",
+        "correct": 896,
+        "total": 1000,
+        "accuracy": 0.896,
+        "type": "arithmetic on saved extracted outcome only, not inference or extractor rerun"
+      }
+    ]
+  },
+  "source_findings": [
+    "split notebook random.shuffle without explicit seed or source-section grouping; writes question/thinking/solution/answer then remaps original line IDs",
+    "final vs change: 132 question strings differ at same source IDs with answers unchanged",
+    "selected SFT/RAG extraction uses gpt-4.1-nano temperature0.1 max_tokens10; first regex [A-D]+; can return multiple choices or None",
+    "aggregation compares sorted(model_answer) with sorted(gold); no set dedup and None becomes empty string; unmatched/invalid gold policy must be explicit",
+    "extractor writes outcomes by row position rather than a verified source-ID join",
+    "local generation selected do_sampleFalse/max_new_tokens16000; GPT4o selected temp0/max_tokens1000; RAG retrieval and generation timers separated; model/index build and extraction not totalized"
+  ],
+  "limitations": [
+    "No semantic adjudication of any gold answer performed.",
+    "No full mixed-ndQTSA/mcQTSA SFT corpus or source chapter provenance audited.",
+    "Saved score agreement verifies arithmetic on those stored choices only, not model reproducibility or extractor reliability."
+  ]
+}

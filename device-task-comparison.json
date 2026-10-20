@@ -1,0 +1,102 @@
+{
+  "as_of": "2026-10-20T00:45:35.886753+00:00",
+  "status": "task and input/label comparison, not a new benchmark or ranking",
+  "scope": "器件仿真数据、论文图表数字化、硅实测拟合、TCAD逆映射及数值一致性分轨；误差单位、物理来源、参数可辨识性与按器件/论文划分决定结论。",
+  "items": [
+    {
+      "task": "BSIM仿真器件曲线",
+      "catalog_ids": [
+        "device-mesd",
+        "device-mesd2.0"
+      ],
+      "input_boundary": "匿名PDK/geometry/corner/temp/bias→Ids与C；两版本共44器件不是88独立",
+      "label_oracle": "来源是foundry compactmodel+Spectre/HSPICE仿真，不是硅实测；公开ACdeck示例1MHz",
+      "scoring_boundary": "没有统一官方split/scorer；linear/log/relative误差及电流符号/零值独立定义",
+      "current_use": "适合forward surrogate；参数提取另榜。按PDK/device留出，插值/compactmodel/普通ML为基线，生成依赖商业工具许可",
+      "source_snapshots": [
+        {
+          "id": "device-mesd",
+          "record_sha256": "e5004d83df0987b1632cb11a17bbcd49dece1a04d60137b1b88d736b0fd6ccf1"
+        },
+        {
+          "id": "device-mesd2.0",
+          "record_sha256": "678990a1b451f2de6d845e9236a6a3c2281346cdaa750955e5bae3d22e4f5de1"
+        }
+      ]
+    },
+    {
+      "task": "论文图表数字化的新型器件曲线",
+      "catalog_ids": [
+        "device-esded"
+      ],
+      "input_boundary": "原论文figure/metadata与曲线；787JSON去精确重复530项、238DOI",
+      "label_oracle": "图表可能来自测量/TCAD/模型，逐论文确认；单例原图mA/µm而README A，不能混绝对电流",
+      "scoring_boundary": "无统一split/scorer；102DOI跨目录，344曲线非严格升序，按论文/器件分组留出",
+      "current_use": "先完成单位/来源/元数据校准再做定量golden；clean index保留aliases。与人工digitizer/现有模型拟合比较，非现成agentbench",
+      "source_snapshots": [
+        {
+          "id": "device-esded",
+          "record_sha256": "87f6d054641a725caced4a77b1623cf4d1e1bec77e1170f1b497744c3321cd5c"
+        }
+      ]
+    },
+    {
+      "task": "实测器件compactmodel拟合",
+      "catalog_ids": [
+        "device-dfo-diode",
+        "device-dfo-hemt"
+      ],
+      "input_boundary": "diamond diode/GaNHEMT实测curve+model/bounds/loss/weights",
+      "label_oracle": "TPE优化SPICE曲线；自定义log变换+截顶平方误差，非普通RMSE/Huber",
+      "scoring_boundary": "80/20随机点与最终100%allfit分开；syntheticglitch鲁棒性非自然工业失效",
+      "current_use": "原生IC-CAP/MBP、专家/梯度/BO同bounds/loss/全预算对照；既有拟合成熟不等流程诊断/跨器件任务已解决",
+      "source_snapshots": [
+        {
+          "id": "device-dfo-diode",
+          "record_sha256": "7752ec47c890a1f19c1800fc869baeff8111968b1c44799db55a0376623d8d73"
+        },
+        {
+          "id": "device-dfo-hemt",
+          "record_sha256": "11205053ff72f8aed4baf2bd446bf4029fed632b5d9ae651ea73383351f31635"
+        }
+      ]
+    },
+    {
+      "task": "TCAD目标的学习式参数提取",
+      "catalog_ids": [
+        "device-iprefer"
+      ],
+      "input_boundary": "5nm nanosheetTCAD目标；25k compactmodel MC样本训练feature→参数逆映射",
+      "label_oracle": "TCAD参考非真实硅，重建IV/CV与参数真值恢复不同",
+      "scoring_boundary": "论文不同curve RMS%分开；未取得公开完整sample/split/scorer/weights",
+      "current_use": "目前方法案例，不能当公开任务包；数据生成+训练+推理成本均计，比较传统提取与同分布学习baseline",
+      "source_snapshots": [
+        {
+          "id": "device-iprefer",
+          "record_sha256": "29b7fc4683462a18cc3d4d2173f7ed87e6f8d1e6db2481f36aff15db92f7aa48"
+        }
+      ]
+    },
+    {
+      "task": "BTI数值求解与实测参数反演",
+      "catalog_ids": [
+        "device-comphy-consistency",
+        "device-comphy-esid"
+      ],
+      "input_boundary": "同stack/stress/seed的solver回归，或eMSM实测curve反演trap分布",
+      "label_oracle": "数值自洽/步长收敛与实测物理校准分开；ESiD非负正则逆问题不唯一",
+      "scoring_boundary": "未有统一公共分数；v1/v3默认计算不同；100/150C拟合→50C外推独立于训练误差",
+      "current_use": "登录访问与许可待核；物理golden需独立heldout，不据软件输出自洽宣称器件寿命预测正确或全可靠性覆盖",
+      "source_snapshots": [
+        {
+          "id": "device-comphy-consistency",
+          "record_sha256": "f3f9d3f82938b9bed389a539dc6b4872c54b2cbba4e0d714b771512ec9e4597c"
+        },
+        {
+          "id": "device-comphy-esid",
+          "record_sha256": "47187104d4fcb999db1ccff215e8efeef8dc554fe14d300529938dc824183cc0"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "as_of": "2026-10-20T00:45:35.748449+00:00",
+  "status": "manual primary-source scope review; vendor claims not independently benchmarked",
+  "items": [
+    {
+      "topic": "Native memory-array flow vs general recipe engineering",
+      "supported_claim": "MEMOPC array/cell识别→SRAF/OPC插入→arrayrestoration/工具选择，聚焦memory/image-sensor一致性；WORKbench是应用启动/结果查看。",
+      "does_not_prove": "不是通用recipe自动optimizer、LLMagent或公开统一workflowbench。",
+      "evidence_files": [
+        "evidence/calibre_memopc.txt",
+        "evidence/selection_calibre_cl_current.txt"
+      ]
+    },
+    {
+      "topic": "Recipe parameter exploration already exists",
+      "supported_claim": "PWB2018datasheet已有RPT参数探索/OPC+LRC评价、并行资源管理、搜索cost与流程脚本扩展。",
+      "does_not_prove": "功能存在不证明2026具体最强配置/每任务全局最优；agent需相同质量/预算原生对照。",
+      "evidence_files": [
+        "evidence/opc_current_proteus_workbench.pdf"
+      ]
+    },
+    {
+      "topic": "Current GPU acceleration scopes",
+      "supported_claim": "2026-10-14 Siemens公告分fullchipOPC最高12x与keysimulation10–17x，非同一计时范围。",
+      "does_not_prove": "未公开固定输入/计时script、不能相加/推全端到端同加速或任务已经解决。",
+      "evidence_files": [
+        "evidence/opc_current_culitho_press.txt"
+      ]
+    },
+    {
+      "topic": "AI orchestration statements",
+      "supported_claim": "Siemens2026-09文章讨论协调物理仿真/数据/工程流程的AI层。",
+      "does_not_prove": "架构图不是固定任务、独立oracle、可读原包或agent完成率；完整agent建议协议仍标proposed。",
+      "evidence_files": [
+        "evidence/opc_current_fab_agent.txt"
+      ]
+    }
+  ],
+  "file_hashes": [
+    {
+      "file": "commercial-tool-map.json",
+      "sha256": "29c4b062e993534138c37f0ca1b19e92d8a446424396603b1c650309066e63ca"
+    },
+    {
+      "file": "evidence/calibre_memopc.txt",
+      "sha256": "846828864d16a37d1109e63901582b12bf89e1dd9cb2f4640548b0244ece77d0"
+    },
+    {
+      "file": "evidence/selection_calibre_cl_current.txt",
+      "sha256": "821c68fce637f6eb0c6f7f58dfbe0bb2b13b9dc949bf9e097b4f1d1ff25ebbf5"
+    },
+    {
+      "file": "evidence/opc_current_proteus_workbench.pdf",
+      "sha256": "137dfaa4474e4144b92e15614dfb741890d0267a154f66737f11a44399e47c71"
+    },
+    {
+      "file": "evidence/opc_current_culitho_press.txt",
+      "sha256": "4612dcdee5d8bbf22d5056eb1f13c485272616766fb9d9f4b0e235a017ca2911"
+    },
+    {
+      "file": "evidence/opc_current_fab_agent.txt",
+      "sha256": "dcdbd3e574242f00c51ba40ffa5e587cb26b572c02d2ed7deaacfbe5c3220cc7"
+    }
+  ],
+  "research_conclusion": "求解器、recipe调参和完整工程agent三个层次都有不同现成工具覆盖；模型余量需同条件实证，不能按软件存在或旧学术score高宣告已饱和。"
+}

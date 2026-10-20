@@ -1,0 +1,197 @@
+{
+  "as_of": "2026-10-20T00:45:35.920190+00:00",
+  "status": "task and input/label comparison, not a new benchmark or ranking",
+  "scope": "封装研究按互连架构、资源配置、成本分区、物理布局、3D实现、热场代理与热求解分类。各层输入/输出/独立oracle不同；原生优化器、求解器和代理加速不混为同一agent任务。",
+  "items": [
+    {
+      "task": "热求解器与版本回归",
+      "catalog_ids": [
+        "thermal-hotspot",
+        "thermal-3dice"
+      ],
+      "input_boundary": "固定geometry/材料/边界/power/网格/时间→热场",
+      "label_oracle": "HotSpot当前输出K；3DICE回归比较数值但exit0不一定代表容限通过",
+      "scoring_boundary": "收敛/格式/误差/CPU与memory必须另定义，工具教程不是ML榜",
+      "current_use": "独立FEM/实测校准与数值自洽分开；成熟solver是执行器，不等布局优化已解决",
+      "source_snapshots": [
+        {
+          "id": "thermal-hotspot",
+          "record_sha256": "a4951fc8444884ed588b89c5a87ffe697abb04ac6895d5d03297df7e9e1ee7c0"
+        },
+        {
+          "id": "thermal-3dice",
+          "record_sha256": "4fadd365e07e1b075daffe6adada91f7b23b01b36f2e4f98867ad2af4fc05d4c"
+        }
+      ]
+    },
+    {
+      "task": "热场学习：同分布与结构OOD",
+      "catalog_ids": [
+        "thermal-ictherm-insupport",
+        "thermal-ictherm-ood"
+      ],
+      "input_boundary": "64²场；S2/S3/S4物理channel不同，S5未知case",
+      "label_oracle": "RMSE逐样本平均/pooledR²/MaxAE/peakerror/Top50不同",
+      "scoring_boundary": "10shot每case10=共50，zero/fewshot测试集合不同需同holdout",
+      "current_use": "与单package两通道FNO不可直接比误差；train-only normalization/按case留出/全solver预算",
+      "source_snapshots": [
+        {
+          "id": "thermal-ictherm-insupport",
+          "record_sha256": "d6af2b01b0b7f0c8752b1f18cf343ed5d3fc06eb048ea3cb889a0c698eb20718"
+        },
+        {
+          "id": "thermal-ictherm-ood",
+          "record_sha256": "4e720c893716350491ae159e660f4675b934c1f3ae30023d382621faae38997f"
+        }
+      ]
+    },
+    {
+      "task": "芯粒物理布局：规模与固定功耗",
+      "catalog_ids": [
+        "chiplet-atplace"
+      ],
+      "input_boundary": "10案例6–61chiplets，pinoffset/功耗/约束固定",
+      "label_oracle": "pin Manhattan TWL与HotSpot Tmax、合法性独立验收",
+      "scoring_boundary": "current公开summary无Tmax/DRC gate，核心加密不能据exit0成功",
+      "current_use": "输入库有价值，独立plaintext合法性/真实热峰重算；不是通用Calibre/完整工程agent",
+      "source_snapshots": [
+        {
+          "id": "chiplet-atplace",
+          "record_sha256": "94514053f8c1c9ad2059f6a30b3ced1e2cc46b5b35d731339f9a99d2bd3a20be"
+        }
+      ]
+    },
+    {
+      "task": "同原流程的SA与热代理替换",
+      "catalog_ids": [
+        "chiplet-tap25d",
+        "thermal-fnoplacer-proxy"
+      ],
+      "input_boundary": "三TAPcfg；FNO沿用输入，只两channel power/occupancy",
+      "label_oracle": "HotSpot教师与独立test不同；TAP返回均线长而非总线长",
+      "scoring_boundary": "FNO数据/weights未发布，默认seed复用风险；final各自搜索温度差非同布局重验",
+      "current_use": "共享casefamily不重复包装新dataset；对比原HotSpot SA，最终候选必须独立oracle重验，训练/标签费用计入",
+      "source_snapshots": [
+        {
+          "id": "chiplet-tap25d",
+          "record_sha256": "b49e78c6003a8e772f9b6c5423abf6703c0b79b73bda18007baf7975fe6d1556"
+        },
+        {
+          "id": "thermal-fnoplacer-proxy",
+          "record_sha256": "0f1aad6b998a24bda9a0bd3f5fe3b7f1506b6c4c7abd2ad8f6b0d57e9412ad84"
+        }
+      ]
+    },
+    {
+      "task": "可微物理热布局示例",
+      "catalog_ids": [
+        "thermal-diffchip"
+      ],
+      "input_boundary": "8chiplet单设计，2优化场景，显式热PDE/BC",
+      "label_oracle": "soft p90peak与真实max、soft与real HPWL分别记录",
+      "scoring_boundary": "本例5°C校准使代理77°C对应目标82°C；ANSYS为作者报告",
+      "current_use": "方法案例非公开任务包；不外推校准/泛化/全工业签核，梯度成本和传统search同预算",
+      "source_snapshots": [
+        {
+          "id": "thermal-diffchip",
+          "record_sha256": "5ef76e5730afc1514f3dbcf0fd462da69fa52c18f1ebe6e4c91193ecd2c50ec7"
+        }
+      ]
+    },
+    {
+      "task": "互连拓扑：解析与周期验证",
+      "catalog_ids": [
+        "chiplet-rapidchiplet-proxy",
+        "chiplet-rapidchiplet-booksim"
+      ],
+      "input_boundary": "architecture/routing/traffic/PHY参数，非热布局输入",
+      "label_oracle": "cycles/bitpercycle/area/cost，BookSim与proxy是不同oracle",
+      "scoring_boundary": "144解析vs128周期配置配对；powerlink漏汇总、饱和load阈值与runtime边界版本化",
+      "current_use": "网络proxy精度与搜索最终收益分轨；无热/DRC/LVS，现行工具optimizer是baseline",
+      "source_snapshots": [
+        {
+          "id": "chiplet-rapidchiplet-proxy",
+          "record_sha256": "a876eab14470bdb1f4abd3d6ed7e2fd661f429e9de4cbba9fb0a9659815de775"
+        },
+        {
+          "id": "chiplet-rapidchiplet-booksim",
+          "record_sha256": "fd44a65dc612e5f0e6f45702d597a9af74303da66c7857fe966935cd4d5b48fa"
+        }
+      ]
+    },
+    {
+      "task": "AI芯粒资源与封装配置",
+      "catalog_ids": [
+        "chiplet-chipletgym"
+      ],
+      "input_boundary": "15变量架构/数量/HBM类别位置/互连参数",
+      "label_oracle": "throughput字段为混合惩罚score，非实测TOPS或热场",
+      "scoring_boundary": "train LoL+50而final不加，action域/预算/800vs900面积需锁",
+      "current_use": "成本/带宽近似需独立校准；benchmark不是实际DNN测量，PPO离线训练计入",
+      "source_snapshots": [
+        {
+          "id": "chiplet-chipletgym",
+          "record_sha256": "f0a8377ccf361120a9bbc74d3588624a55f530462d7abf4b39e34ef9b17621a2"
+        }
+      ]
+    },
+    {
+      "task": "成本驱动IP分区与工艺分配",
+      "catalog_ids": [
+        "chiplet-chipletpart"
+      ],
+      "input_boundary": "blockarea/power/有向bandwidth/wafer-assembly-test XML",
+      "label_oracle": "costmodel、floorplan IOreach/geometry separate；非只mincut",
+      "scoring_boundary": "paper9/current7case与raw/scaled面积不同；ComputeCost vsNRE/volume对齐",
+      "current_use": "原生mincut+同floorplanner/cost、GA/BO强baseline；成本不是市场报价，独立可行性门必需",
+      "source_snapshots": [
+        {
+          "id": "chiplet-chipletpart",
+          "record_sha256": "672a1d4448b9221b0b7d8ad337140d48b9544606669f2d670b2db2b05e2dbd71"
+        }
+      ]
+    },
+    {
+      "task": "3D placement原赛协议",
+      "catalog_ids": [
+        "3d-iccad22",
+        "3d-iccad23"
+      ],
+      "input_boundary": "two-die library/netlist/rows/util/terminalgeometry；2023新增macro/terminalcost",
+      "label_oracle": "HPWL含两die的bondterminal映射与合法性门",
+      "scoring_boundary": "2022 1h/8cores，2023 90min/8cores且cost含runtimemedianfactor",
+      "current_use": "原evaluator/hiddenrelease需锁；不能把现代flow结果自动称原赛分数",
+      "source_snapshots": [
+        {
+          "id": "3d-iccad22",
+          "record_sha256": "b7c60adf5b6137123a2043236600b1650c43a2192ca797f59dc12ac270601818"
+        },
+        {
+          "id": "3d-iccad23",
+          "record_sha256": "76ad087744583a63f5895ceb2a39450316f02829253a2ecdfe630a9a1141f5c7"
+        }
+      ]
+    },
+    {
+      "task": "3D全流程派生基准",
+      "catalog_ids": [
+        "3d-open3d-mol",
+        "3d-open3d-lol"
+      ],
+      "input_boundary": "ORFS/NanGate45→双tier；memory/logic及logic/logic不同",
+      "label_oracle": "routePPA/thermal/clock/RC与原GPproxy分开",
+      "scoring_boundary": "论文placement runtime、脚本HotSpotRuntime含route/CTS范围不同；idealclock存在性分支",
+      "current_use": "原生OpenROAD流程是强baseline，需功能/DRC/hold/setup/热可行性与同activity核验",
+      "source_snapshots": [
+        {
+          "id": "3d-open3d-mol",
+          "record_sha256": "f6e144117a73388e28773f796ced84f526ef45b6536a4992386cab9f04a6ef86"
+        },
+        {
+          "id": "3d-open3d-lol",
+          "record_sha256": "c9550c88a1d63388b4c89ee2a7d45a963a06b06e5bb9905316c6155a4318d45e"
+        }
+      ]
+    }
+  ]
+}

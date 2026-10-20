@@ -1,0 +1,261 @@
+{
+  "as_of": "2026-10-20T00:45:36.020979+00:00",
+  "status": "HLS input, oracle, stage and budget comparison, not a new benchmark or ranking",
+  "scope": "HLS需按程序套件、数据生成框架、给定点预测、未见内核/适配、设计空间搜索和验证覆盖分层。HLS估计、实现报告、真实板测与功能gold不同；成熟编译器自动优化是原生基线，模型须对相同输入/约束/成本与独立终态验收证明增益。",
+  "items": [
+    {
+      "task": "原始程序/应用benchmark套件",
+      "catalog_ids": [
+        "hls-machsuite",
+        "hls-rosetta",
+        "hls-chstone"
+      ],
+      "input_boundary": "C/OpenCL/host与数据/harness，内核/应用级不同",
+      "label_oracle": "给定功能参考、harness的实际check执行与端到端输入输出",
+      "scoring_boundary": "resource/runtime/throughput/energy由具体研究再锁；历史F1成本不能用旧云价直接当现行效率",
+      "current_use": "CHStone镜像top含固定向量/比较的wholemain，不等开放inputkernel；套件非固定agent榜，编译成功不等功能验证，host/传输开销与kernel latency分开",
+      "source_snapshots": [
+        {
+          "id": "hls-machsuite",
+          "record_sha256": "c76062d8968c56f62731167801c93f40e8569d1cf1c2daabd72e2aefc78a0189"
+        },
+        {
+          "id": "hls-rosetta",
+          "record_sha256": "db9c27542772f86476171e728c70f7f80a9b3c0c54aa7f66a35e1b3e1aa970e3"
+        },
+        {
+          "id": "hls-chstone",
+          "record_sha256": "6a71df1b1e3135fbb74c58bfc76fee428300a11d617e2d772821c21433736cff"
+        }
+      ]
+    },
+    {
+      "task": "历史HLS与实现预测数据",
+      "catalog_ids": [
+        "hls-hlsdataset"
+      ],
+      "input_boundary": "论文18876点/34应用/两FPGA/100MHz；currentGit五postHLSCSV612点与utility750另列",
+      "label_oracle": "HLS estimates与实现/仿真power标签不同；ZU9EG完整3.485GB已扫：9kernel×531=4779配置/78644members，0CSV/0Csource/0activity文件，另一FPGA仅HEAD",
+      "scoring_boundary": "CSV14列header但后6特征全缺；ns与MHz/resource计数，Clock table frequency非自动Fmax；current SAIF段注释，历史活动来源需核",
+      "current_use": "可作校准/跨FPGA素材，许可/完整数据/工艺与family split先锁，不把612点冒充18876完整复现",
+      "source_snapshots": [
+        {
+          "id": "hls-hlsdataset",
+          "record_sha256": "df601166754a63d14161cd9ffde8e2caa47f93b25b65d625f36e8611d3463a6d"
+        }
+      ]
+    },
+    {
+      "task": "自建数据与工具编排框架",
+      "catalog_ids": [
+        "hls-hlsfactory"
+      ],
+      "input_boundary": "可配置C/pragma/DSLX/库/工具；demo seed64每源12point/32jobs",
+      "label_oracle": "HLS→implementation→report，full-flow demo未调用独立Csim/cosim",
+      "scoring_boundary": "HLS clock_period秒、impl同名ns；power mW、WNS等ns，XLS delay_model unit不是校准ps",
+      "current_use": "现成flow/随机pragma是强baseline；MLdemo row-random80/20非未见kernel，框架不是统一agent成绩",
+      "source_snapshots": [
+        {
+          "id": "hls-hlsfactory",
+          "record_sha256": "d3ce11bb8be99cbb4ee626197ebc6c29bee78a51dc24d1bfa257aeb7ee91b9fa"
+        }
+      ]
+    },
+    {
+      "task": "给定设计点的多目标预测",
+      "catalog_ids": [
+        "hls-hlsyn"
+      ],
+      "input_boundary": "v18/20 C/pragma/ProGraML图；41596点含失败/无perf",
+      "label_oracle": "指定工具版本latency/resource与分类target，不把all点当成功设计",
+      "scoring_boundary": "current perf=.5log2(1e7/latency)，五RMSE总和非平均；需逆变换cycles另报",
+      "current_use": "currenttransductive全局pointmix不是每kernel精确70/15/15；性能预测不等新程序泛化，原生HLS与代理同输入预算",
+      "source_snapshots": [
+        {
+          "id": "hls-hlsyn",
+          "record_sha256": "ab7a56906bee52525416b6a4094fb8b8247c1769d95650214b7c4de304feb9b9"
+        }
+      ]
+    },
+    {
+      "task": "未见内核预测",
+      "catalog_ids": [
+        "hls-hlsyn-inductive"
+      ],
+      "input_boundary": "每版本六heldout kernel，其余训练",
+      "label_oracle": "默认heldout0val/全test，seenkernel另留15%transductivetest；若启用heldoutval则权限改变，同算法size变体需group",
+      "scoring_boundary": "同五目标变换/validity protocol；不能把六kernel说六点",
+      "current_use": "强调kernel/family/tool新颖性边界，别与同程序row-random结果合榜",
+      "source_snapshots": [
+        {
+          "id": "hls-hlsyn-inductive",
+          "record_sha256": "ef5cbdcd940852511954bec5d35bd96528d5014ef0d8508b9fd898552167ed65"
+        }
+      ]
+    },
+    {
+      "task": "有新内核标注的少样本适配",
+      "catalog_ids": [
+        "hls-hlsyn-adaptation"
+      ],
+      "input_boundary": "heldout kernel额外给少量真实工具标注",
+      "label_oracle": "label获取是有成本的输入权限，需与纯inductive分轨",
+      "scoring_boundary": "paper10points/10epochs vs默认20/holdout.3/repeat5；epoch选last/besttrain，未用holdout挑；all等权kernelrepeat mean/std不是pooledRMSE或CI",
+      "current_use": "同预算label/搜索与未见测试保护；适配收益不当零shot泛化",
+      "source_snapshots": [
+        {
+          "id": "hls-hlsyn-adaptation",
+          "record_sha256": "fa13d7b69944f8beab90c30999dd9b85e3c47b3cfb1464b2b8e0e8e599fbdef5"
+        }
+      ]
+    },
+    {
+      "task": "LLM驱动pragma设计空间搜索",
+      "catalog_ids": [
+        "hls-llmdse"
+      ],
+      "input_boundary": "10 HLSyn/ML4HLS kernel与4大Rosetta、历史反馈/warning",
+      "label_oracle": "Merlin/mcc_estimate cycles/resource，需另补function/actualimplementation gate",
+      "scoring_boundary": "8h/16workers/compile60min、边界轮检查；资源maxutil≤.8，失败/缓存/选优全部计预算",
+      "current_use": "是复用kernel的agent方法协议，不是独立通用题库；同预算native/random/强传统DSE",
+      "source_snapshots": [
+        {
+          "id": "hls-llmdse",
+          "record_sha256": "c5c631bd208a3a318dd94f7078227c7f3ac1a7f0f89532d5ead70af8e366af9c"
+        }
+      ]
+    },
+    {
+      "task": "以板测标签学功耗",
+      "catalog_ids": [
+        "hls-powergear-prediction"
+      ],
+      "input_boundary": "9程序4580配置，HLS IR/FSMD/activity/meta图，100MHz",
+      "label_oracle": "PowerAdvantage板测total/static差分dynamic；µW/mW混列已核",
+      "scoring_boundary": "leave-one-app-out/ensemble协议；per-app MAPE与总/动态不同，1负dynamic差分点局部处理",
+      "current_use": "不与纯C或工具reportpower混输入/真值；原论文与current默认k/fold/名单分开",
+      "source_snapshots": [
+        {
+          "id": "hls-powergear-prediction",
+          "record_sha256": "da513467df9ee918b91b5e219ce3273d58d11c6a87c72b693a4a9add8e796235"
+        }
+      ]
+    },
+    {
+      "task": "功耗代理嵌入DSE",
+      "catalog_ids": [
+        "hls-powergear-dse"
+      ],
+      "input_boundary": "同9应用图/测量素材加候选采样/目标约束",
+      "label_oracle": "最终独立板测与真实latency验证Pareto候选",
+      "scoring_boundary": "MAPE不能代同预算Pareto/终态收益/总time；原完整searchbudget仍缺口",
+      "current_use": "板测活动/静态估计/选点成本保留，与传统native数值搜索对照",
+      "source_snapshots": [
+        {
+          "id": "hls-powergear-dse",
+          "record_sha256": "223856c75a4ccae0650d1ac8b2f5dc1e42f8acbbee13169af92fd7b1691db1b3"
+        }
+      ]
+    },
+    {
+      "task": "SystemC生成RTL的覆盖闭合",
+      "catalog_ids": [
+        "hls-sharp-systemc-coverage"
+      ],
+      "input_boundary": "摘要76SystemC designs与TB；完整manifest/config未获",
+      "label_oracle": "block coverage与不可达/exclusion证明/功能正确是不同门",
+      "scoring_boundary": "90.7→99.1%与51.3% closure为摘要作者结果，分母/聚合/失败未知",
+      "current_use": "存在已确认但协议未深审；不得把摘要高coverage当形式功能正确或76公开可跑agent任务",
+      "source_snapshots": [
+        {
+          "id": "hls-sharp-systemc-coverage",
+          "record_sha256": "53f45e2fddf1b59ae9a4c38233bbfa4e66544cabf082d134ece0711e9b72c9eb"
+        }
+      ]
+    },
+    {
+      "task": "PolyBench原生与HLS派生",
+      "catalog_ids": [
+        "hls-polybench-c",
+        "hls-polybench-bambu"
+      ],
+      "input_boundary": "30主kernel与type/data/size，31C含orig变体；BambuFP/integer不同",
+      "label_oracle": "原C数值dump/CPU计时与HLS后实现latency分别验收",
+      "scoring_boundary": "5次去极值计时不是HLSrule；Bambu cycles×actualperiod ns、weightedLUT公式与其他suite不同",
+      "current_use": "经典kernel有价值；现代nativecompiler/flow和同数值条件对照，多配置不当新IP",
+      "source_snapshots": [
+        {
+          "id": "hls-polybench-c",
+          "record_sha256": "bc982042b87d48a576de95cdd0e3a0f64a31d1c6be71aa80c186edeffa227c8a"
+        },
+        {
+          "id": "hls-polybench-bambu",
+          "record_sha256": "61f1c6b27d6fd8101bfb8c55fe68d53e2967608014474292a8c3c4eab355d031"
+        }
+      ]
+    },
+    {
+      "task": "缺陷注入素材：逻辑与非理想pragma",
+      "catalog_ids": [
+        "hls-chrysalis-logic",
+        "hls-chrysalis-pragma"
+      ],
+      "input_boundary": "1101function目录/19818bugspec总计，不是全验证repair实例",
+      "label_oracle": "公开Original/Faultysnippet+type；单/多fault与原生C/HLS作用层不同",
+      "scoring_boundary": "数据validity/stringmatch/功能sim/HLS-PPA不同，不存在统一19818成功标签",
+      "current_use": "rootApache2与上游许可分开，独立oracle/按源函数split；先核注入可观察性",
+      "source_snapshots": [
+        {
+          "id": "hls-chrysalis-logic",
+          "record_sha256": "4470511b8dcd73c3e4d5e5f52c5fe6e9c99e1db7c47b26f9a251e0a6f2cff760"
+        },
+        {
+          "id": "hls-chrysalis-pragma",
+          "record_sha256": "aa7a1a42b0622f9664a8e4b4335b16b63f54fdc215d5455dd1e958e94985171b"
+        }
+      ]
+    },
+    {
+      "task": "可执行C级修复125实例",
+      "catalog_ids": [
+        "hls-execrepair-chstone",
+        "hls-execrepair-machsuite",
+        "hls-execrepair-polybench"
+      ],
+      "input_boundary": "只给buggyC，41/40/44实例，N5temp1动态token；artifact未公开取得",
+      "label_oracle": "GCC原生自检/文件gold/bytewise输出及10s timeout，只证明所测行为",
+      "scoring_boundary": "pass@1/5与文本multiplicity分开；TableI不同类配比/PolySHFT0，不称matchedbugdistribution",
+      "current_use": "singlevector/UB/不可综合仍须更强oracle与HLS验证；作者compact近饱和不推产业任务已解",
+      "source_snapshots": [
+        {
+          "id": "hls-execrepair-chstone",
+          "record_sha256": "b0d52555fc5ea72b11b13530675eace51e72b1fd58bf8da5b7e3c7c0d7e33e83"
+        },
+        {
+          "id": "hls-execrepair-machsuite",
+          "record_sha256": "d41eb750480056a39e9c0dad4ea403643ffaa6900b8dd65e1535460b937257d3"
+        },
+        {
+          "id": "hls-execrepair-polybench",
+          "record_sha256": "d25ff3c863171266780c3ee7c25b8d1643b7d2eb86ed08abf173f065fa17211b"
+        }
+      ]
+    },
+    {
+      "task": "双测试台生成与对齐",
+      "catalog_ids": [
+        "hls-leveri-testbench"
+      ],
+      "input_boundary": "107Pc/Phpair；goldTB应保护，当前JSON也含已生成TB",
+      "label_oracle": "syntax含compile/run；weightedcoverage与static结构对齐；dynamicrate公式判逐t输入一致",
+      "scoring_boundary": "覆盖.95/static.75、online3round vs noniterpass3并非工具总成本等同；1597construction与107eval不同",
+      "current_use": "完整agent/scorer/KG未公开取得；输入trace一致不推输出正确或所有语义等价",
+      "source_snapshots": [
+        {
+          "id": "hls-leveri-testbench",
+          "record_sha256": "c51b6238ef79387efff9e391231c572c1bb548e3713d704940b9e4f37357625c"
+        }
+      ]
+    }
+  ]
+}

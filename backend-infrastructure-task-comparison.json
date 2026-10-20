@@ -1,0 +1,161 @@
+{
+  "as_of": "2026-10-20T00:45:36.192527+00:00",
+  "status": "backend infrastructure, surrogate, native tuning and 3D task comparison; not a new benchmark or ranking",
+  "scope": "预测/基础设施/nativeflow/参数搜索与工程agent处在不同层。原生数据吞吐、预测误差、指标回归、参数目标和受保护功能/物理验收不能互代；公开源码/平台配置也不等原商业工艺、完整数据或签核结果可得。",
+  "items": [
+    {
+      "task": "静态IR近似，电源百分比不是压降相对误差",
+      "catalog_ids": [
+        "pd-iredge-static"
+      ],
+      "input_boundary": "同node/package power/PDN/padmaps；5000点来自50host×10×10",
+      "label_oracle": "PDNSim静态gold，非动态droop/EM；原5000点/IR源码未取得",
+      "scoring_boundary": "绝对mV；%除.7V，不能当对真实IRMAPE；data点split非已证hostholdout",
+      "current_use": "快速innerloop代理须比nativePDNSim/近似solver；超阈值漏报/最坏值与总成本联合",
+      "source_snapshots": [
+        {
+          "id": "pd-iredge-static",
+          "record_sha256": "9327921857ab85b5bebb2b54bfb147ca61b7bd60dab4a5ba36f9de701fcf8eec"
+        }
+      ]
+    },
+    {
+      "task": "静态与瞬态热代理不同合同",
+      "catalog_ids": [
+        "thermal-thermedge-static",
+        "thermal-thermedge-transient"
+      ],
+      "input_boundary": "固定package与250µm像素；steady vs200frame/15s，currentconfig45需核",
+      "label_oracle": "Icepak百万节点gold；原始case/边界项目未取得",
+      "scoring_boundary": "绝对°C和除105°C百分比分开，瞬态正文.52%不是.52°C；currentnormalization异paper",
+      "current_use": "commercialthermal已有不证明代理全无价值；跨package/初始/峰值/时间插值须独立验收",
+      "source_snapshots": [
+        {
+          "id": "thermal-thermedge-static",
+          "record_sha256": "32c12109c7c666af052240e72e178caf08525a369812f01c5b3616ee1e1f82f5"
+        },
+        {
+          "id": "thermal-thermedge-transient",
+          "record_sha256": "f5cbbfe2eb5ada3be067b4d29cdb0ddafd816b0ab37f5cac85867bb8106a87be"
+        }
+      ]
+    },
+    {
+      "task": "数据表示、样本生成和传输基础设施",
+      "catalog_ids": [
+        "pd-circuitops-infrastructure"
+      ],
+      "input_boundary": "标准EDA文件/STA属性→CSV/LPG；25platformdesigngroup=17name，README21是旧快照",
+      "label_oracle": "没有统一隐藏gold或taskscore，IR接受不是优化成功",
+      "scoring_boundary": "99×数据生成、75Knets/s传输不是PPA/功能收益；同source多工艺/分区不独立",
+      "current_use": "nativeCircuitOpsAPI可直接复用，agent任务另定；许可/schema/单位/工具和来源身份要锁",
+      "source_snapshots": [
+        {
+          "id": "pd-circuitops-infrastructure",
+          "record_sha256": "7950e5bb8408c66e586040037b651257b4b66e6068b0ff955b771742f87dcbda"
+        }
+      ]
+    },
+    {
+      "task": "同设计cell arc回归示例",
+      "catalog_ids": [
+        "timing-circuitops-arc"
+      ],
+      "input_boundary": "slew/load/celltype，row80/20seed42",
+      "label_oracle": "同IR/LibertySTAarcgold；scalertrainonly，非unseenIP",
+      "scoring_boundary": "MAE/MSE/RMSE/max与无eps百分比零值边界；时间unit需exportmetadata",
+      "current_use": "native库插值是必要强baseline，RF也不因README称differentiable就可微；预测不是时序优化",
+      "source_snapshots": [
+        {
+          "id": "timing-circuitops-arc",
+          "record_sha256": "3dcd3fafda78d28be7e997a5d16b6602fd081e836fe86fe52c4b784316a76e84"
+        }
+      ]
+    },
+    {
+      "task": "pre-route命名与目标stage权限",
+      "catalog_ids": [
+        "timing-circuitops-stage"
+      ],
+      "input_boundary": "IRdriver-sink几何/cap/强度14features，stage实际来源需锁",
+      "label_oracle": "labeldrivercellarc+netarc；按targetpin分组后两IDjoin",
+      "scoring_boundary": "allrowsfeature+labelL2后95/5无seed；当前testlabelscale权限与物理单位不同",
+      "current_use": "不能外推paper错误；重建trainonly/hostholdout/真实pre-route输入，独立最终STA评估",
+      "source_snapshots": [
+        {
+          "id": "timing-circuitops-stage",
+          "record_sha256": "b94b1e4384d7499d8661ed322fe1d426c75dd66729827c454ffba06c2292afb2"
+        }
+      ]
+    },
+    {
+      "task": "native完整flow与QoR回归",
+      "catalog_ids": [
+        "be-orfs-native-flow"
+      ],
+      "input_boundary": "RTL/top/PDK/SDC/配置，84literalconfig含需另授权PDK",
+      "label_oracle": "GDS/metadata与QoRgate不同于功能/LVS/全签核",
+      "scoring_boundary": "当前dashboardbaseline移动；PASS/FAIL/INCONCLUSIVE/ERROR，默认inconclusiveexit0",
+      "current_use": "工具已自动RTLtoGDS，agent必须证明在native默认/专家之上收益，冻结baseline和规则响应",
+      "source_snapshots": [
+        {
+          "id": "be-orfs-native-flow",
+          "record_sha256": "45bf27a745876c6afd8e78d1c6b55bc19bfd6fa0a7b1c4e4139d53cdd4356e4e"
+        }
+      ]
+    },
+    {
+      "task": "原生参数搜索与自定义目标",
+      "catalog_ids": [
+        "be-orfs-autotuner"
+      ],
+      "input_boundary": "参数空间/算法/seed/stopstage/step/reference",
+      "label_oracle": "需要最终独立legalroute/STA/功能验收；nonfinishDRC0是占位",
+      "scoring_boundary": "e=T−WNS；score=e100/step+eDRC/10；PPAImprov area用100−util不是实际面积",
+      "current_use": "AutoTuner是现成强baseline；不同stage/step预算与硬约束分别报，不把bestscore当完整PPAclean",
+      "source_snapshots": [
+        {
+          "id": "be-orfs-autotuner",
+          "record_sha256": "36d5e416dd0593c5bb49c780f0251ca56f6dc73d4ceaa061ad705b5d1fa5b56d"
+        }
+      ]
+    },
+    {
+      "task": "旧基准修复/转PDK与意图保持",
+      "catalog_ids": [
+        "pd-rosettastone2-translation"
+      ],
+      "input_boundary": "Bookshelf/fakeLEFDEF→targetPDK/ODB，可能修网/拆cell",
+      "label_oracle": "格式有效不等语义/时序/物理constraints保持，raw/clean需映射",
+      "scoring_boundary": "METRICS2.1报告约定不是统一scalar；论文roadmap不自动当完整实现已获",
+      "current_use": "旧IP转工艺不算freshOOD；research旧localrules与production新dashboardgate分开",
+      "source_snapshots": [
+        {
+          "id": "pd-rosettastone2-translation",
+          "record_sha256": "ac988ed1bd284b387f90fd96993e981da7632d4ba37c62a37f222db1f1e94d38"
+        }
+      ]
+    },
+    {
+      "task": "3D论文实验与迁移后当前工程流",
+      "catalog_ids": [
+        "3d-rosettastone2-pin3d-paper",
+        "3d-taiwei-maintained-flow"
+      ],
+      "input_boundary": "三IP×五enablements非15独立IP，旧flow-Pin3D迁移TaiWei",
+      "label_oracle": "paperbranch与currentpublic不同；当前testedtoolpair明确，CIpass非tapeout",
+      "scoring_boundary": "paperCore单tier/StdCell双tier和；20routeiterations可留DRVs；当前gcd容差DRC≤482",
+      "current_use": "knownissue局部按case/tool隔离；research-onlyfailure/seedbaseline与mainstatus分开，HBTproxy不当finalcount",
+      "source_snapshots": [
+        {
+          "id": "3d-rosettastone2-pin3d-paper",
+          "record_sha256": "fb77f1a2581bad544dcb6055c2f93fa0c1697d5771e9dceac1be4406f0e9b0cc"
+        },
+        {
+          "id": "3d-taiwei-maintained-flow",
+          "record_sha256": "86529b3020f1473cce7f9cd72fd20ea180b318eab0034f7b448f0b223ed31b9e"
+        }
+      ]
+    }
+  ]
+}

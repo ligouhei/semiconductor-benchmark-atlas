@@ -1,0 +1,537 @@
+{
+  "as_of": "2026-10-19T21:33:49.307637+00:00",
+  "status": "static file parsing only, no EM solver, model, source scripts, metric execution, or pickle load",
+  "root_sha": "61e67f85f12aeb2839241041a4c7ef2bbffe00f2",
+  "recursive_root_truncated": true,
+  "complete_shallow_run_trees": true,
+  "run_counts": [
+    {
+      "run": "4ca20bd3e70c",
+      "readme_sample_dirs": 10,
+      "observed_directory_entries": 10,
+      "difference": 0,
+      "tree_sha": "b1f84d4d4320e6c68b0957fde860ab9f7a19ed54"
+    },
+    {
+      "run": "6c5a654ace86",
+      "readme_sample_dirs": 10100,
+      "observed_directory_entries": 10100,
+      "difference": 0,
+      "tree_sha": "4ea88fd481202a428b1ef8a629af957f0c07a7a7"
+    },
+    {
+      "run": "80f0f1b83e77",
+      "readme_sample_dirs": 3000,
+      "observed_directory_entries": 3400,
+      "difference": 400,
+      "tree_sha": "c53480811db3db626d8c881b23a46ab9caa91fe9"
+    },
+    {
+      "run": "931f2952d8ba",
+      "readme_sample_dirs": 6100,
+      "observed_directory_entries": 6100,
+      "difference": 0,
+      "tree_sha": "09476a654612e7c8ba24d7e07eee2523f76404e5"
+    },
+    {
+      "run": "a808805b256b",
+      "readme_sample_dirs": 6940,
+      "observed_directory_entries": 7100,
+      "difference": 160,
+      "tree_sha": "db55623f248e05e8649e46b975cfa1648dfaffb5"
+    }
+  ],
+  "readme_total": 26150,
+  "observed_directory_total": 26710,
+  "distinct_directory_names": 26710,
+  "pairwise_directory_name_overlap": [
+    {
+      "a": "4ca20bd3e70c",
+      "b": "6c5a654ace86",
+      "count": 0
+    },
+    {
+      "a": "4ca20bd3e70c",
+      "b": "80f0f1b83e77",
+      "count": 0
+    },
+    {
+      "a": "4ca20bd3e70c",
+      "b": "931f2952d8ba",
+      "count": 0
+    },
+    {
+      "a": "4ca20bd3e70c",
+      "b": "a808805b256b",
+      "count": 0
+    },
+    {
+      "a": "6c5a654ace86",
+      "b": "80f0f1b83e77",
+      "count": 0
+    },
+    {
+      "a": "6c5a654ace86",
+      "b": "931f2952d8ba",
+      "count": 0
+    },
+    {
+      "a": "6c5a654ace86",
+      "b": "a808805b256b",
+      "count": 0
+    },
+    {
+      "a": "80f0f1b83e77",
+      "b": "931f2952d8ba",
+      "count": 0
+    },
+    {
+      "a": "80f0f1b83e77",
+      "b": "a808805b256b",
+      "count": 0
+    },
+    {
+      "a": "931f2952d8ba",
+      "b": "a808805b256b",
+      "count": 0
+    }
+  ],
+  "samples": [
+    {
+      "run": "4ca20bd3e70c",
+      "directory": "023784bf164e7c1b",
+      "matrix_shape": [
+        20,
+        20
+      ],
+      "dtype": "uint8",
+      "counts": {
+        "0": 123,
+        "1": 277
+      },
+      "npy_equals_npz_matrix": true,
+      "metadata_digest": "023784bf164e7c1b67b73cac5c7cb447bac11ad4a853d125771fbd779830f4ba",
+      "file_sha256": "c93c9b8cc8b893e0ebc0b7de46452b83415eee206585bf7ad7144b4e77832687",
+      "frequency_count": 401,
+      "frequency_range_hz": [
+        300000000.0,
+        3000000000.0
+      ],
+      "frequency_strict_ascending": true,
+      "frequency_step_hz": 6750000.0,
+      "sparameter_dtype": "complex128",
+      "npz_keys": [
+        "matrix",
+        "frequency_hz",
+        "s_ij",
+        "recv_port",
+        "excite_port"
+      ],
+      "recv_port": 0,
+      "excite_port": 0,
+      "boundary_port_count": 3,
+      "ports": {
+        "port1_pixel": [
+          2,
+          0
+        ],
+        "port2_pixel": [
+          1,
+          19
+        ],
+        "port1_mm": [
+          -0.95,
+          0.75
+        ],
+        "port2_mm": [
+          0.9500000000000002,
+          0.8500000000000001
+        ],
+        "boundary_port_mm": [
+          [
+            -0.85,
+            1.0
+          ],
+          [
+            -0.75,
+            1.0
+          ],
+          [
+            -0.35,
+            1.0
+          ]
+        ],
+        "record_dir": "/app/artifacts/datasets/records/4ca20bd3e70c/023784bf164e7c1b"
+      },
+      "stack": {
+        "stack_config_path": "configs/stack_configs.toml",
+        "substrate_eps_r": 4.3,
+        "substrate_thickness_mm": 1.0,
+        "cell_size_mm": 0.1
+      }
+    },
+    {
+      "run": "6c5a654ace86",
+      "directory": "0001237823db52f5",
+      "matrix_shape": [
+        20,
+        20
+      ],
+      "dtype": "uint8",
+      "counts": {
+        "0": 208,
+        "1": 192
+      },
+      "npy_equals_npz_matrix": true,
+      "metadata_digest": "0001237823db52f58a252f21e32a640c805ccba8a9a98b8a7d49722727d7e406",
+      "file_sha256": "d3fd4fc05459a9cbc73978871ed9970e7579fd629cc008c76ba52ccc07437693",
+      "frequency_count": 401,
+      "frequency_range_hz": [
+        300000000.0,
+        3000000000.0
+      ],
+      "frequency_strict_ascending": true,
+      "frequency_step_hz": 6750000.0,
+      "sparameter_dtype": "complex128",
+      "npz_keys": [
+        "matrix",
+        "frequency_hz",
+        "s_ij",
+        "recv_port",
+        "excite_port"
+      ],
+      "recv_port": 0,
+      "excite_port": 0,
+      "boundary_port_count": 3,
+      "ports": {
+        "port1_pixel": [
+          1,
+          0
+        ],
+        "port2_pixel": [
+          0,
+          19
+        ],
+        "port1_mm": [
+          -0.95,
+          0.8500000000000001
+        ],
+        "port2_mm": [
+          0.9500000000000002,
+          0.9500000000000001
+        ],
+        "boundary_port_mm": [
+          [
+            -0.25,
+            1.0
+          ],
+          [
+            0.050000000000000044,
+            1.0
+          ],
+          [
+            0.3500000000000001,
+            1.0
+          ]
+        ],
+        "record_dir": "/home/yongfu/proj/matrix-s-parameters-dataset/artifacts/datasets/records/6c5a654ace86/0001237823db52f5"
+      },
+      "stack": {
+        "stack_config_path": "configs/stack_configs.toml",
+        "substrate_eps_r": 4.3,
+        "substrate_thickness_mm": 1.6,
+        "cell_size_mm": 0.1
+      }
+    },
+    {
+      "run": "80f0f1b83e77",
+      "directory": "0002afa8cc878d56",
+      "matrix_shape": [
+        20,
+        20
+      ],
+      "dtype": "uint8",
+      "counts": {
+        "0": 194,
+        "1": 206
+      },
+      "npy_equals_npz_matrix": true,
+      "metadata_digest": "0002afa8cc878d560ee17d828e6c1e54bd8864e4bb0c9a73f0e5ba00d9fb83b7",
+      "file_sha256": "a4f83b55aba001339733b5f781357a6c080f875e86d25873b78cf4a6b77df3b0",
+      "frequency_count": 401,
+      "frequency_range_hz": [
+        300000000.0,
+        3000000000.0
+      ],
+      "frequency_strict_ascending": true,
+      "frequency_step_hz": 6750000.0,
+      "sparameter_dtype": "complex128",
+      "npz_keys": [
+        "matrix",
+        "frequency_hz",
+        "s_ij",
+        "recv_port",
+        "excite_port"
+      ],
+      "recv_port": 0,
+      "excite_port": 0,
+      "boundary_port_count": 3,
+      "ports": {
+        "port1_pixel": [
+          0,
+          0
+        ],
+        "port2_pixel": [
+          3,
+          19
+        ],
+        "port1_mm": [
+          -0.95,
+          0.9500000000000001
+        ],
+        "port2_mm": [
+          0.9500000000000002,
+          0.65
+        ],
+        "boundary_port_mm": [
+          [
+            -0.95,
+            1.0
+          ],
+          [
+            -0.75,
+            1.0
+          ],
+          [
+            -0.6499999999999999,
+            1.0
+          ]
+        ],
+        "record_dir": "/home/yongfu/proj/matrix-s-parameters-dataset/artifacts/datasets/records/80f0f1b83e77/0002afa8cc878d56"
+      },
+      "stack": {
+        "stack_config_path": "configs/stack_configs.toml",
+        "substrate_eps_r": 4.3,
+        "substrate_thickness_mm": 1.0,
+        "cell_size_mm": 0.1
+      }
+    },
+    {
+      "run": "931f2952d8ba",
+      "directory": "0013a9f024628fa7",
+      "matrix_shape": [
+        20,
+        20
+      ],
+      "dtype": "uint8",
+      "counts": {
+        "0": 132,
+        "1": 268
+      },
+      "npy_equals_npz_matrix": true,
+      "metadata_digest": "0013a9f024628fa75d237c5bd2c44ad3a4d83a6f27ebde1c41879a8eff09a081",
+      "file_sha256": "a81b4df1b715d415e0e817fe0690c3ae0b3c9ccdacce515f25a17f8e4c923391",
+      "frequency_count": 401,
+      "frequency_range_hz": [
+        300000000.0,
+        3000000000.0
+      ],
+      "frequency_strict_ascending": true,
+      "frequency_step_hz": 6750000.0,
+      "sparameter_dtype": "complex128",
+      "npz_keys": [
+        "matrix",
+        "frequency_hz",
+        "s_ij",
+        "recv_port",
+        "excite_port"
+      ],
+      "recv_port": 0,
+      "excite_port": 0,
+      "boundary_port_count": 3,
+      "ports": {
+        "port1_pixel": [
+          0,
+          0
+        ],
+        "port2_pixel": [
+          0,
+          19
+        ],
+        "port1_mm": [
+          -0.95,
+          0.9500000000000001
+        ],
+        "port2_mm": [
+          0.9500000000000002,
+          0.9500000000000001
+        ],
+        "boundary_port_mm": [
+          [
+            -0.95,
+            1.0
+          ],
+          [
+            -0.6499999999999999,
+            1.0
+          ],
+          [
+            -0.44999999999999996,
+            1.0
+          ]
+        ],
+        "record_dir": "/home/yongfu/proj/matrix-s-parameters-dataset/artifacts/datasets/records/931f2952d8ba/0013a9f024628fa7"
+      },
+      "stack": {
+        "stack_config_path": "configs/stack_configs.toml",
+        "substrate_eps_r": 4.3,
+        "substrate_thickness_mm": 1.2,
+        "cell_size_mm": 0.1
+      }
+    },
+    {
+      "run": "a808805b256b",
+      "directory": "000941f40a6d21a0",
+      "matrix_shape": [
+        20,
+        20
+      ],
+      "dtype": "uint8",
+      "counts": {
+        "0": 168,
+        "1": 232
+      },
+      "npy_equals_npz_matrix": true,
+      "metadata_digest": "000941f40a6d21a0d284047b8dc2f3d99a0acd228855854b12a11164e28e4c10",
+      "file_sha256": "8bf243559a19feaa5cc429e667965a8b4bf087f95051628a68b0fcf3dcfaa3a2",
+      "frequency_count": 401,
+      "frequency_range_hz": [
+        300000000.0,
+        3000000000.0
+      ],
+      "frequency_strict_ascending": true,
+      "frequency_step_hz": 6750000.0,
+      "sparameter_dtype": "complex128",
+      "npz_keys": [
+        "matrix",
+        "frequency_hz",
+        "s_ij",
+        "recv_port",
+        "excite_port"
+      ],
+      "recv_port": 0,
+      "excite_port": 0,
+      "boundary_port_count": 3,
+      "ports": {
+        "port1_pixel": [
+          0,
+          0
+        ],
+        "port2_pixel": [
+          0,
+          19
+        ],
+        "port1_mm": [
+          -0.95,
+          0.9500000000000001
+        ],
+        "port2_mm": [
+          0.9500000000000002,
+          0.9500000000000001
+        ],
+        "boundary_port_mm": [
+          [
+            -0.95,
+            1.0
+          ],
+          [
+            -0.85,
+            1.0
+          ],
+          [
+            -0.6499999999999999,
+            1.0
+          ]
+        ],
+        "record_dir": "/home/yongfu/proj/matrix-s-parameters-dataset/artifacts/datasets/records/a808805b256b/000941f40a6d21a0"
+      },
+      "stack": {
+        "stack_config_path": "configs/stack_configs.toml",
+        "substrate_eps_r": 4.3,
+        "substrate_thickness_mm": 0.8,
+        "cell_size_mm": 0.1
+      }
+    }
+  ],
+  "one_complete_s_matrix": [
+    {
+      "file": "matrix_complete_sparam_p000_q000_npz.txt",
+      "recv_port": 0,
+      "excite_port": 0,
+      "samples": 401,
+      "finite": true
+    },
+    {
+      "file": "matrix_complete_sparam_p000_q001_npz.txt",
+      "recv_port": 0,
+      "excite_port": 1,
+      "samples": 401,
+      "finite": true
+    },
+    {
+      "file": "matrix_complete_sparam_p000_q002_npz.txt",
+      "recv_port": 0,
+      "excite_port": 2,
+      "samples": 401,
+      "finite": true
+    },
+    {
+      "file": "matrix_complete_sparam_p001_q000_npz.txt",
+      "recv_port": 1,
+      "excite_port": 0,
+      "samples": 401,
+      "finite": true
+    },
+    {
+      "file": "matrix_complete_sparam_p001_q001_npz.txt",
+      "recv_port": 1,
+      "excite_port": 1,
+      "samples": 401,
+      "finite": true
+    },
+    {
+      "file": "matrix_complete_sparam_p001_q002_npz.txt",
+      "recv_port": 1,
+      "excite_port": 2,
+      "samples": 401,
+      "finite": true
+    },
+    {
+      "file": "matrix_complete_sparam_p002_q000_npz.txt",
+      "recv_port": 2,
+      "excite_port": 0,
+      "samples": 401,
+      "finite": true
+    },
+    {
+      "file": "matrix_complete_sparam_p002_q001_npz.txt",
+      "recv_port": 2,
+      "excite_port": 1,
+      "samples": 401,
+      "finite": true
+    },
+    {
+      "file": "matrix_complete_sparam_p002_q002_npz.txt",
+      "recv_port": 2,
+      "excite_port": 2,
+      "samples": 401,
+      "finite": true
+    }
+  ],
+  "limitations": [
+    "Directory-name uniqueness does not prove full matrix uniqueness or valid-output completeness.",
+    "Five lexicographically first samples are an availability sample, not random quality sampling.",
+    "Port1/port2 and boundary-port arrays coexist; NPZ indices require generator/solver mapping before interpretation.",
+    "No uniform train/test split, independent EM convergence truth, scorer, impedance or full solver setup verified."
+  ]
+}

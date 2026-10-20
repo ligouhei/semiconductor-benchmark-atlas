@@ -1,0 +1,359 @@
+{
+  "status": "cross-protocol comparison; not a new benchmark or model ranking",
+  "as_of": "2026-10-20T00:45:35.817267+00:00",
+  "scope": "这些记录都可能报告accuracy/pass，但输入暴露、gold定义、分母和物理验收不同，禁止合并为一个模拟设计能力分数。",
+  "items": [
+    {
+      "task": "图像感知",
+      "catalog_ids": [
+        "analog-circuitsense-perception",
+        "analog-amsbench-perception"
+      ],
+      "input_boundary": "图/问题；按题格式与可见信息固定",
+      "acceptance": "选项匹配/短答judge，连接/元件/功能分开",
+      "denominator": "所有题/可用题与request/image失败分开，不能只在成功输入上混报",
+      "what_it_proves": "识别和连接理解；不能据此宣称电路电性能达标",
+      "source_snapshots": [
+        {
+          "id": "analog-circuitsense-perception",
+          "record_sha256": "54ade3b209463949df82d60abbfe5889a9835bba0b8838b19e04ac024ae3c31b"
+        },
+        {
+          "id": "analog-amsbench-perception",
+          "record_sha256": "2e8493cbaf040e97ce2ad55c1b0b4340f73aca2faf82f68fe1c413ccaf1c503b"
+        }
+      ]
+    },
+    {
+      "task": "教材电路计算",
+      "catalog_ids": [
+        "analog-circuitsense-curated",
+        "analog-circuitreason1k"
+      ],
+      "input_boundary": "图+自含题；gold/参考推导/源页对模型隐藏",
+      "acceptance": "数值/单位/全部字段；保留符号、方向和相位；judge身份盲化需核",
+      "denominator": "CircuitReason全1000含缺失/未决；CircuitSense按原格式锁，不能直接跨分母排名",
+      "what_it_proves": "最终答案可用性；long-horizon依赖定义不等真实多步工具执行轨迹",
+      "source_snapshots": [
+        {
+          "id": "analog-circuitsense-curated",
+          "record_sha256": "6373350440dae422732be7d30a8bc8608d84418d12f6bcdf24be32b5c8f4901e"
+        },
+        {
+          "id": "analog-circuitreason1k",
+          "record_sha256": "223b08586016e85056a3519bbc53e8b662377a0ce9b277918687184912ab5270"
+        }
+      ]
+    },
+    {
+      "task": "合成符号方程",
+      "catalog_ids": [
+        "analog-circuitsense-symbolic"
+      ],
+      "input_boundary": "未知图+指定目标，不提供gold网表或生成器求解输出",
+      "acceptance": "论文与当前代码分别锁：当前允许±号，36数值点≥60%，超时排除",
+      "denominator": "current evaluated排除比较timeout；另报全量accuracy与coverage方可评可靠性",
+      "what_it_proves": "该协议下表达式命中；±等价不一定保留物理极性，不能直接当严格传函正确",
+      "source_snapshots": [
+        {
+          "id": "analog-circuitsense-symbolic",
+          "record_sha256": "48efbeed3c9c22a8fa966ff9cc465e2f96960db91f7977de1d402d43f91d734f"
+        }
+      ]
+    },
+    {
+      "task": "结构生成与转录",
+      "catalog_ids": [
+        "analog-circuitrubric-design",
+        "analog-circuitrubric-spec"
+      ],
+      "input_boundary": "短拓扑请求/架构提示与逐器件连接spec分轨",
+      "acceptance": "graph iso+相对ratio；functional_full仅放宽MOS D/S结构",
+      "denominator": "125fixtures×prompt条件不是独立IP增加；同fixture各轨配对比较",
+      "what_it_proves": "结构遵循/规范拓扑生成；无真实SPICE/PVT电性能证明",
+      "source_snapshots": [
+        {
+          "id": "analog-circuitrubric-design",
+          "record_sha256": "219e86f2703c76e8a08d47dbdd69b68ae8883e88400f1c88095cee35acdcdf2e"
+        },
+        {
+          "id": "analog-circuitrubric-spec",
+          "record_sha256": "a54372c00733420e96f9a7802995ba864cd1f0f87d5c165239bcd4453c47d1fe"
+        }
+      ]
+    },
+    {
+      "task": "性能代理预测",
+      "catalog_ids": [
+        "analog-zerosim-trained",
+        "analog-zerosim-zero-shot"
+      ],
+      "input_boundary": "已知拓扑新参数与holdout拓扑分轨；训练/测试scaler锁",
+      "acceptance": "MAPE与Acc@K各自定义/单位；失败和未settle惩罚不能混真实测量",
+      "denominator": "3.6M参数实例不是独立电路；尝试数/有效样本/11metric有效分母分别报",
+      "what_it_proves": "特定分布下surrogate误差；尺寸优化收益需要独立SPICE闭环和全成本",
+      "source_snapshots": [
+        {
+          "id": "analog-zerosim-trained",
+          "record_sha256": "92925ce747fc3f0876d1896f60a2c3ebaa446a9a5b8922787d396f24e24a698c"
+        },
+        {
+          "id": "analog-zerosim-zero-shot",
+          "record_sha256": "1f1e69e5e87e75d37d0a95304474e00674907f413ff248357cba04e22d5a6588"
+        }
+      ]
+    },
+    {
+      "task": "设计与规格验收",
+      "catalog_ids": [
+        "analog-circuitsense-design",
+        "analog-amsbench-design"
+      ],
+      "input_boundary": "规格/图/上下文与可访问工具、PDK按题固定",
+      "acceptance": "部分题ngspice/SKY130，完整harness/规格oracle公开程度仍待核",
+      "denominator": "157设计题与AMS68题定义不同；未运行/错误/部分指标不能静默排除",
+      "what_it_proves": "仅已核oracle范围内任务完成；完整工程agent还需预算/失败恢复/受保护验收",
+      "source_snapshots": [
+        {
+          "id": "analog-circuitsense-design",
+          "record_sha256": "d417d1ab0b7a0787c9029d0e2d50f36ea0d66c8300bb78e242b9f9c5cae26195"
+        },
+        {
+          "id": "analog-amsbench-design",
+          "record_sha256": "8ddbbbc21257f76283c274725a573a6f00a261e154388a6fb44877abad8cd65b"
+        }
+      ]
+    },
+    {
+      "task": "执行反馈修复与跨轮记忆",
+      "catalog_ids": [
+        "analog-coder",
+        "analog-coderpro",
+        "analog-analogagent-refinement",
+        "analog-longhorizon"
+      ],
+      "input_boundary": "24/Pro论文28与current45/派生30/50不同任务集；固定playbook初值、成功解重用、PDK和工具权限；未见任务与在线学习另轨",
+      "acceptance": "独立采样组合pass@k、迭代前k轮解题累计率、完整受保护电性能pass是三种量；弱100Hz gain门不等全PVT/规格达标",
+      "denominator": "原paper historical与currentMVP分开；全部失败/超时与20trial数值优化成本入账，复用成功解后不当独立首答",
+      "what_it_proves": "可衡量特定任务下修复/学习，但不能把92–97%弱协议直接排在较低完整规格通过率之上；商业或开源simulator存在不等设计已解",
+      "source_snapshots": [
+        {
+          "id": "analog-coder",
+          "record_sha256": "571165b6dfa24ce342ee3604ad0130ef011338481354fedcd88354ba7678d439"
+        },
+        {
+          "id": "analog-coderpro",
+          "record_sha256": "64f5918c86cb37b4881bdb93bb93df1868b943802422a7adef90adad052280e2"
+        },
+        {
+          "id": "analog-analogagent-refinement",
+          "record_sha256": "df90b606c7e1cb58b8b190ab74f8fd52dd3acebafe0feb3beec40da240f60027"
+        },
+        {
+          "id": "analog-longhorizon",
+          "record_sha256": "16d0e55d21609fc90775af7fced18c92d96eee883abe141e54c0febba2c83348"
+        }
+      ]
+    },
+    {
+      "task": "行为模型与测试平台生成",
+      "catalog_ids": [
+        "analog-vabench-behavior",
+        "analog-analogtester-tb"
+      ],
+      "input_boundary": "文本模块行为契约与论文→实验→TED分别测；模型、DUT、TB/gold信息权限锁定",
+      "acceptance": "vaBench505分层behavior认证≠正式505榜，333候选分母未冻结；AnalogTester三阶段人工保证上游正确，89%非全链",
+      "denominator": "entry/form/版本与63experiment/8paper/37template不同分母；不能将互验自洽当独立物理gold",
+      "what_it_proves": "衡量特定行为编程/测量自动化，有限差分/KCL贡献合同不证明通用SPICE精度；独立mutant检测与真实规格验收还要补",
+      "source_snapshots": [
+        {
+          "id": "analog-vabench-behavior",
+          "record_sha256": "35bb59e541ffccd1e75ed89b6c066c0dd9b1b215f6a4680a409203d38baca9d0"
+        },
+        {
+          "id": "analog-analogtester-tb",
+          "record_sha256": "ddaa6ed9d70560ec5a024e7cf0e84d78fa4d4e6709e3ff5f0c86c2026b9a3fc6"
+        }
+      ]
+    },
+    {
+      "task": "拓扑提议与数值尺寸优化",
+      "catalog_ids": [
+        "analog-coderpro-sizing"
+      ],
+      "input_boundary": "paper12目标instructions/current16提示分开；BPTM45/CL100pF，LLM决定拓扑与bounds后TPE",
+      "acceptance": "30run各1000samples取best，再30run取best；不是均值或passk；DCbias搜索另计",
+      "denominator": "250randominit含在每1000，bias/失败/LLM额外成本均须报；helper未发布不可声称全复现",
+      "what_it_proves": "模型提议、偏置策略和nativeBO三层增益独立；高FoM不推PVT/稳定性/后仿通过",
+      "source_snapshots": [
+        {
+          "id": "analog-coderpro-sizing",
+          "record_sha256": "a302a0be8fb78ca26c13448fefef94a8b1ef4e041f52ba29d1d27e200cde4ad9"
+        }
+      ]
+    },
+    {
+      "task": "厂商内部工具workflow公开结果",
+      "catalog_ids": [
+        "analog-genalpha"
+      ],
+      "input_boundary": "87任务33/35/19仅类别公开，工程/工具/PDK/逐题oracle未披露",
+      "acceptance": "overall分类分值与平均token/time，包含subagents；不可换算成pass率",
+      "denominator": "layout含simpleedit，不能全部当完整布局；12model同厂商Designer并非裸模型独立榜",
+      "what_it_proves": "产业方向线索；没有公开task/harness/scorer不能当可复现主benchmark，也不推已解决或退役",
+      "source_snapshots": [
+        {
+          "id": "analog-genalpha",
+          "record_sha256": "6d0e2ea769638db2631d7e03920fdf4bb7b8dccf30e51c23dd8b3ec547f4d25e"
+        }
+      ]
+    },
+    {
+      "task": "固定拓扑RL尺寸策略",
+      "catalog_ids": [
+        "analog-autockt"
+      ],
+      "input_boundary": "同拓扑同模型的新spec；当前7维99格点，动作[-1,0,+2]索引非对称",
+      "acceptance": "负归一差总和≥−.02为成功，单指标可约−3.92%/+4.08%；finite/正值与严格spec要独立验",
+      "denominator": "paper963/1000与README938/1000不同采样；训练/全部失败/reset模拟成本另计，27是成功条件步数",
+      "what_it_proves": "同环境generalization与sampleefficiency；不证明新拓扑/工业全签核或规范严格通过",
+      "source_snapshots": [
+        {
+          "id": "analog-autockt",
+          "record_sha256": "5f5edb91659772c0b4460a6a2a55dbf866aae2fed9f5a8c4777b98c05136cc07"
+        }
+      ]
+    },
+    {
+      "task": "专家layout生成器支持的PEX策略迁移",
+      "catalog_ids": [
+        "analog-autockt-pex"
+      ],
+      "input_boundary": "Spectre-trained负gm opamp策略→TSMC16nm BAG/PEX，不在PEX重训",
+      "acceptance": "40/40目标与LVS-passing，平均23step；privatecorner/checker未得，不从public reward套用",
+      "denominator": "GA+ML220step是同原paper对照；预训练/generator成本不可忽略，40例不等publicsuite全开",
+      "what_it_proves": "模型在已有原生BAG/PEX工具上调参数，不是从零layout；缺完整artifact只列方法实验",
+      "source_snapshots": [
+        {
+          "id": "analog-autockt-pex",
+          "record_sha256": "7729ffb143433d7086424f043c7d6ddc838c5feb577c6015adf80610caa220c3"
+        }
+      ]
+    },
+    {
+      "task": "AnalogGym三种目标和预算",
+      "catalog_ids": [
+        "analog-analoggym",
+        "analog-analoggym-amp-native-cost",
+        "analog-analoggym-nmcf-rl-contract"
+      ],
+      "input_boundary": "同套件固定拓扑，paper30类目与current21AMP/5LDO变量文件不是同完整运行manifest",
+      "acceptance": "README/paper乘积FOM、native24变量weightedcost、RL11specsum≤0三个score不可合榜；fallhelper与独立.measuresr路径区分",
+      "denominator": "paper1000交互/FE、current10000steps/1000random与reset两SPICEprocess成本分别计；单tt温扫非全4PVT",
+      "what_it_proves": "原生BBO/仿真/角落能力已提供强基线；模型必须证明完整规格/预算收益，reward0非全PVT最优",
+      "source_snapshots": [
+        {
+          "id": "analog-analoggym",
+          "record_sha256": "8121ff5a9416f4d98645771b3f1d9c772872826a534aedda62b7a278ffdcad9d"
+        },
+        {
+          "id": "analog-analoggym-amp-native-cost",
+          "record_sha256": "495aa7e08f9808371017111423e6b8ca80570bfc9bcd6e6b566f8b6b160bde6c"
+        },
+        {
+          "id": "analog-analoggym-nmcf-rl-contract",
+          "record_sha256": "78457c58981d104fd7b3d323a9a491325a3727b8645bf17ef1b182ecab2b3465"
+        }
+      ]
+    },
+    {
+      "task": "流片来源图像转录与同构超时",
+      "catalog_ids": [
+        "analog-sganalog-transcription",
+        "analog-sganalog-transcription-blinded"
+      ],
+      "input_boundary": "同66题的visible/blind，原.sch存在时deterministicnetlister是oracle，PNG-only才需视觉重建",
+      "acceptance": "全局graphiso主判，localF1不是证明；30s timeoutfallbacktrue需分开，W/L条件于非timeoutiso",
+      "denominator": "missingprediction源码跳过而非0，固定66要求另校验；已查GPT5blind66完整且timeout0，不推既有受影响",
+      "what_it_proves": "结构感知不等电气功能；自graph连通性反例仅证明fallback必要条件不足，不是模型复现或实际攻击",
+      "source_snapshots": [
+        {
+          "id": "analog-sganalog-transcription",
+          "record_sha256": "b0ec6883b2cf88dbb5822ade14ab35871f5409b184691192183b7f46ce0127a1"
+        },
+        {
+          "id": "analog-sganalog-transcription-blinded",
+          "record_sha256": "87c9e1efac206f528ec44d6ce056a310c83e4db2cb2bc4b42e3eb800b459656d"
+        }
+      ]
+    },
+    {
+      "task": "流片来源尺寸保真与survival",
+      "catalog_ids": [
+        "analog-sganalog-sizing"
+      ],
+      "input_boundary": "17leaf题无尺寸拓扑+TBcontext，scorer有reference且patch保留未提交参数",
+      "acceptance": "10metric对称fidelity/7仅convergence1，非更优电路目标；完整器件与完整参数要分开",
+      "denominator": "缺.simJSON会从平均rows中跳过；已查Gemini17齐/全器件齐、91.2459算术match，未证partialgate影响该表",
+      "what_it_proves": "要作主基准须独立全提交/ref/freshraw/measuregate及PVT；原score和新严格协议分版保留",
+      "source_snapshots": [
+        {
+          "id": "analog-sganalog-sizing",
+          "record_sha256": "40212109f6f2b96b5b490d78358646e17f89bf9b42deb0b0a45fd6fef1bb8289"
+        }
+      ]
+    },
+    {
+      "task": "FALCON分类、前向与反推",
+      "catalog_ids": [
+        "analog-falcon-topology",
+        "analog-falcon-forward",
+        "analog-falcon-inverse"
+      ],
+      "input_boundary": "20类performance→topology、19类graph→performance与RVCO适配、已选拓扑+目标→参数是三种输入",
+      "acceptance": "classifier99.57%非工程完成；forward95percentile图均值与完整9.09%分开；paper代理10%收敛/物理20%成功/currenthelper20%门分别锁",
+      "denominator": "1043800扫点/20topology；索引70/15/15无重叠不证OOD；9500反推题收敛筛选后再仿真需完整分母",
+      "what_it_proves": "固定拓扑数值代理/解析passive面积，不是自动routing/PEX/签核，论文互连人工绘制；近零/dB相对误差与原始units转换单列",
+      "source_snapshots": [
+        {
+          "id": "analog-falcon-topology",
+          "record_sha256": "f99d244a5334444dac8da9c893e6eda2b14c709093c76b46e402dc3ea3b0d468"
+        },
+        {
+          "id": "analog-falcon-forward",
+          "record_sha256": "900c30f75cf2c3cf7985be4101404f71b0094685e086d47aef1491780428b278"
+        },
+        {
+          "id": "analog-falcon-inverse",
+          "record_sha256": "9b2e4f552a3c5af5972e39842a552cfb77c4cbc53f493b5528c7ca8bcb11e7c0"
+        }
+      ]
+    },
+    {
+      "task": "ACOB经典尺寸FoM",
+      "catalog_ids": [
+        "analog-acob-osc",
+        "analog-acob-opamp",
+        "analog-acob-pll"
+      ],
+      "input_boundary": "14/36/77维归一参数→固定IEEE/ITC电路、native仿真",
+      "acceptance": "三网表不同电流/电压/延迟加权FoM，fail1000/2000不代表真实物理量",
+      "denominator": "未规定统一调用/seed预算，多个并发共享param/log需隔离；只typical/27C",
+      "what_it_proves": "适合数值优化对照；注释的频率/CMR等不自动为硬门，不将低FoM当全部PVT/锁相/振荡通过",
+      "source_snapshots": [
+        {
+          "id": "analog-acob-osc",
+          "record_sha256": "a730dd81a421bdb850b210e6f9844bc5253984dc75c7a7bd3a5ce00dbab80987"
+        },
+        {
+          "id": "analog-acob-opamp",
+          "record_sha256": "f93986851509989dcac1f13d9b0ec3125bbcf96dc501d86f57628b7cd8a4b948"
+        },
+        {
+          "id": "analog-acob-pll",
+          "record_sha256": "cb1792220f7edde5e89ce72dbfbd2d312d6d23979bb77f40fc8919f0d77c6265"
+        }
+      ]
+    }
+  ]
+}

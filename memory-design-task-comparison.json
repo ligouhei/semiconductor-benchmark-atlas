@@ -1,0 +1,211 @@
+{
+  "as_of": "2026-10-20T00:45:36.226555+00:00",
+  "status": "cross-level protocol comparison; not new benchmark or performance ranking",
+  "scope": "SRAM晶体管级电路、nominal尺寸优化、离线代理与rare-yield统计，以及DRAM架构仿真/模型验收是不同问题。既有memory compiler/数值solver/控制器baseline不等所有问题已解；12条协议只对应5家族。",
+  "items": [
+    {
+      "task": "SRAM电路/近似建模",
+      "catalog_ids": [
+        "memory-openyield-circuit"
+      ],
+      "input_boundary": "6T/10T+array/PVT/RC/mismatch，mode0与1–4覆盖不同",
+      "label_oracle": "SPICE与独立波形功能；SNM单cell不等全arraycoverage",
+      "scoring_boundary": "SNMV/delays/powerW/area估计m²及误差/全部失败/运行成本",
+      "current_use": "compiler和SPICE已有，模型需证明精度/总成本；当前发布screen不完整，不把配置上限当全部合格",
+      "source_snapshots": [
+        {
+          "id": "memory-openyield-circuit",
+          "record_sha256": "ae699830991f72ced00687b35222585f3d33479adc013a825bce2b15e31841cb",
+          "primary_sources": "https://arxiv.org/pdf/2508.04106; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/LICENSE; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/README.md; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/docs/design/CONFIGURATION_REVIEW_V2_2_6.md; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/docs/V2_2_5_FULL_COVERAGE_EVALUATION.md; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/sram_compiler/equivalent_modeling/README.md; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/sram_compiler/config_yaml/global.yaml; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/sram_compiler/per_device_mc/README.md"
+        }
+      ]
+    },
+    {
+      "task": "电路闭环尺寸搜索",
+      "catalog_ids": [
+        "memory-openyield-nominal-sizing"
+      ],
+      "input_boundary": "selectedTT1V nominal单样本/末行末列，五operation",
+      "label_oracle": "冻结mode0/目标/波形与时钟驱动，不靠log的MC字样",
+      "scoring_boundary": "[-SNM,power,area,delay]与两个delayconstraints，merit混合单位非yield",
+      "current_use": "nativeSA/BO/PSO/CMAES/MO已提供基线；nominal最优不等PVT/罕见失效合格",
+      "source_snapshots": [
+        {
+          "id": "memory-openyield-nominal-sizing",
+          "record_sha256": "158929e3f6f2753b4045bad7da5fed31034efb54f5e6c9b0e555bed53c1cca0a",
+          "primary_sources": "https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/size_optimization/README.md; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/size_optimization/config_sram.yaml; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/size_optimization/exp_utils.py; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/sram_compiler/equivalent_modeling/README.md; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/README.md"
+        }
+      ]
+    },
+    {
+      "task": "离线代理多目标优化",
+      "catalog_ids": [
+        "memory-openyield-offline"
+      ],
+      "input_boundary": "2250条6T/3701条10T旧等效数据；TT25C/use_mcFalse",
+      "label_oracle": "现有输出为代理预测/规则系统换算，没有新候选Xyce验收",
+      "scoring_boundary": "1000candidatealltargets查询/算法，SNM≥.1V/delay≤3ns/power≤.02W；训练费另算",
+      "current_use": "代理自评Pareto不能当siliconyield或真实macroPPA；train-onlycontext已核，失败/过滤分母保留",
+      "source_snapshots": [
+        {
+          "id": "memory-openyield-offline",
+          "record_sha256": "a8dcd5aa7d67c128bebc08dd7ee8cbae49dd1bb9c414cba502116a7c93c711fd",
+          "primary_sources": "https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/size_optimization/openyield_v2/README.md; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/size_optimization/openyield_v2/configs/experiment.yaml; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/size_optimization/openyield_v2/optimization_spec.py; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/size_optimization/openyield_v2/surrogate_utils.py; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/size_optimization/openyield_v2/datasets/train_6t.csv; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/size_optimization/openyield_v2/datasets/train_10t.csv; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/size_optimization/openyield_v2/optimizers/comparison.py; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/size_optimization/openyield_v2/optimizers/proposed.py; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/size_optimization/openyield_v2/output_schema.py"
+        }
+      ]
+    },
+    {
+      "task": "稀有事件良率估计",
+      "catalog_ids": [
+        "memory-openyield-rare-yield"
+      ],
+      "input_boundary": "完整failureevent与过程分布/density/相关性，currentlegacy未闭环",
+      "label_oracle": "独立MC/可靠rare-eventreference与CI校准，数值失败单列",
+      "scoring_boundary": "Pf/方差/CI/有效样本/调用成本；array(1−Pf)^N需假设",
+      "current_use": "直接SPICE求解成熟不等10^-7尾部已低成本解决；current样本输出不等qualifiedyield",
+      "source_snapshots": [
+        {
+          "id": "memory-openyield-rare-yield",
+          "record_sha256": "16d3a1e3ea374be16fbd1cc952250193aa43b4c23b2a92d98f6ab665e0228332",
+          "primary_sources": "https://arxiv.org/pdf/2508.04106; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/yield_estimation/README.md; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/README.md; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/sram_compiler/per_device_mc/README.md"
+        }
+      ]
+    },
+    {
+      "task": "DRAM/控制器体系结构建模",
+      "catalog_ids": [
+        "memory-ramulator21-framework"
+      ],
+      "input_boundary": "timing/org/controller/trace/clockmap；非SPICE晶体管输入",
+      "label_oracle": "合法命令/独立模型/硅参考，工具本身无统一隐藏任务",
+      "scoring_boundary": "cycle latency→ns需tick、MBps→GBps；powerunmodelled单列",
+      "current_use": "仿真框架不是固定bench，LLM修改模型不能靠虚假低延迟赢；先固定策略/trace/约束",
+      "source_snapshots": [
+        {
+          "id": "memory-ramulator21-framework",
+          "record_sha256": "ae2ed4f75f7310b7a0f3b432d9d3b8031c5803451149a84646187b5b43c08edc",
+          "primary_sources": "https://arxiv.org/pdf/2606.13844; https://raw.githubusercontent.com/CMU-SAFARI/ramulator2/c6c7a5de0cef35935d6fad7369e6271406798865/README.md; https://raw.githubusercontent.com/CMU-SAFARI/ramulator2/c6c7a5de0cef35935d6fad7369e6271406798865/LICENSE; https://raw.githubusercontent.com/CMU-SAFARI/ramulator2/c6c7a5de0cef35935d6fad7369e6271406798865/examples/example_config.py; https://raw.githubusercontent.com/CMU-SAFARI/ramulator2/c6c7a5de0cef35935d6fad7369e6271406798865/src/ramulator/frontend/impl/memory_trace/latency_throughput_trace.cpp; https://raw.githubusercontent.com/CMU-SAFARI/ramulator2/c6c7a5de0cef35935d6fad7369e6271406798865/src/ramulator/frontend/impl/memory_trace/loadstore_trace.cpp; https://raw.githubusercontent.com/CMU-SAFARI/ramulator2/c6c7a5de0cef35935d6fad7369e6271406798865/src/ramulator/frontend/impl/memory_trace/readwrite_trace.cpp; https://raw.githubusercontent.com/CMU-SAFARI/ramulator2/c6c7a5de0cef35935d6fad7369e6271406798865/src/ramulator/base/stats.h"
+        }
+      ]
+    },
+    {
+      "task": "仿真fidelity与命令回归",
+      "catalog_ids": [
+        "memory-ramulator21-fidelity"
+      ],
+      "input_boundary": "syntheticprobe/stream/shortcommand，fast无refresh/full有",
+      "label_oracle": "理论从同库resolve；fast无偏差assert/full仅存在与正吞吐",
+      "scoring_boundary": "ns/GBs/deviation%诊断与device/controller时序assert分层",
+      "current_use": "smoke/pytestpass不等全部物理精度验证；要建agentbench补隐藏序列/受保护独立oracle",
+      "source_snapshots": [
+        {
+          "id": "memory-ramulator21-fidelity",
+          "record_sha256": "95f736fca15eaf60c6e79091918689199ccc48fcb7533c72e4211bdef7edd9d5",
+          "primary_sources": "https://raw.githubusercontent.com/CMU-SAFARI/ramulator2/c6c7a5de0cef35935d6fad7369e6271406798865/README.md; https://raw.githubusercontent.com/CMU-SAFARI/ramulator2/c6c7a5de0cef35935d6fad7369e6271406798865/src/ramulator/frontend/impl/memory_trace/latency_throughput_trace.cpp; https://raw.githubusercontent.com/CMU-SAFARI/ramulator2/c6c7a5de0cef35935d6fad7369e6271406798865/python/ramulator/frontend/latency_throughput_trace.py; https://raw.githubusercontent.com/CMU-SAFARI/ramulator2/c6c7a5de0cef35935d6fad7369e6271406798865/tests/latency_throughput/test_fast.py; https://raw.githubusercontent.com/CMU-SAFARI/ramulator2/c6c7a5de0cef35935d6fad7369e6271406798865/tests/latency_throughput/test_full.py; https://raw.githubusercontent.com/CMU-SAFARI/ramulator2/c6c7a5de0cef35935d6fad7369e6271406798865/tests/latency_throughput/utils/checks.py; https://raw.githubusercontent.com/CMU-SAFARI/ramulator2/c6c7a5de0cef35935d6fad7369e6271406798865/tests/latency_throughput/utils/runner.py; https://raw.githubusercontent.com/CMU-SAFARI/ramulator2/c6c7a5de0cef35935d6fad7369e6271406798865/tests/latency_throughput/utils/spec.py; https://raw.githubusercontent.com/CMU-SAFARI/ramulator2/c6c7a5de0cef35935d6fad7369e6271406798865/tests/latency_throughput/testcases/ddr4.py; https://raw.githubusercontent.com/CMU-SAFARI/ramulator2/c6c7a5de0cef35935d6fad7369e6271406798865/tests/controller_scheduling/harness.py; https://raw.githubusercontent.com/CMU-SAFARI/ramulator2/c6c7a5de0cef35935d6fad7369e6271406798865/tests/device_timings/harness.py; https://raw.githubusercontent.com/CMU-SAFARI/ramulator2/c6c7a5de0cef35935d6fad7369e6271406798865/tests/controller_scheduling/test_all_bank_refresh.py; https://raw.githubusercontent.com/CMU-SAFARI/ramulator2/c6c7a5de0cef35935d6fad7369e6271406798865/tests/device_timings/test_ddr4.py"
+        }
+      ]
+    },
+    {
+      "task": "原生macrocompiler与物理视图",
+      "catalog_ids": [
+        "memory-openram-native"
+      ],
+      "input_boundary": "macroconfig/PDK/bitcell→layout/netlist/LEF/lib",
+      "label_oracle": "必须明确check_lvsdrc/PEX实际请求并通过；nonewrapper不是成功",
+      "scoring_boundary": "function/DRC/LVS/STA/PVT、areaµm²/时间与全部失败成本",
+      "current_use": "compiler生成能力已存在，是强baseline；default关签核不推所有用户运行没验证",
+      "source_snapshots": [
+        {
+          "id": "memory-openram-native",
+          "record_sha256": "c400d963ce56245463053c9d5aa27d8f1e7295d7601e3c4a68450a09a2a7c15e",
+          "primary_sources": "https://raw.githubusercontent.com/VLSIDA/OpenRAM/b2b069ce119d1488cbe6883b2240bceb5c7ce29a/README.md; https://raw.githubusercontent.com/VLSIDA/OpenRAM/b2b069ce119d1488cbe6883b2240bceb5c7ce29a/LICENSE; https://raw.githubusercontent.com/VLSIDA/OpenRAM/b2b069ce119d1488cbe6883b2240bceb5c7ce29a/docs/source/index.md; https://raw.githubusercontent.com/VLSIDA/OpenRAM/b2b069ce119d1488cbe6883b2240bceb5c7ce29a/compiler/options.py; https://raw.githubusercontent.com/VLSIDA/OpenRAM/b2b069ce119d1488cbe6883b2240bceb5c7ce29a/compiler/verify/__init__.py; https://raw.githubusercontent.com/VLSIDA/OpenRAM/b2b069ce119d1488cbe6883b2240bceb5c7ce29a/compiler/verify/none.py"
+        }
+      ]
+    },
+    {
+      "task": "OpenRAM原生analytic/SPICE表征",
+      "catalog_ids": [
+        "memory-openram-characterization"
+      ],
+      "input_boundary": "corner/input slew/output load、netlisttrim/PEX权限",
+      "label_oracle": "默认analytic与SPICE是不同精度/成本轨，.lib不是独立gold",
+      "scoring_boundary": "time1ns/cap1pF/leakage1mW，原生搜索setup/hold/delay/power",
+      "current_use": "代理需比已有nativeanalytic和characterizer，不能忽略生成gold/错误搜索总成本",
+      "source_snapshots": [
+        {
+          "id": "memory-openram-characterization",
+          "record_sha256": "9504bc1c10fc6c58f30f80bdea04d3186b0a68a231df3c327b8d2bb53d313325",
+          "primary_sources": "https://raw.githubusercontent.com/VLSIDA/OpenRAM/b2b069ce119d1488cbe6883b2240bceb5c7ce29a/docs/source/characterization.md; https://raw.githubusercontent.com/VLSIDA/OpenRAM/b2b069ce119d1488cbe6883b2240bceb5c7ce29a/compiler/options.py; https://raw.githubusercontent.com/VLSIDA/OpenRAM/b2b069ce119d1488cbe6883b2240bceb5c7ce29a/compiler/characterizer/lib.py; https://raw.githubusercontent.com/VLSIDA/OpenRAM/b2b069ce119d1488cbe6883b2240bceb5c7ce29a/compiler/characterizer/delay.py"
+        }
+      ]
+    },
+    {
+      "task": "SRAM22单portSKY130宏与工具flow",
+      "catalog_ids": [
+        "memory-sram22-native"
+      ],
+      "input_boundary": "TOMLnumwords/width/mux/write，stocklayoutcells",
+      "label_oracle": "stage complete/failed/skipped/notrequested/reused；--all不自动Liberate",
+      "scoring_boundary": "原生view生成/Calibre DRC/LVS/PEX/Liberate请求分开",
+      "current_use": "agent需解决具体独立任务，GDS存在不等所有view/签核完成",
+      "source_snapshots": [
+        {
+          "id": "memory-sram22-native",
+          "record_sha256": "320ba96a07f41d1e5f883a97577162db0aa7e07f90a7e6df5971291ff0292628",
+          "primary_sources": "https://raw.githubusercontent.com/ucb-substrate/sram22/6ec35d5acc777eeaa199730d7976554e3b3fc50c/README.md; https://raw.githubusercontent.com/ucb-substrate/sram22/6ec35d5acc777eeaa199730d7976554e3b3fc50c/LICENSE; https://raw.githubusercontent.com/ucb-substrate/sram22/6ec35d5acc777eeaa199730d7976554e3b3fc50c/src/blocks/sram/testbench/verify.rs; https://raw.githubusercontent.com/ucb-substrate/sram22/6ec35d5acc777eeaa199730d7976554e3b3fc50c/src/lib.rs; https://raw.githubusercontent.com/ucb-substrate/sram22/6ec35d5acc777eeaa199730d7976554e3b3fc50c/src/plan/mod.rs; https://raw.githubusercontent.com/ucb-substrate/sram22/6ec35d5acc777eeaa199730d7976554e3b3fc50c/src/cli/mod.rs; https://raw.githubusercontent.com/ucb-substrate/sram22/6ec35d5acc777eeaa199730d7976554e3b3fc50c/src/verification/calibre.rs; https://raw.githubusercontent.com/ucb-substrate/sram22/6ec35d5acc777eeaa199730d7976554e3b3fc50c/Cargo.toml; https://raw.githubusercontent.com/ucb-substrate/sram22/6ec35d5acc777eeaa199730d7976554e3b3fc50c/src/cli/args.rs"
+        }
+      ]
+    },
+    {
+      "task": "SRAM22内置时序lookup/拟合",
+      "catalog_ids": [
+        "memory-sram22-timing"
+      ],
+      "input_boundary": "11JSON/249宽度corner快照，固定architecture与≤128width",
+      "label_oracle": "exactraw或OLS/lift相对插值surface，不是独立SPICE保守性证明",
+      "scoring_boundary": "ns/pF和预表误差；当前power/CCS占位零不能解释为物理0",
+      "current_use": "原生lookup已覆盖拟合生成，模型新收益要在heldoutSPICE和总成本上证明",
+      "source_snapshots": [
+        {
+          "id": "memory-sram22-timing",
+          "record_sha256": "cbda5ca488c4f5d38eb4e3cfd767eeb17b28e52cdb52d1db8255b97080222f3b",
+          "primary_sources": "https://raw.githubusercontent.com/ucb-substrate/sram22/6ec35d5acc777eeaa199730d7976554e3b3fc50c/timingdata/INTERPOLATION.md; https://raw.githubusercontent.com/ucb-substrate/sram22/6ec35d5acc777eeaa199730d7976554e3b3fc50c/src/plan/mod.rs; https://raw.githubusercontent.com/ucb-substrate/sram22/6ec35d5acc777eeaa199730d7976554e3b3fc50c/src/liberty.rs; https://raw.githubusercontent.com/ucb-substrate/sram22/6ec35d5acc777eeaa199730d7976554e3b3fc50c/timingdata/1024m4w8.json; https://raw.githubusercontent.com/ucb-substrate/sram22/6ec35d5acc777eeaa199730d7976554e3b3fc50c/timingdata/1024m8w8.json; https://raw.githubusercontent.com/ucb-substrate/sram22/6ec35d5acc777eeaa199730d7976554e3b3fc50c/timingdata/128m4w8.json; https://raw.githubusercontent.com/ucb-substrate/sram22/6ec35d5acc777eeaa199730d7976554e3b3fc50c/timingdata/64m4w8.json"
+        }
+      ]
+    },
+    {
+      "task": "提取SRAM电源网络DC求解",
+      "catalog_ids": [
+        "pd-srampg-dc"
+      ],
+      "input_boundary": "4source设计的R/current/supply，作者16LFS已取",
+      "label_oracle": "可信独立solver/KCL，作者明确参考可能不准且有浮空nodes",
+      "scoring_boundary": "V/mV/residual/runtime/memory；fault/yield与voltage求解不同",
+      "current_use": "不是要生成memory，也非标准scalar；原raw与修复版本分开，不能暗改gold",
+      "source_snapshots": [
+        {
+          "id": "pd-srampg-dc",
+          "record_sha256": "151aeb70772459bb125448e9b1b76baafef0e97311a927ed456c3ee87edbe4f3",
+          "primary_sources": "https://arxiv.org/pdf/2404.05260; https://raw.githubusercontent.com/ShenShan123/SRAM-PG/62a95026696e8f669e9aab25dba574a9cd65b74d/README.md; https://raw.githubusercontent.com/ShenShan123/SRAM-PG/62a95026696e8f669e9aab25dba574a9cd65b74d/LICENSE; https://media.githubusercontent.com/media/ShenShan123/SRAM-PG/62a95026696e8f669e9aab25dba574a9cd65b74d/ssram_dc.sol.ic.tar.bz2; https://media.githubusercontent.com/media/ShenShan123/SRAM-PG/62a95026696e8f669e9aab25dba574a9cd65b74d/ssram_dc.sp.tar.bz2"
+        }
+      ]
+    },
+    {
+      "task": "提取SRAM动态RC响应",
+      "catalog_ids": [
+        "pd-srampg-transient"
+      ],
+      "input_boundary": "RC/pulsecurrents，4设计非8独立IP",
+      "label_oracle": "仅20/30监测节点/40或80ns，需独立全网络gold",
+      "scoring_boundary": "绝对误差/峰值/时间对齐/全cost，sampled误差非全域max",
+      "current_use": "paper20node/40ns与实际包不同，按当前文件定版，nativeSPICE为必要baseline",
+      "source_snapshots": [
+        {
+          "id": "pd-srampg-transient",
+          "record_sha256": "5d5d4cb751fa03ddf54d94ca735222c3e270bc4c53976a39b91345f2df7737a5",
+          "primary_sources": "https://arxiv.org/pdf/2404.05260; https://raw.githubusercontent.com/ShenShan123/SRAM-PG/62a95026696e8f669e9aab25dba574a9cd65b74d/README.md; https://media.githubusercontent.com/media/ShenShan123/SRAM-PG/62a95026696e8f669e9aab25dba574a9cd65b74d/ssram_trans.sol.pt0.tar.bz2; https://media.githubusercontent.com/media/ShenShan123/SRAM-PG/62a95026696e8f669e9aab25dba574a9cd65b74d/ssram_trans.sp.tar.bz2; https://media.githubusercontent.com/media/ShenShan123/SRAM-PG/62a95026696e8f669e9aab25dba574a9cd65b74d/sandwich_trans.sol.pt0.tar.bz2; https://media.githubusercontent.com/media/ShenShan123/SRAM-PG/62a95026696e8f669e9aab25dba574a9cd65b74d/sp8192w_trans.sol.pt0.tar.bz2; https://media.githubusercontent.com/media/ShenShan123/SRAM-PG/62a95026696e8f669e9aab25dba574a9cd65b74d/ultra8T_trans.sol.pt0.tar.bz2"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,167 @@
+{
+  "as_of": "2026-10-20T00:45:36.056020+00:00",
+  "status": "security task/input/attack-model comparison, not a unified benchmark or reproduced ranking",
+  "scope": "安全benchmark至少分性质表达、漏洞利用、木马分类定位、物理防御及逻辑故障鲁棒性；输入权限、攻击者模型、标签、split、证明边界与成本共同决定成绩。软件能执行或发现部分问题不是任务已解决的证据，旧数据也需具体版本/泛化与验收依据才能退役。",
+  "items": [
+    {
+      "task": "自然语言安全性质转断言",
+      "catalog_ids": [
+        "verify-security-assertions"
+      ],
+      "input_boundary": "十设计/性质×多prompt/temperature变体，不是20k独立设计",
+      "label_oracle": "编译/运行/触发等局部检查，尚非完整形式等价证明",
+      "scoring_boundary": "七类精确指标/分析脚本仍需补核；220k断言不是独立规格数",
+      "current_use": "有安全语法/性质表达用途，不能以编译成功推真实安全保证；熟练脚本/受保护formal checker是基线",
+      "source_snapshots": [
+        {
+          "id": "verify-security-assertions",
+          "record_sha256": "2183293cb6ab5f6446b1495607d91bb094b3eaaccc66de7fdce7ef807cb7a7af"
+        }
+      ]
+    },
+    {
+      "task": "SoC安全漏洞挖掘与修复素材",
+      "catalog_ids": [
+        "security-hackatdac21"
+      ],
+      "input_boundary": "OpenPiton/CPU外设RTL/firmware/文档与植入缺陷",
+      "label_oracle": "触发/利用与修复后功能/安全回归；缺陷清单曝光改变盲测权限",
+      "scoring_boundary": "当前56bugs/CWE是README分母，原竞赛积分/自动scorer未核",
+      "current_use": "真实SoC项目层次不同于门级分类，需保留版本/新bug隔离/可利用证据；不把公开答案当fresh任务",
+      "source_snapshots": [
+        {
+          "id": "security-hackatdac21",
+          "record_sha256": "5803c369cec04c982c6e0536f6b25ffd1f75d47c41ab1a14be5772685a791017"
+        }
+      ]
+    },
+    {
+      "task": "硬件木马原数据资源平台",
+      "catalog_ids": [
+        "security-trusthub-corpus"
+      ],
+      "input_boundary": "具体RTL/gate/layout与攻击模型，是否有clean/golden逐项确认",
+      "label_oracle": "设计/门级定位、触发/传播与物理侧信道分别定义",
+      "scoring_boundary": "原2017摘要/索引不等全正文或当前manifest；历史91非现行规模，无已核统一score",
+      "current_use": "已有仿真/形式/ATPG工具覆盖一部分，但检测与恶意语义/物理证据不同；访问失败不判任务过时",
+      "source_snapshots": [
+        {
+          "id": "security-trusthub-corpus",
+          "record_sha256": "d6a70649e471fd93abebfd6c9d6bedea28198221363e4c21c59545738292b78f"
+        }
+      ]
+    },
+    {
+      "task": "Gate分类的已知host与未知family",
+      "catalog_ids": [
+        "security-trusthub-family-split"
+      ],
+      "input_boundary": "16netlist/五family/49124gates340positive/36features；同library",
+      "label_oracle": "trigger/payload/support/glue positive，parser修复/排除明示",
+      "scoring_boundary": "threshold.5 TPR/FPR/F1与AP，先family再macro；pooled10fold/LOCO16/LOFO5不可合榜",
+      "current_use": "pooled适合熟悉host变体，LOFO测新host；五family少、zero-delay活动无timing，不推新库/工业迁移。native LR/RF/XGB固定同协议",
+      "source_snapshots": [
+        {
+          "id": "security-trusthub-family-split",
+          "record_sha256": "872116c2299a6d0127a01a1c67704f2b2b69a4e72f63274d2f9c09fb2dc5b503"
+        }
+      ]
+    },
+    {
+      "task": "物理安全可利用空间代理优化",
+      "catalog_ids": [
+        "pd-ispd22-security"
+      ],
+      "input_boundary": "postroute DEF/网表/约束与敏感assets、site/track/暴露区域",
+      "label_oracle": "保持功能与PPA/DRC，减插入/探测空间；不是真实攻击成功gold",
+      "scoring_boundary": "overall=sec*des，sec两类代理均值；baseline归一低好",
+      "current_use": "是后端防御优化非前端Trojan定位；成熟PnR/DRC/STA为执行器与baseline，不可填无效filler取巧",
+      "source_snapshots": [
+        {
+          "id": "pd-ispd22-security",
+          "record_sha256": "faa6d6b6e6c4f55465c220b8d7c69db195ea4c20439801c55a0f0db858656656"
+        }
+      ]
+    },
+    {
+      "task": "实际Trojan ECO插入压力的防御",
+      "catalog_ids": [
+        "pd-ispd23-security"
+      ],
+      "input_boundary": "ASAP7版图/资产/recipe，final六Trojan类型与多ECO模式",
+      "label_oracle": "每次插入看DRC/setup/hold/DRV/clock约束是否过；原防御保持合法",
+      "scoring_boundary": "final .5des+.25generic+.25ECO，ECO阶段0–27分段失败级别，低分更难插",
+      "current_use": "比空间代理更接近工程攻击预算但仍非全攻击模型证明；AIC/EXT、alpha/final版本分开",
+      "source_snapshots": [
+        {
+          "id": "pd-ispd23-security",
+          "record_sha256": "0187eaee6b8d0a7cedc8782c9f2fb9143c08d2b05aa738d5846b6ab74855bcfa"
+        }
+      ]
+    },
+    {
+      "task": "单bit SEU与RTL形式鲁棒性",
+      "catalog_ids": [
+        "verify-ibex-seu-formal"
+      ],
+      "input_boundary": "Ibex2008目标寄存器bit、gold/faulty双核、memory抽象和assumptions",
+      "label_oracle": "strobe/ISA/crash/hang safety性质集合；非完整程序liveness",
+      "scoring_boundary": "proven/boundedproven/unknown分开，bit可多性质重复，不直接加失败率",
+      "current_use": "逻辑瞬态bit故障非硅辐照/FIT；成熟formal solver是基线，模型价值可在性质/抽象/诊断但需独立proof",
+      "source_snapshots": [
+        {
+          "id": "verify-ibex-seu-formal",
+          "record_sha256": "b3cd1d72850f98dcf5cdcec218e3344d2dbded7386daa796e0dd951d4e1a7c8e"
+        }
+      ]
+    },
+    {
+      "task": "逻辑故障的任意错误效果",
+      "catalog_ids": [
+        "verify-synfi-arbitrary"
+      ],
+      "input_boundary": "gate JSON/Boolean cells/faultmapping/位置数与子电路约束",
+      "label_oracle": "任意输出偏离期望，SAT条件下存在性/有效比例",
+      "scoring_boundary": "Ibex任意PC改变78.1%仅作者指定模型；采样与枚举分母/轮次明示",
+      "current_use": "任意错误与定向绕检测攻击不同，不拿不同目标分数衡量安全强弱；无门延迟/电气/物理邻接",
+      "source_snapshots": [
+        {
+          "id": "verify-synfi-arbitrary",
+          "record_sha256": "1eef687184533a78bc812d78d055f86cf52f0d2a237e73d7f5ba9658a9bcbd95"
+        }
+      ]
+    },
+    {
+      "task": "逻辑故障的指定目标与绕检测",
+      "catalog_ids": [
+        "verify-synfi-targeted"
+      ],
+      "input_boundary": "同工具但指定target/error/detection条件，faultlocation权限固定",
+      "label_oracle": "是否能实现目标输出且满足检测约束",
+      "scoring_boundary": "指定target0与任意错误78.1%不是矛盾；双fault随机10000不等穷举证明",
+      "current_use": "按目标/约束/采样置信与真实硬件模型分别评价，原生SAT与专家模型是强baseline",
+      "source_snapshots": [
+        {
+          "id": "verify-synfi-targeted",
+          "record_sha256": "26e15577fc4de2af00fa2b39aa74daddfdef09a7993d8ed38dfbf16add9bf96b"
+        }
+      ]
+    },
+    {
+      "task": "符号故障/防护电路验证",
+      "catalog_ids": [
+        "verify-fiver"
+      ],
+      "input_boundary": "17.nl/对应.v同设计不可双计，crypto电路/故障mapping/blacklist",
+      "label_oracle": "符号全输入只在给定stage/round/temporal故障模型",
+      "scoring_boundary": "766位置组合→98048场景不同分母；reduction2不保证正确，interrupt首fault停止",
+      "current_use": "保正确与aggressive速度不能称同一proof；不推物理FIT或无限时序，非商业工具存在就全解",
+      "source_snapshots": [
+        {
+          "id": "verify-fiver",
+          "record_sha256": "e3bfb9496c1fe4130d5b90e5fa9e1736738b07720670e5b4bc518da833cf01a6"
+        }
+      ]
+    }
+  ]
+}

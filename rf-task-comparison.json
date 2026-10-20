@@ -1,0 +1,156 @@
+{
+  "as_of": "2026-10-20T00:45:35.986781+00:00",
+  "status": "RF task boundary and evidence comparison, not a new benchmark or ranking",
+  "scope": "射频须分知识/读图、电路与版图设计、无源EM代理、电路目标优化、晶圆计量及板级电磁。S参数只是共同数据形式，不能据此合榜；材料/尺度/端口归一化/真值/成本和独立验收共同定义任务。商业EDA功能是基线与执行器，退休判断仍需明确版本/协议证据。",
+  "items": [
+    {
+      "task": "射频知识问答",
+      "catalog_ids": [
+        "rf-agent-qa"
+      ],
+      "input_boundary": "heldout mcQTSA QA，知识文本/多选形式",
+      "label_oracle": "答案标签不是可制造电路的SPICE/EM真值",
+      "scoring_boundary": "1000题B多数baseline57.7%；11非单A-D；selected4086 mc train与test有1exact重叠，非证明paper全部run；GPT4.1nano抽取temp.1再sortedmatch",
+      "current_use": "可测知识与推理；原1000轨与988待审候选分开，先核132改题/label/章节split和抽取器；不能据QA推RF设计成功",
+      "source_snapshots": [
+        {
+          "id": "rf-agent-qa",
+          "record_sha256": "ac199fef3d81b2f85d2e2f466ef4b82cbf286b16ed1d59ca3bef0faa2c27115d"
+        }
+      ]
+    },
+    {
+      "task": "射频原理图视觉理解",
+      "catalog_ids": [
+        "rf-schembench"
+      ],
+      "input_boundary": "2348QA/590page五来源，电路图片与问题",
+      "label_oracle": "图/电路语义答案标签，不是电气仿真",
+      "scoring_boundary": "匹配/语义评分实现待核；按页/来源/电路族去重划分",
+      "current_use": "可做读图前置能力；不能把同页QA当独立设计或把答题替RF规格满足",
+      "source_snapshots": [
+        {
+          "id": "rf-schembench",
+          "record_sha256": "8a2cc73b44175fff69d30dd4155a48c61cb6b18215bd6b059e0f32e49fc0baa2"
+        }
+      ]
+    },
+    {
+      "task": "片上RF规格到原理图/版图",
+      "catalog_ids": [
+        "rf-composer"
+      ],
+      "input_boundary": "4LNA+3PA、65nm≤60GHz；工艺/规格与组件/版图环境",
+      "label_oracle": "最终EM/SPICE及DRC/LVS/寄生后电气约束应独立验收",
+      "scoring_boundary": "gain/NF/S11/BW/Pdc/IIP3等多指标；2–4min生成与21/37min最终仿真/24h EM训练分开",
+      "current_use": "公开方法实验非大规模统一agent榜；原生RF综合/参数搜索/专家与同预算工具调用是强baseline",
+      "source_snapshots": [
+        {
+          "id": "rf-composer",
+          "record_sha256": "aada02b20bfa1e2fe5598cfb23f56072253915680aa8eb366c57b961331b52e4"
+        }
+      ]
+    },
+    {
+      "task": "片上RF无源几何代理",
+      "catalog_ids": [
+        "rf-orca"
+      ],
+      "input_boundary": "参数化GDS/stack/frequency/ports，InductorOcta/TransformerOcta自生成",
+      "label_oracle": "指定EM仿真输出，不是实测或网格独立收敛真值",
+      "scoring_boundary": "mean|complex error|不是幅度dB RMSE；电气曲线百分比floor与无效派生分母分开",
+      "current_use": "可测EM代理；必须按几何族/stack/频率holdout，补无源/互易、绝对误差及EM成本；商业EM存在不等代理问题解决",
+      "source_snapshots": [
+        {
+          "id": "rf-orca",
+          "record_sha256": "89ebd15d671cee2fd7084011df155c49c078efd4bec938dc4cda36bac465e1a5"
+        }
+      ]
+    },
+    {
+      "task": "RF电路尺寸/工具目标优化",
+      "catalog_ids": [
+        "rf-cobra"
+      ],
+      "input_boundary": "Xyce/VACASK电路+几何surrogate ONNX/bounds/goals，AC/HB/TRAN",
+      "label_oracle": "真实电路约束与独立EM/模型适用域验证",
+      "scoring_boundary": "goal归一化平方偏差，one-sided满足可为负reward、interval满足0，failedsim1e6；aggregateloss非全部spec通过",
+      "current_use": "方法工作流可借鉴agent任务构造，需冻结规格/检查器、模型训练与选优预算；与native optimizer同输入比较",
+      "source_snapshots": [
+        {
+          "id": "rf-cobra",
+          "record_sha256": "307e65517dbdf88a0fc968982952c559df9370262d9ecc2f24395f0366887d3b"
+        }
+      ]
+    },
+    {
+      "task": "晶圆射频计量校准",
+      "catalog_ids": [
+        "rf-nist-calnet-calibration"
+      ],
+      "input_boundary": "10MHz–110GHz官方on-wafer标准/校准检查数据；S2P GHz/RI/50Ω",
+      "label_oracle": "SOLT/multilineTRL与独立check standard/不确定度，不能把参与校准标准自评当泛化",
+      "scoring_boundary": "未设官方统一模型分数；S残差/覆盖率为另拟协议。NERDm1.0.2可读，README/ZIP超时未验证样本",
+      "current_use": "是测量验证数据，不是电路拓扑优化或已建agentbench；原生VNA/校准工具基线与参考面必须一致",
+      "source_snapshots": [
+        {
+          "id": "rf-nist-calnet-calibration",
+          "record_sha256": "468661e76054ccaaa4fc46c5b977c50fc17ea5fe4733c2dec724aa6e0963345f"
+        }
+      ]
+    },
+    {
+      "task": "板级电磁场/散射代理",
+      "catalog_ids": [
+        "boundary-emval-nf",
+        "boundary-emval-sp"
+      ],
+      "input_boundary": "5008块8mm PCB三层，1–20GHz101频；NF每板10kprobe与SP有不同输出",
+      "label_oracle": "同一物理板的全波数据，按板划分而非频点/探针随机打散",
+      "scoring_boundary": "NF boardmacro relativeL2/localmedian/vector alignment；SP复数RI RMSE、加权dB/phase，各权重/零分母/深null边界另核",
+      "current_use": "与片上RF工艺/封装互连分层；模型真值是指定solver，不宣称工业signoff；EM软件是oracle和同预算基线",
+      "source_snapshots": [
+        {
+          "id": "boundary-emval-nf",
+          "record_sha256": "13d0ad786a1fe151c63dd4b02a44a50abc8dc0244af97058713ea726a7a79819"
+        },
+        {
+          "id": "boundary-emval-sp",
+          "record_sha256": "2299f499efeeaad6a7f03313f832eec21507860fc87adc4acbc43a6c5fb36c35"
+        }
+      ]
+    },
+    {
+      "task": "矩阵几何的板级多端口代理",
+      "catalog_ids": [
+        "boundary-matrix-sparam"
+      ],
+      "input_boundary": "20×20二值矩阵、0.1mm网格、εr4.3/毫米基板；五抽样0.3–3GHz401点",
+      "label_oracle": "每对端口complexS标签；端口索引/Zref/solver映射与收敛未核",
+      "scoring_boundary": "README26150 vs完整浅树26710目录；不是已证26710独立有效仿真。未见固定split/scorer，复数/幅相误差仅可另拟",
+      "current_use": "CC BY4数据素材；不能称纳米OPC或片上RFbench。需几何/基板heldout、完整矩阵去重、生成配置与独立EM验收",
+      "source_snapshots": [
+        {
+          "id": "boundary-matrix-sparam",
+          "record_sha256": "fc25affc7891e70832ac624da45190b0250fb38a784f3c95044a701de084df44"
+        }
+      ]
+    },
+    {
+      "task": "原生RF工具链与分级工程验收",
+      "catalog_ids": [
+        "rf-sparx-open-flow"
+      ],
+      "input_boundary": "同一130nm架构13频率layout变体，generator/PDK/ports/stackup/工具版本",
+      "label_oracle": "EM→passive LE→AC/HB/PSS/noise/PEX；TT27°C仿真不等实测/PVT",
+      "scoring_boundary": "detectorLVS不等topLVS；macroDRC clean与regular33waived分开。fast复用EM/nightly只WPD/full/coreEM四成本范围",
+      "current_use": "开放workflow素材非现成agent榜；ToDo旧WPD端口artifact要重算，CI latest未锁digest；同预算native flow+独立spec/signoff才可主张agent收益",
+      "source_snapshots": [
+        {
+          "id": "rf-sparx-open-flow",
+          "record_sha256": "b804956c220c3f77fb047dbc972ccf625eac7e1757696ea98c8c2364a41fe2f3"
+        }
+      ]
+    }
+  ]
+}

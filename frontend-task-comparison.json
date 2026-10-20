@@ -1,0 +1,336 @@
+{
+  "as_of": "2026-10-20T00:45:36.124564+00:00",
+  "status": "frontend task and data identity comparison; not a new benchmark or ranking",
+  "scope": "数字前端需先分训练语料、单次代码生成、工具反馈agent、文本补全、真实仓库修复及可信度审计。同一题库的不同方法不新增独立家族；数据量、文本相似、给定性质通过与完整工程功能是不同证据层级。",
+  "items": [
+    {
+      "task": "合成训练语料与评分训练数据",
+      "catalog_ids": [
+        "rtl-rtlcoder-data27",
+        "rtl-rtlcoder-data80-verified7"
+      ],
+      "input_boundary": "26,532公开原对 vs论文80K/7K未取得实体，版本不可拼接",
+      "label_oracle": "syntax过滤不保语义；LLM SVA通过仅为给定property，缺失/空泛/共错仍可能",
+      "scoring_boundary": "训练量/压缩多样性非独立功能分；raw全缺Score，10行4candidate仅例",
+      "current_use": "强native检查可提高质量，性质完整/环境建模仍是研究问题；独立新题/同训练预算评估",
+      "source_snapshots": [
+        {
+          "id": "rtl-rtlcoder-data27",
+          "record_sha256": "5e781d384d0fbf5c0cce97b8aa310e04a76db2487312d43c245c20070eae22dd"
+        },
+        {
+          "id": "rtl-rtlcoder-data80-verified7",
+          "record_sha256": "8ac577a40fa0c40ae9e94e12da5f99960c58955414d96219c244d01f7699184e"
+        }
+      ]
+    },
+    {
+      "task": "从RTL提取说明的多粒度训练数据",
+      "catalog_ids": [
+        "rtl-mg-verilog",
+        "rtl-mhrc-train"
+      ],
+      "input_boundary": "代码/模块/块/行级说明、repo分组训练",
+      "label_oracle": "LLM标注与文本描述不自动是规格gold",
+      "scoring_boundary": "样本数/文本loss不等完整设计通过率；上游许可与repo近重复须核",
+      "current_use": "与RTL生成测试集分开；拆分应按来源/host/生成模板，防同源多视图跨split",
+      "source_snapshots": [
+        {
+          "id": "rtl-mg-verilog",
+          "record_sha256": "89c8d4ffcac9d2d160a72743d55d165248963ba8d7277f1ea9a1bb3704e2cd0f"
+        },
+        {
+          "id": "rtl-mhrc-train",
+          "record_sha256": "70cbff4be27bc1885fa02aa58a49a965861550e17802a24ec1bd8f39ddbbef76"
+        }
+      ]
+    },
+    {
+      "task": "无工具的规格生成RTL",
+      "catalog_ids": [
+        "rtl-verilogeval-v1",
+        "rtl-verilogeval-v2",
+        "rtl-rtllm"
+      ],
+      "input_boundary": "v1补全/v2完整module/RTLLM不同任务与工具",
+      "label_oracle": "受保护reference/testbench比对，有限刺激与完整功能证明分开",
+      "scoring_boundary": "pass@k、任意5次、版本/生成数/温度择优预算分别锁",
+      "current_use": "老教育题仍是回归基线；工业泛化与污染需要新规格和独立隐藏验收",
+      "source_snapshots": [
+        {
+          "id": "rtl-verilogeval-v1",
+          "record_sha256": "ef09bf46c07074f2dcc70df1532a41ee5eb7a16faafa54e13a6374e0b36f208c"
+        },
+        {
+          "id": "rtl-verilogeval-v2",
+          "record_sha256": "6c9a828dda466b91ea018633e68a1d897297f355f0a22ff0b60dcd651f35c32c"
+        },
+        {
+          "id": "rtl-rtllm",
+          "record_sha256": "c56f49c4659249db70b41b8d21e2b9ad9a0af603a2df9f17c8b1b37ddc71a8d7"
+        }
+      ]
+    },
+    {
+      "task": "相同156题的反馈agent方法",
+      "catalog_ids": [
+        "rtl-verilogcoder-agent-protocol"
+      ],
+      "input_boundary": "沿用VerilogEval-Human v2，工具能看gold比较波形",
+      "label_oracle": "sim日志0mismatch，最终文件需独立重跑；chatmarker不自动可信",
+      "scoring_boundary": "一次episode多轮调用，不是一个LLM样本；94.2%作者报告非本轮重现",
+      "current_use": "不计独立新题库；同反馈/工具/预算基线，比nativechecker之上的诊断编排收益",
+      "source_snapshots": [
+        {
+          "id": "rtl-verilogcoder-agent-protocol",
+          "record_sha256": "2bf99c06e73cb6324b03bd6ee7ed11666ca08f9e99640cd81ba3140f33da9dfa"
+        }
+      ]
+    },
+    {
+      "task": "工程上下文和工具使用分轨",
+      "catalog_ids": [
+        "rtl-cvdp-nonagentic",
+        "rtl-cvdp-agentic",
+        "rtl-cvdp-comprehension"
+      ],
+      "input_boundary": "生成/项目工作区/理解问答输入权限不同",
+      "label_oracle": "代码全tests；理解sentenceBLEU2/LLMscore分开，currentjudgeNone与示例0错误处理不同，不能拿文本相似代工程验收",
+      "scoring_boundary": "agent episode成本、失败/infra分母、hiddenoracle分别锁；仅5examplepair已核，HFbulk未得，不虚报完整row/去重数",
+      "current_use": "商业工具会做确定性优化，agent仍需规范理解/修改/闭环；原生flow和专家是baseline",
+      "source_snapshots": [
+        {
+          "id": "rtl-cvdp-nonagentic",
+          "record_sha256": "8594262bcd6b9b24dc2982594d46467626a730c798b44f6b929f028fcc07bcd4"
+        },
+        {
+          "id": "rtl-cvdp-agentic",
+          "record_sha256": "c16587440ec7ffde27867d1d29192654256938e404ea97a115ec8aa0740d8fa6"
+        },
+        {
+          "id": "rtl-cvdp-comprehension",
+          "record_sha256": "4fb46d98e35e9ad0e773f2053808fa8db257837d72ab46b1632e1408c4858439"
+        }
+      ]
+    },
+    {
+      "task": "仓库补全的文本目标",
+      "catalog_ids": [
+        "rtl-repo",
+        "rtl-mhrc-eval"
+      ],
+      "input_boundary": "跨文件context、下一行/多语种repo target",
+      "label_oracle": "EM/ES只度量文本，合法语义替代解未必同文本",
+      "scoring_boundary": "上下文窗口/截断/完整ID分母/重复预测与训练repo隔离",
+      "current_use": "适合IDE辅助；不把相似度当仿真通过或完整项目可交付",
+      "source_snapshots": [
+        {
+          "id": "rtl-repo",
+          "record_sha256": "071afefb3a40ab01c8ff5de0806cff5e64db4fd29e59eee38a916eea619e3fe7"
+        },
+        {
+          "id": "rtl-mhrc-eval",
+          "record_sha256": "12f194e9572140b32ec82d39715c45269906d6dfeb0090c1a9f6863bd3a964ea"
+        }
+      ]
+    },
+    {
+      "task": "重写规格和扩展语义题",
+      "catalog_ids": [
+        "rtl-benchmt-revised",
+        "rtl-benchmt-expanded"
+      ],
+      "input_boundary": "原题、修订题、语义变体；同母题有依赖",
+      "label_oracle": "规格一致性与独立功能oracle，变体需要重新核gold",
+      "scoring_boundary": "修订前后协议分列、变体按母题分组，不能全部算freshOOD",
+      "current_use": "适合鲁棒性审计；扩充文本/参数不等独立工业设计数",
+      "source_snapshots": [
+        {
+          "id": "rtl-benchmt-revised",
+          "record_sha256": "4da4aafed08226e19d612d93f70ab9457e61abdf7ecb081a623e98ced8b10dde"
+        },
+        {
+          "id": "rtl-benchmt-expanded",
+          "record_sha256": "5e83c97dc2a808bcd553872a3c4fb913c2abad7fb94c2b9df22de5d97023763d"
+        }
+      ]
+    },
+    {
+      "task": "真实仓库issue修复",
+      "catalog_ids": [
+        "rtl-phoenix-bench",
+        "verify-rtlrepair"
+      ],
+      "input_boundary": "repo版本/issue/buggyRTL vs合成或有限debug变体",
+      "label_oracle": "补丁在protectedtest/形式/项目工具下通过，不能仅文件diff",
+      "scoring_boundary": "同工具调用/时间预算；未运行/不编译/缺环境不删分母",
+      "current_use": "更接近工程任务，工具原生定位/修复基线和真实补丁泛化仍需核",
+      "source_snapshots": [
+        {
+          "id": "rtl-phoenix-bench",
+          "record_sha256": "372a79c514d3672e89cbd28d3a69ff685bc6655a51110e4761588d87965aec93"
+        },
+        {
+          "id": "verify-rtlrepair",
+          "record_sha256": "f27b40dd398feeb580c7eec4ba306ed5303817a2846cff8e1aa8dc5c5903df26"
+        }
+      ]
+    },
+    {
+      "task": "跨语言/流水合同的实现生成",
+      "catalog_ids": [
+        "rtl-pyhdl-verilog",
+        "rtl-pyhdl-python",
+        "rtl-hdleval-comb",
+        "rtl-hdleval-pipe"
+      ],
+      "input_boundary": "同算法跨DSL和语言；comb/pipeline的latency/reset不同",
+      "label_oracle": "编译/仿真/等价依各语言与周期合同，不能逐文本比较",
+      "scoring_boundary": "工具链成熟度/编译时间/失败类型和可综合性分报",
+      "current_use": "语言迁移能力不自动是优PPA；native transpiler/reference+专家为baseline",
+      "source_snapshots": [
+        {
+          "id": "rtl-pyhdl-verilog",
+          "record_sha256": "a6ee5a56cf047849dd749664195787b1389b45541428468ba4aed02d9efba9c0"
+        },
+        {
+          "id": "rtl-pyhdl-python",
+          "record_sha256": "740e841d643e3c9b719bee163b5be539d01e0b224eb8afdbdb6569457f658347"
+        },
+        {
+          "id": "rtl-hdleval-comb",
+          "record_sha256": "90d1e002c3193ad8cb6729d02896ecfe1e3ebf910f852ff0d973471bb98b6a69"
+        },
+        {
+          "id": "rtl-hdleval-pipe",
+          "record_sha256": "3556da5acecd45c89e62fda0bc2bc7709e3ad91d44e07ffcc6c736419f60c12e"
+        }
+      ]
+    },
+    {
+      "task": "代码与规格一致性、污染诊断",
+      "catalog_ids": [
+        "rtl-specread-rtl-consistency",
+        "rtl-vericontaminated-screen",
+        "rtl-vericontaminated-ted"
+      ],
+      "input_boundary": "spec跨节推理/矛盾变体 vs生成概率与相似集中信号",
+      "label_oracle": "gold一致性控制不同于污染怀疑；检测器并非逐题训练见过证明",
+      "scoring_boundary": "textdiagnostic/阈值敏感度与功能pass分开，人工已知clean/leak校准",
+      "current_use": "局部错误修复/保留原证据，不把概率诊断定罪整库或把TED降分解释成无污染性能",
+      "source_snapshots": [
+        {
+          "id": "rtl-specread-rtl-consistency",
+          "record_sha256": "933629566fe5ad8cfaac76f83e0d79523170177edd0d79fa35b820f53d12f3ec"
+        },
+        {
+          "id": "rtl-vericontaminated-screen",
+          "record_sha256": "fb25e37f3bfe4788413da205237d80452aae07b62dc7b8078ffb3a31c52f4548"
+        },
+        {
+          "id": "rtl-vericontaminated-ted",
+          "record_sha256": "fb28e6327cb5dd12b81e58e8e2a8484cbd08341ca585557bd1ec6c7cbe62d999"
+        }
+      ]
+    },
+    {
+      "task": "VHDL仓库级五变体",
+      "catalog_ids": [
+        "rtl-vhdlrepo-line",
+        "rtl-vhdlrepo-block",
+        "rtl-vhdlrepo-summary",
+        "rtl-vhdlrepo-smg-module",
+        "rtl-vhdlrepo-smg-repo"
+      ],
+      "input_boundary": "LP/BC/summary/SMGModule/SMGRepo不同输出；约100repo而不是全部样本独立IP",
+      "label_oracle": "主pass多为GHDLcompile，135SMGModule有TB额外仿真；summaryROUGEL/LLMPR不编译",
+      "scoring_boundary": "约7k/1k/850/1.2k/20分母，128k/16k/2k不同上下文预算；全精确数据未取得",
+      "current_use": "类型/跨文件推理重要补充；独立功能oracle和真实可综合/PPA另立，别把所有pass叫functional",
+      "source_snapshots": [
+        {
+          "id": "rtl-vhdlrepo-line",
+          "record_sha256": "5d98446aef72a71fc6a660e88d1e86f14f924d4fb649480154567583e9b11dc6"
+        },
+        {
+          "id": "rtl-vhdlrepo-block",
+          "record_sha256": "99d432123ce00263e14fc8344c8fbf68950c032f68f0d253e3ee8569bf85518b"
+        },
+        {
+          "id": "rtl-vhdlrepo-summary",
+          "record_sha256": "fe33b76a500f3ab803aaf06b7ecfa92a5341465e3a9dfed65e4c3c41f891f48a"
+        },
+        {
+          "id": "rtl-vhdlrepo-smg-module",
+          "record_sha256": "3ee0919e7f05ebe960bf50b4ad09530966a25eb4eed034cc44e6bed947ee91e3"
+        },
+        {
+          "id": "rtl-vhdlrepo-smg-repo",
+          "record_sha256": "81c26dfc584dbd7d656b5a6dc6e64761e4372bb136bfaf894939d7a919e0c94f"
+        }
+      ]
+    },
+    {
+      "task": "有来源门的阶段RTL评价",
+      "catalog_ids": [
+        "rtl-grade-staged",
+        "rtl-grade-ppa"
+      ],
+      "input_boundary": "paper9model×10design/3feedbackattempt；current3smoke/fixture+汇总，非全原包",
+      "label_oracle": "P/C/E/M/F有序门，Yosysinduct+equivstatus；SEY仅C&E，FEpassing才入正确PPA比较",
+      "scoring_boundary": "E2E1/K/SEY、ETS/TTFP只solved与firstfailure只unsolved；aggregateCSV不能重建rawattemptcost",
+      "current_use": "fixture/replay/live与real/stub分开；来源/哈希gate不等全论文复现，65nm/FPGA报告缺失限制明确",
+      "source_snapshots": [
+        {
+          "id": "rtl-grade-staged",
+          "record_sha256": "c9d25a84f79a62998941479c669418ce4a2c9fd176e9680acc2b621844f8ec38"
+        },
+        {
+          "id": "rtl-grade-ppa",
+          "record_sha256": "84f5d802734450de789b8bba57a48b90895feb0f61370029030b954408c2cf1e"
+        }
+      ]
+    },
+    {
+      "task": "复用202题的综合质量评价框架",
+      "catalog_ids": [
+        "rtl-synthagentic-hqi",
+        "rtl-synthagentic-crosslib"
+      ],
+      "input_boundary": "VerilogEval155/RTLLM47，202manifestunique，单次生成5独立attempt非feedbackagent",
+      "label_oracle": "syntax/synth/TB门后HQI，176gold与26nogold分母不同；paperfailfirst与selectedhelperpositiveonly区别保留",
+      "scoring_boundary": "Coverage/Best5Global/ExpectedHQI分开，cost≤1封顶100；ABCmetric单位/nativegeneric与library修订要锁",
+      "current_use": "有意义的评价升级，不新增202独立新题；HFfileindex公开但localrawtimeout不叫empty，无历史错分实证",
+      "source_snapshots": [
+        {
+          "id": "rtl-synthagentic-hqi",
+          "record_sha256": "9745e707a923014c88be39abc0d1c373fd374c0ff7a996497867d77af38229ee"
+        },
+        {
+          "id": "rtl-synthagentic-crosslib",
+          "record_sha256": "9752ebbb48521794e85402e78eb000425b1bdcdcf79678640aaaf1fe405921b7"
+        }
+      ]
+    },
+    {
+      "task": "RTLLM原论文与当前原生helper",
+      "catalog_ids": [
+        "rtl-rtllm",
+        "rtl-rtllm-paper30"
+      ],
+      "input_boundary": "paper30/legacyREADME29/current50不同；50spec/TB/gold/makefile共200完整工件已静态取",
+      "label_oracle": "paper5trial syntaxcount/any5func，currenthelper连续t文件夹n可变、simv存在/Pass正marker；不能混成同一个successoracle",
+      "scoring_boundary": "helpercal_atk加额外0使50题满分50/51；8s线程等待不杀子进程。PPA表原文µm²/µW/WNSns且故意高clock负slack",
+      "current_use": "保留原证据，修正protocol要分版；source弱门不等已证历史错分，独立exitcode/negative/timeout与功能gate必需",
+      "source_snapshots": [
+        {
+          "id": "rtl-rtllm",
+          "record_sha256": "c56f49c4659249db70b41b8d21e2b9ad9a0af603a2df9f17c8b1b37ddc71a8d7"
+        },
+        {
+          "id": "rtl-rtllm-paper30",
+          "record_sha256": "fe04c2557c7bf72b0a89bcfbef885bd6276534f5fa779cc9ff4e4d9f0ff56d92"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,300 @@
+{
+  "status": "task-layer comparison; proposals explicitly excluded from benchmark counts",
+  "as_of": "2026-10-20T00:45:35.781756+00:00",
+  "scope": "同一OPC相关名称可能覆盖不同输入/动作/oracle，不能合并为一个模型优化排行榜；表不证明所有公开OPC基准已穷尽",
+  "items": [
+    {
+      "layer": "前向仿真代理",
+      "catalog_ids": [
+        "litho-lithosim",
+        "litho-lithobench-simulation",
+        "litho-lithodreamer-forward",
+        "litho-lmlitho-forward"
+      ],
+      "input_contract": "mask/source/process→参考resist",
+      "allowed_change": "学习forward predictor，不能改target/参考gold",
+      "independent_oracle": "固定物理模型/原resist，pixel与nm/contour指标分别锁",
+      "cost_boundary": "训练数据生成、训练、I/O、GPU同步推理、测量分开",
+      "valid_claim_and_current_tool_boundary": "预测误差/速度；不是已完成OPC求解或agent交付，现行物理GPU引擎是强baseline",
+      "source_snapshots": [
+        {
+          "id": "litho-lithosim",
+          "record_sha256": "b1ede4eafa1af215d93b945692528c5fa9e98e2849be5bd249c8dda7e4247eef",
+          "primary_sources": "https://www.cse.cuhk.edu.hk/~byu/papers/C300-NeurIPS2025-LithoSim.pdf; https://huggingface.co/datasets/grandiflorum/LithoSim; https://raw.githubusercontent.com/dw-hongquan/LithoSim/07138be9a5ca648b850a282f3ae72a7e27e28537/LICENSE; https://raw.githubusercontent.com/dw-hongquan/LithoSim/07138be9a5ca648b850a282f3ae72a7e27e28537/src/data/components/litho_gen_dataset.py; https://raw.githubusercontent.com/dw-hongquan/LithoSim/07138be9a5ca648b850a282f3ae72a7e27e28537/src/data/litho_gen_datamodule.py; https://raw.githubusercontent.com/dw-hongquan/LithoSim/07138be9a5ca648b850a282f3ae72a7e27e28537/src/models/losses/metrics.py; https://raw.githubusercontent.com/dw-hongquan/LithoSim/07138be9a5ca648b850a282f3ae72a7e27e28537/tool/litho_eval.py"
+        },
+        {
+          "id": "litho-lithobench-simulation",
+          "record_sha256": "25e406856cb412ad124d53b3087c7f5645035f135dfee4602a948d682e035317",
+          "primary_sources": "https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/README.md; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/lithobench/model.py; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/lithobench/evaluate.py; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/lithobench/dataset.py; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/pyilt/evaluation.py"
+        },
+        {
+          "id": "litho-lithodreamer-forward",
+          "record_sha256": "be9beb72c6f75324563ba46c99e57c00834901252880a3520a650ec62832f22a",
+          "primary_sources": "https://proceedings.mlr.press/v306/jiang26ae.html; https://raw.githubusercontent.com/mlresearch/v306/main/assets/jiang26ae/jiang26ae.pdf; https://github.com/7jiangyq/lithodreamer/tree/a491edc3d35fb069450950237214396c6faf3850"
+        },
+        {
+          "id": "litho-lmlitho-forward",
+          "record_sha256": "c3956979ee1650fd24793ad6c5ff181a20eb962933fad8e6aa4cf1403ab256ce",
+          "primary_sources": "https://www.cse.cuhk.edu.hk/~byu/papers/C286-ICCAD2025-LMLitho.pdf; https://github.com/LMLitho/LMLitho/tree/da227637ea1b4db701c63f7ce0bbf1f6a182772e"
+        }
+      ]
+    },
+    {
+      "layer": "固定source的mask/ILT求解",
+      "catalog_ids": [
+        "litho-lithobench",
+        "litho-iccad13",
+        "litho-neuralilt",
+        "litho-maskopt-cell-context"
+      ],
+      "input_contract": "target、固定source/模型及规则",
+      "allowed_change": "输出mask像素/多边形或做学习初始化+refinement",
+      "independent_oracle": "独立fixed EPE点/process/MRC，不能移动gold或评估site",
+      "cost_boundary": "训练/初始化/数值refine/最终验证/shot计数与全流程",
+      "valid_claim_and_current_tool_boundary": "同模型合法mask质量/速度权衡；工具已有OPC/ILT后仍需同条件强solver，不由工具存在判已饱和",
+      "source_snapshots": [
+        {
+          "id": "litho-lithobench",
+          "record_sha256": "3b84961898aaeb33716270a19f6a7e46f5f0f9b97051201f8a830214e89819f3",
+          "primary_sources": "https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/README.md; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/lithobench/model.py; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/lithobench/evaluate.py; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/lithobench/dataset.py; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/pyilt/evaluation.py; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/pycommon/glp.py; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/pylitho/exact.py; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/benchmark/ICCAD2013/M1_test1.glp; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/benchmark/ICCAD2013/M1_test10.glp; https://proceedings.neurips.cc/paper_files/paper/2023/file/604b9fa9e1c16284e6517d923cf9ff20-Paper-Datasets_and_Benchmarks.pdf"
+        },
+        {
+          "id": "litho-iccad13",
+          "record_sha256": "6bf682eaeee7af995f5bff44b00db44d8158ce63244215cbaa1a466e606a9da7",
+          "primary_sources": "https://www.iccad-contest.org/History.html; https://research.ibm.com/publications/iccad-2013-cad-contest-in-mask-optimization-and-benchmark-suite; https://www.cse.cuhk.edu.hk/~byu/papers/C26-DAC2014-MOSAIC.pdf; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/benchmark/ICCAD2013/M1_test1.glp; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/lithobench/evaluate.py"
+        },
+        {
+          "id": "litho-neuralilt",
+          "record_sha256": "14d1cd8d1fd3f9619d66c44fd5b43341fcf93110f5d8585c279fd143fada9070",
+          "primary_sources": "https://raw.githubusercontent.com/cuhk-eda/neural-ilt/47d2aa705d7cabadd3d06aef3560409fb87f81b8/README.md; https://raw.githubusercontent.com/cuhk-eda/neural-ilt/47d2aa705d7cabadd3d06aef3560409fb87f81b8/LICENSE; https://raw.githubusercontent.com/cuhk-eda/neural-ilt/47d2aa705d7cabadd3d06aef3560409fb87f81b8/eval.py; https://raw.githubusercontent.com/cuhk-eda/neural-ilt/47d2aa705d7cabadd3d06aef3560409fb87f81b8/ilt_loss_layer.py"
+        },
+        {
+          "id": "litho-maskopt-cell-context",
+          "record_sha256": "3460fc72f9230f026ffcb68082fbdfbf79dbc1f59bc9d7398b0cf40ba5a1aed7",
+          "primary_sources": "https://arxiv.org/pdf/2512.20655; https://arxiv.org/abs/2512.20655"
+        }
+      ]
+    },
+    {
+      "layer": "直接掩模RL策略",
+      "catalog_ids": [
+        "litho-rlopc"
+      ],
+      "input_contract": "via邻域、currentmask、SRAF和物理反馈",
+      "allowed_change": "12edge/direction单步1nm动作+在线更新",
+      "independent_oracle": "原paperedge中心EPE+PVB；公开独立验证/MRC尚待取得",
+      "cost_boundary": "真实5.46s/step vs扣I/O1.25、10/20step、所有learning与选best时间分开",
+      "valid_claim_and_current_tool_boundary": "有限动作mask优化，不是通用Calibre操作/报错诊断agent；历史版本结果不能当2026软件排名",
+      "source_snapshots": [
+        {
+          "id": "litho-rlopc",
+          "record_sha256": "9d831bb4bdc131467a501ca03215d5e25c8e735ab197878184fa33d0a5ca6eb2",
+          "primary_sources": "https://www.cse.cuhk.edu.hk/~byu/papers/J97-TCAD2024-RL-OPC.pdf"
+        }
+      ]
+    },
+    {
+      "layer": "recipe搜索与规则提炼",
+      "catalog_ids": [
+        "litho-opc-engineer-assistant"
+      ],
+      "input_contract": "EPE/fragment点与形状；RL位移标签→LLM几何features",
+      "allowed_change": "PPO改点±40nm；MLLM标features/decisiontree→9类位移recipe",
+      "independent_oracle": "最终测点固定且与被优化recipe点隔离需单独证明；featureF1与printquality分开",
+      "cost_boundary": "RL约3h与recipe应用4/6s不能混，LLM标注/人工提示/tree生成成本未全报",
+      "valid_claim_and_current_tool_boundary": "这篇是具体recipe方法案例；实验open-source engine，下游Tcl示例非商业引擎实测。Proteus原生RPT/非LLM参数搜索是强baseline；CalibreWORKbench应用编排、MEMOPC阵列专用flow分别匹配任务，不泛化为通用recipeoptimizer",
+      "source_snapshots": [
+        {
+          "id": "litho-opc-engineer-assistant",
+          "record_sha256": "95a3ea7221a002c02644dc87058b020f5a0fb40d7c69e8df356f12f42e322026",
+          "primary_sources": "https://www.cse.cuhk.edu.hk/~byu/papers/C251-AAAI2025-OPCAgent.pdf; https://ojs.aaai.org/index.php/AAAI/article/view/34479; https://arxiv.org/abs/2408.12775"
+        }
+      ]
+    },
+    {
+      "layer": "源与掩模联合优化",
+      "catalog_ids": [
+        "litho-bismo",
+        "litho-torchlitho"
+      ],
+      "input_contract": "source自由度/扫描器约束+mask+模型",
+      "allowed_change": "同时优化source与mask",
+      "independent_oracle": "真实source约束/固定process与MRC，forward测试不等联优成功",
+      "cost_boundary": "联合迭代+模型/数据校准与最终验证",
+      "valid_claim_and_current_tool_boundary": "SMO与固定sourceOPC分轨；CalibrepxSMO/ProteusSMO已有，算法价值依赖同条件Pareto改进",
+      "source_snapshots": [
+        {
+          "id": "litho-bismo",
+          "record_sha256": "059d4591b4b1875c01bdd9953465fab07dc6483c1f772d4c6f96e4b1025a2397",
+          "primary_sources": "https://raw.githubusercontent.com/TorchOPC/Bilevel-SMO/14464922874a96395927c0fe16cbfbf412514b15/README.md; https://raw.githubusercontent.com/TorchOPC/Bilevel-SMO/14464922874a96395927c0fe16cbfbf412514b15/LICENSE; https://raw.githubusercontent.com/TorchOPC/Bilevel-SMO/14464922874a96395927c0fe16cbfbf412514b15/src/problems/mo.py; https://raw.githubusercontent.com/TorchOPC/Bilevel-SMO/14464922874a96395927c0fe16cbfbf412514b15/src/problems/so.py; https://raw.githubusercontent.com/TorchOPC/Bilevel-SMO/14464922874a96395927c0fe16cbfbf412514b15/src/models/mo_module.py; https://raw.githubusercontent.com/TorchOPC/Bilevel-SMO/14464922874a96395927c0fe16cbfbf412514b15/src/models/so_module.py"
+        },
+        {
+          "id": "litho-torchlitho",
+          "record_sha256": "c72b3c0b05e8a1fb7ccb5b45ea532874a932c00acf1da0dc49bb80a059842083",
+          "primary_sources": "https://github.com/TorchOPC/TorchLitho; https://arxiv.org/abs/2409.15306; https://github.com/OpenOPC/TorchLitho-Lite"
+        }
+      ]
+    },
+    {
+      "layer": "写版fracture/shot成本",
+      "catalog_ids": [
+        "litho-fracture-known-optimal",
+        "litho-fracture-real-ilt"
+      ],
+      "input_contract": "已校正mask多边形、写版/shot约束",
+      "allowed_change": "分解为shot/stripe，保持几何表示",
+      "independent_oracle": "mask几何保真/最优或界；waferEPE不是同一个原score",
+      "cost_boundary": "fracture runtime/shotcount/可写性与前后mask一致",
+      "valid_claim_and_current_tool_boundary": "下游制造成本优化，不把shot减少与OPC印刷误差改善混成同榜",
+      "source_snapshots": [
+        {
+          "id": "litho-fracture-known-optimal",
+          "record_sha256": "19486cfe3d33419c48823644d8eb023e33bdb1d22ea53970a573063c0fc9d247",
+          "primary_sources": "https://nanocad.ee.ucla.edu/wp-content/papercite-data/pdf/j44.pdf; https://vlsicad.ucsd.edu/Publications/Conferences/322/c322.pdf"
+        },
+        {
+          "id": "litho-fracture-real-ilt",
+          "record_sha256": "9fd41f842b83eae44452cb9c8e1776ee9a55055ea2e2251f0fd2a20b6311a893",
+          "primary_sources": "https://nanocad.ee.ucla.edu/wp-content/papercite-data/pdf/j44.pdf; https://vlsicad.ucsd.edu/Publications/Conferences/322/c322.pdf"
+        }
+      ]
+    },
+    {
+      "layer": "工业GPU+AI与wafer验证",
+      "catalog_ids": [
+        "litho-culitho-industrial"
+      ],
+      "input_contract": "校准model/真实版图/受限商业环境",
+      "allowed_change": "GPU原语与AI初始化+原生物理优化",
+      "independent_oracle": "MRC、模拟EPE与waferSEM/CD/processwindow分层",
+      "cost_boundary": "34/57与throughfocus14/24、训练排除/设施cost模型逐项锁",
+      "valid_claim_and_current_tool_boundary": "有工业实证但输入未开放；该paper是Proteus路径，2026Calibre公告另来源，不把二者speedup相加",
+      "source_snapshots": [
+        {
+          "id": "litho-culitho-industrial",
+          "record_sha256": "3155aeeb57bfcb0791387e0fdf89e95a22214785af0b21eb1987b0bcf0b78108",
+          "primary_sources": "https://arxiv.org/abs/2602.15036; https://arxiv.org/pdf/2602.15036"
+        }
+      ]
+    },
+    {
+      "layer": "完整工具workflow agent（建议协议）",
+      "catalog_ids": [],
+      "input_contract": "真实工程文件/文档/交付要求/受控故障，tools与checker受保护",
+      "allowed_change": "选择工具、改合法recipe、读日志诊断/恢复并交付",
+      "independent_oracle": "隐藏布局/独立固定测点/物理模型/MRC与报告一致性",
+      "cost_boundary": "全部模型/工具/license/失败重试/人工介入+最终独立验证",
+      "valid_claim_and_current_tool_boundary": "本研究建议尚未建立/执行，不能计公开benchmark；商业工具的编排功能已有，agent仍须比native flow/专家脚本",
+      "source_snapshots": []
+    },
+    {
+      "layer": "套刻偏差标定（相邻制造任务）",
+      "catalog_ids": [
+        "fab-euv-ovl-syn-v11"
+      ],
+      "input_contract": "wafer/field坐标、lot/wafer时间与合成overlay nm；非mask/source输入",
+      "allowed_change": "拟合22参数/非线性残余/漂移预测，不是移动OPC边或操作scanner",
+      "independent_oracle": "固定heldoutwafer/lot，原生OLS/WLS与已知生成模型为baseline；需实测验证才外推产线",
+      "cost_boundary": "训练/数据生成/标定/控制执行分开，模拟数据不等实测效果",
+      "valid_claim_and_current_tool_boundary": "v1.0官方obsolete转v1.1是版本替代，不是overlay问题已被软件解决；不当公开OPC agent榜",
+      "source_snapshots": [
+        {
+          "id": "fab-euv-ovl-syn-v11",
+          "record_sha256": "2cca9d028983b5e0d09eae406325c294ef062696c14ab41fcb75d2f31b926150",
+          "primary_sources": "https://doi.org/10.5281/zenodo.23349771; https://zenodo.org/api/records/23349771; https://doi.org/10.1063/5.0346054; https://zenodo.org/api/records/19725620"
+        }
+      ]
+    },
+    {
+      "layer": "多阶段latent逆向规划",
+      "catalog_ids": [
+        "litho-lithodreamer-inverse"
+      ],
+      "input_contract": "layout/process+目标ADI；28nm目标改resist，目标信息权限与forward不同",
+      "allowed_change": "冻结模型，只优化stagewise latent ct并经learned dynamics生成mask/resist/ADI",
+      "independent_oracle": "officialgaugeEPE是预测对GT轮廓且无交点排除；需独立物理复验/validgauge比例与真实工艺约束",
+      "cost_boundary": "训练、outerplanningloops、模型推理与最终独立forward/制造验证全计",
+      "valid_claim_and_current_tool_boundary": "worldmodel policy不是LLM工具agent；latentfeasible不等scanner可执行，对Calibre原生优化无直接同条件替代证据",
+      "source_snapshots": [
+        {
+          "id": "litho-lithodreamer-inverse",
+          "record_sha256": "9ddd50ea74c4b81308e06c12bf14c749b3cdf582bd330f8de266ec02d15166c2",
+          "primary_sources": "https://proceedings.mlr.press/v306/jiang26ae.html; https://raw.githubusercontent.com/mlresearch/v306/main/assets/jiang26ae/jiang26ae.pdf; https://github.com/7jiangyq/lithodreamer/tree/a491edc3d35fb069450950237214396c6faf3850"
+        }
+      ]
+    },
+    {
+      "layer": "代理引导mask训练+原工具复验",
+      "catalog_ids": [
+        "litho-lmlitho-benchopc"
+      ],
+      "input_contract": "BenchOPC28nm3000train/25test layout+fixedsource",
+      "allowed_change": "冻结learnedsimulator指导DAMOUNet生成mask，再送commercialtool重仿",
+      "independent_oracle": "L2/PVB nm²、EPE nm，±3%dose/±40nmdefocus；非MaskOpt±2%protocol",
+      "cost_boundary": "训练/代理推理/商业最终验证和原OPCbaseline budget分别报",
+      "valid_claim_and_current_tool_boundary": "同质量加速与代理偏差需最终gate；commercial可生成gold不等工具编排agent已解决",
+      "source_snapshots": [
+        {
+          "id": "litho-lmlitho-benchopc",
+          "record_sha256": "2bb597835fff830a95a4a5b306a50001b664fda46f8fccc74a5b9e22d50e41d3",
+          "primary_sources": "https://www.cse.cuhk.edu.hk/~byu/papers/C286-ICCAD2025-LMLitho.pdf; https://github.com/LMLitho/LMLitho/tree/da227637ea1b4db701c63f7ce0bbf1f6a182772e"
+        }
+      ]
+    },
+    {
+      "layer": "多stage规则视觉检测",
+      "catalog_ids": [
+        "litho-unitho-generation",
+        "litho-unitho-rule-detection"
+      ],
+      "input_contract": "layout/mask/contour与对应commerciallabel，负例跨task共享",
+      "allowed_change": "生成图或检测bbox，不能改规则gold/waive未知违规",
+      "independent_oracle": "图像mPA/mIoU/edgeF1 vsbboxAP/F1/#FA分开，最终原ruledeck复验",
+      "cost_boundary": "模型RTms不含上游commercialsimulation与最终签核时间",
+      "valid_claim_and_current_tool_boundary": "视觉marker筛查不能替代完整DRC/MRC/LRC签核，paper检测器不等ruledeck编程或通用agent",
+      "source_snapshots": [
+        {
+          "id": "litho-unitho-generation",
+          "record_sha256": "2fbcda7485d06b88a6708dba68349a5950b7c4fb21b72f4714b3f855e2161cda",
+          "primary_sources": "https://arxiv.org/pdf/2511.10255; https://arxiv.org/abs/2511.10255"
+        },
+        {
+          "id": "litho-unitho-rule-detection",
+          "record_sha256": "025946d31aef22d55ffd733bc78a7992eadaa30a706acf91f4885b7536245ace",
+          "primary_sources": "https://arxiv.org/pdf/2511.10255; https://arxiv.org/abs/2511.10255"
+        }
+      ]
+    },
+    {
+      "layer": "版图clip热点发现/二分类",
+      "catalog_ids": [
+        "litho-iccad12-hsd",
+        "litho-openhsd",
+        "litho-iccad19-tnsb-htc"
+      ],
+      "input_contract": "原layout/clip、工艺标记；HS/NHS分布和true-new/hard-negative范围固定",
+      "allowed_change": "预测HS分数/窗口，不直接生成mask或改规则gold",
+      "independent_oracle": "HSDaccuracy=HSrecall；rawExtra/FA、FA/NHS和普通classaccuracy分开；定位bboxAP另轨",
+      "cost_boundary": "data生成/特征/pretrain/finetune/全测试runtime与裁剪I/O分别报",
+      "valid_claim_and_current_tool_boundary": "2012部分版本过易/新curation与2019压力测试不等整体热点任务被软件解决；跨design许可与train/test身份须锁",
+      "source_snapshots": [
+        {
+          "id": "litho-iccad12-hsd",
+          "record_sha256": "37100729f7599869eb6abf120d6e8596068b602c090eeda48cbce4924b579103",
+          "primary_sources": "https://www.cerc.utexas.edu/utda/publications/C156.pdf; https://personal.utdallas.edu/~gxm112130/papers/iccad19.pdf; https://github.com/gauravr1991/ICCAD2019Benchmarks"
+        },
+        {
+          "id": "litho-openhsd",
+          "record_sha256": "e1e8c3935bbb3551ad41f454e16e3bdff70da60d0927d76abd79e95e0647b491",
+          "primary_sources": "https://github.com/yxgnahz/OpenHSDBench/tree/2886354292c85fb87d8d3f76e5d3276f531c7db1; https://www.cse.cuhk.edu.hk/~byu/papers/J192-TCAD2026-CAGE-HSD.pdf; https://doi.org/10.1109/TCAD.2026.3660602"
+        },
+        {
+          "id": "litho-iccad19-tnsb-htc",
+          "record_sha256": "8fc2f5444ddb740f494eed11d505ab326a347e9b4655a8e01e3295272dfc4e9c",
+          "primary_sources": "https://personal.utdallas.edu/~gxm112130/papers/iccad19.pdf; https://github.com/gauravr1991/ICCAD2019Benchmarks/tree/b99a9c34b9794bf8b0fd34103d5a6fe8eb2185f5"
+        }
+      ]
+    }
+  ],
+  "proposal": "opc-agentic-protocol-proposal.json"
+}

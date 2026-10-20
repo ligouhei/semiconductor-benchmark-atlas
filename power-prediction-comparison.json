@@ -1,0 +1,139 @@
+{
+  "as_of": "2026-10-20T00:45:36.260068+00:00",
+  "status": "task and input/label comparison, not a new benchmark or ranking",
+  "scope": "功耗标签、模型可见信息、测试对象与指标空间必须一致才能比较。商业工具标签、真实板测和代理引导搜索分别列示。",
+  "items": [
+    {
+      "task": "纯RTL早期功耗",
+      "catalog_ids": [
+        "circuitnet3-power-rtl"
+      ],
+      "input_boundary": "RTL与固定工艺/约束；不能额外喂netlist/报告",
+      "label_oracle": "单45nm、vectorless PrimePower；活动设置/频率文字与script仍待对齐",
+      "scoring_boundary": "PCC/R²/MAPE定义/聚合须锁；仅总功耗误差不是优化收益",
+      "current_use": "适合早期proxy；受限固定分布、非实片/真实工作负载功耗",
+      "source_snapshots": [
+        {
+          "id": "circuitnet3-power-rtl",
+          "record_sha256": "bf6ec0e09f5627b595b358acdf28215f6ff26d9e312ae5ddb2f3e0b1ead1dec6"
+        }
+      ]
+    },
+    {
+      "task": "活动率辅助ASIC功耗",
+      "catalog_ids": [
+        "rtl-masterrtl-power",
+        "rtl-trace-power-dataset"
+      ],
+      "input_boundary": "RTL/SOG加EDA初始toggle或VCD，实际工具费用计入",
+      "label_oracle": "MasterRTL DC/Nangate45；TRACE PTPX/TSMC28SS，标签条件不同",
+      "scoring_boundary": "不可与纯RTL合榜；TRACE暂无已取得官方统一scorer，531配置/1045TB报告不同分母",
+      "current_use": "MasterRTL已官方停止维护并推荐RTL-Timer；不是任务饱和。TRACE需数据/权利/协议补齐",
+      "source_snapshots": [
+        {
+          "id": "rtl-masterrtl-power",
+          "record_sha256": "e1380671f09e51fd3e7db03c0392430d008bdbe99449bb17157e0b4bf9143a5a"
+        },
+        {
+          "id": "rtl-trace-power-dataset",
+          "record_sha256": "75ded03c33af5a1849fea57d3b4c332d94562ebd68c182e23411ac4dc78d03ab"
+        }
+      ]
+    },
+    {
+      "task": "多模态PPA与局部slack",
+      "catalog_ids": [
+        "rtl-toportl-design-ppa",
+        "rtl-toportl-register-slack"
+      ],
+      "input_boundary": "CDFG/LLMsummary与cone表示，生成特征/头训练计成本",
+      "label_oracle": "DC/PrimeTime，115源设计7576cones，源family划分需核",
+      "scoring_boundary": "Topo默认signedloglabel、MAPEcap100、RRSE非标准denom；局部和全设计分开",
+      "current_use": "是表示学习任务；跨PDK训练相应head不等zero-shot迁移",
+      "source_snapshots": [
+        {
+          "id": "rtl-toportl-design-ppa",
+          "record_sha256": "92b9246fbb6f177bc49fa91eeb2a869f2e083a41abdce30daa4d350d88f94677"
+        },
+        {
+          "id": "rtl-toportl-register-slack",
+          "record_sha256": "79abe6c16c8260833b702e008d2523ce12f4a3c6cdcb7cac0db86d583a22ab56"
+        }
+      ]
+    },
+    {
+      "task": "HLS后FPGA板测功耗",
+      "catalog_ids": [
+        "hls-powergear-prediction"
+      ],
+      "input_boundary": "HLS IR/FSMD/activity/meta，非只C或RTL",
+      "label_oracle": "ZCU102100MHz、九应用4580配置板测差分；1negative保留并待溯源",
+      "scoring_boundary": "leave-application-out与withintrain ensemble分开，µW/mW换算，MAPE与zero/负值分母锁",
+      "current_use": "历史真实测量资源仍有价值，需现代工具/器件/负载验证；不能据老版本判问题已解",
+      "source_snapshots": [
+        {
+          "id": "hls-powergear-prediction",
+          "record_sha256": "da513467df9ee918b91b5e219ce3273d58d11c6a87c72b693a4a9add8e796235"
+        }
+      ]
+    },
+    {
+      "task": "代理引导搜索",
+      "catalog_ids": [
+        "hls-powergear-dse"
+      ],
+      "input_boundary": "候选pragma/HLS配置与预测power/HLSlatency",
+      "label_oracle": "终态实测/真实工具独立重验，不能只信surrogate最优",
+      "scoring_boundary": "固定采样与全工具预算；Pareto/可行率/实际walltime，MAPE不是搜索QoR",
+      "current_use": "原case study非统一完整工程agentbench；应对强采样/现行工具optimizer比较",
+      "source_snapshots": [
+        {
+          "id": "hls-powergear-dse",
+          "record_sha256": "223856c75a4ccae0650d1ac8b2f5dc1e42f8acbbee13169af92fd7b1691db1b3"
+        }
+      ]
+    },
+    {
+      "task": "表示检索（不属于功耗优化）",
+      "catalog_ids": [
+        "rtl-toportl-retrieval"
+      ],
+      "input_boundary": "语言query与候选电路表示，1positive+L同splitnegatives",
+      "label_oracle": "来源pair标签，非功能等价证明",
+      "scoring_boundary": "pooled pairclassificationAUC不等全库MRR/Recall@K，不混PPA预测总分",
+      "current_use": "属于前端检索辅助；最终复用电路仍需功能/约束检查",
+      "source_snapshots": [
+        {
+          "id": "rtl-toportl-retrieval",
+          "record_sha256": "b4a3590b6b241e307ab25c9622f11f110ba34e64f37d34a96a2e693f3fc8d82e"
+        }
+      ]
+    },
+    {
+      "task": "原生CG之上的工作负载RTL优化",
+      "catalog_ids": [
+        "rtl-autogate-small",
+        "rtl-autogate-large",
+        "rtl-autogate-private"
+      ],
+      "input_boundary": "已有RTL与训练负载toggle/层次/cluster提示，不是纯spec生成；小题合成TB与大IP/私有13workload分开",
+      "label_oracle": "商业native自动CG已开启，gatelevelSAIF/PrimePower+formal+timing；不是仅仿真功能coverage",
+      "scoring_boundary": "dynamic/total/area/CGefficiency分开，NVDLA W1→W2与BlackParrotDhrystone范围不同",
+      "current_use": "原生工具已有CG不代表所有codingstyle已最优；自重实现POET/ROVER、全部token/工具候选成本和工艺闭源限制明示",
+      "source_snapshots": [
+        {
+          "id": "rtl-autogate-small",
+          "record_sha256": "e1cb208f0cc7237bff193c599cdfb683ab94f6cd658eb8878f5c307c60c84e01"
+        },
+        {
+          "id": "rtl-autogate-large",
+          "record_sha256": "3ff0aaf11a1b91a85d00fc6d3c4f188e5b44f1ecee86d7a2b4d83fdc51c1a7ba"
+        },
+        {
+          "id": "rtl-autogate-private",
+          "record_sha256": "47eea8d88a2e9b19f0c5517981556f1b9908bf0c3adb8f1d883f350af56f28fc"
+        }
+      ]
+    }
+  ]
+}

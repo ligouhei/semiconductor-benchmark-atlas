@@ -1,0 +1,275 @@
+{
+  "as_of": "2026-10-20T00:45:35.953863+00:00",
+  "status": "task and input/label comparison, not a new benchmark or ranking",
+  "scope": "时序任务按输入权限、计算阶段、目标/单位/有效对象和独立oracle分层。RTL预测、布线前预测、弧延迟求解、给定参考弧传播、模型提取与工程优化不能用同一个相关性或速度榜替代。",
+  "items": [
+    {
+      "task": "RTL来源的早期时序预测",
+      "catalog_ids": [
+        "rtl-masterrtl-timing-area",
+        "rtl-rtltimer-prediction",
+        "rtl-rtldistil",
+        "circuitnet3-timing",
+        "rtl-toportl-register-slack"
+      ],
+      "input_boundary": "RTL/SOG/BOG/cones/LLMsummary输入不同；有些还要BOG PrimeTime或teacher离线特征",
+      "label_oracle": "标签为synthetic/postlayout AT/WNS/TNS或名为slack的delay，需追parser",
+      "scoring_boundary": "MasterRTL当前单例；RTLTimer21/33/34不同分母，N45 8659原始/15863增强，Toposignedlog与非标准RRSE",
+      "current_use": "工艺/目标/clock/teacher权限/完整工具成本一致才比较；PCC不等签核，成熟早期综合是强baseline",
+      "source_snapshots": [
+        {
+          "id": "rtl-masterrtl-timing-area",
+          "record_sha256": "028826b5a8ade84ad01597cdb8e9204f2778bc7c59d030c9a2bf597beea2572e"
+        },
+        {
+          "id": "rtl-rtltimer-prediction",
+          "record_sha256": "6988e0836826abc8ebe62bcd228be57b81d0ab36f5e9b2876ecc1ef881cc36b1"
+        },
+        {
+          "id": "rtl-rtldistil",
+          "record_sha256": "49e3fbb9ec3754ebd7e63f6752e036be827899cd15d0f4b89b2f19fa24a7e9c2"
+        },
+        {
+          "id": "circuitnet3-timing",
+          "record_sha256": "5371d7586aaf3a5e6f71a4b837411450deedde2cafa4f62cd06b9e419592885f"
+        },
+        {
+          "id": "rtl-toportl-register-slack",
+          "record_sha256": "79abe6c16c8260833b702e008d2523ce12f4a3c6cdcb7cac0db86d583a22ab56"
+        }
+      ]
+    },
+    {
+      "task": "预测指导成熟综合工具",
+      "catalog_ids": [
+        "rtl-rtltimer-guided-synthesis"
+      ],
+      "input_boundary": "预测critical ranking→group_path/retime控制",
+      "label_oracle": "用真正综合/PnR结果和功能/physical gate评估，非预测值优化",
+      "scoring_boundary": "Avg1与失败回退default的Avg2分开，dualflow/选择预算计入",
+      "current_use": "是有价值工程编排方向，但一个TCL示例非完整通用agentbench；原生选项搜索/专家同预算",
+      "source_snapshots": [
+        {
+          "id": "rtl-rtltimer-guided-synthesis",
+          "record_sha256": "c39e1f890b1fcea88abcb7c481d93211861b72821ab5e2bd07896bc8bbd88608"
+        }
+      ]
+    },
+    {
+      "task": "布局后、布线前GNN代理",
+      "catalog_ids": [
+        "pd-timingpredict",
+        "pd-preroutgnn"
+      ],
+      "input_boundary": "放置坐标/拓扑/lib-LUT/pincap与边界条件，非RTL-only",
+      "label_oracle": "AT四EL/RF通道、slew/netdelay/celldelay与slack须区分",
+      "scoring_boundary": "原反序R²/新标准uf与flatten不合榜；currentPreRout按testAT选best，AE按test重构loss选版；独立holdout另设",
+      "current_use": "21小图单PDK/AES家族跨split；图内有标签不自动泄漏，输入白名单/选择协议/invalidmask必须核",
+      "source_snapshots": [
+        {
+          "id": "pd-timingpredict",
+          "record_sha256": "cb1cb78f99f2de0ab9c4d68fc9e8edc27c30c223176fa4b8135464cecb73900a"
+        },
+        {
+          "id": "pd-preroutgnn",
+          "record_sha256": "40d45bf4f5966a8fc754b2e12397cde5f0e0256163ec1023ed18c80e0f0cb3cf"
+        }
+      ]
+    },
+    {
+      "task": "完整STA工具数值回归",
+      "catalog_ids": [
+        "pd-opentimer-regression",
+        "pd-opensta-public-regression"
+      ],
+      "input_boundary": "Verilog/Liberty/SPEF/SDC/ops与goldenlog",
+      "label_oracle": "OpenTimer数字容限/字段抽取、OpenSTA字面logdiff是各自接口协议",
+      "scoring_boundary": "设计数/测试数分开，goldNaN/sentinel与save_ok不能充完整signoff",
+      "current_use": "成熟tool是原生baseline和执行器，public regression通过不是全工业MCMM准确性或优化PPA成绩",
+      "source_snapshots": [
+        {
+          "id": "pd-opentimer-regression",
+          "record_sha256": "07b136a507bd528468f43bbab24c304b6263a32f9683d32d4348984d192f95e9"
+        },
+        {
+          "id": "pd-opensta-public-regression",
+          "record_sha256": "974606ed8a3a732ab1874d74077305ad845e1b68cc0c867afc00b17215be4c9a"
+        }
+      ]
+    },
+    {
+      "task": "统计/增量时序原赛",
+      "catalog_ids": [
+        "pd-tau13-ssta",
+        "pd-tau15-incremental"
+      ],
+      "input_boundary": "2013变异库MCgolden；2015给定ops/clock/earlylate/CPPR查询",
+      "label_oracle": "不对称乐观误差与path/pin准确性、runtime/memory联合",
+      "scoring_boundary": "2013 20finalcases，2015 score A(70+20RF+10MF)，归一化依参赛集合",
+      "current_use": "旧协议仍可作算法参考，但现代LVF/MCMM/多时钟latch扩展是新协议；给定ops不等自主timing closure",
+      "source_snapshots": [
+        {
+          "id": "pd-tau13-ssta",
+          "record_sha256": "2c50bb56f3808ea1cc960fe63fde5f1aa0b0394903b3ca97693ae77cec687673"
+        },
+        {
+          "id": "pd-tau15-incremental",
+          "record_sha256": "82bc2863d31077f27eb1e1fb290686255ae2bf262d60d1a5f2915978971f73d0"
+        }
+      ]
+    },
+    {
+      "task": "timing macro模型提取与使用",
+      "catalog_ids": [
+        "pd-tau16-macro",
+        "pd-tau17-macro"
+      ],
+      "input_boundary": "给设计与多输入slew/arrival/outputload上下文，输出抽象timing model",
+      "label_oracle": "乐观slack误差×2，2016分段与2017线性accuracy不同",
+      "scoring_boundary": "2016 A(70+20RF+10MF) vs2017 A(40+30RF+30MF)，extract/use成本范围不同",
+      "current_use": "模型压缩/提取非布局预测，最终scorer聚合/数据访问缺口保留；软件已有ETM不代表所有压缩/上下文精度已饱和",
+      "source_snapshots": [
+        {
+          "id": "pd-tau16-macro",
+          "record_sha256": "f3d7f491ac458bd226167e23ff3157bdee62942c91bca953f51829886a365955"
+        },
+        {
+          "id": "pd-tau17-macro",
+          "record_sha256": "8bde3715e6b12d5fa7b14ecd089f62c02abc4e7c6014fade6339ac5f011978f1"
+        }
+      ]
+    },
+    {
+      "task": "stage delay与全图GBA",
+      "catalog_ids": [
+        "pd-gcstimer-stage",
+        "pd-gcstimer-gba"
+      ],
+      "input_boundary": "同4EPFL/ASAP7-CCS；stage借PT driver slew，GBA自行传播",
+      "label_oracle": "stage比HSPICE；AT比PrimeTime，不是同golden空间",
+      "scoring_boundary": "<.5ps置零及未截断误差分别报，CPU/GPU/线程/OS成本固定",
+      "current_use": "gold-assisted stage结果不能外推全图独立签核更准；fullgraph与局部delay分别评估",
+      "source_snapshots": [
+        {
+          "id": "pd-gcstimer-stage",
+          "record_sha256": "5793b9e3041317a1049c61676593c8e7c3a0ff79db2ddb76e24f8612364f7507"
+        },
+        {
+          "id": "pd-gcstimer-gba",
+          "record_sha256": "9977eac0dee7804844ac9db1da94022b49b3761d215b28cc1cffe1fae0214585"
+        }
+      ]
+    },
+    {
+      "task": "独立计算cell/net delay",
+      "catalog_ids": [
+        "pd-heterosta-delay"
+      ],
+      "input_boundary": "Liberty/netlist/RC，NLDM+Arnoldi等，不预给PT SDF",
+      "label_oracle": "arcdelay R²/MAEps与runtime，PT是指定tooloracle",
+      "scoring_boundary": "不同CCS/NLDM/mode不能混合；产品功能表非独立覆盖证据",
+      "current_use": "同约束/电容/driver等条件下强nativeSTA比较；完整MCMM/OCV/clock/例外另验",
+      "source_snapshots": [
+        {
+          "id": "pd-heterosta-delay",
+          "record_sha256": "69f738f4c9e472de5e4da3256bdd1f46e84a9bfe5665a8d6f0782f00382d9ca1"
+        }
+      ]
+    },
+    {
+      "task": "参考arc初始化的传播/例外支持",
+      "catalog_ids": [
+        "pd-insta-propagation",
+        "pd-heterosta-exceptions"
+      ],
+      "input_boundary": "已有PT arc/SDF或CSV与RAT/clock/例外，不是零起点STA",
+      "label_oracle": "INSTA plotPearson/refSP匹配与优化WNS/TNS路径不同；Hetero例外R²是指定adapter对比",
+      "scoring_boundary": "输入支持集/simple-complex exception、topK/diff/CPPR/有效EP分母/原始vs后处理分开",
+      "current_use": "可比较传播加速，但reference导出/初始化/更新/设备同步全部计成本；不能和fromRTL模型直接比相关性",
+      "source_snapshots": [
+        {
+          "id": "pd-insta-propagation",
+          "record_sha256": "0d9e193c8ade3bc44479ced79fe08fd57762799a855fccfa97111ba3d5bff95d"
+        },
+        {
+          "id": "pd-heterosta-exceptions",
+          "record_sha256": "e21b94c0fb62cef9e4babf4acc31e5ee78364947772fee138cbd0cfdff2e0d55"
+        }
+      ]
+    },
+    {
+      "task": "结构更新的时序工作负载",
+      "catalog_ids": [
+        "pd-incregpusta-evaluation"
+      ],
+      "input_boundary": "TAU派生graph插buffer，top1000一次/10×100/随机1–100k修改",
+      "label_oracle": "total/core/update阶段runtime及真实greedyflow QoR分开",
+      "scoring_boundary": "更新比例/重复次数/参考误差与memory约束需锁，三次平均不等置信区间",
+      "current_use": "是incrementalSTA性能case，timer更快不直接证明timingclosure更优或工业signoff等价",
+      "source_snapshots": [
+        {
+          "id": "pd-incregpusta-evaluation",
+          "record_sha256": "09c475709382b806a4fd432da74c8a412f73c584dba19258d754e745ccece418"
+        }
+      ]
+    },
+    {
+      "task": "STA嵌入布局布线优化",
+      "catalog_ids": [
+        "pd-heterosta-flow"
+      ],
+      "input_boundary": "同placement/routing flow只替timer/API，固定input/RC/SDC",
+      "label_oracle": "最终同层WNS/TNS/route/合法性与wholeflow成本",
+      "scoring_boundary": "不能用纯propagation speedup替整flow QoR/latency；trace级异常状态需保留",
+      "current_use": "适合工具集成/工程代理研究，baseline为原生flow+同预算商业/开放timer，终态独立签核",
+      "source_snapshots": [
+        {
+          "id": "pd-heterosta-flow",
+          "record_sha256": "2964f99c82e873d4e64648a1cfd18c79c964d08580aac5918973d0535ab83093"
+        }
+      ]
+    },
+    {
+      "task": "Warp-STAR原生数值与GP集成",
+      "catalog_ids": [
+        "pd-warpstar-engine",
+        "pd-warpstar-placement"
+      ],
+      "input_boundary": "9contest设计/RC/LUT与GPU并行，不是learned预测；GP每轮STA对CPU每15轮不同反馈密度",
+      "label_oracle": "相同物理/时序语义的OT/GPU-Timer与最终TNS，工业gold精度未充分取得",
+      "scoring_boundary": "STA ms/GP秒/TNS10^5ns；梯度116%总耗时=16%额外开销；1.74xGP与2.36xSTA分开",
+      "current_use": "方法实验非新独立数据集/通用agent；INSTA闭源引用而非同机复现，GP质量与runtime必须一起比较",
+      "source_snapshots": [
+        {
+          "id": "pd-warpstar-engine",
+          "record_sha256": "6b227bf706dd64d189fac5733aab2b229a223801fb3cdabd12271559b03d81ec"
+        },
+        {
+          "id": "pd-warpstar-placement",
+          "record_sha256": "c7f5a6a0e0c2b86769f2cd730352017bda6982cb3955ae427a4da46e597d4777"
+        }
+      ]
+    },
+    {
+      "task": "PBA-rGAT工业协议与合成演示",
+      "catalog_ids": [
+        "pd-pbargat-industrial",
+        "pd-pbargat-synthetic"
+      ],
+      "input_boundary": "已取得商业GBA slew/delay/CCScap等；5private训练3private测试不是RTL-only，public随机DAG另轨",
+      "label_oracle": "工业PBA标签私有；合成Elmore累积AT标签及全节点sum不是实路径arc oracle",
+      "scoring_boundary": "paper pathMAE ps/arcR²与currentdemo原始数值单位分开；case标签不当真实8IP，默认3epochs与README30核config",
+      "current_use": "公开完整代码/15tree不等工业题公开；公式baseline和独立路径验收必需，源码边界不推历史论文分数已错",
+      "source_snapshots": [
+        {
+          "id": "pd-pbargat-industrial",
+          "record_sha256": "4b7c15344e585619abcc5224b3ff4543b6b8678d3171ce977f8cdc923843310b"
+        },
+        {
+          "id": "pd-pbargat-synthetic",
+          "record_sha256": "8ecfefcacaa2922a3c44af44c2a68db4c76a2977741754b3077e628fec1bd866"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,929 @@
+{
+  "as_of": "2026-10-20T00:45:36.428364+00:00",
+  "status": "curated evidence-backed lifecycle examples; judgments explicitly separate from primary facts",
+  "scope": "仅覆盖本表对象，非全目录逐项退役认证；没有据“商业软件存在”“发布较早”或“某模型得分高”宣告整个任务已解决。",
+  "decision_rules": [
+    "作者明示deprecated/维护替代→只标对应实现或发布入口。",
+    "gold/model/checker修订→标具体版本和受影响对象，保存原版，不把局部问题扩大。",
+    "数据公开/多配置近似→重审新颖性、分组泛化与信息权限，不自动认定污染。",
+    "软件原生已有→要求强同条件baseline和工程增益证据；任务已解决仍需独立证据。"
+  ],
+  "items": [
+    {
+      "status_class": "实现停止维护 / 官方推荐后继",
+      "catalog_ids": [
+        "rtl-masterrtl-power",
+        "rtl-masterrtl-timing-area"
+      ],
+      "primary_fact": "冻结作者README明确MasterRTL repo不再维护，推荐RTL-Timer涵盖主要功能并改进预处理。",
+      "evidence_scope": "具体旧仓库的维护状态；不证明原90设计标签失效，也未证明功耗/时序问题饱和。",
+      "research_judgment": "新研究默认评后继实现，旧实现可作历史基线。这里有直接替代证据。",
+      "recommended_action": "固定原版本复历史结果；新算法同时对RTL-Timer/同权限强baseline，计EDA活动特征费用。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "rtl-masterrtl-power",
+          "record_sha256": "e1380671f09e51fd3e7db03c0392430d008bdbe99449bb17157e0b4bf9143a5a",
+          "primary_sources": "https://arxiv.org/pdf/2311.08441; https://raw.githubusercontent.com/hkust-zhiyao/MasterRTL/5bccf38f8db7bb511a793a709863e7cb1b333ab5/README.md; https://raw.githubusercontent.com/hkust-zhiyao/MasterRTL/5bccf38f8db7bb511a793a709863e7cb1b333ab5/ML_model/train/preprocess.py; https://raw.githubusercontent.com/hkust-zhiyao/MasterRTL/5bccf38f8db7bb511a793a709863e7cb1b333ab5/ML_model/infer/infer.py; https://raw.githubusercontent.com/hkust-zhiyao/MasterRTL/5bccf38f8db7bb511a793a709863e7cb1b333ab5/ML_model/train/train.py"
+        },
+        {
+          "id": "rtl-masterrtl-timing-area",
+          "record_sha256": "028826b5a8ade84ad01597cdb8e9204f2778bc7c59d030c9a2bf597beea2572e",
+          "primary_sources": "https://arxiv.org/pdf/2311.08441; https://raw.githubusercontent.com/hkust-zhiyao/MasterRTL/5bccf38f8db7bb511a793a709863e7cb1b333ab5/README.md; https://raw.githubusercontent.com/hkust-zhiyao/MasterRTL/5bccf38f8db7bb511a793a709863e7cb1b333ab5/ML_model/train/preprocess.py; https://raw.githubusercontent.com/hkust-zhiyao/MasterRTL/5bccf38f8db7bb511a793a709863e7cb1b333ab5/ML_model/infer/infer.py; https://raw.githubusercontent.com/hkust-zhiyao/MasterRTL/5bccf38f8db7bb511a793a709863e7cb1b333ab5/ML_model/train/train.py"
+        }
+      ]
+    },
+    {
+      "status_class": "仓库迁移 / 旧入口deprecated",
+      "catalog_ids": [
+        "test-itc16-ijtag"
+      ],
+      "primary_fact": "作者旧GitHub README写repository deprecated，并指向GitLab IJTAG。",
+      "evidence_scope": "开发入口迁移；不证明IEEE1687 retargeting/scheduling任务已由工具彻底解决。",
+      "research_judgment": "避免仅用失修旧路径判断当前数据状态。",
+      "recommended_action": "按GitLab release锁ICL/HDL/算法/scorer；旧2016协议保留原输入，不混新release。",
+      "additional_primary_sources": [
+        "https://raw.githubusercontent.com/IJTAG-Ecosystem/Benchmarks/master/README.md"
+      ],
+      "source_snapshots": [
+        {
+          "id": "test-itc16-ijtag",
+          "record_sha256": "55ee8e2855c51d4161bc71500f627b73869dc457403ed38fe9164f6aa984caef",
+          "primary_sources": "https://github.com/IJTAG-Ecosystem/Benchmarks; https://gitlab.com/IJTAG/benchmarks/-/blob/577a4dd46e934bf9c86da7be8016db4b7ace35c8/README.md; https://gitlab.com/IJTAG/benchmarks/-/blob/577a4dd46e934bf9c86da7be8016db4b7ace35c8/script/build.sh; https://gitlab.com/IJTAG/benchmarks/-/blob/577a4dd46e934bf9c86da7be8016db4b7ace35c8/script/result.sh; https://gitlab.com/IJTAG/benchmarks/-/blob/577a4dd46e934bf9c86da7be8016db4b7ace35c8/ICL/Basic/BasicSCB/BasicSCB.icl"
+        }
+      ]
+    },
+    {
+      "status_class": "题目与评分修订",
+      "catalog_ids": [
+        "rtl-specread-rtl-consistency",
+        "rtl-specread-retrieval"
+      ],
+      "primary_fact": "v2.2 README383题，明确删2个t4：重复mutation和摘录不支持gold；旧protocol385/t4=98，当前文件名仍v2_1。",
+      "evidence_scope": "这2条gold问题和计分/人工裁决版本；不能扩大为383全无效或规格推理已解决。",
+      "research_judgment": "优先采用修订题集，新旧总分不可直接混榜。",
+      "recommended_action": "保留原证据/删除理由/原与修订分母；报告灰区裁决、negative control与MUTATED提示权限。",
+      "additional_primary_sources": [
+        "https://raw.githubusercontent.com/EDGAhab/specread/ec8f5b2d256035430fb22719863a760e38b7962a/README.md"
+      ],
+      "source_snapshots": [
+        {
+          "id": "rtl-specread-rtl-consistency",
+          "record_sha256": "933629566fe5ad8cfaac76f83e0d79523170177edd0d79fa35b820f53d12f3ec",
+          "primary_sources": "https://github.com/EDGAhab/specread/tree/ec8f5b2d256035430fb22719863a760e38b7962a; https://github.com/EDGAhab/specread/blob/ec8f5b2d256035430fb22719863a760e38b7962a/eval/score_main.py; https://arxiv.org/abs/2609.33699"
+        },
+        {
+          "id": "rtl-specread-retrieval",
+          "record_sha256": "0c6cc74435464262268b931b15a4261daa0dfbd2cf4e66826f1c326af466dd15",
+          "primary_sources": "https://github.com/EDGAhab/specread/tree/ec8f5b2d256035430fb22719863a760e38b7962a; https://github.com/EDGAhab/specread/blob/ec8f5b2d256035430fb22719863a760e38b7962a/eval/score_main.py; https://arxiv.org/abs/2609.33699"
+        }
+      ]
+    },
+    {
+      "status_class": "电路模型 / 测试台修正",
+      "catalog_ids": [
+        "analog-ieee-p2427"
+      ],
+      "primary_fact": "v2.2官方列明修LOGIC.v及BANDGAP/OPAMP/PLL测试台、合并并联晶体管；本研究已下载2.0/2.1/2.2逐包存档。",
+      "evidence_scope": "被修改的模型/测试台/故障宇宙；最终IEEE2427标准正文未取得，不等旧包自动符合最终标准。",
+      "research_judgment": "可保留旧版作历史协议；新缺陷研究应优先核修正版，并重锁coverage分母。",
+      "recommended_action": "按电路/defectlist/testbench三者hash确定版本；不以350nm年份推任务无价值。",
+      "additional_primary_sources": [
+        "https://sagroups.ieee.org/2427/analogue-benchmark-circuits/"
+      ],
+      "source_snapshots": [
+        {
+          "id": "analog-ieee-p2427",
+          "record_sha256": "13f702bc952186e7711a1c41c6500b03949bf34188b01994abe2755812bd126a",
+          "primary_sources": "https://sagroups.ieee.org/2427/analogue-benchmark-circuits/; https://sagroups.ieee.org/2427/wp-content/uploads/sites/302/2019/03/analog_benchmark2017_v2.2.tar_.gz; https://standards.ieee.org/ieee/2427/7233/"
+        }
+      ]
+    },
+    {
+      "status_class": "新版扩展同时撤回部分标签",
+      "catalog_ids": [
+        "analog-infineon-ads"
+      ],
+      "primary_fact": "工作组v4新增PHY，但除bandgap外删除defect tables待重生；current GitHub与v3/v4包内容另核。",
+      "evidence_scope": "特定v4包的可用故障表范围；版本更大不自动表示所有任务覆盖更完整。",
+      "research_judgment": "这是可获取性与标签版本问题，不是被删故障任务已解决。",
+      "recommended_action": "要做旧完整四电路defect实验可固定v3及其限制；要做v4新增PHY需明确缺失表/自建标签。",
+      "additional_primary_sources": [
+        "https://sagroups.ieee.org/2427/analogue-benchmark-circuits/"
+      ],
+      "source_snapshots": [
+        {
+          "id": "analog-infineon-ads",
+          "record_sha256": "2fc06bcb742c7c329164457fd6d9cd5e2a63dbf01056e988851572d0ca6d7f00",
+          "primary_sources": "https://sagroups.ieee.org/2427/analogue-benchmark-circuits/; https://sagroups.ieee.org/2427/wp-content/uploads/sites/302/2021/08/adsbenchmark-main.v3.0..zip; https://sagroups.ieee.org/2427/wp-content/uploads/sites/302/2021/10/adsbenchmark-main-v4.0.zip; https://raw.githubusercontent.com/Infineon/adsbenchmark/d1f5c9be021970e8c1fda5a2c5eea3987cb9667c/LICENSE; https://raw.githubusercontent.com/Infineon/adsbenchmark/d1f5c9be021970e8c1fda5a2c5eea3987cb9667c/BANDGAP/src/model/readme.txt; https://raw.githubusercontent.com/Infineon/adsbenchmark/d1f5c9be021970e8c1fda5a2c5eea3987cb9667c/PLL/src/checker/readme.txt"
+        }
+      ]
+    },
+    {
+      "status_class": "原始几何文件已披露问题 / 发布修复",
+      "catalog_ids": [
+        "physical-circuitnet"
+      ],
+      "primary_fact": "作者README披露2024-11重传raw信息和2024-12 DEF instance名错误/fix script；image/graph/scorer版本还各自独立。",
+      "evidence_scope": "受影响DEF实例名/原始文件，不能推全部训练maps或预测论文都有同一问题。",
+      "research_judgment": "研究需辨识修复前后数据，不能把“可下载最新包”当内容未变。",
+      "recommended_action": "锁具体压缩包hash/修复脚本/flow；原版与清洁修订版结果分列，不静默改gold。",
+      "additional_primary_sources": [
+        "https://raw.githubusercontent.com/circuitnet/CircuitNet/41ade1d7e913a418b4495b6b13630b26b0ff7279/README.md"
+      ],
+      "source_snapshots": [
+        {
+          "id": "physical-circuitnet",
+          "record_sha256": "698409df25561b6e840f506651b11de7dc095b1eed6c9ab65662ec33b73ca054",
+          "primary_sources": "https://github.com/circuitnet/CircuitNet; https://github.com/circuitnet/circuitnet.github.io/blob/vue/docs/intro/overview.md; https://raw.githubusercontent.com/circuitnet/CircuitNet/41ade1d7e913a418b4495b6b13630b26b0ff7279/routability_ir_drop_prediction/files/train_N28.csv; https://raw.githubusercontent.com/circuitnet/CircuitNet/41ade1d7e913a418b4495b6b13630b26b0ff7279/routability_ir_drop_prediction/files/test_N28.csv; https://raw.githubusercontent.com/circuitnet/CircuitNet/41ade1d7e913a418b4495b6b13630b26b0ff7279/routability_ir_drop_prediction/files/train_N14.csv; https://raw.githubusercontent.com/circuitnet/CircuitNet/41ade1d7e913a418b4495b6b13630b26b0ff7279/routability_ir_drop_prediction/files/test_N14.csv; https://raw.githubusercontent.com/circuitnet/CircuitNet/41ade1d7e913a418b4495b6b13630b26b0ff7279/routability_ir_drop_prediction/preprocess_scripts/generate_training_set.py"
+        }
+      ]
+    },
+    {
+      "status_class": "历史隐藏题已公开 / 盲测条件变化",
+      "catalog_ids": [
+        "pd-iccad23-ir",
+        "3d-iccad23"
+      ],
+      "primary_fact": "原比赛结束后提供hidden案例，后续论文可使用这些公开布局/网表；现在下载不再保密。",
+      "evidence_scope": "测试新颖性/模型曝光条件；不自动证明某模型训练污染。",
+      "research_judgment": "仍可作固定可复现算法对照，不能把同一公开集称未来fresh blind industrialtest。",
+      "recommended_action": "新研究固定same manifest并另加真正隔离新设计；原赛成绩和赛后方法实验分轨。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "pd-iccad23-ir",
+          "record_sha256": "d83d715c907ef671726b1c7c0108718486ad8b067cc5358c5722ff5c0ba25304",
+          "primary_sources": "https://github.com/ASU-VDA-Lab/ML-for-IR-drop; https://github.com/ASU-VDA-Lab/ML-for-IR-drop/blob/bda90cbe53f973f28d7c96951af665f678a84180/doc/contest-description.pdf; https://www.iccad-contest.org/2023/Problems.html"
+        },
+        {
+          "id": "3d-iccad23",
+          "record_sha256": "76ad087744583a63f5895ceb2a39450316f02829253a2ecdfe630a9a1141f5c7",
+          "primary_sources": "https://www.iccad-contest.org/2023/Problems.html; https://drive.google.com/file/d/1PJOSECe0sCDGzJoQrQWGIzTnIyUVOr65/view; https://github.com/coherent17/2023-ICCAD-Problem-B"
+        }
+      ]
+    },
+    {
+      "status_class": "经典小规模 / 工艺抽象较旧，未证任务退役",
+      "catalog_ids": [
+        "litho-iccad13"
+      ],
+      "primary_fact": "经典十clip被OpenILT/LithoBench等沿用，固定模型与mask目标，广泛复用且样本少。",
+      "evidence_scope": "数据规模/物理模型/信息可见性有限；未取得“所有合法设计优化已由商业工具解决”的证据。",
+      "research_judgment": "适合基础算法诊断，单独不足支撑先进EUV/全chip/未见形状泛化。",
+      "recommended_action": "用同模型强solver/native优化比较，并增加MRC/processwindow/新clip/全流程成本；不按年份一键弃用。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "litho-iccad13",
+          "record_sha256": "6bf682eaeee7af995f5bff44b00db44d8158ce63244215cbaa1a466e606a9da7",
+          "primary_sources": "https://www.iccad-contest.org/History.html; https://research.ibm.com/publications/iccad-2013-cad-contest-in-mask-optimization-and-benchmark-suite; https://www.cse.cuhk.edu.hk/~byu/papers/C26-DAC2014-MOSAIC.pdf; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/benchmark/ICCAD2013/M1_test1.glp; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/lithobench/evaluate.py"
+        }
+      ]
+    },
+    {
+      "status_class": "商业工具原生覆盖一层，任务需升级验收",
+      "catalog_ids": [
+        "litho-opc-engineer-assistant",
+        "litho-rlopc",
+        "litho-culitho-industrial"
+      ],
+      "primary_fact": "已有Calibre/Proteus的OPC/ILT、recipe开发、ML/GPU等产品能力；目录另有厂商能力图与工业paper，原论文/版本/输入限制分别保留。",
+      "evidence_scope": "产品功能与原作者特定实验，不是同输入、同工艺、同容差的独立对照，也不是完整workflow agent已解决。",
+      "research_judgment": "直接重复已有按钮功能不足构成新工程任务；仍可研究近似/联合优化或受保护验收下工具agent。",
+      "recommended_action": "按OPC层次表选择当前native flow/专家脚本/强数值baseline；模型收益用同合法性、process与总成本证明，不能仅比历史弱基线。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "litho-opc-engineer-assistant",
+          "record_sha256": "95a3ea7221a002c02644dc87058b020f5a0fb40d7c69e8df356f12f42e322026",
+          "primary_sources": "https://www.cse.cuhk.edu.hk/~byu/papers/C251-AAAI2025-OPCAgent.pdf; https://ojs.aaai.org/index.php/AAAI/article/view/34479; https://arxiv.org/abs/2408.12775"
+        },
+        {
+          "id": "litho-rlopc",
+          "record_sha256": "9d831bb4bdc131467a501ca03215d5e25c8e735ab197878184fa33d0a5ca6eb2",
+          "primary_sources": "https://www.cse.cuhk.edu.hk/~byu/papers/J97-TCAD2024-RL-OPC.pdf"
+        },
+        {
+          "id": "litho-culitho-industrial",
+          "record_sha256": "3155aeeb57bfcb0791387e0fdf89e95a22214785af0b21eb1987b0bcf0b78108",
+          "primary_sources": "https://arxiv.org/abs/2602.15036; https://arxiv.org/pdf/2602.15036"
+        }
+      ]
+    },
+    {
+      "status_class": "高分可能只覆盖弱检查 / 不能推问题饱和",
+      "catalog_ids": [
+        "analog-coder",
+        "analog-circuitrubric-design",
+        "analog-circuitsense-symbolic"
+      ],
+      "primary_fact": "静态审查显示有小信号/结构评分及符号±/timeout等特定口径；图同构、最终方程命中与真实电性能不是同任务。",
+      "evidence_scope": "已核具体checker和版本；没有声称所有历史模型分数因此错误。",
+      "research_judgment": "应降窄分数结论或另设强验收；不能把弱oracle接近满分当工业电路设计已解决。",
+      "recommended_action": "保留原榜与修订协议分列；按真实规格/PVT/受保护oracle评价，并说明结构任务自己的合理用途。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "analog-coder",
+          "record_sha256": "571165b6dfa24ce342ee3604ad0130ef011338481354fedcd88354ba7678d439",
+          "primary_sources": "https://raw.githubusercontent.com/laiyao1/AnalogCoder/591a865427bc1e271c8b1f3c88d8be13c350df4f/problem_set.tsv; https://raw.githubusercontent.com/laiyao1/AnalogCoder/591a865427bc1e271c8b1f3c88d8be13c350df4f/LICENSE; https://raw.githubusercontent.com/laiyao1/AnalogCoder/591a865427bc1e271c8b1f3c88d8be13c350df4f/gpt_run.py; https://raw.githubusercontent.com/laiyao1/AnalogCoder/591a865427bc1e271c8b1f3c88d8be13c350df4f/problem_check/Amplifier.py; https://raw.githubusercontent.com/laiyao1/AnalogCoder/591a865427bc1e271c8b1f3c88d8be13c350df4f/problem_check/Opamp.py; https://raw.githubusercontent.com/laiyao1/AnalogCoder/591a865427bc1e271c8b1f3c88d8be13c350df4f/problem_check/Inverter.py; https://raw.githubusercontent.com/laiyao1/AnalogCoder/591a865427bc1e271c8b1f3c88d8be13c350df4f/problem_check/CurrentMirror.py; https://raw.githubusercontent.com/laiyao1/AnalogCoder/591a865427bc1e271c8b1f3c88d8be13c350df4f/problem_check/Integrator.py; https://raw.githubusercontent.com/laiyao1/AnalogCoder/591a865427bc1e271c8b1f3c88d8be13c350df4f/problem_check/Differentiator.py; https://raw.githubusercontent.com/laiyao1/AnalogCoder/591a865427bc1e271c8b1f3c88d8be13c350df4f/problem_check/PLL.py"
+        },
+        {
+          "id": "analog-circuitrubric-design",
+          "record_sha256": "219e86f2703c76e8a08d47dbdd69b68ae8883e88400f1c88095cee35acdcdf2e",
+          "primary_sources": "https://raw.githubusercontent.com/levantlabs/circuitrubric-bench/f96512bf602152d1646c0cfc11ea7af8e6ade99f/NOTICE.md; https://raw.githubusercontent.com/levantlabs/circuitrubric-bench/f96512bf602152d1646c0cfc11ea7af8e6ade99f/README.md; https://raw.githubusercontent.com/levantlabs/circuitrubric-bench/f96512bf602152d1646c0cfc11ea7af8e6ade99f/docs/methodology.md; https://raw.githubusercontent.com/levantlabs/circuitrubric-bench/f96512bf602152d1646c0cfc11ea7af8e6ade99f/circuitrubric/grader.py; https://raw.githubusercontent.com/levantlabs/circuitrubric-bench/f96512bf602152d1646c0cfc11ea7af8e6ade99f/circuitrubric/ratio.py; https://raw.githubusercontent.com/levantlabs/circuitrubric-bench/f96512bf602152d1646c0cfc11ea7af8e6ade99f/docs/results/clean_design_leaderboard.md"
+        },
+        {
+          "id": "analog-circuitsense-symbolic",
+          "record_sha256": "48efbeed3c9c22a8fa966ff9cc465e2f96960db91f7977de1d402d43f91d734f",
+          "primary_sources": "https://arxiv.org/pdf/2509.22339; https://circuitsense-benchmark.github.io/; https://raw.githubusercontent.com/armanakbari/CircuitSense/c125509f2a1876536893a349d29e4fca6cc4fca8/README.md; https://raw.githubusercontent.com/armanakbari/CircuitSense/c125509f2a1876536893a349d29e4fca6cc4fca8/evaluation/benchmark_symbolic_equations.py; https://raw.githubusercontent.com/armanakbari/CircuitSense/c125509f2a1876536893a349d29e4fca6cc4fca8/LICENSE"
+        }
+      ]
+    },
+    {
+      "status_class": "公开回归子集 / 完整验收不开放",
+      "catalog_ids": [
+        "pd-opensta-public-regression"
+      ],
+      "primary_fact": "OpenSTA作者明确extensive regression tests不公开；公开test子集包含接口/日志等，多路径不能替代完整工业gold。",
+      "evidence_scope": "访问范围与oracle覆盖，而非工具算法无用或STA任务已完成。",
+      "research_judgment": "可作API/流程回归学习材料；不据public子集全过推全工业签核能力。",
+      "recommended_action": "工作流agent必须固定独立gold与禁止改save_ok；需要什么覆盖就取得对应受保护case，不能以工具退出0替代。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "pd-opensta-public-regression",
+          "record_sha256": "974606ed8a3a732ab1874d74077305ad845e1b68cc0c867afc00b17215be4c9a",
+          "primary_sources": "https://github.com/parallaxsw/OpenSTA/tree/230e28d9880294170f1e659dbdc675d66468ce2d; https://github.com/parallaxsw/OpenSTA/blob/230e28d9880294170f1e659dbdc675d66468ce2d/test/regression.tcl"
+        }
+      ]
+    },
+    {
+      "status_class": "加密 / 部分输入可审，非任务解决",
+      "catalog_ids": [
+        "chiplet-atplace",
+        "analog-longhorizon"
+      ],
+      "primary_fact": "ATPlace有加密核心但十案例输入可核；AnalogDesignBench公开任务/源码但运行时verifier必须隔离，已选审50任务checker合同，未完成全部实现/仿真审计。",
+      "evidence_scope": "代码可审计性/运行权限/验收覆盖，和真实优化是否已被求解是不同轴。",
+      "research_judgment": "既不因加密判数据无价值，也不把公开checker或一次成功运行当完整闭环已证。",
+      "recommended_action": "在授权输入边界内评测，外部独立检查几何/电性能；保护评估文件并报告工具/环境与未取得部分。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "chiplet-atplace",
+          "record_sha256": "94514053f8c1c9ad2059f6a30b3ced1e2cc46b5b35d731339f9a99d2bd3a20be",
+          "primary_sources": "https://github.com/PKU-IDEA/ATPlace_pub; https://yibolin.com/publications/papers/PLACE_ICCAD2024_Wang.pdf; https://raw.githubusercontent.com/PKU-IDEA/ATPlace_pub/8185e159e049ee3a9203f34febe8b9b9174d98f5/readme.md; https://raw.githubusercontent.com/PKU-IDEA/ATPlace_pub/8185e159e049ee3a9203f34febe8b9b9174d98f5/reproduce.py; https://raw.githubusercontent.com/PKU-IDEA/ATPlace_pub/8185e159e049ee3a9203f34febe8b9b9174d98f5/Thermal.py; https://raw.githubusercontent.com/PKU-IDEA/ATPlace_pub/8185e159e049ee3a9203f34febe8b9b9174d98f5/src/ATPLACE/EvalMetrics.py; https://raw.githubusercontent.com/PKU-IDEA/ATPlace_pub/8185e159e049ee3a9203f34febe8b9b9174d98f5/cases/Case1/Case1.blocks; https://raw.githubusercontent.com/PKU-IDEA/ATPlace_pub/8185e159e049ee3a9203f34febe8b9b9174d98f5/cases/Case10/Case10.blocks"
+        },
+        {
+          "id": "analog-longhorizon",
+          "record_sha256": "16d0e55d21609fc90775af7fced18c92d96eee883abe141e54c0febba2c83348",
+          "primary_sources": "https://arxiv.org/abs/2609.33356; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/README.md; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/LICENSE; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-beta-multiplier-reference-pvt-mc/task.toml; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-beta-multiplier-reference-pvt-mc/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-bandgap-reference-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-ota-5t-gain40-pm60-noise50uv-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-two-stage-miller-opamp-gain60-ugb200-pm60-noise50uv-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-flash-adc-3bit-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-sar-adc-6bit-async/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-delta-sigma-adc-1bit-first-order-osr32-sndr40/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-switched-capacitor-2to1-converter-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-inductive-lna-2p4ghz-gain12-nf2-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-gilbert-cell-mixer-2p4ghz-pvt-mismatch/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-tia-zt8k-bw750m-noise5p-sfdr70-power5m-pt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-capless-ldo-1v0-20ma-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-ldo-ota5-robust-pvt-mc/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-analog-input-mux-8to1-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-cml-divider-div2-range1gto10g/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-transistor-divide-by-2/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-bootstrap-driver-pt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-cml-tx-driver-28g-nrz-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-cmos-switched-resistor-dac-5bit-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-flash-adc-4bit-50msps/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-bottom-plate-sampler-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-regulated-charge-pump-10mhz-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-unregulated-charge-pump-10mhz-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-class-d-halfbridge-eff95-tt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-nmos-pass-ldo-0p4v-pvt-mc/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-fd-sampling-feedback-ota-gain1-settling40ns-noise300uv-pvt-mc/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-fd-sampling-feedback-ota-gain8-settling10ns-noise1mv-pvt-mc/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-ring-amp-3stage-gain8-400uw/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-fct-residue-amplifier-900msps/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-ahuja-compensated-two-stage-load-range-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-fd-two-stage-miller-opamp-gain60-pm60-noise50uv-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-telescopic-cascode-ota-pvt-fix/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-three-stage-nested-miller-ota-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-high-psrr-bandgap-reference-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-low-power-line-driver-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-low-power-oscillator-2mhz-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-programmable-icc-iptat-current-mirror-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-buf-ppsf-bs-gain1-sfdr90/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-constant-gm-stable-gain-amplifier-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-gmr-degen-amp-constant-gm-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-gmr-degenerated-diff-amp-gain2-bw70m-power1p2mw-sdr60/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-complementary-folded-cascode-ab-opamp-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-folded-cascode-ota-gain130-pm60-noise50uv-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-fully-differential-ota-c-biquad-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-two-stage-miller-opamp-gain70-ugb20-pm60-noise50uv-pvt/tests/verify.py"
+        }
+      ]
+    },
+    {
+      "status_class": "旧任务发布退役 / 活跃分母仍未冻结",
+      "catalog_ids": [
+        "analog-vabench-behavior"
+      ],
+      "primary_fact": "vaBench root README明确v2退役、5题吸收为v3的283–287；v1是legacy，v3指定active。固定v3有505题/505CHECKS，机器报告称分层behavior认证，但正式score manifest333候选/0counted且claimfalse。",
+      "evidence_scope": "退役的是v2发布入口/编号，不是Verilog-A行为编程问题；README候选措辞与机器认证进度、EVAS/Spectre oracle政策有不一致，不能仅看目录v4或版本号推标准成熟。",
+      "research_judgment": "直接证据支持停止把v2当独立新任务；505可审任务数不等正式505榜，也不等400家族1200任务的检索宣传口径。",
+      "recommended_action": "新研究固定v3manifest与各层oracle，协调评分分母与版本；保留v1历史entry/form与其265core分母，旧gold/negative隔离，不擅自宣告物理电路任务已解决。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "analog-vabench-behavior",
+          "record_sha256": "35bb59e541ffccd1e75ed89b6c066c0dd9b1b215f6a4680a409203d38baca9d0",
+          "primary_sources": "https://github.com/Arcadia-1/behavioral-veriloga-eval/blob/7b5616dc52195ec275ec6d21c71d7763613702cd/README.md; https://github.com/Arcadia-1/behavioral-veriloga-eval/blob/7b5616dc52195ec275ec6d21c71d7763613702cd/benchmark-vabench-release-v3/TASKS.json; https://github.com/Arcadia-1/behavioral-veriloga-eval/blob/7b5616dc52195ec275ec6d21c71d7763613702cd/benchmark-vabench-release-v3/CHECKS.yaml; https://github.com/Arcadia-1/behavioral-veriloga-eval/blob/7b5616dc52195ec275ec6d21c71d7763613702cd/benchmark-vabench-release-v3/reports/layered_certification.json; https://github.com/Arcadia-1/behavioral-veriloga-eval/blob/7b5616dc52195ec275ec6d21c71d7763613702cd/benchmark-vabench-release-v3/reports/score_denominator_manifest.json; https://github.com/Arcadia-1/behavioral-veriloga-eval/blob/7b5616dc52195ec275ec6d21c71d7763613702cd/runners/run_vabench_v3_model_eval.py; https://github.com/Arcadia-1/behavioral-veriloga-eval/blob/7b5616dc52195ec275ec6d21c71d7763613702cd/runners/simulate_evas.py; https://github.com/Arcadia-1/behavioral-veriloga-eval/blob/7b5616dc52195ec275ec6d21c71d7763613702cd/benchmark-vabench-release-v1/reports/benchmark_overview.json"
+        }
+      ]
+    },
+    {
+      "status_class": "特定实例目标饱和 / 完整协议仍未完成",
+      "catalog_ids": [
+        "be-closer-pilot",
+        "be-closer-stagepaired"
+      ],
+      "primary_fact": "CLOSER原paper的PicoRV32 fmax满分target120MHz而示例181.7MHz，coverage cap85%而88.7%；作者只称当前instance/cap饱和，完整三轨矩阵与firdma签核仍pending。",
+      "evidence_scope": "只支持这些pilot的目标区分度不足，不支持物理设计或RTL验证任务已经解决；10异构pilot不等完整三轨已评测。",
+      "research_judgment": "新研究需校准目标和隐藏条件，保留rawmetrics/Pareto；未完成的宏版评测应标拟议而不是过时。",
+      "recommended_action": "固定新版本target/工作负载，按真实stage/oracle/全部失败成本评；不要将先导满分转成任务退役结论。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "be-closer-pilot",
+          "record_sha256": "bb2e82df136a2fedcb6ef5d27bb3c892b6fce0a586851962a823924bd2b448d7",
+          "primary_sources": "https://arxiv.org/pdf/2607.16632; https://arxiv.org/html/2607.16632"
+        },
+        {
+          "id": "be-closer-stagepaired",
+          "record_sha256": "e1b948a4fc8ef45c0b0d90a79cbdf888dfe0f52b83b153d69c7b4aa458d9c3e1",
+          "primary_sources": "https://arxiv.org/pdf/2607.16632; https://arxiv.org/html/2607.16632"
+        }
+      ]
+    },
+    {
+      "status_class": "派生教程改变划分 / 不等原数据协议失效",
+      "catalog_ids": [
+        "fab-wm811k",
+        "fab-wm811k-mathworks"
+      ],
+      "primary_fact": "MathWorks官方R2026b教程先为缺陷图加5个翻转/旋转副本，移除lot/waferIndex/原trainTestLabel后随机90/5/5；原WM811K corpus另有自己的字段与分类/检索任务。",
+      "evidence_scope": "源代码顺序允许同源变体跨分区的风险；未取得实际split/checkpoint原训练manifest，不声称实测泄漏率或原2015paper受影响。",
+      "research_judgment": "需要修改的是具体派生评测的数据隔离条件，不是整个数据集退役，也不代表分类能力饱和或全产线任务已解决。",
+      "recommended_action": "先按原wafer/lot划分再仅增强训练集；锁原checkpoint训练来源、报告自然类别分布和少数类指标；不将教学例程直接当工业主榜。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "fab-wm811k",
+          "record_sha256": "50b46bdb870ba97a4794505909a48d3fb926b40040632ac168ce73f26ea0d0d6",
+          "primary_sources": "https://scholars.lib.ntu.edu.tw/entities/publication/563e8f2c-74ee-4733-bd62-ba5e409d8424; https://doi.org/10.1109/TSM.2014.2364237; http://mirlab.org/dataSet/public/; https://www.mathworks.com/help/images/classify-anomalies-on-wafer-defect-maps-using-deep-learning.html"
+        },
+        {
+          "id": "fab-wm811k-mathworks",
+          "record_sha256": "78503d706c51298de86dface9697617adb35cc35cf2f80117098197d27321742",
+          "primary_sources": "https://www.mathworks.com/help/images/classify-anomalies-on-wafer-defect-maps-using-deep-learning.html"
+        }
+      ]
+    },
+    {
+      "status_class": "检查器修正 / 认证分母变化",
+      "catalog_ids": [
+        "ver-gatetruth-mutation-audit"
+      ],
+      "primary_fact": "作者撤销未经证明的equivalent排除并拆开compile/formal/sim，内部60/60→49/60→46/60；静态summary1245generated/96stillborn/1149valid/1105simkill与paper一致。",
+      "evidence_scope": "具体mutant筛选与kill定义，不等所有RTL生成bench无效；外部RTLLM adapter compilekill与内部sim-only也不同。",
+      "research_judgment": "旧高认证率不能沿用，current修复不追认历史hash绑定；不是设计验证问题被软件解决。",
+      "recommended_action": "锁generic/task-specific、编译有效性与sim/formal分类，重生签名并绑定输入的证据；按spec裁决不可达/等价mutant。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "ver-gatetruth-mutation-audit",
+          "record_sha256": "49c48629d2b0091bff0b08da84f2f1c34217ebeb519fe63ce4d4f20654d9a0dc",
+          "primary_sources": "https://arxiv.org/pdf/2608.12635; https://github.com/meetbhadra701-cloud/GateTruth/tree/f327624759043296c186f4d5ae8256a8fddc1dab"
+        }
+      ]
+    },
+    {
+      "status_class": "历史agent协议缺口 / 提交证据永久缺失",
+      "catalog_ids": [
+        "be-gatetruth-trackb"
+      ],
+      "primary_fact": "原paper披露56历史run均未保留RTL/hash，31超标称token；current新增allowlist/listing/预算/提交sidecar，但未重跑历史campaign。",
+      "evidence_scope": "历史56campaign可复评能力；不把修复版代码功能追认到旧结果，不推全工具或所有agent失效。",
+      "research_judgment": "旧榜可作诊断案例，新研究需current协议重新运行；任务本身仍有工业意义。",
+      "recommended_action": "保留历史manifest与缺口，未来等预算run持久化RTL、输入hash和独立oracle；当前研究不付费复跑。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "be-gatetruth-trackb",
+          "record_sha256": "8984bdc1ebeb638a7a83ff8e332fec747b039a38cb30aa5a343bc5abe9bd41b7",
+          "primary_sources": "https://arxiv.org/pdf/2608.12635; https://github.com/meetbhadra701-cloud/GateTruth/tree/f327624759043296c186f4d5ae8256a8fddc1dab"
+        }
+      ]
+    },
+    {
+      "status_class": "官方obsolete / 新公开release替代",
+      "catalog_ids": [
+        "fab-euv-ovl-syn-v11"
+      ],
+      "primary_fact": "Zenodo19725620 v1.0 metadata明确obsolete/restricted并转23349771；v1.1于2026-10-13 open/MIT，三py官方checksum与本地全匹配。",
+      "evidence_scope": "只对该旧版本的发布入口/可用性；AIPerratum全文未取不能推公式或数据修改范围。",
+      "research_judgment": "新研究用v1.1固定hash并保留旧证据，不绕过v1.0限制；不因OLS存在宣告overlay漂移任务饱和。",
+      "recommended_action": "锁新generator/geometry/seed/lot分区与独立实测校准；无CSV全包时如实称generator发布而非已核284000原始行。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "fab-euv-ovl-syn-v11",
+          "record_sha256": "2cca9d028983b5e0d09eae406325c294ef062696c14ab41fcb75d2f31b926150",
+          "primary_sources": "https://doi.org/10.5281/zenodo.23349771; https://zenodo.org/api/records/23349771; https://doi.org/10.1063/5.0346054; https://zenodo.org/api/records/19725620"
+        }
+      ]
+    },
+    {
+      "status_class": "局部metadata缺陷 / 派生修复保留原证据",
+      "catalog_ids": [
+        "litho-lithodreamer-forward",
+        "litho-lithodreamer-inverse"
+      ],
+      "primary_fact": "完整固定repo只有100train（两Annular配置），42条目的ADI路径.pjpg不存在，实际同ID.jpg已下载核512²JPEG；本研究另存cleanmetadata只改1路径，原100JSON不覆盖。",
+      "evidence_scope": "只修该1记录路径；sample1以.png名但JPEG内容属格式识别，不据此认全数据错误。论文280k+ID/OOD与repo100subset的公开范围分开。",
+      "research_judgment": "不以局部metadata问题停整个光刻任务，也不把datarelease不足判模型/物理问题过时；当前100可审不等完整评测可复现。",
+      "recommended_action": "保留原hash/变更原因/新manifest与research-only许可；补全正式split/scorer、validgauge和工艺证明后再评价工业成熟度。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "litho-lithodreamer-forward",
+          "record_sha256": "be9beb72c6f75324563ba46c99e57c00834901252880a3520a650ec62832f22a",
+          "primary_sources": "https://proceedings.mlr.press/v306/jiang26ae.html; https://raw.githubusercontent.com/mlresearch/v306/main/assets/jiang26ae/jiang26ae.pdf; https://github.com/7jiangyq/lithodreamer/tree/a491edc3d35fb069450950237214396c6faf3850"
+        },
+        {
+          "id": "litho-lithodreamer-inverse",
+          "record_sha256": "9ddd50ea74c4b81308e06c12bf14c749b3cdf582bd330f8de266ec02d15166c2",
+          "primary_sources": "https://proceedings.mlr.press/v306/jiang26ae.html; https://raw.githubusercontent.com/mlresearch/v306/main/assets/jiang26ae/jiang26ae.pdf; https://github.com/7jiangyq/lithodreamer/tree/a491edc3d35fb069450950237214396c6faf3850"
+        }
+      ]
+    },
+    {
+      "status_class": "派生curation / 原协议与来源身份纠正",
+      "catalog_ids": [
+        "litho-iccad12-hsd",
+        "litho-openhsd",
+        "litho-iccad19-tnsb-htc"
+      ],
+      "primary_fact": "C156是PCA-SVM作者方法文献非2012官方规则；不同clip/全layout版本NHS数差异显著。OpenHSDBench作者规范化尺寸并声明去重/decontam，2019另构TNSB/HTC压力集。",
+      "evidence_scope": "只能核定各文献/版本/任务分母；未取得rawOpenHSDBench包不能独立认证所有去重。2019的PCA讨论不是全模型OOD不可能定理。",
+      "research_judgment": "旧样本容易或高score不证明热点检测已解决；原bench历史价值、curated泛化协议和新压力测试分别保留。",
+      "recommended_action": "记录来源类型、crop/hash、母layout/processsplit、recall与FA/NHS；跨design允许source全体训练不自动判泄漏，target训练权限须保护。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "litho-iccad12-hsd",
+          "record_sha256": "37100729f7599869eb6abf120d6e8596068b602c090eeda48cbce4924b579103",
+          "primary_sources": "https://www.cerc.utexas.edu/utda/publications/C156.pdf; https://personal.utdallas.edu/~gxm112130/papers/iccad19.pdf; https://github.com/gauravr1991/ICCAD2019Benchmarks"
+        },
+        {
+          "id": "litho-openhsd",
+          "record_sha256": "e1e8c3935bbb3551ad41f454e16e3bdff70da60d0927d76abd79e95e0647b491",
+          "primary_sources": "https://github.com/yxgnahz/OpenHSDBench/tree/2886354292c85fb87d8d3f76e5d3276f531c7db1; https://www.cse.cuhk.edu.hk/~byu/papers/J192-TCAD2026-CAGE-HSD.pdf; https://doi.org/10.1109/TCAD.2026.3660602"
+        },
+        {
+          "id": "litho-iccad19-tnsb-htc",
+          "record_sha256": "8fc2f5444ddb740f494eed11d505ab326a347e9b4655a8e01e3295272dfc4e9c",
+          "primary_sources": "https://personal.utdallas.edu/~gxm112130/papers/iccad19.pdf; https://github.com/gauravr1991/ICCAD2019Benchmarks/tree/b99a9c34b9794bf8b0fd34103d5a6fe8eb2185f5"
+        }
+      ]
+    },
+    {
+      "status_class": "竞赛临时许可过期 / 需现行评估环境",
+      "catalog_ids": [
+        "physical-ispd18",
+        "physical-ispd19"
+      ],
+      "primary_fact": "ISPD2018官方页明确contest结束Innovus临时licenseexpired，学术许可需按厂商现行渠道；2019v9官方kit依赖Innovus reports/nativebinary，代码和数据不等评分链全开源。",
+      "evidence_scope": "只影响历史临时授权与准确重评条件，不证明数据/详细布线任务已过时或商业算法全部最优。",
+      "research_judgment": "工具可用性、有限规则验收与现代研究新颖性三轴分开；不把开源router可运行当官方oracle也全开源。",
+      "recommended_action": "锁合法现行工具/版本/旧kit与完整规则范围，比较同条件nativebaseline并报成本；无法原oracle时明确代理指标与差异，不伪称已复现官方排名。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "physical-ispd18",
+          "record_sha256": "3239952b20b77887edea03248fae53a85f211be03fa217be57375cb87c8485b7",
+          "primary_sources": "https://www.ispd.cc/contests/18/; https://www.ispd.cc/contests/18/metric_and_ranking.pdf; https://www.ispd.cc/contests/18/ispd18eval.tgz"
+        },
+        {
+          "id": "physical-ispd19",
+          "record_sha256": "61df24238ab6749cf677a2480008361f419dff45fc018920d1b90e81eb709fd0",
+          "primary_sources": "https://ispd.cc/contests/19/; https://ispd.cc/contests/19/metrics_and_ranking.pdf; https://ispd.cc/contests/19/ispd19eval.tgz"
+        }
+      ]
+    },
+    {
+      "status_class": "初版与最终评分冲突 / 不可混版",
+      "catalog_ids": [
+        "pd-ispd14",
+        "pd-ispd15",
+        "pd-iccad17-legal"
+      ],
+      "primary_fact": "2014官方赛后50slide确认CPU仍在，但罚100改50、WL5×改1.5×median、DP/GR早停门修订；2015最终无CPU且DR改log；2017现存网页β待公布且final报告/score表/sample实际链接404。",
+      "evidence_scope": "只证明各版本和可读资料范围；2017没有证据的“已读finalslides”已撤回，失链不等任务解决或原赛错误。",
+      "research_judgment": "旧公式不能作最终榜协议，也不能由商业Olympus后处理推模型输出本来合法或任务退役。",
+      "recommended_action": "固定最终scorer/数据/工具/population统计；不可取得处明确缺口，原输出与商业修复贡献分别报。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "pd-ispd14",
+          "record_sha256": "aa037dec254bf11ae60cc042955aa435e6e15e28ee9b9222ae8d3d9c53bac6d4",
+          "primary_sources": "https://www.ispd.cc/slides/ispd2014.html; https://www.ispd.cc/slides/2014/s8_Yutsis.pptx; https://www.ispd.cc/contests/14/web/benchmarks/A/Benchmark_Suite_A.pdf; https://www.ispd.cc/contests/14/web/bin/ispd2014_placement_checker; https://www.ispd.cc/contests/14/web/announcements.html; https://www.ispd.cc/contests/14/web/downloads.html"
+        },
+        {
+          "id": "pd-ispd15",
+          "record_sha256": "351b511523117832d8a34871e5548aac431faa1900197fca9e68074e40d15684",
+          "primary_sources": "https://www.ispd.cc/contests/15/ispd2015_contest.html; https://www.ispd.cc/contests/15/web/announcements.html; https://www.ispd.cc/contests/15/web/bustany_ispd_2015_contest_results.pdf"
+        },
+        {
+          "id": "pd-iccad17-legal",
+          "record_sha256": "e153d0393da48124dd364d25b558ceee0261af1da2c39e81d65d9cb8009cf2da",
+          "primary_sources": "https://www.iccad-contest.org/2017/Problem_C/default.html"
+        }
+      ]
+    },
+    {
+      "status_class": "原生流程自动化 / 局部通过不等完整验收",
+      "catalog_ids": [
+        "rf-sparx-open-flow"
+      ],
+      "primary_fact": "作者KNOWN_ISSUES/ToDo明确macroDRCclean但regular33antenna获豁免，detectorLVS过而topLVS尚未进入makeall；committedWPD EM仍有旧port位置需重算/fit。",
+      "evidence_scope": "限定frozen SPARX root tree当前设计/工具链与对应artifact，非说明整个开放PDK或RF设计已无效。",
+      "research_judgment": "现成generator/Makefile应当强baseline；自动化已有不代表工程问题全解，flow与agentbenchmark身份也要分开。",
+      "recommended_action": "先锁版本/端口/stackup并修staleartifact，独立终态验收/waiver白名单与预算；fast/nightly/full/core四范围成绩不合榜。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "rf-sparx-open-flow",
+          "record_sha256": "b804956c220c3f77fb047dbc972ccf625eac7e1757696ea98c8c2364a41fe2f3",
+          "primary_sources": "https://iic-jku.github.io/SG13CMOS_SPARX/index.html; https://github.com/iic-jku/SG13CMOS_SPARX; https://raw.githubusercontent.com/iic-jku/SG13CMOS_SPARX/b56790a25dac02c5c4758f1371054c5b2cf5d878/README.md; https://raw.githubusercontent.com/iic-jku/SG13CMOS_SPARX/b56790a25dac02c5c4758f1371054c5b2cf5d878/Makefile; https://raw.githubusercontent.com/iic-jku/SG13CMOS_SPARX/b56790a25dac02c5c4758f1371054c5b2cf5d878/KNOWN_ISSUES.md; https://raw.githubusercontent.com/iic-jku/SG13CMOS_SPARX/b56790a25dac02c5c4758f1371054c5b2cf5d878/ToDo.md; https://raw.githubusercontent.com/iic-jku/SG13CMOS_SPARX/b56790a25dac02c5c4758f1371054c5b2cf5d878/.github/workflows/regression.yml; https://raw.githubusercontent.com/iic-jku/SG13CMOS_SPARX/b56790a25dac02c5c4758f1371054c5b2cf5d878/measurements/README.md; https://raw.githubusercontent.com/iic-jku/SG13CMOS_SPARX/b56790a25dac02c5c4758f1371054c5b2cf5d878/testbenches/xschem/README.md; https://raw.githubusercontent.com/iic-jku/SG13CMOS_SPARX/b56790a25dac02c5c4758f1371054c5b2cf5d878/testbenches/xschem/SBD-PD-RESULTS.md; https://raw.githubusercontent.com/iic-jku/SG13CMOS_SPARX/b56790a25dac02c5c4758f1371054c5b2cf5d878/REUSE.toml; https://raw.githubusercontent.com/iic-jku/SG13CMOS_SPARX/main/LICENSE"
+        }
+      ]
+    },
+    {
+      "status_class": "经典程序 / 固定测试合同与泛化需区分",
+      "catalog_ids": [
+        "hls-chstone"
+      ],
+      "primary_fact": "原2008 suite自包含有限向量；frozen现代镜像set_top chstone_main，经宏重命名整main含固定输入/gold比较；config开启cosim/impl只是配置而非本研究运行通过。",
+      "evidence_scope": "特定镜像顶层/测试权限；未证明工具实际常量折叠、所有论文无效或所有HLS优化已饱和。",
+      "research_judgment": "适合作compiler/回归素材，但同有限向量返回0不足作开放输入设计agent主榜。旧eXCite无aggressiveopt与现代5ns FPGA流程不合榜。",
+      "recommended_action": "保护checker与输入，若要泛化则另建参数化kernel/隐藏新向量/受保护等价；原wholemain与新合同分报，固定同预算nativebaseline。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "hls-chstone",
+          "record_sha256": "6a71df1b1e3135fbb74c58bfc76fee428300a11d617e2d772821c21433736cff",
+          "primary_sources": "https://nagoya.repo.nii.ac.jp/record/10265/file_preview/iscas2008-300_1027.pdf; https://github.com/ferrandi/CHStone; https://raw.githubusercontent.com/ferrandi/CHStone/2b7e20ffd3365016faf1e4e2b86496a5c95445fb/README; https://raw.githubusercontent.com/ferrandi/CHStone/2b7e20ffd3365016faf1e4e2b86496a5c95445fb/Makefile; https://raw.githubusercontent.com/ferrandi/CHStone/2b7e20ffd3365016faf1e4e2b86496a5c95445fb/common/tb.c; https://raw.githubusercontent.com/ferrandi/CHStone/2b7e20ffd3365016faf1e4e2b86496a5c95445fb/config.tcl; https://raw.githubusercontent.com/ferrandi/CHStone/2b7e20ffd3365016faf1e4e2b86496a5c95445fb/adpcm/hls.tcl; https://raw.githubusercontent.com/ferrandi/CHStone/2b7e20ffd3365016faf1e4e2b86496a5c95445fb/aes/hls.tcl; https://raw.githubusercontent.com/ferrandi/CHStone/2b7e20ffd3365016faf1e4e2b86496a5c95445fb/blowfish/hls.tcl; https://raw.githubusercontent.com/ferrandi/CHStone/2b7e20ffd3365016faf1e4e2b86496a5c95445fb/dfadd/hls.tcl; https://raw.githubusercontent.com/ferrandi/CHStone/2b7e20ffd3365016faf1e4e2b86496a5c95445fb/dfdiv/hls.tcl; https://raw.githubusercontent.com/ferrandi/CHStone/2b7e20ffd3365016faf1e4e2b86496a5c95445fb/dfmul/hls.tcl; https://raw.githubusercontent.com/ferrandi/CHStone/2b7e20ffd3365016faf1e4e2b86496a5c95445fb/dfsin/hls.tcl; https://raw.githubusercontent.com/ferrandi/CHStone/2b7e20ffd3365016faf1e4e2b86496a5c95445fb/gsm/hls.tcl; https://raw.githubusercontent.com/ferrandi/CHStone/2b7e20ffd3365016faf1e4e2b86496a5c95445fb/jpeg/hls.tcl; https://raw.githubusercontent.com/ferrandi/CHStone/2b7e20ffd3365016faf1e4e2b86496a5c95445fb/mips/hls.tcl; https://raw.githubusercontent.com/ferrandi/CHStone/2b7e20ffd3365016faf1e4e2b86496a5c95445fb/motion/hls.tcl; https://raw.githubusercontent.com/ferrandi/CHStone/2b7e20ffd3365016faf1e4e2b86496a5c95445fb/sha/hls.tcl"
+        }
+      ]
+    },
+    {
+      "status_class": "复用母电路 / 划分决定泛化问题",
+      "catalog_ids": [
+        "security-trusthub-corpus",
+        "security-trusthub-family-split"
+      ],
+      "primary_fact": "2026原paper固定16网表/五family/36features，只改变pooled/LOCO/LOFO；RF familymacro F1 .914/.636/.460且AP同向下降；原资源访问和完整current manifest另未获。",
+      "evidence_scope": "特定表示/分类器/小样本实验，非全TrustHub/新库/工业检测器水平；pooled针对已知host部署仍可有意义。",
+      "research_judgment": "高pooled score不能判任务饱和，换LOFO也不自动成为工业证明；原/派生数据身份和访问边界必须保留。",
+      "recommended_action": "报告接受/排除与修复、sourcehash、hostfamily、threshold/OOF/perfamily与误报成本；新family/tool/library分别验，不能静默换历史榜条件。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "security-trusthub-corpus",
+          "record_sha256": "d6a70649e471fd93abebfd6c9d6bedea28198221363e4c21c59545738292b78f",
+          "primary_sources": "https://www.trust-hub.org/#/benchmarks/chip-level-trojan; https://link.springer.com/article/10.1007/s41635-017-0001-6; https://faculty.eng.ufl.edu/dforte/research/hardware-trojan-detection-and-prevention/; https://arxiv.org/abs/2609.07199"
+        },
+        {
+          "id": "security-trusthub-family-split",
+          "record_sha256": "872116c2299a6d0127a01a1c67704f2b2b69a4e72f63274d2f9c09fb2dc5b503",
+          "primary_sources": "https://arxiv.org/abs/2609.07199; https://arxiv.org/pdf/2609.07199; https://research.google/pubs/protocol-effects-on-feature-based-hardware-trojan-detection-across-trust-hub-families/"
+        }
+      ]
+    },
+    {
+      "status_class": "商业不可达分析已有 / 验证合同仍需工程复核",
+      "catalog_ids": [
+        "verify-opentitan-engineering"
+      ],
+      "primary_fact": "项目已用DVSIM多seed回归/结果映射和VCS UNR辅助不可达排除；官方文档说UNR不支持functional/assertion coverage，exclusion有设计/DV复核与RTL变更重做要求。",
+      "evidence_scope": "具体原生能力、适用coverage种类与所选文档版本；未拿真实UNR日志，不声称全体coveragehole已解。",
+      "research_judgment": "重复猜结构不可达应与原生UNR对比，工程代理应证明约束/triage/测试补全/审查收益；不是因有formal软件就退休整个验证任务。",
+      "recommended_action": "固定独立RTL/checker/coverage目标与waiver，报告raw/postexclude和真实缺陷/全成本；空输出/名称progress/历史dashboard不能代完整证明。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "verify-opentitan-engineering",
+          "record_sha256": "184ac0e15608b396a66c20f0c0c2d5eff68fc8abc98b416defb2208fdf8e717e",
+          "primary_sources": "https://opentitan.org/book/doc/contributing/dv/methodology/index.html; https://raw.githubusercontent.com/lowRISC/opentitan/6d236d35bc9b21289ca1fd55043267d028e173fd/LICENSE; https://raw.githubusercontent.com/lowRISC/opentitan/6d236d35bc9b21289ca1fd55043267d028e173fd/doc/contributing/dv/methodology/README.md; https://raw.githubusercontent.com/lowRISC/opentitan/6d236d35bc9b21289ca1fd55043267d028e173fd/doc/contributing/dv/sec_cm_dv_framework/README.md; https://raw.githubusercontent.com/lowRISC/opentitan/6d236d35bc9b21289ca1fd55043267d028e173fd/hw/ip/aes/dv/README.md; https://raw.githubusercontent.com/lowRISC/opentitan/6d236d35bc9b21289ca1fd55043267d028e173fd/hw/ip/aes/data/aes_testplan.hjson; https://raw.githubusercontent.com/lowRISC/opentitan/6d236d35bc9b21289ca1fd55043267d028e173fd/hw/ip/aes/dv/aes_base_sim_cfg.hjson; https://raw.githubusercontent.com/lowRISC/opentitan/6d236d35bc9b21289ca1fd55043267d028e173fd/hw/ip/aes/dv/env/aes_scoreboard.sv; https://raw.githubusercontent.com/lowRISC/opentitan/6d236d35bc9b21289ca1fd55043267d028e173fd/hw/dv/tools/dvsim/common_sim_cfg.hjson; https://raw.githubusercontent.com/lowRISC/opentitan/6d236d35bc9b21289ca1fd55043267d028e173fd/hw/dv/tools/dvsim/vcs.hjson; https://raw.githubusercontent.com/lowRISC/dvsim/7db2431161c8e04b050474fcf69f111c9af7c538/src/dvsim/testplan.py; https://raw.githubusercontent.com/lowRISC/dvsim/7db2431161c8e04b050474fcf69f111c9af7c538/src/dvsim/sim_results.py; https://raw.githubusercontent.com/lowRISC/dvsim/7db2431161c8e04b050474fcf69f111c9af7c538/src/dvsim/sim/report.py; https://raw.githubusercontent.com/lowRISC/dvsim/7db2431161c8e04b050474fcf69f111c9af7c538/src/dvsim/sim/tool/vcs.py; https://raw.githubusercontent.com/lowRISC/dvsim/7db2431161c8e04b050474fcf69f111c9af7c538/src/dvsim/job/deploy.py; https://github.com/lowRISC/dvsim"
+        }
+      ]
+    },
+    {
+      "status_class": "经典协议/库修订与artifact分母不能按年代合并",
+      "catalog_ids": [
+        "synth-lgsynth91-comb",
+        "synth-iwls93",
+        "synth-iwls2005"
+      ],
+      "primary_fact": "LGSynth91原guide明确literal优化不等mappedarea；IWLS93 guide明示修旧lib四cell timing且有限testpattern非formal；IWLS2005官方84而原包actual89顶层mapped.v及designlists有差异。",
+      "evidence_scope": "具体旧模型、库版本与source/变体计数，非整个逻辑综合已失效；未验证全部转换/blackbox/工业flow。",
+      "research_judgment": "适合诊断与历史对照，现代工业主张需强nativebaseline和真实库/physical验收；旧年份或现成综合工具不能直接退休任务。",
+      "recommended_action": "锁输入语义/DC/初始化、库/负载/实际manifest及同IPfamily去重，原出版84与实际file89分列；报告映射后area/timing、独立等价与全部成本。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "synth-lgsynth91-comb",
+          "record_sha256": "cd122e72355b7f698083b6fa1307e522de2ed6bebe8fe095d6b9af90ff6ae67d",
+          "primary_sources": "https://ddd.fit.cvut.cz/www/prj/Benchmarks/LGSynth91.pdf; https://ddd.fit.cvut.cz/www/prj/Benchmarks/LGSynth91.7z; https://ddd.fit.cvut.cz/www/prj/Benchmarks/index.php?page=download; https://users.fit.cvut.cz/~fiserp/papers/iwsbp16_Fiser.pdf"
+        },
+        {
+          "id": "synth-iwls93",
+          "record_sha256": "f098de305f053f9ddbd248ee9f31a6160c51c5015b610ed25f14adf527a78073",
+          "primary_sources": "https://ddd.fit.cvut.cz/www/prj/Benchmarks/IWLS93.pdf; https://ddd.fit.cvut.cz/www/prj/Benchmarks/IWLS93.7z; https://ddd.fit.cvut.cz/www/prj/Benchmarks/index.php?page=download"
+        },
+        {
+          "id": "synth-iwls2005",
+          "record_sha256": "ed974f35fa23a1fd9eda7f5b2052e0dd37e4ba581d039e960228c2115df7299c",
+          "primary_sources": "https://iwls.org/iwls2005/benchmarks.html; https://iwls.org/iwls2005/benchmark_presentation.pdf; https://iwls.org/iwls2005/IWLS_2005_benchmarks_V_1.0.tgz"
+        }
+      ]
+    },
+    {
+      "status_class": "误差许可/数据复用/最终评分版本不同",
+      "catalog_ids": [
+        "synth-iwls20-learning",
+        "synth-iwls23-aig",
+        "synth-iwls25-weighted"
+      ],
+      "primary_fact": "2020为样本泛化≤5000AND，不是完整函数CEC；2025旧100truth与2022逐Gitblob相同，新高层RTL暂缓公开；final按rawratio sum与4权重，旧callfloor/mean不可混版；23current Google节点总与final差58。",
+      "evidence_scope": "这些是具体数据/权限/评分版本，静态header算术不认证电路功能，匹配25总分也不构成CEC复现。",
+      "research_judgment": "旧题在新年仍可考高effort优化但不算freshOOD；商业/原生ABC已有不证明所有逻辑优化已饱和。官方未饱和声明只作其contest证据。",
+      "recommended_action": "原生最强公开提交同预算比较，冻结truth/CRC/hash/有效解/scorer与所有尝试；近似分类/精确综合/physical收益分轨，未公开RTL不臆造规格生成任务。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "synth-iwls20-learning",
+          "record_sha256": "fcd98b4486a5e7fcf012ba209ded4bdcbf4dc817c21640c89404df229f5a8ce4",
+          "primary_sources": "https://arxiv.org/abs/2012.02530; https://arxiv.org/pdf/2012.02530; https://raw.githubusercontent.com/iwls2020-lsml-contest/iwls2020-lsml-contest/593b3760ec5e54c99fe4bf61ebdf1eec9a94ca65/README.md; https://raw.githubusercontent.com/iwls2020-lsml-contest/iwls2020-lsml-contest/593b3760ec5e54c99fe4bf61ebdf1eec9a94ca65/contest_description.pdf"
+        },
+        {
+          "id": "synth-iwls23-aig",
+          "record_sha256": "25e754665407e642548cad4d175fe95a60bfeb141530df68978b807c20272a61",
+          "primary_sources": "https://raw.githubusercontent.com/alanminko/iwls2023-ls-contest/7dbfd510e2597cd07fdebcff91b5ac262d63c3f7/README.md; https://raw.githubusercontent.com/alanminko/iwls2023-ls-contest/7dbfd510e2597cd07fdebcff91b5ac262d63c3f7/LICENSE; https://raw.githubusercontent.com/alanminko/iwls2023-ls-contest/7dbfd510e2597cd07fdebcff91b5ac262d63c3f7/IWLS_2023_Programming_Contest.pdf; https://raw.githubusercontent.com/alanminko/iwls2023-ls-contest/7dbfd510e2597cd07fdebcff91b5ac262d63c3f7/IWLS_2023_Contest_Presentation.pdf; https://codeload.github.com/alanminko/iwls2023-ls-contest/zip/refs/heads/main"
+        },
+        {
+          "id": "synth-iwls25-weighted",
+          "record_sha256": "6fd76652d56a6ac5c2099e97d4d7507973919cb59a27982f581ecff790bee02f",
+          "primary_sources": "https://raw.githubusercontent.com/alanminko/iwls2025-ls-contest/defcf35c16381ead60776f08a3dd088b954b2ede/README.md; https://raw.githubusercontent.com/alanminko/iwls2025-ls-contest/defcf35c16381ead60776f08a3dd088b954b2ede/LICENSE; https://raw.githubusercontent.com/alanminko/iwls2025-ls-contest/defcf35c16381ead60776f08a3dd088b954b2ede/IWLS_2025_Contest_Presentation.pdf; https://www.iwls.org/iwls2025/contest/IWLS_2025_Programming_Contest.pdf; https://codeload.github.com/alanminko/iwls2025-ls-contest/zip/refs/heads/main"
+        }
+      ]
+    },
+    {
+      "status_class": "特定旧工具停止修复 / 原生回归仍有价值",
+      "catalog_ids": [
+        "verify-vloghammer"
+      ],
+      "primary_fact": "冻结README明确XST/ISIM默认禁用，原因是作者称Xilinx不再为这些工具修bug；同仓库继续支持其他综合/仿真工具及表达式回归。",
+      "evidence_scope": "直接维护声明只对XST/ISIM，非现代Vivado/Yosys或全EDA软件正确性；本轮无厂商终止维护公告独立认证。",
+      "research_judgment": "旧工具新bug数量不宜作主研究目标，可保留兼容性/历史回归；现代工具仍需强nativebaseline和独立语义确认。",
+      "recommended_action": "冻结工具/库/X/初始化/timeout契约，历史已修rootcause与新版本新发现分列；不以商业工具存在或原生SAT会做检查认定全部任务完成。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "verify-vloghammer",
+          "record_sha256": "6e0b9b6307cb969cf4c3cd1ad6b95ef76c3dbaf30193769ed28a50218dc48873",
+          "primary_sources": "https://raw.githubusercontent.com/YosysHQ/VlogHammer/12fa7ece0d7e9ad737ecb1363c2b832c18e6367f/README; https://raw.githubusercontent.com/YosysHQ/VlogHammer/12fa7ece0d7e9ad737ecb1363c2b832c18e6367f/COPYING; https://raw.githubusercontent.com/YosysHQ/VlogHammer/12fa7ece0d7e9ad737ecb1363c2b832c18e6367f/Makefile; https://raw.githubusercontent.com/YosysHQ/VlogHammer/12fa7ece0d7e9ad737ecb1363c2b832c18e6367f/scripts/check.sh; https://raw.githubusercontent.com/YosysHQ/VlogHammer/12fa7ece0d7e9ad737ecb1363c2b832c18e6367f/scripts/report.sh; https://raw.githubusercontent.com/YosysHQ/VlogHammer/12fa7ece0d7e9ad737ecb1363c2b832c18e6367f/scripts/generate.cc; https://yosyshq.net/yosys/vloghammer.html"
+        }
+      ]
+    },
+    {
+      "status_class": "生产flow评分从本地rules迁到外部baseline",
+      "catalog_ids": [
+        "be-orfs-native-flow",
+        "be-orfs-autotuner"
+      ],
+      "primary_fact": "冻结current ORFS Metrics文档明确移除checkMetadata/genRuleFile/localrules/golden，改dashboard真实baselinebuild；--strict前默认INCONCLUSIVE返回0。",
+      "evidence_scope": "具体productionORFS版本，researchfork仍含旧localrulecheck；不把入口404当全流程不可用，也不称exit0已验证QoR。",
+      "research_judgment": "agent结果必须区分未评/失败/通过，固定dashboardbaseline/规则；nativeAutoTuner已自动搜索但不代表所有PPA饱和。",
+      "recommended_action": "按版本保存原oracle/返回verdict/物理量/全部尝试成本，停止拿旧rule路径及无gateexit0作新榜验收。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "be-orfs-native-flow",
+          "record_sha256": "45bf27a745876c6afd8e78d1c6b55bc19bfd6fa0a7b1c4e4139d53cdd4356e4e",
+          "primary_sources": "https://raw.githubusercontent.com/The-OpenROAD-Project/OpenROAD-flow-scripts/3692473e791a0b006e935f80d59ab1dbe2512a9f/README.md; https://raw.githubusercontent.com/The-OpenROAD-Project/OpenROAD-flow-scripts/3692473e791a0b006e935f80d59ab1dbe2512a9f/docs/contrib/Metrics.md; https://raw.githubusercontent.com/The-OpenROAD-Project/OpenROAD-flow-scripts/3692473e791a0b006e935f80d59ab1dbe2512a9f/docs/user/FlowVariables.md; https://raw.githubusercontent.com/The-OpenROAD-Project/OpenROAD-flow-scripts/3692473e791a0b006e935f80d59ab1dbe2512a9f/flow/designs/README.md; https://raw.githubusercontent.com/The-OpenROAD-Project/OpenROAD-flow-scripts/3692473e791a0b006e935f80d59ab1dbe2512a9f/flow/util/genMetrics.py; https://raw.githubusercontent.com/The-OpenROAD-Project/OpenROAD-flow-scripts/3692473e791a0b006e935f80d59ab1dbe2512a9f/flow/designs/nangate45/gcd/config.mk; https://raw.githubusercontent.com/The-OpenROAD-Project/OpenROAD-flow-scripts/3692473e791a0b006e935f80d59ab1dbe2512a9f/LICENSE_BUILD_RUN_SCRIPTS; https://raw.githubusercontent.com/The-OpenROAD-Project/OpenROAD-flow-scripts/3692473e791a0b006e935f80d59ab1dbe2512a9f/flow/util/checkQorMetrics.py; https://raw.githubusercontent.com/The-OpenROAD-Project/OpenROAD-flow-scripts/3692473e791a0b006e935f80d59ab1dbe2512a9f/flow/Makefile"
+        },
+        {
+          "id": "be-orfs-autotuner",
+          "record_sha256": "36d5e416dd0593c5bb49c780f0251ca56f6dc73d4ceaa061ad705b5d1fa5b56d",
+          "primary_sources": "https://raw.githubusercontent.com/The-OpenROAD-Project/OpenROAD-flow-scripts/3692473e791a0b006e935f80d59ab1dbe2512a9f/docs/user/InstructionsForAutoTuner.md; https://raw.githubusercontent.com/The-OpenROAD-Project/OpenROAD-flow-scripts/3692473e791a0b006e935f80d59ab1dbe2512a9f/tools/AutoTuner/src/autotuner/distributed.py; https://raw.githubusercontent.com/The-OpenROAD-Project/OpenROAD-flow-scripts/3692473e791a0b006e935f80d59ab1dbe2512a9f/tools/AutoTuner/src/autotuner/utils.py; https://raw.githubusercontent.com/The-OpenROAD-Project/OpenROAD-flow-scripts/3692473e791a0b006e935f80d59ab1dbe2512a9f/flow/designs/nangate45/gcd/autotuner.json; https://raw.githubusercontent.com/The-OpenROAD-Project/OpenROAD-flow-scripts/3692473e791a0b006e935f80d59ab1dbe2512a9f/flow/designs/nangate45/gcd/constraint.sdc"
+        }
+      ]
+    },
+    {
+      "status_class": "旧3D子入口清理迁移 / public与paper分支不同",
+      "catalog_ids": [
+        "3d-rosettastone2-pin3d-paper",
+        "3d-taiwei-maintained-flow"
+      ],
+      "primary_fact": "ORFSResearch/flow-Pin3D README明确归档/清理并指向TaiWei；后继公开README固定testedtoolpair且写paperbranch不同，currentCIbaseline还允许非零DRC/负slack。",
+      "evidence_scope": "仅对应旧3D入口和当前public协议，非整个ORFSResearch退役；本轮未执行任何flow或声称历史paper结果错误。",
+      "research_judgment": "优先固定后继publicpair做新研究；历史paper与currentpublic分榜，回归容差通过不等流片clean。",
+      "recommended_action": "保留旧输入/论文/迁移说明和新stagegate，已知macro/toolblocker局部隔离，最终功能/DRC/LVS/MCMM独立验收。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "3d-rosettastone2-pin3d-paper",
+          "record_sha256": "fb77f1a2581bad544dcb6055c2f93fa0c1697d5771e9dceac1be4406f0e9b0cc",
+          "primary_sources": "https://arxiv.org/pdf/2601.17520; https://raw.githubusercontent.com/ieee-ceda-datc/ORFS-Research/807d9c86a449be7349719c54df34b510deadaca8/README.md; https://raw.githubusercontent.com/ieee-ceda-datc/ORFS-Research/807d9c86a449be7349719c54df34b510deadaca8/flow-Pin3D/README.md; https://raw.githubusercontent.com/CODA-Team/TaiWei-Pin-3D/c85b79352eefc31a588da3ef873e4fd68a3df3f2/README.md"
+        },
+        {
+          "id": "3d-taiwei-maintained-flow",
+          "record_sha256": "86529b3020f1473cce7f9cd72fd20ea180b318eab0034f7b448f0b223ed31b9e",
+          "primary_sources": "https://raw.githubusercontent.com/CODA-Team/TaiWei-Pin-3D/c85b79352eefc31a588da3ef873e4fd68a3df3f2/README.md; https://raw.githubusercontent.com/CODA-Team/TaiWei-Pin-3D/c85b79352eefc31a588da3ef873e4fd68a3df3f2/LICENSE; https://raw.githubusercontent.com/CODA-Team/TaiWei-Pin-3D/c85b79352eefc31a588da3ef873e4fd68a3df3f2/designs/asap7_3D/gcd/ci/ord/openroad_eval.json; https://raw.githubusercontent.com/CODA-Team/TaiWei-Pin-3D/c85b79352eefc31a588da3ef873e4fd68a3df3f2/designs/asap7_3D/gcd/ci/ord/cadence_eval.json; https://raw.githubusercontent.com/CODA-Team/TaiWei-Pin-3D/c85b79352eefc31a588da3ef873e4fd68a3df3f2/test/README.md; https://raw.githubusercontent.com/CODA-Team/TaiWei-Pin-3D/c85b79352eefc31a588da3ef873e4fd68a3df3f2/DOC/issue.md; https://raw.githubusercontent.com/CODA-Team/TaiWei-Pin-3D/c85b79352eefc31a588da3ef873e4fd68a3df3f2/util/compare_eval_baselines.py; https://raw.githubusercontent.com/CODA-Team/TaiWei-Pin-3D/c85b79352eefc31a588da3ef873e4fd68a3df3f2/util/extract_eval_metrics.py; https://raw.githubusercontent.com/CODA-Team/TaiWei-Pin-3D/c85b79352eefc31a588da3ef873e4fd68a3df3f2/DOC/openroad_3d_cooptimization_strategy.md; https://raw.githubusercontent.com/CODA-Team/TaiWei-Pin-3D/c85b79352eefc31a588da3ef873e4fd68a3df3f2/DOC/cadence_3d_cooptimization_strategy.md"
+        }
+      ]
+    },
+    {
+      "status_class": "同套件目标修订和原生实现不是同评分",
+      "catalog_ids": [
+        "analog-analoggym",
+        "analog-analoggym-amp-native-cost",
+        "analog-analoggym-nmcf-rl-contract"
+      ],
+      "primary_fact": "AnalogGym README修改FOMAMP惩罚避免原indicator乘积边界，并调整1.8V/ngspice要求；currentweightedcost和RL11spec不是README乘积FOM。",
+      "evidence_scope": "限定版本与代码路径差异，不称全部30电路/所有历史结果失效；下降沿helper边界也不扩所有SR路径。",
+      "research_judgment": "新研究应固定单协议并比强native搜索，老FOM/PVT下分数保留历史意义但不可混当前榜。",
+      "recommended_action": "逐参数/单位/失败/全部spec独立核，统一真实SPICE/PVT/reset/训练成本，原始与修订分版。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "analog-analoggym",
+          "record_sha256": "8121ff5a9416f4d98645771b3f1d9c772872826a534aedda62b7a278ffdcad9d",
+          "primary_sources": "https://raw.githubusercontent.com/CODA-Team/AnalogGym/0a9d1390ade361e2b4a2d33181e22367edbb8afc/README.md; https://raw.githubusercontent.com/CODA-Team/AnalogGym/0a9d1390ade361e2b4a2d33181e22367edbb8afc/RGNN_RL/utils.py; https://raw.githubusercontent.com/CODA-Team/AnalogGym/0a9d1390ade361e2b4a2d33181e22367edbb8afc/RGNN_RL/main_AMP.py; https://raw.githubusercontent.com/CODA-Team/AnalogGym/0a9d1390ade361e2b4a2d33181e22367edbb8afc/RGNN_RL/ckt_graphs.py; https://raw.githubusercontent.com/CODA-Team/AnalogGym/0a9d1390ade361e2b4a2d33181e22367edbb8afc/RGNN_RL/simulations/AMP_NMCF_ACDC.cir; https://raw.githubusercontent.com/CODA-Team/AnalogGym/0a9d1390ade361e2b4a2d33181e22367edbb8afc/AnalogGym/Amplifier/perf_extraction_amp.py; https://raw.githubusercontent.com/CODA-Team/AnalogGym/0a9d1390ade361e2b4a2d33181e22367edbb8afc/AnalogGym/Low%20Dropout%20Regulator/perf_extraction_LDO.py; https://arxiv.org/abs/2409.08534"
+        },
+        {
+          "id": "analog-analoggym-amp-native-cost",
+          "record_sha256": "495aa7e08f9808371017111423e6b8ca80570bfc9bcd6e6b566f8b6b160bde6c",
+          "primary_sources": "https://raw.githubusercontent.com/CODA-Team/AnalogGym/0a9d1390ade361e2b4a2d33181e22367edbb8afc/README.md; https://raw.githubusercontent.com/CODA-Team/AnalogGym/0a9d1390ade361e2b4a2d33181e22367edbb8afc/RGNN_RL/utils.py; https://raw.githubusercontent.com/CODA-Team/AnalogGym/0a9d1390ade361e2b4a2d33181e22367edbb8afc/RGNN_RL/main_AMP.py; https://raw.githubusercontent.com/CODA-Team/AnalogGym/0a9d1390ade361e2b4a2d33181e22367edbb8afc/RGNN_RL/ckt_graphs.py; https://raw.githubusercontent.com/CODA-Team/AnalogGym/0a9d1390ade361e2b4a2d33181e22367edbb8afc/RGNN_RL/simulations/AMP_NMCF_ACDC.cir; https://raw.githubusercontent.com/CODA-Team/AnalogGym/0a9d1390ade361e2b4a2d33181e22367edbb8afc/AnalogGym/Amplifier/perf_extraction_amp.py; https://raw.githubusercontent.com/CODA-Team/AnalogGym/0a9d1390ade361e2b4a2d33181e22367edbb8afc/AnalogGym/Low%20Dropout%20Regulator/perf_extraction_LDO.py; https://arxiv.org/abs/2409.08534"
+        },
+        {
+          "id": "analog-analoggym-nmcf-rl-contract",
+          "record_sha256": "78457c58981d104fd7b3d323a9a491325a3727b8645bf17ef1b182ecab2b3465",
+          "primary_sources": "https://raw.githubusercontent.com/CODA-Team/AnalogGym/0a9d1390ade361e2b4a2d33181e22367edbb8afc/README.md; https://raw.githubusercontent.com/CODA-Team/AnalogGym/0a9d1390ade361e2b4a2d33181e22367edbb8afc/RGNN_RL/utils.py; https://raw.githubusercontent.com/CODA-Team/AnalogGym/0a9d1390ade361e2b4a2d33181e22367edbb8afc/RGNN_RL/main_AMP.py; https://raw.githubusercontent.com/CODA-Team/AnalogGym/0a9d1390ade361e2b4a2d33181e22367edbb8afc/RGNN_RL/ckt_graphs.py; https://raw.githubusercontent.com/CODA-Team/AnalogGym/0a9d1390ade361e2b4a2d33181e22367edbb8afc/RGNN_RL/simulations/AMP_NMCF_ACDC.cir; https://raw.githubusercontent.com/CODA-Team/AnalogGym/0a9d1390ade361e2b4a2d33181e22367edbb8afc/AnalogGym/Amplifier/perf_extraction_amp.py; https://raw.githubusercontent.com/CODA-Team/AnalogGym/0a9d1390ade361e2b4a2d33181e22367edbb8afc/AnalogGym/Low%20Dropout%20Regulator/perf_extraction_LDO.py; https://arxiv.org/abs/2409.08534"
+        }
+      ]
+    },
+    {
+      "status_class": "公开数据当前版本局部异常 / 原件保留并隔离复核",
+      "catalog_ids": [
+        "fab-mixedwm38"
+      ],
+      "primary_fact": "作者链接Kaggle v4静态核得105图/214个非法值3像素；38015图有1024精确重复超额，无同图冲突标签。",
+      "evidence_scope": "限定已下载v4的像素与精确hash，不追认全部历史版本/论文泄漏，也不影响其他benchmark。",
+      "research_judgment": "原件不改，clean-review-index-v1仅排除105行保留37910行；并非官方新版或已去重训练集。",
+      "recommended_action": "按lot/母图/GAN血缘再设split，确认C7/C9版本与处理策略；不凭类别均衡叙述或满分直接称工业模式识别已解。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "fab-mixedwm38",
+          "record_sha256": "8d72a133d1cabbb8df6aff32b2e43ab9a5b5f4379efbd5cc94b0a00aee7c9ce3",
+          "primary_sources": "https://github.com/Junliangwangdhu/WaferMap/blob/10e65ca04cf105908cb87abec53c3083333b1bc9/README.md; https://github.com/Junliangwangdhu/WaferMap/blob/10e65ca04cf105908cb87abec53c3083333b1bc9/trian_mutil_label.py; https://doi.org/10.1109/TSM.2020.3020985; https://www.kaggle.com/datasets/co1d7era/mixedtype-wafer-defect-datasets; https://www.kaggle.com/api/v1/datasets/download/co1d7era/mixedtype-wafer-defect-datasets"
+        }
+      ]
+    },
+    {
+      "status_class": "新规范宣称多任务 / 当前交互实现未闭合",
+      "catalog_ids": [
+        "fab-mimac2026-dispatch"
+      ],
+      "primary_fact": "MIMAC2026命令行有dispatch baselines/历史CSV，但Gym.step无action读取/无env推进，T2瞬移、T3无agent动作，root与站点许可表述冲突。",
+      "evidence_scope": "selected冻结源码与SPEC/deviation，不是对未发布版本的判断，也不是历史MIMAC1–6。",
+      "research_judgment": "列为部分实现候选；不能按网站三任务数作三个已可跑agentbench。",
+      "recommended_action": "冻结发布/许可/真实actioneventreward与独立约束，重核warmup/CI/稳定性；当前作者自报gate不替代契约核对。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "fab-mimac2026-dispatch",
+          "record_sha256": "d10220bcc060e828172f8b776883e883ea8e348ce7ed3dd3e930144fa58db10b",
+          "primary_sources": "https://semiconfab.org/benchmark.html; https://github.com/jinjiefan2020/SemiconFab/blob/a0cb20c3ac54aa5e9da7af8f0a383a29be09b32b/MIMAC-2026-SPEC-v1.0.md; https://github.com/jinjiefan2020/SemiconFab/blob/a0cb20c3ac54aa5e9da7af8f0a383a29be09b32b/LICENSE; https://github.com/jinjiefan2020/SemiconFab/blob/a0cb20c3ac54aa5e9da7af8f0a383a29be09b32b/benchmark/simulator/DEVIATIONS.md; https://github.com/jinjiefan2020/SemiconFab/blob/a0cb20c3ac54aa5e9da7af8f0a383a29be09b32b/benchmark/simulator/mimac2026/gym_api.py; https://github.com/jinjiefan2020/SemiconFab/blob/a0cb20c3ac54aa5e9da7af8f0a383a29be09b32b/benchmark/simulator/run_benchmark.py"
+        }
+      ]
+    },
+    {
+      "status_class": "历史RTL描述与门网表初始化边界不同",
+      "catalog_ids": [
+        "test-itc99-seq",
+        "test-itc99-cut"
+      ],
+      "primary_fact": "完整I99T当前374blob均hash匹配；b01 VHDL含reset，plain bench无resetPI，opt_r另加两复位PI；seq/cut FAU代表与展开数量不同。",
+      "evidence_scope": "当前文件文本与输入权限的确定差异，不是已执行等价/ATPG证明或对历史论文的定罪。",
+      "research_judgment": "经典集仍可诊断求解器，但必须声明变体/初态/reset/fault分母；多变体不增加独立RTL家族。",
+      "recommended_action": "同预算现代原生ATPG及独立faultsim，保留旧协议/原件，不将_C高覆盖解释为顺序/真实scan全部已解。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "test-itc99-seq",
+          "record_sha256": "eb551b183e3bd6f0f89518c8c5dd162affe888f57f5c27825003f7aef1d07d70",
+          "primary_sources": "https://github.com/cad-polito-it/I99T/blob/8a2c3b500ee7ff20e7031de92592b737bedc6d8c/README.md; https://github.com/cad-polito-it/I99T/blob/8a2c3b500ee7ff20e7031de92592b737bedc6d8c/LICENSE; https://github.com/cad-polito-it/I99T/blob/8a2c3b500ee7ff20e7031de92592b737bedc6d8c/i99t/b01/b01.bench; https://github.com/cad-polito-it/I99T/blob/8a2c3b500ee7ff20e7031de92592b737bedc6d8c/i99t/b01/b01_C.bench; https://github.com/cad-polito-it/I99T/blob/8a2c3b500ee7ff20e7031de92592b737bedc6d8c/i99t/b01/b01.fau; https://github.com/cad-polito-it/I99T/blob/8a2c3b500ee7ff20e7031de92592b737bedc6d8c/i99t/add_reset.pl; https://doi.org/10.1109/54.867894"
+        },
+        {
+          "id": "test-itc99-cut",
+          "record_sha256": "3d1f17cc2983a9c5e58e79bb34888da237d2f68e9816d52fac8829d091b98fe7",
+          "primary_sources": "https://github.com/cad-polito-it/I99T/blob/8a2c3b500ee7ff20e7031de92592b737bedc6d8c/README.md; https://github.com/cad-polito-it/I99T/blob/8a2c3b500ee7ff20e7031de92592b737bedc6d8c/LICENSE; https://github.com/cad-polito-it/I99T/blob/8a2c3b500ee7ff20e7031de92592b737bedc6d8c/i99t/b01/b01.bench; https://github.com/cad-polito-it/I99T/blob/8a2c3b500ee7ff20e7031de92592b737bedc6d8c/i99t/b01/b01_C.bench; https://github.com/cad-polito-it/I99T/blob/8a2c3b500ee7ff20e7031de92592b737bedc6d8c/i99t/b01/b01.fau; https://github.com/cad-polito-it/I99T/blob/8a2c3b500ee7ff20e7031de92592b737bedc6d8c/i99t/add_reset.pl; https://doi.org/10.1109/54.867894"
+        }
+      ]
+    },
+    {
+      "status_class": "新release修复 / 原屏幕测试与良率证据不能自动继承",
+      "catalog_ids": [
+        "memory-openyield-circuit",
+        "memory-openyield-rare-yield"
+      ],
+      "primary_fact": "作者明确V2.2.5波形screen只完成1594/1778且模型hash后改；V2.2.6局部修SNM/metadata/parser并无fullscreen，legacyyieldflow未验证。",
+      "evidence_scope": "原作者发布状态与selected源码，不是本研究SPICE重现；不把其文档本地进程状态当本任务livehandle。",
+      "research_judgment": "优先记录当前限制/版本，不以更大版本或生成netlist成功当完整array/PVT/良率认证；旧已完成screen只认证对应旧tree。",
+      "recommended_action": "锁models/波形gold/expectedmanifest/负控和所有数值不完成，独立恢复完整验收后再评级；局部问题不扩大其他benchmark停工。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "memory-openyield-circuit",
+          "record_sha256": "ae699830991f72ced00687b35222585f3d33479adc013a825bce2b15e31841cb",
+          "primary_sources": "https://arxiv.org/pdf/2508.04106; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/LICENSE; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/README.md; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/docs/design/CONFIGURATION_REVIEW_V2_2_6.md; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/docs/V2_2_5_FULL_COVERAGE_EVALUATION.md; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/sram_compiler/equivalent_modeling/README.md; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/sram_compiler/config_yaml/global.yaml; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/sram_compiler/per_device_mc/README.md"
+        },
+        {
+          "id": "memory-openyield-rare-yield",
+          "record_sha256": "16d3a1e3ea374be16fbd1cc952250193aa43b4c23b2a92d98f6ab665e0228332",
+          "primary_sources": "https://arxiv.org/pdf/2508.04106; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/yield_estimation/README.md; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/README.md; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/sram_compiler/per_device_mc/README.md"
+        }
+      ]
+    },
+    {
+      "status_class": "发布参考解有作者精度警告 / 文本与包的采样范围不同",
+      "catalog_ids": [
+        "pd-srampg-dc",
+        "pd-srampg-transient"
+      ],
+      "primary_fact": "作者README明确参考可能不准确/有floatingnodes；当前16LFS对象hash匹配，瞬态文件SSRAM/SP8192W40ns、Sandwich/Ultra8T80ns且Ultra30node，和paperall40ns/20node不同。",
+      "evidence_scope": "仅本冻结发布的数据/文档边界；本研究未重解，不声称所有参考错或所有case都浮空，SSRAM静态R/V图有接地路径。",
+      "research_judgment": "仍可作为真实提取网络输入，但reference需独立可信数值验收，不能无条件作高精度gold。",
+      "recommended_action": "保留raw证据及版本/节点映射，必要时隔离修复发布clean版；同精度/成本重新对比，不因软件存在宣告solver任务全解。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "pd-srampg-dc",
+          "record_sha256": "151aeb70772459bb125448e9b1b76baafef0e97311a927ed456c3ee87edbe4f3",
+          "primary_sources": "https://arxiv.org/pdf/2404.05260; https://raw.githubusercontent.com/ShenShan123/SRAM-PG/62a95026696e8f669e9aab25dba574a9cd65b74d/README.md; https://raw.githubusercontent.com/ShenShan123/SRAM-PG/62a95026696e8f669e9aab25dba574a9cd65b74d/LICENSE; https://media.githubusercontent.com/media/ShenShan123/SRAM-PG/62a95026696e8f669e9aab25dba574a9cd65b74d/ssram_dc.sol.ic.tar.bz2; https://media.githubusercontent.com/media/ShenShan123/SRAM-PG/62a95026696e8f669e9aab25dba574a9cd65b74d/ssram_dc.sp.tar.bz2"
+        },
+        {
+          "id": "pd-srampg-transient",
+          "record_sha256": "5d5d4cb751fa03ddf54d94ca735222c3e270bc4c53976a39b91345f2df7737a5",
+          "primary_sources": "https://arxiv.org/pdf/2404.05260; https://raw.githubusercontent.com/ShenShan123/SRAM-PG/62a95026696e8f669e9aab25dba574a9cd65b74d/README.md; https://media.githubusercontent.com/media/ShenShan123/SRAM-PG/62a95026696e8f669e9aab25dba574a9cd65b74d/ssram_trans.sol.pt0.tar.bz2; https://media.githubusercontent.com/media/ShenShan123/SRAM-PG/62a95026696e8f669e9aab25dba574a9cd65b74d/ssram_trans.sp.tar.bz2; https://media.githubusercontent.com/media/ShenShan123/SRAM-PG/62a95026696e8f669e9aab25dba574a9cd65b74d/sandwich_trans.sol.pt0.tar.bz2; https://media.githubusercontent.com/media/ShenShan123/SRAM-PG/62a95026696e8f669e9aab25dba574a9cd65b74d/sp8192w_trans.sol.pt0.tar.bz2; https://media.githubusercontent.com/media/ShenShan123/SRAM-PG/62a95026696e8f669e9aab25dba574a9cd65b74d/ultra8T_trans.sol.pt0.tar.bz2"
+        }
+      ]
+    },
+    {
+      "status_class": "算术接口替换 / 旧通过不可追认当前版本",
+      "catalog_ids": [
+        "ara-acc-a1-fixedexp"
+      ],
+      "primary_fact": "作者currenttask明示09-22切到Q5.10输入/bf16输出，历史Q1.15输出和全bf16输入结果保留但标superseded；当前表明确没有按新spec评过的设计。",
+      "evidence_scope": "仅a1特定接口版本；source为当前官网table，完整harness未取，非独立重评分。",
+      "research_judgment": "新研究先锁currentdomain/gold/interfaces，旧53.11/904.66等不当current通过，不能据此断言设计任务已饱和。",
+      "recommended_action": "封存原spec/RTL/score，按合法可读新checker重评；首页旧数值不能覆盖更具体任务卡说明。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "ara-acc-a1-fixedexp",
+          "record_sha256": "c5d8937749eb2fc6ff6d8af5414e5512c4334837eceb336fa6155f98ac4e389c",
+          "primary_sources": "https://www.chipbench.ai/; https://huggingface.co/datasets/AgentNativeResearchLab/cpu-design-benchmark"
+        }
+      ]
+    },
+    {
+      "status_class": "FPGA评分修订 / 未计时路径与FF面积补计",
+      "catalog_ids": [
+        "ara-acc-a2-bf16-rsqrt",
+        "ara-acc-a3-bf16-exp",
+        "ara-acc-a4-bf16-gelu"
+      ],
+      "primary_fact": "作者当前表说明09-19后注册输入输出以覆盖首寄存器前逻辑，面积加FF；部分旧高fmax重评失败。a3另改80MHz门和面积主分/时钟1.2封顶，不再统一fmax/latency分数。",
+      "evidence_scope": "只对应该suite的历史flow/版本，不宣称nextpnr所有应用错误；无完整源码/日志独立复核。",
+      "research_judgment": "优先currenttiming/area及taskformula，旧headline不混榜，原生工具提供指标不免除约束完整性检查。",
+      "recommended_action": "固定所有timingpaths/SDC/FF和资源权重，数值正确与clock/resource硬门分报；重新比较同配置baseline。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "ara-acc-a2-bf16-rsqrt",
+          "record_sha256": "6731fd3181f4c157ec21f2bbe1ffe013628d8cf9c53d96b9d93969d1edcd5558",
+          "primary_sources": "https://www.chipbench.ai/; https://huggingface.co/datasets/AgentNativeResearchLab/cpu-design-benchmark"
+        },
+        {
+          "id": "ara-acc-a3-bf16-exp",
+          "record_sha256": "c9bf918635b25ebcf4908bc0325566cdf3055215f1d17fd41b973cf53e584280",
+          "primary_sources": "https://www.chipbench.ai/; https://huggingface.co/datasets/AgentNativeResearchLab/cpu-design-benchmark"
+        },
+        {
+          "id": "ara-acc-a4-bf16-gelu",
+          "record_sha256": "69c49e49e5b0f930d11278f38f69620d5b332b1211255bdc74f5455b4cdf07db",
+          "primary_sources": "https://www.chipbench.ai/; https://huggingface.co/datasets/AgentNativeResearchLab/cpu-design-benchmark"
+        }
+      ]
+    },
+    {
+      "status_class": "原论文分母与当前helper算分不同",
+      "catalog_ids": [
+        "rtl-rtllm",
+        "rtl-rtllm-paper30"
+      ],
+      "primary_fact": "originalpaper v3明确30，legacyREADME29/current50；currentcal_atk在50项后append0导致满分50/51，n来自连续trial文件夹而非固定5，source功能正marker门与8s线程不kill。",
+      "evidence_scope": "仅具体版本/脚本契约；本研究未执行VCS/DC或证明历史paper实际用当前helper，不判整个RTLLM家族无效。",
+      "research_judgment": "新研究先冻结50题spec/TB与严格oracle，历史30/29/50分轨；修helper须标新版本，不静默重算旧paper分数。",
+      "recommended_action": "全200题目工件metadata/AST静态核已完；功能TB敏感性、清理/退出码/timeout、同综合库clock和功耗活动仍需独立复验。",
+      "additional_primary_sources": [],
+      "source_snapshots": [
+        {
+          "id": "rtl-rtllm",
+          "record_sha256": "c56f49c4659249db70b41b8d21e2b9ad9a0af603a2df9f17c8b1b37ddc71a8d7",
+          "primary_sources": "https://github.com/hkust-zhiyao/RTLLM; https://github.com/hkust-zhiyao/RTLLM/blob/51ed553d0ffd32797a1a0a13e051656bf302c81f/auto_run.py; https://github.com/hkust-zhiyao/RTLLM/blob/51ed553d0ffd32797a1a0a13e051656bf302c81f/README.md"
+        },
+        {
+          "id": "rtl-rtllm-paper30",
+          "record_sha256": "fe04c2557c7bf72b0a89bcfbef885bd6276534f5fa779cc9ff4e4d9f0ff56d92",
+          "primary_sources": "https://arxiv.org/pdf/2308.05345; https://arxiv.org/abs/2308.05345"
+        }
+      ]
+    }
+  ]
+}

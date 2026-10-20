@@ -1,0 +1,288 @@
+{
+  "as_of": "2026-10-20T00:45:36.090728+00:00",
+  "status": "logic task/input/correctness/cost comparison; not a new benchmark or model ranking",
+  "scope": "逻辑综合不能只按年份或同为AIG合榜：稀疏样本学习允许误差，完整truth要求等价；PLA/DC、组合/顺序/FSM、ASIC/FPGA与代理预测各有不同输入、oracle、单位和预算。成熟native能力是必须baseline，退役/饱和仍需具体版本与同条件证据。",
+  "items": [
+    {
+      "task": "样本到小布尔电路的泛化",
+      "catalog_ids": [
+        "synth-iwls20-learning"
+      ],
+      "input_boundary": "100函数、每train/val/test6400，val允许入训练",
+      "label_oracle": "未见minterm分类准确率，不要求完整未知函数CEC",
+      "scoring_boundary": "≤5000AND，过cap该题0；sum/mean单位与majority分开，当前test已公开",
+      "current_use": "同host/算术width/图像类别复用；不能把MLaccuracy当精确综合或让native care拟合替代泛化",
+      "source_snapshots": [
+        {
+          "id": "synth-iwls20-learning",
+          "record_sha256": "fcd98b4486a5e7fcf012ba209ded4bdcbf4dc817c21640c89404df229f5a8ce4"
+        }
+      ]
+    },
+    {
+      "task": "受AIG容量限制的多类图像电路",
+      "catalog_ids": [
+        "synth-iwls21-cifar"
+      ],
+      "input_boundary": "CIFAR10 24576bit→10output，三容量档",
+      "label_oracle": "Top1分类；多1取最低位类/全0class0，不是严格onehot拒绝",
+      "scoring_boundary": "10k/100k/1M AND各档胜者；call exactmetric TBD，test peek自报",
+      "current_use": "honorsystem非独立无污染证明，数据集一份不是三新bench；与无面积约束CNN分开",
+      "source_snapshots": [
+        {
+          "id": "synth-iwls21-cifar",
+          "record_sha256": "85ac10bf27f1206c1edeea121f3e4c648f281ce964ba5d14d1f9cd41d746be14"
+        }
+      ]
+    },
+    {
+      "task": "完整真值表精确AND最小化原赛",
+      "catalog_ids": [
+        "synth-iwls22-exact"
+      ],
+      "input_boundary": "100完全指定multioutput truth",
+      "label_oracle": "必须CEC后再计节点，错误/未提交0",
+      "scoring_boundary": "原call floor100best/own后全case平均；best依参赛有效集合",
+      "current_use": "与学习近似是不同合同；强native/exact/portfolio及公开冠军，不只比初始truth分解",
+      "source_snapshots": [
+        {
+          "id": "synth-iwls22-exact",
+          "record_sha256": "8cc6a3c238b7c4f779f7b747e4a08b21c84d88de2de24b3b5ac4b5108e1dc45d"
+        }
+      ]
+    },
+    {
+      "task": "AND与XOR表示的不同成本",
+      "catalog_ids": [
+        "synth-iwls23-aig",
+        "synth-iwls23-xaig"
+      ],
+      "input_boundary": "2022同源重排/转换100truth",
+      "label_oracle": "同功能，traditionalAIG和XAIG恢复后分别计cost",
+      "scoring_boundary": "AIGheader AND不是XAIG节点；callfloor/mean与finalfractional总score有未核实现差异",
+      "current_use": "currentGoogle23873AND与final23815不同，不据current包追认历史榜；冻结提交/CEC/计数器",
+      "source_snapshots": [
+        {
+          "id": "synth-iwls23-aig",
+          "record_sha256": "25e754665407e642548cad4d175fe95a60bfeb141530df68978b807c20272a61"
+        },
+        {
+          "id": "synth-iwls23-xaig",
+          "record_sha256": "6968939ccddffc436beb0080f032b2da91497ca47b62675e0b01f9321742dfb6"
+        }
+      ]
+    },
+    {
+      "task": "再编号的数据复用与高effort优化",
+      "catalog_ids": [
+        "synth-iwls24-exact"
+      ],
+      "input_boundary": "100samebench变换/重编号、保持最小node数",
+      "label_oracle": "AIG/XAIG精确功能，官方最终库/约束另锁",
+      "scoring_boundary": "finalslide sum100best/own，无floor；旧call不能代最终score",
+      "current_use": "新年份不等新独立IP；小truth改进证据不外推现代physicalPPA",
+      "source_snapshots": [
+        {
+          "id": "synth-iwls24-exact",
+          "record_sha256": "46d24e865eafd855a313fb08322054cbcdfea34adb8372a7b32732ca4ab96724"
+        }
+      ]
+    },
+    {
+      "task": "旧/新两组加权精确综合",
+      "catalog_ids": [
+        "synth-iwls25-weighted"
+      ],
+      "input_boundary": "200truth=原22相同100+新100；新高层RTL暂缓公开",
+      "label_oracle": "200完整函数CEC；头部/真值矩形解析不替CEC",
+      "scoring_boundary": "final S=4S_old+S_new，rawratio sum；假设提交均正确的header算术匹配final2decimals",
+      "current_use": "sourcehash旧100逐一相同，不能称200freshOOD；全部searchbudget/native冠军比较，AIG面积非µm²",
+      "source_snapshots": [
+        {
+          "id": "synth-iwls25-weighted",
+          "record_sha256": "6fd76652d56a6ac5c2099e97d4d7507973919cb59a27982f581ecff790bee02f"
+        }
+      ]
+    },
+    {
+      "task": "两级PLA覆盖",
+      "catalog_ids": [
+        "synth-lgsynth91-pla"
+      ],
+      "input_boundary": "cube/ON-OFF-DC/.type，40PLA文件",
+      "label_oracle": "care兼容与输出极性/DC合同",
+      "scoring_boundary": "product/literal是两级代理，mappedarea另报",
+      "current_use": "成熟Espresso是nativebaseline，不能按输出-或文件行数粗猜正确/面积",
+      "source_snapshots": [
+        {
+          "id": "synth-lgsynth91-pla",
+          "record_sha256": "154eaf2b3280c0a58ac9d16dd071f8fbcddc3cc01356b278d29c59bb08e6b314"
+        }
+      ]
+    },
+    {
+      "task": "组合网络重写与映射",
+      "catalog_ids": [
+        "synth-lgsynth91-comb",
+        "synth-epfl"
+      ],
+      "input_boundary": "BLIF/SLIF+库/IOfanout；EPFL23原始组合设计多格式",
+      "label_oracle": "组合等价/兼容与真实库映射",
+      "scoring_boundary": "LGS91 mappedcellarea/库delay；EPFL LUT6/depth是另一cost，不合榜",
+      "current_use": "原native综合/ABC强flow必比；结构proxy收益还需现代library/PnR复核",
+      "source_snapshots": [
+        {
+          "id": "synth-lgsynth91-comb",
+          "record_sha256": "cd122e72355b7f698083b6fa1307e522de2ed6bebe8fe095d6b9af90ff6ae67d"
+        },
+        {
+          "id": "synth-epfl",
+          "record_sha256": "5a382f726214b1a608843df791848546f2be8f74c3fbc7b9d33d8957b5cbaa0e"
+        }
+      ]
+    },
+    {
+      "task": "顺序优化/retiming",
+      "catalog_ids": [
+        "synth-lgsynth91-seq"
+      ],
+      "input_boundary": "latch/clock/初始化与外部约束",
+      "label_oracle": "初始化序列之后I/O行为保留，不等寄存器逐名字同",
+      "scoring_boundary": "mappedarea/delay+独立SEC，latency/retime不能忽略initial contract",
+      "current_use": "工具已有retime不是全任务已解，不能把组合cut通过当完整顺序等价",
+      "source_snapshots": [
+        {
+          "id": "synth-lgsynth91-seq",
+          "record_sha256": "88dfcd70b5e4ffb830ae23e19c6d42ef2cd77fe8cdebe32918e36bd3c308fef3"
+        }
+      ]
+    },
+    {
+      "task": "FSM最小化与状态赋值",
+      "catalog_ids": [
+        "synth-lgsynth91-fsm"
+      ],
+      "input_boundary": "符号current/nextstate、输入输出cube、可选reset",
+      "label_oracle": "约定initial/care下的外部行为",
+      "scoring_boundary": "statecount/encoding与mappedarea分开；无.r不因START名字发明reset",
+      "current_use": "原生FSM工具/映射是强baseline，状态数下降不直接是工业PPA优化",
+      "source_snapshots": [
+        {
+          "id": "synth-lgsynth91-fsm",
+          "record_sha256": "6371283d0072802bce5ddde028cf2e17c059cc41fb70bc2177ed77f20abde4f7"
+        }
+      ]
+    },
+    {
+      "task": "含时序/异步/多输出库的EDIF综合",
+      "catalog_ids": [
+        "synth-iwls93"
+      ],
+      "input_boundary": "restrictedEDIF+库+有限tv；CVUT202EDIF/204TV不相加",
+      "label_oracle": "finitevector合理检查但原文否认formal证明；drivercap合法性",
+      "scoring_boundary": "FF等效PI/PO负载、库area/cap/delay；lib四cell修订必须定版",
+      "current_use": "旧转换器/仿真器已有仍不等最优映射或现代signoff；多格式语义需独立核",
+      "source_snapshots": [
+        {
+          "id": "synth-iwls93",
+          "record_sha256": "f098de305f053f9ddbd248ee9f31a6160c51c5015b610ed25f14adf527a78073"
+        }
+      ]
+    },
+    {
+      "task": "RTL与旧mappednetlist素材",
+      "catalog_ids": [
+        "synth-iwls2005"
+      ],
+      "input_boundary": "官方84、原包顶层mappedV89；RTL/mapped/OA输入层不同",
+      "label_oracle": "source库/约束与LEC/SEC需另固定；list非全可用身份保证",
+      "scoring_boundary": "quick180nm synthesis是历史baseline，cell不是统一2inputgatecost",
+      "current_use": "同源ISCAS/ITC/IP复用需分组；现代native/physical比较，不将旧quickrun当唯一弱基线",
+      "source_snapshots": [
+        {
+          "id": "synth-iwls2005",
+          "record_sha256": "ed974f35fa23a1fd9eda7f5b2052e0dd37e4ba581d039e960228c2115df7299c"
+        }
+      ]
+    },
+    {
+      "task": "给定recipe的QoR预测",
+      "catalog_ids": [
+        "synth-openabc",
+        "synth-openabc-unseen-ip",
+        "synth-openabc-unseen-pair"
+      ],
+      "input_boundary": "29IP/1500recipe/20steps；新recipe、新IP、新pair三split",
+      "label_oracle": "指定ABC结果是标签，预测本身不是优化终态",
+      "scoring_boundary": "current目标每design zscore；若统计含test/unknownIP标签即有权限问题，原包未加载不可断言历史泄漏",
+      "current_use": "报告原单位误差/输入校准权限与split；代理准确不证明找到更好logic实现",
+      "source_snapshots": [
+        {
+          "id": "synth-openabc",
+          "record_sha256": "de7508067c0aae97023daf50085cb08e05e0fb5af0156269471ea3ebc69251cf"
+        },
+        {
+          "id": "synth-openabc-unseen-ip",
+          "record_sha256": "9ed670e60e4f0e33cb024305a6823c339b61b740e2d2e54782a8a59afd566c22"
+        },
+        {
+          "id": "synth-openabc-unseen-pair",
+          "record_sha256": "7bb0d6ecc03530922acf74a7c116577571d02d775d4bead6043e02de665b32b1"
+        }
+      ]
+    },
+    {
+      "task": "已有RTL的ASIC映射/STA",
+      "catalog_ids": [
+        "synth-logikbench-asic"
+      ],
+      "input_boundary": "固定RTL/top/参数/PDK/lib/corner/SDC",
+      "label_oracle": "cellarea与netlistSTA，非规格生成",
+      "scoring_boundary": "面积单位依库meta；FMAX=1/min_period，组合virtualclock非真实寄存频率",
+      "current_use": "driver/load/IOdelay/hold等固定，完整PnR/MCMM另验；原生mapper是baseline",
+      "source_snapshots": [
+        {
+          "id": "synth-logikbench-asic",
+          "record_sha256": "91eb57cc4c5acb195af504c886b5ec0921d4692994c7c1056f5af982725df3dd"
+        }
+      ]
+    },
+    {
+      "task": "已有RTL的FPGA资源映射",
+      "catalog_ids": [
+        "synth-logikbench-fpga"
+      ],
+      "input_boundary": "同Design映射不同FPGAfabric",
+      "label_oracle": "resourcebucket/netlist统计，不等实际physicalarea",
+      "scoring_boundary": "八bucket无权重相加cell数，不等LUT6等效容量；published无FMAX",
+      "current_use": "DSP/BRAM/LUT4/6不可同量，architecture/flow/资源约束要先锁",
+      "source_snapshots": [
+        {
+          "id": "synth-logikbench-fpga",
+          "record_sha256": "9db8cc45f8eb6138808000e623dd5d3ad111840c6ac2da9144223dec37ed3cb9"
+        }
+      ]
+    },
+    {
+      "task": "模型改写RTL的等价与工具收益",
+      "catalog_ids": [
+        "rtl-rewriter-small",
+        "rtl-rewriter-large"
+      ],
+      "input_boundary": "55短/5长case与接口/允许guides检索",
+      "label_oracle": "原RTL功能/等价与独立工具PPA，checker须保护",
+      "scoring_boundary": "小casewires/cells proxy；大casearea/delay工具/单位仍缺口，不补µm²/ps",
+      "current_use": "模型文本重写、低层recipe和工具agent是不同任务；强native默认/专家/同预算，最终flow核收益",
+      "source_snapshots": [
+        {
+          "id": "rtl-rewriter-small",
+          "record_sha256": "3aa379e5acb1cb2f841d31578e7ac268ba2726f96a7a930f035f1d2934598176"
+        },
+        {
+          "id": "rtl-rewriter-large",
+          "record_sha256": "7a6d8b5e3c5f96c7c3dfcdb9667d0a5c45d9250df2c9aa0c8531a08c15765c5f"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,268 @@
+{
+  "as_of": "2026-10-20T00:45:36.359545+00:00",
+  "status": "static protocol comparison, not reproduced model ranking",
+  "scope": "编译成功、覆盖率、自检仿真通过、有界形式检查、完整证明和缺陷检出是不同证据。必须固定被测RTL身份、失败分母、oracle独立性、覆盖目标和工具预算；源码可读不等已完成运行复验。",
+  "items": [
+    {
+      "task": "ChipVerilog",
+      "catalog_ids": [
+        "dig-chipverilog-integration"
+      ],
+      "population": "同64题×5candidate×3模型，960cached verdict已全数解析",
+      "oracle": "reference层次；sim/bounded/strict_comb混合，当前runner另有induction但cache无此pass",
+      "metric_boundary": "173pass=91sim+78bounded+4组合无界；32reference_fail仍在分母",
+      "research_use": "报pass@k同时分层证明强度/参考工具失败；缺stub字段不能当无stub",
+      "source_snapshots": [
+        {
+          "id": "dig-chipverilog-integration",
+          "record_sha256": "f634711389d6ae0e371f6493c4ec1d9c220293b1513a8cbbf607034863c61ea0",
+          "primary_sources": "https://arxiv.org/pdf/2607.13079; https://github.com/HKUSTGZ-MICS-LYU/ChipVerilog/tree/3eea482f20c048966d54ed04c418b85e5fd4d498; https://raw.githubusercontent.com/HKUSTGZ-MICS-LYU/ChipVerilog/3eea482f20c048966d54ed04c418b85e5fd4d498/artifact_evaluation/METRIC_DEFINITION.md"
+        }
+      ]
+    },
+    {
+      "task": "VerifLLMBench",
+      "catalog_ids": [
+        "ver-verifllmbench-uvm"
+      ],
+      "population": "原paper5DUT×5trial；current30目录仅5题有3模型trial路径",
+      "oracle": "人工interface/covergroups，LLM生成scoreboard可能误报正确DUT",
+      "metric_boundary": "coverage只成功sim且非零项平均；不同人工bins135705vs165",
+      "research_use": "另报无条件有效交付率、适用metric与独立oracle/bugkill，不能只排coverage",
+      "source_snapshots": [
+        {
+          "id": "ver-verifllmbench-uvm",
+          "record_sha256": "f1e97c3f077e17f495f0042d4931d7166eae0d058515a550e9adf7c46b4b624e",
+          "primary_sources": "https://dvcon-proceedings.org/wp-content/uploads/1059.pdf; https://github.com/umn-ece-sartorilabs/Verif-LLM/tree/964747059ef484bf8e8a4c01228db26bec96196a; https://raw.githubusercontent.com/umn-ece-sartorilabs/Verif-LLM/964747059ef484bf8e8a4c01228db26bec96196a/common.mk"
+        }
+      ]
+    },
+    {
+      "task": "UVM²",
+      "catalog_ids": [
+        "ver-uvm2-machine"
+      ],
+      "population": "TableI/II/III九题，贡献称10；每组件5次且其余人工TB作上下文",
+      "oracle": "人工reference期望输出与人工功能场景，实际发布checker未取得",
+      "metric_boundary": "组件SRG和完整流程coverage不同分母；coverage成功条件化",
+      "research_use": "取得固定任务包后再作同输入/预算比较，不能拿组件成功率替代端到端成功",
+      "source_snapshots": [
+        {
+          "id": "ver-uvm2-machine",
+          "record_sha256": "80675d9282ed84f8cdd5f3d34d1649783b113f4a787fd5ab8bda8960eb828118",
+          "primary_sources": "https://arxiv.org/pdf/2504.19959; https://anonymous.4open.science/r/UVM_Machine-7806/; https://arxiv.org/pdf/2504.19959v4"
+        }
+      ]
+    },
+    {
+      "task": "HAVEN",
+      "catalog_ids": [
+        "ver-haven-uvm"
+      ],
+      "population": "paper19题单次vsrepo16题best3；历史UVM²成绩引用不复跑",
+      "oracle": "自身Blueprint生成cover_bins；template scoreboard/DPI配置决定实际验收",
+      "metric_boundary": "code等权均值可用项含数值0，func自生成group；失败design排除模型均值",
+      "research_use": "以固定独立bins/scoreboard和Stage1模板预定义序列作baseline，再量Stage2增益；SHA3≠SHA256",
+      "source_snapshots": [
+        {
+          "id": "ver-haven-uvm",
+          "record_sha256": "b52abee3110276a8d7af9390bac3e1074ac8dccf5ad6d20b6e0d8ee10e81b1f7",
+          "primary_sources": "https://arxiv.org/pdf/2604.27643; https://github.com/mcc311/haven/tree/b2beffbdeb940cbc84637f3425eee4b0e2fbe142; https://huggingface.co/datasets/mcc311/haven-hdl-benchmark/blob/main/README.md"
+        }
+      ]
+    },
+    {
+      "task": "GateTruth mutation audit",
+      "catalog_ids": [
+        "ver-gatetruth-mutation-audit"
+      ],
+      "population": "内部60task vs外部RTLLM50design/46auditable；算子task-specific vsgeneric不同",
+      "oracle": "原reference+TB；内部仅simkill，外部adapter FAIL/compile也计kill",
+      "metric_boundary": "内部1105/1149valid、96stillborn排除；external33/46<95不等两套统一认证",
+      "research_use": "先统一编译有效性/算子/时间再比较；参考divergence≠spec违反，95%非行业通用标准",
+      "source_snapshots": [
+        {
+          "id": "ver-gatetruth-mutation-audit",
+          "record_sha256": "49c48629d2b0091bff0b08da84f2f1c34217ebeb519fe63ce4d4f20654d9a0dc",
+          "primary_sources": "https://arxiv.org/pdf/2608.12635; https://github.com/meetbhadra701-cloud/GateTruth/tree/f327624759043296c186f4d5ae8256a8fddc1dab"
+        }
+      ]
+    },
+    {
+      "task": "GateTruth Track B",
+      "catalog_ids": [
+        "be-gatetruth-trackb"
+      ],
+      "population": "8题×7模型56历史run；当前协议修复未重新campaign",
+      "oracle": "分题行为保留SEC/功能变更目标，8TB未mutation认证",
+      "metric_boundary": "31/56超token，全部56无提交RTL/hash不可独立重评",
+      "research_use": "用current修复版重做严格预算和持久化提交后才可比较；不追认旧榜已可复现",
+      "source_snapshots": [
+        {
+          "id": "be-gatetruth-trackb",
+          "record_sha256": "8984bdc1ebeb638a7a83ff8e332fec747b039a38cb30aa5a343bc5abe9bd41b7",
+          "primary_sources": "https://arxiv.org/pdf/2608.12635; https://github.com/meetbhadra701-cloud/GateTruth/tree/f327624759043296c186f4d5ae8256a8fddc1dab"
+        }
+      ]
+    },
+    {
+      "task": "UVLLM / ErrorSet",
+      "catalog_ids": [
+        "ver-uvllm-errorset"
+      ],
+      "population": "论文27模块多错型vs公开35配置/26project；3缺路径隔离、派生32path-complete",
+      "oracle": "现有TB/reference VCD；paper FR另专家额外情景核验",
+      "metric_boundary": "HR为testcase pass比例，FR为专家有效修复率；不是同一oracle",
+      "research_use": "波形匹配不等专家FR/全部状态证明；路径完整不等可执行验证",
+      "source_snapshots": [
+        {
+          "id": "ver-uvllm-errorset",
+          "record_sha256": "03c50008c2c5280fe34f3b25139eda066a6fe79245d7415bb22b8a4f28c5bfe0",
+          "primary_sources": "https://arxiv.org/pdf/2411.16238; https://github.com/SEU-ACAL/reproduce-UVLLM-DAC-25/tree/39cb479e9b91dabc9855fed6fe43c82fdccbca2a"
+        }
+      ]
+    },
+    {
+      "task": "VeriBugBench",
+      "catalog_ids": [
+        "ver-veribugbench-v1"
+      ],
+      "population": "45project/2608singlefault（manifest和metadata ID全数一致），由7358candidate执行后retain",
+      "oracle": "指定assembledTB下输出可观测；CSV共同列/长度前缀比较，未检出标equivalent非形式证明",
+      "metric_boundary": "36.01→39.54是project均值observability；在已retained子集检测不代表所有潜在错误",
+      "research_use": "适合定位/修复数据；需独立hidden回归并按IP家族split；保留尾部/缺列/未知值对齐边界",
+      "source_snapshots": [
+        {
+          "id": "ver-veribugbench-v1",
+          "record_sha256": "564c75238b755639d569dedebc960a298d85d46a18ad41d0eed95ae59e833aa7",
+          "primary_sources": "https://arxiv.org/pdf/2609.18022; https://github.com/wndif/VeriBugBench/tree/463d490e261dff247eb6ef82b07b6e924fee19e8; https://raw.githubusercontent.com/wndif/VeriBugBench/463d490e261dff247eb6ef82b07b6e924fee19e8/src/veribugbench/results.py"
+        }
+      ]
+    },
+    {
+      "task": "CovR",
+      "catalog_ids": [
+        "ver-covr-stimulus"
+      ],
+      "population": "16514训练quadruple与复用203+83评测task分开，direct与agentic分轨",
+      "oracle": "stimulus-only；FRM/checker来自被集成框架，Cmax取任务reference目标",
+      "metric_boundary": "cov@k是预期best normalized coverage，不是pass概率；Eval2-100为10mutant全杀环境比例",
+      "research_use": "Eval1下降需独立裁决才认FRM bug；缺代码/manifest/Cmax证据，不把paper摘要写成完整可复现榜",
+      "source_snapshots": [
+        {
+          "id": "ver-covr-stimulus",
+          "record_sha256": "e9fe761f4b06b2ca42ecc78448bb35958ad298b1293a237e61bfcff61a741ad2",
+          "primary_sources": "https://arxiv.org/pdf/2609.19189; https://arxiv.org/html/2609.19189v2; https://github.com/orgs/scale-lab/CovR"
+        }
+      ]
+    },
+    {
+      "task": "CovAgent hardware",
+      "catalog_ids": [
+        "ver-covagent-hardware"
+      ],
+      "population": "paper19设计/3run平均，每iteration5seed且跨轮累计；currentdashboard102entry另分",
+      "oracle": "只顶层stimulus，prompt禁止assert；human-reviewed残余hole taxonomy非formal不可达证明",
+      "metric_boundary": "Questa statement vsVerilator line分开；CPT效率比与TTCT目标比要同时看未达N/A和rawcoverage",
+      "research_use": "累计coverage不等单次bestTB；模型建议exclusion须独立证据，不能直接waive或推任务已饱和",
+      "source_snapshots": [
+        {
+          "id": "ver-covagent-hardware",
+          "record_sha256": "1ca278482942197ce79c5b962f08e7044151c9076241f29c8ce5d058b5801bad",
+          "primary_sources": "https://arxiv.org/pdf/2604.15657; https://github.com/advent-lab/CovAgent/tree/2f6a93189d04ca5d59957fa7be89722aaf39c5af"
+        }
+      ]
+    },
+    {
+      "task": "OpenTitan IP engineering regression",
+      "catalog_ids": [
+        "verify-opentitan-engineering"
+      ],
+      "population": "AES base20local tests/19local stage项非完整imports/variants/seed矩阵；非固定agent题库",
+      "oracle": "独立DPI参考/scoreboard/SVA；cfg.en_scb、skip/corrupt和exclude权限须保护；两repo版本未证配套",
+      "metric_boundary": "run种子passrate、testplan去重test名progress、Covergroup名称存在与真实bincoverage不同；runtime取reseed最大非总成本",
+      "research_use": "成熟DVSIM/UNR是nativebaseline；UNR不覆盖func/assert，waiver需复核。保护gold补真实bug/隐蔽测试，不能关checker或改exclude自评",
+      "source_snapshots": [
+        {
+          "id": "verify-opentitan-engineering",
+          "record_sha256": "184ac0e15608b396a66c20f0c0c2d5eff68fc8abc98b416defb2208fdf8e717e",
+          "primary_sources": "https://opentitan.org/book/doc/contributing/dv/methodology/index.html; https://raw.githubusercontent.com/lowRISC/opentitan/6d236d35bc9b21289ca1fd55043267d028e173fd/LICENSE; https://raw.githubusercontent.com/lowRISC/opentitan/6d236d35bc9b21289ca1fd55043267d028e173fd/doc/contributing/dv/methodology/README.md; https://raw.githubusercontent.com/lowRISC/opentitan/6d236d35bc9b21289ca1fd55043267d028e173fd/doc/contributing/dv/sec_cm_dv_framework/README.md; https://raw.githubusercontent.com/lowRISC/opentitan/6d236d35bc9b21289ca1fd55043267d028e173fd/hw/ip/aes/dv/README.md; https://raw.githubusercontent.com/lowRISC/opentitan/6d236d35bc9b21289ca1fd55043267d028e173fd/hw/ip/aes/data/aes_testplan.hjson; https://raw.githubusercontent.com/lowRISC/opentitan/6d236d35bc9b21289ca1fd55043267d028e173fd/hw/ip/aes/dv/aes_base_sim_cfg.hjson; https://raw.githubusercontent.com/lowRISC/opentitan/6d236d35bc9b21289ca1fd55043267d028e173fd/hw/ip/aes/dv/env/aes_scoreboard.sv; https://raw.githubusercontent.com/lowRISC/opentitan/6d236d35bc9b21289ca1fd55043267d028e173fd/hw/dv/tools/dvsim/common_sim_cfg.hjson; https://raw.githubusercontent.com/lowRISC/opentitan/6d236d35bc9b21289ca1fd55043267d028e173fd/hw/dv/tools/dvsim/vcs.hjson; https://raw.githubusercontent.com/lowRISC/dvsim/7db2431161c8e04b050474fcf69f111c9af7c538/src/dvsim/testplan.py; https://raw.githubusercontent.com/lowRISC/dvsim/7db2431161c8e04b050474fcf69f111c9af7c538/src/dvsim/sim_results.py; https://raw.githubusercontent.com/lowRISC/dvsim/7db2431161c8e04b050474fcf69f111c9af7c538/src/dvsim/sim/report.py; https://raw.githubusercontent.com/lowRISC/dvsim/7db2431161c8e04b050474fcf69f111c9af7c538/src/dvsim/sim/tool/vcs.py; https://raw.githubusercontent.com/lowRISC/dvsim/7db2431161c8e04b050474fcf69f111c9af7c538/src/dvsim/job/deploy.py; https://github.com/lowRISC/dvsim"
+        }
+      ]
+    },
+    {
+      "task": "安全SVA翻译 / 原与修正的条件比率",
+      "catalog_ids": [
+        "verify-security-assertions"
+      ],
+      "population": "10有限窗口性质，每题2268queries×10outputs；20kprompts不是20k独立IP",
+      "oracle": "直接枚举选定信号的1/2/4cyclewindow，gold与generated违例时间集合一致；非整SoC/无界形式证明",
+      "metric_boundary": "compiled/generated、completed/compiled、correct/completed各3variants；归档26.5377%条件正确 vs全生成9.28748%，original已有强制字节/endmodule处理",
+      "research_use": "历史prompt敏感性补充；本轮核10归档zero-error均completed，未证实际被缺失仿真错计；新基准需独立hidden性质和formal/长时序oracle",
+      "source_snapshots": [
+        {
+          "id": "verify-security-assertions",
+          "record_sha256": "2183293cb6ab5f6446b1495607d91bb094b3eaaccc66de7fdce7ef807cb7a7af",
+          "primary_sources": "https://arxiv.org/abs/2306.14027v2; https://github.com/seth-lab-tamu/LLMs_for_HW_Assertions/blob/f92c8602a63f63d3471216fc3503dbd9017326fd/README.md; https://github.com/seth-lab-tamu/LLMs_for_HW_Assertions/blob/f92c8602a63f63d3471216fc3503dbd9017326fd/LICENSE; https://github.com/seth-lab-tamu/LLMs_for_HW_Assertions/blob/f92c8602a63f63d3471216fc3503dbd9017326fd/scripts/gen_tables.py; https://github.com/seth-lab-tamu/LLMs_for_HW_Assertions/blob/f92c8602a63f63d3471216fc3503dbd9017326fd/scripts/parse_logs.py; https://github.com/seth-lab-tamu/LLMs_for_HW_Assertions/blob/f92c8602a63f63d3471216fc3503dbd9017326fd/scripts/gen_assertion_files.py; https://github.com/seth-lab-tamu/LLMs_for_HW_Assertions/blob/f92c8602a63f63d3471216fc3503dbd9017326fd/benchmarks/0/tb/tb.sv; https://github.com/seth-lab-tamu/LLMs_for_HW_Assertions/blob/f92c8602a63f63d3471216fc3503dbd9017326fd/outputs_save/info_0_main_cd002.json"
+        }
+      ]
+    },
+    {
+      "task": "CVDP / 文本理解评分与错误分母",
+      "catalog_ids": [
+        "rtl-cvdp-comprehension"
+      ],
+      "population": "paper123题/四理解类别；当前只核1examplepair，HFfull未得",
+      "oracle": "cid006/008 whitespace sentenceBLEU2无smoothing，cid009/010 configurablejudge；exampledefault和actualfactory别混",
+      "metric_boundary": "testthreshold .4/.7与reportfractionalnumericmean不同；judgeNone为error而不是0，有validscore时需另报错误/重试分母",
+      "research_use": "理解分不等RTL功能pass或无界语义证明；hiddenreference可见性、judgeparams/人工校准/所有失败单列",
+      "source_snapshots": [
+        {
+          "id": "rtl-cvdp-comprehension",
+          "record_sha256": "4fb46d98e35e9ad0e773f2053808fa8db257837d72ab46b1632e1408c4858439",
+          "primary_sources": "https://github.com/NVlabs/cvdp_benchmark/blob/8e894cf74414ab1eaea1e2b4e80a02f123df07b6/README.md; https://github.com/NVlabs/cvdp_benchmark/blob/8e894cf74414ab1eaea1e2b4e80a02f123df07b6/run_reporter.py; https://github.com/NVlabs/cvdp_benchmark/blob/8e894cf74414ab1eaea1e2b4e80a02f123df07b6/src/report.py; https://arxiv.org/abs/2506.14074; https://huggingface.co/datasets/nvidia/cvdp-benchmark-dataset/blob/main/README.md; https://huggingface.co/datasets/nvidia/cvdp-benchmark-dataset/blob/main/CHANGELOG; https://github.com/NVlabs/cvdp_benchmark/blob/8e894cf74414ab1eaea1e2b4e80a02f123df07b6/src/dataset_processor.py; https://github.com/NVlabs/cvdp_benchmark/blob/8e894cf74414ab1eaea1e2b4e80a02f123df07b6/src/subjective.py; https://github.com/NVlabs/cvdp_benchmark/blob/8e894cf74414ab1eaea1e2b4e80a02f123df07b6/src/repository.py; https://github.com/NVlabs/cvdp_benchmark/blob/8e894cf74414ab1eaea1e2b4e80a02f123df07b6/src/llm_lib/subjective_score_model.py; https://huggingface.co/datasets/nvidia/cvdp-benchmark-dataset/blob/25aa15d6375da07ba538aaef7e732c133539d253/LICENSE; https://huggingface.co/datasets/nvidia/cvdp-benchmark-dataset/blob/main/NOTICE"
+        }
+      ]
+    },
+    {
+      "task": "FVEval / 参考性质等价与方向蕴含",
+      "catalog_ids": [
+        "verify-fveval-human",
+        "verify-fveval-machine"
+      ],
+      "population": "Human79/13TB、Machine300/1dummyTB，所有CSV/hash已核",
+      "oracle": "先elaborate后clear-all；传空clock/reset给opaquePEC，仅外层与API文档可审",
+      "metric_boundary": "Full equivalence严格；任一implies给relaxed1，无方向强弱区分；syntax仅查错误字符串",
+      "research_use": "需要可审PEC语义/参数/信号条件及独立gold；不等原RTL上性质成立，更不等所有安全性质覆盖",
+      "source_snapshots": [
+        {
+          "id": "verify-fveval-human",
+          "record_sha256": "ffb9d24592a8bdf22e2c1438087fee3418611d9a0a014ffc0c560d2040ad4c88",
+          "primary_sources": "https://arxiv.org/abs/2410.23299; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/LICENSE; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/fv_eval/evaluation.py; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/fv_eval/benchmark_launcher.py; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/fv_eval/fv_tool_execution.py; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/fv_eval/utils.py; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/tool_scripts/pec/pec.md; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/data_nl2sva/data/nl2sva_human.csv; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/tool_scripts/run_jg_nl2sva_human.tcl"
+        },
+        {
+          "id": "verify-fveval-machine",
+          "record_sha256": "bef72a43203b5cee3b2b8b5691cdb24b62c0005971c88f774fe5540480a1d34e",
+          "primary_sources": "https://arxiv.org/abs/2410.23299; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/LICENSE; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/fv_eval/evaluation.py; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/fv_eval/benchmark_launcher.py; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/fv_eval/fv_tool_execution.py; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/fv_eval/utils.py; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/tool_scripts/pec/pec.md; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/data_nl2sva/data/nl2sva_machine.csv; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/data_nl2sva/generate_nl2sva_machine.py; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/tool_scripts/run_jg_nl2sva_machine.tcl"
+        }
+      ]
+    },
+    {
+      "task": "FVEval / RTL上证明提议性质",
+      "catalog_ids": [
+        "verify-fveval-design"
+      ],
+      "population": "pipeline96+FSM96，参考性质全空；原生生成RTL家族非真实192IP",
+      "oracle": "clockclk/reset表达式与proveall1m，未见独立nontrivial/vacuity/mutationgate",
+      "metric_boundary": "strict#proven/status，relaxed含undetermined；paperpassk须另明确binarygate，日志/缺输出完整计数",
+      "research_use": "当前numcases循环累积prompt/plan/model，不默认独立同prompt采样；历史paper配置与current代码边界分列",
+      "source_snapshots": [
+        {
+          "id": "verify-fveval-design",
+          "record_sha256": "c0c5acbd10ebfc0fe0ab35fec73a68480d108a43e76d1c6ecf838b9feac9f27f",
+          "primary_sources": "https://arxiv.org/abs/2410.23299; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/LICENSE; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/fv_eval/evaluation.py; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/fv_eval/benchmark_launcher.py; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/fv_eval/fv_tool_execution.py; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/fv_eval/utils.py; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/tool_scripts/pec/pec.md; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/data_design2sva/data/design2sva_pipeline.csv; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/data_design2sva/data/design2sva_fsm.csv; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/tool_scripts/run_jg_design2sva.tcl"
+        }
+      ]
+    }
+  ]
+}

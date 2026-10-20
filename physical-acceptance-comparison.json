@@ -1,0 +1,269 @@
+{
+  "as_of": "2026-10-20T00:45:36.326775+00:00",
+  "status": "selected primary protocol comparison, not a universal signoff certification",
+  "scope": "路由文件已生成、有限规则DRC为0、功能保持、时序/功耗达标、完整多corner与foundry签核分别是独立条件；不得用其中一个通过推其余全部通过。",
+  "items": [
+    {
+      "task": "MMS与ISPD2005free约束变体",
+      "catalog_ids": [
+        "pd-mms-mixed-size",
+        "pd-ispd05-allfree"
+      ],
+      "success_contract": "MMS宏可动但IO固定，allfree连IO也可动；原ISPD05宏固定条件另轨",
+      "rule_scope": "16MMS/8allfreeconfig已取，但未取原Bookshelf包/scorer；启用LG/DP不证明合法通过",
+      "score_and_cost": "原MMS含8rho_t约束，sHPWL=HPWL(1+.01tau_avg)；currentREADMEIterations/HPWL/Time与stage边界待原log",
+      "research_use": "锁modified包、宏旋转/翻转、fixedIO、density及数值placer基线；同电路名不等同输入权限，也非route/PPA签核",
+      "source_snapshots": [
+        {
+          "id": "pd-mms-mixed-size",
+          "record_sha256": "debcac01c7a61899195c3a4c5dd47c4ec282e992114f327a8867b5f2d139dc10",
+          "primary_sources": "https://cseweb.ucsd.edu/~jlu/papers/eplace-ms-tcad14/paper.pdf; https://github.com/limbo018/DREAMPlace/blob/6627f3327e6cc17db7782c0b90073a498531ca3c/README.md; https://doi.org/10.1145/1629911.1630028"
+        },
+        {
+          "id": "pd-ispd05-allfree",
+          "record_sha256": "2ea658c594b8f9dd06788397a429012c10a24cc5da166abda5df4bae9856b87e",
+          "primary_sources": "https://cseweb.ucsd.edu/~jlu/papers/eplace-ms-tcad14/paper.pdf; https://github.com/limbo018/DREAMPlace/blob/6627f3327e6cc17db7782c0b90073a498531ca3c/README.md; https://doi.org/10.1145/1629911.1630028"
+        }
+      ]
+    },
+    {
+      "task": "CircuitTraining native assisted macro placement",
+      "catalog_ids": [
+        "macro-ct"
+      ],
+      "success_contract": "RL放宏、native初始化/补全、proxy、最终PnR是不同阶段",
+      "rule_scope": "当前DP补全剩余硬宏与软簇，masked非法action抛异常；并非所有不可行episode均−4",
+      "score_and_cost": "terminal WL+Density+.5Congestion，无量纲代理；defaultDP legalize/routabilityFalse；300s是单次可关闭上限",
+      "research_use": "与相同输入/预算的FD/DP及相同CD比较；补全率/已放宏数、全部预训练/episode/PnR成本单报；133硬宏/799软簇不是24965独立cells",
+      "source_snapshots": [
+        {
+          "id": "macro-ct",
+          "record_sha256": "17380f40e1ec542a387260ea806d5ea23ae555b1c3c2baf4183f9d06021a4126",
+          "primary_sources": "https://github.com/google-research/circuit_training; https://github.com/google-research/circuit_training/blob/c417a3a13f40867b649c719c03daaf1b39a909bc/circuit_training/environment/environment.py; https://github.com/google-research/circuit_training/blob/c417a3a13f40867b649c719c03daaf1b39a909bc/docs/ARIANE.md; https://raw.githubusercontent.com/google-research/circuit_training/c417a3a13f40867b649c719c03daaf1b39a909bc/README.md; https://raw.githubusercontent.com/google-research/circuit_training/c417a3a13f40867b649c719c03daaf1b39a909bc/LICENSE; https://raw.githubusercontent.com/google-research/circuit_training/c417a3a13f40867b649c719c03daaf1b39a909bc/docs/ARIANE.md; https://raw.githubusercontent.com/google-research/circuit_training/c417a3a13f40867b649c719c03daaf1b39a909bc/circuit_training/environment/environment.py; https://raw.githubusercontent.com/google-research/circuit_training/c417a3a13f40867b649c719c03daaf1b39a909bc/circuit_training/environment/placement_util.py; https://raw.githubusercontent.com/google-research/circuit_training/c417a3a13f40867b649c719c03daaf1b39a909bc/circuit_training/environment/coordinate_descent_placer.py; https://raw.githubusercontent.com/google-research/circuit_training/c417a3a13f40867b649c719c03daaf1b39a909bc/circuit_training/environment/plc_client.py; https://raw.githubusercontent.com/google-research/circuit_training/c417a3a13f40867b649c719c03daaf1b39a909bc/circuit_training/dreamplace/dreamplace_core.py; https://raw.githubusercontent.com/google-research/circuit_training/c417a3a13f40867b649c719c03daaf1b39a909bc/circuit_training/dreamplace/dreamplace_util.py; https://raw.githubusercontent.com/google-research/circuit_training/c417a3a13f40867b649c719c03daaf1b39a909bc/circuit_training/dreamplace/plc_converter.py; https://raw.githubusercontent.com/google-research/circuit_training/c417a3a13f40867b649c719c03daaf1b39a909bc/circuit_training/environment/test_data/ariane/initial.plc; https://raw.githubusercontent.com/google-research/circuit_training/c417a3a13f40867b649c719c03daaf1b39a909bc/circuit_training/environment/test_data/ariane/netlist.pb.txt; https://raw.githubusercontent.com/google-research/circuit_training/c417a3a13f40867b649c719c03daaf1b39a909bc/circuit_training/learning/train_ppo_lib.py; https://raw.githubusercontent.com/google-research/circuit_training/c417a3a13f40867b649c719c03daaf1b39a909bc/circuit_training/learning/eval_lib.py"
+        }
+      ]
+    },
+    {
+      "task": "ICCAD2013 placement finishing",
+      "catalog_ids": [
+        "pd-iccad13-finishing"
+      ],
+      "success_contract": "初始已legal；每cell最大位移硬门内改善HPWL/密度",
+      "rule_scope": "ABU为最密2/5/10/20%placementbins、10/4/2/1权；不是routingedge ACE",
+      "score_and_cost": "sHPWL=HPWL(1+weighted overflow)；原runtime/全题rank未取得，参赛者无约束实验另列",
+      "research_use": "不把现代多高度复用公式算原工艺范围，也不把HPWL改善推签核/PPA；原坐标单位待input核",
+      "source_snapshots": [
+        {
+          "id": "pd-iccad13-finishing",
+          "record_sha256": "8308ab7b73a22faa1163d828e11af5e77fceebef6d0db5c08d5dfe4098838665",
+          "primary_sources": "https://www.iccad-contest.org/History.html; https://ieeexplore.ieee.org/document/6691130; https://www.ispd.cc/slides/ispd2014.html; https://www.ispd.cc/slides/2014/s1_Chow.pptx"
+        }
+      ]
+    },
+    {
+      "task": "ICCAD2015 incremental timing-driven placement",
+      "catalog_ids": [
+        "pd-iccad15-tdp"
+      ],
+      "success_contract": "early/late WNS/TNS带权改善与密度、runtime结合；clock/位移/合法性硬门",
+      "rule_scope": "LCB→FF用FLUTE，source→LCB理想；完整时钟/MCMM签核未覆盖",
+      "score_and_cost": "权重2/1和5/1使SlackImprovement可达1800%，非通过率；runtime ±20%/top5median",
+      "research_use": "0831evalkit404，最终图公式已核但实现边界未核；.ops/PI/SPEF100um版本修订要锁，不能混旧gold",
+      "source_snapshots": [
+        {
+          "id": "pd-iccad15-tdp",
+          "record_sha256": "07db8dd118e5c31218a49113543bcb100b61cb05bac9666a093e59aacd710ef5",
+          "primary_sources": "https://www.iccad-contest.org/2015/problem_C/default.html; https://www.iccad-contest.org/2015/problem_C/Docs/contest_description.pdf; https://www.iccad-contest.org/2015/problem_C/Docs/iccad15_problemC_results.pdf"
+        }
+      ]
+    },
+    {
+      "task": "DAC2012 global-congestion proxy",
+      "catalog_ids": [
+        "pd-dac12-routability"
+      ],
+      "success_contract": "ACE/RC scaledHPWL是GR代理；没有完整DR/签核通过含义",
+      "rule_scope": "原官方完整checker/scorer未得；当前DREAMPlace配置不等原比赛规则",
+      "score_and_cost": "参与者paper给ACE最拥塞.5/1/2/5%均值、百分数门100和.03罚；RuntimeFactor/两router聚合待核",
+      "research_use": "与ISPD2014/15详细route评分分开；后续28nm转换/Wroute排序差异仅支持那个实验条件",
+      "source_snapshots": [
+        {
+          "id": "pd-dac12-routability",
+          "record_sha256": "e64b25f657244e90283027d73a39d260f4bd8583c122ed057ce1bdc588962ab2",
+          "primary_sources": "https://archive.sigda.org/dac2012/contest/dac2012_contest.html; https://doi.org/10.1145/2228360.2228500; https://ceca.pku.edu.cn/media/lw/fd845d96c5cfd1c93db2964f033a6a2f.pdf; https://www.ispd.cc/slides/2013/5_liu.pdf; https://vlsicad.eecs.umich.edu/BK/FGR/; https://raw.githubusercontent.com/limbo018/DREAMPlace/6627f3327e6cc17db7782c0b90073a498531ca3c/test/dac2012/superblue11.json"
+        }
+      ]
+    },
+    {
+      "task": "ISPD2014 detailed-routing-driven placement",
+      "catalog_ids": [
+        "pd-ispd14"
+      ],
+      "success_contract": "结构checker、原始几何、Olympus修复后route是不同阶段",
+      "rule_scope": "公开checker允许省NETS/可选Verilog；只比DIEAREA未见movable extent全验，不能凭exit0推完整边界或DRC通过",
+      "score_and_cost": "最终保留CPU、无效罚50、WL1.5×median；A/B不同GR早停阈值，不能套初版罚100/5×",
+      "research_use": "15最终cases与原线程/工具需锁；GR拥塞低不推详细route质量高，失败不得从DR均值静默剔除",
+      "source_snapshots": [
+        {
+          "id": "pd-ispd14",
+          "record_sha256": "aa037dec254bf11ae60cc042955aa435e6e15e28ee9b9222ae8d3d9c53bac6d4",
+          "primary_sources": "https://www.ispd.cc/slides/ispd2014.html; https://www.ispd.cc/slides/2014/s8_Yutsis.pptx; https://www.ispd.cc/contests/14/web/benchmarks/A/Benchmark_Suite_A.pdf; https://www.ispd.cc/contests/14/web/bin/ispd2014_placement_checker; https://www.ispd.cc/contests/14/web/announcements.html; https://www.ispd.cc/contests/14/web/downloads.html"
+        }
+      ]
+    },
+    {
+      "task": "ISPD2015 placement with native postprocessing",
+      "catalog_ids": [
+        "pd-ispd15"
+      ],
+      "success_contract": "最终是Olympus合法化和route后的复合评分；非placer单独输出或完整签核",
+      "rule_scope": "fence错误无效；其他部分问题由商业legalizer修复；非零DR可能仅扣分",
+      "score_and_cost": "最终无CPU项、最大罚50；DP为最差10%位移；SWL依参赛min/median，SDP精确缩放未核",
+      "research_use": "保留修复前后合法性/位移/成本，禁止混年初CPU/罚100协议或将商业收尾收益全部归模型",
+      "source_snapshots": [
+        {
+          "id": "pd-ispd15",
+          "record_sha256": "351b511523117832d8a34871e5548aac431faa1900197fca9e68074e40d15684",
+          "primary_sources": "https://www.ispd.cc/contests/15/ispd2015_contest.html; https://www.ispd.cc/contests/15/web/announcements.html; https://www.ispd.cc/contests/15/web/bustany_ispd_2015_contest_results.pdf"
+        }
+      ]
+    },
+    {
+      "task": "ICCAD2017 mixed-height legalization",
+      "catalog_ids": [
+        "pd-iccad17-legal"
+      ],
+      "success_contract": "硬约束与soft约束分开，Olympus修详细规则后评分",
+      "rule_scope": "保持netlist和row/site/PG/fence；不同高度组均权，原输出与修复结果分报",
+      "score_and_cost": "网页Shpwl内max非min，β待公布；finalslides/score表/sample原链接404",
+      "research_use": "仅已核现存网页公式，不能宣称finalbinary复现；失链不证明任务已退役或商业已解",
+      "source_snapshots": [
+        {
+          "id": "pd-iccad17-legal",
+          "record_sha256": "e153d0393da48124dd364d25b558ceee0261af1da2c39e81d65d9cb8009cf2da",
+          "primary_sources": "https://www.iccad-contest.org/2017/Problem_C/default.html"
+        }
+      ]
+    },
+    {
+      "task": "ISPD2018 initial detailed routing",
+      "catalog_ids": [
+        "physical-ispd18"
+      ],
+      "success_contract": "连接优先，有限规则+guide/track质量成本；不是fullDRC签核",
+      "rule_scope": "官方Tcl许多minwidth/viaenclosure/antenna等检查关闭，Open权重0但open解invalid",
+      "score_and_cost": "scaled依populationmedianruntime/3%nd，多run中位、逐题rank去最差",
+      "research_use": "必须同时报open/DRC/rawtypes/完整case和成本；nativecheck范围固定，退出0非充分证据",
+      "source_snapshots": [
+        {
+          "id": "physical-ispd18",
+          "record_sha256": "3239952b20b77887edea03248fae53a85f211be03fa217be57375cb87c8485b7",
+          "primary_sources": "https://www.ispd.cc/contests/18/; https://www.ispd.cc/contests/18/metric_and_ranking.pdf; https://www.ispd.cc/contests/18/ispd18eval.tgz"
+        }
+      ]
+    },
+    {
+      "task": "ISPD2019 initial detailed routing",
+      "catalog_ids": [
+        "physical-ispd19"
+      ],
+      "success_contract": "更细spacing规则和dualshort成本，保持原placement/netlist",
+      "rule_scope": "Shortcount+shortarea/(M2pitch²)双罚，single/multicut不同；v9规则配置不等完整foundrydeck",
+      "score_and_cost": "每题3600–43200s/64GB；rawweighted与官方populationranking分开",
+      "research_use": "不能混2018scorer/旧binary，patch不计WL不等无制造代价；新agent要保护input与报告",
+      "source_snapshots": [
+        {
+          "id": "physical-ispd19",
+          "record_sha256": "61df24238ab6749cf677a2480008361f419dff45fc018920d1b90e81eb709fd0",
+          "primary_sources": "https://ispd.cc/contests/19/; https://ispd.cc/contests/19/metrics_and_ranking.pdf; https://ispd.cc/contests/19/ispd19eval.tgz"
+        }
+      ]
+    },
+    {
+      "task": "PostEDA local DRC repair",
+      "catalog_ids": [
+        "be-posteda-drc-essential",
+        "be-posteda-drc-reason"
+      ],
+      "success_contract": "主SR为DRCclean，5独立run平均；不自动包含LVS",
+      "rule_scope": "v4额外连通/device审计只支持已审648成功run，不追认每个新patch",
+      "score_and_cost": "VRR为初始到最终违例减少，低count也可能改变功能",
+      "research_use": "需独立LVS/功能和不可改deck门；几何clean与功能保持分别报",
+      "source_snapshots": [
+        {
+          "id": "be-posteda-drc-essential",
+          "record_sha256": "ef6a04d9d11caa2b23c1e41104dcb89e0bee6696541735fcfa95aa74e0df1533",
+          "primary_sources": "https://arxiv.org/abs/2605.06936; https://github.com/pengjas/posteda-bench"
+        },
+        {
+          "id": "be-posteda-drc-reason",
+          "record_sha256": "430fbc9ebc85b0a98e430e6ed2cd8d24bbcfe525a18760de4b6704a3262061ae",
+          "primary_sources": "https://arxiv.org/abs/2605.06936; https://github.com/pengjas/posteda-bench"
+        }
+      ]
+    },
+    {
+      "task": "PostEDA PPA targets",
+      "catalog_ids": [
+        "be-posteda-ppa-mono",
+        "be-posteda-ppa-multi"
+      ],
+      "success_contract": "目标达标与NIS改进，有具体归一/负值/zero-floor条件",
+      "rule_scope": "FAIL_INFRA与QoR处理、合法RTL/约束区域必须独立核",
+      "score_and_cost": "5run非bestof5；NIS非无条件PPA几何均值",
+      "research_use": "记录有效flow、全部失败、实际raw与功能门，不能只看正normalizedscore",
+      "source_snapshots": [
+        {
+          "id": "be-posteda-ppa-mono",
+          "record_sha256": "e02ad558e0581bcee489499395a7fa14feb84c4c93dff55aa900c74a670b13ce",
+          "primary_sources": "https://arxiv.org/abs/2605.06936; https://github.com/pengjas/posteda-bench"
+        },
+        {
+          "id": "be-posteda-ppa-multi",
+          "record_sha256": "7b5a570f2fc1b2cfb87224797b482b4489c14641288293236f3be125bb87c5f2",
+          "primary_sources": "https://arxiv.org/abs/2605.06936; https://github.com/pengjas/posteda-bench"
+        }
+      ]
+    },
+    {
+      "task": "Open3DBench platform metrics",
+      "catalog_ids": [
+        "3d-open3d-mol",
+        "3d-open3d-lol"
+      ],
+      "success_contract": "按config生成route/STA/thermal报告，未普遍强制DRC0",
+      "rule_scope": "idealclock/resetfalsepath/迭代budget/3D金属RC和缺deck范围影响验证",
+      "score_and_cost": "论文placementruntime与当前脚本flow/热统计阶段不同",
+      "research_use": "有报告≠全多corner签核/校准3DPDK/EMIR，rawlabel与工具config一同锁",
+      "source_snapshots": [
+        {
+          "id": "3d-open3d-mol",
+          "record_sha256": "f6e144117a73388e28773f796ced84f526ef45b6536a4992386cab9f04a6ef86",
+          "primary_sources": "https://github.com/lamda-bbo/Open3DBench; https://arxiv.org/abs/2503.12946; https://raw.githubusercontent.com/lamda-bbo/Open3DBench/e6d23148beed101b7741960f8aa967544259b0df/OpenROAD-3D/flow/Makefile; https://raw.githubusercontent.com/lamda-bbo/Open3DBench/e6d23148beed101b7741960f8aa967544259b0df/OpenROAD-3D/flow/scripts/final_report.tcl; https://raw.githubusercontent.com/lamda-bbo/Open3DBench/e6d23148beed101b7741960f8aa967544259b0df/OpenROAD-3D/flow/scripts/detail_route.tcl; https://raw.githubusercontent.com/lamda-bbo/Open3DBench/e6d23148beed101b7741960f8aa967544259b0df/OpenROAD-3D/flow/platforms/nangate45_3D/setRC.tcl; https://raw.githubusercontent.com/lamda-bbo/Open3DBench/e6d23148beed101b7741960f8aa967544259b0df/OpenROAD-3D/flow/HotSpot/scripts/temp_tran.py; https://raw.githubusercontent.com/lamda-bbo/Open3DBench/e6d23148beed101b7741960f8aa967544259b0df/OpenROAD-3D/flow/HotSpot/scripts/run_report_power.tcl; https://raw.githubusercontent.com/lamda-bbo/Open3DBench/e6d23148beed101b7741960f8aa967544259b0df/OpenROAD-3D/flow/run_mol_analytical.sh; https://raw.githubusercontent.com/lamda-bbo/Open3DBench/e6d23148beed101b7741960f8aa967544259b0df/OpenROAD-3D/flow/designs/nangate45_3D/ariane133/config.mk"
+        },
+        {
+          "id": "3d-open3d-lol",
+          "record_sha256": "c9550c88a1d63388b4c89ee2a7d45a963a06b06e5bb9905316c6155a4318d45e",
+          "primary_sources": "https://github.com/lamda-bbo/Open3DBench; https://arxiv.org/abs/2503.12946; https://github.com/lamda-bbo/Open3DBench/blob/main/Place-LoL/README.md; https://raw.githubusercontent.com/lamda-bbo/Open3DBench/e6d23148beed101b7741960f8aa967544259b0df/OpenROAD-3D/flow/Makefile; https://raw.githubusercontent.com/lamda-bbo/Open3DBench/e6d23148beed101b7741960f8aa967544259b0df/OpenROAD-3D/flow/scripts/final_report.tcl; https://raw.githubusercontent.com/lamda-bbo/Open3DBench/e6d23148beed101b7741960f8aa967544259b0df/OpenROAD-3D/flow/scripts/detail_route.tcl; https://raw.githubusercontent.com/lamda-bbo/Open3DBench/e6d23148beed101b7741960f8aa967544259b0df/OpenROAD-3D/flow/platforms/nangate45_3D/setRC.tcl; https://raw.githubusercontent.com/lamda-bbo/Open3DBench/e6d23148beed101b7741960f8aa967544259b0df/OpenROAD-3D/flow/HotSpot/scripts/temp_tran.py; https://raw.githubusercontent.com/lamda-bbo/Open3DBench/e6d23148beed101b7741960f8aa967544259b0df/OpenROAD-3D/flow/HotSpot/scripts/run_report_power.tcl; https://raw.githubusercontent.com/lamda-bbo/Open3DBench/e6d23148beed101b7741960f8aa967544259b0df/OpenROAD-3D/flow/run_lol_iccad2023.sh; https://raw.githubusercontent.com/lamda-bbo/Open3DBench/e6d23148beed101b7741960f8aa967544259b0df/OpenROAD-3D/flow/designs/nangate45_3D/ariane133/config_lol.mk"
+        }
+      ]
+    },
+    {
+      "task": "CLOSER stage-paired proposal",
+      "catalog_ids": [
+        "be-closer-stagepaired"
+      ],
+      "success_contract": "拟议func/LEC/GLS/STA/route/DRC/LVS gates乘积；完整实现未完成",
+      "rule_scope": "当前firdma macro flow只globalroute，不能用phase0别的GDS补证明",
+      "score_and_cost": "targetcappedreward+AUC_B依真实预算/日志；完整三轨矩阵待实施",
+      "research_use": "协议可作为工程agent研究参照，必须标拟议，不能把尚未完成的gate当已通过",
+      "source_snapshots": [
+        {
+          "id": "be-closer-stagepaired",
+          "record_sha256": "e1b948a4fc8ef45c0b0d90a79cbdf888dfe0f52b83b153d69c7b4aa458d9c3e1",
+          "primary_sources": "https://arxiv.org/pdf/2607.16632; https://arxiv.org/html/2607.16632"
+        }
+      ]
+    }
+  ]
+}

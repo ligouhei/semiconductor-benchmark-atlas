@@ -1,0 +1,115 @@
+{
+  "as_of": "2026-10-20T00:45:36.293999+00:00",
+  "status": "selected static protocol comparison; not an ATPG performance ranking",
+  "scope": "故障模型、折叠权重、检测类别/不可测分类、观察点、时序与训练权限相同时，覆盖率/成本才有可比性；各类协议不合成一个总分。",
+  "items": [
+    {
+      "task": "NTU FAN",
+      "catalog_ids": [
+        "test-fan-atpg"
+      ],
+      "fault_universe": "collapsed对象+equivalent权重恢复FU；SAF/TDF/scan模式与PI约束固定",
+      "acceptance": "FC=DT/FU；TC=DT/(UD+DT+PT+AB)；AE=(DT+AU+TI+RE)/FU，所有×100%",
+      "cost_boundary": "rtime由ATPG或最近faultsim更新，工具解析/建图/agent成本另报",
+      "research_use": "工具回归/solver强baseline，不是现成受保护agent任务；TC/AE100%不等全fault被检测",
+      "source_snapshots": [
+        {
+          "id": "test-fan-atpg",
+          "record_sha256": "b7bf8c1e64e115c96ca0a8bd0bae2f333e457a784953ab2a54ec58b717a959f9",
+          "primary_sources": "https://github.com/NTU-LaDS-II/FAN_ATPG/blob/26b2b36c0e9db11a4b6d9e759df6e44357121f39/README.md; https://github.com/NTU-LaDS-II/FAN_ATPG/blob/26b2b36c0e9db11a4b6d9e759df6e44357121f39/pkg/fan/src/atpg_cmd.cpp; https://github.com/NTU-LaDS-II/FAN_ATPG/blob/26b2b36c0e9db11a4b6d9e759df6e44357121f39/pkg/core/src/fault.h; https://github.com/NTU-LaDS-II/FAN_ATPG/blob/26b2b36c0e9db11a4b6d9e759df6e44357121f39/script/fanScripts/atpg_s27.script; https://github.com/NTU-LaDS-II/FAN_ATPG/blob/26b2b36c0e9db11a4b6d9e759df6e44357121f39/LICENSE"
+        }
+      ]
+    },
+    {
+      "task": "NN-Hyb / Atalanta",
+      "catalog_ids": [
+        "test-nnhyb"
+      ],
+      "fault_universe": "六ISCAS85含两train四test；hardlist来自FAN K10 abort后选>10fault的三电路",
+      "acceptance": "FC仅detected；AE detected+redundant，hard轨分母是预选hardlist",
+      "cost_boundary": "固定K和lookup；预训练30000epoch与线上runtime分开",
+      "research_use": "按train/heldout与all/hard分轨；backtracks下降不自动是端到端加速或所有电路改善",
+      "source_snapshots": [
+        {
+          "id": "test-nnhyb",
+          "record_sha256": "c0e684bf26907ab582fee33e9011f2160c26a2752278d0a30fdec4770a1419fa",
+          "primary_sources": "https://par.nsf.gov/servlets/purl/10541552; https://github.com/lzzh97/NN-for-ATPG/blob/adc3b79e12318be48a7bbb7bb81a9f58f1bdb1cb/README.md; https://github.com/lzzh97/NN-for-ATPG/blob/adc3b79e12318be48a7bbb7bb81a9f58f1bdb1cb/NN_Hyb/print.cpp; https://github.com/lzzh97/NN-for-ATPG/blob/adc3b79e12318be48a7bbb7bb81a9f58f1bdb1cb/NN_Hyb/fan.cpp; https://github.com/lzzh97/NN-for-ATPG/blob/adc3b79e12318be48a7bbb7bb81a9f58f1bdb1cb/script/AllFault_NN-Hyb.sh; https://github.com/lzzh97/NN-for-ATPG/blob/adc3b79e12318be48a7bbb7bb81a9f58f1bdb1cb/script/H2DFault_NN-Hyb.sh; https://github.com/lzzh97/NN-for-ATPG/blob/adc3b79e12318be48a7bbb7bb81a9f58f1bdb1cb/script/Acceleration_NN-Hyb.sh; https://github.com/lzzh97/NN-for-ATPG/blob/adc3b79e12318be48a7bbb7bb81a9f58f1bdb1cb/LICENSE"
+        }
+      ]
+    },
+    {
+      "task": "InF-ATPG",
+      "catalog_ids": [
+        "test-inf-atpg"
+      ],
+      "fault_universe": "重新综合ISCAS85/89的cellpin故障；每电路100hardfault训练10epochs、其余test",
+      "acceptance": "FC和backtracks；同电路新fault，不是未知designzero-shot",
+      "cost_boundary": "RL部分主要报backtracks proxy，39.2% CPU时间是FFR heuristic对gate heuristic",
+      "research_use": "RL决策agent与LLM工具agent不同；不把操作数下降当GPU/训练/特征全walltime加速",
+      "source_snapshots": [
+        {
+          "id": "test-inf-atpg",
+          "record_sha256": "150c9228d6fbf03c8dfcdd13b49184d4b2d42451d39897dae08360b74bea4362",
+          "primary_sources": "https://arxiv.org/abs/2512.00079"
+        }
+      ]
+    },
+    {
+      "task": "Testyard / TestMAX+functional FSIM",
+      "catalog_ids": [
+        "test-testyard"
+      ],
+      "fault_universe": "现代SoC但范围由SFF/YAML/PORTfilter/strobe/firmware/时间窗决定",
+      "acceptance": "检测class加权numerator；TC除Total，FC再加UB/UI/UR/UT/UU/UO；PT示例权重1，class默认语义待plugin核",
+      "cost_boundary": "ATPG、FSIM、timing-syn、软件构建与工具license条件分别报",
+      "research_use": "框架可构造现代测试任务；targetcoverage不是达成值，商业ATPG已有不等工程收敛任务已解决",
+      "source_snapshots": [
+        {
+          "id": "test-testyard",
+          "record_sha256": "9d991524a797c776d61ba68c42b8313d03e6ba4c1749ebcc593b73cd7daeb585",
+          "primary_sources": "https://github.com/cad-polito-it/testyard/blob/190a25fb44cacd9c3398554fcfdfc4401ad6753f/README.md; https://github.com/cad-polito-it/testyard/blob/190a25fb44cacd9c3398554fcfdfc4401ad6753f/README_cad.md; https://github.com/cad-polito-it/testyard/blob/190a25fb44cacd9c3398554fcfdfc4401ad6753f/vlsi/atpg.mk; https://github.com/cad-polito-it/testyard/blob/190a25fb44cacd9c3398554fcfdfc4401ad6753f/vlsi/fsim.mk; https://github.com/cad-polito-it/testyard/blob/190a25fb44cacd9c3398554fcfdfc4401ad6753f/vlsi/benchmarks.mk; https://github.com/cad-polito-it/testyard/blob/190a25fb44cacd9c3398554fcfdfc4401ad6753f/vlsi/fsim/example-fsim-rocket-sdf.yml; https://github.com/cad-polito-it/testyard/blob/190a25fb44cacd9c3398554fcfdfc4401ad6753f/LICENSE; https://github.com/cad-polito-it/testyard/blob/190a25fb44cacd9c3398554fcfdfc4401ad6753f/LICENSE.SiFive"
+        }
+      ]
+    },
+    {
+      "task": "I99T / sequential vs combinational cut",
+      "catalog_ids": [
+        "test-itc99-seq",
+        "test-itc99-cut"
+      ],
+      "fault_universe": "同一RTL的plain/opt/_C/_opt_C/_opt_r分别锁netlist与FAU；82FAU代表+alias不是82个独立设计",
+      "acceptance": "seq需初态/reset/时间；cut pseudoPI/PO权限更强；FC分母按代表或展开权重，初始UNTESTED不等不可测",
+      "cost_boundary": "patterns/cycles与真实scan shift成本不同，源转换/综合与求解总成本另报",
+      "research_use": "完整原包已静态核对，不是统一官方分榜；同RTL变体同group，不能混reset/FAULT与控制观察条件",
+      "source_snapshots": [
+        {
+          "id": "test-itc99-seq",
+          "record_sha256": "eb551b183e3bd6f0f89518c8c5dd162affe888f57f5c27825003f7aef1d07d70",
+          "primary_sources": "https://github.com/cad-polito-it/I99T/blob/8a2c3b500ee7ff20e7031de92592b737bedc6d8c/README.md; https://github.com/cad-polito-it/I99T/blob/8a2c3b500ee7ff20e7031de92592b737bedc6d8c/LICENSE; https://github.com/cad-polito-it/I99T/blob/8a2c3b500ee7ff20e7031de92592b737bedc6d8c/i99t/b01/b01.bench; https://github.com/cad-polito-it/I99T/blob/8a2c3b500ee7ff20e7031de92592b737bedc6d8c/i99t/b01/b01_C.bench; https://github.com/cad-polito-it/I99T/blob/8a2c3b500ee7ff20e7031de92592b737bedc6d8c/i99t/b01/b01.fau; https://github.com/cad-polito-it/I99T/blob/8a2c3b500ee7ff20e7031de92592b737bedc6d8c/i99t/add_reset.pl; https://doi.org/10.1109/54.867894"
+        },
+        {
+          "id": "test-itc99-cut",
+          "record_sha256": "3d1f17cc2983a9c5e58e79bb34888da237d2f68e9816d52fac8829d091b98fe7",
+          "primary_sources": "https://github.com/cad-polito-it/I99T/blob/8a2c3b500ee7ff20e7031de92592b737bedc6d8c/README.md; https://github.com/cad-polito-it/I99T/blob/8a2c3b500ee7ff20e7031de92592b737bedc6d8c/LICENSE; https://github.com/cad-polito-it/I99T/blob/8a2c3b500ee7ff20e7031de92592b737bedc6d8c/i99t/b01/b01.bench; https://github.com/cad-polito-it/I99T/blob/8a2c3b500ee7ff20e7031de92592b737bedc6d8c/i99t/b01/b01_C.bench; https://github.com/cad-polito-it/I99T/blob/8a2c3b500ee7ff20e7031de92592b737bedc6d8c/i99t/b01/b01.fau; https://github.com/cad-polito-it/I99T/blob/8a2c3b500ee7ff20e7031de92592b737bedc6d8c/i99t/add_reset.pl; https://doi.org/10.1109/54.867894"
+        }
+      ]
+    },
+    {
+      "task": "IJTAG / topology material and compiler harness",
+      "catalog_ids": [
+        "test-itc16-ijtag"
+      ],
+      "fault_universe": "固定GitLab25top/34ICL/17VHDL；没有PDL或统一instrument操作/最优gold",
+      "acceptance": "当前SUCCESS子串脚本只查已有结果；缺失/旧appendlog会使exit0不等全部编译或retarget正确",
+      "cost_boundary": "明确访问bit/clock、TAP控制、求解runtime/memory和生成oracle成本",
+      "research_use": "素材和工具检查不等完成交互benchmark；需隐藏操作请求/预期序列、受保护HDL/形式oracle及许可确认",
+      "source_snapshots": [
+        {
+          "id": "test-itc16-ijtag",
+          "record_sha256": "55ee8e2855c51d4161bc71500f627b73869dc457403ed38fe9164f6aa984caef",
+          "primary_sources": "https://github.com/IJTAG-Ecosystem/Benchmarks; https://gitlab.com/IJTAG/benchmarks/-/blob/577a4dd46e934bf9c86da7be8016db4b7ace35c8/README.md; https://gitlab.com/IJTAG/benchmarks/-/blob/577a4dd46e934bf9c86da7be8016db4b7ace35c8/script/build.sh; https://gitlab.com/IJTAG/benchmarks/-/blob/577a4dd46e934bf9c86da7be8016db4b7ace35c8/script/result.sh; https://gitlab.com/IJTAG/benchmarks/-/blob/577a4dd46e934bf9c86da7be8016db4b7ace35c8/ICL/Basic/BasicSCB/BasicSCB.icl"
+        }
+      ]
+    }
+  ]
+}

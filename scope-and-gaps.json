@@ -1,0 +1,1060 @@
+{
+  "as_of": "2026-10-20T00:45:36.467503+00:00",
+  "status": "coverage inventory with explicit residual limits, not universal completeness/quality certification",
+  "scope": "依据用户阶段划分逐项列已有覆盖与剩余限制；“所有可发现”按此次公开资料检索边界理解，不声称覆盖未公开工业bench或互联网全部材料。",
+  "method": [
+    "以官方规则/作者论文/固定源码/原包为证据；搜索摘要仅作发现线索。",
+    "只运行自写下载/文本/JSON/归档元数据/哈希/静态审计与报告生成，不执行下载源code、模型、EDA、仿真或硬件。",
+    "领域覆盖、对象身份、逐字段证据、独立验收、商业可用性和饱和判断分开；缺源/失链/401/许可/opaque限制保留。",
+    "同一IP多版本/多flow/多设计点按协议记录，归并家族；记录数量不是同等成熟独立benchmark数。",
+    "已知历史协议修订按具体版本标注；未有足够证据把任何整家族宣称已被软件彻底解决。"
+  ],
+  "items": [
+    {
+      "domain": "数字前端",
+      "record_count": 76,
+      "family_count": 33,
+      "catalog_ids": [
+        "rtl-verilogeval-v1",
+        "rtl-verilogeval-v2",
+        "rtl-rtllm",
+        "rtl-cvdp-nonagentic",
+        "rtl-cvdp-agentic",
+        "verify-rtlrepair",
+        "rtl-iccad26-community",
+        "rtl-chipbench-gen",
+        "rtl-iccad26-official",
+        "circuitnet3-power-rtl",
+        "circuitnet3-power-multimodal",
+        "rtl-repo",
+        "rtl-benchmt-revised",
+        "rtl-benchmt-expanded",
+        "rtl-mg-verilog",
+        "rtl-verigen-set1",
+        "rtl-verigen-set2",
+        "rtl-phoenix-bench",
+        "rtl-pyhdl-verilog",
+        "rtl-pyhdl-python",
+        "rtl-hdleval-comb",
+        "rtl-hdleval-pipe",
+        "rtl-mhrc-eval",
+        "rtl-mhrc-train",
+        "rtl-vericontaminated-screen",
+        "rtl-vericontaminated-ted",
+        "rtl-rtldistil",
+        "rtl-specread-retrieval",
+        "rtl-specread-reasoning",
+        "rtl-specread-spec-contradiction",
+        "rtl-specread-rtl-consistency",
+        "rtl-specread-controls",
+        "rtl-cvdp-comprehension",
+        "rtl-hwe-arch-v1",
+        "rtl-hwe-arch-v2",
+        "rtl-masterrtl-timing-area",
+        "rtl-masterrtl-power",
+        "rtl-toportl-design-ppa",
+        "rtl-toportl-register-slack",
+        "rtl-toportl-retrieval",
+        "rtl-trace-power-dataset",
+        "dig-chipverilog-integration",
+        "rtl-gatetruth-tracka",
+        "rtl-rtltimer-prediction",
+        "rtl-rtltimer-guided-synthesis",
+        "rtl-rtlcoder-data27",
+        "rtl-rtlcoder-data80-verified7",
+        "rtl-verilogcoder-agent-protocol",
+        "memory-ramulator21-framework",
+        "memory-ramulator21-fidelity",
+        "ara-hc-c2-branch-pred",
+        "ara-hc-c2-cache-ctrl",
+        "ara-hc-c2-chacha-tput",
+        "ara-hc-c2-divider-al",
+        "ara-hc-c3-mem-sched",
+        "ara-hc-c3-prefetcher",
+        "ara-hc-c3-replacement",
+        "ara-hc-c6-custom-isa",
+        "ara-cpu-level1",
+        "ara-cpu-level2",
+        "ara-cpu-level3",
+        "ara-network-n1",
+        "ara-network-n2",
+        "ara-network-n3",
+        "rtl-vhdlrepo-line",
+        "rtl-vhdlrepo-block",
+        "rtl-vhdlrepo-summary",
+        "rtl-vhdlrepo-smg-module",
+        "rtl-vhdlrepo-smg-repo",
+        "rtl-grade-staged",
+        "rtl-grade-ppa",
+        "rtl-synthagentic-hqi",
+        "rtl-autogate-small",
+        "rtl-autogate-large",
+        "rtl-autogate-private",
+        "rtl-rtllm-paper30"
+      ],
+      "covered_tasks": "RTL与VHDL生成/理解/修复、跨模块工程、微架构优化、规格一致性与功耗/PPA预测；单轮生成与多步agent分别记录",
+      "remaining_limits": "近期大套件完整harness/隐藏数据/许可未全公开；CPU/PCIe规范完成不等全ASIC实现，训练语料与评测集关系、跨family泛化需持续核。",
+      "evidence_boundary": "已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。",
+      "source_snapshots": [
+        {
+          "id": "rtl-verilogeval-v2",
+          "record_sha256": "6c9a828dda466b91ea018633e68a1d897297f355f0a22ff0b60dcd651f35c32c",
+          "primary_sources": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/README.md; https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/scripts/sv-iv-analyze; https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/Makefile.in; https://www.csl.cornell.edu/~cbatten/pdfs/pinckney-revisiting-verilogeval-todaes2025.pdf"
+        },
+        {
+          "id": "rtl-hwe-arch-v2",
+          "record_sha256": "72ac5ece9f2174c0235f258c6e0988be57496cec83d7d331d8260578875c1d09",
+          "primary_sources": "https://github.com/FeSens/auto-arch-tournament/blob/4c7d42537ae3c8f4f8da778f2c7794a94af73287/tools/eval/gowin.py; https://github.com/FeSens/auto-arch-tournament/blob/4c7d42537ae3c8f4f8da778f2c7794a94af73287/tools/eval/holdout.py; https://github.com/FeSens/auto-arch-tournament/blob/4c7d42537ae3c8f4f8da778f2c7794a94af73287/tools/eval/formal.py; https://github.com/FeSens/auto-arch-tournament/blob/4c7d42537ae3c8f4f8da778f2c7794a94af73287/tools/accept_rule.py; https://github.com/FeSens/auto-arch-tournament/blob/4c7d42537ae3c8f4f8da778f2c7794a94af73287/research/v2/V3.md; https://hwebench.com/v2.html"
+        },
+        {
+          "id": "rtl-cvdp-agentic",
+          "record_sha256": "c16587440ec7ffde27867d1d29192654256938e404ea97a115ec8aa0740d8fa6",
+          "primary_sources": "https://github.com/NVlabs/cvdp_benchmark/blob/8e894cf74414ab1eaea1e2b4e80a02f123df07b6/README.md; https://github.com/NVlabs/cvdp_benchmark/blob/8e894cf74414ab1eaea1e2b4e80a02f123df07b6/run_reporter.py; https://github.com/NVlabs/cvdp_benchmark/blob/8e894cf74414ab1eaea1e2b4e80a02f123df07b6/src/report.py; https://arxiv.org/abs/2506.14074; https://huggingface.co/datasets/nvidia/cvdp-benchmark-dataset/blob/main/README.md; https://huggingface.co/datasets/nvidia/cvdp-benchmark-dataset/blob/main/CHANGELOG; https://github.com/NVlabs/cvdp_benchmark/blob/8e894cf74414ab1eaea1e2b4e80a02f123df07b6/README_AGENTIC.md; https://github.com/NVlabs/cvdp_benchmark/blob/8e894cf74414ab1eaea1e2b4e80a02f123df07b6/src/dataset_processor.py; https://github.com/NVlabs/cvdp_benchmark/blob/8e894cf74414ab1eaea1e2b4e80a02f123df07b6/src/subjective.py; https://github.com/NVlabs/cvdp_benchmark/blob/8e894cf74414ab1eaea1e2b4e80a02f123df07b6/src/repository.py; https://github.com/NVlabs/cvdp_benchmark/blob/8e894cf74414ab1eaea1e2b4e80a02f123df07b6/src/llm_lib/subjective_score_model.py; https://huggingface.co/datasets/nvidia/cvdp-benchmark-dataset/blob/25aa15d6375da07ba538aaef7e732c133539d253/LICENSE; https://huggingface.co/datasets/nvidia/cvdp-benchmark-dataset/blob/main/NOTICE"
+        },
+        {
+          "id": "ara-cpu-level2",
+          "record_sha256": "98d73d4c9acc32c6bfafc26ad41bd1397a80f083d80e6b365371c90ed09ebf74",
+          "primary_sources": "https://www.chipbench.ai/; https://huggingface.co/datasets/AgentNativeResearchLab/cpu-design-benchmark"
+        },
+        {
+          "id": "ara-network-n3",
+          "record_sha256": "b7f8988e3b0c8966b97ee43b08c4cedcac9f9e28ba1d0c3aaec17d3db6bcc19a",
+          "primary_sources": "https://www.chipbench.ai/; https://huggingface.co/datasets/AgentNativeResearchLab/cpu-design-benchmark"
+        }
+      ]
+    },
+    {
+      "domain": "数字验证",
+      "record_count": 56,
+      "family_count": 40,
+      "catalog_ids": [
+        "verify-fveval-human",
+        "verify-fveval-machine",
+        "verify-fveval-design",
+        "verify-assertllm2-prevent",
+        "verify-assertllm2-hunt",
+        "verify-security-assertions",
+        "verify-hwmcc25",
+        "security-hackatdac21",
+        "logic-iccad17-patch",
+        "rtl-chipbench-debug",
+        "rtl-chipbench-ref",
+        "rtl-hwe-bench",
+        "verify-iccad26-bucketing",
+        "verify-assertionbench",
+        "verify-asserteval",
+        "verify-hiersva-static",
+        "verify-hiersva-faithful",
+        "verify-hiersva-agent",
+        "verify-rtlfixer-syntax",
+        "verify-rtlfixer-simulate",
+        "verify-hwfixbench-detect",
+        "verify-hwfixbench-fix",
+        "verify-hwfixbench-selfpatch",
+        "verify-hdldebugger-private",
+        "verify-fixbench-rtl-detect",
+        "verify-fixbench-rtl-repair",
+        "verify-ibex-seu-formal",
+        "verify-synfi-arbitrary",
+        "verify-synfi-targeted",
+        "verify-fiver",
+        "verify-logikbench-sim",
+        "ver-verifllmbench-uvm",
+        "ver-haven-uvm",
+        "ver-uvm2-machine",
+        "ver-gatetruth-mutation-audit",
+        "ver-uvllm-errorset",
+        "ver-veribugbench-v1",
+        "ver-covr-stimulus",
+        "ver-covagent-hardware",
+        "ver-chattest-long-spec",
+        "security-trusthub-corpus",
+        "security-trusthub-family-split",
+        "verify-opentitan-engineering",
+        "verify-chibench-tool-corpus",
+        "verify-chigen-fuzzer",
+        "verify-verismith-fuzzer",
+        "verify-vloghammer",
+        "verify-sv-tests",
+        "verify-verixmith",
+        "synth-yosysbench-development",
+        "verify-transfuzz-eda",
+        "ara-hc-c5-induction",
+        "ara-hc-c5-mutation-eff",
+        "ara-hc-c5-testset-min",
+        "ara-hc-c6-const-time",
+        "ara-hc-c6-seu-harden"
+      ],
+      "covered_tasks": "SVA/NL翻译/RTL到性质、形式证明、UVM/coverage闭环、mutation、安全/鲁棒性与EDA工具语义回归",
+      "remaining_limits": "证明强度/方向/undetermined/vacuity与mutation敏感性不等价；opaque PEC、commercialformal和完整hiddenoracle限制单列，静态wrapper审计不等复现实验。",
+      "evidence_boundary": "已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。",
+      "source_snapshots": [
+        {
+          "id": "verify-fveval-human",
+          "record_sha256": "ffb9d24592a8bdf22e2c1438087fee3418611d9a0a014ffc0c560d2040ad4c88",
+          "primary_sources": "https://arxiv.org/abs/2410.23299; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/LICENSE; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/fv_eval/evaluation.py; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/fv_eval/benchmark_launcher.py; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/fv_eval/fv_tool_execution.py; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/fv_eval/utils.py; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/tool_scripts/pec/pec.md; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/data_nl2sva/data/nl2sva_human.csv; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/tool_scripts/run_jg_nl2sva_human.tcl"
+        },
+        {
+          "id": "verify-fveval-design",
+          "record_sha256": "c0c5acbd10ebfc0fe0ab35fec73a68480d108a43e76d1c6ecf838b9feac9f27f",
+          "primary_sources": "https://arxiv.org/abs/2410.23299; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/LICENSE; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/fv_eval/evaluation.py; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/fv_eval/benchmark_launcher.py; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/fv_eval/fv_tool_execution.py; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/fv_eval/utils.py; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/tool_scripts/pec/pec.md; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/data_design2sva/data/design2sva_pipeline.csv; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/data_design2sva/data/design2sva_fsm.csv; https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/tool_scripts/run_jg_design2sva.tcl"
+        },
+        {
+          "id": "verify-security-assertions",
+          "record_sha256": "2183293cb6ab5f6446b1495607d91bb094b3eaaccc66de7fdce7ef807cb7a7af",
+          "primary_sources": "https://arxiv.org/abs/2306.14027v2; https://github.com/seth-lab-tamu/LLMs_for_HW_Assertions/blob/f92c8602a63f63d3471216fc3503dbd9017326fd/README.md; https://github.com/seth-lab-tamu/LLMs_for_HW_Assertions/blob/f92c8602a63f63d3471216fc3503dbd9017326fd/LICENSE; https://github.com/seth-lab-tamu/LLMs_for_HW_Assertions/blob/f92c8602a63f63d3471216fc3503dbd9017326fd/scripts/gen_tables.py; https://github.com/seth-lab-tamu/LLMs_for_HW_Assertions/blob/f92c8602a63f63d3471216fc3503dbd9017326fd/scripts/parse_logs.py; https://github.com/seth-lab-tamu/LLMs_for_HW_Assertions/blob/f92c8602a63f63d3471216fc3503dbd9017326fd/scripts/gen_assertion_files.py; https://github.com/seth-lab-tamu/LLMs_for_HW_Assertions/blob/f92c8602a63f63d3471216fc3503dbd9017326fd/benchmarks/0/tb/tb.sv; https://github.com/seth-lab-tamu/LLMs_for_HW_Assertions/blob/f92c8602a63f63d3471216fc3503dbd9017326fd/outputs_save/info_0_main_cd002.json"
+        },
+        {
+          "id": "verify-chibench-tool-corpus",
+          "record_sha256": "2073d40af181a98f7355ae7e64707df8d178e1a85a3416fcd9e2e5fd7275270b",
+          "primary_sources": "https://arxiv.org/pdf/2406.06550; https://raw.githubusercontent.com/lac-dcc/chimera/2d152eb1ed0468c32d36cc979a1f13d5756d96f6/README.md; https://raw.githubusercontent.com/lac-dcc/chimera/2d152eb1ed0468c32d36cc979a1f13d5756d96f6/scripts/filter_programs.sh; https://raw.githubusercontent.com/lac-dcc/chimera/2d152eb1ed0468c32d36cc979a1f13d5756d96f6/scripts/filter_programs.tcl; https://api.github.com/repos/lac-dcc/chimera/git/trees/a678e48c9b9dce7a5a754038b3e1db5619013178?recursive=1; https://raw.githubusercontent.com/lac-dcc/chimera/2d152eb1ed0468c32d36cc979a1f13d5756d96f6/database/0_01-05-24_dds.v; https://raw.githubusercontent.com/lac-dcc/chimera/2d152eb1ed0468c32d36cc979a1f13d5756d96f6/database/34745_jtcores_cores_track_hdl_jttrack_video.v; https://raw.githubusercontent.com/lac-dcc/chimera/2d152eb1ed0468c32d36cc979a1f13d5756d96f6/database/invalid_programs/9_8bit_MicroComputer_Verilog_VerilogModules_CPU_tb.v"
+        },
+        {
+          "id": "ver-haven-uvm",
+          "record_sha256": "b52abee3110276a8d7af9390bac3e1074ac8dccf5ad6d20b6e0d8ee10e81b1f7",
+          "primary_sources": "https://arxiv.org/pdf/2604.27643; https://github.com/mcc311/haven/tree/b2beffbdeb940cbc84637f3425eee4b0e2fbe142; https://huggingface.co/datasets/mcc311/haven-hdl-benchmark/blob/main/README.md"
+        }
+      ]
+    },
+    {
+      "domain": "模拟前端",
+      "record_count": 80,
+      "family_count": 38,
+      "catalog_ids": [
+        "analog-analoggym",
+        "analog-autockt",
+        "analog-coder",
+        "analog-amsbench-perception",
+        "analog-amsbench-analysis",
+        "analog-amsbench-design",
+        "analog-longhorizon",
+        "analog-sganalog-transcription",
+        "analog-sganalog-sizing",
+        "analog-loadbench",
+        "analog-aicircuit",
+        "analog-genalpha",
+        "analog-coderpro",
+        "analog-xpert",
+        "rf-agent-qa",
+        "rf-schembench",
+        "rf-composer",
+        "analog-anaflow",
+        "rf-orca",
+        "rf-cobra",
+        "analog-ocb-predict",
+        "analog-ocb-generate",
+        "analog-ocb301-lookup",
+        "analog-ocb-cktgen",
+        "analog-amsnet1",
+        "analog-amsnet2",
+        "analog-netlistbench-recognition",
+        "analog-netlistbench-edit",
+        "analog-netlistbench-equivalence",
+        "analog-genie-topology",
+        "analog-genie-sized",
+        "analog-genie-lite",
+        "analog-tobi-structure",
+        "analog-tobi-type",
+        "analog-amsnet-kg",
+        "analog-amsnet-q",
+        "analog-zerosim-trained",
+        "analog-zerosim-zero-shot",
+        "analog-masala-chai",
+        "analog-masala-chai-v2",
+        "analog-retriever",
+        "analog-retriever-rag",
+        "analog-sganalog-corpus",
+        "analog-sganalog-transcription-blinded",
+        "analog-loadbench-generation",
+        "analog-loadbench-retrieval",
+        "analog-loadbench-subcircuit",
+        "analog-loadbench-pareto",
+        "analog-loadbench-optimization",
+        "analog-vibetapeout-sky130",
+        "analog-vibetapeout-65nm-suite",
+        "analog-circuitrubric-design",
+        "analog-circuitrubric-spec",
+        "analog-circuitsense-perception",
+        "analog-circuitsense-curated",
+        "analog-circuitsense-symbolic",
+        "analog-circuitsense-design",
+        "analog-circuitreason1k",
+        "analog-analogagent-refinement",
+        "analog-vabench-behavior",
+        "analog-analogtester-tb",
+        "analog-coderpro-sizing",
+        "rf-nist-calnet-calibration",
+        "rf-sparx-open-flow",
+        "analog-analoggym-amp-native-cost",
+        "analog-analoggym-nmcf-rl-contract",
+        "memory-openyield-circuit",
+        "memory-openyield-nominal-sizing",
+        "memory-openyield-offline",
+        "memory-openyield-rare-yield",
+        "memory-openram-characterization",
+        "memory-sram22-timing",
+        "ara-hc-c6-opamp-fom",
+        "analog-analogmaster-image-layout",
+        "analog-acob-osc",
+        "analog-acob-opamp",
+        "analog-acob-pll",
+        "analog-falcon-topology",
+        "analog-falcon-forward",
+        "analog-falcon-inverse"
+      ],
+      "covered_tasks": "电路图感知、拓扑/结构、尺寸、预测/检索、长程规格闭环、RF与存储电路/稀有失效；方法实验和成熟bench分身份",
+      "remaining_limits": "多数开源spec/模型仍简化，真实PDK/全PVT/MC/寄生/测量gold有缺口；高识别/收敛/nominalFoM不能推完整电性能。部分agent论文尚未完整发布。",
+      "evidence_boundary": "已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。",
+      "source_snapshots": [
+        {
+          "id": "analog-longhorizon",
+          "record_sha256": "16d0e55d21609fc90775af7fced18c92d96eee883abe141e54c0febba2c83348",
+          "primary_sources": "https://arxiv.org/abs/2609.33356; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/README.md; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/LICENSE; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-beta-multiplier-reference-pvt-mc/task.toml; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-beta-multiplier-reference-pvt-mc/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-bandgap-reference-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-ota-5t-gain40-pm60-noise50uv-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-two-stage-miller-opamp-gain60-ugb200-pm60-noise50uv-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-flash-adc-3bit-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-sar-adc-6bit-async/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-delta-sigma-adc-1bit-first-order-osr32-sndr40/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-switched-capacitor-2to1-converter-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-inductive-lna-2p4ghz-gain12-nf2-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-gilbert-cell-mixer-2p4ghz-pvt-mismatch/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-tia-zt8k-bw750m-noise5p-sfdr70-power5m-pt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-capless-ldo-1v0-20ma-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-ldo-ota5-robust-pvt-mc/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-analog-input-mux-8to1-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-cml-divider-div2-range1gto10g/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-transistor-divide-by-2/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-bootstrap-driver-pt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-cml-tx-driver-28g-nrz-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-cmos-switched-resistor-dac-5bit-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-flash-adc-4bit-50msps/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-bottom-plate-sampler-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-regulated-charge-pump-10mhz-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-unregulated-charge-pump-10mhz-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-class-d-halfbridge-eff95-tt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-nmos-pass-ldo-0p4v-pvt-mc/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-fd-sampling-feedback-ota-gain1-settling40ns-noise300uv-pvt-mc/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-fd-sampling-feedback-ota-gain8-settling10ns-noise1mv-pvt-mc/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-ring-amp-3stage-gain8-400uw/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-fct-residue-amplifier-900msps/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-ahuja-compensated-two-stage-load-range-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-fd-two-stage-miller-opamp-gain60-pm60-noise50uv-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-telescopic-cascode-ota-pvt-fix/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-three-stage-nested-miller-ota-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-high-psrr-bandgap-reference-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-low-power-line-driver-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-low-power-oscillator-2mhz-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-programmable-icc-iptat-current-mirror-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-buf-ppsf-bs-gain1-sfdr90/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-constant-gm-stable-gain-amplifier-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-gmr-degen-amp-constant-gm-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-gmr-degenerated-diff-amp-gain2-bw70m-power1p2mw-sdr60/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-complementary-folded-cascode-ab-opamp-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-folded-cascode-ota-gain130-pm60-noise50uv-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-fully-differential-ota-c-biquad-pvt/tests/verify.py; https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-two-stage-miller-opamp-gain70-ugb20-pm60-noise50uv-pvt/tests/verify.py"
+        },
+        {
+          "id": "analog-sganalog-sizing",
+          "record_sha256": "40212109f6f2b96b5b490d78358646e17f89bf9b42deb0b0a45fd6fef1bb8289",
+          "primary_sources": "https://raw.githubusercontent.com/Li-Yueting/SGAnalog/ebd7e694b79cbe8475c42bd41cf4620c5d537a0f/README.md; https://raw.githubusercontent.com/Li-Yueting/SGAnalog/ebd7e694b79cbe8475c42bd41cf4620c5d537a0f/LICENSE; https://raw.githubusercontent.com/Li-Yueting/SGAnalog/ebd7e694b79cbe8475c42bd41cf4620c5d537a0f/scripts/sizing_eval.py; https://raw.githubusercontent.com/Li-Yueting/SGAnalog/ebd7e694b79cbe8475c42bd41cf4620c5d537a0f/scripts/vlm_compare.py; https://raw.githubusercontent.com/Li-Yueting/SGAnalog/ebd7e694b79cbe8475c42bd41cf4620c5d537a0f/eval/vlm/tasks.jsonl; https://raw.githubusercontent.com/Li-Yueting/SGAnalog/ebd7e694b79cbe8475c42bd41cf4620c5d537a0f/eval/sizing/tasks.jsonl"
+        },
+        {
+          "id": "analog-analogmaster-image-layout",
+          "record_sha256": "ad4493edd61913ad098b983d562cf7fe225c28304105d81620d113028e4b5f19",
+          "primary_sources": "https://arxiv.org/abs/2604.20916; https://arxiv.org/pdf/2604.20916; https://github.com/sjjjoaps/AnalogMaster; https://github.com/sjjjoaps/AnalogMaster/blob/092b3b6dd0e90c36cfcd07f5c93f9a4a2d98d2cd/src/final_verification.py"
+        },
+        {
+          "id": "memory-openyield-rare-yield",
+          "record_sha256": "16d3a1e3ea374be16fbd1cc952250193aa43b4c23b2a92d98f6ab665e0228332",
+          "primary_sources": "https://arxiv.org/pdf/2508.04106; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/yield_estimation/README.md; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/README.md; https://raw.githubusercontent.com/ShenShan123/OpenYield/df3fab4b3a6fbc2d74458586040a6e672d67ccb7/sram_compiler/per_device_mc/README.md"
+        },
+        {
+          "id": "rf-cobra",
+          "record_sha256": "307e65517dbdf88a0fc968982952c559df9370262d9ecc2f24395f0366887d3b",
+          "primary_sources": "https://github.com/DI-PASSIONATE/COBRA; https://doi.org/10.1109/SBCCI69725.2026.11706804"
+        }
+      ]
+    },
+    {
+      "domain": "综合HLS",
+      "record_count": 58,
+      "family_count": 29,
+      "catalog_ids": [
+        "synth-epfl",
+        "synth-openabc",
+        "hls-hlsyn",
+        "hls-hlsdataset",
+        "hls-machsuite",
+        "hls-rosetta",
+        "hls-hlsfactory",
+        "hls-llmdse",
+        "rtl-rewriter-small",
+        "rtl-rewriter-large",
+        "fpga-vtr",
+        "fpga-titan",
+        "fpga-koios",
+        "fpga-titanium25",
+        "synth-openabc-unseen-ip",
+        "synth-openabc-unseen-pair",
+        "hls-hlsyn-inductive",
+        "hls-hlsyn-adaptation",
+        "synth-logikbench-asic",
+        "synth-logikbench-fpga",
+        "hls-powergear-prediction",
+        "hls-powergear-dse",
+        "hls-sharp-systemc-coverage",
+        "hls-chstone",
+        "synth-lgsynth91-pla",
+        "synth-lgsynth91-comb",
+        "synth-lgsynth91-seq",
+        "synth-lgsynth91-fsm",
+        "synth-iwls93",
+        "synth-iwls2005",
+        "synth-iwls20-learning",
+        "synth-iwls21-cifar",
+        "synth-iwls22-exact",
+        "synth-iwls23-aig",
+        "synth-iwls23-xaig",
+        "synth-iwls24-exact",
+        "synth-iwls25-weighted",
+        "ara-hc-c1-approx-area",
+        "ara-hc-c1-pipeline-fmax",
+        "ara-hc-c1-recipe-pareto",
+        "ara-acc-a1-fixedexp",
+        "ara-acc-a2-bf16-rsqrt",
+        "ara-acc-a3-bf16-exp",
+        "ara-acc-a4-bf16-gelu",
+        "ara-acc-a5-bf16-sigmoid",
+        "ara-acc-a6-bf16-ln",
+        "ara-acc-v1-fixedexp-64b",
+        "ara-acc-v2-fixedexp-128b",
+        "ara-acc-alu1-vreduce-128b",
+        "hls-polybench-c",
+        "hls-polybench-bambu",
+        "hls-execrepair-chstone",
+        "hls-execrepair-machsuite",
+        "hls-execrepair-polybench",
+        "hls-chrysalis-logic",
+        "hls-chrysalis-pragma",
+        "hls-leveri-testbench",
+        "rtl-synthagentic-crosslib"
+      ],
+      "covered_tasks": "经典逻辑综合、IWLS现代学习/精确综合、HLS程序/应用、代理预测、DSE/agent与FPGA CAD",
+      "remaining_limits": "有些原包取得但未执行CEC/HLS；数据多点并非独立IP，FPGA器件/工具版本跨域与真实后实现验收另核；PolyBench原始C包已取，部分派生HLS完整配置/标签仍待核。",
+      "evidence_boundary": "已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。",
+      "source_snapshots": [
+        {
+          "id": "synth-epfl",
+          "record_sha256": "5a382f726214b1a608843df791848546f2be8f74c3fbc7b9d33d8957b5cbaa0e",
+          "primary_sources": "https://github.com/lsils/benchmarks/blob/82d8cc6910419298e713a46644ed59fd3df53038/README.md; https://github.com/lsils/benchmarks/blob/82d8cc6910419298e713a46644ed59fd3df53038/LICENSE; https://github.com/lsils/benchmarks/releases; https://github.com/lsils/benchmarks/blob/8c832d5d07d822d28ba84dc6e95295367702401f/best_results/README.md; https://api.github.com/repos/lsils/benchmarks/tags?per_page=100; https://api.github.com/repos/lsils/benchmarks/releases?per_page=100"
+        },
+        {
+          "id": "synth-iwls25-weighted",
+          "record_sha256": "6fd76652d56a6ac5c2099e97d4d7507973919cb59a27982f581ecff790bee02f",
+          "primary_sources": "https://raw.githubusercontent.com/alanminko/iwls2025-ls-contest/defcf35c16381ead60776f08a3dd088b954b2ede/README.md; https://raw.githubusercontent.com/alanminko/iwls2025-ls-contest/defcf35c16381ead60776f08a3dd088b954b2ede/LICENSE; https://raw.githubusercontent.com/alanminko/iwls2025-ls-contest/defcf35c16381ead60776f08a3dd088b954b2ede/IWLS_2025_Contest_Presentation.pdf; https://www.iwls.org/iwls2025/contest/IWLS_2025_Programming_Contest.pdf; https://codeload.github.com/alanminko/iwls2025-ls-contest/zip/refs/heads/main"
+        },
+        {
+          "id": "hls-hlsyn-inductive",
+          "record_sha256": "ef5cbdcd940852511954bec5d35bd96528d5014ef0d8508b9fd898552167ed65",
+          "primary_sources": "https://github.com/ZongyueQin/HLSyn/blob/88ed5321811e5c9d838215f0a4f95f89b3ffcd02/README.md; https://github.com/ZongyueQin/HLSyn/blob/88ed5321811e5c9d838215f0a4f95f89b3ffcd02/data/HLSyn_data.tar.gz; https://github.com/ZongyueQin/HLSyn/blob/88ed5321811e5c9d838215f0a4f95f89b3ffcd02/baselines/src/data.py; https://github.com/ZongyueQin/HLSyn/blob/88ed5321811e5c9d838215f0a4f95f89b3ffcd02/baselines/src/test.py; https://github.com/ZongyueQin/HLSyn/blob/88ed5321811e5c9d838215f0a4f95f89b3ffcd02/baselines/src/config.py; https://zenodo.org/records/8034115; https://papers.neurips.cc/paper_files/paper/2023/file/8dfc3a2720a4112243a285b98e0d4415-Paper-Datasets_and_Benchmarks.pdf; https://github.com/ZongyueQin/HLSyn/blob/88ed5321811e5c9d838215f0a4f95f89b3ffcd02/baselines/src/adapt.py; https://github.com/ZongyueQin/HLSyn/blob/88ed5321811e5c9d838215f0a4f95f89b3ffcd02/baselines/src/train.py; https://github.com/ZongyueQin/HLSyn/blob/88ed5321811e5c9d838215f0a4f95f89b3ffcd02/baselines/configs_for_reproducibility/gnn_dse_v1_r.txt; https://github.com/ZongyueQin/HLSyn/blob/88ed5321811e5c9d838215f0a4f95f89b3ffcd02/baselines/configs_for_reproducibility/gnn_dse_v2_r.txt"
+        },
+        {
+          "id": "hls-hlsdataset",
+          "record_sha256": "df601166754a63d14161cd9ffde8e2caa47f93b25b65d625f36e8611d3463a6d",
+          "primary_sources": "https://arxiv.org/abs/2302.10977; https://github.com/UT-LCA/ML4Accel-Dataset/tree/766b1c0175d59bc087144a05f4e76f533ad529bc/fpga_ml_dataset; https://lca.ece.utexas.edu/hls_dataset/xczu9eg-ffvb1156-2-i.tar.gz; https://raw.githubusercontent.com/UT-LCA/ML4Accel-Dataset/766b1c0175d59bc087144a05f4e76f533ad529bc/README.md; https://raw.githubusercontent.com/UT-LCA/ML4Accel-Dataset/766b1c0175d59bc087144a05f4e76f533ad529bc/fpga_ml_dataset/README.md; https://raw.githubusercontent.com/UT-LCA/ML4Accel-Dataset/766b1c0175d59bc087144a05f4e76f533ad529bc/hls_build_framework/README.md; https://raw.githubusercontent.com/UT-LCA/ML4Accel-Dataset/766b1c0175d59bc087144a05f4e76f533ad529bc/fpga_ml_dataset/HLS_dataset/guidance/README.md; https://raw.githubusercontent.com/UT-LCA/ML4Accel-Dataset/766b1c0175d59bc087144a05f4e76f533ad529bc/fpga_ml_dataset/HLS_dataset/polybench/atax/hls_template.tcl; https://raw.githubusercontent.com/UT-LCA/ML4Accel-Dataset/766b1c0175d59bc087144a05f4e76f533ad529bc/fpga_ml_dataset/HLS_dataset/polybench/atax/opt_template.tcl; https://raw.githubusercontent.com/UT-LCA/ML4Accel-Dataset/766b1c0175d59bc087144a05f4e76f533ad529bc/fpga_ml_dataset/HLS_dataset/utils/hls_feature_extract.py; https://raw.githubusercontent.com/UT-LCA/ML4Accel-Dataset/766b1c0175d59bc087144a05f4e76f533ad529bc/fpga_ml_dataset/HLS_dataset/utils/info_collect.py; https://raw.githubusercontent.com/UT-LCA/ML4Accel-Dataset/766b1c0175d59bc087144a05f4e76f533ad529bc/fpga_ml_dataset/HLS_dataset/utils/info_extract.py"
+        },
+        {
+          "id": "fpga-vtr",
+          "record_sha256": "b1f147ba1c1d40d5232d4bcc1b26ce0a65efa53687a33703dd4aa6ca64c9fbc9",
+          "primary_sources": "https://docs.verilogtorouting.org/en/latest/vtr/benchmarks/; https://github.com/verilog-to-routing/vtr-verilog-to-routing"
+        },
+        {
+          "id": "ara-acc-a3-bf16-exp",
+          "record_sha256": "c9bf918635b25ebcf4908bc0325566cdf3055215f1d17fd41b973cf53e584280",
+          "primary_sources": "https://www.chipbench.ai/; https://huggingface.co/datasets/AgentNativeResearchLab/cpu-design-benchmark"
+        }
+      ]
+    },
+    {
+      "domain": "数字后端",
+      "record_count": 141,
+      "family_count": 89,
+      "catalog_ids": [
+        "physical-circuitnet",
+        "physical-ispd18",
+        "physical-ispd19",
+        "physical-ispd24",
+        "physical-ispd25",
+        "physical-ispd26",
+        "physical-iccad24-sizing",
+        "pd-ispd05",
+        "pd-ispd06",
+        "pd-ispd07",
+        "pd-ispd08",
+        "pd-ispd09-cts",
+        "pd-ispd10-cts",
+        "pd-ispd11",
+        "pd-ispd12-sizing",
+        "pd-ispd13-sizing",
+        "pd-ispd14",
+        "pd-ispd15",
+        "pd-ispd16-fpga",
+        "pd-ispd17-fpga",
+        "pd-ispd22-security",
+        "pd-ispd23-security",
+        "pd-tau11-pg",
+        "pd-tau12-pg",
+        "pd-tau13-ssta",
+        "pd-tau15-incremental",
+        "pd-tau16-macro",
+        "pd-tau17-macro",
+        "pd-tau18-path",
+        "pd-tau19-opt",
+        "pd-tau21-csm",
+        "pd-iccad15-tdp",
+        "pd-iccad17-legal",
+        "pd-tau14-cppr",
+        "be-chipbench-ppa",
+        "be-pdagent-qa",
+        "be-pdagent-flow",
+        "be-placereasoner",
+        "be-fluxbench",
+        "be-chateda",
+        "be-iedabench",
+        "be-orfs-agent",
+        "be-posteda-drc-essential",
+        "be-posteda-drc-reason",
+        "be-posteda-ppa-mono",
+        "be-posteda-ppa-multi",
+        "be-rule2drc",
+        "be-edatracer",
+        "be-drcsg",
+        "be-ast-svrf",
+        "be-drc-coder",
+        "be-dac26-drc-detect",
+        "be-dac26-drc-repair",
+        "cell-smtcell1",
+        "cell-smtcell2",
+        "cell-llm-cluster",
+        "cell-cpcell",
+        "pd-ibmpg",
+        "reliability-proton-line",
+        "reliability-proton-point",
+        "reliability-emspice1",
+        "reliability-emspice3",
+        "pd-iccad24-mbff",
+        "pd-iccad25-mbff",
+        "pd-iccad25-incremental",
+        "pd-floorset-prime",
+        "pd-floorset-lite",
+        "pd-floorset-iccad26",
+        "pd-iccad23-ir",
+        "pd-iccad23-ir-cfirstnet",
+        "pd-edalearn",
+        "fp-mcnc",
+        "fp-gsrc-hard",
+        "fp-gsrc-soft",
+        "fp-hb-large",
+        "circuitnet-congestion",
+        "circuitnet-drc",
+        "circuitnet-irdrop",
+        "macro-ct",
+        "macro-tilos",
+        "macro-autodmp",
+        "macro-partcl-proxy",
+        "macro-partcl-ppa",
+        "partition-ispd98-unit",
+        "partition-ispd98-weighted",
+        "partition-titan",
+        "circuitnet-netdelay",
+        "circuitnet3-timing",
+        "fpga24-routing",
+        "pd-iccad16-truepath",
+        "pd-opentimer-regression",
+        "pd-opensta-public-regression",
+        "pd-gcstimer-stage",
+        "pd-gcstimer-gba",
+        "pd-incregpusta-evaluation",
+        "pd-timingpredict",
+        "pd-preroutgnn",
+        "pd-heterosta-delay",
+        "pd-heterosta-exceptions",
+        "pd-heterosta-flow",
+        "pd-insta-propagation",
+        "macro-tilos-acdp-ppa",
+        "macro-tilos-acdp-hpwl",
+        "be-alpharoute-policy",
+        "pd-gapla-fixed-topology",
+        "macro-agenticbbo-repair",
+        "macro-bboplace-sp",
+        "macro-bboplace-mgo",
+        "macro-bboplace-hpo",
+        "pd-iccad23-ir-irfusion",
+        "be-closer-pilot",
+        "be-closer-stagepaired",
+        "be-gatetruth-trackb",
+        "pd-dac12-routability",
+        "pd-iccad13-finishing",
+        "pd-iredge-static",
+        "pd-circuitops-infrastructure",
+        "timing-circuitops-arc",
+        "timing-circuitops-stage",
+        "be-orfs-native-flow",
+        "be-orfs-autotuner",
+        "pd-rosettastone2-translation",
+        "pd-srampg-dc",
+        "pd-srampg-transient",
+        "ara-hc-c4-clock-gating",
+        "ara-hc-c4-flow-tune",
+        "ara-hc-c4-sdc-refine",
+        "qa-ord-retrieval",
+        "qa-ord-rerank",
+        "qa-ord-gold-generator",
+        "qa-ord-rag-flow",
+        "qa-ord-commercial-eco",
+        "qa-edabench-kg",
+        "be-latch-control",
+        "be-latch-search",
+        "pd-warpstar-engine",
+        "pd-warpstar-placement",
+        "pd-pbargat-industrial",
+        "pd-pbargat-synthetic",
+        "pd-mms-mixed-size",
+        "pd-ispd05-allfree"
+      ],
+      "covered_tasks": "划分/块规划/宏与cell布局、合法化、GR/DR、CTS/STA/sizing/MBFF/ECO、功耗/IR/EM、DRC/LVS工作流与agent",
+      "remaining_limits": "历年已覆盖不等全部contest题目/最终checker均取得；部分旧链接失效、商业flow与PDK不可重建；proxy、原生修复、有限DRC与全签核严格分层。",
+      "evidence_boundary": "已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。",
+      "source_snapshots": [
+        {
+          "id": "macro-ct",
+          "record_sha256": "17380f40e1ec542a387260ea806d5ea23ae555b1c3c2baf4183f9d06021a4126",
+          "primary_sources": "https://github.com/google-research/circuit_training; https://github.com/google-research/circuit_training/blob/c417a3a13f40867b649c719c03daaf1b39a909bc/circuit_training/environment/environment.py; https://github.com/google-research/circuit_training/blob/c417a3a13f40867b649c719c03daaf1b39a909bc/docs/ARIANE.md; https://raw.githubusercontent.com/google-research/circuit_training/c417a3a13f40867b649c719c03daaf1b39a909bc/README.md; https://raw.githubusercontent.com/google-research/circuit_training/c417a3a13f40867b649c719c03daaf1b39a909bc/LICENSE; https://raw.githubusercontent.com/google-research/circuit_training/c417a3a13f40867b649c719c03daaf1b39a909bc/docs/ARIANE.md; https://raw.githubusercontent.com/google-research/circuit_training/c417a3a13f40867b649c719c03daaf1b39a909bc/circuit_training/environment/environment.py; https://raw.githubusercontent.com/google-research/circuit_training/c417a3a13f40867b649c719c03daaf1b39a909bc/circuit_training/environment/placement_util.py; https://raw.githubusercontent.com/google-research/circuit_training/c417a3a13f40867b649c719c03daaf1b39a909bc/circuit_training/environment/coordinate_descent_placer.py; https://raw.githubusercontent.com/google-research/circuit_training/c417a3a13f40867b649c719c03daaf1b39a909bc/circuit_training/environment/plc_client.py; https://raw.githubusercontent.com/google-research/circuit_training/c417a3a13f40867b649c719c03daaf1b39a909bc/circuit_training/dreamplace/dreamplace_core.py; https://raw.githubusercontent.com/google-research/circuit_training/c417a3a13f40867b649c719c03daaf1b39a909bc/circuit_training/dreamplace/dreamplace_util.py; https://raw.githubusercontent.com/google-research/circuit_training/c417a3a13f40867b649c719c03daaf1b39a909bc/circuit_training/dreamplace/plc_converter.py; https://raw.githubusercontent.com/google-research/circuit_training/c417a3a13f40867b649c719c03daaf1b39a909bc/circuit_training/environment/test_data/ariane/initial.plc; https://raw.githubusercontent.com/google-research/circuit_training/c417a3a13f40867b649c719c03daaf1b39a909bc/circuit_training/environment/test_data/ariane/netlist.pb.txt; https://raw.githubusercontent.com/google-research/circuit_training/c417a3a13f40867b649c719c03daaf1b39a909bc/circuit_training/learning/train_ppo_lib.py; https://raw.githubusercontent.com/google-research/circuit_training/c417a3a13f40867b649c719c03daaf1b39a909bc/circuit_training/learning/eval_lib.py"
+        },
+        {
+          "id": "physical-ispd19",
+          "record_sha256": "61df24238ab6749cf677a2480008361f419dff45fc018920d1b90e81eb709fd0",
+          "primary_sources": "https://ispd.cc/contests/19/; https://ispd.cc/contests/19/metrics_and_ranking.pdf; https://ispd.cc/contests/19/ispd19eval.tgz"
+        },
+        {
+          "id": "physical-ispd26",
+          "record_sha256": "6e5963147f4a70bbfe9b18cd5b4fccecf379db809c49def793f97c4e18f8ec7d",
+          "primary_sources": "https://github.com/ABKGroup/ISPD26-Contest/blob/f7b29d242fc7d441f3b4eadc556f40099ccca067/README.md; https://github.com/ABKGroup/ISPD26-Contest/blob/f7b29d242fc7d441f3b4eadc556f40099ccca067/ISPD26_contest_description.pdf; https://github.com/ABKGroup/ISPD26-Contest/blob/f7b29d242fc7d441f3b4eadc556f40099ccca067/LICENSE; https://github.com/ABKGroup/ISPD26-Contest/blob/f7b29d242fc7d441f3b4eadc556f40099ccca067/scripts/evaluation.tcl; https://github.com/ABKGroup/ISPD26-Contest/blob/f7b29d242fc7d441f3b4eadc556f40099ccca067/scripts/parse_log.py; https://github.com/ABKGroup/ISPD26-Contest/blob/f7b29d242fc7d441f3b4eadc556f40099ccca067/equiv_check/netlist_equiv_check.py; https://github.com/ABKGroup/ISPD26-Contest/blob/f7b29d242fc7d441f3b4eadc556f40099ccca067/equiv_check/README.md; https://github.com/ABKGroup/ISPD26-Contest/blob/f7b29d242fc7d441f3b4eadc556f40099ccca067/scripts/aes_cipher_top/eval.sh; https://github.com/ABKGroup/ISPD26-Contest/blob/f7b29d242fc7d441f3b4eadc556f40099ccca067/scripts/aes_cipher_top/run_equiv_check.sh; https://github.com/ABKGroup/ISPD26-Contest/blob/f7b29d242fc7d441f3b4eadc556f40099ccca067/scripts/run_equiv_check.tcl; https://github.com/ABKGroup/ISPD26-Contest/blob/f7b29d242fc7d441f3b4eadc556f40099ccca067/docker/README.md"
+        },
+        {
+          "id": "pd-ispd10-cts",
+          "record_sha256": "f943353e27a087a289709b38f45559e10fad09acbd2c70fb324def5d7f77dd17",
+          "primary_sources": "https://www.ispd.cc/contests/10/ispd10cns.html; https://www.ispd.cc/contests/10/final_results.tar.gz; https://www.ispd.cc/contests/10/ISPD2010-cns-contest-v3.pdf"
+        },
+        {
+          "id": "pd-iccad25-incremental",
+          "record_sha256": "a64d3330aa67b8859b30529a198f032660d4c125218105207f454c643a90a1f7",
+          "primary_sources": "https://www.iccad-contest.org/2025/Problems.html; https://drive.google.com/file/d/1Z7VOMX9vpcILlp3A3DggwvZMLM5pHwHp/view; https://drive.google.com/file/d/1VjXmhzNS_EPL9l0oaUXQ18GeI58vyKt0/view"
+        },
+        {
+          "id": "be-posteda-drc-essential",
+          "record_sha256": "ef6a04d9d11caa2b23c1e41104dcb89e0bee6696541735fcfa95aa74e0df1533",
+          "primary_sources": "https://arxiv.org/abs/2605.06936; https://github.com/pengjas/posteda-bench"
+        }
+      ]
+    },
+    {
+      "domain": "模拟后端",
+      "record_count": 13,
+      "family_count": 11,
+      "catalog_ids": [
+        "analog-align",
+        "analog-magical",
+        "analog-osiris-layout",
+        "analog-osiris-cap",
+        "analog-glayout-language",
+        "analog-chipathon-opamp2025",
+        "analog-bag3-generators",
+        "analog-layoutcopilot-commands",
+        "analog-layoutcopilot-physical",
+        "analog-amsio-bench",
+        "analog-autockt-pex",
+        "memory-openram-native",
+        "memory-sram22-native"
+      ],
+      "covered_tasks": "传统/语言版图、寄生感知、自动generator、后仿尺寸、IOring及memorycompiler原生基线",
+      "remaining_limits": "固定工艺/模板往往承担大量先验；完整GDS/DRC/LVS/PEX与工艺授权、几何目标和电性能对应尚不能全独立复核。",
+      "evidence_boundary": "已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。",
+      "source_snapshots": [
+        {
+          "id": "analog-align",
+          "record_sha256": "b00f9629cc886a227dab289ccaaad25130394366163dd971d500671be8526982",
+          "primary_sources": "https://github.com/ALIGN-analoglayout/ALIGN-public/blob/8d3cc2e9aa5511315203eb5cbfd00d2c88fdbd18/README.md; https://github.com/ALIGN-analoglayout/ALIGN-public/blob/8d3cc2e9aa5511315203eb5cbfd00d2c88fdbd18/CircuitsDatabase/LICENSE; https://github.com/ALIGN-analoglayout/ALIGN-public/blob/8d3cc2e9aa5511315203eb5cbfd00d2c88fdbd18/tests/integration/test_integration.py; https://github.com/ALIGN-analoglayout/ALIGN-public/blob/8d3cc2e9aa5511315203eb5cbfd00d2c88fdbd18/tests/regression/test_regression.py; https://github.com/ALIGN-analoglayout/ALIGN-public/blob/8d3cc2e9aa5511315203eb5cbfd00d2c88fdbd18/conftest.py; https://github.com/ALIGN-analoglayout/ALIGN-public/blob/8d3cc2e9aa5511315203eb5cbfd00d2c88fdbd18/align/pnr/main.py; https://github.com/ALIGN-analoglayout/ALIGN-public/blob/8d3cc2e9aa5511315203eb5cbfd00d2c88fdbd18/bin/analyze_regression.py"
+        },
+        {
+          "id": "analog-glayout-language",
+          "record_sha256": "2a9b660040dbc0e427deb378bbadf0b33bbfe473409a11eab21b2338e345d14d",
+          "primary_sources": "https://research.google/pubs/human-language-to-analog-layout-using-glayout-layout-automation/; https://github.com/idea-fasoc/OpenFASOC/blob/426c17025c7c01d6e7d4d259fb7f9e7d741cc5c4/openfasoc/generators/glayout/glayout/llm/syntax_data/eval.json; https://github.com/idea-fasoc/OpenFASOC/blob/426c17025c7c01d6e7d4d259fb7f9e7d741cc5c4/openfasoc/generators/glayout/glayout/llm/manage_data.py; https://github.com/idea-fasoc/OpenFASOC/blob/426c17025c7c01d6e7d4d259fb7f9e7d741cc5c4/openfasoc/generators/glayout/glayout/llm/validate_synthetic_data.py; https://github.com/idea-fasoc/OpenFASOC/blob/426c17025c7c01d6e7d4d259fb7f9e7d741cc5c4/.github/scripts/test_glayout_ci.py; https://github.com/idea-fasoc/OpenFASOC/blob/426c17025c7c01d6e7d4d259fb7f9e7d741cc5c4/LICENSE"
+        },
+        {
+          "id": "analog-autockt-pex",
+          "record_sha256": "7729ffb143433d7086424f043c7d6ddc838c5feb577c6015adf80610caa220c3",
+          "primary_sources": "https://arxiv.org/abs/2001.01808v2; https://www.date-conference.com/proceedings-archive/2020/pdf/0505.pdf; https://github.com/ksettaluri6/AutoCkt/tree/a6c8a61d3dffb8b433f19251e135994a5b0f6ee4; https://raw.githubusercontent.com/ksettaluri6/AutoCkt/a6c8a61d3dffb8b433f19251e135994a5b0f6ee4/autockt/envs/ngspice_vanilla_opamp.py"
+        },
+        {
+          "id": "analog-amsio-bench",
+          "record_sha256": "9aa088fb6a23ab8d71b1c74dec5bad64a9060842f9b94e7e9a7f6e84389b15dd",
+          "primary_sources": "https://ojs.aaai.org/index.php/AAAI/article/download/37134/41096; https://github.com/Arcadia-1/AMS-IO-Bench/tree/dd063cfdcebd000a9406054680eb7cd6cb4a0cd3; https://github.com/Arcadia-1/AMS-IO-Agent/blob/046a2e3edccd76322ab3e47c4dd9a5a1eded1e8a/AMS-IO-Bench/README.md; https://github.com/Arcadia-1/AMS-IO-Agent/blob/046a2e3edccd76322ab3e47c4dd9a5a1eded1e8a/README.md; https://github.com/Arcadia-1/AMS-IO-Agent/blob/046a2e3edccd76322ab3e47c4dd9a5a1eded1e8a/tests/run_IO_Ring_batch.py; https://github.com/Arcadia-1/AMS-IO-Agent/blob/046a2e3edccd76322ab3e47c4dd9a5a1eded1e8a/src/tools/drc_runner_tool.py; https://github.com/Arcadia-1/AMS-IO-Agent/blob/046a2e3edccd76322ab3e47c4dd9a5a1eded1e8a/src/tools/lvs_runner_tool.py; https://github.com/Arcadia-1/AMS-IO-Agent/blob/046a2e3edccd76322ab3e47c4dd9a5a1eded1e8a/src/app/layout/layout_validator.py"
+        },
+        {
+          "id": "memory-openram-native",
+          "record_sha256": "c400d963ce56245463053c9d5aa27d8f1e7295d7601e3c4a68450a09a2a7c15e",
+          "primary_sources": "https://raw.githubusercontent.com/VLSIDA/OpenRAM/b2b069ce119d1488cbe6883b2240bceb5c7ce29a/README.md; https://raw.githubusercontent.com/VLSIDA/OpenRAM/b2b069ce119d1488cbe6883b2240bceb5c7ce29a/LICENSE; https://raw.githubusercontent.com/VLSIDA/OpenRAM/b2b069ce119d1488cbe6883b2240bceb5c7ce29a/docs/source/index.md; https://raw.githubusercontent.com/VLSIDA/OpenRAM/b2b069ce119d1488cbe6883b2240bceb5c7ce29a/compiler/options.py; https://raw.githubusercontent.com/VLSIDA/OpenRAM/b2b069ce119d1488cbe6883b2240bceb5c7ce29a/compiler/verify/__init__.py; https://raw.githubusercontent.com/VLSIDA/OpenRAM/b2b069ce119d1488cbe6883b2240bceb5c7ce29a/compiler/verify/none.py"
+        }
+      ]
+    },
+    {
+      "domain": "制造光刻",
+      "record_count": 57,
+      "family_count": 39,
+      "catalog_ids": [
+        "litho-lithobench",
+        "litho-opc-engineer-assistant",
+        "fab-secom",
+        "litho-lithobench-simulation",
+        "litho-iccad13",
+        "litho-ganopc-data",
+        "litho-openilt",
+        "litho-iccad12-hsd",
+        "litho-iccad16-clustering",
+        "litho-openhsd",
+        "litho-lithosim",
+        "litho-openlithohub",
+        "litho-rlopc",
+        "fab-wm811k",
+        "fab-mixedwm38",
+        "fab-carinthia",
+        "fab-carinthia-s",
+        "fab-waferinspectsr",
+        "fab-saferestore",
+        "fab-phm2016-cmp",
+        "fab-phm2018-ion",
+        "fab-semipointrend",
+        "fab-wafersage",
+        "fab-nist-sem-limits",
+        "fab-sem-centernet-adi",
+        "fab-sem-centernet-aei",
+        "fab-sem-adcds",
+        "fab-sem-continual",
+        "fab-sem-superyolo",
+        "fab-semiad",
+        "litho-neuralilt",
+        "litho-fracture-known-optimal",
+        "litho-fracture-real-ilt",
+        "litho-bismo",
+        "litho-torchlitho",
+        "litho-openhub-stochastic",
+        "fab-minifab",
+        "fab-mimac",
+        "fab-smt2020-hvlm",
+        "fab-smt2020-lvhm",
+        "fab-smt2020-engineering",
+        "fab-pyscfabsim",
+        "fab-smat2022",
+        "fab-benchmfc",
+        "fab-phm2018-business26",
+        "litho-culitho-industrial",
+        "fab-wm811k-mathworks",
+        "litho-maskopt-cell-context",
+        "fab-euv-ovl-syn-v11",
+        "litho-lithodreamer-forward",
+        "litho-lithodreamer-inverse",
+        "litho-lmlitho-forward",
+        "litho-lmlitho-benchopc",
+        "litho-unitho-generation",
+        "litho-unitho-rule-detection",
+        "litho-iccad19-tnsb-htc",
+        "fab-mimac2026-dispatch"
+      ],
+      "covered_tasks": "OPC/ILT求解、前向代理、SMO/随机性、recipe/工程助手、掩模写版、热点/SEM/晶圆模式/计量/良率/调度",
+      "remaining_limits": "Calibre/Proteus生产deck/wafer闭环与通用OPCagent独立基准缺公开完整对照；SEM像素与电测不是同gold。部分官方原包/许可证/lot血缘未取，mock/合成/partialagent明确标记。",
+      "evidence_boundary": "已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。",
+      "source_snapshots": [
+        {
+          "id": "litho-lithobench",
+          "record_sha256": "3b84961898aaeb33716270a19f6a7e46f5f0f9b97051201f8a830214e89819f3",
+          "primary_sources": "https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/README.md; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/lithobench/model.py; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/lithobench/evaluate.py; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/lithobench/dataset.py; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/pyilt/evaluation.py; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/pycommon/glp.py; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/pylitho/exact.py; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/benchmark/ICCAD2013/M1_test1.glp; https://raw.githubusercontent.com/shelljane/lithobench/9c74e82218e377eaf6d02d113fc1ce6e36c92aa6/benchmark/ICCAD2013/M1_test10.glp; https://proceedings.neurips.cc/paper_files/paper/2023/file/604b9fa9e1c16284e6517d923cf9ff20-Paper-Datasets_and_Benchmarks.pdf"
+        },
+        {
+          "id": "litho-opc-engineer-assistant",
+          "record_sha256": "95a3ea7221a002c02644dc87058b020f5a0fb40d7c69e8df356f12f42e322026",
+          "primary_sources": "https://www.cse.cuhk.edu.hk/~byu/papers/C251-AAAI2025-OPCAgent.pdf; https://ojs.aaai.org/index.php/AAAI/article/view/34479; https://arxiv.org/abs/2408.12775"
+        },
+        {
+          "id": "litho-culitho-industrial",
+          "record_sha256": "3155aeeb57bfcb0791387e0fdf89e95a22214785af0b21eb1987b0bcf0b78108",
+          "primary_sources": "https://arxiv.org/abs/2602.15036; https://arxiv.org/pdf/2602.15036"
+        },
+        {
+          "id": "litho-openlithohub",
+          "record_sha256": "865c5c20408d3f13e1b73b0d61405696dfc25e04d49d91b10543cd2b379ce19e",
+          "primary_sources": "https://raw.githubusercontent.com/OpenLithoHub/OpenLithoHub/f054c1d5b2bbab3c20c07b0089297b55269df0fe/README.md; https://raw.githubusercontent.com/OpenLithoHub/OpenLithoHub/f054c1d5b2bbab3c20c07b0089297b55269df0fe/src/openlithohub/benchmark/metrics/stochastic.py; https://raw.githubusercontent.com/OpenLithoHub/OpenLithoHub/f054c1d5b2bbab3c20c07b0089297b55269df0fe/src/openlithohub/_utils/forward_model.py"
+        },
+        {
+          "id": "fab-mixedwm38",
+          "record_sha256": "8d72a133d1cabbb8df6aff32b2e43ab9a5b5f4379efbd5cc94b0a00aee7c9ce3",
+          "primary_sources": "https://github.com/Junliangwangdhu/WaferMap/blob/10e65ca04cf105908cb87abec53c3083333b1bc9/README.md; https://github.com/Junliangwangdhu/WaferMap/blob/10e65ca04cf105908cb87abec53c3083333b1bc9/trian_mutil_label.py; https://doi.org/10.1109/TSM.2020.3020985; https://www.kaggle.com/datasets/co1d7era/mixedtype-wafer-defect-datasets; https://www.kaggle.com/api/v1/datasets/download/co1d7era/mixedtype-wafer-defect-datasets"
+        },
+        {
+          "id": "fab-mimac2026-dispatch",
+          "record_sha256": "d10220bcc060e828172f8b776883e883ea8e348ce7ed3dd3e930144fa58db10b",
+          "primary_sources": "https://semiconfab.org/benchmark.html; https://github.com/jinjiefan2020/SemiconFab/blob/a0cb20c3ac54aa5e9da7af8f0a383a29be09b32b/MIMAC-2026-SPEC-v1.0.md; https://github.com/jinjiefan2020/SemiconFab/blob/a0cb20c3ac54aa5e9da7af8f0a383a29be09b32b/LICENSE; https://github.com/jinjiefan2020/SemiconFab/blob/a0cb20c3ac54aa5e9da7af8f0a383a29be09b32b/benchmark/simulator/DEVIATIONS.md; https://github.com/jinjiefan2020/SemiconFab/blob/a0cb20c3ac54aa5e9da7af8f0a383a29be09b32b/benchmark/simulator/mimac2026/gym_api.py; https://github.com/jinjiefan2020/SemiconFab/blob/a0cb20c3ac54aa5e9da7af8f0a383a29be09b32b/benchmark/simulator/run_benchmark.py"
+        }
+      ]
+    },
+    {
+      "domain": "模拟测试",
+      "record_count": 3,
+      "family_count": 3,
+      "catalog_ids": [
+        "analog-ieee-p2427",
+        "analog-infineon-ads",
+        "analog-ams-anomaly"
+      ],
+      "covered_tasks": "IEEE P2427/Infineon模拟缺陷仿真、AMS异常检测",
+      "remaining_limits": "analog fault模型、真实工艺缺陷、测量噪声/阈值/coverage与量产DPPM/良率不能互换；完整故障仿真和硅校准未执行。",
+      "evidence_boundary": "已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。",
+      "source_snapshots": [
+        {
+          "id": "analog-ieee-p2427",
+          "record_sha256": "13f702bc952186e7711a1c41c6500b03949bf34188b01994abe2755812bd126a",
+          "primary_sources": "https://sagroups.ieee.org/2427/analogue-benchmark-circuits/; https://sagroups.ieee.org/2427/wp-content/uploads/sites/302/2019/03/analog_benchmark2017_v2.2.tar_.gz; https://standards.ieee.org/ieee/2427/7233/"
+        },
+        {
+          "id": "analog-infineon-ads",
+          "record_sha256": "2fc06bcb742c7c329164457fd6d9cd5e2a63dbf01056e988851572d0ca6d7f00",
+          "primary_sources": "https://sagroups.ieee.org/2427/analogue-benchmark-circuits/; https://sagroups.ieee.org/2427/wp-content/uploads/sites/302/2021/08/adsbenchmark-main.v3.0..zip; https://sagroups.ieee.org/2427/wp-content/uploads/sites/302/2021/10/adsbenchmark-main-v4.0.zip; https://raw.githubusercontent.com/Infineon/adsbenchmark/d1f5c9be021970e8c1fda5a2c5eea3987cb9667c/LICENSE; https://raw.githubusercontent.com/Infineon/adsbenchmark/d1f5c9be021970e8c1fda5a2c5eea3987cb9667c/BANDGAP/src/model/readme.txt; https://raw.githubusercontent.com/Infineon/adsbenchmark/d1f5c9be021970e8c1fda5a2c5eea3987cb9667c/PLL/src/checker/readme.txt"
+        },
+        {
+          "id": "analog-ams-anomaly",
+          "record_sha256": "d743041c9792dc965e2389e2c3e0fd4c1e17e551e859fa409e3eb5d169c30992",
+          "primary_sources": "https://raw.githubusercontent.com/TIES-Lab/AMS-Anomaly_dataset/c417543f5d29f932105b9f35fb8b1ce04891e693/README.md; https://api.github.com/repos/TIES-Lab/AMS-Anomaly_dataset/git/trees/main?recursive=1"
+        }
+      ]
+    },
+    {
+      "domain": "数字测试",
+      "record_count": 13,
+      "family_count": 11,
+      "catalog_ids": [
+        "test-iscas85",
+        "test-iscas89-sequential",
+        "test-iscas89-scan",
+        "test-itc99-seq",
+        "test-itc99-cut",
+        "test-itc02-soc",
+        "test-itc16-ijtag",
+        "test-fan-atpg",
+        "test-nnhyb",
+        "test-inf-atpg",
+        "test-testyard",
+        "test-deft",
+        "test-fuzzilicon"
+      ],
+      "covered_tasks": "ISCAS/ITC顺序与cut/scan变体、SoC调度、IJTAG网络、ATPG方法/工具、DFT生成器与真实后硅hook",
+      "remaining_limits": "历史fault lists多为未测试枚举，不是不可测gold；真实scan/ATE/诊断/压缩/DFT签核和硅故障分布缺统一公开验收；JAR/ATPG/硬件未运行。",
+      "evidence_boundary": "已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。",
+      "source_snapshots": [
+        {
+          "id": "test-itc99-seq",
+          "record_sha256": "eb551b183e3bd6f0f89518c8c5dd162affe888f57f5c27825003f7aef1d07d70",
+          "primary_sources": "https://github.com/cad-polito-it/I99T/blob/8a2c3b500ee7ff20e7031de92592b737bedc6d8c/README.md; https://github.com/cad-polito-it/I99T/blob/8a2c3b500ee7ff20e7031de92592b737bedc6d8c/LICENSE; https://github.com/cad-polito-it/I99T/blob/8a2c3b500ee7ff20e7031de92592b737bedc6d8c/i99t/b01/b01.bench; https://github.com/cad-polito-it/I99T/blob/8a2c3b500ee7ff20e7031de92592b737bedc6d8c/i99t/b01/b01_C.bench; https://github.com/cad-polito-it/I99T/blob/8a2c3b500ee7ff20e7031de92592b737bedc6d8c/i99t/b01/b01.fau; https://github.com/cad-polito-it/I99T/blob/8a2c3b500ee7ff20e7031de92592b737bedc6d8c/i99t/add_reset.pl; https://doi.org/10.1109/54.867894"
+        },
+        {
+          "id": "test-itc16-ijtag",
+          "record_sha256": "55ee8e2855c51d4161bc71500f627b73869dc457403ed38fe9164f6aa984caef",
+          "primary_sources": "https://github.com/IJTAG-Ecosystem/Benchmarks; https://gitlab.com/IJTAG/benchmarks/-/blob/577a4dd46e934bf9c86da7be8016db4b7ace35c8/README.md; https://gitlab.com/IJTAG/benchmarks/-/blob/577a4dd46e934bf9c86da7be8016db4b7ace35c8/script/build.sh; https://gitlab.com/IJTAG/benchmarks/-/blob/577a4dd46e934bf9c86da7be8016db4b7ace35c8/script/result.sh; https://gitlab.com/IJTAG/benchmarks/-/blob/577a4dd46e934bf9c86da7be8016db4b7ace35c8/ICL/Basic/BasicSCB/BasicSCB.icl"
+        },
+        {
+          "id": "test-fan-atpg",
+          "record_sha256": "b7bf8c1e64e115c96ca0a8bd0bae2f333e457a784953ab2a54ec58b717a959f9",
+          "primary_sources": "https://github.com/NTU-LaDS-II/FAN_ATPG/blob/26b2b36c0e9db11a4b6d9e759df6e44357121f39/README.md; https://github.com/NTU-LaDS-II/FAN_ATPG/blob/26b2b36c0e9db11a4b6d9e759df6e44357121f39/pkg/fan/src/atpg_cmd.cpp; https://github.com/NTU-LaDS-II/FAN_ATPG/blob/26b2b36c0e9db11a4b6d9e759df6e44357121f39/pkg/core/src/fault.h; https://github.com/NTU-LaDS-II/FAN_ATPG/blob/26b2b36c0e9db11a4b6d9e759df6e44357121f39/script/fanScripts/atpg_s27.script; https://github.com/NTU-LaDS-II/FAN_ATPG/blob/26b2b36c0e9db11a4b6d9e759df6e44357121f39/LICENSE"
+        },
+        {
+          "id": "test-deft",
+          "record_sha256": "07f1d6a4ae88db462b798b2df3dfb536fefe4786f7fa1e3a9f56a00701cc7444",
+          "primary_sources": "https://arxiv.org/abs/2512.23746"
+        },
+        {
+          "id": "test-fuzzilicon",
+          "record_sha256": "eab47cd551d7c46c8b79602e78e6135d9769dc02c5fb3c5f0a1918dcba20cdc5",
+          "primary_sources": "https://www.ndss-symposium.org/wp-content/uploads/2026-s1486-paper.pdf; https://github.com/0xCCF4/ufuzz; https://zenodo.org/records/17062689"
+        }
+      ]
+    },
+    {
+      "domain": "封装芯粒热",
+      "record_count": 20,
+      "family_count": 14,
+      "catalog_ids": [
+        "thermal-hotspot",
+        "thermal-3dice",
+        "thermal-ictherm-insupport",
+        "thermal-ictherm-ood",
+        "chiplet-atplace",
+        "3d-open3d-mol",
+        "3d-open3d-lol",
+        "3d-iccad22",
+        "3d-iccad23",
+        "chiplet-rapidchiplet-proxy",
+        "chiplet-rapidchiplet-booksim",
+        "chiplet-chipletgym",
+        "chiplet-chipletpart",
+        "chiplet-tap25d",
+        "thermal-fnoplacer-proxy",
+        "thermal-diffchip",
+        "thermal-thermedge-static",
+        "thermal-thermedge-transient",
+        "3d-rosettastone2-pin3d-paper",
+        "3d-taiwei-maintained-flow"
+      ],
+      "covered_tasks": "2.5D/3D实现、芯粒划分/互连/成本与资源DSE、热求解/代理/热感知布局",
+      "remaining_limits": "公开sample/合成cost/热label不等实际组装硅校准；跨diePDK/RC/散热边界/EMIR/良率与全签核缺口显式保留。",
+      "evidence_boundary": "已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。",
+      "source_snapshots": [
+        {
+          "id": "3d-open3d-mol",
+          "record_sha256": "f6e144117a73388e28773f796ced84f526ef45b6536a4992386cab9f04a6ef86",
+          "primary_sources": "https://github.com/lamda-bbo/Open3DBench; https://arxiv.org/abs/2503.12946; https://raw.githubusercontent.com/lamda-bbo/Open3DBench/e6d23148beed101b7741960f8aa967544259b0df/OpenROAD-3D/flow/Makefile; https://raw.githubusercontent.com/lamda-bbo/Open3DBench/e6d23148beed101b7741960f8aa967544259b0df/OpenROAD-3D/flow/scripts/final_report.tcl; https://raw.githubusercontent.com/lamda-bbo/Open3DBench/e6d23148beed101b7741960f8aa967544259b0df/OpenROAD-3D/flow/scripts/detail_route.tcl; https://raw.githubusercontent.com/lamda-bbo/Open3DBench/e6d23148beed101b7741960f8aa967544259b0df/OpenROAD-3D/flow/platforms/nangate45_3D/setRC.tcl; https://raw.githubusercontent.com/lamda-bbo/Open3DBench/e6d23148beed101b7741960f8aa967544259b0df/OpenROAD-3D/flow/HotSpot/scripts/temp_tran.py; https://raw.githubusercontent.com/lamda-bbo/Open3DBench/e6d23148beed101b7741960f8aa967544259b0df/OpenROAD-3D/flow/HotSpot/scripts/run_report_power.tcl; https://raw.githubusercontent.com/lamda-bbo/Open3DBench/e6d23148beed101b7741960f8aa967544259b0df/OpenROAD-3D/flow/run_mol_analytical.sh; https://raw.githubusercontent.com/lamda-bbo/Open3DBench/e6d23148beed101b7741960f8aa967544259b0df/OpenROAD-3D/flow/designs/nangate45_3D/ariane133/config.mk"
+        },
+        {
+          "id": "3d-taiwei-maintained-flow",
+          "record_sha256": "86529b3020f1473cce7f9cd72fd20ea180b318eab0034f7b448f0b223ed31b9e",
+          "primary_sources": "https://raw.githubusercontent.com/CODA-Team/TaiWei-Pin-3D/c85b79352eefc31a588da3ef873e4fd68a3df3f2/README.md; https://raw.githubusercontent.com/CODA-Team/TaiWei-Pin-3D/c85b79352eefc31a588da3ef873e4fd68a3df3f2/LICENSE; https://raw.githubusercontent.com/CODA-Team/TaiWei-Pin-3D/c85b79352eefc31a588da3ef873e4fd68a3df3f2/designs/asap7_3D/gcd/ci/ord/openroad_eval.json; https://raw.githubusercontent.com/CODA-Team/TaiWei-Pin-3D/c85b79352eefc31a588da3ef873e4fd68a3df3f2/designs/asap7_3D/gcd/ci/ord/cadence_eval.json; https://raw.githubusercontent.com/CODA-Team/TaiWei-Pin-3D/c85b79352eefc31a588da3ef873e4fd68a3df3f2/test/README.md; https://raw.githubusercontent.com/CODA-Team/TaiWei-Pin-3D/c85b79352eefc31a588da3ef873e4fd68a3df3f2/DOC/issue.md; https://raw.githubusercontent.com/CODA-Team/TaiWei-Pin-3D/c85b79352eefc31a588da3ef873e4fd68a3df3f2/util/compare_eval_baselines.py; https://raw.githubusercontent.com/CODA-Team/TaiWei-Pin-3D/c85b79352eefc31a588da3ef873e4fd68a3df3f2/util/extract_eval_metrics.py; https://raw.githubusercontent.com/CODA-Team/TaiWei-Pin-3D/c85b79352eefc31a588da3ef873e4fd68a3df3f2/DOC/openroad_3d_cooptimization_strategy.md; https://raw.githubusercontent.com/CODA-Team/TaiWei-Pin-3D/c85b79352eefc31a588da3ef873e4fd68a3df3f2/DOC/cadence_3d_cooptimization_strategy.md"
+        },
+        {
+          "id": "chiplet-chipletpart",
+          "record_sha256": "672a1d4448b9221b0b7d8ad337140d48b9544606669f2d670b2db2b05e2dbd71",
+          "primary_sources": "https://github.com/ABKGroup/ChipletPart/blob/84f132069ef0ab4dfbea92c444913bc5859a48dc/README.md; https://github.com/ABKGroup/ChipletPart/blob/84f132069ef0ab4dfbea92c444913bc5859a48dc/LICENSE; https://github.com/ABKGroup/ChipletPart/blob/84f132069ef0ab4dfbea92c444913bc5859a48dc/src/ChipletPart.cpp; https://github.com/ABKGroup/ChipletPart/blob/84f132069ef0ab4dfbea92c444913bc5859a48dc/src/FMRefiner.cpp; https://github.com/ABKGroup/ChipletPart/blob/84f132069ef0ab4dfbea92c444913bc5859a48dc/cost_model/evaluator_cpp.cpp; https://github.com/ABKGroup/ChipletPart/blob/84f132069ef0ab4dfbea92c444913bc5859a48dc/cost_model/src/design/Chip.cpp; https://github.com/ABKGroup/ChipletPart/blob/84f132069ef0ab4dfbea92c444913bc5859a48dc/test_data/ga100/block_definitions.txt; https://github.com/ABKGroup/ChipletPart/blob/84f132069ef0ab4dfbea92c444913bc5859a48dc/test_data/48_1_14_4_1600_1600/block_level_netlist.xml; https://github.com/ABKGroup/ChipletPart/blob/84f132069ef0ab4dfbea92c444913bc5859a48dc/run_chiplet_part.sh; https://vlsicad.ucsd.edu/Publications/Journals/j149.pdf; https://doi.org/10.1145/3796532"
+        },
+        {
+          "id": "chiplet-rapidchiplet-booksim",
+          "record_sha256": "fd44a65dc612e5f0e6f45702d597a9af74303da66c7857fe966935cd4d5b48fa",
+          "primary_sources": "https://github.com/spcl/rapidchiplet/blob/17176f92c91eda629a25bc11bf7959d6b963a23b/README.md; https://github.com/spcl/rapidchiplet/blob/17176f92c91eda629a25bc11bf7959d6b963a23b/booksim_wrapper.py; https://github.com/spcl/rapidchiplet/blob/17176f92c91eda629a25bc11bf7959d6b963a23b/create_paper_plots.py; https://github.com/spcl/rapidchiplet/blob/17176f92c91eda629a25bc11bf7959d6b963a23b/experiments/evaluation_booksim.json; https://github.com/spcl/rapidchiplet/blob/17176f92c91eda629a25bc11bf7959d6b963a23b/inputs/booksim_configs/example_booksim_config.json; https://github.com/spcl/rapidchiplet/blob/17176f92c91eda629a25bc11bf7959d6b963a23b/reproduce_paper_results.py"
+        },
+        {
+          "id": "thermal-thermedge-transient",
+          "record_sha256": "f5cbbfe2eb5ada3be067b4d29cdb0ddafd816b0ab37f5cac85867bb8106a87be",
+          "primary_sources": "https://arxiv.org/pdf/2009.09009; https://raw.githubusercontent.com/VidyaChhabria/ThermEDGe-and-IREDGe/f43c29403692fad7793e49150032cd8d6bc3d37a/README.md; https://raw.githubusercontent.com/VidyaChhabria/ThermEDGe-and-IREDGe/f43c29403692fad7793e49150032cd8d6bc3d37a/config.yaml; https://raw.githubusercontent.com/VidyaChhabria/ThermEDGe-and-IREDGe/f43c29403692fad7793e49150032cd8d6bc3d37a/src/transient_thermal_model.py; https://raw.githubusercontent.com/VidyaChhabria/ThermEDGe-and-IREDGe/f43c29403692fad7793e49150032cd8d6bc3d37a/src/encoder_decoder.py"
+        }
+      ]
+    },
+    {
+      "domain": "器件",
+      "record_count": 8,
+      "family_count": 5,
+      "catalog_ids": [
+        "device-mesd",
+        "device-mesd2.0",
+        "device-dfo-diode",
+        "device-dfo-hemt",
+        "device-iprefer",
+        "device-comphy-consistency",
+        "device-comphy-esid",
+        "device-esded"
+      ],
+      "covered_tasks": "I-V/C-V/参数提取、二极管/HEMT/器件模型、可靠性与模型一致性",
+      "remaining_limits": "论文/模型/样例不等固定公共benchmark；部分model下载需注册，原测量与跨温/工艺gold不全，老化拟合不推全可靠性机制。",
+      "evidence_boundary": "已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。",
+      "source_snapshots": [
+        {
+          "id": "device-mesd",
+          "record_sha256": "e5004d83df0987b1632cb11a17bbcd49dece1a04d60137b1b88d736b0fd6ccf1",
+          "primary_sources": "https://github.com/SJTU-YONGFU-RESEARCH-GRP/MESD-MOSFET-Electrical-Simulation-Dataset/blob/5dcc2236ac5b5eeb6228503f544053c2a359b636/README.md; https://github.com/SJTU-YONGFU-RESEARCH-GRP/MESD-MOSFET-Electrical-Simulation-Dataset/blob/5dcc2236ac5b5eeb6228503f544053c2a359b636/LICENSE; https://github.com/SJTU-YONGFU-RESEARCH-GRP/MESD-MOSFET-Electrical-Simulation-Dataset/blob/5dcc2236ac5b5eeb6228503f544053c2a359b636/scripts/netlist.ac.sp; https://github.com/SJTU-YONGFU-RESEARCH-GRP/MESD-MOSFET-Electrical-Simulation-Dataset/blob/5dcc2236ac5b5eeb6228503f544053c2a359b636/scripts/netlist.ac.spectre; https://github.com/SJTU-YONGFU-RESEARCH-GRP/MESD-MOSFET-Electrical-Simulation-Dataset/blob/5dcc2236ac5b5eeb6228503f544053c2a359b636/scripts/netlist.dc.sp; https://github.com/SJTU-YONGFU-RESEARCH-GRP/MESD-MOSFET-Electrical-Simulation-Dataset/blob/5dcc2236ac5b5eeb6228503f544053c2a359b636/scripts/netlist.dc.spectre"
+        },
+        {
+          "id": "device-dfo-hemt",
+          "record_sha256": "11205053ff72f8aed4baf2bd446bf4029fed632b5d9ae651ea73383351f31635",
+          "primary_sources": "https://web.stanford.edu/~boyd/papers/compact_model_parameter_extraction.html; https://github.com/rafapm/dfo_parameter_extraction"
+        },
+        {
+          "id": "device-comphy-esid",
+          "record_sha256": "47187104d4fcb999db1ccff215e8efeef8dc554fe14d300529938dc824183cc0",
+          "primary_sources": "https://arxiv.org/abs/2212.11547; https://www.comphy.eu/features/; https://www.comphy.eu/downloads/"
+        },
+        {
+          "id": "device-esded",
+          "record_sha256": "87f6d054641a725caced4a77b1623cf4d1e1bec77e1170f1b497744c3321cd5c",
+          "primary_sources": "https://github.com/SJTU-YONGFU-RESEARCH-GRP/ESDED-Emerging-Semiconductor-Device-Electrical-Dataset/blob/1330af095a3ac240da9760a26cedd30acf44b798/README.md; https://github.com/SJTU-YONGFU-RESEARCH-GRP/ESDED-Emerging-Semiconductor-Device-Electrical-Dataset/blob/1330af095a3ac240da9760a26cedd30acf44b798/LICENSE; https://github.com/SJTU-YONGFU-RESEARCH-GRP/ESDED-Emerging-Semiconductor-Device-Electrical-Dataset/tree/1330af095a3ac240da9760a26cedd30acf44b798; https://github.com/SJTU-YONGFU-RESEARCH-GRP/ESDED-Emerging-Semiconductor-Device-Electrical-Dataset/blob/1330af095a3ac240da9760a26cedd30acf44b798/GAA/9903594_74D/9903594_74D.json; https://github.com/SJTU-YONGFU-RESEARCH-GRP/ESDED-Emerging-Semiconductor-Device-Electrical-Dataset/blob/1330af095a3ac240da9760a26cedd30acf44b798/GAA/9903594_74D/74D.png"
+        }
+      ]
+    },
+    {
+      "domain": "板级电磁",
+      "record_count": 3,
+      "family_count": 2,
+      "catalog_ids": [
+        "boundary-emval-nf",
+        "boundary-emval-sp",
+        "boundary-matrix-sparam"
+      ],
+      "covered_tasks": "近场/散射参数与稀疏矩阵相关公开验证，作为芯片范围边界材料",
+      "remaining_limits": "板级/天线EM与IC RF设计及工业封装SI/PI不合并；AEDL/Alpha-RF等候选尚未全部核成独立公共协议。",
+      "evidence_boundary": "已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。",
+      "source_snapshots": [
+        {
+          "id": "boundary-emval-nf",
+          "record_sha256": "13d0ad786a1fe151c63dd4b02a44a50abc8dc0244af97058713ea726a7a79819",
+          "primary_sources": "https://huggingface.co/datasets/ArenaPhysica/EMVal; https://huggingface.co/datasets/ArenaPhysica/EMVal/blob/main/PROTOCOL.md"
+        },
+        {
+          "id": "boundary-emval-sp",
+          "record_sha256": "2299f499efeeaad6a7f03313f832eec21507860fc87adc4acbc43a6c5fb36c35",
+          "primary_sources": "https://huggingface.co/datasets/ArenaPhysica/EMVal; https://huggingface.co/datasets/ArenaPhysica/EMVal/blob/main/PROTOCOL.md"
+        },
+        {
+          "id": "boundary-matrix-sparam",
+          "record_sha256": "fc25affc7891e70832ac624da45190b0250fb38a784f3c95044a701de084df44",
+          "primary_sources": "https://github.com/SJTU-YONGFU-RESEARCH-GRP/matrix-s-parameters-dataset/tree/61e67f85f12aeb2839241041a4c7ef2bbffe00f2/README.md; https://github.com/SJTU-YONGFU-RESEARCH-GRP/matrix-s-parameters-dataset/tree/61e67f85f12aeb2839241041a4c7ef2bbffe00f2/LICENSE; https://api.github.com/repos/SJTU-YONGFU-RESEARCH-GRP/matrix-s-parameters-dataset/git/trees/61e67f85f12aeb2839241041a4c7ef2bbffe00f2?recursive=1; https://github.com/SJTU-YONGFU-RESEARCH-GRP/matrix-s-parameters-dataset/tree/61e67f85f12aeb2839241041a4c7ef2bbffe00f2/artifacts/datasets/records; https://raw.githubusercontent.com/SJTU-YONGFU-RESEARCH-GRP/matrix-s-parameters-dataset/61e67f85f12aeb2839241041a4c7ef2bbffe00f2/artifacts/datasets/records/4ca20bd3e70c/023784bf164e7c1b/ports.json"
+        }
+      ]
+    },
+    {
+      "domain": "加速器映射",
+      "record_count": 2,
+      "family_count": 2,
+      "catalog_ids": [
+        "pd-ispd20-wafer",
+        "pd-ispd21-wafer"
+      ],
+      "covered_tasks": "wafer-scale固定架构placement/routing与物理场映射竞赛边界",
+      "remaining_limits": "在既有加速器上编译/映射不等制造一颗新芯片；架构/toolchain约束下指标不能套ASIC cell PPA。",
+      "evidence_boundary": "已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。",
+      "source_snapshots": [
+        {
+          "id": "pd-ispd20-wafer",
+          "record_sha256": "f8fee0681b1ed74cb156ea05860a759d8ec1ce815b3517a5ad92f86bc765fc8f",
+          "primary_sources": "https://www.ispd.cc/contests/20/index.html; https://www.ispd.cc/slides/2020/ISPD_Contest_Closing_Session.pdf"
+        },
+        {
+          "id": "pd-ispd21-wafer",
+          "record_sha256": "102ad9f54d2dd1bb775f1acbcf052f6ff855207230943629ea2bcdc129b8374f",
+          "primary_sources": "https://www.ispd.cc/contests/21/index.html; https://www.ispd.cc/slides/2021/protected/13_1_Groeneveld.pdf"
+        }
+      ]
+    },
+    {
+      "domain": "成品性能",
+      "record_count": 23,
+      "family_count": 13,
+      "catalog_ids": [
+        "perf-spec-cpu2026",
+        "perf-spec-cpu2017",
+        "perf-coremark",
+        "perf-embench-iot",
+        "perf-mlperf-inference-datacenter",
+        "perf-mlperf-inference-edge",
+        "perf-mlperf-training",
+        "perf-stream",
+        "perf-hpl",
+        "perf-hpcg",
+        "perf-parsec",
+        "perf-rodinia",
+        "perf-mlperf-tiny-kws",
+        "perf-mlperf-tiny-vww",
+        "perf-mlperf-tiny-ic",
+        "perf-mlperf-tiny-ad",
+        "perf-mlperf-tiny-stream",
+        "perf-ulpmark-cp",
+        "perf-ulpmark-pp",
+        "perf-ulpmark-cm",
+        "perf-mlperf-client-llm",
+        "perf-mlperf-client-image",
+        "perf-mlperf-client-agentic"
+      ],
+      "covered_tasks": "SPEC/MLPerf/嵌入式/内存带宽/HPC/应用负载等，成品推理/训练与EDA能力分开",
+      "remaining_limits": "不是所有芯片产品测试大全；Storage/graphics/通信/车规等仍有未逐协议覆盖候选，真实设备功率/计时/正式license规则未本地复现。",
+      "evidence_boundary": "已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。",
+      "source_snapshots": [
+        {
+          "id": "perf-spec-cpu2026",
+          "record_sha256": "80a943b28d3fd80951554fe875bb8823dd033ce13ac1422c7b76380d9644e293",
+          "primary_sources": "https://www.spec.org/cpu2026/docs/overview.html; https://www.spec.org/cpu2026/docs/runrules.html; https://www.spec.org/cpu/"
+        },
+        {
+          "id": "perf-mlperf-inference-datacenter",
+          "record_sha256": "3f42b88e5373e4e5c09f35e095b594f67edf83e2857f4a5d98372aeb83eb4dbe",
+          "primary_sources": "https://github.com/mlcommons/inference_policies/blob/master/inference_rules.adoc; https://mlcommons.org/benchmarks/inference-datacenter/"
+        },
+        {
+          "id": "perf-mlperf-tiny-stream",
+          "record_sha256": "50adae7609b675f125dc4c7fc6632b09a2fc3010369b9e78f0619680bf0089fa",
+          "primary_sources": "https://github.com/mlcommons/tiny/blob/4addd0fa08d216e20637637874e084895f289da4/benchmark/runner/streaming_ww_utils.py; https://github.com/mlcommons/tiny/blob/4addd0fa08d216e20637637874e084895f289da4/benchmark/runner/README.md; https://github.com/mlcommons/tiny/blob/4addd0fa08d216e20637637874e084895f289da4/benchmark/runner/sww_data_dir/sww_long_test.json; https://github.com/mlcommons/tiny/blob/4addd0fa08d216e20637637874e084895f289da4/benchmark/MLPerfTiny_Rules.adoc"
+        },
+        {
+          "id": "perf-coremark",
+          "record_sha256": "3c824ebb59441ddd05146ec31473d4b8930e2ffa2704731f47b4df72dc5c7260",
+          "primary_sources": "https://github.com/eembc/coremark/blob/main/README.md; https://github.com/eembc/coremark/blob/main/LICENSE.md"
+        },
+        {
+          "id": "perf-hpcg",
+          "record_sha256": "9ace4e5c1ad14cbffbe6b05b2b1d1ed8697e43b949a5952bdc6a5485e9eaa7cc",
+          "primary_sources": "https://github.com/hpcg-benchmark/hpcg/blob/master/README.md; https://github.com/hpcg-benchmark/hpcg/blob/master/src/ReportResults.cpp; https://hpcg-benchmark.org/faq/"
+        }
+      ]
+    }
+  ]
+}

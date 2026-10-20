@@ -1,0 +1,150 @@
+{
+  "as_of": "2026-10-20T00:45:35.851971+00:00",
+  "status": "task and input/label comparison, not a new benchmark or ranking",
+  "scope": "模拟版图必须区分器件几何生成、网表到版图、寄生优化、语言调用、工具代理与完整工程。原生PCell/P&R、独立物理验收及全部成本决定模型研究价值；商业软件已有不等任务全部解决。",
+  "items": [
+    {
+      "task": "模拟网表到自动版图",
+      "catalog_ids": [
+        "analog-align",
+        "analog-magical"
+      ],
+      "input_boundary": "SPICE/层次/约束/PDK与原生generator；部分case约束需人工",
+      "label_oracle": "GDS/LEF/网表及内部错误日志；ALIGN当前errors只short/open/内部DRC，非全部错误",
+      "scoring_boundary": "无跨repo统一模型总分；MAGICAL打印runtime不含其后routeOnly",
+      "current_use": "现有native编译/P&R是必须比较的工业基线；独立DRC/LVS/PEX与电TB仍需补，不能按仓库example数称独立任务",
+      "source_snapshots": [
+        {
+          "id": "analog-align",
+          "record_sha256": "b00f9629cc886a227dab289ccaaad25130394366163dd971d500671be8526982"
+        },
+        {
+          "id": "analog-magical",
+          "record_sha256": "d2c919814ebc298e3d4d6d1039725bb65339cf4f9756f1be9e26ae942c3cf1ad"
+        }
+      ]
+    },
+    {
+      "task": "寄生敏感的布局搜索",
+      "catalog_ids": [
+        "analog-osiris-layout"
+      ],
+      "input_boundary": "sized netlist/TB/matching pairs；finger配置与component移动",
+      "label_oracle": "pre/post trace RMSE(V)与componentbbox面积和(µm²)，不是全spec签核",
+      "scoring_boundary": "论文87100与新版card89108分开；Eq3/4符号需代码核，计全部失败/训练成本",
+      "current_use": "适合寄生aware优化/代理标签；独立scorer与group split仍待。原生SA/P&R、等预算random及RL是基线，不自动等于工程agent",
+      "source_snapshots": [
+        {
+          "id": "analog-osiris-layout",
+          "record_sha256": "3aadafd19fc2a406834660c0c02239ff6fb164eb733a05b9646965a2d9ef7d1a"
+        }
+      ]
+    },
+    {
+      "task": "尺寸到器件几何生成",
+      "catalog_ids": [
+        "analog-osiris-cap"
+      ],
+      "input_boundary": "C/W/L/polygonbudget→layer/datatype/bbox JSON，约10k派生primitive",
+      "label_oracle": "JSON/尺寸与独立DRC/LVS/实际C容差分别验收",
+      "scoring_boundary": "90/5/5 split及100%valid为作者声明，有效分母/manifest/checker未取得",
+      "current_use": "同PDK native PCell可直接生成大量标准器件，是强必要基线；LLM成功不能自动声称解决全电路版图",
+      "source_snapshots": [
+        {
+          "id": "analog-osiris-cap",
+          "record_sha256": "40992ac7ba17d3a52f652f015ceafdc3914a0786c961ba24a9b91402e1fd6220"
+        }
+      ]
+    },
+    {
+      "task": "语言到生成器调用",
+      "catalog_ids": [
+        "analog-glayout-language"
+      ],
+      "input_boundary": "自然语言意图/参数→gLayout Python/PDK API调用",
+      "label_oracle": "synthetic instantiation True不等DRC/LVS；CI是另一个验收路径",
+      "scoring_boundary": "历史70%与当前9行不得共用分母，语法/连接/DRC/LVS/PEX分栏",
+      "current_use": "已有PCell是执行器；模型贡献要证明intent正确/组合/跨PDK，未知4管block只是有限泛化",
+      "source_snapshots": [
+        {
+          "id": "analog-glayout-language",
+          "record_sha256": "2a9b660040dbc0e427deb378bbadf0b33bbfe473409a11eab21b2338e345d14d"
+        }
+      ]
+    },
+    {
+      "task": "指令与命令代理",
+      "catalog_ids": [
+        "analog-layoutcopilot-commands",
+        "analog-layoutcopilot-physical"
+      ],
+      "input_boundary": "自然语言请求→约束/版图修改命令；物理例还含人工反馈",
+      "label_oracle": "sanity含正确拒绝；functionality只通过样本条件人审，物理case需后仿",
+      "scoring_boundary": "96.80%overall非DRC/LVS率；25人审不能当全样本；2case多目标有退化",
+      "current_use": "命令层能力与端到端物理收益分轨；native editor/约束脚本与专家同预算对照，不能混成大规模独立签核bench",
+      "source_snapshots": [
+        {
+          "id": "analog-layoutcopilot-commands",
+          "record_sha256": "49ae1a4e054ca39c6a7ae4196cd401716bc3d54166228919a04386af3e95d131"
+        },
+        {
+          "id": "analog-layoutcopilot-physical",
+          "record_sha256": "a6b82a2ab750124472aa9dc858774a7b40ef0aca0867316d81b885577791723d"
+        }
+      ]
+    },
+    {
+      "task": "I/O-ring工程生成",
+      "catalog_ids": [
+        "analog-amsio-bench"
+      ],
+      "input_boundary": "规格/PDK/cell/pad资源→AMS I/O-ring",
+      "label_oracle": "IG/shapeVLM/DRC/LVS/交集各自定义，参考图相似非连续物理距离",
+      "scoring_boundary": "论文30case分母与当前60case分开，human480min为访谈估计",
+      "current_use": "较接近完整工程agent；需要独立DRC/LVS+连接/供电/功能，以及同环境专家/现有生成器成本",
+      "source_snapshots": [
+        {
+          "id": "analog-amsio-bench",
+          "record_sha256": "9aa088fb6a23ab8d71b1c74dec5bad64a9060842f9b94e7e9a7f6e84389b15dd"
+        }
+      ]
+    },
+    {
+      "task": "参数化电路和测量基础设施",
+      "catalog_ids": [
+        "analog-bag3-generators",
+        "analog-autockt-pex"
+      ],
+      "input_boundary": "BAG generator/PDK/测量配置→参数化布局与PEX优化",
+      "label_oracle": "特定SAR FFT测量及私有工艺AutoCkt PEX不能当公共统一赛题",
+      "scoring_boundary": "AutoCkt40/40限特定generator，LVS不等全部DRC/硅签核；完整成本约68h需计",
+      "current_use": "原生generator强先验是输入一部分；跨私有工艺可访问性与独立验收限制必须声明",
+      "source_snapshots": [
+        {
+          "id": "analog-bag3-generators",
+          "record_sha256": "f51a41833273d416f12ff245cc87556ad327e7edd3a340c855e32d642e178bbc"
+        },
+        {
+          "id": "analog-autockt-pex",
+          "record_sha256": "7729ffb143433d7086424f043c7d6ddc838c5feb577c6015adf80610caa220c3"
+        }
+      ]
+    },
+    {
+      "task": "设计挑战/多目标规格",
+      "catalog_ids": [
+        "analog-chipathon-opamp2025"
+      ],
+      "input_boundary": "opamp规格与公开PDK/gLayout→参赛设计",
+      "label_oracle": "准入门、PM/GBP/GBP÷P/area目标分开",
+      "scoring_boundary": "官方未给四目标合成权重/归一化/area细节，不能自建冠军分数",
+      "current_use": "适合专家目标与流程参考；不可宣称已有完整同预算模型排行榜，先补统一signoff与预算",
+      "source_snapshots": [
+        {
+          "id": "analog-chipathon-opamp2025",
+          "record_sha256": "edb69b1bb8ae8ecb07bf88413fedfc9a13ee291d46ee545561ffcfd49052229d"
+        }
+      ]
+    }
+  ]
+}

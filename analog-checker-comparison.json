@@ -1,0 +1,469 @@
+{
+  "status": "static full12type AnalogCoder + five representative long-task verifiers; no grading/SPICE/LLM run",
+  "as_of": "2026-10-19T21:00:59.095649+00:00",
+  "small_circuit_checkers": [
+    {
+      "type": "Amplifier",
+      "source": "evidence/analog_coder_fixed_2.txt",
+      "checks": "原MOS Id≥10µA；100Hz gain>1e-5",
+      "limits": "工作点/单频弱门，不是实用增益带宽/PVT"
+    },
+    {
+      "type": "Opamp",
+      "source": "evidence/analog_coder_fixed_3.txt",
+      "checks": "Id门+100Hz differential gain>1e-5且比common gain多1e-5",
+      "limits": "不是有明确dB CMRR/UGF/PM规格"
+    },
+    {
+      "type": "Inverter",
+      "source": "evidence/analog_coder_control_3.txt",
+      "checks": "Vin0/5V，Vout跨2.5V且输出差≥1V",
+      "limits": "两点功能，不是VTC噪声裕量/延迟"
+    },
+    {
+      "type": "Oscillator",
+      "source": "evidence/analog_coder_fixed_4.txt",
+      "checks": "输出足够peaks，保留较大半数幅度>1µV，period std<meanperiod×.2",
+      "limits": "无目标频率/相噪/完整振幅规格；筛幅度会改变统计对象"
+    },
+    {
+      "type": "VCO",
+      "source": "evidence/analog_coder_control_4.txt",
+      "checks": "基准period与两种控制修改后medianperiod比较，需同向超10µs差",
+      "limits": "不是统一频率/线性调谐范围/相噪目标"
+    },
+    {
+      "type": "PLL",
+      "source": "evidence/analog_coder_fixed_5.txt",
+      "checks": "意图10MHz reference匹配5%频率误差；当前调用np.close且mismatch分支exit0",
+      "limits": "与通常np.isclose不同，所读源码无np.close定义；不能仅看exitcode/输出成功字样当正确，更不能外推原campaign已受影响"
+    },
+    {
+      "type": "Adder",
+      "source": "evidence/analog_coder_rest_0.txt",
+      "checks": "扫输入，逐点Vout对bias-(Vin1-bias+Vin2-bias)，np.isclose rtol.2",
+      "limits": "不等全输入/频段/失真约束；np.isclose还有默认atol"
+    },
+    {
+      "type": "Subtractor",
+      "source": "evidence/analog_coder_rest_5.txt",
+      "checks": "扫输入，逐点Vout对Vin2-Vin1，rtol.2",
+      "limits": "固定sweep/偏置与命名；非任意输入全功能证明"
+    },
+    {
+      "type": "CurrentMirror",
+      "source": "evidence/analog_coder_rest_1.txt",
+      "checks": "5负载100/300/500/750/1000Ω，min相邻|ΔI|<1µA且minI>10µA；ref分支另查",
+      "limits": "只需一对相邻稳定；不是max ΔI约束。ref变化分支resistor=500但除r_load变量仍为最后1000，需保留原实现并修订轨比较"
+    },
+    {
+      "type": "Schmitt",
+      "source": "evidence/analog_coder_rest_4.txt",
+      "checks": "两方向sweep输出过2.5V，触发点差>.05V、摆幅≥2.5V且单调",
+      "limits": "依赖固定输入sweep/门槛，不是广泛PVT迟滞规格"
+    },
+    {
+      "type": "Integrator",
+      "source": "evidence/analog_coder_rest_3.txt",
+      "checks": "所选波形段斜率≈expected±30%、R²≥.9；再移除opamp做负控",
+      "limits": "负控仿真失败/peaks不足可成功退出，是“无opamp不再积分”的附加检查，不等原DUT仿真失败仍通过"
+    },
+    {
+      "type": "Differentiator",
+      "source": "evidence/analog_coder_rest_2.txt",
+      "checks": "triangle→square、幅度偏置对称约.6V±20%、square形状；再移opamp负控",
+      "limits": "负控异常成功exit同理，不把该分支当正常电性能成功；不是连续频率微分传递函数全验收"
+    }
+  ],
+  "long_task_examples": [
+    {
+      "task": "bootstrap-sampler-fft",
+      "source": "evidence/analog_long_frequency_0.txt",
+      "checks": "11 selectedPVTcases×static/FFT；SDR≥72dB、midtrackVgs≥.8VDD、正负retainedgain≥.9、power≤500µW",
+      "limits": "write_results(strict=True)将reward二值；没有PSD噪声/waferMC等证据，不改称SNDR/实片精度"
+    },
+    {
+      "task": "current-starved-ring-vco-pvt",
+      "source": "evidence/analog_long_frequency_1.txt",
+      "checks": "分stage nominal→PVT tuning→corner配对low/high supply pushing，缺失或重复corner矩阵拒绝",
+      "limits": "fail-fast省无效仿真，真实工具成本要计实际调用且固定stage条件"
+    },
+    {
+      "task": "lc-vco-2ghz-pvt",
+      "source": "evidence/analog_long_frequency_2.txt",
+      "checks": "27PVT，4控制plateau；频率包围约2GHz、tuningratio≥1.25、差分swing≥.30V、startup≤14ns、power≤2.4mW等",
+      "limits": "频率/摆幅/operatingrange/supplypushing，不含已证phase-noise/jitter签核"
+    },
+    {
+      "task": "pll-charge-pump-pvt",
+      "source": "evidence/analog_long_frequency_3.txt",
+      "checks": "27PVT DC、3pulsepoints及20mismatchseed31001–31020，50µA标称/10nspulse，漏电/平坦度/净电荷等",
+      "limits": "chargepump只是PLL子电路，不能称完整PLL lock/phase-noise验收；finite MC非真实siliconyield"
+    },
+    {
+      "task": "sar-adc-4bit-async",
+      "source": "evidence/analog_long_frequency_4.txt",
+      "checks": "3PVT codecenters+两组打乱16codes及采后decoy；4dynamicconditions，32samples，tonebin15/13，SNDR>24dB、normalizedENOB>3.90、power≤5mW",
+      "limits": "normalized SNDR=rawSNDR+10log10(fullscale_signal_power/measured_signal_power)，ENOB据此算，非rawSNDR直接代式；4均分partial reward，非满分不算全过"
+    },
+    {
+      "task": "sky130-ota-5t-gain40-pm60-noise50uv-pvt",
+      "checks": "27PVT（tt/ss/ff×3V×3T）1pF/50µA；1kHz double-injection Middlebrook loopgain≥40dB/firstcross UGB≥100MHz/PM≥60°/power≤.5mW/noise10Hz–10MHz≤50µVrms；3代表点CMRR≥50dB/±PSRR≥30dB。",
+      "limits": "名称five-transistor但验收按外部电性能，不数器件/配canonical拓扑。nominal gain/UGB不足全0；其他fail-fast仍可有partial。7gates等权，非1不算完整通过。op/ac/noise合批，analysis_points不等ngspice进程数。noise为unityfeedback输入折算，非开环输出噪声。",
+      "source": "evidence/analog_long_extended_0_verify.txt",
+      "source_sha256": "04905dd2649e600842260bf61108d38a94f1bd351b0f490cfcf84ff7f0c4ba39",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-ota-5t-gain40-pm60-noise50uv-pvt/tests/verify.py"
+    },
+    {
+      "task": "sky130-two-stage-miller-opamp-gain60-ugb200-pm60-noise50uv-pvt",
+      "checks": "27PVT：gain60dB/UGB200MHz/PM60°、不重穿0dB、biaserror25mV/power2mW；noise-gain20闭环10Hz至实测-3dB带宽噪声≤50µVrms；3stress PSRR/CMRR、输出范围≥.8Vpp、双向20ns/2%/2mV settling和50V/µs slew。",
+      "limits": "11gates等权partial；nominal功能仅正gain/UGB/正power等基础gate，之后完整PVT才查高规格。展开listing验证MOS白名单/正R-C，不检connectivity。NEF/PEF/UGBCL/IDD信息项写在reward之后，不影响成绩；不能当主优化总分。",
+      "source": "evidence/analog_long_extended_1_verify.txt",
+      "source_sha256": "418aafec76a5714591d70f31924dac1b376cf9451a2ba92f84f134aa04d7b862",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-two-stage-miller-opamp-gain60-ugb200-pm60-noise50uv-pvt/tests/verify.py"
+    },
+    {
+      "task": "sky130-flash-adc-3bit-pvt",
+      "checks": "3bit50MS/s、.6–1.4V span、15fF/bit，3ramp+3transition+2sine=8选择case，非45PVT全矩阵。DNL/endpoint-INL/绝对threshold误差≤.30LSB；9.5ns内最后阈值cross且到19ns稳定、.2/.8VDD logicband；core+reference≤1mW/clock正向delivery≤.25mW；16sampleFFT低bin1/高bin7，SNDR17/SFDR21dB/normENOB2.5。",
+      "limits": "nominaltransition失败全blocked；13gates等权partial，python main按allchecks返回exit状态，test.sh空/非法仍可exit0且trapreward0。source序列公开与runtime隐藏挂载须分开；输入0Ω理想驱动、不计inputdriverpower，非实片噪声/全PVT/全速度ADC签核。",
+      "source": "evidence/analog_long_extended_2_verify.txt",
+      "source_sha256": "3422eb5a4d36f5dd2a147763f32d19a715f44c4a14571f9f9aeef457e472dab1",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-flash-adc-3bit-pvt/tests/verify.py"
+    },
+    {
+      "task": "sky130-sar-adc-6bit-async",
+      "checks": "6bit100MS/s只TT1.8V27°C；64codecenters两排列+采后decoy，dynamic64samples/bin31 nearNyquist48.4375MHz，rawSNDR≥35dB、normENOB>5.90、净全部外源功耗<3mW（含VDD/reference/CM/input/clock）。",
+      "limits": "4等权partial gates；64逻辑样本实际由4×16独立ngspice chunk与相位偏置重组，每chunk重新启动，非一条连续64sample物理trajectory。normENOB使用fullscale spectralpower修正而非rawSNDR直接代；确定性失真/量化不含器件transientnoise；此任务不含PVT。",
+      "source": "evidence/analog_long_extended_3_verify.txt",
+      "source_sha256": "9576194954f95ffca2277b87fea3f926d08b17790431f1d7aba73303eb04edd0",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-sar-adc-6bit-async/tests/verify.py"
+    },
+    {
+      "task": "sky130-delta-sigma-adc-1bit-first-order-osr32-sndr40",
+      "checks": "只TT1.8V27°C/fs10MHz；3刺激NFFT512、OSR8/16/32，nominalbin4与正/反bin2，三者SNDR32均≥40dB；DC/polarity/gain/transition/complement/state<2V、shaping≥10dB与SNDR32−16≥6dB、VDD功耗≤2mW。",
+      "limits": "提交仅SC/MOS DAC/hold核心；transistor OTA+StrongARM是固定fixture且1mV offset去数值metastability，不是被测模型设计全ADC。9等权partial。power=-1.8×mean(waveform I(VDD))为当前采样点算术均值，包括固定OTA/SA但排除理想clock供能；非完整外源能量积分。无PVT/MC/kT-C/器件transientnoise。",
+      "source": "evidence/analog_long_extended_4_verify.txt",
+      "source_sha256": "1ba62b3a78c914cbd48edb304a25bd5c878ed7c992ef9a48717250c83b91fe43",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-delta-sigma-adc-1bit-first-order-osr32-sndr40/tests/verify.py"
+    },
+    {
+      "task": "sky130-switched-capacitor-2to1-converter-pvt",
+      "checks": "20MHz两phaseSC2:1转换器：45 activePVT（5corner×3V×3T）+ll/hh nominal=47条件，两负载680/6800Ω共94transients。heavy ratio.42–.51/eta70–100%/ripple80mVpp/start200ns且保持≥.378VDD；light ratio.45–.51/eta30–100%/input500µW；匹配Rout≤100Ω。",
+      "limits": "9gates等权partial包含complete_signoff矩阵检查；0.3–.7µs window为8periods。供电加clock正向瞬时delivery均值，返回clock能量不抵扣，与SAR6净外源功耗不是同定义。startup用RISE=LAST及200ns后最低值双检；只PVT无MC/物理noise，非内部nonoverlap波形检查。",
+      "source": "evidence/analog_long_extended_5_verify.txt",
+      "source_sha256": "20a3ea3fb79f65dc8e1153f206df51848c0d8b4c641341591358533f8288358e",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-switched-capacitor-2to1-converter-pvt/tests/verify.py"
+    },
+    {
+      "task": "sky130-inductive-lna-2p4ghz-gain12-nf2-pvt",
+      "checks": "50Ω双端口/50µAref，27PVT（3corner×3V×3T）；2.35–2.45GHz 101线性频点gain≥12dB/ripple≤1.5dB/S11,S22≤−10dB/NF≤2dB/isolation≤−30dB；.1–10GHz K≥1.2/|delta|<1；power≤10mW与biascompliance。",
+      "limits": "7等权partial门。DUT仅官方PDK子电路，禁止idealRCL；reference为输入驱动/端口条件。指令明确BSIM rgatemod0不含分布式gateR噪声，MIM mf不电气乘容值；不能以该NF直接认版图/真实硅RF噪声。无模型尺寸/版图/EM校准证明。",
+      "source": "evidence/analog_long_rfpower_0_verify.txt",
+      "source_sha256": "fd640c7f5f85a1fe98144c831a3f2c3678bbafba1728e995de4d34fd36926c3e",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-inductive-lna-2p4ghz-gain12-nf2-pvt/tests/verify.py"
+    },
+    {
+      "task": "sky130-gilbert-cell-mixer-2p4ghz-pvt-mismatch",
+      "checks": "Gilbert2.4GHzreceiver/200MHzIF，10代表PVT+频率、其中4加2%幅度/2°LO误差，另10nominaltt_mm seeds43001–43010；转换gain≥3dB、三isolation≤−45dB（robustcases）、spur≤−30dBc、offset≤30mV、power≤2mW；3stress two-toneIIP3≥−4dBm并检fundslope.8–1.2/IM3slope1.8–4/压缩≤2dB。",
+      "limits": "7等权partial；10代表组合不是27或全频率PVT笛卡尔积，10固定mismatchseed不是生产yield估计；理想R/C允许但无工艺/局部失配变化。主电源预算含refbranch，非所有RF/LO驱动能耗。two-toneIIP3是模型/幅度/频点条件内外推，非完整receiver或phase-noise验收。",
+      "source": "evidence/analog_long_rfpower_1_verify.txt",
+      "source_sha256": "d40a661a998d951f6143b5e387f59582c0590ebe6266b449778c598dffa4b727",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-gilbert-cell-mixer-2p4ghz-pvt-mismatch/tests/verify.py"
+    },
+    {
+      "task": "sky130-tia-zt8k-bw750m-noise5p-sfdr70-power5m-pt",
+      "checks": "TIA全15PT（5corner×−40/27/85°C），VDD固定1.8、20µAref、Cin.3pF/Cout.2pF。Zt@1MHz>8kΩ/BW>750MHz/power<5mW；10–500MHz noise density<5pA/√Hz且积分<.1µArms；100MHz10µApeak最后16cycle、每cycle1024插值点共16384FFT，SFDR>70dBc同时large-signalZt>8kΩ。",
+      "limits": "6门各权1/6，边界严格>/ <。若10GHz仍高于−3dB只报带宽下界≥10GHz，非实测cutoff；噪声band故意小于bandwidth，不可扩大为全BW噪声。无外加photodiodecap，Cin为指定fixture；PT无supplyvariation/MC或PEX。",
+      "source": "evidence/analog_long_rfpower_2_verify.txt",
+      "source_sha256": "189bf23abe81b23eefef0c7c7fcf2806e01bc97d12533c127873fd802b04ecf2",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-tia-zt8k-bw750m-noise5p-sfdr70-power5m-pt/tests/verify.py"
+    },
+    {
+      "task": "sky130-capless-ldo-1v0-20ma-pvt",
+      "checks": "CaplessLDO全30PVT（5corner×1.5/1.8V×3T）完整0–20mA DC扫、误差≤30mV/IQ≤100µA；1nF DUT理想电容预算含层次与multiplicity。PSR五corner×两Vin在27°C/20mA，1k30/35dB、100k20dB/1M10dB；30PVT负载step excursion150mV/恢复30mV，4startup条件。",
+      "limits": "8等权partial，PM/UGB不评分，因为DUT没有verifier-owned通用loopbreak。idealvref=.4V无限驱动免费不计IQ；idealonchipC不含面积/容差/电压系数/PEX，因此不是完整自偏置电源效率。零负载只DC/IQ，动态从.5mA起；输出noise/MC/mismatch不在范围。",
+      "source": "evidence/analog_long_rfpower_3_verify.txt",
+      "source_sha256": "0938d71db743943e7a662f33c364a68abf18cf5497bcf39d10be65b30fc68986",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-capless-ldo-1v0-20ma-pvt/tests/verify.py"
+    },
+    {
+      "task": "sky130-ldo-ota5-robust-pvt-mc",
+      "checks": "外部.8Vref/50µAbias/300k600kdivider、1µF50mΩ标称；135DC点用15仿真各9点，误差20mV/IQ0–200µA；15dropout≤250mV；59loop任务（9nominal+10representative+40PVT×C/ESR），gain40dB/PM60/UGB50kHz；PSRR14+noise1；startup/load/line各9；30MCseed72000–72029输出1.17–1.23V命中≥90%。",
+      "limits": "9等权partial，按当前jobs静态计算完整161ngspicejobs；并非161独立设计。loop专有gate_drive/gate端口seriesinjection，capless接口无此权限，不能混验收。0.8/1.2µF×20/100mΩ极限与PVT交叉仅loop完整，dynamic外网stress只ss选点4极限；MC只nominalOP输出电压，不是全部性能90%yield。verify自含run/score/SPEC无utils.py，404是文件不存在非全任务不可用。",
+      "source": "evidence/analog_long_rfpower_4_verify.txt",
+      "source_sha256": "33909bf718bcce4be2bb5359718a3b90df5c92b39b2d2726abb7ce9f522fb2a3",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-ldo-ota5-robust-pvt-mc/tests/verify.py"
+    },
+    {
+      "task": "sky130-analog-input-mux-8to1-pvt",
+      "checks": "15代表P/V/T/VCM点（5组PVT×VCM0/.5/1VDD），8select×8source，120states/960transferfunctions；选通gain±.001dB、1mHz/1MHz串扰≤−80dB、BW≥5MHz、supplycurrent≤5µA。5等权partial门。",
+      "limits": "不是5corner×3V×3T全矩阵；每代表点一次ngspice内合批8×8AC与测量，15processes非960。线性幅度允许精确0用1e−300floor再转dB，严格区分非有限/缺失/非零exit；先nominal后14点/4workers，失败数据serialretry额外计成本。无noise/MC/PEX，不推一般mux全波形隔离。",
+      "source": "evidence/analog_long_interfaces_0_verify_py.txt",
+      "source_sha256": "46aa0be48792505e127224e5ed3ab5619dab446874347d2f21461850b3458ad7",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-analog-input-mux-8to1-pvt/tests/verify.py"
+    },
+    {
+      "task": "sky130-cml-divider-div2-range1gto10g",
+      "checks": "5工艺角×1/2/5/10GHz四离散频点共20transient；VDD1.8V/T27°C固定，300mVpp差分输入经50Ω、10fF/side输出；5nsstartup后40inputcycles需39次符号交替、每cycle swing≥200mVpp且timeweighted DFT的finput/2 tone≥200mVpp。另5corner静态VDDpower<1.5mW；2等权partial门。",
+      "limits": "1–10GHz名称不是连续全带扫，也不是V/T全角。tone用adaptive-time trapezoid积分，防仅sample符号别频混叠；固定nodeset启动。power来自quiescent op的−VDD·I(VDD)，不是高速动态总耗能或外部clockdriver功耗。全部speed通过才查power，完整共25processes；无单进程timeout，需outerbudget。",
+      "source": "evidence/analog_long_interfaces_1_verify_py.txt",
+      "source_sha256": "6b3f7fdf224dabe243ce66e45147db2877c742b7b31eb243f32d9433099e0d1c",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-cml-divider-div2-range1gto10g/tests/verify.py"
+    },
+    {
+      "task": "sky130-transistor-divide-by-2",
+      "checks": "TT/1.8V/27°C固定数字divide2，clock1GHz±1%、输出495–505MHz并核3周期；reset清低≤100ps/释放后保持低直到下一有效edge；logic≤.36/≥1.44V、3周期高低duty各49–51%、4次clk→outdelay0–400ps。4等权partial门。",
+      "limits": "2benches（reset/divide）/20fF，reset失败后其余blocked；所报divide_ratio为info，实频/周期门判定。只选定窗口/有限cycles，不含PVT/MC/metastability/任意时序formal或power验收；不能把该数字transistor级bench与CML宽频协议合并。",
+      "source": "evidence/analog_long_interfaces_5_verify_py.txt",
+      "source_sha256": "a25c3d1fa77bd2dd177066f49ed90fa5578a770199eab5ae78bfa83d89ddbbf7",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-transistor-divide-by-2/tests/verify.py"
+    },
+    {
+      "task": "sky130-bootstrap-driver-pt",
+      "checks": "bootstrapdriver 3corner tt/fs/sf，每bench宣称3T27/80/125°C×3pulsewidth20/50/80ns、VDD1.8V固定；24等权门=每corner8门，deadtime3–7ns、driverpower<3.5mW、onphase平均VGS1.65–1.85V/峰<2.15V、highside峰流<.8A、1.8V节点<2.15V与bootstrap最高<5.65V。",
+      "limits": "3processes内拟27analysispoints，非27独立进程；外部功率NMOS/负载/bootstrap寄生为fixture，模型只设计driver。power为DUT供电支路|1.8·avgI|含bootstrapcharge，非总功率级效率。三个bench各9次alterparam pw均无reset；ngspice官方教程明确需reset生效，因此不能独立确认9点脉宽真正变化（静态缺口，无仿真验证）。test.sh先调用area与器件checker，非法可exit0但trap写reward0，不把shell成功当电达标。",
+      "source": "evidence/analog_long_interfaces_6_verify_py.txt",
+      "source_sha256": "8f7676bfc6aaaec475b424a741495bb35386a0f69b03f1415439f88ae1d33495",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-bootstrap-driver-pt/tests/verify.py"
+    },
+    {
+      "task": "sky130-cml-tx-driver-28g-nrz-pvt",
+      "checks": "28Gb/s CMLTX只3组配对(ss1.62V−40C/tt1.8V27C/ff1.98V125C)，23等权partial门：6static/4AC/10PRBS/3sensitivity；static diff swing400–900mV、offset20mV/CMshift30mV/currentbalance10%；100MHzgain1.3–4V/V、BW≥22GHz、peaking≤1.5dB、1–14GHz groupdelay变化≤8ps；PRBS eye≥320mV、signerror0、20–80%rise/fall≤15ps、pp/RMSjitter≤5/1.5ps、DCD≤2ps、VDDpower≤45mW；200mVpp输入sensitivity要求250mV输出/17psrise-fall。",
+      "limits": "4类bench×3点完整12processes，非全P×V×T。固定PRBS7两周期取第二127bits；按找到的crossing估平均delay并移动眼图采样，jitter去均值，不是绝对latency限制或统计BER/noisejitter证明。missingcrossings仅n_transitions>0 gate，没有按expected全transition计完整率，应另报found/expected。power是CSV I(VDD)采样算术均值×VDD，非timeweighted全外源能量；bench无linearize，adaptive采样权重需留意。",
+      "source": "evidence/analog_long_interfaces_2_verify_py.txt",
+      "source_sha256": "c3a06e967f5a2eac84e1adcf42e2445af775b6b3bee39840cc98a9c97a850bac",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-cml-tx-driver-28g-nrz-pvt/tests/verify.py"
+    },
+    {
+      "task": "sky130-cmos-switched-resistor-dac-5bit-pvt",
+      "checks": "5bit DAC：11代表PVT点+TT27C八固定tt_mm seeds41001–41008，1pF负载/有限strength数字driver；32codes endpointfit LSB=(V31−V0)/31，PVT |INL|/|DNL|≤.25LSB且严格monotonic，zero≤2mV/fullscale≤5mV；mismatch≤.5LSB+monotonic。3↔4/7↔8/15↔16六majorcarry要求settling≤5ns、finalerror≤.25LSB、excursion≤1LSB；6指定code Rout0..2kΩ，VDDpower0..1mW；8等权partial门。",
+      "limits": "完整11code+8mismatch+11majorcarry+11Rout=41processes串行，非11×8全组合/全随机yield。majorcarry用阈值cross与enderror并验excursion，不等所有code任意时序保证。端点fit与绝对endpoint独立检查；power积分VDD支路，不含VDRV数字输入driver供能。TT_mm bench含固定driver MOS，失配不是硅实测分布或foundry良率认证。",
+      "source": "evidence/analog_long_interfaces_3_verify_py.txt",
+      "source_sha256": "a0445632e67eb6fc33a48b1757c08db48efe950546d72cc860441fd3b95e692e",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-cmos-switched-resistor-dac-5bit-pvt/tests/verify.py"
+    },
+    {
+      "task": "sky130-flash-adc-4bit-50msps",
+      "checks": "4bit50MS/s FlashADC仅TT1.8V27C：16codecenter transfer零错误/无missing，90sample缓坡须15相邻transition+monotonic，endpointLSB由首/末transition间距/14，|INL|/|DNL|≤.5LSB。动态NFFT32、bin5=7.8125MHz，9ns采样、3cycle warmup，SNDR≥22/SFDR≥26dB、主power≤5mW。6checks但reward必须全部通过才1，partial只信息；完整3transients。",
+      "limits": "SNDR由bins1..15去fundamental计算（不含DC/Nyquist），ENOB=(SNDR−1.76)/6.02仅info，不是fullscale-normalizedENOB。主功耗为VDD+Vrefp积分后clip0，clock_drive_power另算不入5mW，inputdrive不入；不能与包括clock/input的任务直接比power。strictbinary与commonhelper等权partial不同；main即使verifier异常仍可exit0写失败，需读reward/报告。无PVT/MC/物理transientnoise或PEX。",
+      "source": "evidence/analog_long_interfaces_4_verify_py.txt",
+      "source_sha256": "a3ebd7fde9153007dc0f06925d4e7ba30989c7b17c7e2636e08b4dece01beb50",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-flash-adc-4bit-50msps/tests/verify.py"
+    },
+    {
+      "task": "sky130-bottom-plate-sampler-pvt",
+      "checks": "bottomplate sampler：nominal双极±.8V acquisition误差≤5mV；3代表PVT hold隔离/负再捕获各≤5mV；9代表PVT FFT，100MHz采样5MHz sine、80points/bin4、warmup8cycle，SFDR≥80dB、gainerror≤.5%、存储commonmode误差≤25mV、总外源power≤.6mW。6等权partial门；2acquisition+3hold+9FFT=14processes，FFT最多4workers。",
+      "limits": "外露顶部板/采样节点接口固定，允许本地子ckt但external leaf仅指定SKY130 NMOS/PMOS；topology-independent行为验收不证明内部真用某canonicalbottomplate。80–880ns每个VDD/VCM/VINP/VINN/CLOCK先时间积分取netpower再各clip≥0后求和；不是逐瞬时正功积分，也不是全部源正负互抵，与Flash4/SCconverter定义不同。只SFDR不算physicalnoise/完整SNDR，9代表点非fullPVT/MC/PEX。",
+      "source": "evidence/analog_long_interfaces_7_verify_py.txt",
+      "source_sha256": "410a6407ac79250df505a699238b615199bb19f8e7d4adfc22d1a131bb669df4",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-bottom-plate-sampler-pvt/tests/verify.py"
+    },
+    {
+      "task": "sky130-regulated-charge-pump-10mhz-pvt",
+      "checks": "10MHz regulatedboost chargepump：8代表enabled PVT/load jobs（含nominal1/25/50µA）+5disabled op，13processes/最多4workers；1nF外loadcap。enabled VOUT=1.3VDD±5%、ripple≤5mVpp、AVDD sensecurrent≤200µA；disabled sensecurrent≤100nA；4等权partial门。",
+      "limits": "只有列出的代表组合非5P×3V×3T×3load，先nominal4job gate再补剩余。enabled测190–200µs，disabled为op，不是动态enable恢复/启动或loadstep稳定性验收。提供外部1µA IBIAS直接自AVDD_SRC注入，位于VSENSE测量支路之外；clock/enable驱动能量也不入电流目标，故不是系统效率基准。与PLL up/down chargepump任务不同。",
+      "source": "evidence/analog_long_power_0_verify_py.txt",
+      "source_sha256": "e72840ee7d016d3fe2a3920e01ac15f01afbba9207f2a2d192613e8b77f43174",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-regulated-charge-pump-10mhz-pvt/tests/verify.py"
+    },
+    {
+      "task": "sky130-unregulated-charge-pump-10mhz-pvt",
+      "checks": "10MHz unregulatedboost chargepump：固定VDD1.8V/50µA/外1nF，8代表P/T点tt40/ss−10/ss125/ff−10/ff125/sf−10/sf125/fs40；每点enabled和disabled两transient，共16processes串行。VOUT2.2–2.8V/ripple≤5mVpp、enabledcurrent≤200µA、disabled≤100nA；4等权partial门。",
+      "limits": "电压没有变化，名称PVT不等V轴覆盖。两个bench固定load而不是多负载稳压或动态loadstep；enabled在190–200µs、disabled末窗测电流。nominal任一失败将4门全blocked，与regulated nominal部分得分不同。clock/enable理想源供能不进AVDD sensecurrent，不由电流门推完整效率。",
+      "source": "evidence/analog_long_power_1_verify_py.txt",
+      "source_sha256": "532f8478cedbe757deb7aa9189bf7aff71cc50505f8a1b1756a330e6ada399e2",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-unregulated-charge-pump-10mhz-pvt/tests/verify.py"
+    },
+    {
+      "task": "sky130-class-d-halfbridge-eff95-tt",
+      "checks": "ClassDhalfbridge仅TT1.8V、27/125°C两T×七load1/2/3/6/8/12/16Ω，共14analysis合在1process。27C peakη>95%、所有loadη>85%；125C peak>90%、全部>80%；所有Pout>30mW。5等权partial门，finite/Pin>0/η≤100%+1e−6 sanity。",
+      "limits": "5MHz50%duty/2nsedge外clock经50Ω，外LC3µH/345pF为fixture，DUT是半桥。18–20µs窗用时间积分，Pin为VDD/VSS/clock各平均功率绝对值之和，Pout负载实功积分；不是忽略clock或简单样本均值。直接alter RL不属于bootstrap alterparam缺reset问题。只效率/交付power，不含音频调制THD+N/全process/MC/PEX或全部shootthrough瞬时电流门；shootthrough仅以损耗影响效率。",
+      "source": "evidence/analog_long_power_2_verify_py.txt",
+      "source_sha256": "f394f28427c03b7e3ba2070624600dd00c06a70df6122803761c9776e1dcdea1",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-class-d-halfbridge-eff95-tt/tests/verify.py"
+    },
+    {
+      "task": "sky130-nmos-pass-ldo-0p4v-pvt-mc",
+      "checks": "0.4V NMOSpassLDO：3P×3VIN1.6/1.8/2V×3T−40/27/125C×2load1/5mA=54points，每process含DC/loop/PSRR；另50tt_mm seeds12345–12394在nominal逐seed两load op，共104processes最多4workers。VOUT.35–.45V，Iq=−IVDD−Iload−40µA须0..400µA（上限严格<），PM>45°/GM>6dB、PSRR1kHz>40dB、activeMOS |VDS|−|VDSAT|>30mV（|Id|<1nA除外）；50seed输出mean±3sampleσ在两load各落范围内；7等权partial门。",
+      "limits": "固定0.4V理想VREF与40µA偏置sink、外10pF不属于DUT；Iq扣除bias不等总耗流。loop端口需外注入Middlebrook，首falling0dB/−180°cross为PM/GM，不含全部cross、宽频PSRR或loadstep瞬态。MC只nominal输出mean±3σ，不是逐样本全部spec/全PVT良率、更不保证分布无假设99.7%；headroom是器件sat余量不是LDO dropout规格。完整进程/finite/MC门与7项partial分开，main非全过exit1但reward仍可能部分正值。",
+      "source": "evidence/analog_long_power_3_verify_py.txt",
+      "source_sha256": "943aece4917216d2a988f5ece41b4ac66202f1715bd966002515499685e2f97f",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-nmos-pass-ldo-0p4v-pvt-mc/tests/verify.py"
+    },
+    {
+      "task": "sky130-fd-sampling-feedback-ota-gain1-settling40ns-noise300uv-pvt-mc",
+      "checks": "FDsamplingfeedback OTA gain1：5P×2V1.80/1.98×3T−20/27/80=30PVT；PM≥60°/outputCMerror≤25mV、power≤5mW、双向settling≤40ns、staticerror≤.01%/dynamic≤.1%。闭环差分outputnoise10Hz–10GHz≤300µVrms逐30PVT；3dBcompression差分输出范围≥1.8V仅nominal。20tt_mm seeds41000–41019的10Hz CMRR≥60/±PSRR≥70dB；3代表CMFB扰动峰≤150mV、20/100ns残差≤50/20mV。15等权partial门，完整114processes。",
+      "limits": "range门虽名pvt_output_range实际只nominal，不能推30角范围。loop/settling/noise各30、range1、CMFB3、MC20合114；脚本reported analysis_points154因每MC3测量计数，不等所有底层analysis/调用。Cs=Cf=CL1pF和外idealLFchokes/CM参考由fixture提供；noise为连续AC噪声积分非真实采样kT/C/alias或transientnoise。MCrejection用nominalTT closedloopgain作分子、固定ideal闭环，不是每seed全spec良率。",
+      "source": "evidence/analog_long_feedback_0_verify_py.txt",
+      "source_sha256": "f643a12c8b7fd717632154a045b377345a3ce02c1b5a0e01d40d6adcab5181f5",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-fd-sampling-feedback-ota-gain1-settling40ns-noise300uv-pvt-mc/tests/verify.py"
+    },
+    {
+      "task": "sky130-fd-sampling-feedback-ota-gain8-settling10ns-noise1mv-pvt-mc",
+      "checks": "FDsamplingfeedback OTA gain8：5P×1.80/1.98V×−25/27/85°C共30PVT；PM60°/CMerror25mV、power≤10mW、rise/fallsettling≤10ns、static/dynamicerror各≤1%；outputrange≥1.8V及outputnoise10Hz–10GHz≤1mVrms都测30PVT。20tt_mm10Hz CMRR≥50/±PSRR≥60dB，3代表CMFB峰≤100mV、20/100ns残差≤5/1mV。15等权partial门，完整143processes。",
+      "limits": "和gain1不仅gain/速度变化，温度、误差、功率/噪声/rejection/CMFB阈值与range矩阵也不同；不能混同难度。Cs1pF/Cf125fF/CL250fF等由bench固定，referencebias50µA。loop按cap反馈比例求首0dBcross，不是完整SC开关系统稳定性/后仿。143=4×30+3+20，reportedanalysis183非独立sim调用数；MC也仅nominalrejection，用名义gain分子，不称20seed全电性能签核。",
+      "source": "evidence/analog_long_feedback_1_verify_py.txt",
+      "source_sha256": "f9aa2b7baedcd43b2168ef74a1564527448653f835af1082b0a1f723ce3291c0",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-fd-sampling-feedback-ota-gain8-settling10ns-noise1mv-pvt-mc/tests/verify.py"
+    },
+    {
+      "task": "sky130-ring-amp-3stage-gain8-400uw",
+      "checks": "3stage SC ringamp gain8：仅TT1.8V27°C，四bench输入+20/+10/0/−20mV求两种斜率均7.2–8.8为先决gate；零输入残差≤5mV、±160mV输出staticerror≤1%、CMerror≤50mV、VDDpower≤400µW、指令±10%带最后进入时间≤50ns、steady ripple≤5mV。7等权partial门/4processes。",
+      "limits": "bench提供7个idealreset开关、外25µA偏置/0.9V参考、10pF/side及暴露内部reset端口；不是模型从零实现完整SC采样系统或任意无约束OTA。只有限极性/幅度和时窗，未测PVT/MC/noise/频带线性。power仅|1.8·avgI(VDD)|不含fixture/reset驱动所有源。settle相对1.05µs并用最后fallcross到固定10%误差带，和别的任务1%/0.1%不相同。",
+      "source": "evidence/analog_long_feedback_2_verify_py.txt",
+      "source_sha256": "f7157580c966ff4382cd5db25fbb740e5f4bc1285854934528fbf2ac797e7e30",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-ring-amp-3stage-gain8-400uw/tests/verify.py"
+    },
+    {
+      "task": "sky130-fct-residue-amplifier-900msps",
+      "checks": "900MS/s FCTresidue activecore：固定1.8V27°C五P角×两差分输入peak10/20mV，10transients串行。warmup64cycles/32point，10mVbin5=140.625MHz、20mVbin3=84.375MHz；heldsample gain5.5–6.5V/V/SFDR≥60dB（含Nyquist、除DC）、CMmean.3–1.2V、sample输出.2–1.6V、track→hold RMSmovement≤1.5%、DUT端总netdeliveredpower0..5mW。12qualitychecks+第13个complete=全部前12通过，等权partial但complete非独立。",
+      "limits": "测试平台提供flyingcaps400fF、理想sampling/transfer/precharge/outputhold、50fFload、bias/reference/clock，模型只交transistorcore；不是全ADC/SC前端由模型生成。0.78/0.88ns两时刻RMSmovement是释放前后变化，不是相对理想目标绝对settlingerror。power计DUT共VDD/VCM/两直接clock/50µA ib端，fixturepower/输入/输出hold分源排除，净能量合计不逐源clip。只有process变化，无V/T/MC/physicalnoise/PEX。",
+      "source": "evidence/analog_long_feedback_3_verify_py.txt",
+      "source_sha256": "97c61e1d06d948477b99d13a27d5bb2485fcc99ad3b0a68b655bf64507e7fe3c",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-fct-residue-amplifier-900msps/tests/verify.py"
+    },
+    {
+      "task": "sky130-ahuja-compensated-two-stage-load-range-pvt",
+      "checks": "Ahuja loadrangeOTA：5P×3V1.62/1.8/1.98×3T−40/27/125=45points；20pF gain≥58dB/UGB≥6.5MHz/PM≥60°/followeroffset≤6mV/power≤2mW；200pF同45点PM≥60及rise/fallsettle≤2µs/enderror≤6mV。63pF guard仅5工艺角nominalV/T，需PM≥60且各AC无0dB重穿。8等权partial门，完整21processes/report185analysispoints。",
+      "limits": "20–200pF不是连续所有负载/所有工况证明，只20/63/200三负载且中间点覆盖较窄。repeak幅度有输出但只按有没有重穿0dB判guard，不把日志约−6dB说明当新增硬门。nominal/轻载/PVT/重载/step分级failfast，前级保留部分得分；合批进程数与OP/AC工况数不同。没有noise/MC/PEX验收，Ahuja命名是目标而不是对其结构正确性的独立证明。",
+      "source": "evidence/analog_long_multistage_0_verify_py.txt",
+      "source_sha256": "8dfe655fa421bdfa6d1a8685e076651f3b4dca087d38ca6eae23398b648ccff9",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-ahuja-compensated-two-stage-load-range-pvt/tests/verify.py"
+    },
+    {
+      "task": "sky130-fd-two-stage-miller-opamp-gain60-pm60-noise50uv-pvt",
+      "checks": "FDtwo-stageMiller：27PVT(tt/ff/ss×3V×3T)，gain≥60dB/UGB≥100MHz/PM≥60°、CMerror≤15mV/差分静态imbalance≤100µV/power≤5mW、10Hz–15MHz unityfeedback inputreferrednoise≤50µVrms。3代表点range≥.8Vpp/tracking≤5mV、settle≤15ns/error≤1%、CMrecovery≤100ns/error≤10mV；20tt_mm seeds41000–41019在10Hz各seed CMRR≥50/±PSRR≥40dB。11等权partial门；完整36batchedprocesses/report170analysispoints。",
+      "limits": "27PVT只OP/AC与noise，range/settle/CM仅3代表点；MCrejection分子为同seed测得differentialgain，和另两FDsampling任务用nominalgain不同。1MHzRR虽测量但仅characterization、不进reward，不能当1MHz规格通过。先过OPAC/noise才跑secondary+MC，不含MC全specyield或物理采样noise/后仿。固定50µA参考/1pFload/ideal闭环是fixture条件。",
+      "source": "evidence/analog_long_multistage_1_verify_py.txt",
+      "source_sha256": "d6bb3e2f0735285982bf143e3749d211a0eb95f156075ebcb07a412a687c7a34",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-fd-two-stage-miller-opamp-gain60-pm60-noise50uv-pvt/tests/verify.py"
+    },
+    {
+      "task": "sky130-telescopic-cascode-ota-pvt-fix",
+      "checks": "telescopic OTA：27PVT(tt/ff/ss×3V×3T)严格gain>60dB/UGB>50MHz/PM>60°，必须恰1falling0dBcross且后续gain<0dB；outputCMerror<5mV/0≤power<1mW。nominal额外181点−.45..+.45V/5mVstep完整.9Vpp、每点tracking/CM≤5mV；100mVdiffstep末进入1%带<10ns/final10nsmeanerror≤.1mV；CMstep.85→.95V恢复5mV带<40ns/final20nsmeanerror≤5mV。8等权partial门，30单worker/单threadprocesses。",
+      "limits": "四nominalcase任何电/仿真失败会block余26点；缺/重复/额外/malformed/nonfinite/失败或blocked矩阵在score前全blocked，完整数值矩阵的非nominal质量不达标才保留部分分。complete门测覆盖不是所有电指标自动通过。公开意图telescopic但不数device或检查内部连线/层级，合法替代拓扑可按外部合同通过；无fs/sf/参考variation/CMRR/PSRR/noise/MC/PEX，不能由task名推全签核。",
+      "source": "evidence/analog_long_multistage_2_verify_py.txt",
+      "source_sha256": "0108328a5f6d349412da802ecbc531e6048c3a6202b999f62407ee044fbfa840",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-telescopic-cascode-ota-pvt-fix/tests/verify.py"
+    },
+    {
+      "task": "sky130-three-stage-nested-miller-ota-pvt",
+      "checks": "3stageNestedMiller：5P×3V×3T=45，OPAC/inputbias/swing/settling/slew五组各45，共225processes；gain≥110dB/UGB≥.4MHz/PM≥70°、CMerror≤10mV/power<300µW、两input DCcurrent≤100nA、200pF driveFoM≥300kHz·pF/µW。连续tracking≤20mV的闭环range≥.8Vpp，.5Vcommandstep 2%带settle<3µs/finalerror≤2%，rise/fallslew≥.2V/µs。11门、nominal与complete两硬门任一失败reward0，否则等权partial。",
+      "limits": "driveFoM=(UGBkHz×200pF)/powerµW，不能直接混MHz单位FoM，也非单纯GBW或power独立达标。nominalOPAC+settling先决，矩阵必须每group45唯一完整有限；一个case丢失使全部功能分blocked，但summary保留原检查数，须读正式reward/CTRF。200pF/5µAreference/固定.9VCM是fixture；namedarchitecture不做内部结构计数，未含noise/MC/全部稳定性cross或PEX。",
+      "source": "evidence/analog_long_multistage_3_verify_py.txt",
+      "source_sha256": "24543cb440c44a24a50168336b97872aedd1f792af6f18ae6246e48c2709b124",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-three-stage-nested-miller-ota-pvt/tests/verify.py"
+    },
+    {
+      "task": "sky130-high-psrr-bandgap-reference-pvt",
+      "checks": "高PSRR bandgap：4代表PVT(ff1.9V−40C/tt1.8V27C/ss1.7V85C/fs1.7V−40C)，各DCtemp/AC/startup，共12processes；5等权partial门：代表点VBG1.05–1.35V、−40..85C每1C扫温的(max−min)/mean/125×1e6≤50ppm/C；供电到输出gain在.01Hz各点≤−50dB且nominal≤−60dB，在1MHz≤−30dB；90–100µs末段startup平均VBG相对DC偏差≤1%。",
+      "limits": "4代表点并非全P×V×T；温漂是区间归一化幅差而非局部导数。负dB供电gain与正dB PSRR符号须区分，两个频点不等于全频带保证。1µs电源爬升/1pF负载，末段收敛不能读成明确启动时间上限；无power/noise/MC/PEX验收。",
+      "source": "evidence/analog_long_reference_0_verify_py.txt",
+      "source_sha256": "f0c1058365f90cacaf0430aa31336144b8853a9ce066e971651990657795e8f4",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-high-psrr-bandgap-reference-pvt/tests/verify.py"
+    },
+    {
+      "task": "sky130-low-power-line-driver-pvt",
+      "checks": "低功耗line-driver：5工艺角×3V1.62/1.8/1.98×3T−40/27/125=45PVT；8等权partial门，10Hz loopgain≥40dB/UGB≥.5MHz/PM≥60°/offset≤20mV/静态功耗≤400µW、range≥1.5Vpp、20kHz THD≤3%且fundamental≥.55V、peak供电current≥2mA且peak/quiescent≥10。45loop+45range+45THD=135processes，报告180analysispoints。",
+      "limits": "THD fixture为.6Vpeak/20kHz、10k/10k反相闭环、1µF耦合300Ω与200pF负载、50µA参考；4周期预热+4周期测量，2048重采样，2–9谐波DFT，非THD+N或全音频带测试。2mA是供电峰值电流，不是输出负载电流/功率。nominal器件policy核型号与正R/C，不检查目标拓扑连接；分级failfast保留前级partial，无MC/PEX。",
+      "source": "evidence/analog_long_reference_1_verify_py.txt",
+      "source_sha256": "708a9227a985143724c6468b734e4ca74bb3233cea0633024ee661429abb4365",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-low-power-line-driver-pvt/tests/verify.py"
+    },
+    {
+      "task": "sky130-low-power-oscillator-2mhz-pvt",
+      "checks": "2MHz低功耗oscillator：5代表点(tt1.8V27C/ff1.62V27C/ss1.98V85C/ss1.62V−40C/ff1.98V−40C)，5processes；3等权partial门：全部5点freq1.8–2.2MHz/swing .95–1.05×VDD，功耗≤20µW只在nominal。freq=10/第2到第12上升沿时间差；10–20µs窗口测幅度和平均电流，含2µA bias与1pF驱动。",
+      "limits": "非完整PVT，无fs/sf；峰峰值接近VDD不额外保证绝对高低电平、占空比或jitter/phase-noise。电源1µs爬升、20µs transient，检测到有限边沿不能当完整启动鲁棒性验收。/opt/sky130/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice与其他任务PDK路径不同须锁版本；nominal功耗不能外推全工况≤20µW。",
+      "source": "evidence/analog_long_reference_2_verify_py.txt",
+      "source_sha256": "238e5cb21a77042c0478cf28662c121e3dd586281b52fd6c476aa90ff75e5cf2",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-low-power-oscillator-2mhz-pvt/tests/verify.py"
+    },
+    {
+      "task": "sky130-programmable-icc-iptat-current-mirror-pvt",
+      "checks": "可编程ICC/IPTAT电流镜：3成对PVT(ss1.62V−40C/tt1.8V27C/ff1.98V125C)，ICC=50µA外部强制，IPTAT=38.84/50/66.31µA外部强制；4码权重(16,4)/(12,8)/(8,12)/(4,16)，27C目标均1mA。11等权partial门：midpoint Iout目标误差≤8%、±5µA独立参考扰动的增益/比值误差≤10%、参考pin .20–1.10V且码间≤50mV/交叉扰动≤25mV、auxVDD≤100µA/digitalpin≤1µA、Vout .45..VDD−.20V共41点变化≤3%/midpoint±5mV差分Rout≥100kΩ。3权重合批+3顺从范围=6processes。",
+      "limits": "该任务不生成ICC/PTAT参考，只对理想输入电流做加权、隔离与输出顺从；四码权重和20，nominal同1mA不是四档振幅。参考pin headroom包括自身/交叉扰动，auxVDD=abs(IVDD−ICC−IPTAT)，不能误读含外部输出电流的总功耗。3成对PVT非全Cartesian，静态差分Rout非频域阻抗；无噪声/瞬态/MC/aging/PEX。",
+      "source": "evidence/analog_long_reference_3_verify_py.txt",
+      "source_sha256": "b3e54edba2cc4c4c1bb14a1b61cd95da4dfab2af2544f2f3acfc755924742663",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-programmable-icc-iptat-current-mirror-pvt/tests/verify.py"
+    },
+    {
+      "task": "sky130-buf-ppsf-bs-gain1-sfdr90",
+      "checks": "PPSF bootstrap differentialbuffer：5工艺角固定1.8V/27C，20µA bias/每端1pF/.8Vpeak差分drive。40MHz差分输入电流|I(VIP)−I(VIN)|<20µA为0权重资格硬门，失败其余全blocked/reward0；合格后gain> .99V/V(1–40MHz sampled AC)、三频SFDR>90/80/70dB(1/11/41MHz且各dynamicgain>.95)、外源DCpower<1mW各占1/3。完整5AC+15transient=20processes。",
+      "limits": "SFDR在49–50µs窗口重采样1000×1ns，rectangular DFT搜索所有非DC非fundamental bins含Nyquist；不是仅谐波THD、不是物理噪声SNR。差分输入电流换算约99.47fF是特定定义等效量，非PDK寄生签核。power=VDD/VCM/VIN/VIP各绝对DC功率之和，无温度/供电扫、MC/PEX；命名pushpull/bootstrapped不查内部架构。",
+      "source": "evidence/analog_long_gm_0_verify_py.txt",
+      "source_sha256": "6a51e1ff5630a8e04b4882f21549f0dc51769fd344b6b96b9a5e69e54db36957",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-buf-ppsf-bs-gain1-sfdr90/tests/verify.py"
+    },
+    {
+      "task": "sky130-constant-gm-stable-gain-amplifier-pvt",
+      "checks": "constant-gm gainstableamp：tt/ff/ss×3V1.62/1.8/1.98×3T−40/27/125=27PVT，OPAC/startup/DClinearity各27，共81serialprocess；9等权partial门：gain1MHz3–4V/V、PVTmax/min≤1.15、相对1MHzgain的−3dBBWish≥30MHz、VDD−outputCM .15–.40V、确定性imbalance≤10mV、±30/60mV相对中心±2mV斜率偏差≤8%、VDDpower0..500µW、完整矩阵、冷启动检查。",
+      "limits": "startup为zero-state uic/规定电源与50µA参考爬升，8–9µs零输入和14–15µs+20mV窗口平均，stepgain=postoutput/20mV不减前值，不测明确last-entry settling。nominal OPAC/startup或任一后续startup失败全9blocked/0，完整PVT普通质量失败可保留相关partial，linearity缺失仍可保留其他分；进程exit1不等于已有reward被清零。0.95V输入CM/500fF各端，imbalance不是统计offset，未直接证明gm恒定或指定拓扑；BW缺cross且1GHz仍高于阈值记1GHz。",
+      "source": "evidence/analog_long_gm_1_verify_py.txt",
+      "source_sha256": "32d094279659c91ef7d50a23857540f0ee972e07f026363683f91ed0a353fa38",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-constant-gm-stable-gain-amplifier-pvt/tests/verify.py"
+    },
+    {
+      "task": "sky130-gmr-degen-amp-constant-gm-pvt",
+      "checks": "constant-gain GM-R：5P×3T−40/27/85=15点固定1.8V；1MHzgain1.98–2.02占50%，BW>60MHz/power<1.5mW/SDR>60dB各1/6。3MHz .1Vpeak差分drive的拟合fundamentalgain须1.90–2.10。15OPAC+15transient=30processes/report45analysispoints；完整in-range gain矩阵是BW和power得分先决，全部AC指标过才做SDR，阶段fail可保留此前partial。",
+      "limits": "SDR为0.5–1.5µs adaptive样本对DC+3MHz sin/cos最小二乘拟合后10log10(signalpower/residual MSE)，未均匀重采样或按时间加权；不是最大杂散SFDR/含物理noise的SNDR。1pF各端/50µA/理想VCM与输入，power为VDD/VCM/VIN/VIP各绝对DC功率和；无VDD扫/MC/PEX。缺−3dBcross且10GHz响应仍高可记10GHz下界，不是实际pole精确值；器件policy只许R非C、外部合同不查GM-R内部结构。",
+      "source": "evidence/analog_long_gm_2_verify_py.txt",
+      "source_sha256": "779dd4c0998e843106018805065a2a08e643fc53d7434681ad6f2f66c928ad97",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-gmr-degen-amp-constant-gm-pvt/tests/verify.py"
+    },
+    {
+      "task": "sky130-gmr-degenerated-diff-amp-gain2-bw70m-power1p2mw-sdr60",
+      "checks": "GM-R gain2 BW70：5工艺角固定1.8V27C，gain1MHz1.98–2.02、BW>70MHz、外源DCpower<1.2mW、3MHz拟合SDR>60dB且dynamicgain1.90–2.10，四项各25%。5OPAC+5transient=10process/report15analysispoints；gain完整in-range是BW/power得分先决，nominal再其余AC后才transient。",
+      "limits": "与15点constant-gain任务同样SDR拟合残差口径/1pF各端/50µA/外源绝对DC功率和，但温度覆盖、BW/power阈值和计分权重不同，不能合并为同一pass率。只27C无电压variation/MC/PEX；generic器件policy及外部电合同不证明指定source-degeneration架构，非完整gm恒定或宽带动态范围签核。",
+      "source": "evidence/analog_long_gm_3_verify_py.txt",
+      "source_sha256": "61436db5060b6a8e7bb346210b4d8c9a08a98ba42ad7c6bf6d53c7beb7646901",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-gmr-degenerated-diff-amp-gain2-bw70m-power1p2mw-sdr60/tests/verify.py"
+    },
+    {
+      "task": "sky130-complementary-folded-cascode-ab-opamp-pvt",
+      "checks": "互补rail-to-rail ClassAB：5P×5成对V/T stresses=25代表PVT，每点5VCM(.1/.2/VDD÷2/VDD−.2/VDD−.1)共125AC；coregain10Hz≥90dB/PM≥60°、edgegain≥80/PM≥55°，全部UGB≥1MHz且全矩阵max/min≤2。tracking core≤5mV/band≤20mV，ICMRspan≥1.5V/两rail headroom≤.1V；power≤1.5mW、双向slew≥2V/µs及末100ns误差≤5mV。25noise10Hz–1MHz input≤70µVrms；3代表点CMRR1k/1M≥70/55dB、PSRR10Hz/1M≥45/10dB、1kHz .4Vpeak THD≤.01%与residual≤.5%；3tt_mm seeds31000–31002 offset≤5mV。14门正式binary，完整212serialprocesses。",
+      "limits": "25代表点不是45Cartesian；5VCM只AC，noise中点、RR/THD固定.9V三点。4pF+10k负载用于大信号/noise，AC输出中点与极轻1TΩ不同；power检查AC及全0..VDD tracking扫，但不能当全源动态效率。strict=True使partial仅诊断非reward，complete还AND其他质量门，不是独立覆盖分；3固定MC样本非统计yield，命名ClassAB/folded等不是结构验收。末段误差不是last-entry启动或settlingdeadline。",
+      "source": "evidence/analog_long_finalfour_0_verify_py.txt",
+      "source_sha256": "0d015757c7f0c54507e1e7777138d768a769ccb65c2af011b543a61a7453dfee",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-complementary-folded-cascode-ab-opamp-pvt/tests/verify.py"
+    },
+    {
+      "task": "sky130-folded-cascode-ota-gain130-pm60-noise50uv-pvt",
+      "checks": "gain130 foldedOTA：tt/ss/ff×3V×3T=27PVT，gain10Hz≥130dB/UGB≥200MHz/PM≥60°且10Hz–100GHz只1falling0dBcross且后续below0，outputCMerror≤.8mV/0≤power≤5.4mW；27noise10Hz–10MHz unity input≤50µVrms。3range点.30–1.50V/10mVstep共121点，选最长连续tracking≤20mV区间≥.92Vpp，仅边界相邻点插值；3settling点双向100mVstep last-entry≤10ns/.7mV/.7%，末5nsmeanerror。8等权partial，60singleworker/singlethreadprocesses。",
+      "limits": "四nominalgroup硬门先跑且复用，失败余56blocked；缺/重复/未请求/非有限/失败/blocked矩阵或worker/thread不符会8门全0，完整矩阵普通非nominal质量失败仍partial。range与settling的3代表点不同；noise固定上限10MHz。50µA/1pF固定fixture，无MC/PEX/CMRR/PSRR/电容物理面积，gainboostedfolded只是设计目标非结构评分。",
+      "source": "evidence/analog_long_finalfour_1_verify_py.txt",
+      "source_sha256": "6c74f3c29d2b28aab0db159ae66f36f6175822851b52bd1a33058637bdb117ff",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-folded-cascode-ota-gain130-pm60-noise50uv-pvt/tests/verify.py"
+    },
+    {
+      "task": "sky130-fully-differential-ota-c-biquad-pvt",
+      "checks": "FD OTA-C biquad：25代表PVT(5P×5成对V/T)AC+noise，3secondary点各THD/THDlarge/THDf0/CMstep，62正式runs+额外1nominalACgate=63processes，最多4workers。16等权partial：LP拟合f0 1.8–2.2MHz/Q .65–.75/gain±1dB/RMSfit≤.5dB/20MHz衰减≥35dB；BPpeak1.7–2.3MHz/−8..−5dB且200k/20M衰减≥15/1k≥18dB；两stateCM≤10mV/power≤500µW，LPoutputnoise1k–4MHz≤500µVrms。200kHz .6/.9Vpp THD≤−45/−30dB且gain≥.85/.80；2MHz .9Vpp双输出THD≤−45dB/LPgain≥.50/BPgain≥.30；CM .85→.95V后10mV带≤1µs及lateexcursion≤10mV。",
+      "limits": "所有积分电容在DUT内，外露LP与BP各state仅250fF probe/20µA参考/.9VOCM；名字不查内部拓扑。LP二阶拟合到8MHz，THD末2周期256均匀点只2–5谐波，非SFDR或全噪声SNDR；dynamicrange仅派生报告无硬门。nominalACgate失败正式0，完整矩阵任何run失败使bounded所有门false；scorer主要count/finite而非foldedOTA那种point-identity全审。25非全Cartesian，无passivetolerance/MC/PEX/后仿校准，golden margin校准非独立泛化证明。",
+      "source": "evidence/analog_long_finalfour_2_verify_py.txt",
+      "source_sha256": "bb89af95c90ca84140ad0cbbdc6f509b489591350705787d9b46aebbd84a8db3",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-fully-differential-ota-c-biquad-pvt/tests/verify.py"
+    },
+    {
+      "task": "sky130-two-stage-miller-opamp-gain70-ugb20-pm60-noise50uv-pvt",
+      "checks": "two-stageMiller70：27PVT gain10Hz≥70dB/UGB≥20MHz且无0dB recross、PM≥60°、outputbias≤25mV/power≤600µW；27点noise-gain20闭环的inputnoise10Hz至各点实测closedloop−3dB≤50µVrms，上限非固定亦非openloopUGB。3代表点PSRR+1k/1M≥65/20dB、CMRR1k≥60dB、range连续tracking20mV≥.8Vpp、双向100mVstep settle≤30ns/2%/2mVfinal、双向slew≥10V/µs。11等权partial，完整69serialprocesses。",
+      "limits": "noise-gain20不是unitygain噪声测试，和其unityfeedback range/settling是不同fixture；primary/noise27，rejection/dynamics仅3代表点，虽标签pvt不代表全27RR。nominalfunctional只基本正gain/UGB/power与bias合理，非所有spec硬门；阶段fail保留此前partial。50µA/2pF、fixed.9VCM，无MC/PEX/架构内部验收；原脚本analysis_points后续等process数，不能据其认为OP+AC等独立analysis完全统计。",
+      "source": "evidence/analog_long_finalfour_3_verify_py.txt",
+      "source_sha256": "876db51531aa660ca20dc23d09baea9d541103d3ee6f92aabb53746d0cce322b",
+      "source_url": "https://raw.githubusercontent.com/Arcadia-1/analog-design-bench/972f7cd7c95381134387b250edf18f3bd23bdd25/tasks/sky130-two-stage-miller-opamp-gain70-ugb20-pm60-noise50uv-pvt/tests/verify.py"
+    }
+  ],
+  "helper_contract": "抽查11任务utils均同gitblob/同SHA256，run_spice只取finite且非零返回空，无percall timeout；sigma自定义subprocess及flash也未设percalltimeout。write_results默认等权partial且不统一非零退出，必须看reward/allchecks。不同test.sh对非法DUT可能exit0但trap写reward0，不作通过依据。 RF/LNA/mixer/TIA/capless使用相同sharedutils；robustLDO自含run与score，亦无percalltimeout，score按allchecks才exit0；不同任务仍须读完整reward与外层harness状态。；本轮mux/CMLdivider/数字divider/bootstrapdriver四类新增：均读test.sh/相关bench；新helper仍默认等权partial，mux自有runner验证returncode/finite且可serialretry。bootstrap pulsewidth alterparam缺reset按官方文档记静态疑义，未外推整套无效。；第二批接口：Flash4自含6checks严格binary/partialinfo/main总exit0；CMLTX23、DAC8、bottomplate6为等权partial。功耗源/时间平均/积分clip与transientnoise覆盖逐任务记录，不能统一口径。；电源新增：CPreg/unreg各4、ClassD5、NMOSLDO7门默认等权partial；NMOS main全过才exit0，其余多只写reward。各task有不同failfast与供能fixture，有限MC统计不代表全机yield。；反馈四任务分别15/15/7/13等权partial门，FCT第13门逻辑依前12质量；gain1名为PVT的range实际nominal、gain8全30角，统计analysispoints不等SPICEprocesses。；多级OTA四任务8/11/8/11门；telescopic完整性错误全blocked，NMC nominal+五组45完整矩阵为硬门。按正式reward/CTRF而非原summary passed数或进程退出解释成功。；参考四任务5/8/3/11等权partial门；bandgap两个PSRR频点，osc功耗nominal-only；line-driver供电峰值不等于输出负载电流；ICC/IPTAT由fixture输入。；buffer输入电流是0权重资格硬门，三个电目标等权；constantGM9partial有阶段失败不同处理；GMR15点gain权重.5，其余各1/6，而5点各.25。SDR残差与SFDR最大spur不是同指标。；最后四项ClassAB14门strict binary、folded8partial且完整60点身份校验、biquad16partial/62正式+1预检、Miller11partial/69process。噪声输入/输出、unity/NG20及积分频带必须分栏比较。",
+  "coverage": "long suite50：beta/bandgap两项加48个long_task_examples，已达50/50任务所选verifier契约静态审计。本轮取得40相关文件，审score/必要metric与代表bench；非全部器件checker、环境或全部源码全审，无回归/EDA执行证据。",
+  "current_mirror_predicate_example": {
+    "currents_a": [
+      2e-05,
+      2e-05,
+      8e-05,
+      0.0002,
+      0.001
+    ],
+    "min_adjacent_delta_a": 0.0,
+    "max_adjacent_delta_a": 0.0008,
+    "first_gate_accepts": true,
+    "scope": "own arithmetic over synthetic values; no physical circuit/benchmark execution; ref branch may add conditions"
+  }
+}

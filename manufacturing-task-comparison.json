@@ -1,0 +1,205 @@
+{
+  "as_of": "2026-10-20T00:45:36.392904+00:00",
+  "status": "cross-task protocol map; not model ranking or full raw-data audit",
+  "scope": "制造数据按观测层级、标签与工业结论分开；不能将所有分类/分割/预测的accuracy拼成一个“良率优化”benchmark。",
+  "items": [
+    {
+      "task": "生产实体pass/fail预测",
+      "catalog_ids": [
+        "fab-secom"
+      ],
+      "input_boundary": "匿名过程传感器+时间戳，不是wafer图",
+      "prediction_target": "每个生产实体的最终pass/fail及特征排序",
+      "acceptance": "BER/FNR/FPR/少数fail召回；accuracy受93.36%pass基率影响",
+      "split_boundary": "训练fold内填补/缩放/特征筛选；随机CV与时间外推不同",
+      "industrial_claim_boundary": "关联预测不等发现根因或证明改变某传感器可提升真实良率",
+      "source_snapshots": [
+        {
+          "id": "fab-secom",
+          "record_sha256": "451feb16b3997ce72f36dde8459f8235582e2716b3414753c54e7c3c06e3afd7",
+          "primary_sources": "https://archive.ics.uci.edu/dataset/179/secom; https://archive.ics.uci.edu/static/public/179/secom.zip"
+        }
+      ]
+    },
+    {
+      "task": "电测空间模式分类",
+      "catalog_ids": [
+        "fab-wm811k",
+        "fab-wm811k-mathworks",
+        "fab-mixedwm38"
+      ],
+      "input_boundary": "die电测pass/fail网格，非SEM缺陷显微图",
+      "prediction_target": "单pattern标签或8基本pattern组合；none不是全die通过",
+      "acceptance": "WM单标签按类F1/recall；Mixed exact8位全对不是逐标签准确率或38类任意accuracy",
+      "split_boundary": "lot/原wafer及合成血缘先隔离；vendor增强后randomsplit与原trainTestLabel不同，Mixed示例test参与checkpoint选择",
+      "industrial_claim_boundary": "模式识别不等最终良率预测/真实fab根因定位；GAN平衡数据与现场分布不同",
+      "source_snapshots": [
+        {
+          "id": "fab-wm811k",
+          "record_sha256": "50b46bdb870ba97a4794505909a48d3fb926b40040632ac168ce73f26ea0d0d6",
+          "primary_sources": "https://scholars.lib.ntu.edu.tw/entities/publication/563e8f2c-74ee-4733-bd62-ba5e409d8424; https://doi.org/10.1109/TSM.2014.2364237; http://mirlab.org/dataSet/public/; https://www.mathworks.com/help/images/classify-anomalies-on-wafer-defect-maps-using-deep-learning.html"
+        },
+        {
+          "id": "fab-wm811k-mathworks",
+          "record_sha256": "78503d706c51298de86dface9697617adb35cc35cf2f80117098197d27321742",
+          "primary_sources": "https://www.mathworks.com/help/images/classify-anomalies-on-wafer-defect-maps-using-deep-learning.html"
+        },
+        {
+          "id": "fab-mixedwm38",
+          "record_sha256": "8d72a133d1cabbb8df6aff32b2e43ab9a5b5f4379efbd5cc94b0a00aee7c9ce3",
+          "primary_sources": "https://github.com/Junliangwangdhu/WaferMap/blob/10e65ca04cf105908cb87abec53c3083333b1bc9/README.md; https://github.com/Junliangwangdhu/WaferMap/blob/10e65ca04cf105908cb87abec53c3083333b1bc9/trian_mutil_label.py; https://doi.org/10.1109/TSM.2020.3020985; https://www.kaggle.com/datasets/co1d7era/mixedtype-wafer-defect-datasets; https://www.kaggle.com/api/v1/datasets/download/co1d7era/mixedtype-wafer-defect-datasets"
+        }
+      ]
+    },
+    {
+      "task": "空间图VQA与原因假设",
+      "catalog_ids": [
+        "fab-wafersage"
+      ],
+      "input_boundary": "wafer图+自然语言题/规则rubric",
+      "prediction_target": "类别/位置/形态描述与候选原因",
+      "acceptance": "关键词规则、fuzzy阈值、LLMjudge分别锁，不能互当独立物理oracle",
+      "split_boundary": "图级划分，多个问题不增独立wafer；原31/54图版本冲突和train-only新卡需核",
+      "industrial_claim_boundary": "候选原因是知识推测，未有设备干预或工艺因果真值，不能叫根因准确率",
+      "source_snapshots": [
+        {
+          "id": "fab-wafersage",
+          "record_sha256": "414c2582d87c551321cae759a1bf6759cebe1f466ad529d0d8540d7eaf4c0109",
+          "primary_sources": "https://arxiv.org/abs/2604.27629; https://huggingface.co/datasets/Niraya666/wafermap-vqa-2602; https://huggingface.co/datasets/Niraya666/WaferSAGE-Wafermap-VQA-Dataset/blob/main/README.md"
+        }
+      ]
+    },
+    {
+      "task": "显微图缺陷分割",
+      "catalog_ids": [
+        "fab-carinthia",
+        "fab-carinthia-s"
+      ],
+      "input_boundary": "电子束显微图及逐像素annotation",
+      "prediction_target": "像素掩码/缺陷区域/类别",
+      "acceptance": "IoU/Dice与阈值/空mask/忽略类口径；像素数量不等独立样本量",
+      "split_boundary": "同原图/切片/wafer血缘分组；增强/重采样只用train，Carinthia-S同源映射不当独立fab",
+      "industrial_claim_boundary": "分割一致性不等真实良率或电气致命性，mask标签与设备/工艺因果需额外证据",
+      "source_snapshots": [
+        {
+          "id": "fab-carinthia",
+          "record_sha256": "adf9be72e54cf2aa52dd52b3f531003842d12a1724be6a91bbbef4f20be8acdb",
+          "primary_sources": "https://zenodo.org/records/10715190; https://zenodo.org/records/10715190/files/carinthia_dataset.html"
+        },
+        {
+          "id": "fab-carinthia-s",
+          "record_sha256": "4d3d9adc710a513f303edb398c446e15fa71ba4d3aef90744a2acc076743b708",
+          "primary_sources": "https://zenodo.org/records/16895427; https://zenodo.org/records/16895427/files/carinthia-s_dataset.html; https://journals.sagepub.com/doi/10.3233/FAIA251487; https://zenodo.org/api/records/16895427/files/data.zip/content"
+        }
+      ]
+    },
+    {
+      "task": "恢复与选择性部署风险",
+      "catalog_ids": [
+        "fab-saferestore"
+      ],
+      "input_boundary": "缺陷显微图→恢复/拒绝/保留原图",
+      "prediction_target": "改善下游分割而约束缺陷损害与正常误报",
+      "acceptance": "校准风险上界+选择gate，测试点估计低于risk不自动获认证；无候选被认证也须如实报",
+      "split_boundary": "train/val/tune/cal/cert/test分离，同一cal/test跨seed不是独立样本",
+      "industrial_claim_boundary": "PSNR或恢复图好看不代表生产安全；保障只在协议定义的指标/分布和置信度下成立",
+      "source_snapshots": [
+        {
+          "id": "fab-saferestore",
+          "record_sha256": "961d8d1c34760745206d0bbf5df2c212788ebdd2a8055e6044dc39493fa71344",
+          "primary_sources": "https://arxiv.org/abs/2609.03475; https://raw.githubusercontent.com/nbbllxx0/SafeRestore/e2184696417efb26a5c64e9671142cf238b57cf9/LICENSE; https://raw.githubusercontent.com/nbbllxx0/SafeRestore/e2184696417efb26a5c64e9671142cf238b57cf9/src/saferestore/certification.py; https://raw.githubusercontent.com/nbbllxx0/SafeRestore/e2184696417efb26a5c64e9671142cf238b57cf9/src/saferestore/torch_data.py; https://raw.githubusercontent.com/nbbllxx0/SafeRestore/e2184696417efb26a5c64e9671142cf238b57cf9/scripts/run_reported_analysis.py; https://raw.githubusercontent.com/nbbllxx0/SafeRestore/e2184696417efb26a5c64e9671142cf238b57cf9/scripts/run_v4_confirmatory.py; https://raw.githubusercontent.com/nbbllxx0/SafeRestore/e2184696417efb26a5c64e9671142cf238b57cf9/splits/carinthia_s_v4.json; https://raw.githubusercontent.com/nbbllxx0/SafeRestore/e2184696417efb26a5c64e9671142cf238b57cf9/experiments/v4_reported_analysis_primary/seed_policy_results.csv; https://raw.githubusercontent.com/nbbllxx0/SafeRestore/e2184696417efb26a5c64e9671142cf238b57cf9/experiments/v4_reported_analysis_primary/seed_207_floor_0.25.json"
+        }
+      ]
+    },
+    {
+      "task": "设备磨损/工艺预测与维护",
+      "catalog_ids": [
+        "fab-phm2016-cmp",
+        "fab-phm2018-ion",
+        "fab-phm2018-business26"
+      ],
+      "input_boundary": "CMP过程/传感器或ionmill工具序列，非wafer缺陷标签",
+      "prediction_target": "material removal rate或工具剩余寿命/维护目标，任务不同",
+      "acceptance": "原竞赛修订score与后续quantile/businessmetric另分；原物理量误差不等维护经济收益",
+      "split_boundary": "按tool/run/时间划分，窗口重叠和相同设备不能跨集合冒充OOD",
+      "industrial_claim_boundary": "RUL或过程预测误差低不自动证明实际维护/排程收益；后续业务假设/成本也要锁",
+      "source_snapshots": [
+        {
+          "id": "fab-phm2016-cmp",
+          "record_sha256": "bb99647809b8f59197a7d80f207942cf8c404283f3f0098cbc2fa8aef9abddf5",
+          "primary_sources": "https://phmsociety.org/conference/annual-conference-of-the-phm-society/annual-conference-of-the-prognostics-and-health-management-society-2016/phm-data-challenge-4/; https://phmsociety.org/wp-content/uploads/2016/05/PHM16DataChallengeCFP.pdf; https://phmsociety.org/wp-content/uploads/2016/05/Table1PHM16DataChallenge.png; https://phmsociety.org/wp-content/uploads/2016/05/Table2PHM16DataChallenge.png"
+        },
+        {
+          "id": "fab-phm2018-ion",
+          "record_sha256": "ad99059b2ae2a0b69ec50ffb26c99b07cb753bd1725f9068f32954101e044590",
+          "primary_sources": "https://phmsociety.org/conference/annual-conference-of-the-phm-society/annual-conference-of-the-prognostics-and-health-management-society-2018-b/phm-data-challenge-6/; https://phmsociety.org/wp-content/uploads/2018/05/PHM-Data-Challenge-2018-vFinal-v2_0.pdf; https://papers.phmsociety.org/index.php/phmconf/article/download/589/phmc_18_589; https://papers.phmsociety.org/index.php/phmconf/article/download/591/phmc_18_591"
+        },
+        {
+          "id": "fab-phm2018-business26",
+          "record_sha256": "ae29f77f395243ea4b4a8ac01d101e54e2f355ab834f0793bf73ef6259e47b2f",
+          "primary_sources": "https://arxiv.org/abs/2609.22160; https://arxiv.org/pdf/2609.22160; https://phmsociety.org/conference/annual-conference-of-the-phm-society/annual-conference-of-the-prognostics-and-health-management-society-2018-b/phm-data-challenge-6/"
+        }
+      ]
+    },
+    {
+      "task": "合成套刻偏差/漂移标定",
+      "catalog_ids": [
+        "fab-euv-ovl-syn-v11"
+      ],
+      "input_boundary": "site坐标mm/lot/wafer时间，六列CSV由公开generator产生",
+      "prediction_target": "OverlayX/Y nm与模型/非线性残余预测",
+      "acceptance": "RMSE/MAE/bias/σ/3σ/P95/MaxAbs nm，R²；OLS/WLS强baseline",
+      "split_boundary": "lot1demo先10wafer训练/后10test不等冻结全suite；跨lot/时间隔离防同fingerprint混入",
+      "industrial_claim_boundary": "合成已知物理模型不等实测scanner校准/真实控制闭环，不输出OPC mask，不可统称良率优化",
+      "source_snapshots": [
+        {
+          "id": "fab-euv-ovl-syn-v11",
+          "record_sha256": "2cca9d028983b5e0d09eae406325c294ef062696c14ab41fcb75d2f31b926150",
+          "primary_sources": "https://doi.org/10.5281/zenodo.23349771; https://zenodo.org/api/records/23349771; https://doi.org/10.1063/5.0346054; https://zenodo.org/api/records/19725620"
+        }
+      ]
+    },
+    {
+      "task": "晶圆厂调度与仿真环境验收",
+      "catalog_ids": [
+        "fab-smt2020-hvlm",
+        "fab-smt2020-lvhm",
+        "fab-pyscfabsim",
+        "fab-smat2022",
+        "fab-mimac2026-dispatch"
+      ],
+      "input_boundary": "factory routes/tools/WIP/随机故障/运输模型与未来信息权限，非wafer电测图",
+      "prediction_target": "lot派工、运输或维护动作，必须核动作是否真正改变环境",
+      "acceptance": "CTdays/迟交/吞吐lot或waferday/WIP/利用率与成本分报，先过约束；不同cohort不混；Gym接口存在不等动作已接入",
+      "split_boundary": "固定warmup释放/完成cohort、reset、30rep或实际rep数及CRN；SMAT运输与MIMAC瞬移不可合榜",
+      "industrial_claim_boundary": "仿真改善不等真实fab收益；MIMAC当前Gym动作无效、T2/T3未完整，现有商业排程需作为强baseline",
+      "source_snapshots": [
+        {
+          "id": "fab-smt2020-hvlm",
+          "record_sha256": "f0cb90cb1e7bb3fe8aff9882b5c52ca891d4ccc8d9cfe7647dcf845c9ff67b97",
+          "primary_sources": "https://p2schedgen.fernuni-hagen.de/downloads/simulation; https://p2schedgen.fernuni-hagen.de/fileadmin/ess/uploads_p2schedgen/SMT2020/SMT2020.zip; https://doi.org/10.1109/TSM.2020.3001933; https://www.informs-sim.org/wsc19papers/232.pdf"
+        },
+        {
+          "id": "fab-smt2020-lvhm",
+          "record_sha256": "f9a687c2f8dd40c0ae6bb22fefabc71e44a741b7d9238006ca24b9bcf426d832",
+          "primary_sources": "https://p2schedgen.fernuni-hagen.de/downloads/simulation; https://p2schedgen.fernuni-hagen.de/fileadmin/ess/uploads_p2schedgen/SMT2020/SMT2020.zip; https://doi.org/10.1109/TSM.2020.3001933; https://www.informs-sim.org/wsc19papers/232.pdf"
+        },
+        {
+          "id": "fab-pyscfabsim",
+          "record_sha256": "1f2384291db3f4b214bb30a33fabe56c5b2e9e1ee503f35e17d44d9cb9945b4e",
+          "primary_sources": "https://github.com/prosysscience/PySCFabSim-release/tree/0dbff6a55c30978aa7d61d4cbd42cbf550c48e9a; https://informs-sim.org/wsc22papers/270.pdf; https://zenodo.org/records/15088815; https://github.com/david-dd/PySCFabSim-revised/blob/ae3d55ef08cd0d6bc9cd114eb800e6c920dbede1/simulation/stats.py"
+        },
+        {
+          "id": "fab-smat2022",
+          "record_sha256": "37c9bd509f6d0821fd3ad416f8c8c93450f035cef495f04096e514fc36af4f88",
+          "primary_sources": "https://informs-sim.org/wsc22papers/339.pdf; https://github.com/kwoo-lee/SMAT2022/tree/a6df7fef99745fa49cf347306abaeb4b19002169"
+        },
+        {
+          "id": "fab-mimac2026-dispatch",
+          "record_sha256": "d10220bcc060e828172f8b776883e883ea8e348ce7ed3dd3e930144fa58db10b",
+          "primary_sources": "https://semiconfab.org/benchmark.html; https://github.com/jinjiefan2020/SemiconFab/blob/a0cb20c3ac54aa5e9da7af8f0a383a29be09b32b/MIMAC-2026-SPEC-v1.0.md; https://github.com/jinjiefan2020/SemiconFab/blob/a0cb20c3ac54aa5e9da7af8f0a383a29be09b32b/LICENSE; https://github.com/jinjiefan2020/SemiconFab/blob/a0cb20c3ac54aa5e9da7af8f0a383a29be09b32b/benchmark/simulator/DEVIATIONS.md; https://github.com/jinjiefan2020/SemiconFab/blob/a0cb20c3ac54aa5e9da7af8f0a383a29be09b32b/benchmark/simulator/mimac2026/gym_api.py; https://github.com/jinjiefan2020/SemiconFab/blob/a0cb20c3ac54aa5e9da7af8f0a383a29be09b32b/benchmark/simulator/run_benchmark.py"
+        }
+      ]
+    }
+  ]
+}

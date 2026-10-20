@@ -1,0 +1,135 @@
+{
+  "as_of": "2026-10-20T00:45:36.158638+00:00",
+  "status": "EDA software validation and QoR regression task comparison; not a new benchmark or ranking",
+  "scope": "芯片验证检查电路实现，工具验证检查parser/simulator/synthesizer本身。真实语料、语法生成、崩溃检测、差分签名、形式等价、标准特性支持与资源回归各有不同oracle；软件coverage、硬件coverage、缺陷数与PPA不能互换。现成fuzzer可作为agent的原生基线，未建立隐藏任务/预算/验收时不称公开agenticbenchmark。",
+  "items": [
+    {
+      "task": "真实语料压测与原始valid/invalid身份",
+      "catalog_ids": [
+        "verify-chibench-tool-corpus"
+      ],
+      "input_boundary": "顶层50,598/invalid4,389；文件独立分析与原项目全依赖不同",
+      "label_oracle": "工具不crash/HDL接受不等原规格功能正确",
+      "scoring_boundary": "软件line/branch coverage、time/tokens；路径数量、uniqueGitblob和独立IP分开",
+      "current_use": "许可每file与原repo保留；剔除已知invalid须显式manifest，不把54,987全叫有效gold",
+      "source_snapshots": [
+        {
+          "id": "verify-chibench-tool-corpus",
+          "record_sha256": "2073d40af181a98f7355ae7e64707df8d178e1a85a3416fcd9e2e5fd7275270b"
+        }
+      ]
+    },
+    {
+      "task": "概率语法生成与软件覆盖引导",
+      "catalog_ids": [
+        "verify-chigen-fuzzer"
+      ],
+      "input_boundary": "grammar/K/seed/token下限与format，5组3k是不同来源",
+      "label_oracle": "parser/类型检查不提供用户规格gold；ASan只是软件内存检测",
+      "scoring_boundary": "production/4gram多样性、软件coverage、100design生成秒；crash次数不等uniquebugs",
+      "current_use": "agent应比nativefuzzer在同预算下确认新根因，不能拿语法coverage当电路codecoverage",
+      "source_snapshots": [
+        {
+          "id": "verify-chigen-fuzzer",
+          "record_sha256": "e247a5c51dc3e0537ff248c3709277701c224231f79a584db44a0504323b9bab"
+        }
+      ]
+    },
+    {
+      "task": "综合前后确定性语义测试与缩减",
+      "catalog_ids": [
+        "verify-verismith-fuzzer"
+      ],
+      "input_boundary": "组合/行为顺序RTL与初始化/未定义值限制",
+      "label_oracle": "形式结果+独立sim反例；timeout/unknown另列",
+      "scoring_boundary": "确认miscompile/crash/Icarus checkerbugs分桶；README Criterion ms仅生成器微基准",
+      "current_use": "已有强nativefuzz/reduce能力；模型只比随机源代码产量没有足够价值",
+      "source_snapshots": [
+        {
+          "id": "verify-verismith-fuzzer",
+          "record_sha256": "483727679be731e645ba6447d9632cce017f3db8d7ce05624f3924b3a0965fbc"
+        }
+      ]
+    },
+    {
+      "task": "表达式/X语义回归与维护生命周期",
+      "catalog_ids": [
+        "verify-vloghammer"
+      ],
+      "input_boundary": "小表达式/位宽/符号与历史issue；默认工具列表不等所有支持工具",
+      "label_oracle": "YosysSAT/input/X contract和部分bruteforce；多sim定位",
+      "scoring_boundary": "sat60s/具体option与unknown不得省略；已知修复case作为regression",
+      "current_use": "XST/ISIM原作者明确不再修bug是具体维护证据，不推广成全综合任务饱和",
+      "source_snapshots": [
+        {
+          "id": "verify-vloghammer",
+          "record_sha256": "6e0b9b6307cb969cf4c3cd1ad6b95ef76c3dbaf30193769ed28a50218dc48873"
+        }
+      ]
+    },
+    {
+      "task": "语言特性、正例接受与负例拒绝",
+      "catalog_ids": [
+        "verify-sv-tests"
+      ],
+      "input_boundary": "LRMtag/type/shouldfail/compatibility/mode；local1028source非全run分母",
+      "label_oracle": "正确拒绝≠timeout/crash；空assertlog不证明功能有检查",
+      "scoring_boundary": "currentgenericnegativepredicate可接rc71，需日志/状态分桶复核，非历史误计实测",
+      "current_use": "生成/修复agent必须保护tag/checker/适用集合，unsupported、未运行和variant分别报",
+      "source_snapshots": [
+        {
+          "id": "verify-sv-tests",
+          "record_sha256": "23fa81e23afa534f7b54ca05044d00a02c6922643cca2ab0c0be697de6ad3c00"
+        }
+      ]
+    },
+    {
+      "task": "跨表示转换图的语义比较",
+      "catalog_ids": [
+        "verify-verixmith"
+      ],
+      "input_boundary": "Verilog/SV/C++/SMT及路径/opts，受支持确定性子集",
+      "label_oracle": "extractor/SMT可共错；exception生成difference不等不等价证明",
+      "scoring_boundary": "uniqueconfirmedrootcause/CPUh；quick特定值与full方程分开",
+      "current_use": "保留failureartifact/solverstatus、独立反例；publisher403不推断全文已读，也不阻断repo静态研究",
+      "source_snapshots": [
+        {
+          "id": "verify-verixmith",
+          "record_sha256": "72165f56d8253a31c6245e27135a041aab07df9ebe327b076af9156e72430cb6"
+        }
+      ]
+    },
+    {
+      "task": "macrocell网络差分与签名",
+      "catalog_ids": [
+        "verify-transfuzz-eda"
+      ],
+      "input_boundary": "racefree network/刺激/周期/宽度和工具组合",
+      "label_oracle": "cumulativesignature压缩相等不等完整trace证明",
+      "scoring_boundary": "translationbug/unsafecrash/slowhang与toggles/s goodput分开",
+      "current_use": "同名DL库TransFuzz不是此EDAartifact；历史31bug不等当前新版本31可复现缺陷",
+      "source_snapshots": [
+        {
+          "id": "verify-transfuzz-eda",
+          "record_sha256": "5ce76c441733994fbbfc9834e6cf5807ee604d3cf7e03517ffcde6bf23aaf560"
+        }
+      ]
+    },
+    {
+      "task": "开发资源回归与正确性门槛",
+      "catalog_ids": [
+        "synth-yosysbench-development"
+      ],
+      "input_boundary": "small/largeHDL、生成参数/top/iCE40/EXTRA_FLAGS",
+      "label_oracle": "本mode无独立gold；功能等价须补",
+      "scoring_boundary": "SB_LUT4count不是ASICarea/时序；当前脚本实际manifest与README不同",
+      "current_use": "native综合计数本就自动完成；模型需证明功能保持和最终额外收益，不重复封装stat当新任务",
+      "source_snapshots": [
+        {
+          "id": "synth-yosysbench-development",
+          "record_sha256": "0b519708c5f003d254fe68826b1d75d9976ed9c7e36726d89a06b44677720cfa"
+        }
+      ]
+    }
+  ]
+}

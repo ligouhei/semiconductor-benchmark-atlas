@@ -1,0 +1,232 @@
+{
+  "as_of": "2026-10-19T21:56:43.258342+00:00",
+  "status": "selected static source/test-contract audit, no compiler/model/HLS/tool execution",
+  "catalog_id": "hls-chstone",
+  "record_sha256": "6a71df1b1e3135fbb74c58bfc76fee428300a11d617e2d772821c21433736cff",
+  "original_paper": "https://nagoya.repo.nii.ac.jp/record/10265/file_preview/iscas2008-300_1027.pdf",
+  "mirror_tree_sha": "2b7e20ffd3365016faf1e4e2b86496a5c95445fb",
+  "programs": [
+    {
+      "name": "DFADD",
+      "input_task": "SoftFloat双精度加法，以64bit整数编码浮点数",
+      "functional_gate": "46固定输入对，结果位模式与gold不等则累加；不按任意浮点容差判分"
+    },
+    {
+      "name": "DFMUL",
+      "input_task": "SoftFloat双精度乘法",
+      "functional_gate": "20固定输入对，位模式精确比较"
+    },
+    {
+      "name": "DFDIV",
+      "input_task": "SoftFloat双精度除法",
+      "functional_gate": "22固定输入对，位模式精确比较"
+    },
+    {
+      "name": "DFSIN",
+      "input_task": "以SoftFloat实现双精度sin",
+      "functional_gate": "36固定弧度样本，结果位模式精确比较；不是任意native-libm/fastmath误差合同"
+    },
+    {
+      "name": "MIPS",
+      "input_task": "简化MIPS执行固定排序指令流",
+      "functional_gate": "最终指令数必须611，另比较8个dmem单元；不是全ISA/异常/并发验证"
+    },
+    {
+      "name": "ADPCM",
+      "input_task": "固定音频数组编码/解码",
+      "functional_gate": "比较compressed与decoded result各自gold数组，累加不匹配"
+    },
+    {
+      "name": "GSM",
+      "input_task": "GSM线性预测编码分析",
+      "functional_gate": "160 sample输出与另组参数gold比较，固定输入不是完整语音场景集"
+    },
+    {
+      "name": "JPEG",
+      "input_task": "固定JPEG解压缩/转图像",
+      "functional_gate": "比较RGB输出与gold、尺寸等，检查在jpeg2bmp辅助函数内累加全局main_result"
+    },
+    {
+      "name": "MOTION",
+      "input_task": "MPEG2运动向量解码固定bitstream",
+      "functional_gate": "PMV与motion_vertical_field_select等结构和gold逐项比较，main在mpeg2.c"
+    },
+    {
+      "name": "AES",
+      "input_task": "固定输入加密/解密",
+      "functional_gate": "aes_enc/aes_dec分别16byte结果与gold比较并累加main_result"
+    },
+    {
+      "name": "BLOWFISH",
+      "input_task": "固定Blowfish加密输入流",
+      "functional_gate": "blowfish_main返回固定输出检查计数，再由main返回"
+    },
+    {
+      "name": "SHA",
+      "input_task": "固定输入的SHA hash",
+      "functional_gate": "driver汇总digest等比较；有限向量不证明密码学安全或任意输入等价"
+    }
+  ],
+  "source_files": [
+    {
+      "file": "evidence/chstone_hls_7.txt",
+      "sha256": "7084d49c306c8a859f50fb9070908347b086c808693734835063dd85db7b566f"
+    },
+    {
+      "file": "evidence/chstone_hls_9.txt",
+      "sha256": "25ba1e25e7b9d103ff1d1fb7420ab397678536fd490adbce385c845556c4284c"
+    },
+    {
+      "file": "evidence/chstone_fixed_10.txt",
+      "sha256": "adf60b0dff8388ffc7387029fe989237b80842addb75c3e549ad7d4f07ce71a1"
+    },
+    {
+      "file": "evidence/chstone_fixed_15.txt",
+      "sha256": "a8d214da7577dfd8e731587377ffdf09c648fe7bf170c919545dff086b47733d"
+    },
+    {
+      "file": "evidence/chstone_fixed_9.txt",
+      "sha256": "ad5cd6a22e292ef1df73bc75b51ff435bc8810d03305a61e09a5af5831e2a226"
+    },
+    {
+      "file": "evidence/chstone_hls_1.txt",
+      "sha256": "9dd7b3b0b9a05a4519b60de30b2b8e3643a05c31563b09a113b4704b88a0271d"
+    },
+    {
+      "file": "evidence/chstone_hls_6.txt",
+      "sha256": "f3d51d12a64d105eb4d0d2c0d63a8502b458e69fd6a5610e9e76faf96f124880"
+    },
+    {
+      "file": "evidence/chstone_fixed_7.txt",
+      "sha256": "595f37584b0f2e819bc1789911c4e94183924c5eb3b308b1984af0d540e31afb"
+    },
+    {
+      "file": "evidence/chstone_aux_2.txt",
+      "sha256": "732625a48643dfdc15813d22b15f9e6c8ed52f957ec12875d43ad1f285c71d8e"
+    },
+    {
+      "file": "evidence/chstone_hls_0.txt",
+      "sha256": "53ca553c3ad3ee39ec96100a85268ff1c10da2a26cccf9a6db3cf9b518768181"
+    },
+    {
+      "file": "evidence/chstone_fixed_14.txt",
+      "sha256": "04d99f2902575229aa08f230eb2eff436522b6c2f5b856f45e323aed92a35ff8"
+    },
+    {
+      "file": "evidence/chstone_fixed_4.txt",
+      "sha256": "49b3ccaafea6ab8b99357c234e201657806fbbd6715456e79c13878048714ba5"
+    },
+    {
+      "file": "evidence/chstone_aux_5.txt",
+      "sha256": "e90d115679ba6ca8a3c51aefd874ce2be71d32c01fbe6a4d50350472e1b4c1e0"
+    },
+    {
+      "file": "evidence/chstone_fixed_0.txt",
+      "sha256": "1a0c50bca2ddd3ee6065e7c7480d7dd24545713abdcfa8b774e42dd02db443b9"
+    },
+    {
+      "file": "evidence/chstone_fixed_2.txt",
+      "sha256": "2dfa29a04dd543fdc021eb2ab8ea4b5cee0ed264e9725581dd3b6a51d1af05a4"
+    },
+    {
+      "file": "evidence/chstone_fixed_11.txt",
+      "sha256": "4d6787dd96818856008509f0c3f479dd2f2b42242f7cf2feb32750c16b6871bd"
+    },
+    {
+      "file": "evidence/chstone_tree.txt",
+      "sha256": "0774f52a2b006725af4d85d0a256a42aae9019b83d6d270d7a8e08e4adf5407d"
+    },
+    {
+      "file": "evidence/chstone_fixed_5.txt",
+      "sha256": "cc2db407f48dcaa7fe5d3a76f8ab53000d8e2533e2a969565840014e5cfb0700"
+    },
+    {
+      "file": "evidence/chstone_fixed_12.txt",
+      "sha256": "e20412e572cc8c58777aa604ba4e931bfc21402c19c6cb0b0e99f951bb6158f9"
+    },
+    {
+      "file": "evidence/chstone_hls_3.txt",
+      "sha256": "db617f8330fcdfbd7e1ef2cf810a7063b328552c1236eca8d6bf528db94b5652"
+    },
+    {
+      "file": "evidence/chstone_aux_1.txt",
+      "sha256": "7c310bf1d25eb2feb4460819d0c6bb7e7b204637b28618cd7f9a0a1df42aef5b"
+    },
+    {
+      "file": "evidence/chstone_hls_10.txt",
+      "sha256": "6591fc670618db4604b092ee46e5050e4fbc65fd50d282a54ff80c4bbce79a31"
+    },
+    {
+      "file": "evidence/chstone_hls_11.txt",
+      "sha256": "11915c62b43fe0cda578a63d7bd49882ba82d69008ae18bc1382d627bea43eea"
+    },
+    {
+      "file": "evidence/chstone_hls_8.txt",
+      "sha256": "db86ec3692ac20258e7c98369d1f9410318813f8385fd87225097e20b8c2532d"
+    },
+    {
+      "file": "evidence/chstone_fixed_1.txt",
+      "sha256": "44631d81da4e1e094f120ceec9f89e9790004d7059048e220cea15aa5226e68d"
+    },
+    {
+      "file": "evidence/chstone_hls_2.txt",
+      "sha256": "ca8eb810f159f8a1756f817c04e1e48f330ed4193699c6a63ba5a18a9dd0e16c"
+    },
+    {
+      "file": "evidence/chstone_fixed_13.txt",
+      "sha256": "38aa9fdbb577aa138409cdc005930a20fe96f2a50cb8f505785131336a7ded64"
+    },
+    {
+      "file": "evidence/chstone_hls_4.txt",
+      "sha256": "b66ae065447a678ced285e5e041fdf05be347b1549df5241ab674bd174e8d476"
+    },
+    {
+      "file": "evidence/chstone_fixed_8.txt",
+      "sha256": "653e4f788068cac957cf69abcdaf6808775213192da382c8a0dd1f802d3aab45"
+    },
+    {
+      "file": "evidence/chstone_aux_4.txt",
+      "sha256": "496172a4946e21a7359334d2504f7fe44a5126777da705e7a907e43f3a5c6b10"
+    },
+    {
+      "file": "evidence/chstone_paper.txt",
+      "sha256": "f2014a4122939bb495574afa4839544fefe0c0cc43186c252ace75716913f413"
+    },
+    {
+      "file": "evidence/chstone_fixed_6.txt",
+      "sha256": "60721252777edd2b6af2834d9ea7b11373d3bcb0e1a2f5ed958d007c2e774971"
+    },
+    {
+      "file": "evidence/chstone_meta.txt",
+      "sha256": "e41ff6df63c6ddcbe5f278f65ef66a72c998312c656a3e6e75af382634984a49"
+    },
+    {
+      "file": "evidence/chstone_aux_0.txt",
+      "sha256": "4e6f2ab174cfa0034eff81f69b12bc6504287074eeb58b643f97138a13fa197f"
+    },
+    {
+      "file": "evidence/chstone_hls_5.txt",
+      "sha256": "cbb0efa7a71940d1cc049d4f19c22a2dcc1c52612e6e501b82aa09ad96e1b570"
+    },
+    {
+      "file": "evidence/chstone_fixed_3.txt",
+      "sha256": "776a86db1282f1df713a950ad0fe5610c76378545fd86f6d3671d441a5b350df"
+    },
+    {
+      "file": "evidence/chstone_aux_3.txt",
+      "sha256": "314ec7da76a70ae2386713d3c79577c72ea455de85c3f50eb83ef139d00ae748"
+    }
+  ],
+  "shared_flow": {
+    "top": "chstone_main via -Dmain=chstone_main",
+    "testbench": "common/tb.c returns chstone_main()",
+    "part": "xc7vx690tffg1930-3",
+    "period": 5,
+    "period_unit": "Vitis default clock-period ns, full tool contract still must be locked",
+    "csim": false,
+    "synth": true,
+    "cosim": true,
+    "implementation": true
+  },
+  "limitations": "12有限向量main通过不等任意输入功能正确、形式等价或密码安全。改写agent若可修改main/测试/比较器并仅看返回0，会弱化验收；当前镜像top整main含硬编码输入，与开放输入kernel性能问题不同。没有运行或证明已有工具/论文发生常量折叠取巧，不能据此判整个套件失效。镜像现代5ns FPGA流和原eXCite device-independent设置不合榜；相同程序跨HLSyn/HLSDataset/HLSFactory派生数据不能当新独立程序。"
+}
