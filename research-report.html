@@ -2,7 +2,7 @@
 <html lang="zh-CN"><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>芯片行业 benchmark 分类研究 · 工作稿</title><style>
 body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:0}main{max-width:1400px;margin:auto;padding:36px}h1,h2,h3{line-height:1.35}h1{font-size:32px}h2{margin-top:40px;border-top:2px solid #ced9e4;padding-top:24px}a{color:#075ca8}table{border-collapse:collapse;background:white;width:100%;font-size:14px}th,td{border:1px solid #dbe2ea;padding:12px;vertical-align:top;text-align:left}th{background:#eaf0f7}td:first-child{min-width:160px}nav,.note{background:#e8f0fa;border-radius:10px;padding:20px}details{background:white;border:1px solid #d5e0ec;margin:12px 0;padding:16px;border-radius:8px}summary{font-weight:650;cursor:pointer}dt{font-weight:bold;margin-top:12px}dd{margin-left:0}small,.muted{color:#58697b}.tag{display:inline-block;padding:2px 8px;border-radius:5px;background:#e8eff7;font-size:12px}.tablewrap{overflow:auto}@media print{body{background:white}main{padding:0}details{break-inside:avoid}nav{display:none}a{color:#203044}td{font-size:10px}}
 </style><main><p><a href="index.html">← 返回交互式 Benchmark 表格</a></p><h1>芯片行业 benchmark 分类研究</h1>
-<p class="muted">工作稿 · 研究起点 2026-10-19 · 生成时间 2026-10-20T14:36+08:00（北京时间）</p>
+<p class="muted">工作稿 · 研究起点 2026-10-19 · 生成时间 2026-10-20T14:49+08:00（北京时间）</p>
 <div class="note"><a href="agentic-research.html">Agentic 续查专题：11项新增研究对象与开放边界</a> · <a href="agentic-followup.json">结构化协议</a></div>
 <div class="note"><a href="round2-research.html">第二轮12小时续研（进行中）：首批新增协议与证据边界</a> · <a href="round2-research-update.json">结构化增量</a></div>
 <div class="note"><strong>研究仍在进行。</strong>本稿包含 606 条任务/版本记录，归并为 340 个家族/对象。记录中也包含公开数据集、方法实验、工具示例和内部评测线索；这些数量不能解释为同等成熟的独立公开 benchmark 数量。12 小时研究尚未完成，待核验字段均保留，完整覆盖与最终优先级尚待补齐。</div>
@@ -24,7 +24,7 @@ body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:
 <li><a href="#group-12">边界：既有加速器上的工作负载映射</a> · 2 条</li>
 <li><a href="#group-13">边界：成品性能与微体系结构工作负载</a> · 23 条</li>
 </ol><a href="catalog.csv">下载 CSV</a> · <a href="catalog.json">下载 JSON</a> · 进度与未完成事项（本地研究附件） · <a href="#coverage-limits">已有覆盖与具体缺口</a></nav>
-<p>来源存档与完整性索引（本地研究附件）：6947 条检索/下载记录，6685 个本地文件完成哈希核对，完整性异常 0 项。509/606 条目录记录至少有一个精确URL或相同GitHub repo/ref/path的存档关联。此比例不是研究准确率：入口链接与实际论文/脚本常不同，完整逐字段证据映射仍待补，下载与哈希匹配也不等事实已被来源支持。</p>
+<p>来源存档与完整性索引（本地研究附件）：7028 条检索/下载记录，6764 个本地文件完成哈希核对，完整性异常 0 项。509/606 条目录记录至少有一个精确URL或相同GitHub repo/ref/path的存档关联。此比例不是研究准确率：入口链接与实际论文/脚本常不同，完整逐字段证据映射仍待补，下载与哈希匹配也不等事实已被来源支持。</p>
 <h2>分类与判断方法</h2><p>按“领域阶段 × 任务层次 × 证据成熟度”交叉归类。任务层次包括底层数值或组合优化、性能预测与代理模型、固定工具参数调优、多步工具工作流，以及端到端工程闭环。公开可下载代码、公开可下载数据、可重建标签、独立受保护评分和可商用，分别核验。</p><p>时效性从工艺/规模/规则、基线强度、信息条件、独立评价及实际约束判断。经典基准可以仍适合算法研究；新发布的基准也可能只有弱检查器、内部数据或未完整发布的流程。研究价值判断是分析结论，和来源中直接报告的事实分开。</p>
 <h2>目前已核实的关键区别</h2><ul>
 <li>维护替代与任务饱和分开：<a href="#rtl-masterrtl-power">MasterRTL</a> 作者已明确停止旧仓库维护并推荐 RTL-Timer，因此新工作应优先检查后继实现。此证据支持实现版本替代，不能证明早期功耗预测已解决；其功耗特征还需要 EDA 提取活动率，与纯 RTL 输入分轨。</li>
@@ -9804,8 +9804,8 @@ body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:
 <dt>任务设定</dt><dd>分析时序、选择/执行RapidWright或Vivado优化，保持布线合法与功能行为；1h内维护最后最佳DCP。</dd>
 <dt>输出</dt><dd>inputstem_optimized*.dcp；多文件按最新mtime选取，不自动挑最高Fmax。</dd>
 <dt>考核指标</dt><dd>各题score=max(0,α(1−.1β−.1γ))，α=Fmax增量MHz、β=OpenRouterUSD、γ=runtimehours且cap1；无改善/未产出或gate失败0。gate含routed/DRC/hold/pulsewidth/sim；按题标准竞赛名次后平均，非总score排名。1h优化/setup90min；final规则可等次数重跑取best，不称pass@1。</dd>
-<dt>基线</dt><dd>exampleagent的fanout/phys_opt_design流程与公开finalists；需同runtime/费用比较，不能将Vivado内核收益全归LLM。</dd>
-<dt>工具、数据与访问条件</dt><dd>源码Apache2；Vivado2025.1、RapidWright、OpenRouter；runtime8vCPU/32GB。公开validator结构检查+默认1000向量/100precheck xsim，非formal全输入等价；有encryptedIP跳过分支，官方harness具体消费方式待核。</dd>
+<dt>基线</dt><dd>exampleagent的fanout/phys_opt_design、确定性recipe portfolio、少量LLM动作选择和完整agent须同runtime/费用比较。已核AER/RouteAgents/ESCA/PACT/MEEMAR五方法；MEEMAR官方7题有3题确定性早退零LLM费用，其余4题非零，不能将Vivado内核收益全归LLM。</dd>
+<dt>工具、数据与访问条件</dt><dd>源码Apache2；Vivado2025.1、RapidWright、OpenRouter；runtime8vCPU/32GB。RouteAgents获评分tag公开44行开发run摘要（13种design字符串），非完整逐步LLM轨迹，当前main已移除seed并修正缺陷。PACT仅给35行reference表，完整DCP/rawrun/baseline runner尚缺，DATuner表26/35超过1h。公开validator结构检查+默认1000向量/100precheck xsim，非formal全输入等价；有encryptedIP跳过分支，官方harness具体消费方式待核。</dd>
 <dt>限制与可比性</dt><dd>有限仿真不是完整形式证明；validatorSHA与DCP版本必须固定。mtime选择/失败与infraretry区别影响结果；上游设计/二进制DCP许可另核，包内LICENSE-BENCHMARKS已列多数IP的Apache2/BSD3/MIT归属，未见ISPD16单列归属；Vivado/其他依赖仍各自授权。</dd>
 <dt>现实价值判断</dt><dd>研究判断：固定实现上的agent策略、ECO与原生物理优化编排。与原生工具、脚本及同预算搜索对照；工具成熟不自动消除这类工程能力需求。</dd>
 <dt>证据状态</dt><dd>第二轮12h研究进行中：已静态读取一手正文/选定公开源码；未运行模型、EDA或仿真。来源与字段映射见round2-first-protocol-field-evidence.json。</dd>

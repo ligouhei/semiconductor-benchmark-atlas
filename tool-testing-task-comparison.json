@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T06:36:51.125576+00:00",
+  "as_of": "2026-10-20T06:49:14.152785+00:00",
   "status": "EDA software validation and QoR regression task comparison; not a new benchmark or ranking",
   "scope": "芯片验证检查电路实现，工具验证检查parser/simulator/synthesizer本身。真实语料、语法生成、崩溃检测、差分签名、形式等价、标准特性支持与资源回归各有不同oracle；软件coverage、硬件coverage、缺陷数与PPA不能互换。现成fuzzer可作为agent的原生基线，未建立隐藏任务/预算/验收时不称公开agenticbenchmark。",
   "items": [

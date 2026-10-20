@@ -1,0 +1,159 @@
+{
+  "as_of": "2026-10-20T06:49:14.445027+00:00",
+  "status": "第二轮12h进行中；静态源码、数据schema和原始结果表核查，未执行优化器",
+  "family": "FPL26 Agentic FPGA Backend Optimization",
+  "identity": "同一竞赛协议下的五个方法实现，不新增五套独立benchmark；PACT的35设计方法实验另标artifact缺口",
+  "common_protocol": "输入placed/routed DCP；输出保持结构/布线/有限功能仿真gate的优化DCP。score=max(0,ΔFmaxMHz×[1−0.1×USD−0.1×cappedhours])，先每题排名再平均。最终7题、输入发布包19DCP含同源变体。",
+  "recommended_controls": [
+    "同一DCP/约束/工具版本/CPU/内存/随机种子与预算下，比较原生Vivado推荐脚本、确定性recipe portfolio、少量LLM选动作与完整agent。",
+    "开发priors/规则/知识目录的构建成本与测试时调用成本分列；用源IP隔离heldout，不能仅按约束或v2窗口划分。",
+    "报告全部尝试、失败、gate、无改善、调用费用与wall time；最佳重跑与单次成功率分开。",
+    "当前发现说明LLM边际贡献需要对照实验，不支持“成熟EDA工具已解决全部工程编排”的结论。"
+  ],
+  "implementations": [
+    {
+      "name": "AER",
+      "policy": "精确指纹可走既有recipe；变体/新设计首步并行比较规则与LLM选择，其后以规则搜索和停止条件驱动。FPL_LLM默认1，G1提示含13设计×6动作的实测目录、邻居和判别规则；失败回退。",
+      "actions": "Vivado局部窗口压缩/全局re-place、phys_opt与route；模型选择有限动作，不是替代放置布线内核。",
+      "data": "公开知识目录、判别规则、prompt构造与代码；选定完整tree未定位公开JSONL原始交互。开发动作表可用于策略研究，不能称完整LLM训练轨迹。",
+      "limits": "不能因README强调规则就称全程零LLM；API key要求也不等每题实际调用。代码/目录含开发设计先验，需另测未见IP。",
+      "repo": "https://github.com/haeun-josue/fpl26contest-AER-optimizer",
+      "reviewed_commit": "e325940dd7b5af3e13265f912d4812218cd0ae66",
+      "primary_sources": [
+        "https://github.com/haeun-josue/fpl26contest-AER-optimizer/tree/e325940dd7b5af3e13265f912d4812218cd0ae66"
+      ]
+    },
+    {
+      "name": "RouteAgents",
+      "policy": "多阶段原生优化、restart、成本/时间管理、策略检索与LLM。获评分tag d8ae7bd8与当前main分别固定；main已移除seed并做错误修正。",
+      "actions": "starter的34工具接口上扩展策略与编排；维持最好可交付DCP及预算。",
+      "data": "获评分tag有44行开发run摘要，13种design字符串；有成本/时长/QoR和部分winning_tools，没有逐步prompt/action/observation。当前main有decision/memory logger不等已公开完整语料。",
+      "limits": "作者披露在19个公开开发设计上积累先验，最终7题来自其中；不能据此当严格新IP泛化，也不能直接指控隐藏评测泄漏。tag含随后修正的测量/成本等缺陷，不能用修正版main等同原获评分执行。",
+      "repo": "https://github.com/Geochatz3/routeagents-fpl26",
+      "reviewed_commit": "4a929b490dad048198e746d15c475a8c19dc5017",
+      "primary_sources": [
+        "https://github.com/Geochatz3/routeagents-fpl26/tree/4a929b490dad048198e746d15c475a8c19dc5017"
+      ]
+    },
+    {
+      "name": "ESCA",
+      "policy": "原生Tcl候选portfolio为主；实际代码有至多一次、短超时、低费用的LLM继续/停止建议，无key或网络失败回退规则。",
+      "actions": "并行原生优化候选、retiming/reimplementation与结果选择。",
+      "data": "公开优化器、Makefile和许可；docs/results是beta表。未定位完整最终每题调用/失败轨迹。",
+      "limits": "源码头和帮助文本的NO-LLM不能覆盖真实llm_decide分支；正式run_optimizer未显式清空API key。实际final调用次数未独立核实。",
+      "repo": "https://github.com/jun311k/fpl26_optimization_contest",
+      "reviewed_commit": "ac1969c34d0c5e320bc9db838118c4ec48be93c7",
+      "primary_sources": [
+        "https://github.com/jun311k/fpl26_optimization_contest/tree/ac1969c34d0c5e320bc9db838118c4ec48be93c7"
+      ]
+    },
+    {
+      "name": "PACT / FuDoFdo",
+      "policy": "阶段化ReAct、知识case/skills及原生物理工具；另有明确--no-llm回退路径。",
+      "actions": "在路由DCP上调用Vivado/RapidWright，阶段化搜索、记录memory与交付routedDCP。",
+      "data": "作者公开agent、知识YAML和两份35行baseline reference CSV，均27train/8test；README明确完整35设计DCP、rawrun、baseline runner与绘图聚合包尚未完整提供。",
+      "limits": "Codex表时长320–3145s；DATuner表26/35超过3600s、最大45162s。它们不自动构成官方1h同预算比较；也不能凭这些表认定完整论文结果可复算。自身MIT与contest Apache许可分别，商业工具另需授权。",
+      "repo": "https://github.com/FudanLLMEDA/PACT",
+      "reviewed_commit": "40810620b70bfa073da6b292d37683b34f764fbf",
+      "primary_sources": [
+        "https://github.com/FudanLLMEDA/PACT/tree/40810620b70bfa073da6b292d37683b34f764fbf"
+      ]
+    },
+    {
+      "name": "MEEMAR",
+      "policy": "先走确定性优化保底；需要时用LLM候选和预算控制。作者RESULTS中7个官方结果有3个零LLM费用/确定性早退，其他4个并非零LLM。",
+      "actions": "原生phys_opt/re-place/route及候选选择；保留最好DCP，后续LLM搜索不能覆盖掉更好的保底。",
+      "data": "公开代码、官方结果表和验证标识；不是完整逐步LLM调用、工具反馈、全部候选和失败语料。",
+      "limits": "7题score总和318.254是结果汇总，不是竞赛总排名公式；3个零LLM案例不能外推全部7题不需要模型或所有FPGA优化已解决。",
+      "repo": "https://github.com/randomuzbek/meemar-fpl26-optimizer",
+      "reviewed_commit": "509a4c10ffa1586f5078fe63754e9fd3471db221",
+      "primary_sources": [
+        "https://github.com/randomuzbek/meemar-fpl26-optimizer/tree/509a4c10ffa1586f5078fe63754e9fd3471db221"
+      ]
+    }
+  ],
+  "static_summary": {
+    "as_of": "2026-10-20T06:48:06.890869+00:00",
+    "scope": "static Git identities and released-table metadata only; no Vivado/RapidWright/LLM execution",
+    "selected_git_blob_matches": 37,
+    "routeagents_scored_commit": "d8ae7bd8f1f8e4f434d21c751fd853f73be7ed96",
+    "routeagents_tag_blob_count": 239,
+    "routeagents_seed_memory": {
+      "rows": 44,
+      "unique_design_strings": 13,
+      "completed_true": 44,
+      "exit_codes": {
+        "0": 33,
+        "1": 11
+      },
+      "positive_recorded_delta": 40,
+      "null_cost_rows": 6,
+      "null_tool_count_rows": 6,
+      "winning_tools_summary_rows": 14,
+      "fields": [
+        "budget_capped",
+        "candidate",
+        "classifier_used",
+        "commit",
+        "completed",
+        "delta_fmax_mhz",
+        "delta_wns_ns",
+        "design",
+        "exit_code",
+        "final_fmax_mhz",
+        "final_status",
+        "final_wns_ns",
+        "force_continues",
+        "initial_fmax_mhz",
+        "initial_wns_ns",
+        "iterations",
+        "log_path",
+        "max_wall_seconds",
+        "note",
+        "optimized_dcp",
+        "primary_pathology",
+        "strategies_skipped_budget",
+        "tool_calls",
+        "total_cost_usd",
+        "wall_time_s",
+        "winning_tools"
+      ],
+      "interpretation": "整理后开发run摘要，不是逐步prompt/action/observation/reward轨迹；completed=True不等退出0或官方validator通过。只发布schema/计数，不转发路径或原始行。"
+    },
+    "pact_reference_tables": {
+      "pact4": {
+        "rows": 35,
+        "unique_examples": 35,
+        "split_counts": {
+          "train": 27,
+          "test": 8
+        },
+        "wall_seconds_min": 320.427,
+        "wall_seconds_max": 3145.417,
+        "over_3600_seconds": 0,
+        "interpretation": "作者reference结果表；不是全量原始日志、runner或正式FPL等预算复现。"
+      },
+      "pact5": {
+        "rows": 35,
+        "unique_examples": 35,
+        "split_counts": {
+          "train": 27,
+          "test": 8
+        },
+        "wall_seconds_min": 520.094,
+        "wall_seconds_max": 45161.823,
+        "over_3600_seconds": 26,
+        "interpretation": "作者reference结果表；不是全量原始日志、runner或正式FPL等预算复现。"
+      }
+    },
+    "residual_limits": [
+      "第三方自己报告的官方分数并非此次重跑；不从规则/LLM分支存在推断官方每题实际调用。",
+      "未获得五队的完整逐步模型交互和全部失败/重试成本语料；logger、MCP工具、开发run摘要分别标注。",
+      "公开主分支不等获评分提交；开发先验与严格未见IP泛化须区分。"
+    ]
+  },
+  "primary_additional_sources": [
+    "https://github.com/Geochatz3/routeagents-fpl26/blob/d8ae7bd8f1f8e4f434d21c751fd853f73be7ed96/optimizer/data/seed_memory.jsonl",
+    "https://github.com/FudanLLMEDA/PACT/blob/40810620b70bfa073da6b292d37683b34f764fbf/README.md"
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-20T06:36:51.562926+00:00",
+  "generated_at": "2026-10-20T06:49:14.609425+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
@@ -4522,7 +4522,7 @@
           "stale_field_audit_snapshots": [],
           "next_verification": "固定完整输入/工具与评分器、budget与失败分母；补足记录中明确缺口；不从静态阅读推独立复现实验或工业签核。",
           "limitations": "有限仿真不是完整形式证明；validatorSHA与DCP版本必须固定。mtime选择/失败与infraretry区别影响结果；上游设计/二进制DCP许可另核，包内LICENSE-BENCHMARKS已列多数IP的Apache2/BSD3/MIT归属，未见ISPD16单列归属；Vivado/其他依赖仍各自授权。",
-          "tools_and_access": "源码Apache2；Vivado2025.1、RapidWright、OpenRouter；runtime8vCPU/32GB。公开validator结构检查+默认1000向量/100precheck xsim，非formal全输入等价；有encryptedIP跳过分支，官方harness具体消费方式待核。",
+          "tools_and_access": "源码Apache2；Vivado2025.1、RapidWright、OpenRouter；runtime8vCPU/32GB。RouteAgents获评分tag公开44行开发run摘要（13种design字符串），非完整逐步LLM轨迹，当前main已移除seed并修正缺陷。PACT仅给35行reference表，完整DCP/rawrun/baseline runner尚缺，DATuner表26/35超过1h。公开validator结构检查+默认1000向量/100precheck xsim，非formal全输入等价；有encryptedIP跳过分支，官方harness具体消费方式待核。",
           "industrial_value": "研究判断：固定实现上的agent策略、ECO与原生物理优化编排。与原生工具、脚本及同预算搜索对照；工具成熟不自动消除这类工程能力需求。"
         }
       ]

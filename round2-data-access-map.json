@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T06:36:51.465936+00:00",
+  "as_of": "2026-10-20T06:49:14.515127+00:00",
   "status": "第二轮12h进行中的数据/轨迹开放性核查，非完整市场清单或最终结论",
   "scope": "只覆盖本轮已保存一手核查的新增协议；训练样本、评测输入、模型权重、整理后记忆、生成采样轨迹与LLM工具交互轨迹分别描述",
   "protocol_records": 40,
@@ -47,8 +47,8 @@
       "family": "FPL26 Agentic FPGA Backend Optimization",
       "object_identity": "官方竞赛/公开DCP与validator；商业工具依赖",
       "task": "分析时序、选择/执行RapidWright或Vivado优化，保持布线合法与功能行为；1h内维护最后最佳DCP。",
-      "available_materials_and_tools": "源码Apache2；Vivado2025.1、RapidWright、OpenRouter；runtime8vCPU/32GB。公开validator结构检查+默认1000向量/100precheck xsim，非formal全输入等价；有encryptedIP跳过分支，官方harness具体消费方式待核。",
-      "trajectory_and_training_access": "19DCP输入包与官方checksum已核；输入checkpoint不是agent轨迹。比赛agent代码/提交与完整LLM反馈训练数据须分别核。",
+      "available_materials_and_tools": "源码Apache2；Vivado2025.1、RapidWright、OpenRouter；runtime8vCPU/32GB。RouteAgents获评分tag公开44行开发run摘要（13种design字符串），非完整逐步LLM轨迹，当前main已移除seed并修正缺陷。PACT仅给35行reference表，完整DCP/rawrun/baseline runner尚缺，DATuner表26/35超过1h。公开validator结构检查+默认1000向量/100precheck xsim，非formal全输入等价；有encryptedIP跳过分支，官方harness具体消费方式待核。",
+      "trajectory_and_training_access": "19DCP输入包与官方checksum已核；输入checkpoint不是agent轨迹。五个前列方法代码已核；RouteAgents获评分tag有44行开发run摘要/13种design字符串，含QoR/费用/时长但无逐步prompt/action/observation，main已移除seed。PACT有两份35行reference表但完整实验包缺失。完整LLM反馈训练语料仍未定位。",
       "limits": "有限仿真不是完整形式证明；validatorSHA与DCP版本必须固定。mtime选择/失败与infraretry区别影响结果；上游设计/二进制DCP许可另核，包内LICENSE-BENCHMARKS已列多数IP的Apache2/BSD3/MIT归属，未见ISPD16单列归属；Vivado/其他依赖仍各自授权。",
       "primary_sources": "https://github.com/Xilinx/fpl26_optimization_contest/blob/47ad33ce66fd2fe82e9721c19177e617c3ec71cf/docs/scorecard.md; https://github.com/Xilinx/fpl26_optimization_contest/blob/47ad33ce66fd2fe82e9721c19177e617c3ec71cf/validate_dcps.py; https://github.com/Xilinx/fpl26_optimization_contest/blob/47ad33ce66fd2fe82e9721c19177e617c3ec71cf/docs/final_submission.md; https://github.com/Xilinx/fpl26_optimization_contest/releases/tag/v1.3.0",
       "record_snapshot_matches_audit": true

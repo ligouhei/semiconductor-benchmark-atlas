@@ -1,7 +1,7 @@
 {
   "status": "第二轮12小时研究进行中，非最终交付",
   "round": 2,
-  "updated_beijing": "2026-10-20T14:36:50+08:00",
+  "updated_beijing": "2026-10-20T14:49:13+08:00",
   "start_beijing": "2026-10-20T13:23:20+08:00",
   "earliest_completion_beijing": "2026-10-21T01:23:20+08:00",
   "baseline_records": 566,
@@ -84,8 +84,8 @@
       "task": "分析时序、选择/执行RapidWright或Vivado优化，保持布线合法与功能行为；1h内维护最后最佳DCP。",
       "output": "inputstem_optimized*.dcp；多文件按最新mtime选取，不自动挑最高Fmax。",
       "metrics": "各题score=max(0,α(1−.1β−.1γ))，α=Fmax增量MHz、β=OpenRouterUSD、γ=runtimehours且cap1；无改善/未产出或gate失败0。gate含routed/DRC/hold/pulsewidth/sim；按题标准竞赛名次后平均，非总score排名。1h优化/setup90min；final规则可等次数重跑取best，不称pass@1。",
-      "baseline": "exampleagent的fanout/phys_opt_design流程与公开finalists；需同runtime/费用比较，不能将Vivado内核收益全归LLM。",
-      "tools_and_access": "源码Apache2；Vivado2025.1、RapidWright、OpenRouter；runtime8vCPU/32GB。公开validator结构检查+默认1000向量/100precheck xsim，非formal全输入等价；有encryptedIP跳过分支，官方harness具体消费方式待核。",
+      "baseline": "exampleagent的fanout/phys_opt_design、确定性recipe portfolio、少量LLM动作选择和完整agent须同runtime/费用比较。已核AER/RouteAgents/ESCA/PACT/MEEMAR五方法；MEEMAR官方7题有3题确定性早退零LLM费用，其余4题非零，不能将Vivado内核收益全归LLM。",
+      "tools_and_access": "源码Apache2；Vivado2025.1、RapidWright、OpenRouter；runtime8vCPU/32GB。RouteAgents获评分tag公开44行开发run摘要（13种design字符串），非完整逐步LLM轨迹，当前main已移除seed并修正缺陷。PACT仅给35行reference表，完整DCP/rawrun/baseline runner尚缺，DATuner表26/35超过1h。公开validator结构检查+默认1000向量/100precheck xsim，非formal全输入等价；有encryptedIP跳过分支，官方harness具体消费方式待核。",
       "limitations": "有限仿真不是完整形式证明；validatorSHA与DCP版本必须固定。mtime选择/失败与infraretry区别影响结果；上游设计/二进制DCP许可另核，包内LICENSE-BENCHMARKS已列多数IP的Apache2/BSD3/MIT归属，未见ISPD16单列归属；Vivado/其他依赖仍各自授权。",
       "primary_sources": "https://github.com/Xilinx/fpl26_optimization_contest/blob/47ad33ce66fd2fe82e9721c19177e617c3ec71cf/docs/scorecard.md; https://github.com/Xilinx/fpl26_optimization_contest/blob/47ad33ce66fd2fe82e9721c19177e617c3ec71cf/validate_dcps.py; https://github.com/Xilinx/fpl26_optimization_contest/blob/47ad33ce66fd2fe82e9721c19177e617c3ec71cf/docs/final_submission.md; https://github.com/Xilinx/fpl26_optimization_contest/releases/tag/v1.3.0",
       "evidence_status": "第二轮12h研究进行中：已静态读取一手正文/选定公开源码；未运行模型、EDA或仿真。来源与字段映射见round2-first-protocol-field-evidence.json。",
@@ -871,7 +871,9 @@
     "HighTide论文12skills、currenttree13份SKILL.md与17份DECISIONS：属于工程策展/检索记忆，完整raw工具交互训练集未定位。",
     "Analog-DB论文68电路与当前72verifiable+13reference分开；当前69generated/3draft记录不代表电学validated，457记录点全部tt。其378个无约束PPA前沿点有266带specfail，不能用Pareto当全部达标。",
     "SpiceXplorer公开PAM-4三轮800条optimizer trial与LPF37条整理后尺寸记录/14版图iteration；它们不是完整LLM对话。PAM量测/奖励跨轮变更，LPF保留acceptedcorner miss与PEX/LVS边界。",
-    "Analog-DB/platform根许可为PolyForm Noncommercial，各上游条目另列许可；两个案例子仓库未定位LICENSE，不能把公开可读取等同商业训练授权。"
+    "Analog-DB/platform根许可为PolyForm Noncommercial，各上游条目另列许可；两个案例子仓库未定位LICENSE，不能把公开可读取等同商业训练授权。",
+    "FPL26五个前列方法已逐源码核：规则/原生工具与LLM贡献需分开。RouteAgents获评分tag有44行开发run摘要，不是逐步交互；主分支已移除seed且修正缺陷。",
+    "PACT两份35行reference表均27train/8test，但完整DCP/rawrun/基线runner未齐；DATuner表26/35时长超过1h，不自动构成正式竞赛等预算基线。"
   ],
   "limits": [
     "本轮新增40条任务/版本协议，不等同数量的成熟公共数据集；TimingAnalysis、HLS-Eval、ChatHLS与FIXME各分轨按同家族登记。",
