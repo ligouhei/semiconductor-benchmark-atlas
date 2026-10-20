@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-10-20T14:45:28.230034+00:00",
+  "as_of": "2026-10-20T15:19:20.757025+00:00",
   "status": "第二轮12h进行中的数据/轨迹开放性核查，非完整市场清单或最终结论",
   "scope": "只覆盖本轮已保存一手核查的新增协议；训练样本、评测输入、模型权重、整理后记忆、生成采样轨迹与LLM工具交互轨迹分别描述",
-  "protocol_records": 156,
-  "families": 74,
+  "protocol_records": 158,
+  "families": 75,
   "items": [
     {
       "catalog_id": "lib-siemens-nemo-characterization",
@@ -1875,6 +1875,30 @@
       "trajectory_and_training_access": "实际185最终sourcecode和公开summaryCSV，缺对应完整inputpayload/candidatehistory/toolmessages；本轮仅发派生统计及原链接。",
       "limits": "paper10iter/当前CLI默认3/网页更新5iter分别记录；paper8cores，ops/map10s、routing300s、egraph10s、intra60s，budget含优化器/全部候选/评测成本。main只给demo反馈，但collector传datasetroot递归收文件可能同时收demo/eval，并从结果选bestiteration；完整payload/ledger缺失，不能量化实际泄漏或归因每个论文run。 Generatedcode/resource可能含无效解，需独立重新验收后才能作positive；缺完整error/cost/iterationhistory，不能把185当185完整providertrajectories。",
       "primary_sources": "https://www.csl.cornell.edu/~zhiruz/pdfs/heurigym-iclr2026.pdf; https://arxiv.org/abs/2506.07972; https://github.com/cornell-zhang/heurigym/tree/a4cf0460152eb798f1b3a797ef22a08192661bf5; https://huggingface.co/datasets/heurigen/heurigen-data; https://cornell-zhang.github.io/heurigym/",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "rtl-vflow-v1",
+      "name": "VFlow / historical single-search MCTS workflow",
+      "family": "VFlow workflow optimization method",
+      "object_identity": "复用VerilogEval/RTLLM的方法协议；非新独立数据集",
+      "task": "MCTS对LLMmodel/prompt/temperature/graphconnections和syntax/sim/refineoperators搜索，最多20searchrounds、5轮无改进earlystop；Icarus功能仿真/Yosys综合。每个workflow可能多次LLM/候选/工具调用，pass@1不是只花一次生成成本。",
+      "available_materials_and_tools": "作者v1/v2全文与ASP-DAC2026program已取；官方matchingrepo/taskmanifest/scorer/trace未定位，不猜同名视频/VFlow软件库冒充。Yosys/仿真是原生求解，不因多agent描述就算开放训练轨迹。",
+      "trajectory_and_training_access": "仅论文workflow例图和聚合table；未取得原始多轮LLM/action-observation/searchhistory。",
+      "limits": "历史协议保留供版本追溯，后续v2新增多population，不以v1代表当前方法。20/80split若同源描述或调参过test需manifest核，未取得不能武断认定实际泄漏。 有限TB通过不等全规格/全PVT/物理签核；“industrialstandards”作者措辞不替独立验收。",
+      "primary_sources": "https://arxiv.org/html/2504.03723v1; https://www.aspdac.com/aspdac2026/pdf/ASP-DAC_2026_Full_Program.pdf; https://doi.org/10.1109/ASP-DAC66049.2026.11420713",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "rtl-vflow-v2",
+      "name": "VFlow / CEPE-MCTS multi-population workflow search",
+      "family": "VFlow workflow optimization method",
+      "object_identity": "复用VerilogEval/RTLLM的方法协议；非新独立数据集",
+      "task": "CEPE-MCTS四population：functional/area/timing/balanced，workflowfragmentmigration与globalfailureexperience共享，最多20searchrounds、5轮无改进earlystop；Icarus功能仿真/Yosys综合。每个workflow可能多次LLM/候选/工具调用，pass@1不是只花一次生成成本。",
+      "available_materials_and_tools": "作者v1/v2全文与ASP-DAC2026program已取；官方matchingrepo/taskmanifest/scorer/trace未定位，不猜同名视频/VFlow软件库冒充。Yosys/仿真是原生求解，不因多agent描述就算开放训练轨迹。",
+      "trajectory_and_training_access": "仅论文workflow例图和聚合table；未取得原始多轮LLM/action-observation/searchhistory。",
+      "limits": "v2CEPE方法/RTLLM9PPA与v1明显不同。PPA表五方法ALU/PE数值列完全相同，可能共享/排版需原工件解释，不据此认定实际任务重复；Timing全负，正文称slack，不能当negativephysicaldelay或已timingclosure。库/工艺/约束/全部候选成本未齐。 有限TB通过不等全规格/全PVT/物理签核；“industrialstandards”作者措辞不替独立验收。",
+      "primary_sources": "https://arxiv.org/html/2504.03723v2; https://www.aspdac.com/aspdac2026/pdf/ASP-DAC_2026_Full_Program.pdf; https://doi.org/10.1109/ASP-DAC66049.2026.11420713",
       "record_snapshot_matches_audit": true
     }
   ],

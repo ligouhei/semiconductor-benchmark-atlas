@@ -1,13 +1,13 @@
 {
   "status": "第二轮12小时研究进行中，非最终交付",
   "round": 2,
-  "updated_beijing": "2026-10-20T22:45:27+08:00",
+  "updated_beijing": "2026-10-20T23:19:19+08:00",
   "start_beijing": "2026-10-20T13:23:20+08:00",
   "earliest_completion_beijing": "2026-10-21T01:23:20+08:00",
   "baseline_records": 566,
   "baseline_families": 326,
-  "current_records": 722,
-  "current_families": 395,
+  "current_records": 724,
+  "current_families": 396,
   "added_protocols": [
     {
       "id": "lib-siemens-nemo-characterization",
@@ -3284,6 +3284,48 @@
       "evidence_status": "第二轮12h进行中；80固定Gitblobs/全文、网站CSV与185solver的自写静态AST/数表核；未运行solver/第三方grader/EDA。",
       "next_verification": "需要匹配runrevision、严格heldoutmanifest/全部失败/原始task与完整轨迹，核评分版本、强原生基线/成本；访问受限内容不绕过。",
       "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "rtl-vflow-v1",
+      "benchmark_family": "VFlow workflow optimization method",
+      "name": "VFlow / historical single-search MCTS workflow",
+      "category": "数字前端/RTL生成与workflow搜索",
+      "artifact_type": "复用VerilogEval/RTLLM的方法协议；非新独立数据集",
+      "task_layer": "生成/优化agentworkflow，而非只优化单个RTL或原生工具",
+      "version": "arxiv2504.03723v1（2025-03-30）；ASP-DAC2026正式program确认，未取得匹配conference全文",
+      "input": "VerilogEval156sourceproblems的machine/humandescriptions，v1称20%validation/80%test，没有公开精确caseIDs/rounding/seeds。 同源两描述不可当312独立电路。",
+      "task": "MCTS对LLMmodel/prompt/temperature/graphconnections和syntax/sim/refineoperators搜索，最多20searchrounds、5轮无改进earlystop；Icarus功能仿真/Yosys综合。每个workflow可能多次LLM/候选/工具调用，pass@1不是只花一次生成成本。",
+      "output": "RTL、workflowgraphs/候选策略与functionalpass；资源表给Time6.7×、APIcost.13×等相对GPT4o。 未定位原始全部候选、独立gold/判题log或完整搜图history。",
+      "metrics": "主表VFlowpass1 machine84.3/human82.8→平均83.55%；PromptV75.7/79.3→77.5，差6.05pp（相对7.806%），不是简单+6.1%relative。IO56.7/46.6→51.65，差31.9pp；v1正文46.7/36.9提升无法由该表同口径重建。v1Avg是Pass1/5/10均值，不能当single-shotaccuracy。",
+      "baseline": "主promptingbaseline用Claude3.7，VFlow可选多模型，不是严格同模型/同调用次数。v1DeepSeek80.5/57=1.4123倍pass且time6.7×/cost.13×，更慢但API便宜；不得把141.2%写成增加141.2个百分点。",
+      "tools_and_access": "作者v1/v2全文与ASP-DAC2026program已取；官方matchingrepo/taskmanifest/scorer/trace未定位，不猜同名视频/VFlow软件库冒充。Yosys/仿真是原生求解，不因多agent描述就算开放训练轨迹。",
+      "limitations": "历史协议保留供版本追溯，后续v2新增多population，不以v1代表当前方法。20/80split若同源描述或调参过test需manifest核，未取得不能武断认定实际泄漏。 有限TB通过不等全规格/全PVT/物理签核；“industrialstandards”作者措辞不替独立验收。",
+      "industrial_value": "研究判断：让agent搜索更有效workflow有价值，但应与固定强workflow/同预算自纠错及原生验证比较；复用旧小模块高Pass的边际价值可能较低，应补多文件/新规格泛化和完整成本账本。",
+      "primary_sources": "https://arxiv.org/html/2504.03723v1; https://www.aspdac.com/aspdac2026/pdf/ASP-DAC_2026_Full_Program.pdf; https://doi.org/10.1109/ASP-DAC66049.2026.11420713",
+      "evidence_status": "第二轮12h进行中；一手两版本、数表与自写算术审计；没有运行模型/EDA。",
+      "next_verification": "取得冻结workflowsearch/trainvaltestIDs、模型API与全部LLM/工具费用、独立TB/物理lib/原PPA工件；核camera-ready与arxivv2变化。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "rtl-vflow-v2",
+      "benchmark_family": "VFlow workflow optimization method",
+      "name": "VFlow / CEPE-MCTS multi-population workflow search",
+      "category": "数字前端/RTL生成与workflow搜索",
+      "artifact_type": "复用VerilogEval/RTLLM的方法协议；非新独立数据集",
+      "task_layer": "生成/优化agentworkflow，而非只优化单个RTL或原生工具",
+      "version": "arxiv2504.03723v2（2025-07-13）；ASP-DAC2026正式program确认，未取得匹配conference全文",
+      "input": "VerilogEval156sourceproblems的machine/humandescriptions，另9selectedRTLLM2.0modules做PPA。v2未给可核冻结validation/testmanifest。 同源两描述不可当312独立电路。",
+      "task": "CEPE-MCTS四population：functional/area/timing/balanced，workflowfragmentmigration与globalfailureexperience共享，最多20searchrounds、5轮无改进earlystop；Icarus功能仿真/Yosys综合。每个workflow可能多次LLM/候选/工具调用，pass@1不是只花一次生成成本。",
+      "output": "RTL、workflowgraphs/候选策略与functionalpass；9PPA表列Areaµm²/PowerµW/Timingns。 未定位原始全部候选、独立gold/判题log或完整搜图history。",
+      "metrics": "主表VFlowpass1 machine84.3/human82.8→平均83.55%；PromptV75.7/79.3→77.5，差6.05pp（相对7.806%），不是简单+6.1%relative。IO56.7/46.6→51.65，差31.9pp；v1正文46.7/36.9提升无法由该表同口径重建。v2主表只列Pass1/5，正文仍称Pass10/旧三k平均增幅，需按表分开。",
+      "baseline": "主promptingbaseline用Claude3.7，VFlow可选多模型，不是严格同模型/同调用次数。v2加入AFlow；DeepSeek80.5/57=1.4123倍pass、cost.13→ROI10.86≈10.9；ROI是相对pass/cost比，不是10.9倍成功率或少10.9倍所有成本。",
+      "tools_and_access": "作者v1/v2全文与ASP-DAC2026program已取；官方matchingrepo/taskmanifest/scorer/trace未定位，不猜同名视频/VFlow软件库冒充。Yosys/仿真是原生求解，不因多agent描述就算开放训练轨迹。",
+      "limitations": "v2CEPE方法/RTLLM9PPA与v1明显不同。PPA表五方法ALU/PE数值列完全相同，可能共享/排版需原工件解释，不据此认定实际任务重复；Timing全负，正文称slack，不能当negativephysicaldelay或已timingclosure。库/工艺/约束/全部候选成本未齐。 有限TB通过不等全规格/全PVT/物理签核；“industrialstandards”作者措辞不替独立验收。",
+      "industrial_value": "研究判断：让agent搜索更有效workflow有价值，但应与固定强workflow/同预算自纠错及原生验证比较；复用旧小模块高Pass的边际价值可能较低，应补多文件/新规格泛化和完整成本账本。",
+      "primary_sources": "https://arxiv.org/html/2504.03723v2; https://www.aspdac.com/aspdac2026/pdf/ASP-DAC_2026_Full_Program.pdf; https://doi.org/10.1109/ASP-DAC66049.2026.11420713",
+      "evidence_status": "第二轮12h进行中；一手两版本、数表与自写算术审计；没有运行模型/EDA。",
+      "next_verification": "取得冻结workflowsearch/trainvaltestIDs、模型API与全部LLM/工具费用、独立TB/物理lib/原PPA工件；核camera-ready与arxivv2变化。",
+      "retrieved_date": "2026-10-20"
     }
   ],
   "scope": "公开资料/任务/代码的静态研究；未运行模型、EDA或仿真。当前仅为阶段性增量，不声称完成全范围或12小时。",
@@ -3384,10 +3426,12 @@
     "HeuriGym包含三EDA分轨与两邻接compiler/accelerator分轨，paper共9问题218instances；当前GR24names来自ariane/mempool/nvdla三源组各8part，不当24独立芯片。",
     "HeuriGym公开185份最终solvercode（62份三EDA、103份含两邻接任务），180可AST解析不等功能正确；没有完整LLM/工具交互链。",
     "HeuriGym论文Quality算术均值、当前collector几何均值、intraop用logcostratio；网站30模型中19的Yield/QYI按218权重可复得，11不齐需匹配runversion，不能直接把所有新模型并成严格同协议榜。",
-    "HeuriGym当前opschecker未显式拒绝负start，GRverifier虽returnTrue但C++evaluator仍查连接并失败；局部代码现象不能扩大为全链无验收。demo/eval与bestiteration选择边界需完整manifest核。"
+    "HeuriGym当前opschecker未显式拒绝负start，GRverifier虽returnTrue但C++evaluator仍查连接并失败；局部代码现象不能扩大为全链无验收。demo/eval与bestiteration选择边界需完整manifest核。",
+    "VFlow最新版v2已改CEPE多population并加9RTLLM2模块，与v1分版；同156VerilogEval不是新独立数据集。主表Pass1平均83.55vsPromptV77.5差6.05pp/相对7.806%，不照搬混淆百分比；10.9倍ROI是pass/cost比。",
+    "Renoir内部套件与Waferira设计预览已加候选清单：一手vendor声明可读，但无固定task/oracle/公开真实轨迹，不把厂商产品/演示数当成熟benchmark。"
   ],
   "limits": [
-    "本轮新增156条任务/版本协议，不等同数量的成熟公共数据集；TimingAnalysis、HLS-Eval、ChatHLS与FIXME各分轨按同家族登记。",
+    "本轮新增158条任务/版本协议，不等同数量的成熟公共数据集；TimingAnalysis、HLS-Eval、ChatHLS与FIXME各分轨按同家族登记。",
     "FPL26原包743289124bytes与官方SHA256匹配，19DCP逐文件匹配包内SHA256SUM；只核字节/元数据，不加载执行DCP。",
     "HLS-Eval202configs已核固定Git身份，含同源变体；Bench4HLS170个task各有reference/TB路径。",
     "其他候选仍在查证；后续会继续增补原生工具基线、交互轨迹和评分隔离。"

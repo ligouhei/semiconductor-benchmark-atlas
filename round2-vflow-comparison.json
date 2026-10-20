@@ -1,0 +1,401 @@
+{
+  "status": "round2 active; workflow search v1/v2 and shared VerilogEval/RTLLM source tasks",
+  "protocols": [
+    {
+      "id": "rtl-vflow-v1",
+      "benchmark_family": "VFlow workflow optimization method",
+      "name": "VFlow / historical single-search MCTS workflow",
+      "category": "数字前端/RTL生成与workflow搜索",
+      "artifact_type": "复用VerilogEval/RTLLM的方法协议；非新独立数据集",
+      "task_layer": "生成/优化agentworkflow，而非只优化单个RTL或原生工具",
+      "version": "arxiv2504.03723v1（2025-03-30）；ASP-DAC2026正式program确认，未取得匹配conference全文",
+      "input": "VerilogEval156sourceproblems的machine/humandescriptions，v1称20%validation/80%test，没有公开精确caseIDs/rounding/seeds。 同源两描述不可当312独立电路。",
+      "task": "MCTS对LLMmodel/prompt/temperature/graphconnections和syntax/sim/refineoperators搜索，最多20searchrounds、5轮无改进earlystop；Icarus功能仿真/Yosys综合。每个workflow可能多次LLM/候选/工具调用，pass@1不是只花一次生成成本。",
+      "output": "RTL、workflowgraphs/候选策略与functionalpass；资源表给Time6.7×、APIcost.13×等相对GPT4o。 未定位原始全部候选、独立gold/判题log或完整搜图history。",
+      "metrics": "主表VFlowpass1 machine84.3/human82.8→平均83.55%；PromptV75.7/79.3→77.5，差6.05pp（相对7.806%），不是简单+6.1%relative。IO56.7/46.6→51.65，差31.9pp；v1正文46.7/36.9提升无法由该表同口径重建。v1Avg是Pass1/5/10均值，不能当single-shotaccuracy。",
+      "baseline": "主promptingbaseline用Claude3.7，VFlow可选多模型，不是严格同模型/同调用次数。v1DeepSeek80.5/57=1.4123倍pass且time6.7×/cost.13×，更慢但API便宜；不得把141.2%写成增加141.2个百分点。",
+      "tools_and_access": "作者v1/v2全文与ASP-DAC2026program已取；官方matchingrepo/taskmanifest/scorer/trace未定位，不猜同名视频/VFlow软件库冒充。Yosys/仿真是原生求解，不因多agent描述就算开放训练轨迹。",
+      "limitations": "历史协议保留供版本追溯，后续v2新增多population，不以v1代表当前方法。20/80split若同源描述或调参过test需manifest核，未取得不能武断认定实际泄漏。 有限TB通过不等全规格/全PVT/物理签核；“industrialstandards”作者措辞不替独立验收。",
+      "industrial_value": "研究判断：让agent搜索更有效workflow有价值，但应与固定强workflow/同预算自纠错及原生验证比较；复用旧小模块高Pass的边际价值可能较低，应补多文件/新规格泛化和完整成本账本。",
+      "primary_sources": "https://arxiv.org/html/2504.03723v1; https://www.aspdac.com/aspdac2026/pdf/ASP-DAC_2026_Full_Program.pdf; https://doi.org/10.1109/ASP-DAC66049.2026.11420713",
+      "evidence_status": "第二轮12h进行中；一手两版本、数表与自写算术审计；没有运行模型/EDA。",
+      "next_verification": "取得冻结workflowsearch/trainvaltestIDs、模型API与全部LLM/工具费用、独立TB/物理lib/原PPA工件；核camera-ready与arxivv2变化。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "rtl-vflow-v2",
+      "benchmark_family": "VFlow workflow optimization method",
+      "name": "VFlow / CEPE-MCTS multi-population workflow search",
+      "category": "数字前端/RTL生成与workflow搜索",
+      "artifact_type": "复用VerilogEval/RTLLM的方法协议；非新独立数据集",
+      "task_layer": "生成/优化agentworkflow，而非只优化单个RTL或原生工具",
+      "version": "arxiv2504.03723v2（2025-07-13）；ASP-DAC2026正式program确认，未取得匹配conference全文",
+      "input": "VerilogEval156sourceproblems的machine/humandescriptions，另9selectedRTLLM2.0modules做PPA。v2未给可核冻结validation/testmanifest。 同源两描述不可当312独立电路。",
+      "task": "CEPE-MCTS四population：functional/area/timing/balanced，workflowfragmentmigration与globalfailureexperience共享，最多20searchrounds、5轮无改进earlystop；Icarus功能仿真/Yosys综合。每个workflow可能多次LLM/候选/工具调用，pass@1不是只花一次生成成本。",
+      "output": "RTL、workflowgraphs/候选策略与functionalpass；9PPA表列Areaµm²/PowerµW/Timingns。 未定位原始全部候选、独立gold/判题log或完整搜图history。",
+      "metrics": "主表VFlowpass1 machine84.3/human82.8→平均83.55%；PromptV75.7/79.3→77.5，差6.05pp（相对7.806%），不是简单+6.1%relative。IO56.7/46.6→51.65，差31.9pp；v1正文46.7/36.9提升无法由该表同口径重建。v2主表只列Pass1/5，正文仍称Pass10/旧三k平均增幅，需按表分开。",
+      "baseline": "主promptingbaseline用Claude3.7，VFlow可选多模型，不是严格同模型/同调用次数。v2加入AFlow；DeepSeek80.5/57=1.4123倍pass、cost.13→ROI10.86≈10.9；ROI是相对pass/cost比，不是10.9倍成功率或少10.9倍所有成本。",
+      "tools_and_access": "作者v1/v2全文与ASP-DAC2026program已取；官方matchingrepo/taskmanifest/scorer/trace未定位，不猜同名视频/VFlow软件库冒充。Yosys/仿真是原生求解，不因多agent描述就算开放训练轨迹。",
+      "limitations": "v2CEPE方法/RTLLM9PPA与v1明显不同。PPA表五方法ALU/PE数值列完全相同，可能共享/排版需原工件解释，不据此认定实际任务重复；Timing全负，正文称slack，不能当negativephysicaldelay或已timingclosure。库/工艺/约束/全部候选成本未齐。 有限TB通过不等全规格/全PVT/物理签核；“industrialstandards”作者措辞不替独立验收。",
+      "industrial_value": "研究判断：让agent搜索更有效workflow有价值，但应与固定强workflow/同预算自纠错及原生验证比较；复用旧小模块高Pass的边际价值可能较低，应补多文件/新规格泛化和完整成本账本。",
+      "primary_sources": "https://arxiv.org/html/2504.03723v2; https://www.aspdac.com/aspdac2026/pdf/ASP-DAC_2026_Full_Program.pdf; https://doi.org/10.1109/ASP-DAC66049.2026.11420713",
+      "evidence_status": "第二轮12h进行中；一手两版本、数表与自写算术审计；没有运行模型/EDA。",
+      "next_verification": "取得冻结workflowsearch/trainvaltestIDs、模型API与全部LLM/工具费用、独立TB/物理lib/原PPA工件；核camera-ready与arxivv2变化。",
+      "retrieved_date": "2026-10-20"
+    }
+  ],
+  "static_audit": {
+    "v1": {
+      "table": {
+        "IO": [
+          56.7,
+          79.1,
+          84.1,
+          73.3,
+          46.6,
+          60.8,
+          70.7,
+          58.4
+        ],
+        "PromptV": [
+          75.7,
+          87.9,
+          93.8,
+          85.8,
+          79.3,
+          86.2,
+          91.4,
+          85.6
+        ],
+        "VFlow": [
+          84.3,
+          96.5,
+          98.1,
+          92.9,
+          82.8,
+          91.5,
+          96.5,
+          90.3
+        ]
+      },
+      "pass1_mean": 83.55,
+      "IO_pass1_mean": 51.650000000000006,
+      "PromptV_pass1_mean": 77.5,
+      "vs_promptV_pp": 6.049999999999997,
+      "vs_promptV_relative_percent": 7.806451612903231,
+      "vs_IO_pp": 31.89999999999999,
+      "vs_IO_relative_percent": 61.76185866408517
+    },
+    "v2": {
+      "table": {
+        "IO": [
+          56.7,
+          79.1,
+          46.6,
+          60.8
+        ],
+        "PromptV": [
+          75.7,
+          87.9,
+          79.3,
+          86.2
+        ],
+        "AFlow": [
+          80.1,
+          91.2,
+          80.6,
+          88.1
+        ],
+        "VFlow": [
+          84.3,
+          96.5,
+          82.8,
+          91.5
+        ]
+      },
+      "pass1_mean": 83.55,
+      "IO_pass1_mean": 51.650000000000006,
+      "PromptV_pass1_mean": 77.5,
+      "vs_promptV_pp": 6.049999999999997,
+      "vs_promptV_relative_percent": 7.806451612903231,
+      "vs_IO_pp": 31.89999999999999,
+      "vs_IO_relative_percent": 61.76185866408517
+    },
+    "as_of": "2026-10-20T15:05:32.636449+00:00",
+    "mode": "own static tables and math only",
+    "v2_ppa": [
+      {
+        "method": "DesignerRef.",
+        "metrics": [
+          [
+            68.0,
+            6.5,
+            -0.08
+          ],
+          [
+            168.0,
+            16000.0,
+            -0.3
+          ],
+          [
+            19.0,
+            2600.0,
+            -0.14
+          ],
+          [
+            128.0,
+            68.0,
+            -1.21
+          ],
+          [
+            749.0,
+            75000.0,
+            -0.91
+          ],
+          [
+            380.0,
+            45000.0,
+            -0.13
+          ],
+          [
+            2400.0,
+            36000.0,
+            -1.03
+          ],
+          [
+            2400.0,
+            36000.0,
+            -1.03
+          ],
+          [
+            35.0,
+            6200.0,
+            -0.21
+          ]
+        ],
+        "alu_pe_exact_equal": true,
+        "negative_timing_columns": 9
+      },
+      {
+        "method": "IO",
+        "metrics": [
+          [
+            75.0,
+            8.0,
+            -0.07
+          ],
+          [
+            200.0,
+            18000.0,
+            -0.28
+          ],
+          [
+            23.0,
+            3300.0,
+            -0.12
+          ],
+          [
+            157.0,
+            91.0,
+            -0.33
+          ],
+          [
+            930.0,
+            95000.0,
+            -0.5
+          ],
+          [
+            410.0,
+            48000.0,
+            -0.1
+          ],
+          [
+            2600.0,
+            39000.0,
+            -0.9
+          ],
+          [
+            2600.0,
+            39000.0,
+            -0.9
+          ],
+          [
+            42.0,
+            6500.0,
+            -0.2
+          ]
+        ],
+        "alu_pe_exact_equal": true,
+        "negative_timing_columns": 9
+      },
+      {
+        "method": "PromptV",
+        "metrics": [
+          [
+            70.0,
+            7.2,
+            -0.08
+          ],
+          [
+            180.0,
+            16500.0,
+            -0.29
+          ],
+          [
+            20.0,
+            2900.0,
+            -0.13
+          ],
+          [
+            135.0,
+            80.0,
+            -0.37
+          ],
+          [
+            840.0,
+            86000.0,
+            -0.58
+          ],
+          [
+            390.0,
+            46000.0,
+            -0.12
+          ],
+          [
+            2480.0,
+            36500.0,
+            -0.97
+          ],
+          [
+            2480.0,
+            36500.0,
+            -0.97
+          ],
+          [
+            36.0,
+            6100.0,
+            -0.21
+          ]
+        ],
+        "alu_pe_exact_equal": true,
+        "negative_timing_columns": 9
+      },
+      {
+        "method": "AFlow",
+        "metrics": [
+          [
+            69.0,
+            7.0,
+            -0.08
+          ],
+          [
+            175.0,
+            16200.0,
+            -0.29
+          ],
+          [
+            19.0,
+            2800.0,
+            -0.14
+          ],
+          [
+            130.0,
+            76.0,
+            -0.38
+          ],
+          [
+            800.0,
+            83000.0,
+            -0.6
+          ],
+          [
+            385.0,
+            45000.0,
+            -0.13
+          ],
+          [
+            2460.0,
+            36200.0,
+            -1.0
+          ],
+          [
+            2460.0,
+            36200.0,
+            -1.0
+          ],
+          [
+            35.0,
+            6000.0,
+            -0.21
+          ]
+        ],
+        "alu_pe_exact_equal": true,
+        "negative_timing_columns": 9
+      },
+      {
+        "method": "VFlow",
+        "metrics": [
+          [
+            68.0,
+            6.6,
+            -0.09
+          ],
+          [
+            169.0,
+            16000.0,
+            -0.31
+          ],
+          [
+            19.0,
+            2600.0,
+            -0.14
+          ],
+          [
+            126.0,
+            69.0,
+            -1.2
+          ],
+          [
+            750.0,
+            75000.0,
+            -0.9
+          ],
+          [
+            380.0,
+            45000.0,
+            -0.13
+          ],
+          [
+            2430.0,
+            36000.0,
+            -1.02
+          ],
+          [
+            2430.0,
+            36000.0,
+            -1.02
+          ],
+          [
+            35.0,
+            6000.0,
+            -0.22
+          ]
+        ],
+        "alu_pe_exact_equal": true,
+        "negative_timing_columns": 9
+      }
+    ],
+    "roi_arithmetic": {
+      "deepseek": 10.863697705802968,
+      "mini": 3.203842940685046
+    },
+    "artifact": "No official matching code/tasksplit/scorer/trace package located; v2 differs strongly from v1",
+    "limits": [
+      "Current v2 adds CEPE multipopulation and9RTLLM2modules, so do not usev1 ascurrent.",
+      "v1 time6.7x andv2tokens.4x aredifferentquantities.",
+      "Negative Timing(ns) maybe slack as text describes; notnegativephysicaldelay or provenclosure.",
+      "ALU/PE five-method numeric columns identical, notproof actualtasksidentical.",
+      "No actual re-execution or property/PPAverification."
+    ]
+  }
+}

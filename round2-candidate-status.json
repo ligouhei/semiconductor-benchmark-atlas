@@ -1,6 +1,6 @@
 {
   "status": "第二轮12小时仍在进行；静态核查清单，不是训练授权或模型实验结果",
-  "as_of": "2026-10-20T14:45:27.042324+00:00",
+  "as_of": "2026-10-20T15:19:19.499991+00:00",
   "scope": "只发布派生研究摘要；原始轨迹/问题/答案/凭据不随网站重发。",
   "records": [
     {
@@ -145,6 +145,27 @@
       "missing": "不把仅名称当已存在、已发布数据；需要正确作者/论文/仓库证据，不与其他DRCbench混淆。",
       "sources": [
         "https://github.com/Rumali-Siddiqua/DRC-Ingest-Bench"
+      ],
+      "counted_as_new_benchmark": false
+    },
+    {
+      "name": "ChipAgents Renoir internal suite",
+      "status": "商业内部评测／不是公开benchmark包",
+      "verified": "作者2026-06-17与07-26官方blog确认内部RTLgeneration/buglocalization/spec-to-code评测；不同版本参考模型/费用口径变化，属于厂商自报。",
+      "missing": "没有公开taskcount/冻结inputs/independentoracle/splits/完整results或providertraces；不能把on-prem可部署模型、归一化营销图或laterBuild-A-Chip-Bench混当该内部套件公开。",
+      "sources": [
+        "https://chipagents.ai/blogs/introducing-renoir",
+        "https://chipagents.ai/blogs/nvidia-collaboration-scale-agentic-AI"
+      ],
+      "counted_as_new_benchmark": false
+    },
+    {
+      "name": "Waferira fab-agent operations layer",
+      "status": "厂商设计预览／未确认固定公开评测",
+      "verified": "官方网页写SDK/CLI为designpreview，含litho/APC/virtualmetrology/dispatch工具编排与标为scenario的演示；不是几何OPC数值benchmark。",
+      "missing": "未定位冻结任务包、真实fab/lot数据、独立scorer、测得runledger或公开训练轨迹；64candidate/1840WIP等UIscenario数不能当真实benchmark测量。",
+      "sources": [
+        "https://www.waferira.com/"
       ],
       "counted_as_new_benchmark": false
     }

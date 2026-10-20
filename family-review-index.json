@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T14:45:28.337569+00:00",
+  "generated_at": "2026-10-20T15:19:20.861631+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 395,
-    "records": 722,
-    "records_with_any_field_audit_entry": 481,
-    "records_with_current_field_audit_snapshot": 448,
+    "families": 396,
+    "records": 724,
+    "records_with_any_field_audit_entry": 483,
+    "records_with_current_field_audit_snapshot": 450,
     "records_without_current_field_audit_snapshot": 274
   },
   "requirements_per_record": [
@@ -15984,6 +15984,56 @@
           "limitations": "检测的是数据定义的可视marker标签，未必覆盖工艺全部DRC/MRC/LRC条款；高AP不等零漏检、模型可替代签核或其误差已无产业风险。跨task共享负例和相似layout需grouped身份检验，无数据不能证明有或无泄漏。未将新方法名字重复统计3个独立数据家族。",
           "tools_and_access": "完整原paper检测定义与TableI/IV已读，训练/测试split数字可核但rawimage/bbox/ruledeck与fixedmatchingcode/license未取得。原commercial规则checker标签有工具/规则依赖，开放推理速度不代表免商业授权签核。",
           "industrial_value": "把原生规则引擎已有能力转为快速筛查/定位任务，价值在加速和辅助诊断，仍须原rulechecker为最终gate；适合定义带隐藏违规/同等oracle权限的工程agent任务，但原文不是现成通用agentbench。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "VFlow workflow optimization method",
+      "record_count": 2,
+      "records_with_current_field_audit": 2,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "rtl-vflow-v1",
+          "name": "VFlow / historical single-search MCTS workflow",
+          "category": "数字前端/RTL生成与workflow搜索",
+          "artifact_type": "复用VerilogEval/RTLLM的方法协议；非新独立数据集",
+          "task_layer": "生成/优化agentworkflow，而非只优化单个RTL或原生工具",
+          "evidence_status": "第二轮12h进行中；一手两版本、数表与自写算术审计；没有运行模型/EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-vflow-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得冻结workflowsearch/trainvaltestIDs、模型API与全部LLM/工具费用、独立TB/物理lib/原PPA工件；核camera-ready与arxivv2变化。",
+          "limitations": "历史协议保留供版本追溯，后续v2新增多population，不以v1代表当前方法。20/80split若同源描述或调参过test需manifest核，未取得不能武断认定实际泄漏。 有限TB通过不等全规格/全PVT/物理签核；“industrialstandards”作者措辞不替独立验收。",
+          "tools_and_access": "作者v1/v2全文与ASP-DAC2026program已取；官方matchingrepo/taskmanifest/scorer/trace未定位，不猜同名视频/VFlow软件库冒充。Yosys/仿真是原生求解，不因多agent描述就算开放训练轨迹。",
+          "industrial_value": "研究判断：让agent搜索更有效workflow有价值，但应与固定强workflow/同预算自纠错及原生验证比较；复用旧小模块高Pass的边际价值可能较低，应补多文件/新规格泛化和完整成本账本。"
+        },
+        {
+          "id": "rtl-vflow-v2",
+          "name": "VFlow / CEPE-MCTS multi-population workflow search",
+          "category": "数字前端/RTL生成与workflow搜索",
+          "artifact_type": "复用VerilogEval/RTLLM的方法协议；非新独立数据集",
+          "task_layer": "生成/优化agentworkflow，而非只优化单个RTL或原生工具",
+          "evidence_status": "第二轮12h进行中；一手两版本、数表与自写算术审计；没有运行模型/EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-vflow-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得冻结workflowsearch/trainvaltestIDs、模型API与全部LLM/工具费用、独立TB/物理lib/原PPA工件；核camera-ready与arxivv2变化。",
+          "limitations": "v2CEPE方法/RTLLM9PPA与v1明显不同。PPA表五方法ALU/PE数值列完全相同，可能共享/排版需原工件解释，不据此认定实际任务重复；Timing全负，正文称slack，不能当negativephysicaldelay或已timingclosure。库/工艺/约束/全部候选成本未齐。 有限TB通过不等全规格/全PVT/物理签核；“industrialstandards”作者措辞不替独立验收。",
+          "tools_and_access": "作者v1/v2全文与ASP-DAC2026program已取；官方matchingrepo/taskmanifest/scorer/trace未定位，不猜同名视频/VFlow软件库冒充。Yosys/仿真是原生求解，不因多agent描述就算开放训练轨迹。",
+          "industrial_value": "研究判断：让agent搜索更有效workflow有价值，但应与固定强workflow/同预算自纠错及原生验证比较；复用旧小模块高Pass的边际价值可能较低，应补多文件/新规格泛化和完整成本账本。"
         }
       ]
     },
