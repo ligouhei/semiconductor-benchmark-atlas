@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T08:02:33.300494+00:00",
+  "as_of": "2026-10-20T08:09:25.810537+00:00",
   "status": "coverage inventory with explicit residual limits, not universal completeness/quality certification",
   "scope": "依据用户阶段划分逐项列已有覆盖与剩余限制；“所有可发现”按此次公开资料检索边界理解，不声称覆盖未公开工业bench或互联网全部材料。",
   "method": [
@@ -482,8 +482,8 @@
     },
     {
       "domain": "数字后端",
-      "record_count": 148,
-      "family_count": 94,
+      "record_count": 150,
+      "family_count": 95,
       "catalog_ids": [
         "physical-circuitnet",
         "physical-ispd18",
@@ -632,7 +632,9 @@
         "pd-timingagent-single",
         "pd-timingagent-multi",
         "pd-hightide-flow-suite",
-        "pd-hightide-agent-memory"
+        "pd-hightide-agent-memory",
+        "pd-grevolve-code-evolution",
+        "pd-grevolve-standalone-transfer"
       ],
       "covered_tasks": "划分/块规划/宏与cell布局、合法化、GR/DR、CTS/STA/sizing/MBFF/ECO、功耗/IR/EM、DRC/LVS工作流与agent",
       "remaining_limits": "历年已覆盖不等全部contest题目/最终checker均取得；部分旧链接失效、商业flow与PDK不可重建；proxy、原生修复、有限DRC与全签核严格分层。",

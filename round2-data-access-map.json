@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-10-20T08:02:33.260295+00:00",
+  "as_of": "2026-10-20T08:09:25.771019+00:00",
   "status": "第二轮12h进行中的数据/轨迹开放性核查，非完整市场清单或最终结论",
   "scope": "只覆盖本轮已保存一手核查的新增协议；训练样本、评测输入、模型权重、整理后记忆、生成采样轨迹与LLM工具交互轨迹分别描述",
-  "protocol_records": 63,
-  "families": 30,
+  "protocol_records": 65,
+  "families": 31,
   "items": [
     {
       "catalog_id": "lib-siemens-nemo-characterization",
@@ -759,6 +759,30 @@
       "trajectory_and_training_access": "24YAML/netlist/testbench和核心optimizer/LLM保存机制公开；paper一张bandgap三cycle策略例和action汇总不是全24×3原始交互数据。当前tree无results目录；containerZIP存在但未下载/运行，内容不作无证据判断。root无LICENSE，上游PDK/数据与训练权另核。",
       "limits": "主helper虽全spec模式仍漏4个negative阈值；missingtrial聚合分母和batch可能超预算影响比较。Evals-to-best不同于总calls；time_to_best字段代码填trial total_time_seconds。签核布局/PEX为可选局部能力，不推广24任务全后端完成。",
       "primary_sources": "https://arxiv.org/html/2602.02849v2; https://github.com/yuxi120407/AutoSizer/tree/1b9b8f6498e2c7ad3b650bbbc78c8e3b0e1205e1",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "pd-grevolve-code-evolution",
+      "name": "GR-Evolve / design-adaptive global-router source evolution",
+      "family": "GR-Evolve router code-evolution method",
+      "object_identity": "复用ORFS设计的source-evolution方法协议；非45独立bench",
+      "task": "每freshagent session读外部context，修改NEWGR算法/启发式/控制流与必要buildfiles，compile→route→record/commit；错误可同iter自修，跨designwarmstart。区别于只调router超参数或生成netlist。",
+      "available_materials_and_tools": "42selectedrootGitblob匹配；公开AGENTS/脚本、sourcefork分支和27sheet摘要。完整tree无README所指Dockerfile，gitlinkrouter固定点是upstreammerge并非45score对应evolved版本；逐选择SHA/placement/PDK/binary和原log仍缺。root无LICENSE，OpenROAD/ORFS/router/PDK分开审。",
+      "trajectory_and_training_access": "当前42个路由器source分支；已固定4branch HEAD，各取100commit元数据与HEAD源码diff，真实部分code-mutation/parent顺序可派生。3QoR工作簿27sheets/81selectedNEWGR交叉测试行，不能自动与每commit对齐；无全prompt/action/toolstdout/费用/失败的LLMreplay。root无LICENSE，upstreamrouter/PDK与派生训练授权另核。",
+      "limits": "prompt可改面有NEWGR-only与末尾整个OpenROAD目录两层描述，runner未显式固定权限sandbox；静态不证明已隔离作弊。最终DRC/LVS不代表所有迭代及timing/power/IR签核；paperTWL冲突、selectedQoR、失败分母和同预算nativeparamsearch待复核。",
+      "primary_sources": "https://arxiv.org/html/2604.22234v1; https://github.com/ASU-VDA-Lab/GR-Evolve/tree/5223e79c1a15891d3615db6e009fe1c606c6a2b2; https://github.com/taizun-jj202/OpenROAD_New_GRT",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "pd-grevolve-standalone-transfer",
+      "name": "GR-Evolve / evolved-router transfer to placed contest designs",
+      "family": "GR-Evolve router code-evolution method",
+      "object_identity": "同方法迁移协议；公开部分QoR表与代码，非新独立contest",
+      "task": "不在各新design上再次进化该router，运行预选CUGR_SWERV并比静态native三router。只评globalroute，不沿用主实验postDR结果。",
+      "available_materials_and_tools": "公开Table5与fixed作者repo补充数据；ISPD_BENCHMARK.xlsx实际FR/CUGR/SPR_SWERV-ASAP7三个块，和paperCUGR_SWERV-Nangate45不是同run，不能冒充其原始表。部分sourcebranches可取，终验日志/全输入hash未定位。",
+      "trajectory_and_training_access": "当前42个路由器source分支；已固定4branch HEAD，各取100commit元数据与HEAD源码diff，真实部分code-mutation/parent顺序可派生。3QoR工作簿27sheets/81selectedNEWGR交叉测试行，不能自动与每commit对齐；无全prompt/action/toolstdout/费用/失败的LLMreplay。root无LICENSE，upstreamrouter/PDK与派生训练授权另核。",
+      "limits": "主论文DRC/LVSclean声明针对ORFS最终选择，standaloneMO/TO0不是详细DRC/LVS/时序签核；不能把GR WL改进拿去当最终DR线长。边界固定，原生工具自身优化/预算与模型训练成本要并报。",
+      "primary_sources": "https://arxiv.org/html/2604.22234v1; https://github.com/ASU-VDA-Lab/GR-Evolve/tree/5223e79c1a15891d3615db6e009fe1c606c6a2b2; https://github.com/taizun-jj202/OpenROAD_New_GRT",
       "record_snapshot_matches_audit": true
     }
   ],

@@ -1,0 +1,961 @@
+{
+  "status": "round2 active; static sourcehistories/selectedQoR only",
+  "protocols": [
+    {
+      "id": "pd-grevolve-code-evolution",
+      "benchmark_family": "GR-Evolve router code-evolution method",
+      "name": "GR-Evolve / design-adaptive global-router source evolution",
+      "category": "后端/全局路由器算法代码进化agent",
+      "artifact_type": "复用ORFS设计的source-evolution方法协议；非45独立bench",
+      "task_layer": "固定placement+netlist/PDK→改routerC++→GR/DR反馈",
+      "version": "arXiv2604.22234v1；root5223e79；4evolved分支HEAD另固定",
+      "input": "7设计AES/IBEX/JPEG/SWERV/DYNAMIC_NODE/ARIANE136/BLACK_PARROT，15design-platform：Nangate45七/ASAP7五/SKY130HD三，每组FastRoute/CUGR/SPRoute=45实验。输入placedDEF/LEF/原netlist、router源码、summary和先前QoR/gitlogs，不改placement/netlist。",
+      "task": "每freshagent session读外部context，修改NEWGR算法/启发式/控制流与必要buildfiles，compile→route→record/commit；错误可同iter自修，跨designwarmstart。区别于只调router超参数或生成netlist。",
+      "output": "design专用router代码/commit和GR/DRQoR；bestmutation事后选择，保留tradeoff。",
+      "metrics": "soft priority：DRwirelengthμm→DRvia count→GRruntime秒；DRruntime另报。TWL作者定义WL+VC为自定proxy，不当物理总线长；SKY130表4处TWLΔ不能由同表WL/VCΔ复算（最大约5.96pp），保留冲突。最终选中router作者称DRCclean/LVS，未每轮都硬验。",
+      "baseline": "未修改三router同placement；75mutationiter小设计约24h，大设计warmstart25或更少约12–18h。EPYC7313双socket/512GB，Codex5.3medium；GRruntime不含进化12–24h，iter也非固定LLM/call次数，费用未完整给。部分WL/VC/runtime互相恶化，不将selectedWL增益称全PPA普升。",
+      "tools_and_access": "42selectedrootGitblob匹配；公开AGENTS/脚本、sourcefork分支和27sheet摘要。完整tree无README所指Dockerfile，gitlinkrouter固定点是upstreammerge并非45score对应evolved版本；逐选择SHA/placement/PDK/binary和原log仍缺。root无LICENSE，OpenROAD/ORFS/router/PDK分开审。",
+      "limitations": "prompt可改面有NEWGR-only与末尾整个OpenROAD目录两层描述，runner未显式固定权限sandbox；静态不证明已隔离作弊。最终DRC/LVS不代表所有迭代及timing/power/IR签核；paperTWL冲突、selectedQoR、失败分母和同预算nativeparamsearch待复核。",
+      "industrial_value": "研究判断：EDA内部算法仍可由agent定制，不把原生router拥有功能等同工程优化已解决；模型价值须计进化成本、保持验证独立并对强原生/调参基线比较。",
+      "primary_sources": "https://arxiv.org/html/2604.22234v1; https://github.com/ASU-VDA-Lab/GR-Evolve/tree/5223e79c1a15891d3615db6e009fe1c606c6a2b2; https://github.com/taizun-jj202/OpenROAD_New_GRT",
+      "evidence_status": "第二轮12h进行中；固定一手版本、42个Gitblob、XLSX与源码history静态核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+      "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "pd-grevolve-standalone-transfer",
+      "benchmark_family": "GR-Evolve router code-evolution method",
+      "name": "GR-Evolve / evolved-router transfer to placed contest designs",
+      "category": "后端/全局路由器跨设计迁移",
+      "artifact_type": "同方法迁移协议；公开部分QoR表与代码，非新独立contest",
+      "task_layer": "冻结evolvedrouter→standalone placedDEF→postGRmetrics",
+      "version": "arXiv2604.22234v1 Table5；root5223e79补充XLSX不同实验",
+      "input": "paper Table5九个ispd19_test1–4、6–10 placed designs，缺test5；作者称ICCAD19contest，确切原始contest输入/规则血缘仍需另核。迁移CUGR_SWERV-Nangate45到不同技术节点standalone，非ORFS15design-platform训练集。",
+      "task": "不在各新design上再次进化该router，运行预选CUGR_SWERV并比静态native三router。只评globalroute，不沿用主实验postDR结果。",
+      "output": "MO/TO overflow、postGR WL/via、runtime；固定源版本和失败设计需保留。",
+      "metrics": "Table5九例作者evolvedMO/TO均0；WLΔ=(baseline−ours)/baseline×100，runtime秒。SPRoute无standalonevia报告且test4未完成；不可补0或删失败后称全题成功。训练中每design12–24h不在此runtime内。",
+      "baseline": "静态CUGR/FastRoute/SPRoute，baseline未给各design同样进化预算；sourceSWERV学习与testsets去重/选择独立性未给。证明有限工程迁移，不推全新PDK工业泛化或同预算胜过所有调参。",
+      "tools_and_access": "公开Table5与fixed作者repo补充数据；ISPD_BENCHMARK.xlsx实际FR/CUGR/SPR_SWERV-ASAP7三个块，和paperCUGR_SWERV-Nangate45不是同run，不能冒充其原始表。部分sourcebranches可取，终验日志/全输入hash未定位。",
+      "limitations": "主论文DRC/LVSclean声明针对ORFS最终选择，standaloneMO/TO0不是详细DRC/LVS/时序签核；不能把GR WL改进拿去当最终DR线长。边界固定，原生工具自身优化/预算与模型训练成本要并报。",
+      "industrial_value": "研究判断：是评价专用路由算法是否可迁移的有用附加协议；和逐designagent进化分开，保持真实输入与nativebaseline。",
+      "primary_sources": "https://arxiv.org/html/2604.22234v1; https://github.com/ASU-VDA-Lab/GR-Evolve/tree/5223e79c1a15891d3615db6e009fe1c606c6a2b2; https://github.com/taizun-jj202/OpenROAD_New_GRT",
+      "evidence_status": "第二轮12h进行中；固定一手版本、42个Gitblob、XLSX与源码history静态核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+      "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+      "retrieved_date": "2026-10-20"
+    }
+  ],
+  "static_audit": {
+    "as_of": "2026-10-20T08:08:12.481771+00:00",
+    "scope": "static primary tables/XLSX cachedvalues/source/commit metadata; no thirdparty code, macro, router, build, agent or sim executed",
+    "commit": "5223e79c1a15891d3615db6e009fe1c606c6a2b2",
+    "paper_version": "2604.22234v1",
+    "paper_designs": 7,
+    "design_platforms": 15,
+    "router_design_platforms": 45,
+    "selected_paper_results": [
+      {
+        "pdk": "ASAP7",
+        "design": "AES",
+        "router": "FR_AES",
+        "baseline": "FastRoute",
+        "dr_wl_reduction_percent": 1.09,
+        "dr_vc_reduction_percent": -0.07,
+        "gr_runtime_seconds": 8.8,
+        "dr_runtime_seconds": 600.3,
+        "baseline_gr_rt_seconds": 3.0
+      },
+      {
+        "pdk": "ASAP7",
+        "design": "AES",
+        "router": "CUGR_AES",
+        "baseline": "CUGR",
+        "dr_wl_reduction_percent": 0.38,
+        "dr_vc_reduction_percent": -1.74,
+        "gr_runtime_seconds": 1.9,
+        "dr_runtime_seconds": 402.1,
+        "baseline_gr_rt_seconds": 1.4
+      },
+      {
+        "pdk": "ASAP7",
+        "design": "AES",
+        "router": "SPR_AES",
+        "baseline": "SPRoute",
+        "dr_wl_reduction_percent": 0.23,
+        "dr_vc_reduction_percent": -0.09,
+        "gr_runtime_seconds": 2.8,
+        "dr_runtime_seconds": 569.3,
+        "baseline_gr_rt_seconds": 1.0
+      },
+      {
+        "pdk": "ASAP7",
+        "design": "IBX",
+        "router": "FR_IBX",
+        "baseline": "FastRoute",
+        "dr_wl_reduction_percent": 0.72,
+        "dr_vc_reduction_percent": 3.45,
+        "gr_runtime_seconds": 8.5,
+        "dr_runtime_seconds": 825.8,
+        "baseline_gr_rt_seconds": 3.9
+      },
+      {
+        "pdk": "ASAP7",
+        "design": "IBX",
+        "router": "CUGR_IBX",
+        "baseline": "CUGR",
+        "dr_wl_reduction_percent": 0.0,
+        "dr_vc_reduction_percent": 0.0,
+        "gr_runtime_seconds": 2.3,
+        "dr_runtime_seconds": 1004.9,
+        "baseline_gr_rt_seconds": 2.3
+      },
+      {
+        "pdk": "ASAP7",
+        "design": "IBX",
+        "router": "SPR_IBX",
+        "baseline": "SPRoute",
+        "dr_wl_reduction_percent": 1.02,
+        "dr_vc_reduction_percent": 0.83,
+        "gr_runtime_seconds": 22.1,
+        "dr_runtime_seconds": 905.9,
+        "baseline_gr_rt_seconds": 1.7
+      },
+      {
+        "pdk": "ASAP7",
+        "design": "JPG",
+        "router": "FR_JPG",
+        "baseline": "FastRoute",
+        "dr_wl_reduction_percent": 0.81,
+        "dr_vc_reduction_percent": -0.7,
+        "gr_runtime_seconds": 2.7,
+        "dr_runtime_seconds": 413.3,
+        "baseline_gr_rt_seconds": 6.4
+      },
+      {
+        "pdk": "ASAP7",
+        "design": "JPG",
+        "router": "CUGR_JPG",
+        "baseline": "CUGR",
+        "dr_wl_reduction_percent": 0.0,
+        "dr_vc_reduction_percent": 0.0,
+        "gr_runtime_seconds": 5.0,
+        "dr_runtime_seconds": 1119.6,
+        "baseline_gr_rt_seconds": 4.4
+      },
+      {
+        "pdk": "ASAP7",
+        "design": "JPG",
+        "router": "SPR_JPG",
+        "baseline": "SPRoute",
+        "dr_wl_reduction_percent": 0.53,
+        "dr_vc_reduction_percent": -1.83,
+        "gr_runtime_seconds": 2.7,
+        "dr_runtime_seconds": 542.9,
+        "baseline_gr_rt_seconds": 2.9
+      },
+      {
+        "pdk": "ASAP7",
+        "design": "SWV",
+        "router": "FR_SWV",
+        "baseline": "FastRoute",
+        "dr_wl_reduction_percent": 0.04,
+        "dr_vc_reduction_percent": 0.08,
+        "gr_runtime_seconds": 157.7,
+        "dr_runtime_seconds": 1795.0,
+        "baseline_gr_rt_seconds": 27.3
+      },
+      {
+        "pdk": "ASAP7",
+        "design": "SWV",
+        "router": "CUGR_SWV",
+        "baseline": "CUGR",
+        "dr_wl_reduction_percent": 0.38,
+        "dr_vc_reduction_percent": -1.82,
+        "gr_runtime_seconds": 20.7,
+        "dr_runtime_seconds": 1387.8,
+        "baseline_gr_rt_seconds": 8.0
+      },
+      {
+        "pdk": "ASAP7",
+        "design": "SWV",
+        "router": "SPR_SWV",
+        "baseline": "SPRoute",
+        "dr_wl_reduction_percent": 0.14,
+        "dr_vc_reduction_percent": -0.57,
+        "gr_runtime_seconds": 7.0,
+        "dr_runtime_seconds": 1424.4,
+        "baseline_gr_rt_seconds": 7.1
+      },
+      {
+        "pdk": "ASAP7",
+        "design": "DYN",
+        "router": "FR_DYN",
+        "baseline": "FastRoute",
+        "dr_wl_reduction_percent": 0.11,
+        "dr_vc_reduction_percent": 0.1,
+        "gr_runtime_seconds": 9.2,
+        "dr_runtime_seconds": 260.6,
+        "baseline_gr_rt_seconds": 1.6
+      },
+      {
+        "pdk": "ASAP7",
+        "design": "DYN",
+        "router": "CUGR_DYN",
+        "baseline": "CUGR",
+        "dr_wl_reduction_percent": 0.12,
+        "dr_vc_reduction_percent": -0.72,
+        "gr_runtime_seconds": 4.3,
+        "dr_runtime_seconds": 223.8,
+        "baseline_gr_rt_seconds": 1.1
+      },
+      {
+        "pdk": "ASAP7",
+        "design": "DYN",
+        "router": "SPR_DYN",
+        "baseline": "SPRoute",
+        "dr_wl_reduction_percent": 0.15,
+        "dr_vc_reduction_percent": -2.86,
+        "gr_runtime_seconds": 1.0,
+        "dr_runtime_seconds": 216.8,
+        "baseline_gr_rt_seconds": 1.1
+      },
+      {
+        "pdk": "Nangate45",
+        "design": "AES",
+        "router": "FR_AES",
+        "baseline": "FastRoute",
+        "dr_wl_reduction_percent": 0.04,
+        "dr_vc_reduction_percent": -0.03,
+        "gr_runtime_seconds": 3.0,
+        "dr_runtime_seconds": 190.2,
+        "baseline_gr_rt_seconds": 3.0
+      },
+      {
+        "pdk": "Nangate45",
+        "design": "AES",
+        "router": "CUGR_AES",
+        "baseline": "CUGR",
+        "dr_wl_reduction_percent": 2.21,
+        "dr_vc_reduction_percent": 1.55,
+        "gr_runtime_seconds": 0.6,
+        "dr_runtime_seconds": 373.0,
+        "baseline_gr_rt_seconds": 1.4
+      },
+      {
+        "pdk": "Nangate45",
+        "design": "AES",
+        "router": "SPR_AES",
+        "baseline": "SPRoute",
+        "dr_wl_reduction_percent": 2.89,
+        "dr_vc_reduction_percent": -0.15,
+        "gr_runtime_seconds": 0.8,
+        "dr_runtime_seconds": 348.9,
+        "baseline_gr_rt_seconds": 1.0
+      },
+      {
+        "pdk": "Nangate45",
+        "design": "IBX",
+        "router": "FR_IBX",
+        "baseline": "FastRoute",
+        "dr_wl_reduction_percent": 2.4,
+        "dr_vc_reduction_percent": -8.73,
+        "gr_runtime_seconds": 80.3,
+        "dr_runtime_seconds": 147.6,
+        "baseline_gr_rt_seconds": 3.9
+      },
+      {
+        "pdk": "Nangate45",
+        "design": "IBX",
+        "router": "CUGR_IBX",
+        "baseline": "CUGR",
+        "dr_wl_reduction_percent": 3.41,
+        "dr_vc_reduction_percent": 1.26,
+        "gr_runtime_seconds": 1.9,
+        "dr_runtime_seconds": 146.5,
+        "baseline_gr_rt_seconds": 2.3
+      },
+      {
+        "pdk": "Nangate45",
+        "design": "IBX",
+        "router": "SPR_IBX",
+        "baseline": "SPRoute",
+        "dr_wl_reduction_percent": 1.1,
+        "dr_vc_reduction_percent": 0.8,
+        "gr_runtime_seconds": 0.9,
+        "dr_runtime_seconds": 172.3,
+        "baseline_gr_rt_seconds": 1.7
+      },
+      {
+        "pdk": "Nangate45",
+        "design": "JPG",
+        "router": "FR_JPG",
+        "baseline": "FastRoute",
+        "dr_wl_reduction_percent": -0.01,
+        "dr_vc_reduction_percent": -0.1,
+        "gr_runtime_seconds": 68.6,
+        "dr_runtime_seconds": 309.6,
+        "baseline_gr_rt_seconds": 6.4
+      },
+      {
+        "pdk": "Nangate45",
+        "design": "JPG",
+        "router": "CUGR_JPG",
+        "baseline": "CUGR",
+        "dr_wl_reduction_percent": 0.17,
+        "dr_vc_reduction_percent": 0.36,
+        "gr_runtime_seconds": 4.5,
+        "dr_runtime_seconds": 218.2,
+        "baseline_gr_rt_seconds": 4.4
+      },
+      {
+        "pdk": "Nangate45",
+        "design": "JPG",
+        "router": "SPR_JPG",
+        "baseline": "SPRoute",
+        "dr_wl_reduction_percent": 1.65,
+        "dr_vc_reduction_percent": 1.36,
+        "gr_runtime_seconds": 23.7,
+        "dr_runtime_seconds": 455.6,
+        "baseline_gr_rt_seconds": 2.9
+      },
+      {
+        "pdk": "Nangate45",
+        "design": "SWV",
+        "router": "FR_SWV",
+        "baseline": "FastRoute",
+        "dr_wl_reduction_percent": -1.34,
+        "dr_vc_reduction_percent": -6.18,
+        "gr_runtime_seconds": 40077.3,
+        "dr_runtime_seconds": 266.5,
+        "baseline_gr_rt_seconds": 27.3
+      },
+      {
+        "pdk": "Nangate45",
+        "design": "SWV",
+        "router": "CUGR_SWV",
+        "baseline": "CUGR",
+        "dr_wl_reduction_percent": 8.72,
+        "dr_vc_reduction_percent": -1.03,
+        "gr_runtime_seconds": 7.5,
+        "dr_runtime_seconds": 345.1,
+        "baseline_gr_rt_seconds": 8.0
+      },
+      {
+        "pdk": "Nangate45",
+        "design": "SWV",
+        "router": "SPR_SWV",
+        "baseline": "SPRoute",
+        "dr_wl_reduction_percent": -0.5,
+        "dr_vc_reduction_percent": 0.9,
+        "gr_runtime_seconds": 5.8,
+        "dr_runtime_seconds": 296.4,
+        "baseline_gr_rt_seconds": 7.1
+      },
+      {
+        "pdk": "Nangate45",
+        "design": "DYN",
+        "router": "FR_DYN",
+        "baseline": "FastRoute",
+        "dr_wl_reduction_percent": -0.62,
+        "dr_vc_reduction_percent": -4.58,
+        "gr_runtime_seconds": 3.0,
+        "dr_runtime_seconds": 503.5,
+        "baseline_gr_rt_seconds": 1.6
+      },
+      {
+        "pdk": "Nangate45",
+        "design": "DYN",
+        "router": "CUGR_DYN",
+        "baseline": "CUGR",
+        "dr_wl_reduction_percent": 2.13,
+        "dr_vc_reduction_percent": -0.79,
+        "gr_runtime_seconds": 2.2,
+        "dr_runtime_seconds": 107.5,
+        "baseline_gr_rt_seconds": 1.1
+      },
+      {
+        "pdk": "Nangate45",
+        "design": "DYN",
+        "router": "SPR_DYN",
+        "baseline": "SPRoute",
+        "dr_wl_reduction_percent": 0.12,
+        "dr_vc_reduction_percent": -0.24,
+        "gr_runtime_seconds": 0.8,
+        "dr_runtime_seconds": 76.1,
+        "baseline_gr_rt_seconds": 1.1
+      },
+      {
+        "pdk": "Nangate45",
+        "design": "AR136",
+        "router": "FR_AR136",
+        "baseline": "FastRoute",
+        "dr_wl_reduction_percent": 0.01,
+        "dr_vc_reduction_percent": -0.17,
+        "gr_runtime_seconds": 766.2,
+        "dr_runtime_seconds": 971.0,
+        "baseline_gr_rt_seconds": 182.4
+      },
+      {
+        "pdk": "Nangate45",
+        "design": "AR136",
+        "router": "CUGR_AR136",
+        "baseline": "CUGR",
+        "dr_wl_reduction_percent": 7.11,
+        "dr_vc_reduction_percent": 2.47,
+        "gr_runtime_seconds": 34.9,
+        "dr_runtime_seconds": 870.0,
+        "baseline_gr_rt_seconds": 68.1
+      },
+      {
+        "pdk": "Nangate45",
+        "design": "AR136",
+        "router": "SPR_AR136",
+        "baseline": "SPRoute",
+        "dr_wl_reduction_percent": 0.0,
+        "dr_vc_reduction_percent": 0.0,
+        "gr_runtime_seconds": 17.0,
+        "dr_runtime_seconds": 10195.0,
+        "baseline_gr_rt_seconds": 20.2
+      },
+      {
+        "pdk": "Nangate45",
+        "design": "BP",
+        "router": "FR_BP",
+        "baseline": "FastRoute",
+        "dr_wl_reduction_percent": 0.01,
+        "dr_vc_reduction_percent": -0.02,
+        "gr_runtime_seconds": 226.7,
+        "dr_runtime_seconds": 641.3,
+        "baseline_gr_rt_seconds": 154.3
+      },
+      {
+        "pdk": "Nangate45",
+        "design": "BP",
+        "router": "CUGR_BP",
+        "baseline": "CUGR",
+        "dr_wl_reduction_percent": 2.15,
+        "dr_vc_reduction_percent": 0.37,
+        "gr_runtime_seconds": 38.8,
+        "dr_runtime_seconds": 927.3,
+        "baseline_gr_rt_seconds": 43.4
+      },
+      {
+        "pdk": "Nangate45",
+        "design": "BP",
+        "router": "SPR_BP",
+        "baseline": "SPRoute",
+        "dr_wl_reduction_percent": 0.01,
+        "dr_vc_reduction_percent": 0.02,
+        "gr_runtime_seconds": 13.7,
+        "dr_runtime_seconds": 25095.0,
+        "baseline_gr_rt_seconds": 21.4
+      },
+      {
+        "pdk": "SKY130HD",
+        "design": "AES",
+        "router": "FR_AES",
+        "baseline": "FastRoute",
+        "dr_wl_reduction_percent": 0.82,
+        "dr_vc_reduction_percent": -3.11,
+        "gr_runtime_seconds": 8.8,
+        "dr_runtime_seconds": 500.7,
+        "baseline_gr_rt_seconds": 5.3
+      },
+      {
+        "pdk": "SKY130HD",
+        "design": "AES",
+        "router": "CUGR_AES",
+        "baseline": "CUGR",
+        "dr_wl_reduction_percent": 8.56,
+        "dr_vc_reduction_percent": -0.88,
+        "gr_runtime_seconds": 1.9,
+        "dr_runtime_seconds": 319.4,
+        "baseline_gr_rt_seconds": 2.1
+      },
+      {
+        "pdk": "SKY130HD",
+        "design": "AES",
+        "router": "SPR_AES",
+        "baseline": "SPRoute",
+        "dr_wl_reduction_percent": 1.82,
+        "dr_vc_reduction_percent": -1.9,
+        "gr_runtime_seconds": 0.8,
+        "dr_runtime_seconds": 392.7,
+        "baseline_gr_rt_seconds": 1.4
+      },
+      {
+        "pdk": "SKY130HD",
+        "design": "IBX",
+        "router": "FR_IBX",
+        "baseline": "FastRoute",
+        "dr_wl_reduction_percent": 1.83,
+        "dr_vc_reduction_percent": 2.82,
+        "gr_runtime_seconds": 3.5,
+        "dr_runtime_seconds": 669.5,
+        "baseline_gr_rt_seconds": 5.0
+      },
+      {
+        "pdk": "SKY130HD",
+        "design": "IBX",
+        "router": "CUGR_IBX",
+        "baseline": "CUGR",
+        "dr_wl_reduction_percent": 3.91,
+        "dr_vc_reduction_percent": 3.47,
+        "gr_runtime_seconds": 1.1,
+        "dr_runtime_seconds": 444.5,
+        "baseline_gr_rt_seconds": 1.4
+      },
+      {
+        "pdk": "SKY130HD",
+        "design": "IBX",
+        "router": "SPR_IBX",
+        "baseline": "SPRoute",
+        "dr_wl_reduction_percent": 2.39,
+        "dr_vc_reduction_percent": 3.96,
+        "gr_runtime_seconds": 1.4,
+        "dr_runtime_seconds": 622.5,
+        "baseline_gr_rt_seconds": 1.8
+      },
+      {
+        "pdk": "SKY130HD",
+        "design": "JPG",
+        "router": "FR_JPG",
+        "baseline": "FastRoute",
+        "dr_wl_reduction_percent": 2.51,
+        "dr_vc_reduction_percent": 0.62,
+        "gr_runtime_seconds": 3.5,
+        "dr_runtime_seconds": 1194.5,
+        "baseline_gr_rt_seconds": 11.5
+      },
+      {
+        "pdk": "SKY130HD",
+        "design": "JPG",
+        "router": "CUGR_JPG",
+        "baseline": "CUGR",
+        "dr_wl_reduction_percent": 0.8,
+        "dr_vc_reduction_percent": 0.63,
+        "gr_runtime_seconds": 4.8,
+        "dr_runtime_seconds": 5315.0,
+        "baseline_gr_rt_seconds": 4.8
+      },
+      {
+        "pdk": "SKY130HD",
+        "design": "JPG",
+        "router": "SPR_JPG",
+        "baseline": "SPRoute",
+        "dr_wl_reduction_percent": 0.38,
+        "dr_vc_reduction_percent": -0.17,
+        "gr_runtime_seconds": 2.5,
+        "dr_runtime_seconds": 1118.0,
+        "baseline_gr_rt_seconds": 4.3
+      }
+    ],
+    "metrics": "fixedplacement netlist+DEF/LEF/PDK/routerC++，agent改source不是netlist/placement；lexicographic soft priority DRwirelengthμm→DRvia count→GRruntime秒，DRruntime另报。TWL作者定义WL+VC，是自定义proxy，无via-to-length换算不能认作物理线长。",
+    "paper_twl_component_inconsistencies": [
+      {
+        "table": "S4.T4",
+        "design": "AES",
+        "router": "CUGR_AES",
+        "stage": "GR",
+        "printed_twl_reduction_percent": 15.79,
+        "recomputed_from_printed_components_percent": 11.8819,
+        "gap_pp": 3.9081
+      },
+      {
+        "table": "S4.T4",
+        "design": "AES",
+        "router": "SPR_AES",
+        "stage": "GR",
+        "printed_twl_reduction_percent": 2.64,
+        "recomputed_from_printed_components_percent": 3.112,
+        "gap_pp": -0.472
+      },
+      {
+        "table": "S4.T4",
+        "design": "JPG",
+        "router": "CUGR_JPG",
+        "stage": "GR",
+        "printed_twl_reduction_percent": 3.62,
+        "recomputed_from_printed_components_percent": 0.6227,
+        "gap_pp": 2.9973
+      },
+      {
+        "table": "S4.T4",
+        "design": "JPG",
+        "router": "SPR_JPG",
+        "stage": "GR",
+        "printed_twl_reduction_percent": 3.48,
+        "recomputed_from_printed_components_percent": -2.4802,
+        "gap_pp": 5.9602
+      }
+    ],
+    "hardgates": "作者称最终selected每个router DRCclean/LVS；未每轮LVS/DRC硬拒绝，失败候选/DR错误导致Paretopoints减少。不要把全45×75轮均认证正确。详细DR不含全timing/power/IR/电迁移签核。",
+    "native_baseline": "未修改FastRoute/CUGR/SPRoute同placement；45selected中存在WL不改善/VC恶化/GRruntime很大tradeoff。nativepostDR缩小/改变GRsurrogate增益。无同预算parameter-tuner/传统code-search基线，不能说唯一LLM贡献。",
+    "evolution_budget": "paper75mutationiter小设计约24h；大设计warmstart25或更少约12–18h；双socketEPYC7313/32cores64threads512GB，Codex5.3medium。1iter可含编译/运行自修多次toolcalls，非固定LLM次数/美元，GRRT不含12–24h训练搜索成本。",
+    "transfer": "Table5九个ispd19_test1–4/6–10，缺test5，paper称ICCAD19；standaloneplacedDEF/另一technology只看postGR/MO/TO不是ORFSpostDR。SPRoute test4未完成；base不按每设计同样进化，不等同预算generalization。输入原始血缘/官方contest协议需另核。",
+    "source_release": {
+      "tree_entries": 118,
+      "gitlinks": [
+        {
+          "path": "OpenROAD-flow-scripts",
+          "sha": "e652d36d7791a5fe9c7b17ec524c9d2a853b4f49"
+        },
+        {
+          "path": "OpenROAD_New_GRT",
+          "sha": "d69f08d01e675b65eb5f1300f5fb0969e11399a0"
+        }
+      ],
+      "root_files": [
+        ".DS_Store",
+        ".bashrc",
+        ".gitmodules",
+        ".vimrc",
+        "GR_SUMMARY.md",
+        "METRICS_TABLE.md",
+        "README.md"
+      ],
+      "router_branches": 42,
+      "selected_branch_histories": [
+        {
+          "branch": "NEWGR-CE-CUGR-SWERV",
+          "head": "42b0c0f6165126ea75f1a41e36e3b3e6b475b45e",
+          "downloaded_history_entries": 100,
+          "iteration_like_messages": 32,
+          "head_message": "Iteration 28",
+          "head_parent_shas": [
+            "c89d701b10319af7c8d2ee575a0c9c79f225cd0a"
+          ],
+          "head_changed_files": [
+            {
+              "path": "src/grt/src/NEWGR/include/CUGR.h",
+              "status": "modified",
+              "changes": 1,
+              "has_patch": true
+            },
+            {
+              "path": "src/grt/src/NEWGR/src/CUGR.cpp",
+              "status": "modified",
+              "changes": 365,
+              "has_patch": true
+            }
+          ],
+          "interpretation": "公开源码mutation及parent/commit顺序是真实部分工程演化数据；无逐commit prompt/action/toolstdout/费用，未把XLSX反馈自动对齐到同commit。"
+        },
+        {
+          "branch": "NEWGR-CE-CUGR-AES-Nan45",
+          "head": "9c71abc3e20bce5d727c00ca9e1087a146baeaa9",
+          "downloaded_history_entries": 100,
+          "iteration_like_messages": 14,
+          "head_message": "Iteration 10",
+          "head_parent_shas": [
+            "283236baae2712fcf3e531bd66273d7f35a99b9b"
+          ],
+          "head_changed_files": [
+            {
+              "path": "src/grt/src/NEWGR/include/CUGR.h",
+              "status": "modified",
+              "changes": 18,
+              "has_patch": true
+            },
+            {
+              "path": "src/grt/src/NEWGR/src/CUGR.cpp",
+              "status": "modified",
+              "changes": 22,
+              "has_patch": true
+            }
+          ],
+          "interpretation": "公开源码mutation及parent/commit顺序是真实部分工程演化数据；无逐commit prompt/action/toolstdout/费用，未把XLSX反馈自动对齐到同commit。"
+        },
+        {
+          "branch": "NEWGR-CodexEvolve-CUGR-AES",
+          "head": "d9784c2af41ec55c568bb74d5ef421ea249f4a5f",
+          "downloaded_history_entries": 100,
+          "iteration_like_messages": 17,
+          "head_message": "Iteration 14",
+          "head_parent_shas": [
+            "0b06ceb0cda5c4680f184238fd3ef7bbd42c3295"
+          ],
+          "head_changed_files": [
+            {
+              "path": "src/grt/src/NEWGR/include/newgr/CUGR.h",
+              "status": "modified",
+              "changes": 10,
+              "has_patch": true
+            },
+            {
+              "path": "src/grt/src/NEWGR/src/CUGR.cpp",
+              "status": "modified",
+              "changes": 5,
+              "has_patch": true
+            },
+            {
+              "path": "src/grt/src/NEWGR/src/PatternRoute.cpp",
+              "status": "modified",
+              "changes": 6,
+              "has_patch": true
+            }
+          ],
+          "interpretation": "公开源码mutation及parent/commit顺序是真实部分工程演化数据；无逐commit prompt/action/toolstdout/费用，未把XLSX反馈自动对齐到同commit。"
+        },
+        {
+          "branch": "NEWGR-CodexEvolve-CUGR-IBEX",
+          "head": "6c34996b608c3533a53fee5747f7c16ebbaa4b40",
+          "downloaded_history_entries": 100,
+          "iteration_like_messages": 73,
+          "head_message": "Iteration 70",
+          "head_parent_shas": [
+            "034c7eaec79730481f296105ab46ddd96529093b"
+          ],
+          "head_changed_files": [
+            {
+              "path": "src/grt/src/NEWGR/include/CUGR.h",
+              "status": "modified",
+              "changes": 6,
+              "has_patch": true
+            },
+            {
+              "path": "src/grt/src/NEWGR/src/PatternRoute.cpp",
+              "status": "modified",
+              "changes": 28,
+              "has_patch": true
+            }
+          ],
+          "interpretation": "公开源码mutation及parent/commit顺序是真实部分工程演化数据；无逐commit prompt/action/toolstdout/费用，未把XLSX反馈自动对齐到同commit。"
+        }
+      ],
+      "implementation_boundary": "README引用Dockerfile但当前完整tree无该文件；gitlinkrouter d69f...是upstream merge点，不是45evolved分支的对应score版本。script按branch名checkout，冻结各选择SHA/PDK/placement/binary仍需；root无LICENSE，forkOpenROAD/ORFS及各router/PDK原license单独核。"
+    },
+    "workbooks": [
+      {
+        "file": "ADDITIONAL_DATA/sheets/EvolveGR_Metrics_asap7.xlsx",
+        "sheet": "fr_aes",
+        "rows": 25,
+        "cols": 14,
+        "selected_newgr_rows": 3,
+        "interpretation": "含跨AES/IBEX/JPEG selectedrouter交叉测试，不把每行当一个evolution iteration/独立任务"
+      },
+      {
+        "file": "ADDITIONAL_DATA/sheets/EvolveGR_Metrics_asap7.xlsx",
+        "sheet": "fr_ibex",
+        "rows": 17,
+        "cols": 14,
+        "selected_newgr_rows": 3,
+        "interpretation": "含跨AES/IBEX/JPEG selectedrouter交叉测试，不把每行当一个evolution iteration/独立任务"
+      },
+      {
+        "file": "ADDITIONAL_DATA/sheets/EvolveGR_Metrics_asap7.xlsx",
+        "sheet": "fr_jpeg",
+        "rows": 17,
+        "cols": 14,
+        "selected_newgr_rows": 3,
+        "interpretation": "含跨AES/IBEX/JPEG selectedrouter交叉测试，不把每行当一个evolution iteration/独立任务"
+      },
+      {
+        "file": "ADDITIONAL_DATA/sheets/EvolveGR_Metrics_asap7.xlsx",
+        "sheet": "cugr_aes",
+        "rows": 17,
+        "cols": 14,
+        "selected_newgr_rows": 3,
+        "interpretation": "含跨AES/IBEX/JPEG selectedrouter交叉测试，不把每行当一个evolution iteration/独立任务"
+      },
+      {
+        "file": "ADDITIONAL_DATA/sheets/EvolveGR_Metrics_asap7.xlsx",
+        "sheet": "cugr_ibex",
+        "rows": 17,
+        "cols": 14,
+        "selected_newgr_rows": 3,
+        "interpretation": "含跨AES/IBEX/JPEG selectedrouter交叉测试，不把每行当一个evolution iteration/独立任务"
+      },
+      {
+        "file": "ADDITIONAL_DATA/sheets/EvolveGR_Metrics_asap7.xlsx",
+        "sheet": "cugr_jpeg",
+        "rows": 17,
+        "cols": 14,
+        "selected_newgr_rows": 3,
+        "interpretation": "含跨AES/IBEX/JPEG selectedrouter交叉测试，不把每行当一个evolution iteration/独立任务"
+      },
+      {
+        "file": "ADDITIONAL_DATA/sheets/EvolveGR_Metrics_asap7.xlsx",
+        "sheet": "spr_aes",
+        "rows": 17,
+        "cols": 14,
+        "selected_newgr_rows": 3,
+        "interpretation": "含跨AES/IBEX/JPEG selectedrouter交叉测试，不把每行当一个evolution iteration/独立任务"
+      },
+      {
+        "file": "ADDITIONAL_DATA/sheets/EvolveGR_Metrics_asap7.xlsx",
+        "sheet": "spr_ibex",
+        "rows": 17,
+        "cols": 14,
+        "selected_newgr_rows": 3,
+        "interpretation": "含跨AES/IBEX/JPEG selectedrouter交叉测试，不把每行当一个evolution iteration/独立任务"
+      },
+      {
+        "file": "ADDITIONAL_DATA/sheets/EvolveGR_Metrics_asap7.xlsx",
+        "sheet": "spr_jpeg",
+        "rows": 17,
+        "cols": 14,
+        "selected_newgr_rows": 3,
+        "interpretation": "含跨AES/IBEX/JPEG selectedrouter交叉测试，不把每行当一个evolution iteration/独立任务"
+      },
+      {
+        "file": "ADDITIONAL_DATA/sheets/EvolveGR_Metrics_nan45.xlsx",
+        "sheet": "fr_aes",
+        "rows": 39,
+        "cols": 14,
+        "selected_newgr_rows": 3,
+        "interpretation": "含跨AES/IBEX/JPEG selectedrouter交叉测试，不把每行当一个evolution iteration/独立任务"
+      },
+      {
+        "file": "ADDITIONAL_DATA/sheets/EvolveGR_Metrics_nan45.xlsx",
+        "sheet": "fr_ibex",
+        "rows": 17,
+        "cols": 14,
+        "selected_newgr_rows": 3,
+        "interpretation": "含跨AES/IBEX/JPEG selectedrouter交叉测试，不把每行当一个evolution iteration/独立任务"
+      },
+      {
+        "file": "ADDITIONAL_DATA/sheets/EvolveGR_Metrics_nan45.xlsx",
+        "sheet": "fr_jpeg",
+        "rows": 17,
+        "cols": 14,
+        "selected_newgr_rows": 3,
+        "interpretation": "含跨AES/IBEX/JPEG selectedrouter交叉测试，不把每行当一个evolution iteration/独立任务"
+      },
+      {
+        "file": "ADDITIONAL_DATA/sheets/EvolveGR_Metrics_nan45.xlsx",
+        "sheet": "cugr_aes",
+        "rows": 17,
+        "cols": 14,
+        "selected_newgr_rows": 3,
+        "interpretation": "含跨AES/IBEX/JPEG selectedrouter交叉测试，不把每行当一个evolution iteration/独立任务"
+      },
+      {
+        "file": "ADDITIONAL_DATA/sheets/EvolveGR_Metrics_nan45.xlsx",
+        "sheet": "cugr_ibex",
+        "rows": 17,
+        "cols": 14,
+        "selected_newgr_rows": 3,
+        "interpretation": "含跨AES/IBEX/JPEG selectedrouter交叉测试，不把每行当一个evolution iteration/独立任务"
+      },
+      {
+        "file": "ADDITIONAL_DATA/sheets/EvolveGR_Metrics_nan45.xlsx",
+        "sheet": "cugr_jpeg",
+        "rows": 17,
+        "cols": 14,
+        "selected_newgr_rows": 3,
+        "interpretation": "含跨AES/IBEX/JPEG selectedrouter交叉测试，不把每行当一个evolution iteration/独立任务"
+      },
+      {
+        "file": "ADDITIONAL_DATA/sheets/EvolveGR_Metrics_nan45.xlsx",
+        "sheet": "spr_aes",
+        "rows": 17,
+        "cols": 14,
+        "selected_newgr_rows": 3,
+        "interpretation": "含跨AES/IBEX/JPEG selectedrouter交叉测试，不把每行当一个evolution iteration/独立任务"
+      },
+      {
+        "file": "ADDITIONAL_DATA/sheets/EvolveGR_Metrics_nan45.xlsx",
+        "sheet": "spr_ibex",
+        "rows": 17,
+        "cols": 14,
+        "selected_newgr_rows": 3,
+        "interpretation": "含跨AES/IBEX/JPEG selectedrouter交叉测试，不把每行当一个evolution iteration/独立任务"
+      },
+      {
+        "file": "ADDITIONAL_DATA/sheets/EvolveGR_Metrics_nan45.xlsx",
+        "sheet": "spr_jpeg",
+        "rows": 17,
+        "cols": 14,
+        "selected_newgr_rows": 3,
+        "interpretation": "含跨AES/IBEX/JPEG selectedrouter交叉测试，不把每行当一个evolution iteration/独立任务"
+      },
+      {
+        "file": "ADDITIONAL_DATA/sheets/EvolveGR_Metrics_sky130.xlsx",
+        "sheet": "FR_AES",
+        "rows": 54,
+        "cols": 17,
+        "selected_newgr_rows": 3,
+        "interpretation": "含跨AES/IBEX/JPEG selectedrouter交叉测试，不把每行当一个evolution iteration/独立任务"
+      },
+      {
+        "file": "ADDITIONAL_DATA/sheets/EvolveGR_Metrics_sky130.xlsx",
+        "sheet": "FR_IBEX",
+        "rows": 60,
+        "cols": 16,
+        "selected_newgr_rows": 3,
+        "interpretation": "含跨AES/IBEX/JPEG selectedrouter交叉测试，不把每行当一个evolution iteration/独立任务"
+      },
+      {
+        "file": "ADDITIONAL_DATA/sheets/EvolveGR_Metrics_sky130.xlsx",
+        "sheet": "FR_JPEG",
+        "rows": 57,
+        "cols": 16,
+        "selected_newgr_rows": 3,
+        "interpretation": "含跨AES/IBEX/JPEG selectedrouter交叉测试，不把每行当一个evolution iteration/独立任务"
+      },
+      {
+        "file": "ADDITIONAL_DATA/sheets/EvolveGR_Metrics_sky130.xlsx",
+        "sheet": "CUGR_AES",
+        "rows": 86,
+        "cols": 17,
+        "selected_newgr_rows": 3,
+        "interpretation": "含跨AES/IBEX/JPEG selectedrouter交叉测试，不把每行当一个evolution iteration/独立任务"
+      },
+      {
+        "file": "ADDITIONAL_DATA/sheets/EvolveGR_Metrics_sky130.xlsx",
+        "sheet": "CUGR_IBEX",
+        "rows": 57,
+        "cols": 15,
+        "selected_newgr_rows": 3,
+        "interpretation": "含跨AES/IBEX/JPEG selectedrouter交叉测试，不把每行当一个evolution iteration/独立任务"
+      },
+      {
+        "file": "ADDITIONAL_DATA/sheets/EvolveGR_Metrics_sky130.xlsx",
+        "sheet": "CUGR_JPEG",
+        "rows": 58,
+        "cols": 16,
+        "selected_newgr_rows": 3,
+        "interpretation": "含跨AES/IBEX/JPEG selectedrouter交叉测试，不把每行当一个evolution iteration/独立任务"
+      },
+      {
+        "file": "ADDITIONAL_DATA/sheets/EvolveGR_Metrics_sky130.xlsx",
+        "sheet": "SPR_AES",
+        "rows": 32,
+        "cols": 15,
+        "selected_newgr_rows": 3,
+        "interpretation": "含跨AES/IBEX/JPEG selectedrouter交叉测试，不把每行当一个evolution iteration/独立任务"
+      },
+      {
+        "file": "ADDITIONAL_DATA/sheets/EvolveGR_Metrics_sky130.xlsx",
+        "sheet": "SPR_IBEX",
+        "rows": 32,
+        "cols": 16,
+        "selected_newgr_rows": 3,
+        "interpretation": "含跨AES/IBEX/JPEG selectedrouter交叉测试，不把每行当一个evolution iteration/独立任务"
+      },
+      {
+        "file": "ADDITIONAL_DATA/sheets/EvolveGR_Metrics_sky130.xlsx",
+        "sheet": "SPR_JPEG",
+        "rows": 57,
+        "cols": 16,
+        "selected_newgr_rows": 3,
+        "interpretation": "含跨AES/IBEX/JPEG selectedrouter交叉测试，不把每行当一个evolution iteration/独立任务"
+      }
+    ],
+    "total_sheets": 27,
+    "selected_newgr_rows": 81,
+    "transfer_workbook": {
+      "file": "ADDITIONAL_DATA/ISPD_BENCHMARK.xlsx",
+      "rows": 38,
+      "block_labels": [
+        "FR_SWERV_ASAP7",
+        "CUGR_SWERV_ASAP7",
+        "SPR_SWERV_ASAP7"
+      ],
+      "interpretation": "XLSX三个SWERV-ASAP7 router块，而paperTable5为CUGR_SWERV-Nangate45；不能移花接木当同实验原始表。"
+    },
+    "trace": "42source branches和四个固定history各100commitmetadata/HEADdiff已取得；XLSX为部分selectedQoR交叉测试；没有完整400agentdialog、message、cost、拒绝/失败logs。可派生code-edit history，不等全多步agent replay。",
+    "scope_enforcement": "AGENTS研究输入是prompt限制写NEWGR/部分buildfiles，末尾允许整个OpenROAD_New_GRT；runner只codexexec(--skip-git-repo-check)，未显式冻结OS权限/工具返回检查。仅静态按作者意图记可改面，不称已证实防作弊沙箱。",
+    "best_first_n": "ADDITIONAL_DATA/Best_Evolution的OverallBest First25=8.99%、First50=6.84%、First75=3.62%下降；如果同cohort累积最优应不降，因此不能直接当同一全历史学习曲线，需各checkpoint参与样本manifest。"
+  }
+}

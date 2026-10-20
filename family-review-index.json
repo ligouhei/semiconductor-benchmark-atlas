@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T08:02:33.358074+00:00",
+  "generated_at": "2026-10-20T08:09:25.866055+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 352,
-    "records": 629,
-    "records_with_any_field_audit_entry": 387,
-    "records_with_current_field_audit_snapshot": 354,
+    "families": 353,
+    "records": 631,
+    "records_with_any_field_audit_entry": 389,
+    "records_with_current_field_audit_snapshot": 356,
     "records_without_current_field_audit_snapshot": 275
   },
   "requirements_per_record": [
@@ -4963,6 +4963,56 @@
           "limitations": "四算术电路不是工业全功能signoff覆盖。stage条件借用goldtool slew是受控局部比较，不等完整无gold辅助工具结果；不能与GBA条件直接混比。README认为局部更准则全图更准属作者推断，未由独立全图gold证实",
           "tools_and_access": "BSD3代码；四设计netlist/SPEF和pt/spice结果有公开路径，ASAP7 CCS库需另取且遵守原许可；原综合/P&R和重新生成PrimeTime/HSPICE参考需商业工具许可。本轮读论文/README/源码，未运行GPU或SPICE",
           "industrial_value": "适合当前源模型delay求解/数值加速的补充基准；商业CCS已有成熟功能是强baseline，不表示GPU加速无价值。LLM研究更适合工具维护/配置闭环，需另立agent协议"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "GR-Evolve router code-evolution method",
+      "record_count": 2,
+      "records_with_current_field_audit": 2,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "pd-grevolve-code-evolution",
+          "name": "GR-Evolve / design-adaptive global-router source evolution",
+          "category": "后端/全局路由器算法代码进化agent",
+          "artifact_type": "复用ORFS设计的source-evolution方法协议；非45独立bench",
+          "task_layer": "固定placement+netlist/PDK→改routerC++→GR/DR反馈",
+          "evidence_status": "第二轮12h进行中；固定一手版本、42个Gitblob、XLSX与源码history静态核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-grevolve-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+          "limitations": "prompt可改面有NEWGR-only与末尾整个OpenROAD目录两层描述，runner未显式固定权限sandbox；静态不证明已隔离作弊。最终DRC/LVS不代表所有迭代及timing/power/IR签核；paperTWL冲突、selectedQoR、失败分母和同预算nativeparamsearch待复核。",
+          "tools_and_access": "42selectedrootGitblob匹配；公开AGENTS/脚本、sourcefork分支和27sheet摘要。完整tree无README所指Dockerfile，gitlinkrouter固定点是upstreammerge并非45score对应evolved版本；逐选择SHA/placement/PDK/binary和原log仍缺。root无LICENSE，OpenROAD/ORFS/router/PDK分开审。",
+          "industrial_value": "研究判断：EDA内部算法仍可由agent定制，不把原生router拥有功能等同工程优化已解决；模型价值须计进化成本、保持验证独立并对强原生/调参基线比较。"
+        },
+        {
+          "id": "pd-grevolve-standalone-transfer",
+          "name": "GR-Evolve / evolved-router transfer to placed contest designs",
+          "category": "后端/全局路由器跨设计迁移",
+          "artifact_type": "同方法迁移协议；公开部分QoR表与代码，非新独立contest",
+          "task_layer": "冻结evolvedrouter→standalone placedDEF→postGRmetrics",
+          "evidence_status": "第二轮12h进行中；固定一手版本、42个Gitblob、XLSX与源码history静态核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-grevolve-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+          "limitations": "主论文DRC/LVSclean声明针对ORFS最终选择，standaloneMO/TO0不是详细DRC/LVS/时序签核；不能把GR WL改进拿去当最终DR线长。边界固定，原生工具自身优化/预算与模型训练成本要并报。",
+          "tools_and_access": "公开Table5与fixed作者repo补充数据；ISPD_BENCHMARK.xlsx实际FR/CUGR/SPR_SWERV-ASAP7三个块，和paperCUGR_SWERV-Nangate45不是同run，不能冒充其原始表。部分sourcebranches可取，终验日志/全输入hash未定位。",
+          "industrial_value": "研究判断：是评价专用路由算法是否可迁移的有用附加协议；和逐designagent进化分开，保持真实输入与nativebaseline。"
         }
       ]
     },
