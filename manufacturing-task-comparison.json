@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T07:11:34.665928+00:00",
+  "as_of": "2026-10-20T07:19:11.065344+00:00",
   "status": "cross-task protocol map; not model ranking or full raw-data audit",
   "scope": "制造数据按观测层级、标签与工业结论分开；不能将所有分类/分割/预测的accuracy拼成一个“良率优化”benchmark。",
   "items": [

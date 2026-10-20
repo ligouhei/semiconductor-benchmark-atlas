@@ -1,0 +1,298 @@
+{
+  "status": "round2 active; fixed-source proof-strength and released-table arithmetic only",
+  "protocols": [
+    {
+      "id": "verify-rtl-gauntlet",
+      "name": "RTL Gauntlet / VerilogEval oracle and cost audit",
+      "benchmark_family": "VerilogEval",
+      "category": "数字验证/agent评测oracle与成本审计",
+      "artifact_type": "复用VerilogEval的派生验收协议/研究框架；非新独立RTL数据集，完整候选/轨迹缺口",
+      "task_layer": "可见测试反馈修复→固定候选→外部oracle审计；PPA部分含mock原型",
+      "version": "repof899353f7d5a4b594a859b7ac3a1906a87e61fd9；README/careset当前结果与REPRODUCE前阶段说明分开",
+      "input": "原VerilogEval156任务的spec/interface与可见TB，最多2轮生成/修复；golden保留给formal。pilot runner另含hidden随机TB，但正式156题run_veval仅visible+formal，不能称该结果同时经三层验收。另有人工/变异demo与PPA原型数据。",
+      "task": "修复RTL直到visible通过或2轮结束；冻结candidate后按不同Yosys路径判定proven/bmc_equiv/careset_equiv/dontcare/inconclusive/cex，按阶段重评分以检查oracle误报。",
+      "output": "候选RTL、visible/各formal状态、任务级token/iteration汇总；公开结果表不能替代完整messages/action/tool-feedback训练轨迹。",
+      "metrics": "HPR=accepted/156，当前report把honest+boundedBMC+maskedcareset均接受：Opus/GPT145、Gemini140、DeepSeek120、Haiku114。对应unbounded proven路径可见通过数129/126/123/113/109，其余16/19/17/7/5走有限/带mask路径。RHG_cex/visiblepass均0仍有2/5/2/0/1个visiblepass未进HPR；不能推全部候选无界等价或不存在rewardhacking。BMC20/40cycles，careset24cycles+settle2，mixededge28halfcycles+settle3；init/reset/合法输入限制另列。",
+      "baseline": "同一生成candidate在多oracle阶段重评分，避免把oracle修改当模型进步；gold/植入错误/变异为控制。五模型单次156题不是多seed复现。C2cap1按总token均分到iteration作反事实估计，省11.59/17.22/24.15/23.39%并损8/10/13/5个accepted(不含DeepSeek)；非实测重跑费用。",
+      "tools_and_access": "当前tree214entries/190files，74selectedGitblobs匹配；五组156行类别与summary逐项相符。Yosys0.66/Icarus13和若干OpenLane/Sky130输出为作者环境。完整156候选runs与逐步模型轨迹不在固定tree，rescore token0不等生成零成本；DeepSeek无逐题cost，Haiku11无candidate在HPR分母保留、成本子集仅145。未见本repo LICENSE；上游VerilogEval/工具另有许可。",
+      "limitations": "两个gold统一填0/填1的caremask相同位不足普遍保证对所有独立undef组合不敏感；仅为静态数学局限，不称此次实际结果存在利用。dontcare启发式和有限depth/settle/clock约束需分开；Wilson区间不覆盖系统性oracle错误。PPA训练315行全mock，另2行rawOpenLane、8行/4设计策略表；timing_ns实际负worstslack非直接pathdelay，okTrue非完整DRC/时序签核，慢PPA反馈完整agentloop仍future。",
+      "industrial_value": "研究判断：有助审计测试/形式验收对agent结论的影响；现阶段宜作可复核框架和表值研究，不作成熟工业验证榜或完整训练语料。原生Yosys/仿真完成求解，agent任务是生成/修复与工程决策。",
+      "primary_sources": "https://github.com/loversky02/rtl-gauntlet/tree/f899353f7d5a4b594a859b7ac3a1906a87e61fd9; https://github.com/loversky02/rtl-gauntlet/blob/f899353f7d5a4b594a859b7ac3a1906a87e61fd9/rtl_gauntlet/equiv.py; https://github.com/loversky02/rtl-gauntlet/blob/f899353f7d5a4b594a859b7ac3a1906a87e61fd9/scripts/report_cis.py; https://yosyshq.readthedocs.io/projects/yosys/en/v0.51/cmd/sat.html; https://yosyshq.readthedocs.io/projects/yosys/en/0.45/cmd/setundef.html",
+      "evidence_status": "第二轮12h进行中；固定Git身份、selectedAST与5×156类别、PPA数据来源及费用算式静态核查；未执行任何第三方代码、模型、EDA、形式工具或仿真。",
+      "next_verification": "独立固定候选/gold/合法输入协议并复核无界/有限证明；补全部query/tool traces、逐轮成本、真实PPA与许可；当前明确限制不冒作已完成复现。",
+      "retrieved_date": "2026-10-20"
+    }
+  ],
+  "static_audit": {
+    "as_of": "2026-10-20T07:17:18.116138+00:00",
+    "scope": "static sources,AST,and frozenJSON arithmetic only; no Yosys/Icarus/OpenLane/model/harness execution",
+    "repo": "https://github.com/loversky02/rtl-gauntlet",
+    "pinned_commit": "f899353f7d5a4b594a859b7ac3a1906a87e61fd9",
+    "tree_entries": 214,
+    "files": 190,
+    "git_blob_checks": 74,
+    "git_blob_matches": 74,
+    "model_results": [
+      {
+        "model": "opus",
+        "total_rows": 156,
+        "categories": {
+          "honest": 129,
+          "careset_equiv": 5,
+          "bmc_equiv": 11,
+          "fail_visible": 9,
+          "dontcare": 2
+        },
+        "formal_statuses": {
+          "proven": 131,
+          "careset_equiv": 5,
+          "bmc_equiv": 13,
+          "cex": 4,
+          "dontcare": 3
+        },
+        "hpr_accepted": 145,
+        "hpr": 0.9294871794871795,
+        "hpr_wilson95": [
+          0.8781559366038769,
+          0.9601740100433038
+        ],
+        "unbounded_path_visible_passers": 129,
+        "bounded_or_masked_path_visible_passers": 16,
+        "visible_passers": 147,
+        "visible_but_not_in_hpr": 2,
+        "flagged_cex": 0,
+        "zero_cex_wilson95": [
+          0,
+          0.025467775467775466
+        ],
+        "positive_token_rows": 156,
+        "recorded_tokens": 482072,
+        "estimated_cap1_saved_tokens": 55857.5,
+        "estimated_cap1_saved_percent": 11.586962113543205,
+        "estimated_cap1_hpr_acceptances_lost": 8
+      },
+      {
+        "model": "gpt",
+        "total_rows": 156,
+        "categories": {
+          "honest": 126,
+          "inconclusive": 2,
+          "fail_visible": 6,
+          "careset_equiv": 7,
+          "bmc_equiv": 12,
+          "dontcare": 3
+        },
+        "formal_statuses": {
+          "proven": 127,
+          "inconclusive": 3,
+          "cex": 2,
+          "careset_equiv": 7,
+          "bmc_equiv": 14,
+          "dontcare": 3
+        },
+        "hpr_accepted": 145,
+        "hpr": 0.9294871794871795,
+        "hpr_wilson95": [
+          0.8781559366038769,
+          0.9601740100433038
+        ],
+        "unbounded_path_visible_passers": 126,
+        "bounded_or_masked_path_visible_passers": 19,
+        "visible_passers": 150,
+        "visible_but_not_in_hpr": 5,
+        "flagged_cex": 0,
+        "zero_cex_wilson95": [
+          0,
+          0.02497113914571871
+        ],
+        "positive_token_rows": 156,
+        "recorded_tokens": 119556,
+        "estimated_cap1_saved_tokens": 20592.5,
+        "estimated_cap1_saved_percent": 17.224146006892166,
+        "estimated_cap1_hpr_acceptances_lost": 10
+      },
+      {
+        "model": "gemini",
+        "total_rows": 156,
+        "categories": {
+          "honest": 123,
+          "fail_visible": 14,
+          "careset_equiv": 6,
+          "bmc_equiv": 11,
+          "dontcare": 1,
+          "inconclusive": 1
+        },
+        "formal_statuses": {
+          "proven": 124,
+          "cex": 7,
+          "inconclusive": 3,
+          "careset_equiv": 6,
+          "bmc_equiv": 13,
+          "dontcare": 3
+        },
+        "hpr_accepted": 140,
+        "hpr": 0.8974358974358975,
+        "hpr_wilson95": [
+          0.8398900249906909,
+          0.935877985339536
+        ],
+        "unbounded_path_visible_passers": 123,
+        "bounded_or_masked_path_visible_passers": 17,
+        "visible_passers": 142,
+        "visible_but_not_in_hpr": 2,
+        "flagged_cex": 0,
+        "zero_cex_wilson95": [
+          0,
+          0.02634090684688045
+        ],
+        "positive_token_rows": 156,
+        "recorded_tokens": 170056,
+        "estimated_cap1_saved_tokens": 41073.0,
+        "estimated_cap1_saved_percent": 24.152632074140282,
+        "estimated_cap1_hpr_acceptances_lost": 13
+      },
+      {
+        "model": "deepseek",
+        "total_rows": 156,
+        "categories": {
+          "honest": 113,
+          "fail_visible": 36,
+          "bmc_equiv": 5,
+          "careset_equiv": 2
+        },
+        "formal_statuses": {
+          "proven": 117,
+          "inconclusive": 7,
+          "cex": 16,
+          "dontcare": 7,
+          "bmc_equiv": 7,
+          "careset_equiv": 2
+        },
+        "hpr_accepted": 120,
+        "hpr": 0.7692307692307693,
+        "hpr_wilson95": [
+          0.6971230773935652,
+          0.8283971876688466
+        ],
+        "unbounded_path_visible_passers": 113,
+        "bounded_or_masked_path_visible_passers": 7,
+        "visible_passers": 120,
+        "visible_but_not_in_hpr": 0,
+        "flagged_cex": 0,
+        "zero_cex_wilson95": [
+          0,
+          0.031020271055929513
+        ],
+        "positive_token_rows": 0,
+        "recorded_tokens": 0,
+        "estimated_cap1_saved_tokens": 0,
+        "estimated_cap1_saved_percent": null,
+        "estimated_cap1_hpr_acceptances_lost": 0
+      },
+      {
+        "model": "haiku",
+        "total_rows": 156,
+        "categories": {
+          "honest": 109,
+          "fail_visible": 30,
+          "bmc_equiv": 4,
+          "careset_equiv": 1,
+          "dontcare": 1,
+          "no_candidate": 11
+        },
+        "formal_statuses": {
+          "proven": 112,
+          "inconclusive": 8,
+          "cex": 16,
+          "dontcare": 2,
+          "bmc_equiv": 6,
+          "careset_equiv": 1,
+          "not_recorded": 11
+        },
+        "hpr_accepted": 114,
+        "hpr": 0.7307692307692307,
+        "hpr_wilson95": [
+          0.6562352674611922,
+          0.794210674020875
+        ],
+        "unbounded_path_visible_passers": 109,
+        "bounded_or_masked_path_visible_passers": 5,
+        "visible_passers": 115,
+        "visible_but_not_in_hpr": 1,
+        "flagged_cex": 0,
+        "zero_cex_wilson95": [
+          0,
+          0.03232538101136302
+        ],
+        "positive_token_rows": 145,
+        "recorded_tokens": 521654,
+        "estimated_cap1_saved_tokens": 122001.0,
+        "estimated_cap1_saved_percent": 23.387341034478794,
+        "estimated_cap1_hpr_acceptances_lost": 5
+      }
+    ],
+    "ppa_data": [
+      {
+        "path": "results/ppa_dataset.jsonl",
+        "rows": 315,
+        "sources": {
+          "mock": 315
+        },
+        "unique_task_strings": 315,
+        "negative_timing_ns_rows": 0
+      },
+      {
+        "path": "results/ppa_graded.jsonl",
+        "rows": 8,
+        "sources": {
+          "openlane": 8
+        },
+        "unique_task_strings": 4,
+        "negative_timing_ns_rows": 6
+      },
+      {
+        "path": "results/ppa_real_railway.jsonl",
+        "rows": 2,
+        "sources": {
+          "openlane": 2
+        },
+        "unique_task_strings": 2,
+        "negative_timing_ns_rows": 2
+      }
+    ],
+    "proof_boundaries": {
+      "induction": "equiv_simple+equiv_induct+equiv_status成功的proven路径与bounded fallback分开；不把全部路径贬为有限测试。",
+      "bounded": "BMC default20cycles，reset fallback40cycles，careset seq24cycles+settle2，mixededge28halfcycles+settle3；返回accepted不证明更长trace。",
+      "care_mask": "gold0/allundef0与gold1/allundef1相同位被视为care；两个极端填值不足普遍证明对所有独立undef组合不敏感。该数学局限非已运行Yosys反例，也不宣称实际冻结结果含利用。",
+      "illustrative_xor_truth_table": [
+        {
+          "u": 0,
+          "v": 0,
+          "xor": 0
+        },
+        {
+          "u": 0,
+          "v": 1,
+          "xor": 1
+        },
+        {
+          "u": 1,
+          "v": 0,
+          "xor": 1
+        },
+        {
+          "u": 1,
+          "v": 1,
+          "xor": 0
+        }
+      ],
+      "assumptions": "reset/init、只比较settle之后、prob149 legalinput/sequence、mixededge regularclock/posedge registeredinputs；这些是受限协议，不自动推完整工业规范。"
+    },
+    "oracle_protocols": "pilot runner包含visible+hiddenTB+formal；156题run_veval sweep只调用visible+formal，并没有另一个hiddenrandomTB层。不能把pilot三层对照挪到正式156结果。",
+    "released_data": "52results文件/若干demo任务和scorer公开；主要完整156候选runs与message/action/feedback轨迹不在固定tree。rescore字段iters/tokens为0，不等生成零成本。",
+    "license": "完整190filetree未见LICENSE；上游VerilogEval与Yosys等依赖许可另属各自，不推本repo商业再利用授权。",
+    "cost_limits": "DeepSeek无逐题token记录；Haiku11无candidate不进positive-token成本子集。cap估计均分总token到iterations，非逐turn实测；leave-one-model-out复用同156题，不是未见IP隔离。",
+    "ppa_limits": "315训练表全部mock；2行rawOpenLane与8行/4设计策略表另列。parser timing_ns实际=-timing__setup__ws，非直接关键路径delay；负值应按slackproxy解释；okTrue未强制timing/DRC/功能签核。slowreward完整agentloop作者列future。",
+    "remaining": "RHG_cex为0只是这些受限checker下未有该category；仍有dontcare/inconclusive，不能称所有visiblepass已无界证明或所有rewardhacking不存在。文档REPRODUCE仍写前caresetstage，与README/当前report脚本须分版本。"
+  }
+}

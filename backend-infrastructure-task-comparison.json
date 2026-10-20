@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T07:11:34.470766+00:00",
+  "as_of": "2026-10-20T07:19:10.864630+00:00",
   "status": "backend infrastructure, surrogate, native tuning and 3D task comparison; not a new benchmark or ranking",
   "scope": "预测/基础设施/nativeflow/参数搜索与工程agent处在不同层。原生数据吞吐、预测误差、指标回归、参数目标和受保护功能/物理验收不能互代；公开源码/平台配置也不等原商业工艺、完整数据或签核结果可得。",
   "items": [

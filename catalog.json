@@ -12829,5 +12829,26 @@
     "evidence_status": "第二轮12h进行中；一手全文与选定源码/计数/表值静态核查，未执行LLM、RL、仿真或第三方实验代码。",
     "next_verification": "固定完整数据/评分器/模型与预算、分割和复现资产；存在内部口径差异时保留各版本，不以缺原始数据支持工业通过结论。",
     "retrieved_date": "2026-10-20"
+  },
+  {
+    "id": "verify-rtl-gauntlet",
+    "name": "RTL Gauntlet / VerilogEval oracle and cost audit",
+    "benchmark_family": "VerilogEval",
+    "category": "数字验证/agent评测oracle与成本审计",
+    "artifact_type": "复用VerilogEval的派生验收协议/研究框架；非新独立RTL数据集，完整候选/轨迹缺口",
+    "task_layer": "可见测试反馈修复→固定候选→外部oracle审计；PPA部分含mock原型",
+    "version": "repof899353f7d5a4b594a859b7ac3a1906a87e61fd9；README/careset当前结果与REPRODUCE前阶段说明分开",
+    "input": "原VerilogEval156任务的spec/interface与可见TB，最多2轮生成/修复；golden保留给formal。pilot runner另含hidden随机TB，但正式156题run_veval仅visible+formal，不能称该结果同时经三层验收。另有人工/变异demo与PPA原型数据。",
+    "task": "修复RTL直到visible通过或2轮结束；冻结candidate后按不同Yosys路径判定proven/bmc_equiv/careset_equiv/dontcare/inconclusive/cex，按阶段重评分以检查oracle误报。",
+    "output": "候选RTL、visible/各formal状态、任务级token/iteration汇总；公开结果表不能替代完整messages/action/tool-feedback训练轨迹。",
+    "metrics": "HPR=accepted/156，当前report把honest+boundedBMC+maskedcareset均接受：Opus/GPT145、Gemini140、DeepSeek120、Haiku114。对应unbounded proven路径可见通过数129/126/123/113/109，其余16/19/17/7/5走有限/带mask路径。RHG_cex/visiblepass均0仍有2/5/2/0/1个visiblepass未进HPR；不能推全部候选无界等价或不存在rewardhacking。BMC20/40cycles，careset24cycles+settle2，mixededge28halfcycles+settle3；init/reset/合法输入限制另列。",
+    "baseline": "同一生成candidate在多oracle阶段重评分，避免把oracle修改当模型进步；gold/植入错误/变异为控制。五模型单次156题不是多seed复现。C2cap1按总token均分到iteration作反事实估计，省11.59/17.22/24.15/23.39%并损8/10/13/5个accepted(不含DeepSeek)；非实测重跑费用。",
+    "tools_and_access": "当前tree214entries/190files，74selectedGitblobs匹配；五组156行类别与summary逐项相符。Yosys0.66/Icarus13和若干OpenLane/Sky130输出为作者环境。完整156候选runs与逐步模型轨迹不在固定tree，rescore token0不等生成零成本；DeepSeek无逐题cost，Haiku11无candidate在HPR分母保留、成本子集仅145。未见本repo LICENSE；上游VerilogEval/工具另有许可。",
+    "limitations": "两个gold统一填0/填1的caremask相同位不足普遍保证对所有独立undef组合不敏感；仅为静态数学局限，不称此次实际结果存在利用。dontcare启发式和有限depth/settle/clock约束需分开；Wilson区间不覆盖系统性oracle错误。PPA训练315行全mock，另2行rawOpenLane、8行/4设计策略表；timing_ns实际负worstslack非直接pathdelay，okTrue非完整DRC/时序签核，慢PPA反馈完整agentloop仍future。",
+    "industrial_value": "研究判断：有助审计测试/形式验收对agent结论的影响；现阶段宜作可复核框架和表值研究，不作成熟工业验证榜或完整训练语料。原生Yosys/仿真完成求解，agent任务是生成/修复与工程决策。",
+    "primary_sources": "https://github.com/loversky02/rtl-gauntlet/tree/f899353f7d5a4b594a859b7ac3a1906a87e61fd9; https://github.com/loversky02/rtl-gauntlet/blob/f899353f7d5a4b594a859b7ac3a1906a87e61fd9/rtl_gauntlet/equiv.py; https://github.com/loversky02/rtl-gauntlet/blob/f899353f7d5a4b594a859b7ac3a1906a87e61fd9/scripts/report_cis.py; https://yosyshq.readthedocs.io/projects/yosys/en/v0.51/cmd/sat.html; https://yosyshq.readthedocs.io/projects/yosys/en/0.45/cmd/setundef.html",
+    "evidence_status": "第二轮12h进行中；固定Git身份、selectedAST与5×156类别、PPA数据来源及费用算式静态核查；未执行任何第三方代码、模型、EDA、形式工具或仿真。",
+    "next_verification": "独立固定候选/gold/合法输入协议并复核无界/有限证明；补全部query/tool traces、逐轮成本、真实PPA与许可；当前明确限制不冒作已完成复现。",
+    "retrieved_date": "2026-10-20"
   }
 ]

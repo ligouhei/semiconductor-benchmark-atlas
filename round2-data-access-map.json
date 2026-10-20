@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-10-20T07:11:34.793807+00:00",
+  "as_of": "2026-10-20T07:19:11.190226+00:00",
   "status": "第二轮12h进行中的数据/轨迹开放性核查，非完整市场清单或最终结论",
   "scope": "只覆盖本轮已保存一手核查的新增协议；训练样本、评测输入、模型权重、整理后记忆、生成采样轨迹与LLM工具交互轨迹分别描述",
-  "protocol_records": 45,
-  "families": 20,
+  "protocol_records": 46,
+  "families": 21,
   "items": [
     {
       "catalog_id": "lib-siemens-nemo-characterization",
@@ -543,6 +543,18 @@
       "trajectory_and_training_access": "代码提供SQLite transcript/checkpoint和图像路径保存；当前固定tree没有完整公开微评测/实际case原始交互语料，视频和token汇总不等可训练多步trace。",
       "limits": "5模型×10trial的简单采集已在作者设置饱和，但不证明复杂实验/新硬件/焦点闭环饱和。表中case聚焦15kinput/7koutput与约$.1属作者特定案例估计，不含完整人时/硬件/失败成本。理论工具可操作、logger可记录与完整任务/轨迹可训练三者分开；不作为fab计量/良率工业签核。",
       "primary_sources": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13633048/; https://github.com/AdvancedPhotonSource/EAA/tree/738960330cb66b3cf195d7e261def2e89ef5f9a8",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "verify-rtl-gauntlet",
+      "name": "RTL Gauntlet / VerilogEval oracle and cost audit",
+      "family": "VerilogEval",
+      "object_identity": "复用VerilogEval的派生验收协议/研究框架；非新独立RTL数据集，完整候选/轨迹缺口",
+      "task": "修复RTL直到visible通过或2轮结束；冻结candidate后按不同Yosys路径判定proven/bmc_equiv/careset_equiv/dontcare/inconclusive/cex，按阶段重评分以检查oracle误报。",
+      "available_materials_and_tools": "当前tree214entries/190files，74selectedGitblobs匹配；五组156行类别与summary逐项相符。Yosys0.66/Icarus13和若干OpenLane/Sky130输出为作者环境。完整156候选runs与逐步模型轨迹不在固定tree，rescore token0不等生成零成本；DeepSeek无逐题cost，Haiku11无candidate在HPR分母保留、成本子集仅145。未见本repo LICENSE；上游VerilogEval/工具另有许可。",
+      "trajectory_and_training_access": "公开frozen任务汇总、74选定源码/数表与少量demo；不是完整156×5候选/原始LLM多步messages，re-score token0不代表生成0成本。315mockPPA与真实OpenLane2/8行分开。",
+      "limits": "两个gold统一填0/填1的caremask相同位不足普遍保证对所有独立undef组合不敏感；仅为静态数学局限，不称此次实际结果存在利用。dontcare启发式和有限depth/settle/clock约束需分开；Wilson区间不覆盖系统性oracle错误。PPA训练315行全mock，另2行rawOpenLane、8行/4设计策略表；timing_ns实际负worstslack非直接pathdelay，okTrue非完整DRC/时序签核，慢PPA反馈完整agentloop仍future。",
+      "primary_sources": "https://github.com/loversky02/rtl-gauntlet/tree/f899353f7d5a4b594a859b7ac3a1906a87e61fd9; https://github.com/loversky02/rtl-gauntlet/blob/f899353f7d5a4b594a859b7ac3a1906a87e61fd9/rtl_gauntlet/equiv.py; https://github.com/loversky02/rtl-gauntlet/blob/f899353f7d5a4b594a859b7ac3a1906a87e61fd9/scripts/report_cis.py; https://yosyshq.readthedocs.io/projects/yosys/en/v0.51/cmd/sat.html; https://yosyshq.readthedocs.io/projects/yosys/en/0.45/cmd/setundef.html",
       "record_snapshot_matches_audit": true
     }
   ],
