@@ -1,0 +1,409 @@
+{
+  "status": "round2 active; evaluation agents and single-frame GUI tasks, not native optimization",
+  "protocols": [
+    {
+      "id": "data-maeda-openroad-evaluator",
+      "benchmark_family": "MAEDA EDA QA evaluation",
+      "name": "MAEDA / OpenROAD QA multi-label error identification",
+      "category": "数字后端/工具知识与回答评审",
+      "artifact_type": "公开300评审样本；multi-agent是judge，不是P&Ragent",
+      "task_layer": "EDA文档QA的检索/生成错误评审",
+      "version": "DATE2026；Git1c2f07f8",
+      "input": "Q/modelanswer/retrieveddocs/expertgoldanswer/goldpoints/refIDs；300uniquequeryIDs但仅67uniquequestions、274uniquequestion-answerpairs，真实RAG案例与GPT4o改写负例混合。32文档sections/290chunks，81被引用docIDs全部可解析。",
+      "task": "判检索错误、错误拒答/错误不拒答、contradiction/missing、命令参数/examplehallucination。Ret/RF/SC/HL四类评审agents，pointalignment+ruleextract+LLMsemantic；judge需要gold是此元评审任务规定，不是给设计solver偷看gold。",
+      "output": "多标签错误集合与解释；不是更好的GDS/layout，也不把“没有检索支撑”直接等同工具命令物理无效。CLI本轮未运行。",
+      "metrics": "按errortype报recall/precision/F1，不是问答任务成功率。当前labeloccurrences检索75/contradiction51/missing97/incorrectrefusal45/nonrefusal34/command32/example61/Correct42，multi-label不能相加当题数。paperfinetunedRetR/P.973/.936、Contr.941/.800、Missing.928/.726，prediction未公开不独立复算这些R/P。",
+      "baseline": "RAGChecker/RAGEval/G-Eval的score经阈值转错误标签，非原默认binaryoracle；RAGCheckretrieval.7，RAGEvalrecall.7/completeness.8/irrelevance.1等应冻结。fine-tunedQwen3-14B只替Ret/SC，其他类型仍原Qwen，不说所有judge都微调。",
+      "tools_and_access": "fixedtree4文件含paper/300JSON/290chunks/README全部Gitblob核；没有rootLICENSE、训练数据、权重、runner或全部predictions。paper3197positive/Ret2094/SC2670finetune为另一个合成构建过程，不等300评测样本开放了4764训练条。",
+      "limitations": "67源问题有多种回答/检索与错误标签，随机行split会跨源题；未取得实际训练语料不能武断称已训练泄漏。全300JSON不同并非300独立问题，26QA重复pair还有context差异，不能无条件丢掉。文档版本更新会让命令有效性变化。",
+      "industrial_value": "研究判断：agent可靠性/grounding的重要配套评审数据，可用于研究judge与错误分析；与成熟OpenROAD优化器竞争是错位比较，必须把原生schema/文档查验纳入baseline。",
+      "primary_sources": "https://github.com/Rayzzz14/MAEDA-DATE26/tree/1c2f07f8ae9c07aa6fcd45280d7b46cd6a2cb5d6",
+      "evidence_status": "第二轮12h进行中；一手全文、4Gitblobs与JSON/引用/数表静态核；没有运行第三方模型/工具/评分器。",
+      "next_verification": "取得冻结评分器/真实predictionledger、训练/评测按源问题分组、许可和完整agent预算；GUI真实点击/物性需独立验收，本轮不执行。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "data-maeda-commercial-transfer",
+      "benchmark_family": "MAEDA EDA QA evaluation",
+      "name": "MAEDA / commercial timing-ECO documentation QA transfer",
+      "category": "数字后端/工具知识与回答评审",
+      "artifact_type": "论文205QA迁移协议；当前未公开题库",
+      "task_layer": "EDA文档QA的检索/生成错误评审",
+      "version": "DATE2026 TableII",
+      "input": "商业timingECOplatform文档QA，205cases，结构同OpenROAD：问题/模型answer/retrieveddocs/goldpoints。工具品牌/许可和完整任务包未披露可核，不自行指认PrimeTime/Tempus。",
+      "task": "评估errorjudge从OpenROAD向商业tool迁移；另以商业文档训练的Ret/SCmodel与OpenROAD微调model对比，未对真实ECO设计实施修复。",
+      "output": "五大错误类型recall/precision与解释，既非时序slack改善也非商业工具运行成功。",
+      "metrics": "TableII commercialtrainedRetR/P.896/.952、Contr.800/.727、Missing.879/.725；OpenROADtrainedtransfer分别.866/.921、.700/.700、.909/.600。Missing recall可更高但precision更低，不能说全指标普遍提升。refusal/hallucination仍共用Qwenmodel。",
+      "baseline": "GPT4o/MAEDAbase/同域训练/跨域训练与genericjudge阈值对照；指标比较限定205QA，不能与OpenROAD300直接汇总或推百万门ECO工程收益。",
+      "tools_and_access": "paperTableII全文可读，作者固定4文件tree只有OpenROAD300JSON与32docsections，无205商业cases/文档/权重/prediction。不能把公开paper称商业数据可下载。",
+      "limitations": "训练/检索文档与商业软件许可另核；有gold的offlinejudge比无gold真实服务条件强，需分别评。当前没有完整confusion/labels重算成绩，不声称已复现。",
+      "industrial_value": "研究判断：商业EDA知识域迁移的相关证据，agent数据可得性低；不等商业时序优化已由LLM完成，实际ECO仍原生工具求解。",
+      "primary_sources": "https://github.com/Rayzzz14/MAEDA-DATE26/tree/1c2f07f8ae9c07aa6fcd45280d7b46cd6a2cb5d6",
+      "evidence_status": "第二轮12h进行中；一手全文、4Gitblobs与JSON/引用/数表静态核；没有运行第三方模型/工具/评分器。",
+      "next_verification": "取得冻结评分器/真实predictionledger、训练/评测按源问题分组、许可和完整agent预算；GUI真实点击/物性需独立验收，本轮不执行。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "gui-eda-answer",
+      "benchmark_family": "GUI-EDA multiphysics GUI",
+      "name": "GUI-EDA / key-step screenshot comprehension",
+      "category": "边界类/板级工程与电磁/多物理GUI",
+      "artifact_type": "同2082截图样本的语义回答协议；非完整EDAworkflow",
+      "task_layer": "截图理解/动作定位/模型选择",
+      "version": "2512.11611v1（2025-12-12）；API模型截至2025-07",
+      "input": "paper2082keyStep[Image/Question/Answer/bbox]、五域acoustic/optical/mechanical/electrothermal/electromagnetic，COMSOL/Flotherm/ICEPAK/CST/HFSS共8software-field组；同图large/middle/smallcropping不当新设计。五软件无Calibre/Innovus/Virtuoso，这是一条相邻多物理GUI线。",
+      "task": "根据当前截图和即时操作目标输出5–10word操作说明；考核理解为什么/怎样操作，不执行完整设计。",
+      "output": "简短自然语言说明与GPT4ojudgments。",
+      "metrics": "GPT4o按precision/recall分别给0/.5/1，五独立judge重复均值；不是实际electricaltest。坐标专用agent有些不报Answer。Answer最高.766不能说76.6%全部芯片设计成功。",
+      "baseline": "paper多处模型数30+/27/26不一，冻结per-table名单；五PhD/fiveundergrad用于难度标签与humanbaseline，未等于资深工业工程师全任务。无需GUI时原生脚本/API/batchflow应是工程强基线；点击任务不能证明优于这些替代。",
+      "tools_and_access": "全文v1可读，唯一submissionv1；作者仓库rootREADME/API tree当前404，未取得2082images/annotations、runner、judgeprompts或rawtraces。商业CADlicense/Windows10/4K环境另依赖；论文CCBYNCSA4不自动覆盖题库/商业软件。",
+      "limitations": "III-D称10selectedphysicalcases，VI-E称7iterations；且仅keyStep由agent操作，前后goldensteps由工程师完成。选例物理验证不能推广所有2082或任意点击均预言硅成功；具体rawmeasurement/匹配ledger未公开可核。",
+      "industrial_value": "研究判断：与agentic工程操作直接相关，适合衡量视觉界面理解/定位；属于邻接多物理CAD层，不冒充芯片P&R或OPCbenchmark。native成熟不消除界面操作问题，但原生API可能更有效。",
+      "primary_sources": "https://arxiv.org/html/2512.11611v1; https://github.com/aiben-ch/GUI-EDA",
+      "evidence_status": "第二轮12h进行中；一手全文、4Gitblobs与JSON/引用/数表静态核；没有运行第三方模型/工具/评分器。",
+      "next_verification": "取得冻结评分器/真实predictionledger、训练/评测按源问题分组、许可和完整agent预算；GUI真实点击/物性需独立验收，本轮不执行。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "gui-eda-action",
+      "benchmark_family": "GUI-EDA multiphysics GUI",
+      "name": "GUI-EDA / key-step action grounding and EDAgent selection",
+      "category": "边界类/板级工程与电磁/多物理GUI",
+      "artifact_type": "同2082截图样本的点击定位agent协议；非完整EDAworkflow",
+      "task_layer": "截图理解/动作定位/模型选择",
+      "version": "2512.11611v1（2025-12-12）；API模型截至2025-07",
+      "input": "paper2082keyStep[Image/Question/Answer/bbox]、五域acoustic/optical/mechanical/electrothermal/electromagnetic，COMSOL/Flotherm/ICEPAK/CST/HFSS共8software-field组；同图large/middle/smallcropping不当新设计。五软件无Calibre/Innovus/Virtuoso，这是一条相邻多物理GUI线。",
+      "task": "根据当前截图和即时操作目标输出绝对(x,y)；EDAgent以Qwen2.5VL理解、Aguvis定位，比较原问题/生成说明两候选并由MLLM视觉validator选点。不是多轮真实仿真反馈优化整个设计。",
+      "output": "clickcoordinates与point-inside-bboxbinarymark。",
+      "metrics": "Action=点在GT框内记1否则0，非完成task/物理达标率；paperEDAgent.598 vsHumanexpert.459差13.9pp/relative30.3%，标题“16%”不直接沿用同一口径。16显示cellmean可复得EDAgent.5975→.598，缺rawpercase不能复现所有weighteddenominator。",
+      "baseline": "paper多处模型数30+/27/26不一，冻结per-table名单；五PhD/fiveundergrad用于难度标签与humanbaseline，未等于资深工业工程师全任务。无需GUI时原生脚本/API/batchflow应是工程强基线；点击任务不能证明优于这些替代。",
+      "tools_and_access": "全文v1可读，唯一submissionv1；作者仓库rootREADME/API tree当前404，未取得2082images/annotations、runner、judgeprompts或rawtraces。商业CADlicense/Windows10/4K环境另依赖；论文CCBYNCSA4不自动覆盖题库/商业软件。",
+      "limitations": "III-D称10selectedphysicalcases，VI-E称7iterations；且仅keyStep由agent操作，前后goldensteps由工程师完成。选例物理验证不能推广所有2082或任意点击均预言硅成功；具体rawmeasurement/匹配ledger未公开可核。",
+      "industrial_value": "研究判断：与agentic工程操作直接相关，适合衡量视觉界面理解/定位；属于邻接多物理CAD层，不冒充芯片P&R或OPCbenchmark。native成熟不消除界面操作问题，但原生API可能更有效。",
+      "primary_sources": "https://arxiv.org/html/2512.11611v1; https://github.com/aiben-ch/GUI-EDA",
+      "evidence_status": "第二轮12h进行中；一手全文、4Gitblobs与JSON/引用/数表静态核；没有运行第三方模型/工具/评分器。",
+      "next_verification": "取得冻结评分器/真实predictionledger、训练/评测按源问题分组、许可和完整agent预算；GUI真实点击/物性需独立验收，本轮不执行。",
+      "retrieved_date": "2026-10-20"
+    }
+  ],
+  "static_audit": {
+    "as_of": "2026-10-20T13:59:11.823353+00:00",
+    "mode": "static only; no model/CAD/evaluator execution",
+    "maeda": {
+      "pinned_commit": "1c2f07f8ae9c07aa6fcd45280d7b46cd6a2cb5d6",
+      "records": 300,
+      "unique_record_ids": 300,
+      "unique_questions": 67,
+      "unique_question_answer_pairs": 274,
+      "unique_full_json_records": 300,
+      "question_group_size_counts": {
+        "1": 14,
+        "6": 14,
+        "5": 17,
+        "7": 9,
+        "2": 2,
+        "4": 7,
+        "8": 2,
+        "3": 2
+      },
+      "label_occurrences": {
+        "Retrieval Error": 75,
+        "Contradiction": 51,
+        "Missing": 97,
+        "Incorrect Refusal": 45,
+        "Example Hallucination": 61,
+        "Incorrect Non-Refusal": 34,
+        "Command/Parameter Hallucination": 32,
+        "Correct": 42
+      },
+      "label_count_distribution": {
+        "3": 13,
+        "1": 210,
+        "2": 60,
+        "4": 17
+      },
+      "correct_cooccurs_with_error": 0,
+      "documentation_sections": 32,
+      "documentation_chunks": 290,
+      "unique_doc_ids": 290,
+      "referenced_doc_ids": 81,
+      "unresolved_doc_ids": 0,
+      "source_checks": [
+        {
+          "path": "MAEDA-Published-Version.pdf",
+          "bytes": 576887,
+          "gitblob": "6e622aa93bed28f0e9073c89cb758c22b42d7d33",
+          "sha256": "1fc8800d6ee6b41f6c08ae482217c7bc7133ead27d71840e0458b890233374be",
+          "matches": true
+        },
+        {
+          "path": "MAEDA-benchmark-300.json",
+          "bytes": 1363297,
+          "gitblob": "a6994c4f867b4f206d44c4e80e1174f2f5fbd484",
+          "sha256": "f89bb1d17370dc0b54f3381d85bd5f8ddc7234f81bebb5251c68232cf230fd4e",
+          "matches": true
+        },
+        {
+          "path": "README.md",
+          "bytes": 2052,
+          "gitblob": "03a731a24e97b1a225b80a851e14390202096688",
+          "sha256": "536cf2d18fe33092b715dd5a843a157a00449aa1881e5fae27fbe80cb877567b",
+          "matches": true
+        },
+        {
+          "path": "openroad_documentation.json",
+          "bytes": 356490,
+          "gitblob": "3fac1e519cb4c9e91b4cf036c20c8abd8f0d0266",
+          "sha256": "61381de36c723188047dd6482498889030bb6ddd92a587e35db1637fa0d654d3",
+          "matches": true
+        }
+      ],
+      "release": "4 files, no rootlicense/scorer/traininginstances/modelweights in fixed tree",
+      "paper_training_counts": {
+        "gpt4o_positive": 3197,
+        "ret_training": 2094,
+        "semantic_training": 2670
+      },
+      "commercial_eval_qa": 205
+    },
+    "gui_eda": {
+      "version": "2512.11611v1",
+      "paper_samples": 2082,
+      "cad_tools": [
+        "COMSOL",
+        "Flotherm",
+        "ICEPAK",
+        "CST",
+        "HFSS"
+      ],
+      "fields": [
+        "Acoustic",
+        "Optical",
+        "Mechanical",
+        "Electro-Thermal",
+        "Electro-Magnetical"
+      ],
+      "software_field_groups": 8,
+      "resolution_conditions": 3,
+      "answer_score": "GPT4o precision/recall-oriented judgments in {0,.5,1}, five runs averaged",
+      "action_score": "binary if absolute point inside target bounding box; not completed physical design",
+      "table7_checks": [
+        {
+          "model": "EDAgent",
+          "mean_from_16_rounded_cells": 0.5975,
+          "published_mean": 0.598,
+          "round3_matches": true,
+          "note": "rounded displayed cells only; weighted per-sample raw-score denominator not available"
+        },
+        {
+          "model": "Human (expert)",
+          "mean_from_16_rounded_cells": 0.45875,
+          "published_mean": 0.459,
+          "round3_matches": true,
+          "note": "rounded displayed cells only; weighted per-sample raw-score denominator not available"
+        },
+        {
+          "model": "Aguvis-7B",
+          "mean_from_16_rounded_cells": 0.39437500000000003,
+          "published_mean": 0.394,
+          "round3_matches": true,
+          "note": "rounded displayed cells only; weighted per-sample raw-score denominator not available"
+        },
+        {
+          "model": "OSAtlasPro-7B",
+          "mean_from_16_rounded_cells": 0.346875,
+          "published_mean": 0.347,
+          "round3_matches": true,
+          "note": "rounded displayed cells only; weighted per-sample raw-score denominator not available"
+        },
+        {
+          "model": "UITARS-7B",
+          "mean_from_16_rounded_cells": 0.34625,
+          "published_mean": 0.346,
+          "round3_matches": true,
+          "note": "rounded displayed cells only; weighted per-sample raw-score denominator not available"
+        },
+        {
+          "model": "CogAgent-9B",
+          "mean_from_16_rounded_cells": 0.344375,
+          "published_mean": 0.345,
+          "round3_matches": false,
+          "note": "rounded displayed cells only; weighted per-sample raw-score denominator not available"
+        },
+        {
+          "model": "Aria-18B",
+          "mean_from_16_rounded_cells": 0.33,
+          "published_mean": 0.33,
+          "round3_matches": true,
+          "note": "rounded displayed cells only; weighted per-sample raw-score denominator not available"
+        },
+        {
+          "model": "OSAtlas-7B",
+          "mean_from_16_rounded_cells": 0.213125,
+          "published_mean": 0.214,
+          "round3_matches": false,
+          "note": "rounded displayed cells only; weighted per-sample raw-score denominator not available"
+        },
+        {
+          "model": "Human (average)",
+          "mean_from_16_rounded_cells": 0.165625,
+          "published_mean": 0.166,
+          "round3_matches": true,
+          "note": "rounded displayed cells only; weighted per-sample raw-score denominator not available"
+        },
+        {
+          "model": "Show-2B",
+          "mean_from_16_rounded_cells": 0.150625,
+          "published_mean": 0.151,
+          "round3_matches": true,
+          "note": "rounded displayed cells only; weighted per-sample raw-score denominator not available"
+        },
+        {
+          "model": "Qwen2VL-72B",
+          "mean_from_16_rounded_cells": 0.15,
+          "published_mean": 0.149,
+          "round3_matches": false,
+          "note": "rounded displayed cells only; weighted per-sample raw-score denominator not available"
+        },
+        {
+          "model": "Qwen25VL-72B",
+          "mean_from_16_rounded_cells": 0.130625,
+          "published_mean": 0.131,
+          "round3_matches": true,
+          "note": "rounded displayed cells only; weighted per-sample raw-score denominator not available"
+        },
+        {
+          "model": "Gemini-api",
+          "mean_from_16_rounded_cells": 0.0925,
+          "published_mean": 0.093,
+          "round3_matches": false,
+          "note": "rounded displayed cells only; weighted per-sample raw-score denominator not available"
+        },
+        {
+          "model": "SeeClick-7B",
+          "mean_from_16_rounded_cells": 0.08750000000000001,
+          "published_mean": 0.087,
+          "round3_matches": false,
+          "note": "rounded displayed cells only; weighted per-sample raw-score denominator not available"
+        },
+        {
+          "model": "InternVL25-78B",
+          "mean_from_16_rounded_cells": 0.075,
+          "published_mean": 0.075,
+          "round3_matches": true,
+          "note": "rounded displayed cells only; weighted per-sample raw-score denominator not available"
+        },
+        {
+          "model": "OSGenesis-AC-7B",
+          "mean_from_16_rounded_cells": 0.06,
+          "published_mean": 0.06,
+          "round3_matches": true,
+          "note": "rounded displayed cells only; weighted per-sample raw-score denominator not available"
+        },
+        {
+          "model": "LLama3-90B",
+          "mean_from_16_rounded_cells": 0.058125,
+          "published_mean": 0.058,
+          "round3_matches": true,
+          "note": "rounded displayed cells only; weighted per-sample raw-score denominator not available"
+        },
+        {
+          "model": "InternVL25-38B",
+          "mean_from_16_rounded_cells": 0.050625,
+          "published_mean": 0.051,
+          "round3_matches": true,
+          "note": "rounded displayed cells only; weighted per-sample raw-score denominator not available"
+        },
+        {
+          "model": "Ovis2-34B",
+          "mean_from_16_rounded_cells": 0.050625,
+          "published_mean": 0.05,
+          "round3_matches": false,
+          "note": "rounded displayed cells only; weighted per-sample raw-score denominator not available"
+        },
+        {
+          "model": "GPT4o-api",
+          "mean_from_16_rounded_cells": 0.04125,
+          "published_mean": 0.042,
+          "round3_matches": false,
+          "note": "rounded displayed cells only; weighted per-sample raw-score denominator not available"
+        },
+        {
+          "model": "Qwen2VL-7B",
+          "mean_from_16_rounded_cells": 0.040625,
+          "published_mean": 0.041,
+          "round3_matches": true,
+          "note": "rounded displayed cells only; weighted per-sample raw-score denominator not available"
+        },
+        {
+          "model": "LLaVA-o-72B",
+          "mean_from_16_rounded_cells": 0.036250000000000004,
+          "published_mean": 0.037,
+          "round3_matches": false,
+          "note": "rounded displayed cells only; weighted per-sample raw-score denominator not available"
+        },
+        {
+          "model": "Claude-api",
+          "mean_from_16_rounded_cells": 0.03125,
+          "published_mean": 0.031,
+          "round3_matches": true,
+          "note": "rounded displayed cells only; weighted per-sample raw-score denominator not available"
+        },
+        {
+          "model": "Nvlm-70B",
+          "mean_from_16_rounded_cells": 0.031875,
+          "published_mean": 0.031,
+          "round3_matches": false,
+          "note": "rounded displayed cells only; weighted per-sample raw-score denominator not available"
+        },
+        {
+          "model": "MPlugOwl3-7B",
+          "mean_from_16_rounded_cells": 0.015,
+          "published_mean": 0.015,
+          "round3_matches": true,
+          "note": "rounded displayed cells only; weighted per-sample raw-score denominator not available"
+        },
+        {
+          "model": "LLaVA-Next-7B",
+          "mean_from_16_rounded_cells": 0.014375,
+          "published_mean": 0.014,
+          "round3_matches": true,
+          "note": "rounded displayed cells only; weighted per-sample raw-score denominator not available"
+        },
+        {
+          "model": "InternVL2-7B",
+          "mean_from_16_rounded_cells": 0.009375,
+          "published_mean": 0.01,
+          "round3_matches": false,
+          "note": "rounded displayed cells only; weighted per-sample raw-score denominator not available"
+        },
+        {
+          "model": "Random Guess",
+          "mean_from_16_rounded_cells": 0.00875,
+          "published_mean": 0.009,
+          "round3_matches": true,
+          "note": "rounded displayed cells only; weighted per-sample raw-score denominator not available"
+        },
+        {
+          "model": "Janus-7B",
+          "mean_from_16_rounded_cells": 0.009375,
+          "published_mean": 0.009,
+          "round3_matches": true,
+          "note": "rounded displayed cells only; weighted per-sample raw-score denominator not available"
+        },
+        {
+          "model": "Phi35-7B",
+          "mean_from_16_rounded_cells": 0.0075,
+          "published_mean": 0.008,
+          "round3_matches": false,
+          "note": "rounded displayed cells only; weighted per-sample raw-score denominator not available"
+        }
+      ],
+      "edagent_expert_difference_pp": 13.899999999999995,
+      "edagent_expert_relative_gain": 30.283224400871454,
+      "artifact_status": "official aiben-ch/GUI-EDA README and API tree both404 on2026-10-20; no taskpack downloaded",
+      "physical_validation_limits": "III-D says10selectedsamples; VI-E says7iterations, only one key step byagent, surroundingstepsgoldenhuman; no complete matched experimental ledger",
+      "agent_scope": "single screenshot comprehension/pointing with model-validator selection; not full action-observation workflows"
+    }
+  }
+}

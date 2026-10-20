@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-10-20T13:42:47.487311+00:00",
+  "as_of": "2026-10-20T14:05:35.761160+00:00",
   "status": "第二轮12h进行中的数据/轨迹开放性核查，非完整市场清单或最终结论",
   "scope": "只覆盖本轮已保存一手核查的新增协议；训练样本、评测输入、模型权重、整理后记忆、生成采样轨迹与LLM工具交互轨迹分别描述",
-  "protocol_records": 145,
-  "families": 71,
+  "protocol_records": 150,
+  "families": 73,
   "items": [
     {
       "catalog_id": "lib-siemens-nemo-characterization",
@@ -1743,6 +1743,66 @@
       "trajectory_and_training_access": "统一数值action/costlogger与paperdatasetconstruction；没有LLM消息，完整历史数据payload尚未验证。",
       "limits": "完整21600experimentdataset与历史logs本轮11文件未核；未把代码可记录数据当现有完整轨迹下载证明。DRAMparser做1e9/1e3数值转换但注释仍写rawunits，配置mW/ns注释不可靠；需随实际simstdout固定单位。",
       "primary_sources": "https://arxiv.org/html/2306.08888v1; https://github.com/srivatsankrishnan/oss-arch-gym/tree/53f745af87b256794c0cd712c2b8e77aab74b4a6",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "data-archgym-proxy-subset",
+      "name": "ArchGym ISCA23 / official numeric exploration proxy-data subset",
+      "family": "ArchGym numerical architecture DSE",
+      "object_identity": "真实公开数值参数/性能数据；非LLM交互轨迹",
+      "task": "历史numericalDSE observations可作proxycostmodel/offlineoptimization参考，paper用RandomForest预测energy/power/latency。没有task/workload/run/seed/stepID，不能从平表重建完整agentepisode、holdoutworkload或时间顺序。",
+      "available_materials_and_tools": "官方MD5 40b9a3a5ea20a3653d42089b0fe188a4完全匹配，2296members/1.232GB展开但未整体extract。Zenodo元数据CCBY3-US；包内2023软件LICENSE限制ISCA2023artifactevaluation，currentGitApache2是另一版，不自动覆盖旧包/数据权利。数据训练许可应向作者确认版本与作用范围，网站只发布派生统计与原链接。",
+      "trajectory_and_training_access": "8485833 flat numericrows/1075709uniqueparametervectors，真实公开；没有LLM或episode边界。",
+      "limits": "这是名为subset的数据，并未证明覆盖paper全部21600实验或约1.5B仿真。既有数值记录不等真实电测/完整LLMagent轨迹；CSV无单位strings且parser有转换，须固定原sim/目标配置后解释性能单位。",
+      "primary_sources": "https://zenodo.org/records/7791592; https://arxiv.org/html/2306.08888v1",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "data-maeda-openroad-evaluator",
+      "name": "MAEDA / OpenROAD QA multi-label error identification",
+      "family": "MAEDA EDA QA evaluation",
+      "object_identity": "公开300评审样本；multi-agent是judge，不是P&Ragent",
+      "task": "判检索错误、错误拒答/错误不拒答、contradiction/missing、命令参数/examplehallucination。Ret/RF/SC/HL四类评审agents，pointalignment+ruleextract+LLMsemantic；judge需要gold是此元评审任务规定，不是给设计solver偷看gold。",
+      "available_materials_and_tools": "fixedtree4文件含paper/300JSON/290chunks/README全部Gitblob核；没有rootLICENSE、训练数据、权重、runner或全部predictions。paper3197positive/Ret2094/SC2670finetune为另一个合成构建过程，不等300评测样本开放了4764训练条。",
+      "trajectory_and_training_access": "公开300评审cases和gold标签/检索片段；不是完整设计agent轨迹，真实/合成来源逐条比例未标。",
+      "limits": "67源问题有多种回答/检索与错误标签，随机行split会跨源题；未取得实际训练语料不能武断称已训练泄漏。全300JSON不同并非300独立问题，26QA重复pair还有context差异，不能无条件丢掉。文档版本更新会让命令有效性变化。",
+      "primary_sources": "https://github.com/Rayzzz14/MAEDA-DATE26/tree/1c2f07f8ae9c07aa6fcd45280d7b46cd6a2cb5d6",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "data-maeda-commercial-transfer",
+      "name": "MAEDA / commercial timing-ECO documentation QA transfer",
+      "family": "MAEDA EDA QA evaluation",
+      "object_identity": "论文205QA迁移协议；当前未公开题库",
+      "task": "评估errorjudge从OpenROAD向商业tool迁移；另以商业文档训练的Ret/SCmodel与OpenROAD微调model对比，未对真实ECO设计实施修复。",
+      "available_materials_and_tools": "paperTableII全文可读，作者固定4文件tree只有OpenROAD300JSON与32docsections，无205商业cases/文档/权重/prediction。不能把公开paper称商业数据可下载。",
+      "trajectory_and_training_access": "仅论文聚合R/P，205逐条cases/训练与真实toolhistory未取得。",
+      "limits": "训练/检索文档与商业软件许可另核；有gold的offlinejudge比无gold真实服务条件强，需分别评。当前没有完整confusion/labels重算成绩，不声称已复现。",
+      "primary_sources": "https://github.com/Rayzzz14/MAEDA-DATE26/tree/1c2f07f8ae9c07aa6fcd45280d7b46cd6a2cb5d6",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "gui-eda-answer",
+      "name": "GUI-EDA / key-step screenshot comprehension",
+      "family": "GUI-EDA multiphysics GUI",
+      "object_identity": "同2082截图样本的语义回答协议；非完整EDAworkflow",
+      "task": "根据当前截图和即时操作目标输出5–10word操作说明；考核理解为什么/怎样操作，不执行完整设计。",
+      "available_materials_and_tools": "全文v1可读，唯一submissionv1；作者仓库rootREADME/API tree当前404，未取得2082images/annotations、runner、judgeprompts或rawtraces。商业CADlicense/Windows10/4K环境另依赖；论文CCBYNCSA4不自动覆盖题库/商业软件。",
+      "trajectory_and_training_access": "paper描述2082annotatedkeyframes与clickregions，不是2082完整操作轨迹；currentcorpus入口404，未取得完整providerhistory。",
+      "limits": "III-D称10selectedphysicalcases，VI-E称7iterations；且仅keyStep由agent操作，前后goldensteps由工程师完成。选例物理验证不能推广所有2082或任意点击均预言硅成功；具体rawmeasurement/匹配ledger未公开可核。",
+      "primary_sources": "https://arxiv.org/html/2512.11611v1; https://github.com/aiben-ch/GUI-EDA",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "gui-eda-action",
+      "name": "GUI-EDA / key-step action grounding and EDAgent selection",
+      "family": "GUI-EDA multiphysics GUI",
+      "object_identity": "同2082截图样本的点击定位agent协议；非完整EDAworkflow",
+      "task": "根据当前截图和即时操作目标输出绝对(x,y)；EDAgent以Qwen2.5VL理解、Aguvis定位，比较原问题/生成说明两候选并由MLLM视觉validator选点。不是多轮真实仿真反馈优化整个设计。",
+      "available_materials_and_tools": "全文v1可读，唯一submissionv1；作者仓库rootREADME/API tree当前404，未取得2082images/annotations、runner、judgeprompts或rawtraces。商业CADlicense/Windows10/4K环境另依赖；论文CCBYNCSA4不自动覆盖题库/商业软件。",
+      "trajectory_and_training_access": "paper描述2082annotatedkeyframes与clickregions，不是2082完整操作轨迹；currentcorpus入口404，未取得完整providerhistory。",
+      "limits": "III-D称10selectedphysicalcases，VI-E称7iterations；且仅keyStep由agent操作，前后goldensteps由工程师完成。选例物理验证不能推广所有2082或任意点击均预言硅成功；具体rawmeasurement/匹配ledger未公开可核。",
+      "primary_sources": "https://arxiv.org/html/2512.11611v1; https://github.com/aiben-ch/GUI-EDA",
       "record_snapshot_matches_audit": true
     }
   ],

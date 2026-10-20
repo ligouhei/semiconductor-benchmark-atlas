@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T13:42:47.602742+00:00",
+  "generated_at": "2026-10-20T14:05:35.865793+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 392,
-    "records": 711,
-    "records_with_any_field_audit_entry": 470,
-    "records_with_current_field_audit_snapshot": 437,
+    "families": 394,
+    "records": 716,
+    "records_with_any_field_audit_entry": 475,
+    "records_with_current_field_audit_snapshot": 442,
     "records_without_current_field_audit_snapshot": 274
   },
   "requirements_per_record": [
@@ -1737,8 +1737,8 @@
     },
     {
       "benchmark_family": "ArchGym numerical architecture DSE",
-      "record_count": 4,
-      "records_with_current_field_audit": 4,
+      "record_count": 5,
+      "records_with_current_field_audit": 5,
       "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
       "records": [
         {
@@ -1824,6 +1824,27 @@
           "limitations": "完整21600experimentdataset与历史logs本轮11文件未核；未把代码可记录数据当现有完整轨迹下载证明。DRAMparser做1e9/1e3数值转换但注释仍写rawunits，配置mW/ns注释不可靠；需随实际simstdout固定单位。",
           "tools_and_access": "11selectedsourceblobs/licensereadme/env/config已核，rootApache2；全tree8389blobs包含大量bundledsim上游，不宣称全核。paper与README列表支持4env，README“三个simulator”是过期文字；AstraSim/CFU/Vizier为WIP。各sim/data许可另核。",
           "industrial_value": "研究判断：应纳入行业benchmark地图的传统数值DSE环境/agent强基线，不能因名称含Agent/Gym归到LLMagentbench或可训练对话；四env同一框架家族但不同任务域。"
+        },
+        {
+          "id": "data-archgym-proxy-subset",
+          "name": "ArchGym ISCA23 / official numeric exploration proxy-data subset",
+          "category": "数字前端/架构数值优化与原生工具环境",
+          "artifact_type": "真实公开数值参数/性能数据；非LLM交互轨迹",
+          "task_layer": "架构数值设计空间探索/原生优化基线",
+          "evidence_status": "第二轮12h进行中；426固定Gitblobs、原始论文与评分公式静态核；仅自写解析/算术，没有运行第三方模型、仿真、EDA或评测器。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-analog-arch-frontier-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "按各工作许可取得冻结taskmanifest/评分器/全部失败与成本ledger，核gold隔离、oracle独立性、native强基线与同预算对照；受限或未发布内容保持边界。",
+          "limitations": "这是名为subset的数据，并未证明覆盖paper全部21600实验或约1.5B仿真。既有数值记录不等真实电测/完整LLMagent轨迹；CSV无单位strings且parser有转换，须固定原sim/目标配置后解释性能单位。",
+          "tools_and_access": "官方MD5 40b9a3a5ea20a3653d42089b0fe188a4完全匹配，2296members/1.232GB展开但未整体extract。Zenodo元数据CCBY3-US；包内2023软件LICENSE限制ISCA2023artifactevaluation，currentGitApache2是另一版，不自动覆盖旧包/数据权利。数据训练许可应向作者确认版本与作用范围，网站只发布派生统计与原链接。",
+          "industrial_value": "研究判断：已实取的大规模参数→性能数据，比只有log能力更实用；重复、分组、缺episode字段和旧archive限制必须先处理，不能把可下载当可直接商业训练授权。"
         }
       ]
     },
@@ -6245,6 +6266,56 @@
       ]
     },
     {
+      "benchmark_family": "GUI-EDA multiphysics GUI",
+      "record_count": 2,
+      "records_with_current_field_audit": 2,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "gui-eda-answer",
+          "name": "GUI-EDA / key-step screenshot comprehension",
+          "category": "边界类/板级工程与电磁/多物理GUI",
+          "artifact_type": "同2082截图样本的语义回答协议；非完整EDAworkflow",
+          "task_layer": "截图理解/动作定位/模型选择",
+          "evidence_status": "第二轮12h进行中；一手全文、4Gitblobs与JSON/引用/数表静态核；没有运行第三方模型/工具/评分器。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-maeda-gui-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得冻结评分器/真实predictionledger、训练/评测按源问题分组、许可和完整agent预算；GUI真实点击/物性需独立验收，本轮不执行。",
+          "limitations": "III-D称10selectedphysicalcases，VI-E称7iterations；且仅keyStep由agent操作，前后goldensteps由工程师完成。选例物理验证不能推广所有2082或任意点击均预言硅成功；具体rawmeasurement/匹配ledger未公开可核。",
+          "tools_and_access": "全文v1可读，唯一submissionv1；作者仓库rootREADME/API tree当前404，未取得2082images/annotations、runner、judgeprompts或rawtraces。商业CADlicense/Windows10/4K环境另依赖；论文CCBYNCSA4不自动覆盖题库/商业软件。",
+          "industrial_value": "研究判断：与agentic工程操作直接相关，适合衡量视觉界面理解/定位；属于邻接多物理CAD层，不冒充芯片P&R或OPCbenchmark。native成熟不消除界面操作问题，但原生API可能更有效。"
+        },
+        {
+          "id": "gui-eda-action",
+          "name": "GUI-EDA / key-step action grounding and EDAgent selection",
+          "category": "边界类/板级工程与电磁/多物理GUI",
+          "artifact_type": "同2082截图样本的点击定位agent协议；非完整EDAworkflow",
+          "task_layer": "截图理解/动作定位/模型选择",
+          "evidence_status": "第二轮12h进行中；一手全文、4Gitblobs与JSON/引用/数表静态核；没有运行第三方模型/工具/评分器。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-maeda-gui-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得冻结评分器/真实predictionledger、训练/评测按源问题分组、许可和完整agent预算；GUI真实点击/物性需独立验收，本轮不执行。",
+          "limitations": "III-D称10selectedphysicalcases，VI-E称7iterations；且仅keyStep由agent操作，前后goldensteps由工程师完成。选例物理验证不能推广所有2082或任意点击均预言硅成功；具体rawmeasurement/匹配ledger未公开可核。",
+          "tools_and_access": "全文v1可读，唯一submissionv1；作者仓库rootREADME/API tree当前404，未取得2082images/annotations、runner、judgeprompts或rawtraces。商业CADlicense/Windows10/4K环境另依赖；论文CCBYNCSA4不自动覆盖题库/商业软件。",
+          "industrial_value": "研究判断：与agentic工程操作直接相关，适合衡量视觉界面理解/定位；属于邻接多物理CAD层，不冒充芯片P&R或OPCbenchmark。native成熟不消除界面操作问题，但原生API可能更有效。"
+        }
+      ]
+    },
+    {
       "benchmark_family": "GateTruth",
       "record_count": 3,
       "records_with_current_field_audit": 3,
@@ -9991,6 +10062,56 @@
           "limitations": "固定tree按直接design.py目录计250：basic26/arithmetic71/memory17/blocks43/large16/EPFL19/ISCAS85 11/ISCAS89 28/Koios19。含人写/AI生成/既有公开suite，不能称250个新独立设计；README inventory正文249行而目录250（blocks少列1），发布覆盖按target另报；不是全部250都有自检TB；旧results/sim/sim.json是10bench simulation stub，README明确非发布artifact。源级有限TB不证明mappednetlist等价或时序，日志词汇判定非防篡改hiddenoracle；脚本/tool执行成功不等任务正确",
           "tools_and_access": "核心MIT（2025ZeroASIC）已读；上游RTL/第三方SiliconCompiler/lambdalib/PDK和tool各自核，不能只凭根MIT推每个IP/工艺全可商用。公开Python Design/RTL/部分TB及results，未执行/安装工具或生成任何结果",
           "industrial_value": "研究判断：可构建RTL维护/工具工程任务的补充验收，但尚非现成独立受保护LLM题库；不能把syn/STA结果当已经跑过同套功能验证"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "MAEDA EDA QA evaluation",
+      "record_count": 2,
+      "records_with_current_field_audit": 2,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "data-maeda-openroad-evaluator",
+          "name": "MAEDA / OpenROAD QA multi-label error identification",
+          "category": "数字后端/工具知识与回答评审",
+          "artifact_type": "公开300评审样本；multi-agent是judge，不是P&Ragent",
+          "task_layer": "EDA文档QA的检索/生成错误评审",
+          "evidence_status": "第二轮12h进行中；一手全文、4Gitblobs与JSON/引用/数表静态核；没有运行第三方模型/工具/评分器。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-maeda-gui-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得冻结评分器/真实predictionledger、训练/评测按源问题分组、许可和完整agent预算；GUI真实点击/物性需独立验收，本轮不执行。",
+          "limitations": "67源问题有多种回答/检索与错误标签，随机行split会跨源题；未取得实际训练语料不能武断称已训练泄漏。全300JSON不同并非300独立问题，26QA重复pair还有context差异，不能无条件丢掉。文档版本更新会让命令有效性变化。",
+          "tools_and_access": "fixedtree4文件含paper/300JSON/290chunks/README全部Gitblob核；没有rootLICENSE、训练数据、权重、runner或全部predictions。paper3197positive/Ret2094/SC2670finetune为另一个合成构建过程，不等300评测样本开放了4764训练条。",
+          "industrial_value": "研究判断：agent可靠性/grounding的重要配套评审数据，可用于研究judge与错误分析；与成熟OpenROAD优化器竞争是错位比较，必须把原生schema/文档查验纳入baseline。"
+        },
+        {
+          "id": "data-maeda-commercial-transfer",
+          "name": "MAEDA / commercial timing-ECO documentation QA transfer",
+          "category": "数字后端/工具知识与回答评审",
+          "artifact_type": "论文205QA迁移协议；当前未公开题库",
+          "task_layer": "EDA文档QA的检索/生成错误评审",
+          "evidence_status": "第二轮12h进行中；一手全文、4Gitblobs与JSON/引用/数表静态核；没有运行第三方模型/工具/评分器。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-maeda-gui-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得冻结评分器/真实predictionledger、训练/评测按源问题分组、许可和完整agent预算；GUI真实点击/物性需独立验收，本轮不执行。",
+          "limitations": "训练/检索文档与商业软件许可另核；有gold的offlinejudge比无gold真实服务条件强，需分别评。当前没有完整confusion/labels重算成绩，不声称已复现。",
+          "tools_and_access": "paperTableII全文可读，作者固定4文件tree只有OpenROAD300JSON与32docsections，无205商业cases/文档/权重/prediction。不能把公开paper称商业数据可下载。",
+          "industrial_value": "研究判断：商业EDA知识域迁移的相关证据，agent数据可得性低；不等商业时序优化已由LLM完成，实际ECO仍原生工具求解。"
         }
       ]
     },

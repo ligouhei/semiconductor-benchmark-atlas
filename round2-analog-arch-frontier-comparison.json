@@ -231,6 +231,27 @@
       "evidence_status": "第二轮12h进行中；426固定Gitblobs、原始论文与评分公式静态核；仅自写解析/算术，没有运行第三方模型、仿真、EDA或评测器。",
       "next_verification": "按各工作许可取得冻结taskmanifest/评分器/全部失败与成本ledger，核gold隔离、oracle独立性、native强基线与同预算对照；受限或未发布内容保持边界。",
       "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "data-archgym-proxy-subset",
+      "benchmark_family": "ArchGym numerical architecture DSE",
+      "name": "ArchGym ISCA23 / official numeric exploration proxy-data subset",
+      "category": "数字前端/架构数值优化与原生工具环境",
+      "artifact_type": "真实公开数值参数/性能数据；非LLM交互轨迹",
+      "task_layer": "架构数值设计空间探索/原生优化基线",
+      "version": "Zenodo7791592（2023-04-01）；209563193-byte isca-ae.zip",
+      "input": "官方archive内852901271-byte CSV，15columns含10memorycontroller参数、Reward/Energy/Power/Latency/Algorithm。全量8485833行：BO82123/GA3457926/random250043/ACO4695741，无RL标签；不是848万独立芯片。",
+      "task": "历史numericalDSE observations可作proxycostmodel/offlineoptimization参考，paper用RandomForest预测energy/power/latency。没有task/workload/run/seed/stepID，不能从平表重建完整agentepisode、holdoutworkload或时间顺序。",
+      "output": "全量静态解析数值performance、参数/观测对；没有LLM消息或自然语言推理。归档附带PKL模型只列目录未反序列化、未加载软件或simulator。",
+      "metrics": "exactuniquerows1590951，重复出现6894882；unique10参数向量1075709，参数+三performancepairs也是1075709，此subset同参数未见不同performance。最大某整行重复10105次；所有4数值列finite。不能按随机行split评泛化，需按参数/来源分组。",
+      "baseline": "paperdatasetdiversity与RFproxy实验特定.61%RMSE/2000×inference，不等本轮重新训练成绩；本轮仅核字节/数量/一致性，Reward并非各行均为同一power1倒距离公式，缺taskmetadata不混成统一优化榜。",
+      "tools_and_access": "官方MD5 40b9a3a5ea20a3653d42089b0fe188a4完全匹配，2296members/1.232GB展开但未整体extract。Zenodo元数据CCBY3-US；包内2023软件LICENSE限制ISCA2023artifactevaluation，currentGitApache2是另一版，不自动覆盖旧包/数据权利。数据训练许可应向作者确认版本与作用范围，网站只发布派生统计与原链接。",
+      "limitations": "这是名为subset的数据，并未证明覆盖paper全部21600实验或约1.5B仿真。既有数值记录不等真实电测/完整LLMagent轨迹；CSV无单位strings且parser有转换，须固定原sim/目标配置后解释性能单位。",
+      "industrial_value": "研究判断：已实取的大规模参数→性能数据，比只有log能力更实用；重复、分组、缺episode字段和旧archive限制必须先处理，不能把可下载当可直接商业训练授权。",
+      "primary_sources": "https://zenodo.org/records/7791592; https://arxiv.org/html/2306.08888v1",
+      "evidence_status": "第二轮12h进行中；426固定Gitblobs、原始论文与评分公式静态核；仅自写解析/算术，没有运行第三方模型、仿真、EDA或评测器。",
+      "next_verification": "按各工作许可取得冻结taskmanifest/评分器/全部失败与成本ledger，核gold隔离、oracle独立性、native强基线与同预算对照；受限或未发布内容保持边界。",
+      "retrieved_date": "2026-10-20"
     }
   ],
   "static_audit": {

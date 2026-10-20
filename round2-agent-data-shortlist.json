@@ -1,6 +1,6 @@
 {
   "status": "第二轮12小时仍在进行；静态核查清单，不是训练授权或模型实验结果",
-  "as_of": "2026-10-20T13:40:20.978858+00:00",
+  "as_of": "2026-10-20T14:05:20.192299+00:00",
   "scope": "只发布派生研究摘要；原始轨迹/问题/答案/凭据不随网站重发。",
   "records": [
     {
@@ -321,22 +321,57 @@
       ]
     },
     {
-      "name": "ArchGym / DRAMGym memory-controller",
+      "name": "ArchGym ISCA23 / official numeric exploration proxy-data subset",
       "catalog_ids": [
+        "data-archgym-proxy-subset",
         "arch-archgym-dram",
         "arch-archgym-timeloop",
         "arch-archgym-farsi",
         "arch-archgym-maestro"
       ],
-      "data_kind": "数值DSE框架与logger；非LLM轨迹",
-      "quantity": "4env/5算法；paper21600hyperparameterexperiments与约1.5Bsimulations为作者声明。",
-      "authenticity": "数字参数→原生cost反馈；不含自然语言agent消息。",
-      "availability": "11核心源文件hash核，完整历史dataset/所有sim文件未核。",
-      "license_note": "rootApache2，各bundledsim/workload许可分开。",
-      "caution": "不能把logger能力当完整历史数据下载证明；不同reward方向/饱和阈值/单位需逐env固定。",
+      "data_kind": "真实大规模数值参数/性能数据；非LLM轨迹",
+      "quantity": "官方209.6MB ZIP内852.9MB CSV：8485833行、1590951unique整行、1075709参数向量；4算法无RL标签。",
+      "authenticity": "10参数→Reward/Energy/Power/Latency/Algorithm平表，不含自然语言或task/run/stepID。",
+      "availability": "官方MD5完整匹配，2296member清单与全CSV逐行静态核，未执行/反序列化模型。",
+      "license_note": "currentGitApache2、Zenodo元数据CCBY3-US、旧包软件仅ISCA2023artifactevaluation，层次不同需确认数据许可。",
+      "caution": "6894882重复行不能当独立design；缺episode/workload/seed，随机行split会重复参数；全21600历史仍未核。",
       "sources": [
+        "https://zenodo.org/records/7791592",
         "https://arxiv.org/html/2306.08888v1",
         "https://github.com/srivatsankrishnan/oss-arch-gym/tree/53f745af87b256794c0cd712c2b8e77aab74b4a6"
+      ]
+    },
+    {
+      "name": "MAEDA / OpenROAD QA multi-label error identification",
+      "catalog_ids": [
+        "data-maeda-openroad-evaluator",
+        "data-maeda-commercial-transfer"
+      ],
+      "data_kind": "多标签judge训练/评估参考数据",
+      "quantity": "300uniquequeryIDs但67uniquequestions，274uniqueQA，32docsections/290chunks；205商业QA另未公开。",
+      "authenticity": "真实RAG案例与GPT4o合成改写负例混合，专家gold错误标签；不是EDAtoolrollout。",
+      "availability": "全部4Gitblobs核，81引用docIDs全部能在文档解析。",
+      "license_note": "固定tree没有rootLICENSE，训练2组2094/2670数据与weights不在库中，公开可读非训练授权。",
+      "caution": "按源问题分组，ref/gt仅供judge元评审，不能给被评价QA solver偷看；无predictions不能重算paperR/P。",
+      "sources": [
+        "https://github.com/Rayzzz14/MAEDA-DATE26/tree/1c2f07f8ae9c07aa6fcd45280d7b46cd6a2cb5d6"
+      ]
+    },
+    {
+      "name": "GUI-EDA / key-step screenshot comprehension",
+      "catalog_ids": [
+        "gui-eda-answer",
+        "gui-eda-action"
+      ],
+      "data_kind": "论文2082人工关键帧/点击框；完整库未取得",
+      "quantity": "5CAD/5physicaldomains/8software-field组，3resolution条件同源。",
+      "authenticity": "单帧专家answer/bbox标注，非2082完整多步操作链。",
+      "availability": "全文v1已核，官方aiben-ch/GUI-EDA README/tree当前404。",
+      "license_note": "论文CCBYNCSA4不自动覆盖未发布题库/商业CADlicense。",
+      "caution": "Action仅点在GT框内；选例物理验证前后steps人工，不等2082端到端制造验证。",
+      "sources": [
+        "https://arxiv.org/html/2512.11611v1",
+        "https://github.com/aiben-ch/GUI-EDA"
       ]
     }
   ]

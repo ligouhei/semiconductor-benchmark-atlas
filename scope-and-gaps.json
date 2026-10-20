@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T13:42:47.528737+00:00",
+  "as_of": "2026-10-20T14:05:35.805434+00:00",
   "status": "coverage inventory with explicit residual limits, not universal completeness/quality certification",
   "scope": "依据用户阶段划分逐项列已有覆盖与剩余限制；“所有可发现”按此次公开资料检索边界理解，不声称覆盖未公开工业bench或互联网全部材料。",
   "method": [
@@ -12,7 +12,7 @@
   "items": [
     {
       "domain": "数字前端",
-      "record_count": 117,
+      "record_count": 118,
       "family_count": 51,
       "catalog_ids": [
         "rtl-verilogeval-v1",
@@ -131,7 +131,8 @@
         "arch-archgym-dram",
         "arch-archgym-timeloop",
         "arch-archgym-farsi",
-        "arch-archgym-maestro"
+        "arch-archgym-maestro",
+        "data-archgym-proxy-subset"
       ],
       "covered_tasks": "RTL与VHDL生成/理解/修复、跨模块工程、微架构优化、规格一致性与功耗/PPA预测；单轮生成与多步agent分别记录",
       "remaining_limits": "近期大套件完整harness/隐藏数据/许可未全公开；CPU/PCIe规范完成不等全ASIC实现，训练语料与评测集关系、跨family泛化需持续核。",
@@ -530,8 +531,8 @@
     },
     {
       "domain": "数字后端",
-      "record_count": 165,
-      "family_count": 103,
+      "record_count": 167,
+      "family_count": 104,
       "catalog_ids": [
         "physical-circuitnet",
         "physical-ispd18",
@@ -697,7 +698,9 @@
         "data-openroad-agent-correction-v2",
         "pd-openroad-agent-script",
         "pd-structverify-singlestep",
-        "pd-structverify-multistep"
+        "pd-structverify-multistep",
+        "data-maeda-openroad-evaluator",
+        "data-maeda-commercial-transfer"
       ],
       "covered_tasks": "划分/块规划/宏与cell布局、合法化、GR/DR、CTS/STA/sizing/MBFF/ECO、功耗/IR/EM、DRC/LVS工作流与agent",
       "remaining_limits": "历年已覆盖不等全部contest题目/最终checker均取得；部分旧链接失效、商业flow与PDK不可重建；proxy、原生修复、有限DRC与全签核严格分层。",
@@ -1111,13 +1114,15 @@
     },
     {
       "domain": "板级工程与电磁",
-      "record_count": 4,
-      "family_count": 3,
+      "record_count": 6,
+      "family_count": 4,
       "catalog_ids": [
         "boundary-emval-nf",
         "boundary-emval-sp",
         "boundary-matrix-sparam",
-        "boundary-edabench-pcb-agent"
+        "boundary-edabench-pcb-agent",
+        "gui-eda-answer",
+        "gui-eda-action"
       ],
       "covered_tasks": "KiCad PCB工程agent、近场/散射参数与稀疏矩阵相关公开验证，作为芯片范围边界材料",
       "remaining_limits": "板级/天线EM与IC RF设计及工业封装SI/PI不合并；AEDL/Alpha-RF等候选尚未全部核成独立公共协议。",
