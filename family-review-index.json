@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T08:43:33.818312+00:00",
+  "generated_at": "2026-10-20T08:53:43.542507+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 358,
-    "records": 640,
-    "records_with_any_field_audit_entry": 398,
-    "records_with_current_field_audit_snapshot": 365,
+    "families": 360,
+    "records": 644,
+    "records_with_any_field_audit_entry": 402,
+    "records_with_current_field_audit_snapshot": 369,
     "records_without_current_field_audit_snapshot": 275
   },
   "requirements_per_record": [
@@ -145,6 +145,56 @@
           "limitations": "3固定拓扑为IEEE/ITC素材派生优化协议，不是新增3独立IP。当前netlist27°C/3.3V、仅typical process启用，其他corners与多项功能测量被注释；FoM低不等所有原规格/PVT/振荡或锁相正确。wrapper os.system未独立验exit/超时，依first含fom行解析；需额外独立功能/测量成功gate，同目录param/log/result.csv并发需隔离。原始注释Lbound/Ubound不自动成为代码硬约束。",
           "tools_and_access": "repo f79343772b5beb248d1c146bd8f13281fdf67a5f完整71treeentries，3circuits/py、param、processmodels/subcircuits与示例log。来自ITC2017AMS V2.2；tree无rootLICENSE，不以公开下载推商用/重分发授权。sim_command/pathparam/pathlog须配置，原包含HSPICE风格测量/模型，不能声称无修改ngspice通跑。",
           "industrial_value": "提供确定性数值搜索和学习代理的具体对照；已有SPICE/原生优化不证明任务最优。模型研究需证明跨拓扑/工艺/频率泛化、同预算效率或工程可靠增量。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "ACR-Bench / ACR-Agent",
+      "record_count": 2,
+      "records_with_current_field_audit": 2,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "analog-acr-symbolic-reasoning",
+          "name": "ACR-Bench / symbolic structure–performance reasoning",
+          "category": "模拟前端/符号电路推理",
+          "artifact_type": "131题公开教材改编推理benchmark；非端到端电路设计或PPA",
+          "task_layer": "带符号SPICE风格文本+问题→解析公式",
+          "evidence_status": "第二轮12h进行中；一手正文/固定Git源码和数据静态核查，ACR302/AgenticSizing192 Gitblobs匹配；未执行模型、EDA、仿真、形式工具或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-acr-agenticsizing-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需冻结逐trial的输入、agent版本、原始反馈/成功硬门/失败分母/成本与许可；论文成绩与当前配置不一致处需原始运行记录，不默改作者成绩。",
+          "limitations": "评分预处理去绝对值竖线/百分号，≤/≥/≈/sim转=、取最后=右端并Vtp→−Vtn，可能改变语义；未做参数域/器件工作区/量纲物理证明。currentgold路径otherset/answer1而发布dataset/answer1，且结果按排序位置与gold配对不核ID，必须适配校验。",
+          "tools_and_access": "作者repo rootMIT；302源码/题答/知识prompt blobs全匹配。教材来源与原图权利另审，公开改编题不自动证明消除预训练污染；当前缺独立冻结topic/difficulty manifest和全部原始10重复输出/成本。",
+          "industrial_value": "研究判断：有实质可下载的模拟知识推理测试集；仍有低分与一致性缺口，但不能以符号答对替代真实仿真或设计签核。"
+        },
+        {
+          "id": "analog-acr-agent-workflow",
+          "name": "ACR-Agent / choosing, pre-analysis and analysis workflow",
+          "category": "模拟前端/推理agent",
+          "artifact_type": "复用同131题的多agent方法评测；不是新增数据集",
+          "task_layer": "选择知识→拓扑分解/规划→符号分析",
+          "evidence_status": "第二轮12h进行中；一手正文/固定Git源码和数据静态核查，ACR302/AgenticSizing192 Gitblobs匹配；未执行模型、EDA、仿真、形式工具或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-acr-agenticsizing-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需冻结逐trial的输入、agent版本、原始反馈/成功硬门/失败分母/成本与许可；论文成绩与当前配置不一致处需原始运行记录，不默改作者成绩。",
+          "limitations": "递归API重试无总上限会影响硬预算和失败分母；scorer按现有131文件目录处理缺失会抛错而非自动补0。下游AnalogCoder24题Retry3、Pass1/5是复用独立既有套件；四例SMIC180RF作者人工验证不等全部24题/版图/tapeout闭环。",
+          "tools_and_access": "已公开gpt_ana_cho_on.py和多agentprompt/知识库，MIT。currentgenerator turns5而scorer turns10、paper n10；空model/API配置与Windows路径需配置。未调用模型/脚本，本轮未复现实验。",
+          "industrial_value": "研究判断：能研究知识/分解agent的框架及prompt资源；完整agent训练rollout与工具反馈数据尚未定位，和ACR-Bench同家族统计。"
         }
       ]
     },
@@ -625,6 +675,56 @@
           "limitations": "人工审批属于协议一部分，不能当无人agent。bias测试列.05/.1/.2/.5/1V，其中.05/1V也用于校准，不能称五个全heldoutbias；L2µm不重调。4%W另经再校准，是process-sensitive study，不是zero-shot迁移。校准有效参数非氧空位/微观trap唯一实测提取。",
           "tools_and_access": "Sentaurus W-2024.09-SP1与获准本地手册；作者报告GPT5.5及Codex/NeMo Agent Toolkit接口。全文可读；原始测量、deck、norm常数全表、RAG材料与完整轨迹公开未确认。作者博客为通用workflow示例，非实验复现包。",
           "industrial_value": "研究判断：人工审核的器件物理模型选择/参数校准；公开academic或方法实验不自动具有工厂校准、商业签核与独立盲测效力。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "AgenticSizing method and knowledge resources",
+      "record_count": 2,
+      "records_with_current_field_audit": 2,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "analog-agenticsizing-workflow",
+          "name": "AgenticSizing / topology-aware planner–sizer optimization",
+          "category": "模拟前端/尺寸优化agent",
+          "artifact_type": "商用仿真器集成方法；4评测电路与4知识源分开",
+          "task_layer": "固定拓扑/参数bounds/spec→角色分工尺寸→Spectre反馈",
+          "evidence_status": "第二轮12h进行中；一手正文/固定Git源码和数据静态核查，ACR302/AgenticSizing192 Gitblobs匹配；未执行模型、EDA、仿真、形式工具或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-acr-agenticsizing-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需冻结逐trial的输入、agent版本、原始反馈/成功硬门/失败分母/成本与许可；论文成绩与当前配置不一致处需原始运行记录，不默改作者成绩。",
+          "limitations": "paperfullLDO TableVIII声称3成功但两成功行power748/984.7µW>700上限；Fig7首次可行attempt1/2/5与table1/2/4不齐，需原trial记录。摘要83与intro89.7/table90迭代口径不同。currentYAML FC19变量/power10mW vs paper29/1mW；fullLDO50/1000µW vs60/700µW，BGR10µW vspaper1µW，不得默认clone复现paper。corners0、无布局/PEX/PVT签核证明。",
+          "tools_and_access": "真实Cadence接口代码已公开，作者称VirtuosoIC23.1适配；实际cds.lib/Maestro工程、Spectre许可证/PDK外部依赖。192selectedGitblobs matched；rootMIT与商业项目分开。公开mock是显式算术demo，不能据mock运行当电气复现。",
+          "industrial_value": "研究判断：实质开放的agent编排及真实EDA adapter，仍有高维耦合难题；须固定版本/外部项目和硬门后衡量相对原生优化器的收益。"
+        },
+        {
+          "id": "data-agenticsizing-knowledge",
+          "name": "AgenticSizing / improving points, topology tags and reusable KB",
+          "category": "模拟前端/经验与知识数据",
+          "artifact_type": "小规模设计-性能稀疏点/策展记忆；非完整rollout",
+          "task_layer": "历史仿真点→tradeoff/角色/局部参数事实与heuristic",
+          "evidence_status": "第二轮12h进行中；一手正文/固定Git源码和数据静态核查，ACR302/AgenticSizing192 Gitblobs匹配；未执行模型、EDA、仿真、形式工具或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-acr-agenticsizing-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需冻结逐trial的输入、agent版本、原始反馈/成功硬门/失败分母/成本与许可；论文成绩与当前配置不一致处需原始运行记录，不默改作者成绩。",
+          "limitations": "currentweightedviolation只计min/max且跳缺失项，target另作单侧阈值/目标处理；fullfeasibility对missing返回False，两者不可替代。currentYAML会重新生成JSONsettings，需冻结有效配置。向量单位与case-specificspec定义不能只读字段power/ugb猜单位；不支持直接宣称PVT/PEX覆盖。",
+          "tools_and_access": "121点/JSONsettings/输出facts/heuristics及源代码均静态取得并hash核；7组measurement向量可读，rootMIT；原Cadence项目/模型未包含。未取得完整paper5重复trial及生成这些记忆的全量rawobservations。",
+          "industrial_value": "研究判断：有真实可下载的经验素材，适合检索/知识提炼研究；与完整可监督agent多轮交互数据明确区分，和AgenticSizing同家族。"
         }
       ]
     },
