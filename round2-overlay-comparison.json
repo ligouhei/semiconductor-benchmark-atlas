@@ -1,0 +1,124 @@
+{
+  "status": "round2 active; revisionofexistingrecord, noindependentnewbenchmarkcount",
+  "protocols": [
+    {
+      "id": "fab-euv-ovl-syn-v11",
+      "name": "EUV-OVL-SYN / synthetic scanner overlay calibration v1.1",
+      "category": "制造/套刻计量与APC校准",
+      "artifact_type": "公开合成benchmark生成器；原始200CSV本轮未取得；非OPC/recipeagent",
+      "task_layer": "scanner几何+解析物理drift→overlay数据→校准/残差预测",
+      "version": "Zenodo23349771 v1.1 /2026-10-13；paper10.1063/5.0346054；erratum10.1063/5.0361881",
+      "input": "4lots×50wafers；71fieldcentres×20die sites=1420site/wafer，预计284000site（568000轴分量不是独立sites）。每表6列wafer/field中心与die偏移坐标mm、OverlayX/Ynm。22参数多项式fingerprint+四类lotdrift+非线性intrafield残差+.15nm测量噪声，非真实scanner采集。",
+      "task": "拟合/补偿套刻系统误差，研究跨wafer/lot/time的校准和非线性残差；不改OPCmask，不提供agent可调recipe/tool行动。必须冻结时间/lot划分和原生least-squares基线。",
+      "output": "overlay预测/校准残差和已知解析模型；源码内部计算各信号分量，但保存CSV仅totalX/Y，不是已公开逐rowgroundtruthdecomposition表。",
+      "metrics": "RMSE/MAE/bias/Sigma(ddof1)/3sigma/P95abs/Maxabs单位nm，R2无单位；validfinite筛选、两轴拼法、全部目标分母须明示。当前无统一passrate/hiddentest/硬算力预算；不能把高R2≥.93称agent成功或全部非线性校准已解决。",
+      "tools_and_access": "当前官方Zenodo仅3个.py共28820B，均匹配官方MD5并留SHA256，metadataMIT；未运行生成器，因此未取得200CSV字节/真实表。旧19725620明确obsolete/restricted且files空，GitHub API/head/README三处404，当前独立Zenodo仍可读，已改用新入口。",
+      "primary_sources": "https://doi.org/10.1063/5.0346054; https://doi.org/10.1063/5.0361881; https://zenodo.org/records/23349771; https://zenodo.org/api/records/23349771",
+      "evidence_status": "第二轮12h进行中；固定Zenodo一手版本、3文件MD5/SHA256与AST/几何计数核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+      "limitations": "Crossref摘要仍同时写420site/wafer与284000total，数学不合；源码71×20=1420支持新Zenodo1420。Oct13erratum存在，但正文浏览不可访问/DOI403，未绕过；不能推具体更正仅此数字。v1.1与勘误同日不自动等内容已对应修完。synthetic结构/噪声与真实工厂可迁移性未独立验证。",
+      "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+      "industrial_value": "研究判断：补充制造计量/APC的可控合成校准任务；旧链接确已失效/废弃，按版本修正后仍可研究，不把原生多项式baseline已拟合多数信号等同全部剩余任务无价值。",
+      "baseline": "原生22参数普通/加权least-squares可拟合dominantfingerprint；sanity仅Lot1 trainwafer1–10/test11–20，非完整200wafer标准heldout。非线性residual与futurelot误差应单列，避免大多项式信号遮蔽真正增益。",
+      "retrieved_date": "2026-10-20",
+      "benchmark_family": "EUV-OVL-SYN"
+    }
+  ],
+  "static_audit": {
+    "as_of": "2026-10-20T08:17:26.921320+00:00",
+    "scope": "Zenodo/checksum/source AST and independent integer count arithmetic only; no externalgenerator/scientificmodel simulation executed",
+    "family": "EUV-OVL-SYN",
+    "current": {
+      "zenodo_id": 23349771,
+      "title": "euv-ovl-syn: v1.1 — EUV-OVL-SYN: Public Release",
+      "created": "2026-10-13T19:24:26.872726+00:00",
+      "modified": "2026-10-13T19:24:27.150678+00:00",
+      "license": {
+        "id": "mit-license"
+      },
+      "file_count": 3,
+      "source_checks": [
+        {
+          "name": "generate_figures.py",
+          "file": "evidence/round2-overlay99_overlay_generate_figures_py.txt",
+          "bytes": 10103,
+          "declared_checksum": "md5:bffec8d25ecdae26f26f01c94c4ad490",
+          "md5_match": true,
+          "sha256": "197dc2272a23744123c8c1b759e93526b19095127057c37b35de8fc490a99d39"
+        },
+        {
+          "name": "model.py",
+          "file": "evidence/round2-overlay99_overlay_model_py.txt",
+          "bytes": 5551,
+          "declared_checksum": "md5:a4331f52bd843bd8df8ff73a6d4200de",
+          "md5_match": true,
+          "sha256": "94994129bfe2e6bc6d65b7324813f0ed15cad5e8757f90db2fc316eea3993743"
+        },
+        {
+          "name": "generate_synthetic_data.py",
+          "file": "evidence/round2-overlay99_overlay_generate_synthetic_data_py.txt",
+          "bytes": 13166,
+          "declared_checksum": "md5:449168e9bf4e72fdaf8eb64b54b31901",
+          "md5_match": true,
+          "sha256": "8ac43d2f712743119ae04ca53b32468b595e560414b87015ea81147a7f0f3492"
+        }
+      ]
+    },
+    "old": {
+      "zenodo_id": 19725620,
+      "description": "<p>This version of the dataset is obsolete.&nbsp;<br>The new version is in https://doi.org/10.5281/zenodo.23349771</p>",
+      "file_count": 0,
+      "github": "https://github.com/arismagk/euv-ovl-syn",
+      "github_api_head_readme": "三处404已留证，不称当前可clone；当前官方Zenodo独立release仍公开，可继续该数据研究"
+    },
+    "quantity": {
+      "lots": 4,
+      "wafers_each": 50,
+      "total_wafers": 200,
+      "field_centres_own_count": 71,
+      "sites_per_field": 20,
+      "sites_per_wafer": 1420,
+      "total_sites": 284000,
+      "axis_values": 568000,
+      "source_csv_columns": [
+        "WaferCenterX_mm_",
+        "WaferCenterY_mm_",
+        "DieCenterX_mm_",
+        "DieCenterY_mm_",
+        "OverlayX",
+        "OverlayY"
+      ],
+      "unit": "wafer/field/die坐标mm，OverlayX/Y为nm；一个measurement含x/y，不把568000分量当独立284000新sites"
+    },
+    "metadata_conflict": {
+      "crossref_abstract": "420metrology targets/wafer和284000total同时出现",
+      "count_if420": 84000,
+      "count_if1420": 284000,
+      "author_current_zenodo": "1420与284000一致",
+      "interpretation": "源码71×20=1420支持current metadata；不能无证据认定erratum仅更正此数字或已全面修正文稿。"
+    },
+    "erratum": {
+      "doi": "10.1063/5.0361881",
+      "title": [
+        "Erratum: “A scanner-informed synthetic overlay benchmark dataset for EUV lithography calibration” [APL Mach. Learn. 4, 036113 (2026)]"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            10,
+            13
+          ]
+        ]
+      },
+      "text_access": "期刊浏览不可访问、DOI落地403；未绕过，只有Crossref出版元数据，勘误具体正文未取得。v1.1与勘误同Oct13发布不自动证明内容对应。"
+    },
+    "input": "analytic22parameterBrink/van-den-Brink inter/intrafield basis、4lot50wafer temporaldrift、fixed20diegrid perfield、nonlinearresidual+Gaussian .15nm noise；synthetic not scannermeasurement/realwaferdataset",
+    "task": "拟合/补偿系统overlay、跨wafer/lot/time预测残差；不含OPCmask/recipeaction/toolagent。完整generator是研究输入，评估需固定heldoutwafer/lot及baseline/预算。",
+    "oracle": "解析beta/drift/nonlinear/noise都在源码；CSV仅6列totalobservedOverlay，没有逐row分量groundtruth列/额外truth输出，不能称已下载完整groundtruthCSV。generator提供可重建定义，与独立真实scannergold不同。",
+    "baseline": "model.py提供22parameter加权/普通least-squares；sanitytrainLot1wafer1–10，test11–20（print文字10–19与实际range不同），非完整200wafer官方split。高R2可由dominant polynomial贡献，应另报去该基线后的nonlinear residual/nextlot error。",
+    "metrics": "RMSE/MAE/signedbias/Sigma(ddof1)/3sigma/P95abs/Maxabs单位nm，R2无单位。两轴stack/conctenate口径须固定。源码仅筛finite残差，不能丢失败/NAN后只报漂亮RMSE；应报validfraction/alltargets。无统一硬成功率/成本/timebudget或hiddenleaderboard。",
+    "data_access": "current v1.1仅3个.py共28820B，没有200CSV/已跑baseline/rawplots/agent轨迹；我们校MD5/SHA256并静态读，不运行作者生成器，所以只声明预计可构建284000sites，不冒称已取得原始测量表。",
+    "obsolescence": "旧Zenodo明确obsolete且空files、GitHub404，链接替换为当前23349771；原论文/erratum保留出处，局部修复不影响其他研究。",
+    "relevance": "制造计量/APC套刻校准合成benchmark，能补传统物理baseline与新学习残差任务；不作工业PDK/ASML内部数据或agentrecipe公开证据。"
+  }
+}

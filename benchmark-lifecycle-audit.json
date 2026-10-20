@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T08:14:50.337891+00:00",
+  "as_of": "2026-10-20T08:20:12.687167+00:00",
   "status": "curated evidence-backed lifecycle examples; judgments explicitly separate from primary facts",
   "scope": "仅覆盖本表对象，非全目录逐项退役认证；没有据“商业软件存在”“发布较早”或“某模型得分高”宣告整个任务已解决。",
   "decision_rules": [
@@ -398,8 +398,8 @@
       "source_snapshots": [
         {
           "id": "fab-euv-ovl-syn-v11",
-          "record_sha256": "2cca9d028983b5e0d09eae406325c294ef062696c14ab41fcb75d2f31b926150",
-          "primary_sources": "https://doi.org/10.5281/zenodo.23349771; https://zenodo.org/api/records/23349771; https://doi.org/10.1063/5.0346054; https://zenodo.org/api/records/19725620"
+          "record_sha256": "a0caf297afcae9f1d74b84dea3c6941d633227c2cf3ccbcd5f32c1c4cffde052",
+          "primary_sources": "https://doi.org/10.1063/5.0346054; https://doi.org/10.1063/5.0361881; https://zenodo.org/records/23349771; https://zenodo.org/api/records/23349771"
         }
       ]
     },

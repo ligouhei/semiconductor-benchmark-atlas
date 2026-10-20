@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T08:14:50.303730+00:00",
+  "as_of": "2026-10-20T08:20:12.651121+00:00",
   "status": "cross-task protocol map; not model ranking or full raw-data audit",
   "scope": "制造数据按观测层级、标签与工业结论分开；不能将所有分类/分割/预测的accuracy拼成一个“良率优化”benchmark。",
   "items": [
@@ -154,8 +154,8 @@
       "source_snapshots": [
         {
           "id": "fab-euv-ovl-syn-v11",
-          "record_sha256": "2cca9d028983b5e0d09eae406325c294ef062696c14ab41fcb75d2f31b926150",
-          "primary_sources": "https://doi.org/10.5281/zenodo.23349771; https://zenodo.org/api/records/23349771; https://doi.org/10.1063/5.0346054; https://zenodo.org/api/records/19725620"
+          "record_sha256": "a0caf297afcae9f1d74b84dea3c6941d633227c2cf3ccbcd5f32c1c4cffde052",
+          "primary_sources": "https://doi.org/10.1063/5.0346054; https://doi.org/10.1063/5.0361881; https://zenodo.org/records/23349771; https://zenodo.org/api/records/23349771"
         }
       ]
     },

@@ -1,7 +1,7 @@
 {
   "status": "第二轮12小时研究进行中，非最终交付",
   "round": 2,
-  "updated_beijing": "2026-10-20T16:14:49+08:00",
+  "updated_beijing": "2026-10-20T16:19:55+08:00",
   "start_beijing": "2026-10-20T13:23:20+08:00",
   "earliest_completion_beijing": "2026-10-21T01:23:20+08:00",
   "baseline_records": 566,
@@ -1461,12 +1461,36 @@
     "AMS-SizingBench24个SKY130配置与AutoSizer方法分开；主结果prelayout，部分ugbw单位kHz而非统一MHz。当前全spec验收helper漏4配置的负dB约束，missingtrial不补0，paper100%SR影响尚未量化。",
     "GR-Evolve45个router-design-platform复用7设计；42源码分支、4固定history和27sheet部分反馈不等完整LLMtool轨迹。75iter约24h和GR单次runtime分别记；只在finalselected验DRC/LVS，postGR/DR与standalone迁移分开。",
     "GR-Evolve论文SKY130四处TWLΔ与同表WL/VC分量复算不符；原始表/不同XLSXrun不替换，保留冲突而不默选更优数字。",
-    "ChipMATE推理crossmatch不等独立功能正确；训练local/fixreward用gold。64.4KPython为论文构建语料，完整包/GRPOrollout未定位，9Bmodelcard明确gated；currentdefault/repro/paper3×3×1000预算不同，不默称exactreproduction。"
+    "ChipMATE推理crossmatch不等独立功能正确；训练local/fixreward用gold。64.4KPython为论文构建语料，完整包/GRPOrollout未定位，9Bmodelcard明确gated；currentdefault/repro/paper3×3×1000预算不同，不默称exactreproduction。",
+    "EUV-OVL-SYN是已收录原条目，本次补充勘误DOI与Crossref420/总284000计数冲突、旧版obsolete和新Zenodo仅三源码；不新增家族或重复任务。勘误正文403未绕过，具体更正内容未取得。"
   ],
   "limits": [
     "本轮新增67条任务/版本协议，不等同数量的成熟公共数据集；TimingAnalysis、HLS-Eval、ChatHLS与FIXME各分轨按同家族登记。",
     "FPL26原包743289124bytes与官方SHA256匹配，19DCP逐文件匹配包内SHA256SUM；只核字节/元数据，不加载执行DCP。",
     "HLS-Eval202configs已核固定Git身份，含同源变体；Bench4HLS170个task各有reference/TB路径。",
     "其他候选仍在查证；后续会继续增补原生工具基线、交互轨迹和评分隔离。"
+  ],
+  "revised_protocols": [
+    {
+      "id": "fab-euv-ovl-syn-v11",
+      "name": "EUV-OVL-SYN / synthetic scanner overlay calibration v1.1",
+      "category": "制造/套刻计量与APC校准",
+      "artifact_type": "公开合成benchmark生成器；原始200CSV本轮未取得；非OPC/recipeagent",
+      "task_layer": "scanner几何+解析物理drift→overlay数据→校准/残差预测",
+      "version": "Zenodo23349771 v1.1 /2026-10-13；paper10.1063/5.0346054；erratum10.1063/5.0361881",
+      "input": "4lots×50wafers；71fieldcentres×20die sites=1420site/wafer，预计284000site（568000轴分量不是独立sites）。每表6列wafer/field中心与die偏移坐标mm、OverlayX/Ynm。22参数多项式fingerprint+四类lotdrift+非线性intrafield残差+.15nm测量噪声，非真实scanner采集。",
+      "task": "拟合/补偿套刻系统误差，研究跨wafer/lot/time的校准和非线性残差；不改OPCmask，不提供agent可调recipe/tool行动。必须冻结时间/lot划分和原生least-squares基线。",
+      "output": "overlay预测/校准残差和已知解析模型；源码内部计算各信号分量，但保存CSV仅totalX/Y，不是已公开逐rowgroundtruthdecomposition表。",
+      "metrics": "RMSE/MAE/bias/Sigma(ddof1)/3sigma/P95abs/Maxabs单位nm，R2无单位；validfinite筛选、两轴拼法、全部目标分母须明示。当前无统一passrate/hiddentest/硬算力预算；不能把高R2≥.93称agent成功或全部非线性校准已解决。",
+      "tools_and_access": "当前官方Zenodo仅3个.py共28820B，均匹配官方MD5并留SHA256，metadataMIT；未运行生成器，因此未取得200CSV字节/真实表。旧19725620明确obsolete/restricted且files空，GitHub API/head/README三处404，当前独立Zenodo仍可读，已改用新入口。",
+      "primary_sources": "https://doi.org/10.1063/5.0346054; https://doi.org/10.1063/5.0361881; https://zenodo.org/records/23349771; https://zenodo.org/api/records/23349771",
+      "evidence_status": "第二轮12h进行中；固定Zenodo一手版本、3文件MD5/SHA256与AST/几何计数核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+      "limitations": "Crossref摘要仍同时写420site/wafer与284000total，数学不合；源码71×20=1420支持新Zenodo1420。Oct13erratum存在，但正文浏览不可访问/DOI403，未绕过；不能推具体更正仅此数字。v1.1与勘误同日不自动等内容已对应修完。synthetic结构/噪声与真实工厂可迁移性未独立验证。",
+      "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+      "industrial_value": "研究判断：补充制造计量/APC的可控合成校准任务；旧链接确已失效/废弃，按版本修正后仍可研究，不把原生多项式baseline已拟合多数信号等同全部剩余任务无价值。",
+      "baseline": "原生22参数普通/加权least-squares可拟合dominantfingerprint；sanity仅Lot1 trainwafer1–10/test11–20，非完整200wafer标准heldout。非线性residual与futurelot误差应单列，避免大多项式信号遮蔽真正增益。",
+      "retrieved_date": "2026-10-20",
+      "benchmark_family": "EUV-OVL-SYN"
+    }
   ]
 }

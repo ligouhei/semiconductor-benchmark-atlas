@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-20T08:14:50.535592+00:00",
+  "generated_at": "2026-10-20T08:20:12.880228+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
@@ -4261,24 +4261,30 @@
       "records": [
         {
           "id": "fab-euv-ovl-syn-v11",
-          "name": "EUV-OVL-SYN v1.1 / synthetic overlay calibration and lot-drift benchmark generator",
-          "category": "制造/套刻偏差标定与跨lot漂移",
-          "artifact_type": "公开固定种子合成generator/model；不是实测284000晶圆数据，也不是OPC mask优化",
-          "task_layer": "site坐标/lot/wafer时序→overlay偏差拟合/残余预测/漂移外推",
-          "evidence_status": "current公开metadata/三个源文件完整读与官方MD5核；独立几何算术，不是生成/仿真或模型性能复现；原论文/erratum全文未取得。",
+          "name": "EUV-OVL-SYN / synthetic scanner overlay calibration v1.1",
+          "category": "制造/套刻计量与APC校准",
+          "artifact_type": "公开合成benchmark生成器；原始200CSV本轮未取得；非OPC/recipeagent",
+          "task_layer": "scanner几何+解析物理drift→overlay数据→校准/残差预测",
+          "evidence_status": "第二轮12h进行中；固定Zenodo一手版本、3文件MD5/SHA256与AST/几何计数核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
           "current_field_audit_snapshots": [
             {
-              "audit_file": "mask-context-overlay-field-evidence.json",
+              "audit_file": "round2-overlay-field-evidence.json",
               "record_snapshot_matches_current": true,
               "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
             }
           ],
           "unversioned_field_audit_entries": [],
-          "stale_field_audit_snapshots": [],
-          "next_verification": "取得合法原paper/erratum全文核scanner-informed范围、校准来源与旧新版变化；静态核seed/时间字段及completegenerator单位，未来生成需单独授权任务范围；保持旧证据和新releasehash，按lot/时间固定评测，不运行外部代码。",
-          "limitations": "scanner-informed合成不等真实scanner数据或所有工艺噪声；给定22basis与已知残余构成降低inverse任务难度，需heldoutregime检验。v1.0撤回/obsolete证据仅指特定release，不代表overlay校准任务被软件解决。生成器注释/metadata的校准/SNR声明未由本研究重新测量；不能把预测284000行写成已取得全部CSV。erratum搜索显示涉及编辑处理信息，具体全文未取，不推数据公式已更改。",
-          "tools_and_access": "已取得v1.0/v1.1 ZenodoAPI与v1.1三py（generate_synthetic_data/model/generate_figures），各本地MD5与官方声明全匹配；v1.1 metadata MIT/open。current release仅三源文件无现成200CSV，本研究不运行generator。GitHub原入口404；AIP论文PDF与erratum页面403未绕过，正文/修订全文未取得，声明以currentmetadata/静态源码为主。",
-          "industrial_value": "把mask optimization与制造metrology calibration拆开，后者已有OLS仍有drift/非线性/OOD研究空间；适合开放受控合成比较，产业有效性需独立实测数据、控制闭环和工具基线。不是已发布OPC agentic排行榜。"
+          "stale_field_audit_snapshots": [
+            {
+              "audit_file": "mask-context-overlay-field-evidence.json",
+              "record_snapshot_matches_current": false,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+          "limitations": "Crossref摘要仍同时写420site/wafer与284000total，数学不合；源码71×20=1420支持新Zenodo1420。Oct13erratum存在，但正文浏览不可访问/DOI403，未绕过；不能推具体更正仅此数字。v1.1与勘误同日不自动等内容已对应修完。synthetic结构/噪声与真实工厂可迁移性未独立验证。",
+          "tools_and_access": "当前官方Zenodo仅3个.py共28820B，均匹配官方MD5并留SHA256，metadataMIT；未运行生成器，因此未取得200CSV字节/真实表。旧19725620明确obsolete/restricted且files空，GitHub API/head/README三处404，当前独立Zenodo仍可读，已改用新入口。",
+          "industrial_value": "研究判断：补充制造计量/APC的可控合成校准任务；旧链接确已失效/废弃，按版本修正后仍可研究，不把原生多项式baseline已拟合多数信号等同全部剩余任务无价值。"
         }
       ]
     },
