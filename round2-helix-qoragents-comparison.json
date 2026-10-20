@@ -1,0 +1,919 @@
+{
+  "status": "round2 active; toolsourceimprovement methods and scopedproofs",
+  "protocols": [
+    {
+      "id": "pd-helix-openroad-evolution",
+      "benchmark_family": "HELIX placement code evolution",
+      "name": "HELIX / OpenROAD GPL+DPL algorithm evolution",
+      "category": "后端/布局算法研发agent",
+      "artifact_type": "修改生产placer源码的方法评测；复用六源设计双平台",
+      "task_layer": "OpenROAD C++源码+ORC→构建/布局反馈→算法diff",
+      "version": "ICCAD2026 DOI10.1145/3831252.3834232；repo f9ccc706",
+      "input": "GPL/DPL源码、结构化OpenROADCorpus（论文卡、pseudocode、参数范围、profile/lessons）及aes/ibex/jpeg三ASAP7训练design；最终六源设计×NG45/ASAP7=12design-node，heldout为cva6/swerv_wrapper/ariane37，不是12独立IP。",
+      "task": "μ+λ进化：参数/结构/文献/creative/crossover操作，LLM在worktree改C++；buildrepair、近优候选refine、historydiff注入、placementheatmap与反思指导下一代。选定算法后可原生运行，不需每次placement再调用模型。",
+      "output": "可编译GPL+DPL源码patch、生成布局DEF与HPWL/runtime；最终需独立全flow重评RWL/timing/power/DRC。innerfitness不直接优化postroute全部PPA。",
+      "metrics": "perdesign f=HPWLbase/HPWLcand−.5max(0,timecand/timebase−γ)，默认γ1.5可随代数调；aggregate设计均值，失败预期罚100。paper3runs/module、μ5/λ8/G15，Table5选best；每design五clock±2/±1/0ps trials报median，HPWL/RWL geo改善4.5/5.6%。",
+      "baseline": "默认OpenROAD、同ORC/buildrepair LLMsingle-shot paper120attempt、TPE9knob400trials分别用于default/evolved；7×是fitnessgain(.028/.004)，不是7×运行加速/成功率。currentLLMSS摘要100attempt而非120，预算/版本须分开；author250–300USD/evolution不等最终placer运行成本。",
+      "tools_and_access": "全部357源码/patch/模板/知识blobs取得hash匹配；rootBSD3，上游OpenROAD/PDK/原论文另列。初始CSV/测试DEF与外部路径需自行生成/配置；本轮不构建运行。currentOpenROADspecG20/eval同3design，非paperheldout全流程配置。",
+      "limitations": "currentcode_evolver对失败/超时/无法parse的design continue，按剩余可用结果平均，未落实固定三题−100分母；缺runtime归0也免罚，需全ledger核影响。paperTable4/5 WNS2/TNS3对退步且仍负WNS，不能称所有时序保持/closure；打印HPWL≥2%为9/12而文字10/12待raw核。mergedDPLgen7与paperbestgen13需映射。",
+      "industrial_value": "研究判断：真实agent算法研发，原生placer仍负责数值优化；值得研究可迁移算法diff，但评分失败分母、公开配置与paper版本、全部轨迹开放程度需补齐后公平比较。",
+      "primary_sources": "https://vlsicad.ucsd.edu/Publications/Conferences/430/c430.pdf; https://github.com/ABKGroup/HELIX/tree/f9ccc7068c878c8e56bbf25795511008875da869",
+      "evidence_status": "第二轮12h进行中；一手正文/固定Git源码和数据静态核查，HELIX357/AuDoPEDA53全部Gitblobs与归档/代码/数表核查；未执行模型、EDA、仿真、形式工具或第三方代码。",
+      "next_verification": "需冻结逐trial的输入、agent版本、原始反馈/成功硬门/失败分母/成本与许可；论文成绩与当前配置不一致处需原始运行记录，不默改作者成绩。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "pd-helix-dreamplace-transfer",
+      "benchmark_family": "HELIX placement code evolution",
+      "name": "HELIX / DREAMPlace optimizer-code transfer study",
+      "category": "后端/全局布局算法研发agent",
+      "artifact_type": "同框架迁移至既有DREAMPlace/ISPD2005；非新独立数据集",
+      "task_layer": "Python/PyTorch optimizer源码→ISPD HPWL反馈",
+      "version": "ICCAD2026 /repo f9ccc706 /spec_dreamplace",
+      "input": "DREAMPlace源码/同进化模板；adaptec1和bigblue1作两训练design，ISPD2005八case作evaluation。EvoPlace为另一方法的publishedperdesign最佳optimizerconfigs，并非HELIx新建测试集。",
+      "task": "进化优化器/密度更新等源码，复用数值placer完成globalplacement；本实验评价HPWL，不等整个RTL-to-GDS/PPA/DRC/LVS工程验收或layoutagent。",
+      "output": "可读Pythonpatch与HPWL/runtime、单best摘要；当前BEST摘要说binarybuildfailed/0sourcefiles且evolution_commits为空，是相应发布工件边界，不据此判所有数值结果失败。",
+      "metrics": "paper/current20gens、μ5λ8；同score函数按2trainingdesign平均。八eval中EvoPlace一例diverge，表中共同7case geoHPWL改善HELIX.61% vsEvoPlace.50%，条件分母必须保留；主OpenROAD12designnode的4.5%不能套此轨。",
+      "baseline": "EvoPlace 30–930generation perdesign configs vsHELIX一份code20generation；约60×fewer generations不是60×fewer model/toolcalls或相同walltime证明；模型、硬件、失败与完整搜索成本仍要对齐。",
+      "tools_and_access": "rootBSD3；公开DREAMPlace adapter/eval Python及patch，ISPD来源/原库许可另列。currentDreamPlace skip_repairtrue、buildtimeout120s/agent2400s，未运行GPU/模型。本轮核357个同repo文件，不冒充GPU基准复现。",
+      "limitations": "当前八case跨方法选择共同可用七例，不能静默删除diverged一例后宣称全套成功。currentdefaultbaselineCSV外部生成，真实raw八题score/完整candidateledger未定位；22示例prompt不是可回放完整policyrollout。",
+      "industrial_value": "研究判断：有意义的跨代码库迁移与原生optimizer协作实验；适合作算法研究而非工业PPA/signoff或完整agent行为训练benchmark。",
+      "primary_sources": "https://vlsicad.ucsd.edu/Publications/Conferences/430/c430.pdf; https://github.com/ABKGroup/HELIX/tree/f9ccc7068c878c8e56bbf25795511008875da869",
+      "evidence_status": "第二轮12h进行中；一手正文/固定Git源码和数据静态核查，HELIX357/AuDoPEDA53全部Gitblobs与归档/代码/数表核查；未执行模型、EDA、仿真、形式工具或第三方代码。",
+      "next_verification": "需冻结逐trial的输入、agent版本、原始反馈/成功硬门/失败分母/成本与许可；论文成绩与当前配置不一致处需原始运行记录，不默改作者成绩。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "pd-audopeda-code-improvement",
+      "benchmark_family": "AuDoPEDA code-improvement method",
+      "name": "AuDoPEDA / repository-grounded OpenROAD QoR improvement",
+      "category": "后端/EDA算法研发与局部形式契约",
+      "artifact_type": "生产工具源码改进方法与三patch配套；非100独立设计",
+      "task_layer": "仓库/文献→计划定位→sourcepatch→proxy/fullflow与局部证明",
+      "version": "ICCAD2026 DOI10.1145/3831252.3834240；repo d396422 /Zenodo22020200",
+      "input": "固定OpenROAD7bc521f/ORFS93c42b及GPL/DPL/RSZ docs/文献；三目标DPL routedwirelength、GPL/RSZ ECP、RSZ totalpower。同diff复用于ASAP7/NG45/SKY130与既有aes/ibex/jpeg/宏design，100是候选diff audit而非100IP。",
+      "task": "S0构仓库codegraph/docs，S1高层方向，S2定位API/实现步骤，S3生成修复源码并build/proxy/终flow评QoR，适用时S4实例化数学契约，用Aristotle生成/AXLE或本地Lean校验。源码改进与flowknobtuning区分。",
+      "output": "三headlinecodepatch/source/局部Lean模块、PPA表与计划文档；每candidate完整runroot是作者流程能力，当前包只提供collateral，不能称整个无人搜索harness/历史训练集已发布。",
+      "metrics": "baseline归一化signed S=Σα(base−cand)/max(|base|,ε)，targetweight1/secondary小权重，build/test/DRC/timing硬门优先。paperfinalaudit rWL33/36/ECP28/30/PWR31/34=92/100wins；每目标mean/median限improvingcandidates，非所有100平均效应。",
+      "baseline": "nativeOpenROAD及3点同time/compute TPE flowtuning；作者平均rWL额外改善2.11%，不等全设计普遍dominance。WL/ECP/PWR各24/19/22searchcandidate，38/30/34compile，5/4/5fullflow，和100finalaudit队列须有ID映射，不混算。",
+      "tools_and_access": "53Gitfiles全部核、ZenodoZIP381662B官方MD5一致；currentBSD3、归档无rootLICENSE，上游PDK单列。公开headlineLean68/50/49theorems static0sorry；待证明statement/input模板各3sorry属预期，不把模板当已完成证明。本轮未编译Lean/运行EDA/调用API。",
+      "limitations": "Lean证明选定数学kernel bounds/guard/monotone，不模型化全部C++语义/全局QoR/功能等价。paper主physicalrun EQYdisabled，timingclamp单例manifest不等Table主榜全由formalgate验收。404个1ps扰动点非404独立design；缺raw全ledger，不能独立复算92wins/相关统计。",
+      "industrial_value": "研究判断：有实质源码/计划/局部可审阅证明的EDA研发agent研究；34–45h级完整搜索成本与原生算法作用需区分。paper整体search34–45h/目标、S0 4.6h和$77作者LLM估算不能当最终EDA每次运行成本或完全证明安全。",
+      "primary_sources": "https://vlsicad.ucsd.edu/Publications/Conferences/431/c431.pdf; https://github.com/ABKGroup/AuDoPEDA/tree/d396422e27496b6836ecbc7229edff33f642525c; https://zenodo.org/records/22020200",
+      "evidence_status": "第二轮12h进行中；一手正文/固定Git源码和数据静态核查，HELIX357/AuDoPEDA53全部Gitblobs与归档/代码/数表核查；未执行模型、EDA、仿真、形式工具或第三方代码。",
+      "next_verification": "需冻结逐trial的输入、agent版本、原始反馈/成功硬门/失败分母/成本与许可；论文成绩与当前配置不一致处需原始运行记录，不默改作者成绩。",
+      "retrieved_date": "2026-10-20"
+    }
+  ],
+  "audits": {
+    "helix": {
+      "as_of": "2026-10-20T09:19:13.475019+00:00",
+      "static_only": true,
+      "repo": "ABKGroup/HELIX",
+      "pinned_commit": "f9ccc7068c878c8e56bbf25795511008875da869",
+      "verified_gitblobs": 357,
+      "tree_entries": 469,
+      "root_license": "BSD3-Clause; upstreamOpenROAD/DREAMPlace/PDK/corpuspaper rights separate",
+      "released_resources": {
+        "example_prompts": 22,
+        "example_prompt_paths": [
+          "example_prompts/evo-20260320-222647-476798/gen000-mutate_param-12fd4b/prompt.txt",
+          "example_prompts/evo-20260320-222647-476798/gen008-mutate_creative-adfe79/prompt.txt",
+          "example_prompts/evo-20260320-222647-476798/gen015-mutate_struct-5f978a/prompt.txt",
+          "example_prompts/evo-20260325-012334-b6e5b4/gen000-mutate_lit-6f2aa2/prompt.txt",
+          "example_prompts/evo-20260325-012334-b6e5b4/gen008-mutate_lit-babcd6/prompt.txt",
+          "example_prompts/evo-20260325-012334-b6e5b4/gen015-mutate_param-47cb5b/prompt.txt",
+          "example_prompts/evo-20260326-130240-967074/gen000-mutate_lit-96d098/prompt.txt",
+          "example_prompts/evo-20260326-130240-967074/gen008-mutate_lit-572250/prompt.txt",
+          "example_prompts/evo-20260326-130240-967074/gen015-mutate_struct-e6f860/prompt.txt",
+          "example_prompts/evo-20260327-234101-3cc475/gen000-mutate_lit-928c55/prompt.txt",
+          "example_prompts/evo-20260327-234101-3cc475/gen010-mutate_struct-5a1879/prompt.txt",
+          "example_prompts/evo-20260327-234101-3cc475/gen020-mutate_struct-ff73b8/prompt.txt",
+          "example_prompts/evo-20260327-234523-89d62a/gen000-mutate_lit-4953c3/prompt.txt",
+          "example_prompts/evo-20260327-234523-89d62a/gen010-mutate_param-bbfc62/prompt.txt",
+          "example_prompts/evo-20260327-234523-89d62a/gen020-mutate_param-b5c6ad/prompt.txt",
+          "example_prompts/evo-20260408-153629-a331ce/gen000-mutate_param-369b8a/prompt.txt",
+          "example_prompts/evo-20260408-154427-575c6b/gen000-mutate_lit-3526c9/prompt.txt",
+          "example_prompts/evo-20260408-154427-575c6b/gen001-mutate_param-961166/prompt.txt",
+          "example_prompts/evo-20260408-154427-575c6b/gen002-mutate_struct-b581ca/prompt.txt",
+          "example_prompts/evo-20260408-180544-be1286/gen000-mutate_lit-9139fb/prompt.txt",
+          "example_prompts/evo-20260408-180544-be1286/gen011-crossover-90f879/prompt.txt",
+          "example_prompts/evo-20260408-180544-be1286/gen020-mutate_struct-575a4f/prompt.txt"
+        ],
+        "literature_json_cards": 88,
+        "selected_best_individuals": [
+          {
+            "path": "saved_best/evo-20260320-222647-476798_gen007-crossover-0e13c9/BEST_INDIVIDUAL.md",
+            "run": "evo-20260320-222647-476798",
+            "generation": "15",
+            "candidates": "130",
+            "compile_success": "100%",
+            "fitness": "1.0279",
+            "commit": "b741eaf4874591538ca8358f6e828edb175a7e5b"
+          },
+          {
+            "path": "saved_best/evo-20260325-012334-b6e5b4_gen012-mutate_struct-32701b/BEST_INDIVIDUAL.md",
+            "run": "evo-20260325-012334-b6e5b4",
+            "generation": "15",
+            "candidates": "100",
+            "compile_success": "1.0",
+            "fitness": "1.0171",
+            "commit": "49d83d964e"
+          },
+          {
+            "path": "saved_best/evo-20260326-130240-967074_gen015-mutate_lit-e8b414/BEST_INDIVIDUAL.md",
+            "run": "evo-20260326-130240-967074",
+            "generation": "15",
+            "candidates": "119",
+            "compile_success": "1.0",
+            "fitness": "1.0119",
+            "commit": "46edf2e872"
+          },
+          {
+            "path": "saved_best/evo-20260327-234101-3cc475_gen016-mutate_struct-69ed8c/BEST_INDIVIDUAL.md",
+            "run": "evo-20260327-234101-3cc475",
+            "generation": "20",
+            "candidates": "154",
+            "compile_success": "1.0",
+            "fitness": "1.0170",
+            "commit": "e11bfdec65"
+          },
+          {
+            "path": "saved_best/evo-20260327-234523-89d62a_gen016-mutate_creative-af194c/BEST_INDIVIDUAL.md",
+            "run": "evo-20260327-234523-89d62a",
+            "generation": "20",
+            "candidates": "135",
+            "compile_success": "1.0",
+            "fitness": "1.0176",
+            "commit": "307c866be04afc14ff03b37c115127e050b92726"
+          },
+          {
+            "path": "saved_best/evo-20260408-180544-be1286_gen012-mutate_creative-9d1df0/BEST_INDIVIDUAL.md",
+            "run": "evo-20260408-180544-be1286",
+            "generation": "20",
+            "candidates": "171",
+            "compile_success": "1.0",
+            "fitness": "1.0034",
+            "commit": "3ea6510"
+          }
+        ],
+        "telemetry_jsonl_files": [],
+        "csv_metric_files": [],
+        "history_mbox_files": [
+          "saved_best/evo-20260320-222647-476798_gen007-crossover-0e13c9/patches/full_format_patch.mbox",
+          "saved_best/evo-20260325-012334-b6e5b4_gen012-mutate_struct-32701b/patches/full_format_patch.mbox",
+          "saved_best/evo-20260326-130240-967074_gen015-mutate_lit-e8b414/patches/full_format_patch.mbox",
+          "saved_best/evo-20260327-234101-3cc475_gen016-mutate_struct-69ed8c/patches/full_format_patch.mbox",
+          "saved_best/evo-20260327-234523-89d62a_gen016-mutate_creative-af194c/patches/full_format_patch.mbox",
+          "saved_best/evo-20260408-180544-be1286_gen012-mutate_creative-9d1df0/patches/full_format_patch.mbox"
+        ]
+      },
+      "spec": {
+        "target_module": "gpl",
+        "corpus_dir": "corpus/",
+        "targets": {
+          "gpl": {
+            "source_dir": "<HELIX_ROOT>/helix_playground/OpenROAD/src/gpl",
+            "call_graph": "corpus/call_graphs/gpl.json",
+            "pseudocode_dir": "corpus/pseudocode/gpl",
+            "entry_functions": [
+              "Replace::doPlace",
+              "NesterovPlace::doNesterovPlace"
+            ],
+            "key_function_groups": [
+              "nesterov_core",
+              "bin_density",
+              "wirelength",
+              "timing_driven",
+              "initial_place"
+            ],
+            "key_files": [
+              "src/nesterovBase.cpp",
+              "src/nesterovPlace.cpp",
+              "src/placerBase.cpp",
+              "src/timingBase.cpp",
+              "src/fft.cpp",
+              "src/initialPlace.cpp"
+            ],
+            "parameter_catalog": "corpus/parameters/gpl_parameters.yaml",
+            "profiling_data": "corpus/profiling/gpl_hotspots.yaml",
+            "design_stats": "corpus/design_stats/gpl_design_stats.yaml",
+            "optimizer_reference": "corpus/literature/optimizer_variants.md",
+            "lessons_dir": "corpus/lessons"
+          },
+          "dpl": {
+            "source_dir": "<HELIX_ROOT>/helix_playground/OpenROAD/src/dpl",
+            "call_graph": "corpus/call_graphs/dpl.json",
+            "pseudocode_dir": "corpus/pseudocode/dpl",
+            "entry_functions": [
+              "Opendp::detailedPlacement",
+              "Opendp::improvePlacement"
+            ],
+            "key_function_groups": [
+              "detailed_placement",
+              "optimization",
+              "legalization"
+            ],
+            "optimization_files": [
+              "src/optimization/detailed_random.cxx",
+              "src/optimization/detailed_global.cxx",
+              "src/optimization/detailed_manager.cxx",
+              "src/optimization/detailed_reorder.cxx",
+              "src/optimization/detailed_mis.cxx",
+              "src/optimization/detailed_vertical.cxx",
+              "src/optimization/detailed_orient.cxx",
+              "src/objective/detailed_abu.cxx",
+              "src/objective/detailed_hpwl.cxx"
+            ],
+            "key_files": [
+              "src/optimization/detailed_random.cxx",
+              "src/optimization/detailed_global.cxx",
+              "src/optimization/detailed_manager.cxx",
+              "src/objective/detailed_abu.cxx",
+              "src/objective/detailed_hpwl.cxx",
+              "src/Place.cpp"
+            ],
+            "parameter_catalog": "corpus/parameters/dpl_parameters.yaml",
+            "profiling_data": "corpus/profiling/dpl_hotspots.yaml",
+            "lessons_dir": "corpus/lessons"
+          }
+        },
+        "literature": {
+          "cards_dir": "corpus/literature/cards",
+          "source_pdfs": "corpus/literature/pdfs"
+        },
+        "baseline": {
+          "metrics_csv": "corpus/baseline/gpl_baseline.csv",
+          "logs_dir": ".evo/gpl_baselines"
+        },
+        "designs": {
+          "evolution": [
+            "aes_1",
+            "ibex_1",
+            "jpeg_1"
+          ],
+          "evaluation": [
+            "aes_1",
+            "ibex_1",
+            "jpeg_1"
+          ]
+        },
+        "fitness": {
+          "w1": 1.0,
+          "w2": 0.5,
+          "gamma": 1.5,
+          "zeta": 100.0,
+          "early_stop_threshold": 0.7
+        },
+        "evolution": {
+          "mu": 5,
+          "lambda": 8,
+          "G_max": 20,
+          "k_tournament": 3,
+          "elitism": 3,
+          "max_repair_attempts": 5
+        },
+        "operator_weights": {
+          "a_param": 0.3,
+          "a_struct": 0.2,
+          "a_lit": 0.25,
+          "a_creative": 0.2,
+          "a_xover": 0.05,
+          "stagnation_threshold": 3,
+          "stagnation_boost": 0.1
+        },
+        "build": {
+          "command": "make -j 80",
+          "threads": 80,
+          "build_dir": "<HELIX_ROOT>/helix_playground/OpenROAD/build",
+          "timeout_s": 1800,
+          "repo_root": "<HELIX_ROOT>/helix_playground/OpenROAD",
+          "bench_command": "<HELIX_ROOT>/scripts/openroad_gpl_bench.sh",
+          "singularity_image": "<SINGULARITY_IMAGE>"
+        },
+        "metrics_parsing": {
+          "hpwl_grep": "^legalized HPWL",
+          "hpwl_field": 3,
+          "runtime_grep": "^Elapsed:",
+          "runtime_field": 2,
+          "runtime_unit": "ms"
+        },
+        "agent": {
+          "model": "",
+          "timeout_s": 2400,
+          "force": true,
+          "approve_mcps": true,
+          "trust": true
+        },
+        "llm": {
+          "backend": "claude",
+          "model": "",
+          "timeout_s": 1200,
+          "bottleneck_timeout_s": 1200
+        },
+        "analysis": {
+          "bo_env_python": "<BO_ENV_PYTHON>",
+          "enable_heatmaps": true
+        }
+      },
+      "dreamplace_spec": {
+        "target_module": "dreamplace_gp",
+        "project_name": "DREAMPlace",
+        "language": "Python",
+        "corpus_dir": "corpus/",
+        "targets": {
+          "dreamplace_gp": {
+            "source_dir": "<HELIX_ROOT>/helix_playground/DREAMPlace/dreamplace",
+            "call_graph": "corpus/call_graphs/dreamplace_gp.json",
+            "pseudocode_dir": "corpus/pseudocode/dreamplace_gp",
+            "entry_functions": [
+              "NonLinearPlace.__call__",
+              "place",
+              "BasicPlace.__init__",
+              "PreconditionOp.__call__"
+            ],
+            "key_function_groups": [
+              "optimizer",
+              "density_schedule",
+              "stopping_criteria",
+              "objective_assembly",
+              "wirelength_model",
+              "initial_position_layout",
+              "gradient_preconditioning"
+            ],
+            "key_files": [
+              "NonLinearPlace.py",
+              "PlaceObj.py",
+              "BasicPlace.py",
+              "NesterovAcceleratedGradientOptimizer.py",
+              "Placer.py",
+              "EvalMetrics.py",
+              "Params.py"
+            ],
+            "parameter_catalog": "corpus/parameters/dreamplace_gp_parameters.yaml",
+            "profiling_data": "corpus/profiling/dreamplace_gp_hotspots.yaml",
+            "design_stats": "corpus/design_stats/dreamplace_gp_design_stats.yaml",
+            "optimizer_reference": "corpus/literature/optimizer_variants.md",
+            "lessons_dir": "corpus/lessons"
+          }
+        },
+        "literature": {
+          "cards_dir": "corpus/literature/cards",
+          "source_pdfs": "corpus/literature/pdfs"
+        },
+        "baseline": {
+          "metrics_csv": "corpus/baseline/dreamplace_gp_baseline.csv",
+          "logs_dir": ".evo/dreamplace_baselines"
+        },
+        "designs": {
+          "evolution": [
+            "adaptec1",
+            "bigblue1"
+          ],
+          "evaluation": [
+            "adaptec1",
+            "adaptec2",
+            "adaptec3",
+            "adaptec4",
+            "bigblue1",
+            "bigblue2",
+            "bigblue3",
+            "bigblue4"
+          ]
+        },
+        "fitness": {
+          "w1": 1.0,
+          "w2": 0.5,
+          "gamma": 1.5,
+          "zeta": 100.0,
+          "early_stop_threshold": 0.7
+        },
+        "evolution": {
+          "mu": 5,
+          "lambda": 8,
+          "G_max": 20,
+          "k_tournament": 3,
+          "elitism": 3,
+          "max_repair_attempts": 0
+        },
+        "operator_weights": {
+          "a_param": 0.3,
+          "a_struct": 0.2,
+          "a_lit": 0.25,
+          "a_creative": 0.2,
+          "a_xover": 0.05,
+          "stagnation_threshold": 3,
+          "stagnation_boost": 0.1
+        },
+        "build": {
+          "build_script": "scripts/build_dreamplace_worktree.sh",
+          "command": "echo 'python-only: no compilation needed'",
+          "threads": 8,
+          "build_dir": "<HELIX_ROOT>/helix_playground/DREAMPlace/install",
+          "timeout_s": 120,
+          "repo_root": "<HELIX_ROOT>/helix_playground/DREAMPlace",
+          "bench_command": "<HELIX_ROOT>/scripts/dreamplace_bench.sh",
+          "singularity_image": "<DREAMPLACE_CONTRIB_ROOT>/DREAMPlace/DREAMPlace-apptainer/containers/dreamplace-prebuilt.sif",
+          "skip_repair": true
+        },
+        "metrics_parsing": {
+          "hpwl_grep": "wHPWL",
+          "hpwl_field": 2,
+          "runtime_grep": "placement takes",
+          "runtime_field": 3,
+          "runtime_unit": "s"
+        },
+        "agent": {
+          "model": "",
+          "timeout_s": 2400,
+          "force": true,
+          "approve_mcps": true,
+          "trust": true
+        },
+        "llm": {
+          "backend": "claude",
+          "model": "",
+          "timeout_s": 1200,
+          "bottleneck_timeout_s": 1200
+        },
+        "analysis": {
+          "bo_env_python": "<BO_ENV_PYTHON>",
+          "enable_heatmaps": false,
+          "enable_def_analysis": false
+        }
+      },
+      "paper_scope": {
+        "OpenROAD_design_node_pairs": 12,
+        "source_designs": [
+          "aes",
+          "ibex",
+          "jpeg",
+          "cva6",
+          "swerv_wrapper",
+          "ariane37"
+        ],
+        "evolution": [
+          "aes-ASAP7",
+          "ibex-ASAP7",
+          "jpeg-ASAP7"
+        ],
+        "heldout_source_designs": [
+          "cva6",
+          "swerv_wrapper",
+          "ariane37"
+        ],
+        "mu": 5,
+        "offspring_lambda": 8,
+        "generations": 15,
+        "independent_runs_permodule": 3,
+        "selection": "bestfitness run chosen; combineGPL+DPL",
+        "five_trial_perturbation_ps": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ],
+        "main_HPWL_geomean_percent": 4.5,
+        "main_RWL_geomean_percent": 5.6,
+        "LLM_single_shot_attempts": 120,
+        "flow_BO_trials": 400,
+        "DREAMPlace_training_designs": [
+          "adaptec1",
+          "bigblue1"
+        ],
+        "DREAMPlace_eval_designs": 8,
+        "DREAMPlace_common_nondiverged": 7,
+        "DREAMPlace_mean_reduction_percent": 0.61,
+        "EvoPlace_common_reduction_percent": 0.5
+      },
+      "printed_table_audit": {
+        "design_order": [
+          "NG45-aes",
+          "NG45-ibex",
+          "NG45-jpeg",
+          "NG45-cva6",
+          "NG45-swerv",
+          "NG45-ariane37",
+          "ASAP7-aes",
+          "ASAP7-ibex",
+          "ASAP7-jpeg",
+          "ASAP7-cva6",
+          "ASAP7-swerv",
+          "ASAP7-ariane37"
+        ],
+        "hpwl_delta_percent": [
+          -8,
+          -1,
+          -5,
+          -9,
+          -8,
+          -1,
+          -4,
+          -2,
+          -6,
+          -1,
+          -2,
+          -6
+        ],
+        "rwl_delta_percent": [
+          -6,
+          -2,
+          -5,
+          -9,
+          -8,
+          -1,
+          -2,
+          -1,
+          -23,
+          -1,
+          -1,
+          -6
+        ],
+        "hpwl_improvements_at_least_2_percent_visible": 9,
+        "paper_claim_atleast2": 10,
+        "wns_worsened": [
+          "NG45-aes",
+          "ASAP7-ibex"
+        ],
+        "tns_worsened": [
+          "NG45-aes",
+          "NG45-ibex",
+          "ASAP7-ibex"
+        ],
+        "interpretation": "roundintegerprintedHPWLcounts9/12nottext10/12; rawperpairnumbersneeded. WNS2/TNS3regressionsfromprintedTables4/5; doesnotdisprovewirelengthgain"
+      },
+      "current_scoring": {
+        "per_design": "w1*HPWLbase/HPWLcand−w2*max(0,timecand/timebase−gamma); failedcall path requiresseparatehandling",
+        "aggregate": "meanofper_design_scoresactuallypresent",
+        "defaults": {
+          "w1": 1,
+          "w2": 0.5,
+          "gamma": 1.5,
+          "zeta": 100
+        },
+        "failure_findings": [
+          "scorefunctionsupports−zeta butcode_evolver skipsfailednonzero/timeout/unparseddesigns andaggregatesremaining; missingbaseline also skipped",
+          "earlystop can skipremainingdesigns andmeanusesresultsubset; retainallfixeddesigns/recordfailureswhencomparingmodels",
+          "missingruntime parserdefaults0 ->runtimepenalty0; noindependentlymeasuredsearchcampaignwallcostinfitness",
+          "currentdefaultG_max20 vs paper15; currentOpenROADspec evolution/evaluation bothsame3names, notpaperfullheldoutsuiteautomatically"
+        ]
+      },
+      "findings": [
+        "source-levelplacementalgorithmevolutionmethod, notnew12independentbenchmarkIPs; GPL/DPLmainflow andDREAMPlaceportability differentmetrics/budgets",
+        "innerloopHPWL/runtime notpostrouteRWL/timing/power; downstreamre-evalrequired. NoLLMneededafterselectedmodifiedplacercompiled",
+        "rawLLMweightsfrozen; operatorportfolio/parentselection/history/reflection/refinement producecodemutations; buildrepair/refineextraLLMcalls notonecandidateonecall",
+        "paperLLMSS120attempts vscurrentartifactSUMMARY100attempts perGPL/DPL; DPLbaselineartifactall100samefitness. Needversionmappingbeforeusing7xasuniformbudgetinference",
+        "paperbestDPLgen13 vsreleasedmergeddocgen7 lineage; genuinecodepatches/selectedhistory available butnotfullallcandidateprompt/action/QoR/costlogs",
+        "README97literaturecards vs current88JSONcards; versiondifference preserve actualcurrentcount",
+        "currentrepo22exampleprompts and6BESTsummaries/6mboxfiles; zeroCSV/JSONL resultfiles, telemetrywriter code notpublishedtrainingtrace",
+        "initialbaselineCSV/config paths aregenerated/externalandmustbecaptured; currenttree notfullyselfcontainedfrozendesign/scorepack",
+        "paperC++buildsurvivalandlegality intendedgates, currentpartialfailureskip needsauditrawcampaignbeforequantifyingimpact; noEDAexecutedhere",
+        "READMEpreserve-timing shorthandnotallcaseproof: printedTables4/5 WNS2/TNS3worsen, allWNSremainnegative; wirelengthgainnotfulltimingclosure",
+        "nativeOpenROADbaseline, sameBOtuningbudget400each andsameORCLLMSSsupportmethodcomponents; totalsearch250–300USD/evolutionauthorclaim notfinalplacer runtime",
+        "DREAMPlaceEvoPlace usespublishedperdesignconfigspickedover30–930generations vsoneevolvedcode20gens; onebaseline design diverges, common7denomconditional; reportdivergence notremovequietly",
+        "headlineOpenROAD12node/fivetrial/3repeatedevolutions notsameas12IPsand60independentdesigns; sourcebookliteraturecards/curatedlessons nottoolinteractiontraces"
+      ]
+    },
+    "qoragents": {
+      "as_of": "2026-10-20T09:19:13.528701+00:00",
+      "static_only": true,
+      "repo": "ABKGroup/AuDoPEDA",
+      "pinned_commit": "d396422e27496b6836ecbc7229edff33f642525c",
+      "verified_gitblobs": 53,
+      "tree_entries": 81,
+      "archive": {
+        "record": 22020200,
+        "bytes": 381662,
+        "md5": "0bdac96073493591008474c15bde169a",
+        "sha256": "57520f1d7ae806ea48e68051a6af40f4015bde8aefa73c16f40bef1e24e2f802",
+        "files": 52,
+        "comparison_counts": {
+          "same_after_CRLF_normalization": 51,
+          "missing_in_archive": 1,
+          "content_difference": 1
+        },
+        "file_comparisons": [
+          {
+            "path": "EVALUATION_RESULTS.md",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "LICENSE",
+            "status": "missing_in_archive"
+          },
+          {
+            "path": "README.md",
+            "status": "content_difference"
+          },
+          {
+            "path": "diffs/README.md",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "diffs/ecp/OpenROAD_ecp.patch",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "diffs/pwr/OpenROAD_pwr.patch",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "diffs/wl/OpenROAD_rwl.patch",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "docs/dpl.md",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "docs/gpl.md",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "docs/rsz.md",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "formal/formal_gate.py",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "formal/headline-contracts/README.md",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "formal/headline-contracts/lake-manifest.json",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "formal/headline-contracts/lakefile.toml",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "formal/lean-artifacts/README.md",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "formal/lean-artifacts/openroad_timing_weight_clamp/README.md",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "formal/lean-artifacts/openroad_timing_weight_clamp/aristotle_output/ARISTOTLE_SUMMARY.md",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "formal/lean-artifacts/openroad_timing_weight_clamp/aristotle_output/REPAIR_DIFF.diff",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "formal/lean-artifacts/openroad_timing_weight_clamp/aristotle_output/lake-manifest.json",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "formal/lean-artifacts/openroad_timing_weight_clamp/aristotle_output/lakefile.toml",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "formal/lean-artifacts/openroad_timing_weight_clamp/manifest/openroad_timing_weight_clamp.json",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "formal/lean-artifacts/openroad_timing_weight_clamp/patch/openroad_timing_weight_clamp.patch",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "orfs_customizations.patch",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "plans/dpl1.md",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "plans/dpl2.md",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "plans/dpl3.md",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "plans/execution_plan_for_task.md",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "plans/proposal_1_power-_and_timing-aware_mbff_synthesis.md",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "reconstruct.sh",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "diffs/ecp/src/gpl/src/nesterovBase.cpp",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "diffs/ecp/src/gpl/src/nesterovBase.h",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "diffs/ecp/src/gpl/src/nesterovPlace.cpp",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "diffs/ecp/src/gpl/src/replace.cpp",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "diffs/ecp/src/gpl/src/timingBase.cpp",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "diffs/ecp/src/gpl/src/timingBase.h",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "diffs/ecp/src/rsz/src/BaseMove.cc",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "diffs/ecp/src/rsz/src/Resizer.cc",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "diffs/wl/src/dpl/src/infrastructure/Grid.cpp",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "diffs/wl/src/dpl/src/infrastructure/Grid.h",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "diffs/wl/src/dpl/src/optimization/detailed_global.h",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "diffs/wl/src/dpl/src/optimization/detailed_manager.h",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "diffs/wl/src/dpl/src/util/journal.h",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "formal/headline-contracts/OpenRoadEcpFull.lean",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "formal/headline-contracts/OpenRoadPwrFull.lean",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "formal/headline-contracts/OpenRoadWlFull.lean",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "formal/lean-artifacts/openroad_timing_weight_clamp/aristotle_input/OpenRoadTimingWeight.lean",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "formal/lean-artifacts/openroad_timing_weight_clamp/aristotle_output/OpenRoadTimingWeight.lean",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "formal/lean-artifacts/openroad_timing_weight_clamp/lean_contract/openroad_timing_weight.proof.lean",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "formal/lean-artifacts/openroad_timing_weight_clamp/lean_contract/openroad_timing_weight.statement.lean",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "diffs/ecp/src/rsz/include/rsz/Resizer.hh",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "diffs/wl/src/dpl/src/optimization/detailed_global.cxx",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "formal/headline-contracts/lean-toolchain",
+            "status": "same_after_CRLF_normalization"
+          },
+          {
+            "path": "formal/lean-artifacts/openroad_timing_weight_clamp/aristotle_output/lean-toolchain",
+            "status": "same_after_CRLF_normalization"
+          }
+        ]
+      },
+      "root_license": "BSD3-Clause currentGit; Zenodo lacksLICENSE file; upstreamOpenROAD/ORFS/PDK separate",
+      "pins": {
+        "OpenROAD": "7bc521f36a34c986885473856e9f5b464093e38a",
+        "ORFS": "93c42b2e6877550589af655e0eb299038426e915",
+        "selected_ECP_flow": "1edbcba1243b91213f8dde2b89b623fe114300e6"
+      },
+      "released_lean_static_counts": [
+        {
+          "path": "formal/headline-contracts/OpenRoadEcpFull.lean",
+          "theorems": 50,
+          "sorry_tokens": 0,
+          "axiom_declarations": 0
+        },
+        {
+          "path": "formal/headline-contracts/OpenRoadPwrFull.lean",
+          "theorems": 49,
+          "sorry_tokens": 0,
+          "axiom_declarations": 0
+        },
+        {
+          "path": "formal/headline-contracts/OpenRoadWlFull.lean",
+          "theorems": 68,
+          "sorry_tokens": 0,
+          "axiom_declarations": 0
+        },
+        {
+          "path": "formal/lean-artifacts/openroad_timing_weight_clamp/aristotle_input/OpenRoadTimingWeight.lean",
+          "theorems": 3,
+          "sorry_tokens": 3,
+          "axiom_declarations": 0
+        },
+        {
+          "path": "formal/lean-artifacts/openroad_timing_weight_clamp/aristotle_output/OpenRoadTimingWeight.lean",
+          "theorems": 3,
+          "sorry_tokens": 0,
+          "axiom_declarations": 0
+        },
+        {
+          "path": "formal/lean-artifacts/openroad_timing_weight_clamp/lean_contract/openroad_timing_weight.proof.lean",
+          "theorems": 3,
+          "sorry_tokens": 0,
+          "axiom_declarations": 0
+        },
+        {
+          "path": "formal/lean-artifacts/openroad_timing_weight_clamp/lean_contract/openroad_timing_weight.statement.lean",
+          "theorems": 3,
+          "sorry_tokens": 3,
+          "axiom_declarations": 0
+        }
+      ],
+      "paper_summary": {
+        "objective_families": [
+          "DPL routedwirelength",
+          "GPL/RSZ effectiveclockperiod",
+          "RSZ power"
+        ],
+        "search_candidates": {
+          "WL": 24,
+          "ECP": 19,
+          "PWR": 22
+        },
+        "compile_attempts": [
+          38,
+          30,
+          34
+        ],
+        "full_signoff_promotions": [
+          5,
+          4,
+          5
+        ],
+        "audit_candidates": 100,
+        "audit_objective_counts": [
+          36,
+          30,
+          34
+        ],
+        "audit_wins": [
+          33,
+          28,
+          31
+        ],
+        "audited_calls": 1126,
+        "input_tokens": 33640000,
+        "output_tokens": 4200000,
+        "cost_USD_author_estimate": 77,
+        "search_wallhours_perobjective": "34–45",
+        "cold_docs_S0_hours": 4.6,
+        "proxy_minutes_perdesign": "35–90",
+        "fullflow_hours_perdesign": "1.7–5.8"
+      },
+      "findings": [
+        "sourcecodeimprovementmethod and3reusablepatchfamilies, not100independentdesignbenchmarks; finalaudit100candidatediffs differentfrom3search24/19/22 candidatecounts, needIDs/cohortmanifest",
+        "S0repodocs→S1literatureplan→S2source localization→S3code+build/QoR→optionalS4localformal; postedrepositorycollateralnotfullautonomoussearchharness or100runroots",
+        "targetnormalizedsignedscore sum alpha*(base−cand)/max(abs(base),epsilon), targetweight1 andsecondaryweights; subordinatecompile/test/DRC/timingthresholdgates",
+        "mainpaper Table3 EQYdisabled; no claimallphysicaldesignfunctions formallyequivalent. Lean modulesprove mathkernels notallC++semantics/globalQoR/EDAfunctionalcorrectness",
+        "headlineLean authors68/50/49theorems, actualstaticcounts recorded; noLeancompiler/checkerexecuted. No-sorrytokensbyinspection notindependent proofreplay",
+        "input/statement Leanfiles contain3sorry goals each bydesign; completedproof/output andheadline167theorems have0sorry, distinguish templates from claimedproofs",
+        "timingclamp manifest bindsrepo/patch/statement/proof andremoteAXLEchecker, separatedemonstration fromheadlinePPAacceptance",
+        "paper100audit92wins; perobjective mean/median conditiononimprovingcandidates, notall100effectsize; 1-ps404sweep correlatedoperatingpoints, not404independentIPs",
+        "12numericalrWLrows includeexcluded/unroutablereferencecases; preserveN/A andbothbaseline/candidatefailurecounts; donotdropfailuresforglobalclaimedgenerality",
+        "sameheadlinediffappliedover3PDKs andexistingdesignfamilies; normalizedPPAcomparisonmustfixsnapshotandfiveclockperturbationtrials; currentpublicREADME best/median/worst summaries notrawfullrunledger",
+        "matchedTPEbaseline3design-PDKpoints author2.11%meanrWLdifference; supportsnarrowmatchedcomparison notuniversaltoolreplacement",
+        "rootdocs/plans/patches/scopedLeanassets available; complete1126calls,100candidatehistories,404rawscoreCSV/fullconversations notfoundincurrenttree/archive",
+        "archivevsGit mostlyCRLFonly; README contentrevisionandcurrentLICENSEaddition separated fromsemantics ofpatches, donotcallall53changesdifferentcode"
+      ]
+    }
+  }
+}

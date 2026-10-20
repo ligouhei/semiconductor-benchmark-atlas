@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T09:15:57.099711+00:00",
+  "generated_at": "2026-10-20T09:21:31.386301+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 363,
-    "records": 648,
-    "records_with_any_field_audit_entry": 406,
-    "records_with_current_field_audit_snapshot": 373,
+    "families": 365,
+    "records": 651,
+    "records_with_any_field_audit_entry": 409,
+    "records_with_current_field_audit_snapshot": 376,
     "records_without_current_field_audit_snapshot": 275
   },
   "requirements_per_record": [
@@ -1432,6 +1432,35 @@
           "limitations": "模型看到目标RTL可能只复述实现；valid断言未保证非空真、独立规格忠实或故障检出。syntaxcorrector是额外模型/调用成本，不能单归功原模型；GoldMine/HARM只是参考并非所有正确property全集",
           "tools_and_access": "作者repo/Jasper2022.06p002、Icarus/GoldMine Python2/HARM；root未见LICENSE。recursive tree截断，已另查root/python_scripts子树；公开results不等完整可移植runner",
           "industrial_value": "仍可作SVA语法与provability入门；完整现代验证应增加非空真、规格/故障coverage，与既有形式工具互补，不能说证明通过即工业验证完成"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "AuDoPEDA code-improvement method",
+      "record_count": 1,
+      "records_with_current_field_audit": 1,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "pd-audopeda-code-improvement",
+          "name": "AuDoPEDA / repository-grounded OpenROAD QoR improvement",
+          "category": "后端/EDA算法研发与局部形式契约",
+          "artifact_type": "生产工具源码改进方法与三patch配套；非100独立设计",
+          "task_layer": "仓库/文献→计划定位→sourcepatch→proxy/fullflow与局部证明",
+          "evidence_status": "第二轮12h进行中；一手正文/固定Git源码和数据静态核查，HELIX357/AuDoPEDA53全部Gitblobs与归档/代码/数表核查；未执行模型、EDA、仿真、形式工具或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-helix-qoragents-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需冻结逐trial的输入、agent版本、原始反馈/成功硬门/失败分母/成本与许可；论文成绩与当前配置不一致处需原始运行记录，不默改作者成绩。",
+          "limitations": "Lean证明选定数学kernel bounds/guard/monotone，不模型化全部C++语义/全局QoR/功能等价。paper主physicalrun EQYdisabled，timingclamp单例manifest不等Table主榜全由formalgate验收。404个1ps扰动点非404独立design；缺raw全ledger，不能独立复算92wins/相关统计。",
+          "tools_and_access": "53Gitfiles全部核、ZenodoZIP381662B官方MD5一致；currentBSD3、归档无rootLICENSE，上游PDK单列。公开headlineLean68/50/49theorems static0sorry；待证明statement/input模板各3sorry属预期，不把模板当已完成证明。本轮未编译Lean/运行EDA/调用API。",
+          "industrial_value": "研究判断：有实质源码/计划/局部可审阅证明的EDA研发agent研究；34–45h级完整搜索成本与原生算法作用需区分。paper整体search34–45h/目标、S0 4.6h和$77作者LLM估算不能当最终EDA每次运行成本或完全证明安全。"
         }
       ]
     },
@@ -5672,6 +5701,56 @@
           "limitations": "论文compiler成功不是独立TB功能正确/形式等价证据；8:2是否按原始设计分组未明确，同设计多mutant可能泄漏；ChatGPT/GPT4因保密省略部分规格，与本地完整输入条件不完全相同",
           "tools_and_access": "工业数据/内部HDL compiler不可公开取得；论文可读，完整公开manifest/scorer/许可未确认；不要求用户披露私有设计",
           "industrial_value": "说明工业编译调试与检索需求；不能拿私有81.93%与公共RTLFixer/VerilogEval直接排序，也不说明逻辑功能问题已解决"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "HELIX placement code evolution",
+      "record_count": 2,
+      "records_with_current_field_audit": 2,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "pd-helix-openroad-evolution",
+          "name": "HELIX / OpenROAD GPL+DPL algorithm evolution",
+          "category": "后端/布局算法研发agent",
+          "artifact_type": "修改生产placer源码的方法评测；复用六源设计双平台",
+          "task_layer": "OpenROAD C++源码+ORC→构建/布局反馈→算法diff",
+          "evidence_status": "第二轮12h进行中；一手正文/固定Git源码和数据静态核查，HELIX357/AuDoPEDA53全部Gitblobs与归档/代码/数表核查；未执行模型、EDA、仿真、形式工具或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-helix-qoragents-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需冻结逐trial的输入、agent版本、原始反馈/成功硬门/失败分母/成本与许可；论文成绩与当前配置不一致处需原始运行记录，不默改作者成绩。",
+          "limitations": "currentcode_evolver对失败/超时/无法parse的design continue，按剩余可用结果平均，未落实固定三题−100分母；缺runtime归0也免罚，需全ledger核影响。paperTable4/5 WNS2/TNS3对退步且仍负WNS，不能称所有时序保持/closure；打印HPWL≥2%为9/12而文字10/12待raw核。mergedDPLgen7与paperbestgen13需映射。",
+          "tools_and_access": "全部357源码/patch/模板/知识blobs取得hash匹配；rootBSD3，上游OpenROAD/PDK/原论文另列。初始CSV/测试DEF与外部路径需自行生成/配置；本轮不构建运行。currentOpenROADspecG20/eval同3design，非paperheldout全流程配置。",
+          "industrial_value": "研究判断：真实agent算法研发，原生placer仍负责数值优化；值得研究可迁移算法diff，但评分失败分母、公开配置与paper版本、全部轨迹开放程度需补齐后公平比较。"
+        },
+        {
+          "id": "pd-helix-dreamplace-transfer",
+          "name": "HELIX / DREAMPlace optimizer-code transfer study",
+          "category": "后端/全局布局算法研发agent",
+          "artifact_type": "同框架迁移至既有DREAMPlace/ISPD2005；非新独立数据集",
+          "task_layer": "Python/PyTorch optimizer源码→ISPD HPWL反馈",
+          "evidence_status": "第二轮12h进行中；一手正文/固定Git源码和数据静态核查，HELIX357/AuDoPEDA53全部Gitblobs与归档/代码/数表核查；未执行模型、EDA、仿真、形式工具或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-helix-qoragents-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需冻结逐trial的输入、agent版本、原始反馈/成功硬门/失败分母/成本与许可；论文成绩与当前配置不一致处需原始运行记录，不默改作者成绩。",
+          "limitations": "当前八case跨方法选择共同可用七例，不能静默删除diverged一例后宣称全套成功。currentdefaultbaselineCSV外部生成，真实raw八题score/完整candidateledger未定位；22示例prompt不是可回放完整policyrollout。",
+          "tools_and_access": "rootBSD3；公开DREAMPlace adapter/eval Python及patch，ISPD来源/原库许可另列。currentDreamPlace skip_repairtrue、buildtimeout120s/agent2400s，未运行GPU/模型。本轮核357个同repo文件，不冒充GPU基准复现。",
+          "industrial_value": "研究判断：有意义的跨代码库迁移与原生optimizer协作实验；适合作算法研究而非工业PPA/signoff或完整agent行为训练benchmark。"
         }
       ]
     },

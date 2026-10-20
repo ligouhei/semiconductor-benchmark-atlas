@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-10-20T09:15:57.002448+00:00",
+  "as_of": "2026-10-20T09:21:31.285432+00:00",
   "status": "第二轮12h进行中的数据/轨迹开放性核查，非完整市场清单或最终结论",
   "scope": "只覆盖本轮已保存一手核查的新增协议；训练样本、评测输入、模型权重、整理后记忆、生成采样轨迹与LLM工具交互轨迹分别描述",
-  "protocol_records": 82,
-  "families": 41,
+  "protocol_records": 85,
+  "families": 43,
   "items": [
     {
       "catalog_id": "lib-siemens-nemo-characterization",
@@ -987,6 +987,42 @@
       "trajectory_and_training_access": "正式公开85题指令/初始project/评测配置与85最终patch，归档1295文件全部与Git字节一致，submission85hash匹配。作者明确不含agenttrajectories、任务生成/qualificationpipeline；paper7132steps/7556calls只是摘要，不是已可下载训练轨迹。rootBSD3，上游RTL/PDK另列。",
       "limits": "paperreported103qualified仅85评测/发布，18大型systemtask未取得。当前crossstagehardgate只覆盖具体声明，14functionalconfigs的EQYbasicSATdepth5/TB与固定输入hash不等完整无界signoff。最终patch/reward真公开而7132step/7556call轨迹不公开，不能直接作多轮agentrollout训练。",
       "primary_sources": "https://vlsicad.ucsd.edu/Publications/Conferences/436/c436.pdf; https://github.com/Ergodex-Labs/eda-env-iccad-26/tree/89dfcbed4376e2065b3917249f6c91f56dbf79bc; https://zenodo.org/records/22990248",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "pd-helix-openroad-evolution",
+      "name": "HELIX / OpenROAD GPL+DPL algorithm evolution",
+      "family": "HELIX placement code evolution",
+      "object_identity": "修改生产placer源码的方法评测；复用六源设计双平台",
+      "task": "μ+λ进化：参数/结构/文献/creative/crossover操作，LLM在worktree改C++；buildrepair、近优候选refine、historydiff注入、placementheatmap与反思指导下一代。选定算法后可原生运行，不需每次placement再调用模型。",
+      "available_materials_and_tools": "全部357源码/patch/模板/知识blobs取得hash匹配；rootBSD3，上游OpenROAD/PDK/原论文另列。初始CSV/测试DEF与外部路径需自行生成/配置；本轮不构建运行。currentOpenROADspecG20/eval同3design，非paperheldout全流程配置。",
+      "trajectory_and_training_access": "全部357Gitblobs核对；公开88literatureJSONcards、22示例prompt、6BESTindividual摘要、选中patch/source/6mboxlineage，未见CSV或JSONL全量评分/telemetry/完整LLM action-observation-cost轨迹。README97cards与current88版本不同。真实代码历史/策展知识不等完整agent训练rollout。",
+      "limits": "currentcode_evolver对失败/超时/无法parse的design continue，按剩余可用结果平均，未落实固定三题−100分母；缺runtime归0也免罚，需全ledger核影响。paperTable4/5 WNS2/TNS3对退步且仍负WNS，不能称所有时序保持/closure；打印HPWL≥2%为9/12而文字10/12待raw核。mergedDPLgen7与paperbestgen13需映射。",
+      "primary_sources": "https://vlsicad.ucsd.edu/Publications/Conferences/430/c430.pdf; https://github.com/ABKGroup/HELIX/tree/f9ccc7068c878c8e56bbf25795511008875da869",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "pd-helix-dreamplace-transfer",
+      "name": "HELIX / DREAMPlace optimizer-code transfer study",
+      "family": "HELIX placement code evolution",
+      "object_identity": "同框架迁移至既有DREAMPlace/ISPD2005；非新独立数据集",
+      "task": "进化优化器/密度更新等源码，复用数值placer完成globalplacement；本实验评价HPWL，不等整个RTL-to-GDS/PPA/DRC/LVS工程验收或layoutagent。",
+      "available_materials_and_tools": "rootBSD3；公开DREAMPlace adapter/eval Python及patch，ISPD来源/原库许可另列。currentDreamPlace skip_repairtrue、buildtimeout120s/agent2400s，未运行GPU/模型。本轮核357个同repo文件，不冒充GPU基准复现。",
+      "trajectory_and_training_access": "全部357Gitblobs核对；公开88literatureJSONcards、22示例prompt、6BESTindividual摘要、选中patch/source/6mboxlineage，未见CSV或JSONL全量评分/telemetry/完整LLM action-observation-cost轨迹。README97cards与current88版本不同。真实代码历史/策展知识不等完整agent训练rollout。",
+      "limits": "当前八case跨方法选择共同可用七例，不能静默删除diverged一例后宣称全套成功。currentdefaultbaselineCSV外部生成，真实raw八题score/完整candidateledger未定位；22示例prompt不是可回放完整policyrollout。",
+      "primary_sources": "https://vlsicad.ucsd.edu/Publications/Conferences/430/c430.pdf; https://github.com/ABKGroup/HELIX/tree/f9ccc7068c878c8e56bbf25795511008875da869",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "pd-audopeda-code-improvement",
+      "name": "AuDoPEDA / repository-grounded OpenROAD QoR improvement",
+      "family": "AuDoPEDA code-improvement method",
+      "object_identity": "生产工具源码改进方法与三patch配套；非100独立设计",
+      "task": "S0构仓库codegraph/docs，S1高层方向，S2定位API/实现步骤，S3生成修复源码并build/proxy/终flow评QoR，适用时S4实例化数学契约，用Aristotle生成/AXLE或本地Lean校验。源码改进与flowknobtuning区分。",
+      "available_materials_and_tools": "53Gitfiles全部核、ZenodoZIP381662B官方MD5一致；currentBSD3、归档无rootLICENSE，上游PDK单列。公开headlineLean68/50/49theorems static0sorry；待证明statement/input模板各3sorry属预期，不把模板当已完成证明。本轮未编译Lean/运行EDA/调用API。",
+      "trajectory_and_training_access": "公开DPL/GPL/RSZ三headlinepatch及重建源码、S0模块文档、S1/S2计划、scopedLean proof与formalchecker接口；全53Gitblobs匹配。归档52文件，51与current仅CRLF差异，README内容更新/rootLICENSE新增分开。未见完整1126calls/100candidate runroots/404rawscores或agent对话轨迹。",
+      "limits": "Lean证明选定数学kernel bounds/guard/monotone，不模型化全部C++语义/全局QoR/功能等价。paper主physicalrun EQYdisabled，timingclamp单例manifest不等Table主榜全由formalgate验收。404个1ps扰动点非404独立design；缺raw全ledger，不能独立复算92wins/相关统计。",
+      "primary_sources": "https://vlsicad.ucsd.edu/Publications/Conferences/431/c431.pdf; https://github.com/ABKGroup/AuDoPEDA/tree/d396422e27496b6836ecbc7229edff33f642525c; https://zenodo.org/records/22020200",
       "record_snapshot_matches_audit": true
     }
   ],
