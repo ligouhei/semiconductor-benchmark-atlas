@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T06:05:17.053052+00:00",
+  "generated_at": "2026-10-20T06:15:00.400510+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 337,
-    "records": 597,
-    "records_with_any_field_audit_entry": 355,
-    "records_with_current_field_audit_snapshot": 322,
+    "families": 338,
+    "records": 600,
+    "records_with_any_field_audit_entry": 358,
+    "records_with_current_field_audit_snapshot": 325,
     "records_without_current_field_audit_snapshot": 275
   },
   "requirements_per_record": [
@@ -575,6 +575,77 @@
           "limitations": "人工审批属于协议一部分，不能当无人agent。bias测试列.05/.1/.2/.5/1V，其中.05/1V也用于校准，不能称五个全heldoutbias；L2µm不重调。4%W另经再校准，是process-sensitive study，不是zero-shot迁移。校准有效参数非氧空位/微观trap唯一实测提取。",
           "tools_and_access": "Sentaurus W-2024.09-SP1与获准本地手册；作者报告GPT5.5及Codex/NeMo Agent Toolkit接口。全文可读；原始测量、deck、norm常数全表、RAG材料与完整轨迹公开未确认。作者博客为通用workflow示例，非实验复现包。",
           "industrial_value": "研究判断：人工审核的器件物理模型选择/参数校准；公开academic或方法实验不自动具有工厂校准、商业签核与独立盲测效力。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "AgenticTCAD",
+      "record_count": 3,
+      "records_with_current_field_audit": 3,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "device-agentictcad-codegen",
+          "name": "AgenticTCAD / 1004条代码生成评测资源",
+          "category": "器件/TCAD代码与优化",
+          "artifact_type": "公开prompt/reference评测资源；完整独立评分协议待补",
+          "task_layer": "从器件自然语言需求生成SDE/SDevice代码",
+          "evidence_status": "第二轮12h进行中；完整tree与JSON/Parquet内容及21selectedGitblobs静态核验，未运行LLM、Sentaurus或第三方harness。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-agentictcad-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "进一步核最终30000训练对、分组split、代码质量/物理行为oracle、完整25轮轨迹与时间/许可预算；保持训练资源与独立benchmark身份区分。",
+          "limitations": "这是1004参数/脚本任务，不是1004独立器件；22源baseline均在eval出现。中间main/shards分别有223/232个evalresponse精确命中，但这些不是已取得的最终训练集，不能据此断言真实train/test泄漏；需源device分组核验。",
+          "tools_and_access": "正式arXiv2512.23742v2(2026-01-13)给作者仓库；v1匿名链接本次仅取到网页壳，不据此判数据未发布。完整tree334entries/295files，22器件baseline目录。根MIT代码许可已取，上游Sentaurus W-2024.09-SP1需自备许可；不再分发原始数据、第三方代码和日志。",
+          "industrial_value": "研究判断：面向Sentaurus代码生成/器件反馈优化；工程模型仍由TCAD求解，工具调用成功不等器件物理可信或新架构泛化。"
+        },
+        {
+          "id": "device-agentictcad-corpus",
+          "name": "AgenticTCAD / 中间数据与SFT构建资源（非独立benchmark）",
+          "category": "器件/TCAD代码与优化",
+          "artifact_type": "公开中间数据/构建脚本；完整论文训练语料未确认",
+          "task_layer": "参数化baseline→自然语言需求生成→ChatML训练对→SFT",
+          "evidence_status": "第二轮12h进行中；完整tree与JSON/Parquet内容及21selectedGitblobs静态核验，未运行LLM、Sentaurus或第三方harness。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-agentictcad-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "进一步核最终30000训练对、分组split、代码质量/物理行为oracle、完整25轮轨迹与时间/许可预算；保持训练资源与独立benchmark身份区分。",
+          "limitations": "原始中间记录可支持数据构建研究，不能直接称30000公开完整训练对或多步agent轨迹。eval1004完整对有gold，应隔离为评测，不能混入训练后仍报告其独立成绩。根MIT不授予商业TCAD工具/手册使用权。",
+          "tools_and_access": "正式arXiv2512.23742v2(2026-01-13)给作者仓库；v1匿名链接本次仅取到网页壳，不据此判数据未发布。完整tree334entries/295files，22器件baseline目录。根MIT代码许可已取，上游Sentaurus W-2024.09-SP1需自备许可；不再分发原始数据、第三方代码和日志。",
+          "industrial_value": "研究判断：面向Sentaurus代码生成/器件反馈优化；工程模型仍由TCAD求解，工具调用成功不等器件物理可信或新架构泛化。"
+        },
+        {
+          "id": "device-agentictcad-nsfet",
+          "name": "AgenticTCAD / 2nm节点NS-FET多agent优化案例",
+          "category": "器件/TCAD代码与优化",
+          "artifact_type": "单器件方法实验/公开流程代码；非规模化盲测suite",
+          "task_layer": "生成结构/mesh/电学仿真脚本，读Ion/Ioff/SS反馈迭代参数；定量target与定性方向提示对照",
+          "evidence_status": "第二轮12h进行中；完整tree与JSON/Parquet内容及21selectedGitblobs静态核验，未运行LLM、Sentaurus或第三方harness。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-agentictcad-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "进一步核最终30000训练对、分组split、代码质量/物理行为oracle、完整25轮轨迹与时间/许可预算；保持训练资源与独立benchmark身份区分。",
+          "limitations": "当前main默认max_iters2，todo终止函数恒False且注释evaluator待定义；不能以clone即复现paper25轮。ext_summary将不收敛/SS1000点排除出曲线展示，仍须计入总成本/失败分母。未确认完整25轮prompt/tool/失败链与专家预算匹配；单case达标不证明跨器件成功率。",
+          "tools_and_access": "正式arXiv2512.23742v2(2026-01-13)给作者仓库；v1匿名链接本次仅取到网页壳，不据此判数据未发布。完整tree334entries/295files，22器件baseline目录。根MIT代码许可已取，上游Sentaurus W-2024.09-SP1需自备许可；不再分发原始数据、第三方代码和日志。",
+          "industrial_value": "研究判断：面向Sentaurus代码生成/器件反馈优化；工程模型仍由TCAD求解，工具调用成功不等器件物理可信或新架构泛化。"
         }
       ]
     },
