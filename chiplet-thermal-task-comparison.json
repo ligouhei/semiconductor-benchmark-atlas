@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T10:34:25.826037+00:00",
+  "as_of": "2026-10-20T11:21:15.461357+00:00",
   "status": "task and input/label comparison, not a new benchmark or ranking",
   "scope": "封装研究按互连架构、资源配置、成本分区、物理布局、3D实现、热场代理与热求解分类。各层输入/输出/独立oracle不同；原生优化器、求解器和代理加速不混为同一agent任务。",
   "items": [

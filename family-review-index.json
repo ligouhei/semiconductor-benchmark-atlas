@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T10:34:26.549378+00:00",
+  "generated_at": "2026-10-20T11:21:16.173555+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 376,
-    "records": 674,
-    "records_with_any_field_audit_entry": 433,
-    "records_with_current_field_audit_snapshot": 400,
+    "families": 380,
+    "records": 684,
+    "records_with_any_field_audit_entry": 443,
+    "records_with_current_field_audit_snapshot": 410,
     "records_without_current_field_audit_snapshot": 274
   },
   "requirements_per_record": [
@@ -767,6 +767,56 @@
           "limitations": "工作负载导出的稳定/toggle模式可过拟合；功耗降低不等真实系统能效/全部负载或硅量测。商业formal结果是作者报告，source/脚本未独立运行；不同层次partition/多workload不当独立IP数。原生综合已CG但RTLcodingstyle仍有余量，支持具体增量而非通用全EDAagent已完成。 作者reportedA single9/13改善→combined12/13、B6/13→12/13，平均收益不是所有case都降；不能当公开可复现bench或wholechip所有工作负载结论。",
           "tools_and_access": "arXiv2606.17461v1全文可读，开源IP引用NVDLA/BlackParrot/CVDP/OpenCores/OpenTitan不等全部fixedinput/TB/agent/artifact已发布。当前未取得正式完整code/data/商业3nm库/PrimePower/formaldeck/原日志；私有两productiondesign未公开。",
           "industrial_value": "现有EDA已提供确定性综合/仿真/功耗与等价检查；模型价值需在同输入/约束/预算及更强原生基线上证明，不因商业工具存在宣称任务已解。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "Agentic Architect microarchitecture",
+      "record_count": 2,
+      "records_with_current_field_audit": 2,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "arch-agenticarchitect-v2",
+          "name": "Agentic Architect v2 / hardware-budgeted CPU policy evolution",
+          "category": "数字前端/微体系结构与RTL优化",
+          "artifact_type": "三域方法评测；框架仍称publication后开源",
+          "task_layer": "微体系结构/策略源码与配置→仿真反馈/性能预测",
+          "evidence_status": "第二轮12h进行中；一手正文/版本历史/作者源码包、官方DPC4的201个Git blobs与结果工作簿静态核；未运行模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-architecture-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+          "limitations": "area指机制或服务cache归一化area，power又可能全processor，勿混成全芯片同比例节约。硬件模型依赖LLM声明结构与计数，物理时序/逻辑等价/RTL实现待独立验证。v1十一trace/无此预算的结果另列，不能混版本。",
+          "tools_and_access": "v2全文/原TeX/figures可读，完整框架/工作负载manifest/CACTI声明与100候选历史未定位；文末仍是willbeopensourceuponpublication。开源OpenEvolve/ChampSim不是本方法benchmark全部开放。",
+          "industrial_value": "研究判断：新版已纠正仅靠扩状态拿性能的问题，考核应包含强seed和面积功耗约束；仿真/CACTI原生工具完成估值，agent负责结构搜索和反馈决策。"
+        },
+        {
+          "id": "arch-agenticarchitect-v1",
+          "name": "Agentic Architect v1 / historical 11-trace study",
+          "category": "数字前端/微体系结构与RTL优化",
+          "artifact_type": "历史协议；已由v2显著改写评测与约束",
+          "task_layer": "微体系结构/策略源码与配置→仿真反馈/性能预测",
+          "evidence_status": "第二轮12h进行中；一手正文/版本历史/作者源码包、官方DPC4的201个Git blobs与结果工作簿静态核；未运行模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-architecture-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+          "limitations": "版本过时指本方法更新了协议，不是预取/branch任务已被工具永久解决。旧版百分比与statecost仅供历史审计，不拿作新版现状。",
+          "tools_and_access": "v1作者包26论文/图文件，框架futureopensource声明；没有固定完整LLMrollout可核。旧版不同model/prompt/backend最佳选取不是单一runPass@1。",
+          "industrial_value": "研究判断：展示没有hardwaregate时的性能/成本混淆，作为历史对照保留；选择训练数据与native强seed后再评agent净收益。"
         }
       ]
     },
@@ -1536,6 +1586,77 @@
       ]
     },
     {
+      "benchmark_family": "ArchEval architecture agents",
+      "record_count": 3,
+      "records_with_current_field_audit": 3,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "arch-archeval-l1",
+          "name": "ArchEval / L1 architecture-agent setting",
+          "category": "数字前端/微体系结构与RTL优化",
+          "artifact_type": "同20题三种支持协议；当前完整任务包发布未核实",
+          "task_layer": "微体系结构/策略源码与配置→仿真反馈/性能预测",
+          "evidence_status": "第二轮12h进行中；一手正文/版本历史/作者源码包、官方DPC4的201个Git blobs与结果工作簿静态核；未运行模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-architecture-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+          "limitations": "论文4个model+harness×20题×3setting=240单seed runs，非240题。任务表简写N/A与详细card部分不一致（BTB16KB、LLC组合64KB等），需canonicalchecker核。源码包23个论文/图文件；作者call-for-challenges仓库固定55cc85b仅README，不等完整20题/实验日志发布。",
+          "tools_and_access": "已读完整正文/20卡与source archive；8种开源simulator不等ArchEval adapters/workloads/container已全部开放。调用/文件diff/buildlog记录是平台能力，完整历史trajectory下载未定位。",
+          "industrial_value": "研究判断：把反馈驱动搜索、自己建立实验工具和无反馈判断拆开，可判断agent是否只会消费现成EDA接口。原生仿真工具提供oracle，并未使所有策略设计任务自动饱和。"
+        },
+        {
+          "id": "arch-archeval-l2",
+          "name": "ArchEval / L2 architecture-agent setting",
+          "category": "数字前端/微体系结构与RTL优化",
+          "artifact_type": "同20题三种支持协议；当前完整任务包发布未核实",
+          "task_layer": "微体系结构/策略源码与配置→仿真反馈/性能预测",
+          "evidence_status": "第二轮12h进行中；一手正文/版本历史/作者源码包、官方DPC4的201个Git blobs与结果工作簿静态核；未运行模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-architecture-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+          "limitations": "论文4个model+harness×20题×3setting=240单seed runs，非240题。任务表简写N/A与详细card部分不一致（BTB16KB、LLC组合64KB等），需canonicalchecker核。源码包23个论文/图文件；作者call-for-challenges仓库固定55cc85b仅README，不等完整20题/实验日志发布。",
+          "tools_and_access": "已读完整正文/20卡与source archive；8种开源simulator不等ArchEval adapters/workloads/container已全部开放。调用/文件diff/buildlog记录是平台能力，完整历史trajectory下载未定位。",
+          "industrial_value": "研究判断：把反馈驱动搜索、自己建立实验工具和无反馈判断拆开，可判断agent是否只会消费现成EDA接口。原生仿真工具提供oracle，并未使所有策略设计任务自动饱和。"
+        },
+        {
+          "id": "arch-archeval-l3",
+          "name": "ArchEval / L3 architecture-agent setting",
+          "category": "数字前端/微体系结构与RTL优化",
+          "artifact_type": "同20题三种支持协议；当前完整任务包发布未核实",
+          "task_layer": "微体系结构/策略源码与配置→仿真反馈/性能预测",
+          "evidence_status": "第二轮12h进行中；一手正文/版本历史/作者源码包、官方DPC4的201个Git blobs与结果工作簿静态核；未运行模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-architecture-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+          "limitations": "论文4个model+harness×20题×3setting=240单seed runs，非240题。任务表简写N/A与详细card部分不一致（BTB16KB、LLC组合64KB等），需canonicalchecker核。源码包23个论文/图文件；作者call-for-challenges仓库固定55cc85b仅README，不等完整20题/实验日志发布。",
+          "tools_and_access": "已读完整正文/20卡与source archive；8种开源simulator不等ArchEval adapters/workloads/container已全部开放。调用/文件diff/buildlog记录是平台能力，完整历史trajectory下载未定位。",
+          "industrial_value": "研究判断：把反馈驱动搜索、自己建立实验工具和无反馈判断拆开，可判断agent是否只会消费现成EDA接口。原生仿真工具提供oracle，并未使所有策略设计任务自动饱和。"
+        }
+      ]
+    },
+    {
       "benchmark_family": "AssertEval",
       "record_count": 1,
       "records_with_current_field_audit": 0,
@@ -1914,6 +2035,56 @@
           "limitations": "单调累计throughput会让R²易高，需naive persistence/线性趋势/增量throughput对照；不能随机拆邻近滑动窗口造成泄漏。no-repair三个lot规模训练后93配置评估不是任意未知fab泛化；模拟产线数据不等真实制程缺陷/良率",
           "tools_and_access": "作者原论文指comses/SCFM仓库；本轮论文已取，仓库README/tree获取以manifest为准。数据为仿真构造，训练/test split、scorer版本和数据许可不根据第三方MIT描述推定；本轮作者paper所给comses/SCFM的GitHub API及README均404，实际公开获取不可确认；不按第三方宣称将其标为可直接复现。",
           "industrial_value": "适合低门槛时序surrogate与工业数据方法教学；对真实厂排程/良率主结论价值有限，须真实数据或高保真仿真transfer评测"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "BenchmarkAnything OpenBench",
+      "record_count": 2,
+      "records_with_current_field_audit": 2,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "arch-openbench-universe",
+          "name": "BenchmarkAnything / OpenBench workload construction and Universe",
+          "category": "数字前端/微体系结构与RTL优化",
+          "artifact_type": "agent构建CPU工作负载的方法与suite；非架构agent能力榜",
+          "task_layer": "微体系结构/策略源码与配置→仿真反馈/性能预测",
+          "evidence_status": "第二轮12h进行中；一手正文/版本历史/作者源码包、官方DPC4的201个Git blobs与结果工作簿静态核；未运行模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-architecture-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+          "limitations": "构建gate确保静态/不崩溃/ROI兼容，并不自动证明改依赖/裁剪feature后仍保留应用语义。subset在同30配置选取与验证，未见独立heldoutconfig集；singlethread/SE/AVXfree有选择偏差，不称已覆盖OS/GPU/多线程。",
+          "tools_and_access": "完整正文与30配置/14域/8core表已核，domaincounts求和272。暂未定位确切publicbinaries/inputs/构建agentcode/history根许可；paper可读不等重分发每个上游repo/input获统一授权。",
+          "industrial_value": "研究判断：可扩展负载策展缓解过拟合，作为架构研究支撑资源有价值；agent参与制作数据与数据用来评agent是两种身份，应明确区分。"
+        },
+        {
+          "id": "arch-openbench-core",
+          "name": "OpenBench / Core-8 and Core-23 subsets",
+          "category": "数字前端/微体系结构与RTL优化",
+          "artifact_type": "同272workload的配套子集；非新agent任务集",
+          "task_layer": "微体系结构/策略源码与配置→仿真反馈/性能预测",
+          "evidence_status": "第二轮12h进行中；一手正文/版本历史/作者源码包、官方DPC4的201个Git blobs与结果工作簿静态核；未运行模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-architecture-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+          "limitations": "构建gate确保静态/不崩溃/ROI兼容，并不自动证明改依赖/裁剪feature后仍保留应用语义。subset在同30配置选取与验证，未见独立heldoutconfig集；singlethread/SE/AVXfree有选择偏差，不称已覆盖OS/GPU/多线程。",
+          "tools_and_access": "完整正文与30配置/14域/8core表已核，domaincounts求和272。暂未定位确切publicbinaries/inputs/构建agentcode/history根许可；paper可读不等重分发每个上游repo/input获统一授权。",
+          "industrial_value": "研究判断：可扩展负载策展缓解过拟合，作为架构研究支撑资源有价值；agent参与制作数据与数据用来评agent是两种身份，应明确区分。"
         }
       ]
     },
@@ -4285,6 +4456,77 @@
           "limitations": "同曲线随机点留出不证明device/PDK OOD；test参与设置选择；合成glitch不是自然工业失效样本。计入全部失败仿真和离线调参，不只best trial",
           "tools_and_access": "MIT代码/数据notebooks；ngspice/Optuna路径和商业Keysight IC-CAP接口；具体HEMT模型/工具配置需锁定",
           "industrial_value": "现有软件已能参数提取；模型研究应证明更少仿真/稳健性或分区、损失选择与诊断流程收益，而非把数值拟合本身描述为新agent任务"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "DPC4 prefetcher evaluation",
+      "record_count": 3,
+      "records_with_current_field_audit": 3,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "arch-dpc4-championship",
+          "name": "DPC4 / multi-level prefetcher championship and official results",
+          "category": "数字前端/微体系结构与RTL优化",
+          "artifact_type": "非LLM竞赛本体；供多个agent方法复用",
+          "task_layer": "微体系结构/策略源码与配置→仿真反馈/性能预测",
+          "evidence_status": "第二轮12h进行中；一手正文/版本历史/作者源码包、官方DPC4的201个Git blobs与结果工作簿静态核；未运行模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-architecture-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+          "limitations": "当前全部610公开不等各历史agent search当时可见全部；agent训练/评估split须按论文另核。工作簿有successflags/缺失，不能把500候选组合写成500有效评分，不能用simulation性能当RTL时序/面积签核。",
+          "tools_and_access": "201选定Gitblobs匹配；工作簿16592个独立数值重算最大差2.22e−16。610单核manifest；500四核manifest中484有效，16同样在baseline/八方案排除，非只挑agent成功。外部ChampSim与trace来源许可另核，root统一LICENSE未定位。",
+          "industrial_value": "研究判断：成熟人工/原生工具基线和共享物理约束尤其重要。新agent用同DPC4任务不增加独立bench家族；需要同预算对照和不可篡改storage/模拟评分。"
+        },
+        {
+          "id": "arch-dpc4-archagentv2",
+          "name": "ArchAgent v2 / DPC4 cascaded prefetcher evolution",
+          "category": "数字前端/微体系结构与RTL优化",
+          "artifact_type": "复用DPC4的方法实验；非新独立trace集",
+          "task_layer": "微体系结构/策略源码与配置→仿真反馈/性能预测",
+          "evidence_status": "第二轮12h进行中；一手正文/版本历史/作者源码包、官方DPC4的201个Git blobs与结果工作簿静态核；未运行模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-architecture-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+          "limitations": "TableI Total/Warmup列60/15、12.5/5、200/50、50/20M，但正文写afterwarmup；实际测量总指令口径需冻结CLI。逻辑storageestimate不是综合面积/功耗/时序，声明字段可被错报，需独立审计。",
+          "tools_and_access": "正文/source已核；source中google/archagent-dpc4 URL是注释行，直接仓库404，不当公开发行证明。DPC4八个人工方案公开不等AlphaEvolve系统、最佳策略/全12000rollout已随包公开。",
+          "industrial_value": "研究判断：成熟领域仍有小幅增益空间，关键在分阶段组合与硬件约束；比赛自动仿真已完成测量，但策略源代码探索仍是不同任务。不能把%.3收益写成大幅超越工业芯片。"
+        },
+        {
+          "id": "arch-dpc4-duodiscover",
+          "name": "DuoDiscover / DPC4 learned yardstick search study",
+          "category": "数字前端/微体系结构与RTL优化",
+          "artifact_type": "复用DPC4的代理评估/源码搜索方法实验",
+          "task_layer": "微体系结构/策略源码与配置→仿真反馈/性能预测",
+          "evidence_status": "第二轮12h进行中；一手正文/版本历史/作者源码包、官方DPC4的201个Git blobs与结果工作簿静态核；未运行模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-architecture-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得对应冻结任务/工具镜像/隐藏workload与全部候选ledger后核边界、预算、失败分母；物理可实现性需独立RTL/综合/时序验证，本轮不运行。",
+          "limitations": "搜索目标/允许编辑stage与MC训练样本经过人工调整，不能称全程无人变更searchspec。sharedDPC4 fixedtrace+sizeoracle仍需核、防proxyhack；论文主文IPC概述不能替代官方MC调和平均。",
+          "tools_and_access": "作者两个projectrepos固定625436ad/40817dd各23条webtree，主HTML可核，但未见CPU最终源码/完整agentharness/yardstick历程。其他软件mergedPR可用，不能补成这一硬件case的缺失数据。",
+          "industrial_value": "研究判断：适合评昂贵仿真下agent是否能构建有效代理、校验代理失配和组合策略；要求最终用真实oracle确认，代理分数/短trace胜利不是最终硬件收益。"
         }
       ]
     },
