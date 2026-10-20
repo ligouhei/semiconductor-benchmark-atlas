@@ -120,7 +120,7 @@
       "metrics": "70/90=77.78%实际mismatchresolved，70/98=71.43%validcohort，70/124=56.45%allcandidates；98/98仅terminalpipelinecompletion。match要求finitegap同semiconductorcharacter，≤.5×或≥2×实验gap为partial；不能当严格带隙数值重现。",
       "baseline": "random19%/staticLLM20%比78%约4倍，不是一个数量级；基于同bench结果拟合四行静态rule几乎恢复收益，这是in-samplesummary而非新heldoutbaseline。",
       "tools_and_access": "v2HTML404、官方PDF成功可读；v1称URLonpublication、SupplementTableS2，但本轮未定位可获取code/hypothesislibrary/frozeninputs/完整SI或runledger。不把arxiv全文公开当VASP资产/训练轨迹公开；本轮未运行计算。",
-      "limitations": "八infra失败被排除，报告真实endtoend时应另列；1500GPUh为作者计算成本，完整ledger未取得。99.9%formalphysicaltruth不成立，v1旧结果只作历史不代表最新版。",
+      "limitations": "八infra失败被排除，报告真实endtoend时应另列；1500GPUh为作者计算成本，完整ledger未取得。v1旧结果只作历史，不代表最新版；gap匹配不能唯一确认微观机制。",
       "industrial_value": "研究判断：半导体材料异常诊断的agentic任务，成熟VASP只执行候选物理方案，模型仍需选择机制/设计区分实验；属于材料计算边界，不当电路前端/测试DFT。",
       "primary_sources": "https://arxiv.org/pdf/2604.26703v2; https://arxiv.org/pdf/2604.26703v1; https://arxiv.org/abs/2604.26703",
       "evidence_status": "第二轮12h进行中；82选定Gitblobs、最新论文/版本与自写JSON/数表核；未运行VASP/QE/ATPG/LLM。",

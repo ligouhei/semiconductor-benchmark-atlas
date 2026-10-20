@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T15:54:56.426607+00:00",
+  "as_of": "2026-10-20T16:29:27.989563+00:00",
   "status": "第二轮12h进行中的数据/轨迹开放性核查，非完整市场清单或最终结论",
   "scope": "只覆盖本轮已保存一手核查的新增协议；训练样本、评测输入、模型权重、整理后记忆、生成采样轨迹与LLM工具交互轨迹分别描述",
   "protocol_records": 165,
@@ -1969,7 +1969,7 @@
       "task": "41预设hypothesisclasses、十轮上限、Beta后验+LLMadvisor+元素filter；原子编辑/磁序/U/结构等VASP检验；此版实际library静态，generatehypothesis未用。",
       "available_materials_and_tools": "v2HTML404、官方PDF成功可读；v1称URLonpublication、SupplementTableS2，但本轮未定位可获取code/hypothesislibrary/frozeninputs/完整SI或runledger。不把arxiv全文公开当VASP资产/训练轨迹公开；本轮未运行计算。",
       "trajectory_and_training_access": "论文过程与聚合轨迹数；v2的345selections和v1S2表都未取得完整可训练action/observationpayload。",
-      "limits": "八infra失败被排除，报告真实endtoend时应另列；1500GPUh为作者计算成本，完整ledger未取得。99.9%formalphysicaltruth不成立，v1旧结果只作历史不代表最新版。",
+      "limits": "八infra失败被排除，报告真实endtoend时应另列；1500GPUh为作者计算成本，完整ledger未取得。v1旧结果只作历史，不代表最新版；gap匹配不能唯一确认微观机制。",
       "primary_sources": "https://arxiv.org/pdf/2604.26703v2; https://arxiv.org/pdf/2604.26703v1; https://arxiv.org/abs/2604.26703",
       "record_snapshot_matches_audit": true
     },

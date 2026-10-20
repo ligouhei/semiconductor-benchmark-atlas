@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-20T15:54:56.539402+00:00",
+  "generated_at": "2026-10-20T16:29:28.095913+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
@@ -16961,7 +16961,7 @@
           "unversioned_field_audit_entries": [],
           "stale_field_audit_snapshots": [],
           "next_verification": "取得匹配冻结材料/任务与独立物理reference、完整候选/失败/预算ledger和明确许可；按源材料分割，不把本边界类当芯片全流程签核。",
-          "limitations": "八infra失败被排除，报告真实endtoend时应另列；1500GPUh为作者计算成本，完整ledger未取得。99.9%formalphysicaltruth不成立，v1旧结果只作历史不代表最新版。",
+          "limitations": "八infra失败被排除，报告真实endtoend时应另列；1500GPUh为作者计算成本，完整ledger未取得。v1旧结果只作历史，不代表最新版；gap匹配不能唯一确认微观机制。",
           "tools_and_access": "v2HTML404、官方PDF成功可读；v1称URLonpublication、SupplementTableS2，但本轮未定位可获取code/hypothesislibrary/frozeninputs/完整SI或runledger。不把arxiv全文公开当VASP资产/训练轨迹公开；本轮未运行计算。",
           "industrial_value": "研究判断：半导体材料异常诊断的agentic任务，成熟VASP只执行候选物理方案，模型仍需选择机制/设计区分实验；属于材料计算边界，不当电路前端/测试DFT。"
         },

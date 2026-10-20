@@ -1,0 +1,1192 @@
+{
+  "as_of": "2026-10-20T16:28:36.213465+00:00",
+  "status": "本轮仍在进行，尚未触发完成时间门",
+  "research_period": {
+    "start_utc": "2026-10-20T05:23:20Z",
+    "start_beijing": "2026-10-20T13:23:20+08:00",
+    "minimum_seconds": 43200,
+    "earliest_completion_beijing": "2026-10-21T01:23:20+08:00",
+    "completed_utc": null,
+    "elapsed_seconds_to_receipt": 39916.213465,
+    "time_gate_satisfied": false
+  },
+  "counts": {
+    "baseline_records": 566,
+    "current_records": 731,
+    "added_task_version_protocols": 165,
+    "revised_baseline_records": 2,
+    "baseline_family_objects": 326,
+    "current_family_objects": 399,
+    "new_family_objects": 73,
+    "family_objects_covered_by_added_protocols": 78,
+    "curated_data_groups": 22,
+    "excluded_candidate_frameworks": 16,
+    "task_selection_groups": 24
+  },
+  "revised_baseline_ids": [
+    "fab-euv-ovl-syn-v11",
+    "fab-semikongbench100-agent"
+  ],
+  "family_index": [
+    {
+      "family": "Siemens Fuse NeMo characterization",
+      "protocol_ids": [
+        "lib-siemens-nemo-characterization"
+      ],
+      "protocol_count": 1,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://developer.nvidia.com/blog/optimizing-agent-reliability-and-tool-calling-efficiency-for-chip-design-using-nvidia-nemo-gym/"
+      ]
+    },
+    {
+      "family": "Semibench Argonne",
+      "protocol_ids": [
+        "fab-semibench-virtual-process"
+      ],
+      "protocol_count": 1,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://www.avsconferences.org/AVS2025/Sessions/Schedule/83957"
+      ]
+    },
+    {
+      "family": "TapeoutBench Simra",
+      "protocol_ids": [
+        "analog-tapeoutbench-v01"
+      ],
+      "protocol_count": 1,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://tapeoutbench.simratech.com/v0.1/",
+        "https://pypi.org/pypi/tapeoutbench/0.0.1/json"
+      ]
+    },
+    {
+      "family": "FPL26 Agentic FPGA Backend Optimization",
+      "protocol_ids": [
+        "pd-fpl26-agentic-backend"
+      ],
+      "protocol_count": 1,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://github.com/Xilinx/fpl26_optimization_contest/blob/47ad33ce66fd2fe82e9721c19177e617c3ec71cf/docs/scorecard.md",
+        "https://github.com/Xilinx/fpl26_optimization_contest/blob/47ad33ce66fd2fe82e9721c19177e617c3ec71cf/validate_dcps.py",
+        "https://github.com/Xilinx/fpl26_optimization_contest/blob/47ad33ce66fd2fe82e9721c19177e617c3ec71cf/docs/final_submission.md",
+        "https://github.com/Xilinx/fpl26_optimization_contest/releases/tag/v1.3.0"
+      ]
+    },
+    {
+      "family": "Timing Analysis Agent TDRG",
+      "protocol_ids": [
+        "pd-timingagent-single",
+        "pd-timingagent-multi"
+      ],
+      "protocol_count": 2,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2504.11502v1"
+      ]
+    },
+    {
+      "family": "HLS-Eval",
+      "protocol_ids": [
+        "hls-hlseval-generation",
+        "hls-hlseval-editing",
+        "hls-hlseval-pi-generation",
+        "hls-hlseval-parameterization",
+        "hls-hlseval-dataflow-agent",
+        "hls-fpgagent-78"
+      ],
+      "protocol_count": 6,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2504.12268v1",
+        "https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/hls_eval/eval.py",
+        "https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/LICENSE",
+        "https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/hls_eval/eval_agent_pi/eval_agent_pi.py",
+        "https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/hls_eval/eval_agent_pi/vitis.py",
+        "https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/hls_eval/eval_agent_pi/PARAMETERIZATION.md",
+        "https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/hls_eval/eval_agent_pi/eval_agent_pi_paramaterized.py",
+        "https://github.com/sharc-lab/hls-eval/blob/5fb3649738feb2622ba574321031f81c9d2e200c/hls_eval/eval_agent_pi/eval_agent_pi_paramaterized_dataflow.py",
+        "https://arxiv.org/html/2608.23630v1"
+      ]
+    },
+    {
+      "family": "PolyBench-C",
+      "protocol_ids": [
+        "hls-hlsmith-polybench"
+      ],
+      "protocol_count": 1,
+      "new_family_object": false,
+      "primary_sources": [
+        "https://arxiv.org/html/2608.06791v1"
+      ]
+    },
+    {
+      "family": "Bench4HLS",
+      "protocol_ids": [
+        "hls-bench4hls-generation"
+      ],
+      "protocol_count": 1,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2601.19941v1",
+        "https://github.com/zfsadik/Bench4HLS/blob/7fac5b356b0383e9463995e2c6b13a5fee27a62d/bench4hls/evaluator.py",
+        "https://github.com/zfsadik/Bench4HLS/blob/7fac5b356b0383e9463995e2c6b13a5fee27a62d/bench4hls/report.py",
+        "https://github.com/zfsadik/Bench4HLS/blob/7fac5b356b0383e9463995e2c6b13a5fee27a62d/tcl/vivado_power.tcl"
+      ]
+    },
+    {
+      "family": "ChatHLS experimental suite",
+      "protocol_ids": [
+        "hls-chathls-generation",
+        "hls-chathls-debug",
+        "hls-chathls-tuning"
+      ],
+      "protocol_count": 3,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://aclanthology.org/2026.acl-long.962.pdf",
+        "https://github.com/GEAR-SEU/ChatHLS-ACL-26/blob/204397cba1c4dfdd88cad1c8477f8db2fe038fbf/README.md",
+        "https://github.com/GEAR-SEU/ChatHLS-ACL-26/blob/204397cba1c4dfdd88cad1c8477f8db2fe038fbf/LICENSE"
+      ]
+    },
+    {
+      "family": "FIXME",
+      "protocol_ids": [
+        "fv-fixme-specom",
+        "fv-fixme-mgen",
+        "fv-fixme-tbgen",
+        "fv-fixme-svagen",
+        "fv-fixme-rtlfix-text",
+        "fv-fixme-rtlfix-mm"
+      ],
+      "protocol_count": 6,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://ojs.aaai.org/index.php/AAAI/article/view/37079",
+        "https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluators/specom_eval.py",
+        "https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/llm_client.py",
+        "https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/config.py",
+        "https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluators/mgen_eval.py",
+        "https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/simulation/vcs_runner.py",
+        "https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/utils/file_finder.py",
+        "https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluators/tbgen_eval.py",
+        "https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluators/code_base.py",
+        "https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluators/svagen_eval.py",
+        "https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/simulation/fv_runner.py",
+        "https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluators/rtlfix_eval.py",
+        "https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/src/evaluator.py",
+        "https://github.com/ChatDesignVerification/FIXME/blob/e875437fbb11590b71775b32d3579726d702cfc6/configs/eval_config.yaml"
+      ]
+    },
+    {
+      "family": "LDU-Bench",
+      "protocol_ids": [
+        "fab-ldu-triage",
+        "fab-ldu-morphology",
+        "fab-ldu-localization",
+        "fab-ldu-cause"
+      ],
+      "protocol_count": 4,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2608.03078v1",
+        "https://arxiv.org/pdf/2608.03078v1"
+      ]
+    },
+    {
+      "family": "Agentic BG-IWO experimental calibration",
+      "protocol_ids": [
+        "device-agentic-iwo-calibration"
+      ],
+      "protocol_count": 1,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2609.12184v1",
+        "https://gyulab.github.io/blog/2026/agentic-workflow-tcad/"
+      ]
+    },
+    {
+      "family": "LithoBench",
+      "protocol_ids": [
+        "litho-lithogrpo-protocol",
+        "litho-binaryflow-final",
+        "litho-binaryflow-capability",
+        "litho-arlo-method"
+      ],
+      "protocol_count": 4,
+      "new_family_object": false,
+      "primary_sources": [
+        "https://arxiv.org/html/2606.00228v1",
+        "https://github.com/laiyao1/LithoGRPO/blob/f694498f1523efb89381fd9fb8984247f166095e/README.md",
+        "https://github.com/laiyao1/LithoGRPO/blob/f694498f1523efb89381fd9fb8984247f166095e/LICENSE",
+        "https://icml.cc/virtual/2026/poster/61189",
+        "https://github.com/JaeminPark417/discrete-flow-matching-opc/blob/b971fdcab4e2ef024cdd8009c4d66c2e474d9497/README.md",
+        "https://github.com/JaeminPark417/discrete-flow-matching-opc/blob/b971fdcab4e2ef024cdd8009c4d66c2e474d9497/protocols/final_evaluation.yaml",
+        "https://github.com/JaeminPark417/discrete-flow-matching-opc/blob/b971fdcab4e2ef024cdd8009c4d66c2e474d9497/results/final_epe_per_cell.csv",
+        "https://github.com/JaeminPark417/discrete-flow-matching-opc/blob/b971fdcab4e2ef024cdd8009c4d66c2e474d9497/scripts/evaluate_final.py",
+        "https://github.com/JaeminPark417/discrete-flow-matching-opc/blob/b971fdcab4e2ef024cdd8009c4d66c2e474d9497/protocols/capability_evaluation.yaml",
+        "https://github.com/JaeminPark417/discrete-flow-matching-opc/blob/b971fdcab4e2ef024cdd8009c4d66c2e474d9497/results/capability_bestofn_subsets.csv",
+        "https://github.com/JaeminPark417/discrete-flow-matching-opc/blob/b971fdcab4e2ef024cdd8009c4d66c2e474d9497/results/capability_candidate_metrics.csv",
+        "https://github.com/JaeminPark417/discrete-flow-matching-opc/blob/b971fdcab4e2ef024cdd8009c4d66c2e474d9497/scripts/evaluate_capability.py",
+        "https://www.nature.com/articles/s41598-026-43555-z",
+        "https://shura.shu.ac.uk/37129/8/Akmal-AdaptiveReinforcementLearning%28VoR%29.pdf"
+      ]
+    },
+    {
+      "family": "AgenticTCAD",
+      "protocol_ids": [
+        "device-agentictcad-codegen",
+        "device-agentictcad-corpus",
+        "device-agentictcad-nsfet"
+      ],
+      "protocol_count": 3,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2512.23742v2",
+        "https://github.com/guangxifan/llm4tcad_flow/blob/c6f026d4e23c08420f24b3785ea84633337b49fa/tcad_llm_sft/datasets/eval_dataset/qwen_eval.json",
+        "https://github.com/guangxifan/llm4tcad_flow/blob/c6f026d4e23c08420f24b3785ea84633337b49fa/tcad_llm_sft/datasets/eval_dataset/qwen_eval.parquet",
+        "https://github.com/guangxifan/llm4tcad_flow/blob/c6f026d4e23c08420f24b3785ea84633337b49fa/tcad_llm_sft/eval/utils.py",
+        "https://github.com/guangxifan/llm4tcad_flow/blob/c6f026d4e23c08420f24b3785ea84633337b49fa/tcad_llm_sft/eval/generate_codes.py",
+        "https://github.com/guangxifan/llm4tcad_flow/blob/c6f026d4e23c08420f24b3785ea84633337b49fa/build_dataset/README.md",
+        "https://github.com/guangxifan/llm4tcad_flow/blob/c6f026d4e23c08420f24b3785ea84633337b49fa/build_dataset/prompt_gen_Qwen72B_sub_dataset/sampled_dataset.json",
+        "https://github.com/guangxifan/llm4tcad_flow/blob/c6f026d4e23c08420f24b3785ea84633337b49fa/build_dataset/final_data/build_final_data.py",
+        "https://github.com/guangxifan/llm4tcad_flow/blob/c6f026d4e23c08420f24b3785ea84633337b49fa/tcad_llm_sft/train/data_parallel_sft.py",
+        "https://github.com/guangxifan/llm4tcad_flow/blob/c6f026d4e23c08420f24b3785ea84633337b49fa/agent_flow/main.py",
+        "https://github.com/guangxifan/llm4tcad_flow/blob/c6f026d4e23c08420f24b3785ea84633337b49fa/agent_flow/ext_summary.py",
+        "https://github.com/guangxifan/llm4tcad_flow/blob/c6f026d4e23c08420f24b3785ea84633337b49fa/agent_flow/pre_requirement_file/design_space.json",
+        "https://github.com/guangxifan/llm4tcad_flow/blob/c6f026d4e23c08420f24b3785ea84633337b49fa/agent_flow/README.md"
+      ]
+    },
+    {
+      "family": "HighTide",
+      "protocol_ids": [
+        "pd-hightide-flow-suite",
+        "pd-hightide-agent-memory"
+      ],
+      "protocol_count": 2,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2606.04126v1",
+        "https://github.com/VLSIDA/HighTide/blob/157644588d12732779acfc0d34ece49ed9b39bbb/MODULE.bazel",
+        "https://github.com/VLSIDA/HighTide/blob/157644588d12732779acfc0d34ece49ed9b39bbb/defs.bzl",
+        "https://github.com/VLSIDA/HighTide/blob/157644588d12732779acfc0d34ece49ed9b39bbb/docs/designs.md",
+        "https://github.com/VLSIDA/HighTide/blob/157644588d12732779acfc0d34ece49ed9b39bbb/tools/benchmark_manifest.py",
+        "https://github.com/VLSIDA/HighTide/blob/157644588d12732779acfc0d34ece49ed9b39bbb/tools/summary.sh",
+        "https://github.com/VLSIDA/HighTide/blob/157644588d12732779acfc0d34ece49ed9b39bbb/tools/fetch_cache.sh",
+        "https://github.com/VLSIDA/HighTide/blob/157644588d12732779acfc0d34ece49ed9b39bbb/designs/src/NVDLA/DECISIONS.md",
+        "https://github.com/VLSIDA/HighTide/blob/157644588d12732779acfc0d34ece49ed9b39bbb/.claude/skills/optimize-ppa/SKILL.md",
+        "https://github.com/VLSIDA/HighTide/blob/157644588d12732779acfc0d34ece49ed9b39bbb/.github/workflows/benchmark-status.yml"
+      ]
+    },
+    {
+      "family": "Analog-DB / SpiceXplorer",
+      "protocol_ids": [
+        "analog-analogdb-core",
+        "analog-analogdb-regulator",
+        "analog-spicexplorer-pam4",
+        "analog-spicexplorer-lpf"
+      ],
+      "protocol_count": 4,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://github.com/MacAnalog/spicexplorer-release/blob/f6f3f92246cc4dbe2763155b375c34aeec7dd39d/analog-db/README.md",
+        "https://github.com/MacAnalog/spicexplorer-release/blob/f6f3f92246cc4dbe2763155b375c34aeec7dd39d/analog-db/catalog.json",
+        "https://github.com/MacAnalog/spicexplorer-release/blob/f6f3f92246cc4dbe2763155b375c34aeec7dd39d/analog-db/scoreboard.json",
+        "https://github.com/MacAnalog/spicexplorer-release/blob/f6f3f92246cc4dbe2763155b375c34aeec7dd39d/analog-db/src/spicexplorer_analog_db/verify.py",
+        "https://github.com/MacAnalog/spicexplorer-release/blob/f6f3f92246cc4dbe2763155b375c34aeec7dd39d/analog-db/src/spicexplorer_analog_db/scoreboard.py",
+        "https://arxiv.org/html/2609.01286v1",
+        "https://github.com/MacAnalog/agentic-design-pam4-driver-ihp130/blob/f81f417fa8ef6b4dbe786d7e04022eb0bd7466bf/README.md",
+        "https://github.com/MacAnalog/agentic-design-pam4-driver-ihp130/blob/f81f417fa8ef6b4dbe786d7e04022eb0bd7466bf/layout/codesign/flow.yaml",
+        "https://github.com/MacAnalog/agentic-design-pam4-driver-ihp130/blob/f81f417fa8ef6b4dbe786d7e04022eb0bd7466bf/layout/codesign/project_setup.yaml",
+        "https://github.com/MacAnalog/agentic-design-pam4-driver-ihp130/blob/f81f417fa8ef6b4dbe786d7e04022eb0bd7466bf/layout/codesign/results/r3/trials.jsonl",
+        "https://github.com/MacAnalog/dn-003-afe-lpf-250hz-ihp130/blob/cc24b6db5523be530f1143cbf383ccd38b246f46/README.md",
+        "https://github.com/MacAnalog/dn-003-afe-lpf-250hz-ihp130/blob/cc24b6db5523be530f1143cbf383ccd38b246f46/doc/sizing-history/rounds.json",
+        "https://github.com/MacAnalog/dn-003-afe-lpf-250hz-ihp130/blob/cc24b6db5523be530f1143cbf383ccd38b246f46/signoff/pre-pvt/scorecard.json",
+        "https://github.com/MacAnalog/dn-003-afe-lpf-250hz-ihp130/blob/cc24b6db5523be530f1143cbf383ccd38b246f46/layout/H12-pdk-cap/scorecard_post.json",
+        "https://github.com/MacAnalog/dn-003-afe-lpf-250hz-ihp130/blob/cc24b6db5523be530f1143cbf383ccd38b246f46/layout/H12-pdk-cap/REVIEW.yaml"
+      ]
+    },
+    {
+      "family": "FAB-Bench FutureFab",
+      "protocol_ids": [
+        "fab-fabbench-rag"
+      ],
+      "protocol_count": 1,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2605.26476v1",
+        "https://github.com/FuturefabAI/FAB-Bench"
+      ]
+    },
+    {
+      "family": "Hardware Design MCP Tool Calling",
+      "protocol_ids": [
+        "rtl-hardware-mcp-stateful"
+      ],
+      "protocol_count": 1,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2608.26199v1"
+      ]
+    },
+    {
+      "family": "SupplyBench",
+      "protocol_ids": [
+        "fab-supplybench-compass"
+      ],
+      "protocol_count": 1,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://ceur-ws.org/Vol-3996/paper-5.pdf",
+        "https://github.com/wintechis/compass/tree/0c2184af6a4770a473235ab896540528c43cf38f",
+        "https://github.com/wintechis/supplybench"
+      ]
+    },
+    {
+      "family": "Experiment Automation Agents EAA",
+      "protocol_ids": [
+        "boundary-eaa-microscopy"
+      ],
+      "protocol_count": 1,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC13633048/",
+        "https://github.com/AdvancedPhotonSource/EAA/tree/738960330cb66b3cf195d7e261def2e89ef5f9a8"
+      ]
+    },
+    {
+      "family": "VerilogEval",
+      "protocol_ids": [
+        "verify-rtl-gauntlet"
+      ],
+      "protocol_count": 1,
+      "new_family_object": false,
+      "primary_sources": [
+        "https://github.com/loversky02/rtl-gauntlet/tree/f899353f7d5a4b594a859b7ac3a1906a87e61fd9",
+        "https://github.com/loversky02/rtl-gauntlet/blob/f899353f7d5a4b594a859b7ac3a1906a87e61fd9/rtl_gauntlet/equiv.py",
+        "https://github.com/loversky02/rtl-gauntlet/blob/f899353f7d5a4b594a859b7ac3a1906a87e61fd9/scripts/report_cis.py",
+        "https://yosyshq.readthedocs.io/projects/yosys/en/v0.51/cmd/sat.html",
+        "https://yosyshq.readthedocs.io/projects/yosys/en/0.45/cmd/setundef.html"
+      ]
+    },
+    {
+      "family": "Saarthi formal-verification method",
+      "protocol_ids": [
+        "verify-saarthi-2025",
+        "verify-saarthi-2026",
+        "verify-saarthi-coverage-companion"
+      ],
+      "protocol_count": 3,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2502.16662v2",
+        "https://arxiv.org/html/2603.03175v1",
+        "https://keerthankopparam.com/",
+        "https://arxiv.org/html/2603.03147v2"
+      ]
+    },
+    {
+      "family": "NVIDIA HORIZON RTL method",
+      "protocol_ids": [
+        "rtl-nvidia-horizon-method"
+      ],
+      "protocol_count": 1,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2606.28279v1"
+      ]
+    },
+    {
+      "family": "FVEval",
+      "protocol_ids": [
+        "verify-rwopd-fveval"
+      ],
+      "protocol_count": 1,
+      "new_family_object": false,
+      "primary_sources": [
+        "https://arxiv.org/html/2605.13501v1"
+      ]
+    },
+    {
+      "family": "RefEvo SystemC method",
+      "protocol_ids": [
+        "verify-refevo-systemc"
+      ],
+      "protocol_count": 1,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2604.24218v1"
+      ]
+    },
+    {
+      "family": "RTL-BenchLS",
+      "protocol_ids": [
+        "rtl-benchls-roundtrip",
+        "rtl-benchls-masked",
+        "rtl-benchls-repoissue"
+      ],
+      "protocol_count": 3,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2606.08976v1",
+        "https://github.com/hkust-zhiyao/RTL-BenchLS/tree/5a8d15a7818b7925034850092dae9c48cd5e3c80"
+      ]
+    },
+    {
+      "family": "CktEvo",
+      "protocol_ids": [
+        "rtl-cktevo-repoevolution"
+      ],
+      "protocol_count": 1,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2603.08718v1",
+        "https://github.com/cure-lab/cktevo/tree/2f1abe75cc48437378bd8832517048ba64d53149"
+      ]
+    },
+    {
+      "family": "RealBench",
+      "protocol_ids": [
+        "rtl-realbench-module",
+        "rtl-realbench-system",
+        "rtl-realbench-agent-current"
+      ],
+      "protocol_count": 3,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2507.16200v1",
+        "https://github.com/IPRC-DIP/RealBench/tree/9bc9a6ac058b3a3acb09b9e7623526737bbf8312"
+      ]
+    },
+    {
+      "family": "NotSoTiny",
+      "protocol_ids": [
+        "rtl-notsotiny-2512",
+        "rtl-notsotiny-2607"
+      ],
+      "protocol_count": 2,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2512.20823v1",
+        "https://github.com/HPAI-BSC/TuRTLe/tree/6a32467e79d7a6cfbf3a6c579c24f20662475101",
+        "https://huggingface.co/datasets/HPAI-BSC/NotSoTiny-25-12",
+        "https://huggingface.co/datasets/HPAI-BSC/NotSoTiny-26-07",
+        "https://github.com/razinemg/notsotiny-website/blob/de33a6b78c92ac5ae403d036177cb692c8955bd7/src/constants.js",
+        "https://github.com/HPAI-BSC/TuRTLe/blob/6a32467e79d7a6cfbf3a6c579c24f20662475101/turtle/tasks/NotSoTiny.py"
+      ]
+    },
+    {
+      "family": "AMS-SizingBench / AutoSizer",
+      "protocol_ids": [
+        "analog-ams-sizingbench",
+        "analog-autosizer-agent"
+      ],
+      "protocol_count": 2,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2602.02849v2",
+        "https://github.com/yuxi120407/AutoSizer/tree/1b9b8f6498e2c7ad3b650bbbc78c8e3b0e1205e1"
+      ]
+    },
+    {
+      "family": "GR-Evolve router code-evolution method",
+      "protocol_ids": [
+        "pd-grevolve-code-evolution",
+        "pd-grevolve-standalone-transfer"
+      ],
+      "protocol_count": 2,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2604.22234v1",
+        "https://github.com/ASU-VDA-Lab/GR-Evolve/tree/5223e79c1a15891d3615db6e009fe1c606c6a2b2",
+        "https://github.com/taizun-jj202/OpenROAD_New_GRT"
+      ]
+    },
+    {
+      "family": "ChipMATE multi-agent RTL method",
+      "protocol_ids": [
+        "rtl-chipmate-crossverify",
+        "data-chipmate-python-reference"
+      ],
+      "protocol_count": 2,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2605.12857v1",
+        "https://github.com/zhongkaiyu/ChipMATE/tree/d94087b5159aea482648b26398a2ffb164246671",
+        "https://huggingface.co/core12345/ChipMATE-V-9B",
+        "https://huggingface.co/core12345/ChipMATE-P-9B"
+      ]
+    },
+    {
+      "family": "CircuitFormer analog topology 2026",
+      "protocol_ids": [
+        "data-circuitformer-analog",
+        "analog-circuitbench100"
+      ],
+      "protocol_count": 2,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2605.05773v1",
+        "https://huggingface.co/datasets/touhid314/cktformer-dataset"
+      ]
+    },
+    {
+      "family": "VLM-CAD method",
+      "protocol_ids": [
+        "analog-vlm-cad-sizing-v5",
+        "analog-vlm-cad-structural-v5"
+      ],
+      "protocol_count": 2,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2601.07315v5",
+        "https://arxiv.org/html/2601.07315v1"
+      ]
+    },
+    {
+      "family": "RFAmpDesigner method",
+      "protocol_ids": [
+        "rf-rfampdesigner-lna"
+      ],
+      "protocol_count": 1,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2605.10093v1"
+      ]
+    },
+    {
+      "family": "CI2N / Image2Net",
+      "protocol_ids": [
+        "data-ci2n-visual",
+        "analog-ci2n-netlist-eval"
+      ],
+      "protocol_count": 2,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2508.13157v2",
+        "https://github.com/LAD021/ci2n_datasets/tree/2ffd41b2255726eb1be215fa7ba1d9808c80c808"
+      ]
+    },
+    {
+      "family": "ACR-Bench / ACR-Agent",
+      "protocol_ids": [
+        "analog-acr-symbolic-reasoning",
+        "analog-acr-agent-workflow"
+      ],
+      "protocol_count": 2,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://www.maxapress.com/article/doi/10.48130/ker-0026-0012?viewType=HTML",
+        "https://github.com/cnzjq1/Analog-reasoning-circuit/tree/569a8466dfa8f00c6a1c12516b4b479a34c2f05f"
+      ]
+    },
+    {
+      "family": "AgenticSizing method and knowledge resources",
+      "protocol_ids": [
+        "analog-agenticsizing-workflow",
+        "data-agenticsizing-knowledge"
+      ],
+      "protocol_count": 2,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2609.25873v1",
+        "https://github.com/aprilaihub/agentic-analog-sizing/tree/d4b59e00bb54029e952b5a38d519ab34665dcc02"
+      ]
+    },
+    {
+      "family": "EvoDRC method on DAC26 DRC",
+      "protocol_ids": [
+        "be-evodrc-skill-evolution"
+      ],
+      "protocol_count": 1,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2607.20019v1",
+        "https://github.com/ASU-VDA-Lab/EvoDRC/tree/69a138b081b007772a39e643342d520ca656ce4f"
+      ]
+    },
+    {
+      "family": "OSAT_RL synthetic scheduling study",
+      "protocol_ids": [
+        "fab-osat-rl-scheduling"
+      ],
+      "protocol_count": 1,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://rsisinternational.org/journals/ijriss/view/benchmarking-multi-agent-reinforcement-learning-for-stochastic-osat-scheduling-a-reproducible-computational-study-for-semiconductor-operations-management",
+        "https://github.com/plmaihuy-cloud/OSAT_RL/tree/787e362f913104a6139b5dab7cb718ac06b387e9"
+      ]
+    },
+    {
+      "family": "EDA-env RTL-to-GDS",
+      "protocol_ids": [
+        "be-edaenv-engineering",
+        "be-edaenv-physical-opt"
+      ],
+      "protocol_count": 2,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://vlsicad.ucsd.edu/Publications/Conferences/436/c436.pdf",
+        "https://github.com/Ergodex-Labs/eda-env-iccad-26/tree/89dfcbed4376e2065b3917249f6c91f56dbf79bc",
+        "https://zenodo.org/records/22990248"
+      ]
+    },
+    {
+      "family": "HELIX placement code evolution",
+      "protocol_ids": [
+        "pd-helix-openroad-evolution",
+        "pd-helix-dreamplace-transfer"
+      ],
+      "protocol_count": 2,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://vlsicad.ucsd.edu/Publications/Conferences/430/c430.pdf",
+        "https://github.com/ABKGroup/HELIX/tree/f9ccc7068c878c8e56bbf25795511008875da869"
+      ]
+    },
+    {
+      "family": "AuDoPEDA code-improvement method",
+      "protocol_ids": [
+        "pd-audopeda-code-improvement"
+      ],
+      "protocol_count": 1,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://vlsicad.ucsd.edu/Publications/Conferences/431/c431.pdf",
+        "https://github.com/ABKGroup/AuDoPEDA/tree/d396422e27496b6836ecbc7229edff33f642525c",
+        "https://zenodo.org/records/22020200"
+      ]
+    },
+    {
+      "family": "VPR-Evolve FPGA source evolution",
+      "protocol_ids": [
+        "pd-vpr-evolve-source"
+      ],
+      "protocol_count": 1,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2607.24998v1",
+        "https://github.com/ASU-VDA-Lab/VPR-Evolve/tree/8285bb50ce719498a49721bfd75ad6e98a05a47b",
+        "https://github.com/hahacharlie/vtr-verilog-to-routing"
+      ]
+    },
+    {
+      "family": "ResizerAgent post-CTS repair",
+      "protocol_ids": [
+        "pd-resizeragent-repair",
+        "data-resizeragent-traces"
+      ],
+      "protocol_count": 2,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://vlsicad.ucsd.edu/Publications/Conferences/428/c428.pdf",
+        "https://github.com/ASU-VDA-Lab/ResizerAgent/tree/ae402b9bf00b5116b9f2743b3bd8f7c9aed52127",
+        "https://zenodo.org/records/21959752"
+      ]
+    },
+    {
+      "family": "AnalogGym",
+      "protocol_ids": [
+        "analog-analoggym-opt-grpo",
+        "analog-analoggym-opt-agent-tools",
+        "data-analoggym-opt-historical"
+      ],
+      "protocol_count": 3,
+      "new_family_object": false,
+      "primary_sources": [
+        "https://ieeexplore.ieee.org/document/11690621",
+        "https://doi.org/10.1109/TCAD.2026.3733612",
+        "https://github.com/Computing-Intelligent-Decision-Team/AnalogGym-Opt/tree/10093e3496ef2c7d06494d91d131b0cc5de6c25b"
+      ]
+    },
+    {
+      "family": "TcadGPT",
+      "protocol_ids": [
+        "device-tcadgpt-qa",
+        "device-tcadgpt-sde"
+      ],
+      "protocol_count": 2,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2601.10128v1",
+        "https://doi.org/10.1002/aisy.70520",
+        "https://github.com/wddddds1/TcadGPT/tree/68026387da36d33a74de6ad4d2cc12d16970b141"
+      ]
+    },
+    {
+      "family": "zenDot quantum TCAD platform",
+      "protocol_ids": [
+        "device-zendot-demonstrations"
+      ],
+      "protocol_count": 1,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/abs/2608.16048",
+        "https://arxiv.org/pdf/2608.16048v1"
+      ]
+    },
+    {
+      "family": "SemiFA-930",
+      "protocol_ids": [
+        "data-semifa930-narratives",
+        "fab-semifa-agent-reporting"
+      ],
+      "protocol_count": 2,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2604.13236v1",
+        "https://github.com/Shivamckaushik/SemiFA/tree/0bc296e49d23c1a3724aa4be6b1fa270687da1f8",
+        "https://huggingface.co/datasets/ShivamChand/SemiFA-930"
+      ]
+    },
+    {
+      "family": "Material Discovery Bench",
+      "protocol_ids": [
+        "fab-material-discovery-computational",
+        "fab-material-discovery-synthesis",
+        "fab-material-discovery-legacy-hv"
+      ],
+      "protocol_count": 3,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://discoveredmaterials.com/research/",
+        "https://discoveredmaterials.com/research/downloads/materials.csv",
+        "https://discoveredmaterials.com/research/downloads/mdb-materials.zip",
+        "https://discoveredmaterials.com/research/synthesis_grades.js",
+        "https://petmad.matforge.ai/bench/about.html"
+      ]
+    },
+    {
+      "family": "SHRAV physical-state continuation",
+      "protocol_ids": [
+        "litho-shrav-latent-demo"
+      ],
+      "protocol_count": 1,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/abs/2609.27621",
+        "https://arxiv.org/pdf/2609.27621v2"
+      ]
+    },
+    {
+      "family": "ICPI analog layout refinement",
+      "protocol_ids": [
+        "analog-layout-icpi-real",
+        "analog-layout-icpi-synthetic"
+      ],
+      "protocol_count": 2,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2608.13767v1",
+        "https://github.com/bingyang1132/ICLAD2026-demo-sim-aware-in-context/tree/7ad0f408ae59405eaff312ad42b9cfbab08855a7"
+      ]
+    },
+    {
+      "family": "ATLAS SAR ADC generation",
+      "protocol_ids": [
+        "analog-atlas-sar-method"
+      ],
+      "protocol_count": 1,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2607.14165v1",
+        "https://arxiv.org/src/2607.14165v1"
+      ]
+    },
+    {
+      "family": "PANDA analog intent-to-layout",
+      "protocol_ids": [
+        "analog-panda-intent-layout"
+      ],
+      "protocol_count": 1,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2606.15052v1",
+        "https://github.com/PKU-IDEA/PANDA/tree/9e53e43c0d29bdc8c0f326640b9d66c7075e841b"
+      ]
+    },
+    {
+      "family": "AGAPI materials tool agents",
+      "protocol_ids": [
+        "device-agapi-known-property",
+        "device-agapi-defhyp",
+        "device-agapi-workflow-repeat",
+        "device-agapi-grounding"
+      ],
+      "protocol_count": 4,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2512.11935v2",
+        "https://doi.org/10.1021/acs.jpclett.6c00837",
+        "https://doi.org/10.1021/acs.jpclett.6c00837.s001",
+        "https://github.com/atomgptlab/agapi/tree/b367c87d99cec479737592b05883495df920e19e",
+        "https://github.com/atomgptlab/aai4science/tree/01d7630cd9914a6991ce72b2f7f6627f2774184e"
+      ]
+    },
+    {
+      "family": "ArchEval architecture agents",
+      "protocol_ids": [
+        "arch-archeval-l1",
+        "arch-archeval-l2",
+        "arch-archeval-l3"
+      ],
+      "protocol_count": 3,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2607.03601v1",
+        "https://github.com/billwang485/Archeval_Call_for_Challenges/tree/55cc85b669416e7746a96b9a051a99242eb2aff1"
+      ]
+    },
+    {
+      "family": "DPC4 prefetcher evaluation",
+      "protocol_ids": [
+        "arch-dpc4-championship",
+        "arch-dpc4-archagentv2",
+        "arch-dpc4-duodiscover"
+      ],
+      "protocol_count": 3,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://github.com/CMU-SAFARI/DPC4/tree/051684493c8439312b9c4c3af38fa25100834afa",
+        "https://traces.rbera.com/dpc4/manifest.txt",
+        "https://arxiv.org/html/2608.09874v1",
+        "https://arxiv.org/html/2610.17184v1",
+        "https://github.com/DuoDiscover/duodiscover.github.io/tree/40817dd299561ac6d3c39137844676060c8c1d76"
+      ]
+    },
+    {
+      "family": "Agentic Architect microarchitecture",
+      "protocol_ids": [
+        "arch-agenticarchitect-v2",
+        "arch-agenticarchitect-v1"
+      ],
+      "protocol_count": 2,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2604.25083v2",
+        "https://arxiv.org/src/2604.25083v2",
+        "https://arxiv.org/html/2604.25083v1"
+      ]
+    },
+    {
+      "family": "BenchmarkAnything OpenBench",
+      "protocol_ids": [
+        "arch-openbench-universe",
+        "arch-openbench-core"
+      ],
+      "protocol_count": 2,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2610.09447v1",
+        "https://arxiv.org/src/2610.09447v1"
+      ]
+    },
+    {
+      "family": "QuArch architecture reasoning",
+      "protocol_ids": [
+        "arch-quarch-mcq",
+        "arch-quarch-frq",
+        "arch-quarch-v01",
+        "arch-quarch-memory-codesign",
+        "arch-quarch-dram-control"
+      ],
+      "protocol_count": 5,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2510.22087v3",
+        "https://github.com/harvard-edge/quarch-eval/tree/2df4734692f9783a9978d4d4698ff25f391ced41",
+        "https://quarch.ai/",
+        "https://arxiv.org/html/2501.01892v2"
+      ]
+    },
+    {
+      "family": "DS2SC-Agent chiplet models",
+      "protocol_ids": [
+        "arch-ds2sc-model-generation"
+      ],
+      "protocol_count": 1,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/abs/2603.21190",
+        "https://arxiv.org/pdf/2603.21190v1"
+      ]
+    },
+    {
+      "family": "EDA-Corpus OpenROAD tool data",
+      "protocol_ids": [
+        "data-eda-corpus-qa-v1",
+        "data-eda-corpus-ps-v1",
+        "data-openroad-agent-correction-v2",
+        "pd-openroad-agent-script"
+      ],
+      "protocol_count": 4,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2405.06676v1",
+        "https://github.com/OpenROAD-Assistant/EDA-Corpus/tree/473daeb20677758b612e1a9e30246231c02d133c",
+        "https://github.com/OpenROAD-Assistant/OpenROAD-Agent/tree/2b3889e0574b8167f15df8aee3d507b42ee83c14",
+        "https://doi.org/10.1109/ICLAD65226.2025.00039",
+        "https://bingyuew.github.io/publication/2025-06-26-iclad"
+      ]
+    },
+    {
+      "family": "ProtocolLLM protocol generation",
+      "protocol_ids": [
+        "rtl-protocolllm-generation",
+        "data-protocolllm-generations"
+      ],
+      "protocol_count": 2,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2506.07945v2",
+        "https://github.com/amsheth/ProtocolLLM/tree/fba94a81b975b9b85c6e2c3c5da27d65021b1369"
+      ]
+    },
+    {
+      "family": "Semi-Sim supply chain simulation",
+      "protocol_ids": [
+        "fab-semisim-reflectichain"
+      ],
+      "protocol_count": 1,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2604.11041v1",
+        "https://arxiv.org/abs/2604.11041"
+      ]
+    },
+    {
+      "family": "CDM agentic hardware synthesis",
+      "protocol_ids": [
+        "rtl-cdm-supergates-method"
+      ],
+      "protocol_count": 1,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://doi.org/10.1145/3787109.3816376"
+      ]
+    },
+    {
+      "family": "Structural verification OpenROAD",
+      "protocol_ids": [
+        "pd-structverify-singlestep",
+        "pd-structverify-multistep"
+      ],
+      "protocol_count": 2,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2604.18834v1",
+        "https://arxiv.org/abs/2604.18834"
+      ]
+    },
+    {
+      "family": "Razavi-Bench multimodal circuit reasoning",
+      "protocol_ids": [
+        "analog-razavi-direct",
+        "analog-razavi-agentic",
+        "analog-razavi-spice"
+      ],
+      "protocol_count": 3,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://github.com/Arcadia-1/razavi-bench/tree/223ce9182c13a13c16e7f5fe18e0cf5f4a182752",
+        "https://razavi-bench.tokenzhang.com"
+      ]
+    },
+    {
+      "family": "AnalogSAGE circuit topology sizing",
+      "protocol_ids": [
+        "analog-analogsage-paper10",
+        "analog-analogsage-current52"
+      ],
+      "protocol_count": 2,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2512.22435v1",
+        "https://github.com/xz-group/AnalogSAGE/tree/8fd72e235d2b331ee3ef2e3b633b4875bb9fa358"
+      ]
+    },
+    {
+      "family": "CIRCUIT circuit reasoning",
+      "protocol_ids": [
+        "analog-circuit-numeric-robustness"
+      ],
+      "protocol_count": 1,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2502.07980v1"
+      ]
+    },
+    {
+      "family": "ASIC-Agent-Bench workflow",
+      "protocol_ids": [
+        "rtl-asic-agent-bench"
+      ],
+      "protocol_count": 1,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2508.15940v1",
+        "https://github.com/AUCOHL/ASIC-Agent-Bench"
+      ]
+    },
+    {
+      "family": "ArchGym numerical architecture DSE",
+      "protocol_ids": [
+        "arch-archgym-dram",
+        "arch-archgym-timeloop",
+        "arch-archgym-farsi",
+        "arch-archgym-maestro",
+        "data-archgym-proxy-subset"
+      ],
+      "protocol_count": 5,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2306.08888v1",
+        "https://github.com/srivatsankrishnan/oss-arch-gym/tree/53f745af87b256794c0cd712c2b8e77aab74b4a6",
+        "https://zenodo.org/records/7791592"
+      ]
+    },
+    {
+      "family": "MAEDA EDA QA evaluation",
+      "protocol_ids": [
+        "data-maeda-openroad-evaluator",
+        "data-maeda-commercial-transfer"
+      ],
+      "protocol_count": 2,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://github.com/Rayzzz14/MAEDA-DATE26/tree/1c2f07f8ae9c07aa6fcd45280d7b46cd6a2cb5d6"
+      ]
+    },
+    {
+      "family": "GUI-EDA multiphysics GUI",
+      "protocol_ids": [
+        "gui-eda-answer",
+        "gui-eda-action"
+      ],
+      "protocol_count": 2,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2512.11611v1",
+        "https://github.com/aiben-ch/GUI-EDA"
+      ]
+    },
+    {
+      "family": "HeuriGym heuristic algorithm engineering",
+      "protocol_ids": [
+        "hls-heurigym-scheduling",
+        "synth-heurigym-techmap",
+        "pd-heurigym-globalrouting",
+        "synth-heurigym-egraph",
+        "arch-heurigym-intraop",
+        "data-heurigym-solvers"
+      ],
+      "protocol_count": 6,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://www.csl.cornell.edu/~zhiruz/pdfs/heurigym-iclr2026.pdf",
+        "https://arxiv.org/abs/2506.07972",
+        "https://github.com/cornell-zhang/heurigym/tree/a4cf0460152eb798f1b3a797ef22a08192661bf5",
+        "https://huggingface.co/datasets/heurigen/heurigen-data",
+        "https://cornell-zhang.github.io/heurigym/"
+      ]
+    },
+    {
+      "family": "VFlow workflow optimization method",
+      "protocol_ids": [
+        "rtl-vflow-v1",
+        "rtl-vflow-v2"
+      ],
+      "protocol_count": 2,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2504.03723v1",
+        "https://www.aspdac.com/aspdac2026/pdf/ASP-DAC_2026_Full_Program.pdf",
+        "https://doi.org/10.1109/ASP-DAC66049.2026.11420713",
+        "https://arxiv.org/html/2504.03723v2"
+      ]
+    },
+    {
+      "family": "TritonDFT DFTBench",
+      "protocol_ids": [
+        "device-tritondft-accuracy",
+        "device-tritondft-hpc",
+        "data-tritondft-template-corpus"
+      ],
+      "protocol_count": 3,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2603.03372v2",
+        "https://github.com/Leo9660/TritonDFT/tree/6868e866a635e8fb0d91f60e3ee2bb98840e5c14"
+      ]
+    },
+    {
+      "family": "AutoDFT VASP workflows",
+      "protocol_ids": [
+        "device-autodft-vaspbench",
+        "device-autodft-mp20"
+      ],
+      "protocol_count": 2,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/html/2605.26179v2",
+        "https://arxiv.org/abs/2605.26179"
+      ]
+    },
+    {
+      "family": "XDFT semiconductor mechanism diagnosis",
+      "protocol_ids": [
+        "device-xdft-v1",
+        "device-xdft-v2"
+      ],
+      "protocol_count": 2,
+      "new_family_object": true,
+      "primary_sources": [
+        "https://arxiv.org/pdf/2604.26703v2",
+        "https://arxiv.org/pdf/2604.26703v1",
+        "https://arxiv.org/abs/2604.26703"
+      ]
+    }
+  ],
+  "source_accounting": {
+    "as_of": "2026-10-20T16:13:36.446296+00:00",
+    "round2_manifest_files": 197,
+    "retrieval_records": 13209,
+    "downloaded_records": 12727,
+    "unique_downloaded_sha256": 11485,
+    "failed_or_other_records": 482,
+    "scope": "Retrieval/accounting counts across saved round2 manifests, includes source code files, duplicated requests, PDFs, archives and metadata; not independentpapers/benchmarks/datasets",
+    "malformed_manifest_files": []
+  },
+  "verification_scope": {
+    "all_added_record_snapshots_match": true,
+    "all_added_supporting_files_exist": true,
+    "CSV_and_links": "See current delivery audit and publication receipt; those are structural checks, not scientific reproduction",
+    "models_EDA_simulation_executed": false
+  },
+  "public_deliverables": {
+    "table": "https://ligouhei.github.io/semiconductor-benchmark-atlas/",
+    "round_summary": "https://ligouhei.github.io/semiconductor-benchmark-atlas/round2-research.html",
+    "task_selection": "https://ligouhei.github.io/semiconductor-benchmark-atlas/round2-task-selection.html",
+    "agent_data": "https://ligouhei.github.io/semiconductor-benchmark-atlas/round2-agent-data-shortlist.html",
+    "candidates": "https://ligouhei.github.io/semiconductor-benchmark-atlas/round2-candidate-status.html",
+    "repository": "https://github.com/ligouhei/semiconductor-benchmark-atlas"
+  },
+  "interpretation": [
+    "165 task/version protocols are not165 independent datasets; families also include method/resource objects.",
+    "VPEvolve remains onefamily with commercialrecipe-agent protocol and companionopen simulationresource, sharing20GDSwindows.",
+    "Native software capability does not prove the corresponding engineering-agent task solved; compare matchedoracles/budgets andindependenthardgates.",
+    "QA/reasoning, directnumericaloptimization, toolorchestration, algorithm-sourceevolution andclosedloopphysicalacceptance remain distinct.",
+    "Gated/private/403/challenge/404/timeout evidence is recorded, not bypassed or silently assumed public.",
+    "Training authorization is separate from datareadability; no rawrestrictedtasks/answers/trajectories orcredentials are republished."
+  ],
+  "material_remaining_gaps": [
+    "CommercialCalibre/PDK/deck/model andfullwafercalibrated OPC-agent oracle unavailable forindependentreplication.",
+    "Many methodpapers lack frozen taskmanifests/standalonegraders/fullcandidatefailurecostledger.",
+    "Realmodel/tooltrajectories scarce; reference scripts, finalsource, curatedmemory andnumerictrials notsubstitutes.",
+    "Some public score tables use differentversions/denominators/qualitydefinitions; sourcecorrections preserved, no modelrerunperformed.",
+    "No claim to have exhausted every existing or private industry benchmark."
+  ]
+}

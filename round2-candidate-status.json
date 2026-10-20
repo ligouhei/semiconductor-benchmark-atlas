@@ -1,6 +1,6 @@
 {
   "status": "第二轮12小时仍在进行；静态核查清单，不是训练授权或模型实验结果",
-  "as_of": "2026-10-20T15:54:55.152848+00:00",
+  "as_of": "2026-10-20T16:31:34.528291+00:00",
   "scope": "只发布派生研究摘要；原始轨迹/问题/答案/凭据不随网站重发。",
   "records": [
     {
@@ -63,16 +63,6 @@
         "https://arxiv.org/abs/2607.22975",
         "https://pypi.org/project/AEcroscopyWave/0.1.21/",
         "https://yongtaoliu.github.io/aecroscopy.pyae/welcome_intro.html"
-      ],
-      "counted_as_new_benchmark": false
-    },
-    {
-      "name": "DFTAgent",
-      "status": "选定demo已核／完整paper协议未取得",
-      "verified": "固定ff6f0ee96f4f6117cce59df7f784b3683d69b159；Atalanta nativeATPG wrapper与parser例。baseline_atpg当前实际调用注释且返回True，testfile为确定性reportparser，不直接调模型。",
-      "missing": "全文请求429/403未绕过；不能由demo推全paper，不能用弱固定lineparser对较强regex证明LLM必要。ISCAS/ITC复用也不是新独立电路库；完整fault/coverage分母待核。",
-      "sources": [
-        "https://github.com/ame-shiro/DFTAgent/tree/ff6f0ee96f4f6117cce59df7f784b3683d69b159"
       ],
       "counted_as_new_benchmark": false
     },
