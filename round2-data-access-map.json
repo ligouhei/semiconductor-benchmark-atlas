@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-10-20T09:45:35.734873+00:00",
+  "as_of": "2026-10-20T10:03:25.442466+00:00",
   "status": "第二轮12h进行中的数据/轨迹开放性核查，非完整市场清单或最终结论",
   "scope": "只覆盖本轮已保存一手核查的新增协议；训练样本、评测输入、模型权重、整理后记忆、生成采样轨迹与LLM工具交互轨迹分别描述",
-  "protocol_records": 94,
-  "families": 48,
+  "protocol_records": 100,
+  "families": 51,
   "items": [
     {
       "catalog_id": "lib-siemens-nemo-characterization",
@@ -1131,6 +1131,78 @@
       "trajectory_and_training_access": "论文声称SI保存18步prompt/reply/execution与SourceData，但本轮仅取得主PDF，未核到公开SI下载；源码明确商业开发不公开。不得把18迭代记成已下载训练轨迹。",
       "limits": "内部一致物理模型不是fabricateddevice拟合；未计relaxation、未传播material/geometryuncertainty。完整SI/code/固定任务manifest未独立取得，六评估/任务不能作规模化优化能力结论。",
       "primary_sources": "https://arxiv.org/abs/2608.16048; https://arxiv.org/pdf/2608.16048v1",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "data-semifa930-narratives",
+      "name": "SemiFA-930 / wafer-map FA narratives and classifier task",
+      "family": "SemiFA-930",
+      "object_identity": "图像分类/合成多轮报告SFT资源；非真实交互轨迹",
+      "task": "DINOv2-base+MLP分类；GPT4o Vision按图+已知class、随机78–97%confidence及class-conditioned模拟equipmentlogs生成报告。作者审合理性，不是实测根因gold。每例两轮human/gpt、第二轮答案从首报告抽取。",
+      "available_materials_and_tools": "55Gitblobs含完整930annotations/source/notebook/results逐hash核；Git无PNG。HF官方公开MIT、文件页有图像，但本轮raw/API因proxy CONNECT超时，未独立取齐bitmap/archive，不能称图文byte完整复验。上游waferdataset许可另列。",
+      "trajectory_and_training_access": "930个两轮SFTconversation已完整读，非tool action-observation轨迹；HF图像列表公开但本轮原始imagebytes未核。current统计与paper来源配比不同，需先固定版本。",
+      "limits": "首human prompt只请求看图，未附teacher用过的equipmentlogs/class/confidence，teacher答案却含详细设备事实；直接SFT可能学习无输入证据的断言。train/val图路径无重合，不等bitmap/wafer/lot独立，需图像与源组核查。",
+      "primary_sources": "https://arxiv.org/html/2604.13236v1; https://github.com/Shivamckaushik/SemiFA/tree/0bc296e49d23c1a3724aa4be6b1fa270687da1f8; https://huggingface.co/datasets/ShivamChand/SemiFA-930",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "fab-semifa-agent-reporting",
+      "name": "SemiFA / root-cause report pipeline and five-case modality ablation",
+      "family": "SemiFA-930",
+      "object_identity": "四agent+报告节点的仿真实验；生产架构未验证",
+      "task": "按固定LangGraph顺序报告；独立rootcause消融五手选案例×四condition(full/无retrieval/无telemetry/仅description)，使用GPT4o同时生成和judge，非productionLLaVA/DINO端到端大样本验收。",
+      "available_materials_and_tools": "公开源码/20caseoutputs/评分/Colab；rootMIT、外部模型/waferdataset权利另核。未执行notebook、API、GPU或部署生产栈。",
+      "trajectory_and_training_access": "公开20个rootcause生成输出+judge结果（五例四条件）及固定agent代码；不是全量真实设备交互或真实LLaVA运行轨迹。930文本SFT同家族资源分列不另算独立dataset。",
+      "limits": "5case×4condition不是930个agent任务，语义judge单模型同源偏差/测试class已知、模拟设备日志、生产部署未验证等边界保留。report完整/延迟好不等真实根因准确或工艺优化成功。",
+      "primary_sources": "https://arxiv.org/html/2604.13236v1; https://github.com/Shivamckaushik/SemiFA/tree/0bc296e49d23c1a3724aa4be6b1fa270687da1f8; https://huggingface.co/datasets/ShivamChand/SemiFA-930",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "fab-material-discovery-computational",
+      "name": "Material Discovery Bench / BEOL dielectric computational search",
+      "family": "Material Discovery Bench",
+      "object_identity": "开放目标长程研究benchmark；物性预测与实物验证分开",
+      "task": "七模型在Inspect类harness提出结构/查询文献/预算搜索；声明100Mtoken上限且无stoppingcondition、实际30–100M。PET-MAD/声子/输运/张量预测承担物性计算；新研究页把直接DFT列未来，不是已完成DFT/实测。",
+      "available_materials_and_tools": "公开3.2e5B结构ZIP、2.1MBrecipeJSON、表和展示评分JS都静态读，ZIPCSV逐字节一致，526IDs全对齐。官方harnessGitHub advaith-dm/materials-autoresearch当前404；未执行MLIP/DFT/Inspect。来源未见统一冻结license，数据使用权需核。",
+      "trajectory_and_training_access": "下载实核526CSV/526CIF/526recipe-structureJSON/526gradeIDs对齐；70submittingruns摘要、评分/展示JS、部分quotes与近似token时间线，不是全部30–100Mtoken实际provider轨迹。官方指向执行harness的GitHub链接404，未核到完整Inspect运行包。",
+      "limits": "旧about页是ε∞/异步DFT/ParetoHV/五次停滞停止，与新ε0/MLIP/100M无停止冲突，不能拼成统一协议。rawrun簿531候选与clean526保留过滤血缘。compound公开不等已合成、量测或fabqualified，CIF精确文件亦非晶体等价证明。",
+      "primary_sources": "https://discoveredmaterials.com/research/; https://discoveredmaterials.com/research/downloads/materials.csv; https://discoveredmaterials.com/research/downloads/mdb-materials.zip; https://discoveredmaterials.com/research/synthesis_grades.js; https://petmad.matforge.ai/bench/about.html",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "fab-material-discovery-synthesis",
+      "name": "Material Discovery Bench / synthesis-recipe plausibility grading",
+      "family": "Material Discovery Bench",
+      "object_identity": "同候选家族的配方评审轨；非实验成功率",
+      "task": "评critical/fixablepenalty：任一critical直接wouldnotattempt，fixable组合决定unlikely/attempt。LLM生成路线/查文献与实际可获得前驱体/目标phase形成/设备条件要有独立审查。",
+      "available_materials_and_tools": "526CSV/grade/recipeID全对齐，公开可审阅。完整expertcalibration labels/rubric versions/三次judge响应及执行harness未核到，不能称全部评分可独立回放。本轮不执行/建议执行任何化学配方。",
+      "trajectory_and_training_access": "下载实核526CSV/526CIF/526recipe-structureJSON/526gradeIDs对齐；70submittingruns摘要、评分/展示JS、部分quotes与近似token时间线，不是全部30–100Mtoken实际provider轨迹。官方指向执行harness的GitHub链接404，未核到完整Inspect运行包。",
+      "limits": "公开表476/49/1与另一artifact531/527/1版本不同；三knownOverrides/五postexport移除保留来源。专家校准LLMjudge非实物oracle，路线中目标相预先存在的假设必须单独判。",
+      "primary_sources": "https://discoveredmaterials.com/research/; https://discoveredmaterials.com/research/downloads/materials.csv; https://discoveredmaterials.com/research/downloads/mdb-materials.zip; https://discoveredmaterials.com/research/synthesis_grades.js; https://petmad.matforge.ai/bench/about.html",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "fab-material-discovery-legacy-hv",
+      "name": "Material Discovery Bench / legacy hypervolume protocol（与新榜不合并）",
+      "family": "Material Discovery Bench",
+      "object_identity": "旧方法页协议/候选变体描述；当前执行包未取得",
+      "task": "旧页称异步DFT队列、agent不见verdict、五连续提交不增HV则停；新版research称MLIP/无stoppingcondition/100Mtoken。需取得固定harness commit再归属结果，不能按旧说法替新数据补充DFT验证。",
+      "available_materials_and_tools": "官方旧页GitHub链接404，未取得执行/DFT/设备sheet工件；公开页面保留但标legacy/versionconflict。所有已下载CSV provenance均MLIP，不能用旧页面“DFT groundtruth”升级。",
+      "trajectory_and_training_access": "下载实核526CSV/526CIF/526recipe-structureJSON/526gradeIDs对齐；70submittingruns摘要、评分/展示JS、部分quotes与近似token时间线，不是全部30–100Mtoken实际provider轨迹。官方指向执行harness的GitHub链接404，未核到完整Inspect运行包。",
+      "limits": "版本发布血缘/日期不完整，旧页仍可访问但不代表新研究成绩使用它；旧novelty notinMP与新BEOLthinfilm未报道也不同。设备约束和ten-system变体是待核候选，不分四个独立数据集计数。",
+      "primary_sources": "https://discoveredmaterials.com/research/; https://discoveredmaterials.com/research/downloads/materials.csv; https://discoveredmaterials.com/research/downloads/mdb-materials.zip; https://discoveredmaterials.com/research/synthesis_grades.js; https://petmad.matforge.ai/bench/about.html",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "litho-shrav-latent-demo",
+      "name": "SHRAV / fixed-weight lithography continuation exemplar（非LLM benchmark）",
+      "family": "SHRAV physical-state continuation",
+      "object_identity": "方法接口与selected单轨迹演示；不是工程agent对抗bench",
+      "task": "缺失/过量像素与response重新contextualize下一mask；候选固定weights全部执行、没有accept/rejectgate。语言上State/Hypothesis/Reason/Action/Verify不自动意味着LLM、多agent或可下载agent轨迹。",
+      "available_materials_and_tools": "已读官方v2 PDF7页，HTML404，未核到完整source/evaltask/训练权重或savedtrajectorydownload。Level2自适应机制列companionfuture，不把当前Level0固定权重演示升级为已实现selfevolvingagent。",
+      "trajectory_and_training_access": "只取得论文所示五状态单轨迹/30cached-equivalence描述；未取得完整可回放source/任务包，且此工作不是LLM对话agent数据。",
+      "limits": "singleexemplar的metrictradeoff与固定场景复用不支持跨PDK/新optics/unrestrictedtransfer；并未给出商业toolrecipe/制造signoff/hardwareclosure。source实验归档提及不等完整公开训练数据取得。",
+      "primary_sources": "https://arxiv.org/abs/2609.27621; https://arxiv.org/pdf/2609.27621v2",
       "record_snapshot_matches_audit": true
     }
   ],

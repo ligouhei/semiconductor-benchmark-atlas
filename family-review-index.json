@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-10-20T09:45:35.834057+00:00",
+  "generated_at": "2026-10-20T10:03:25.543143+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 369,
-    "records": 660,
-    "records_with_any_field_audit_entry": 418,
-    "records_with_current_field_audit_snapshot": 385,
-    "records_without_current_field_audit_snapshot": 275
+    "families": 372,
+    "records": 666,
+    "records_with_any_field_audit_entry": 425,
+    "records_with_current_field_audit_snapshot": 392,
+    "records_without_current_field_audit_snapshot": 274
   },
   "requirements_per_record": [
     "输入与动作/权限固定",
@@ -10044,6 +10044,77 @@
       ]
     },
     {
+      "benchmark_family": "Material Discovery Bench",
+      "record_count": 3,
+      "records_with_current_field_audit": 3,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "fab-material-discovery-computational",
+          "name": "Material Discovery Bench / BEOL dielectric computational search",
+          "category": "制造/材料发现agent",
+          "artifact_type": "开放目标长程研究benchmark；物性预测与实物验证分开",
+          "task_layer": "BEOL导热绝缘材料目标→文献/结构/MLIP工具→候选晶体",
+          "evidence_status": "第二轮12h进行中；一手正文/固定源码/完整选定数据静态核查，自编计数与评分算术核对；未执行第三方agent、模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-fab-materials-shrav-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需冻结实际数据/环境与评分版本、模型与原生工具预算、失败分母和使用许可；静态核验不等动态性能复现。",
+          "limitations": "旧about页是ε∞/异步DFT/ParetoHV/五次停滞停止，与新ε0/MLIP/100M无停止冲突，不能拼成统一协议。rawrun簿531候选与clean526保留过滤血缘。compound公开不等已合成、量测或fabqualified，CIF精确文件亦非晶体等价证明。",
+          "tools_and_access": "公开3.2e5B结构ZIP、2.1MBrecipeJSON、表和展示评分JS都静态读，ZIPCSV逐字节一致，526IDs全对齐。官方harnessGitHub advaith-dm/materials-autoresearch当前404；未执行MLIP/DFT/Inspect。来源未见统一冻结license，数据使用权需核。",
+          "industrial_value": "研究判断：范围直接涉及3D芯片BEOL材料，属于agent长程研究而非EDA数值优化；可用于研究surrogate利用、文献新颖性、候选去重/失败诊断，但必须补模型工具成本和独立物理/实验验收。"
+        },
+        {
+          "id": "fab-material-discovery-synthesis",
+          "name": "Material Discovery Bench / synthesis-recipe plausibility grading",
+          "category": "制造/材料合成路线agent",
+          "artifact_type": "同候选家族的配方评审轨；非实验成功率",
+          "task_layer": "候选结构/BEOL温度工艺要求/配方→专家校准rubric+LLM审阅",
+          "evidence_status": "第二轮12h进行中；一手正文/固定源码/完整选定数据静态核查，自编计数与评分算术核对；未执行第三方agent、模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-fab-materials-shrav-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需冻结实际数据/环境与评分版本、模型与原生工具预算、失败分母和使用许可；静态核验不等动态性能复现。",
+          "limitations": "公开表476/49/1与另一artifact531/527/1版本不同；三knownOverrides/五postexport移除保留来源。专家校准LLMjudge非实物oracle，路线中目标相预先存在的假设必须单独判。",
+          "tools_and_access": "526CSV/grade/recipeID全对齐，公开可审阅。完整expertcalibration labels/rubric versions/三次judge响应及执行harness未核到，不能称全部评分可独立回放。本轮不执行/建议执行任何化学配方。",
+          "industrial_value": "研究判断：把计算筛选与“模型会写配方”分开是此bench价值；现有1个attempt并无实物成功证明，不能用于声称模型完成材料研发闭环。"
+        },
+        {
+          "id": "fab-material-discovery-legacy-hv",
+          "name": "Material Discovery Bench / legacy hypervolume protocol（与新榜不合并）",
+          "category": "制造/材料发现agent",
+          "artifact_type": "旧方法页协议/候选变体描述；当前执行包未取得",
+          "task_layer": "结构新颖性/κ与光学ε∞→Pareto frontier",
+          "evidence_status": "第二轮12h进行中；一手正文/固定源码/完整选定数据静态核查，自编计数与评分算术核对；未执行第三方agent、模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-fab-materials-shrav-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需冻结实际数据/环境与评分版本、模型与原生工具预算、失败分母和使用许可；静态核验不等动态性能复现。",
+          "limitations": "版本发布血缘/日期不完整，旧页仍可访问但不代表新研究成绩使用它；旧novelty notinMP与新BEOLthinfilm未报道也不同。设备约束和ten-system变体是待核候选，不分四个独立数据集计数。",
+          "tools_and_access": "官方旧页GitHub链接404，未取得执行/DFT/设备sheet工件；公开页面保留但标legacy/versionconflict。所有已下载CSV provenance均MLIP，不能用旧页面“DFT groundtruth”升级。",
+          "industrial_value": "研究判断：保留旧协议防止不同指标/物理oracle/停止规则混用；待固定作者版本与运行ledger后才能比较新旧成果。"
+        }
+      ]
+    },
+    {
       "benchmark_family": "Matrix S-parameters dataset",
       "record_count": 1,
       "records_with_current_field_audit": 1,
@@ -12741,6 +12812,35 @@
       ]
     },
     {
+      "benchmark_family": "SHRAV physical-state continuation",
+      "record_count": 1,
+      "records_with_current_field_audit": 1,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "litho-shrav-latent-demo",
+          "name": "SHRAV / fixed-weight lithography continuation exemplar（非LLM benchmark）",
+          "category": "制造/光刻逆设计testbed",
+          "artifact_type": "方法接口与selected单轨迹演示；不是工程agent对抗bench",
+          "task_layer": "目标/固定光学与latentstate→二值mask/预测反馈→标量pupil replay",
+          "evidence_status": "第二轮12h进行中；一手正文/固定源码/完整选定数据静态核查，自编计数与评分算术核对；未执行第三方agent、模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-fab-materials-shrav-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需冻结实际数据/环境与评分版本、模型与原生工具预算、失败分母和使用许可；静态核验不等动态性能复现。",
+          "limitations": "singleexemplar的metrictradeoff与固定场景复用不支持跨PDK/新optics/unrestrictedtransfer；并未给出商业toolrecipe/制造signoff/hardwareclosure。source实验归档提及不等完整公开训练数据取得。",
+          "tools_and_access": "已读官方v2 PDF7页，HTML404，未核到完整source/evaltask/训练权重或savedtrajectorydownload。Level2自适应机制列companionfuture，不把当前Level0固定权重演示升级为已实现selfevolvingagent。",
+          "industrial_value": "研究判断：作为光刻模型statecontinuation/数值回放边界案例收录，明确非LLMagentbenchmark；要证工程价值需更多任务、原生优化对照、maskmanufacturability及更高保真/实验验证。"
+        }
+      ]
+    },
+    {
       "benchmark_family": "SMAT2022",
       "record_count": 1,
       "records_with_current_field_audit": 0,
@@ -13256,9 +13356,59 @@
       ]
     },
     {
+      "benchmark_family": "SemiFA-930",
+      "record_count": 2,
+      "records_with_current_field_audit": 2,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "data-semifa930-narratives",
+          "name": "SemiFA-930 / wafer-map FA narratives and classifier task",
+          "category": "制造/失效分析数据",
+          "artifact_type": "图像分类/合成多轮报告SFT资源；非真实交互轨迹",
+          "task_layer": "wafer map/九类标签→描述/根因/严重性/建议叙述",
+          "evidence_status": "第二轮12h进行中；一手正文/固定源码/完整选定数据静态核查，自编计数与评分算术核对；未执行第三方agent、模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-fab-materials-shrav-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需冻结实际数据/环境与评分版本、模型与原生工具预算、失败分母和使用许可；静态核验不等动态性能复现。",
+          "limitations": "首human prompt只请求看图，未附teacher用过的equipmentlogs/class/confidence，teacher答案却含详细设备事实；直接SFT可能学习无输入证据的断言。train/val图路径无重合，不等bitmap/wafer/lot独立，需图像与源组核查。",
+          "tools_and_access": "55Gitblobs含完整930annotations/source/notebook/results逐hash核；Git无PNG。HF官方公开MIT、文件页有图像，但本轮raw/API因proxy CONNECT超时，未独立取齐bitmap/archive，不能称图文byte完整复验。上游waferdataset许可另列。",
+          "industrial_value": "研究判断：有真实公开的合成报告训练对，适合作视觉分类/报告格式研究；须修复证据输入或屏蔽无法证实的设备事实，才能用于可靠FA行为训练。"
+        },
+        {
+          "id": "fab-semifa-agent-reporting",
+          "name": "SemiFA / root-cause report pipeline and five-case modality ablation",
+          "category": "制造/失效分析报告agent",
+          "artifact_type": "四agent+报告节点的仿真实验；生产架构未验证",
+          "task_layer": "图像/已知defect描述/模拟telemetry/历史检索→结构化FA报告",
+          "evidence_status": "第二轮12h进行中；一手正文/固定源码/完整选定数据静态核查，自编计数与评分算术核对；未执行第三方agent、模型、仿真或EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-fab-materials-shrav-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需冻结实际数据/环境与评分版本、模型与原生工具预算、失败分母和使用许可；静态核验不等动态性能复现。",
+          "limitations": "5case×4condition不是930个agent任务，语义judge单模型同源偏差/测试class已知、模拟设备日志、生产部署未验证等边界保留。report完整/延迟好不等真实根因准确或工艺优化成功。",
+          "tools_and_access": "公开源码/20caseoutputs/评分/Colab；rootMIT、外部模型/waferdataset权利另核。未执行notebook、API、GPU或部署生产栈。",
+          "industrial_value": "研究判断：有可审阅实验与工具架构的FA报告agent，适合研究多源证据组织；需要独立专家/真实设备groundtruth、跨lot评测及原生检索/确定性报告基线后判断工业价值。"
+        }
+      ]
+    },
+    {
       "benchmark_family": "SemiKongBench-100",
       "record_count": 1,
-      "records_with_current_field_audit": 0,
+      "records_with_current_field_audit": 1,
       "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
       "records": [
         {
@@ -13267,13 +13417,19 @@
           "category": "制造/合成工厂运营agent",
           "artifact_type": "公开100状态任务/工具/状态差分评分与参考轨迹",
           "task_layer": "跨证据检索、工艺判断、受控状态写入与回读",
-          "evidence_status": "本轮已读作者论文/固定README及选定评分/元数据；具体见agentic-followup.json。仅静态核验，未执行下载代码、模型、EDA或仿真。",
-          "current_field_audit_snapshots": [],
+          "evidence_status": "第二轮完整静态核查897文件及2100reference actions/100verifier/200state snapshots；原始资格运行和本轮只读算术审阅分开。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-fab-materials-shrav-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
           "unversioned_field_audit_entries": [],
           "stale_field_audit_snapshots": [],
-          "next_verification": "取得并锁定完整任务manifest、环境/工具/PDK、评分器与许可；隔离agent和验收材料，固定预算/失败分母；本轮未进行动态复现。",
-          "limitations": "作者明确非Aitomatic/SemiKong/AIAlliance官方bench。完全合成状态机，不能推真实蚀刻/CMP/OPC物理仿真、真实MES对接或工艺收益。",
-          "tools_and_access": "固定publicrepo，100任务JSON与100参考轨迹、Harbor包；sourceApache2/dataCCBY4；本轮只静态读取task001/selectedscorer/spec和tree，不执行MCP、数据库或agent。",
+          "next_verification": "任务manifest/静态发布工件已取得；下一步需受控动态复验工具隔离/预算/失败恢复，并进行跨fab或workflow留出评测。当前保持静态范围，不执行。",
+          "limitations": "合成状态机，不是蚀刻/CMP/OPC物理优化或真实MES。100referenceepisode×21toolcall=2100确定性动作观察转移，另100verdict记录；非真实LLM/provider对话。作者明确非Aitomatic/SemiKong官方bench；六脚本负例零误接纳不代表对未知策略完整鲁棒。",
+          "tools_and_access": "897选定Gitblobs逐hash核：100task/100referenceJSONL/100verifier/200snapshots/380assets；另2000个Harborassetcopy Gitblobs与canonical匹配。Apache2software/dataCCBY4；本轮只读取JSON/源码和计数，无MCP/数据库/agent执行。",
           "industrial_value": "研究判断：跨证据检索、工艺判断、受控状态写入与回读；需要与原生工具或确定性流程同预算比较，成熟软件的存在不等该工程任务已解决。"
         }
       ]
