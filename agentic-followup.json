@@ -1,0 +1,280 @@
+{
+  "as_of": "2026-10-20",
+  "scope": "用户要求继续市场与公开学术agentic研究；原12h交付后的独立续查，不计为原任务内发现",
+  "added_records": 11,
+  "record_count": 566,
+  "family_count": 326,
+  "items": [
+    {
+      "catalog_id": "hls-ahrr-agent",
+      "name": "AHRR / agent-based HLS with RTL refinement",
+      "domain": "综合HLS/多抽象层工程agent",
+      "tier": "公开任务+评分代码，商业工具依赖",
+      "trajectory_access": "派生agent transcripts及逐轮ledger公开；raw transcripts不分发",
+      "input": "11个工作负载；GEM1的12-port变体是同工作负载的接口变体。每题规格、C++参考、接口合同和public TB；hidden TB定义也公开，但实验时应对agent隔离。",
+      "task": "比较直接RTL、agent HLS、HLS后RTL改写、编译器后HLS改写四种flow；反复读仿真/综合/布线报告改设计。",
+      "output": "HLS C++或RTL、每轮提交、ledger与测量报告。",
+      "metrics": "C/RTL仿真正确性与可布线/资源硬门后计吞吐=workitems/(cycles×max(实测period,target))；target3.33ns，U55C资源上限各类60%。最多5round，agent每轮60min、RTLsim75min、综合PnR90min，总10h；不能将多轮best当单次pass@1。FPGA OOC结果，不等含shell的板上吞吐。",
+      "access": "固定README、MIT LICENSE、docs/NUMBERS和params、round源码已读；Vitis/Vivado2025.2与Alveo U55C目标，自备商业工具。公开派生transcripts/每轮结果，原始transcripts、大型routedcheckpoint不随包提供。",
+      "limits": "公开隐藏测试定义需运行时隔离；11任务不能加接口变体算12独立IP；OOC/PnR可行与实际板级性能不同。",
+      "sources": [
+        "https://github.com/ZijD/AHRR/blob/3ad7306f1d52db461873382e397ff87a28c282a2/README.md",
+        "https://github.com/ZijD/AHRR/blob/3ad7306f1d52db461873382e397ff87a28c282a2/docs/NUMBERS.md",
+        "https://github.com/ZijD/AHRR/blob/3ad7306f1d52db461873382e397ff87a28c282a2/figures/tables/analysis/params.tsv"
+      ],
+      "record_sha256": "2e5a75ec96547baf0731698fd696cd6e3079dc787f4cf5c01d2a0eb9b50ee014"
+    },
+    {
+      "catalog_id": "pd-tictacbench-agent",
+      "name": "TicTacBench / post-PnR setup closure",
+      "domain": "数字后端/RTL级时序收敛agent",
+      "tier": "论文协议+匿名artifact待完整核验",
+      "trajectory_access": "论文做轨迹分析；完整轨迹下载未确认",
+      "input": "30任务=25个RTLLM2/RTL-OPT来源设计+5个允许额外latency的派生任务；suboptimal RTL、SDC、基线pre/postPnR报告与验证材料。",
+      "task": "agent可编译、等价检查、有限次prePnR STA后提交optimized.v；搜索中不能调用postPnR STA。验收在干净环境全flow运行。",
+      "output": "通过接口、功能和latency guards的最终RTL及后布线报告。",
+      "metrics": "Timing Closure Rate、WNS gap改善、ADP/EDDP改善；WNS ns、power mW，ECP=约束周期−截断为非正的WNS。保latency与显式允许cycle shift分开；只测setup，不包含hold。不得把prePnR正slack当通过。",
+      "access": "Yosys/SymbiYosys/LibreLane/OpenROAD/OpenSTA；论文提供anonymous.4open.science入口，本轮只取入口HTML未完整审计任务文件/许可/环境pin。",
+      "limits": "30任务含同源变体；主要单模块/单clock，CDC/存储为剩余缺口；匿名入口可访问不等完整包已取，精确搜索预算与功耗/能量归一实现仍待核。",
+      "sources": [
+        "https://arxiv.org/html/2609.23363v1",
+        "https://anonymous.4open.science/r/tictacbench-anon-F3C0/"
+      ],
+      "record_sha256": "388a63669ac54ed26f88e1ce63ca6d7466314a2265710e7a3e4454aac18e595f"
+    },
+    {
+      "catalog_id": "verify-circuitprover-agent",
+      "name": "CircuitProver / parameterized Lean hardware proofs",
+      "domain": "数字验证/交互式定理证明agent",
+      "tier": "论文明确协议；完整artifact未确认",
+      "trajectory_access": "论文描述证明轨迹积累，完整公开训练轨迹未确认",
+      "input": "63参数化Chisel任务：34算术/9控制/9存储/11其他；含Chisel、生成Lean模型、自然语言规格、theorem scaffold。另4个processor算术模块为扩展研究，不能直接并入主63分母。",
+      "task": "构造组合等价或时序状态转移/不变量证明，调用Lean检查并迭代；维护可复用lemma与策略。",
+      "output": "完整可编译Lean4证明文件。",
+      "metrics": "解决数/率、wallclock、output tokens、有效证明rounds、proof LoC。验收禁止sorry/admit/axiom/unsafe；成本平均仅成功题，必须同时报成功分母。",
+      "access": "需Lean4与相应硬件模型/形式化库；已读全文任务和验收定义，未确认完整公开manifest/独立grader/许可。",
+      "limits": "证明成立针对给定形式化模型和定理；自然语言规格→Lean翻译是否忠实仍是独立可信边界，不等任意RTL或硅实现全正确。",
+      "sources": [
+        "https://arxiv.org/html/2607.27259v1"
+      ],
+      "record_sha256": "b21d94c1b29c5cbccea3e7e1de63a2c8d421037a034acbfaface08ffd8625a05"
+    },
+    {
+      "catalog_id": "verify-gogotb-agent",
+      "name": "GoGoTB / specification-grounded coverage closure",
+      "domain": "数字验证/环境生成与覆盖收敛agent",
+      "tier": "论文方法评测；完整任务包待发布/待确认",
+      "trajectory_access": "公开论文含case分析，完整运行轨迹未确认",
+      "input": "8RTL设计(AES/ALU/UART/SPI/I2C/SHA256/SM4/SDRAM)、规格、提供的reference model；291–1424行，不是8大型SoC。",
+      "task": "生成并修复cocotb验证环境；按规格建立testpoints、诊断残余覆盖缺口、修订stimulus/coverage/checker。",
+      "output": "可运行验证工程、coverage模型/日志、诊断与closure记录。",
+      "metrics": "SRG要求零编译错+无死锁仿真+非零coverage；SRG不是功能正确率。另报line/branch/toggle/functionalcoverage和coverpoint/cross数量、构建时长；功能bins由spec导出，跨方法分母需核。",
+      "access": "论文Verilator5.024、cocotb2.0.1、CodeBuddy SDK；全文明确完整8设计spec/验证环境/testpoints稍后开源。",
+      "limits": "8设计且提供reference model；SRG100%不等100%coverage或全部bug找出。生成coverage模型与验收强度必须分开，尚无完整独立hidden测试审计。",
+      "sources": [
+        "https://arxiv.org/html/2607.26181v1"
+      ],
+      "record_sha256": "a7c8103c0f32417817283446395684d673b109574c24251f1da5344705d99536"
+    },
+    {
+      "catalog_id": "verify-bttf-waveform-agent",
+      "name": "BTTF / tool-interactive waveform query study",
+      "domain": "数字验证/波形诊断agent",
+      "tier": "论文明确查询协议；完整artifact未确认",
+      "trajectory_access": "附录给调用/响应示例；全量150轨迹未确认",
+      "input": "跨SoC层级VCD及RTL与150个专家标注查询/答案；作者描述总4.2GB、18450nets，分析窗口50–800ns。",
+      "task": "根据问题探索schema、查询波形数据、检查RTL来源并验证回答；含信号值/事件时间、toggle、活动热点及给定断言检查。",
+      "output": "带查询执行证据的回答与SQL/工具调用。",
+      "metrics": "executionaccuracy及各类query准确率，数据库尺寸/预处理/查询延迟；LLM autorater推理质量分与专家gold执行准确率不同。作者95.33%不等bug修复率、功耗估计精度或完整形式证明率。",
+      "access": "论文公开；本轮未确认150题/专家gold/VCD完整公开下载、许可和独立grader。",
+      "limits": "给定波形有限时间窗的证据查询，不等所有可能轨迹的formal proof；toggle活动热点不等真实电路功耗。",
+      "sources": [
+        "https://arxiv.org/html/2610.06790v1"
+      ],
+      "record_sha256": "4b3cf9613bc8ee721b3e520475e6f271b536d088d99212fdd9ccff73c9730e61"
+    },
+    {
+      "catalog_id": "analog-spicediffbench-repair",
+      "name": "SpiceDiffBench / bounded analog ECO repair",
+      "domain": "模拟前端/受限网表修复agent",
+      "tier": "一手摘要确认；协议细节与数据待核",
+      "trajectory_access": "未确认公开交互轨迹",
+      "input": "11电路模板衍生275个故障网表与目标规格；最多2个component-level edits，固定仿真预算。",
+      "task": "用patch DSL、拓扑连通剪枝、LLM slot ranking、两步lookahead/swaprefine和SPICE恢复目标行为。",
+      "output": "受限编辑patch与通过规格的网表。",
+      "metrics": "作者报告275题全部解出、平均30.63次sim，对照filter-enabled beam91.48；须在相同budget/值网格/故障生成下比解决率与sim成本。精确预算、成功阈值/单位从摘要尚不能完整确定。",
+      "access": "IEEE TCAD DOI10.1109/TCAD.2026.3729375，2026-08-31；本轮仅一手摘要/元数据，未取得全文/数据包/许可。",
+      "limits": "受限两处编辑与11模板，不是任意拓扑生成/完整层次电路/后版图PPA closure。高解出率仅对应作者冻结grid与分布。",
+      "sources": [
+        "https://ieeexplore.ieee.org/abstract/document/11673487/"
+      ],
+      "record_sha256": "b74c79cbf9c59c422b4cb6d48642217a470495bab259a1e5724ad8baf3f8b25e"
+    },
+    {
+      "catalog_id": "analog-cabagent-resource",
+      "name": "CABAgent / layout-verified benchmark generation resource",
+      "domain": "模拟后端/基准生成agent",
+      "tier": "公开示例/生成工具；完整实验依赖未齐",
+      "trajectory_access": "例题/部分工件；完整生成与失败轨迹集未确认",
+      "input": "自然语言电路、接口与SKY130信息；验证过的seed扩展尺寸/偏置/版图约束。作者称20topologies/1000package trials，当前repo50treeentries只说明illustrative cases。",
+      "task": "自演化记忆生成/修复网表，再自动布局和物理验证，保留成功与分阶段失败。",
+      "output": "标准化benchmark.json、SPICE/版图/后仿工件与stagefailure日志。",
+      "metrics": "分别报告netlist Pass@1、package trial数、postlayout sizing Pass@1及时间；98.3%与70.5%属于不同阶段/分母，1000trials不是1000独立IP或全部成功。",
+      "access": "固定README/源码示例、BSD3LICENSE；README明确修改版布局工具submodule未提供，当前code用于illustration。需ngspice/Magic/Netgen/open_pdks等。",
+      "limits": "不能据README1000trials宣称完整1000任务公开可跑；缺修改版布局依赖限制端到端重现；与AnalogAgent相关技术不等全新独立训练语料。",
+      "sources": [
+        "https://github.com/artifact-cabagent/CABAgent/blob/865310665dede87c42135e6edc13ae88b9d3cdae/README.md",
+        "https://github.com/artifact-cabagent/CABAgent/blob/865310665dede87c42135e6edc13ae88b9d3cdae/LICENSE.BSD-3-Clause"
+      ],
+      "record_sha256": "0285a83c170d6ee282185f5eaf553c6c7d6b3dd14b84af63000bf6d4164a83dd"
+    },
+    {
+      "catalog_id": "hls-hlsfactory-agent-extraction",
+      "name": "HLSFactory-Agent / repository-to-HLS dataset extraction",
+      "domain": "综合HLS/仓库抽取agent",
+      "tier": "公开工具；任务是数据抽取，非通用设计榜",
+      "trajectory_access": "工具支持保存session与HTML；不宣称论文全部原始轨迹已下载",
+      "input": "26个学术/开源HLS源码仓库、抽取指令与Vitis目标；不能把候选design直接算有效任务。",
+      "task": "识别kernel/top、复制headers/testdata、必要时迁移非Vitis构造，生成独立工程与synth.tcl，再Vitis HLS验证。",
+      "output": "独立设计目录、synth.tcl、run_data、Pi session/HTML transcript。",
+      "metrics": "论文271候选中130通过Vitis HLS synthesis、141失败，5仓库未抽到design；另报designs/$、designs/min。合成成功不等C/RTL功能等价、后PnR或最优QoR。",
+      "access": "固定公开repo/README，Python3.12/Docker/Pi/OpenRouter及自备Vitis HLS；当前完整tree未见LICENSE，不能因open-source自述就认定宽松再分发许可；上游各自授权。",
+      "limits": "HLSFactory-Agent与已有HLSFactory工具/数据来源相关，不把所有271重复加成独立IP；数据构建agent和硬件优化agent分层。",
+      "sources": [
+        "https://arxiv.org/html/2609.09519v1",
+        "https://github.com/sharc-lab/hlsfactory-agent/blob/8fac504210fae6403808b2acaad1310300dedd69/README.md"
+      ],
+      "record_sha256": "2e4a0f5a00fe725c04c751330b2c22ac8ab22ec1b82dfc54770528c4112037ec"
+    },
+    {
+      "catalog_id": "be-buildachip-agent",
+      "name": "Build-A-Chip-Bench / workload-to-GDS",
+      "domain": "数字后端/跨前后端长程agent",
+      "tier": "厂商协议与结果公开；完整任务/评分包未确认",
+      "trajectory_access": "官网有选定trace片段，完整交互数据未确认",
+      "input": "工作负载、接口/ABI、功能与吞吐/clock/power/area约束；hidden VIP不提供agent。官网展示72h运行，不能推每题完整统一budget。",
+      "task": "选择微架构，写RTL和时序约束，运行综合/布局布线、读报告、跨阶段回退/ECO。",
+      "output": "最终设计与GDS、验证和PPA证据。",
+      "metrics": "score=(1/N)Σfunctional_gate×GDS_gate×PPA_vs_constraint；任一gate失败该题0。GDSgate包括可布线、无holdviolations、DRCclean；PPA子分0–100%，通过子集平均不等全体分。",
+      "access": "作者ChipAgents研究页，开源工具/PDK声明、Yosys/OpenROAD流程与结果；完整taskmanifest/hiddenVIP/归一细则、工具pin和数据许可未确认，官网称liveleaderboard仍在筹备。",
+      "limits": "厂商结果与可独立复现公开数据分别标记。不能采纳官网对其他benchmark“都只测单步”的概括：CVDP等已有工程任务，需逐协议比较。",
+      "sources": [
+        "https://chipagents.ai/research/build-a-chip-bench"
+      ],
+      "record_sha256": "d401a3727bd6e1ff0dc77e616fbfa15268a4c3182ecdc3a5d12b372187bcaf9e"
+    },
+    {
+      "catalog_id": "fab-semikongbench100-agent",
+      "name": "SemiKongBench-100 / synthetic fab operations",
+      "domain": "制造/合成工厂运营agent",
+      "tier": "公开任务+评分代码；合成环境，暂无模型全量榜",
+      "trajectory_access": "100参考轨迹声称并由tree数量核验；不是100真实工程师轨迹",
+      "input": "10syntheticfab×10workflows=100任务；每题20证据文件、多格式文档，task-local24SQLite表；都是新编合成数据，非真实fabrecords。",
+      "task": "用38provider-shaped tools/11MCPservers或CLI/REST进行调查、计算、处置、写入业务记录并回读，保持无关状态不变。",
+      "output": "最终答案、业务数据库状态和tooltrace。",
+      "metrics": "26确定性criteria共100SemiOpsScore：证据发现12/分析20/决策10/状态执行30/回读20/范围保持8；sample任务含独立rubric。部分得分不等全任务通过；参考oracle/replay/6adversarialcontrols是资格控制，不是LLM成绩。",
+      "access": "固定publicrepo，100任务JSON与100参考轨迹、Harbor包；sourceApache2/dataCCBY4；本轮只静态读取task001/selectedscorer/spec和tree，不执行MCP、数据库或agent。",
+      "limits": "作者明确非Aitomatic/SemiKong/AIAlliance官方bench。完全合成状态机，不能推真实蚀刻/CMP/OPC物理仿真、真实MES对接或工艺收益。",
+      "sources": [
+        "https://github.com/blobfishai/semiconductor-agent-simulation/blob/24eaa3e239839576041fc3b1ce48af611951ac63/README.md",
+        "https://github.com/blobfishai/semiconductor-agent-simulation/blob/24eaa3e239839576041fc3b1ce48af611951ac63/benchmark/semikongbench100/evaluation.py"
+      ],
+      "record_sha256": "b2d89ee48306d1b998fd059794c62c0048edc8ca737e5834216a6940ef0cdd82"
+    },
+    {
+      "catalog_id": "boundary-edabench-pcb-agent",
+      "name": "EDA-bench / KiCad public-source reconstruction agents",
+      "domain": "边界类/板级PCB工程agent",
+      "tier": "公开任务+独立评分；邻近PCB领域",
+      "trajectory_access": "Harbor运行可记录trajectory；旧HF provenance属另一版本，未混作当前结果",
+      "input": "35工程指令、KiCad9/ngspice工具环境与公开网络；agent不挂载reference/contract/grader，但上游工程公开可被搜索发现。",
+      "task": "生成一致的.kicad_pro/.kicad_sch/.kicad_pcb；完成连通、功能接口、布局布线并提交final_project，独立无网络verifier只接受工件。",
+      "output": "完整KiCad工程及ERC/DRC/ngspice验收证据。",
+      "metrics": "overall_score/reward0–1，独立检查接口/连通/功能/几何/一致性；difficulty加权mean，veryeasy1/easy1.5/medium2/hard3/veryhard4/extreme5，缺失trial计0。不是IC综合/布局布线的PPA得分。",
+      "access": "固定repo571treeentries/35task.toml；Harbor0.19.0与自建agent/verifierimages，当前未发布registryrelease应--path运行。上游多种许可逐task核，不能全仓按同一许可再分发。",
+      "limits": "PCB范围边界，不是芯片IC；测web-enabled公开源工程重建，不能称闭卷原创电路设计；完整功能/制造/EMC认证不由本评分保证；旧HF包与当前nativeHarbor版不能混合。",
+      "sources": [
+        "https://github.com/EDA-bench/eda-bench/blob/5d65bfffd6975f44f42914ec15a917d3aacb0298/README.md",
+        "https://github.com/EDA-bench/eda-bench/blob/5d65bfffd6975f44f42914ec15a917d3aacb0298/DATA_CARD.md",
+        "https://github.com/EDA-bench/eda-bench/blob/5d65bfffd6975f44f42914ec15a917d3aacb0298/dataset/metric.py"
+      ],
+      "record_sha256": "68c9fec1f2bc5f93eb722be9578610b448cc6c6735a009b8793aaca0d07519cf"
+    }
+  ],
+  "additional_candidates": [
+    {
+      "name": "PD-Bench",
+      "url": "https://pdbench.com/",
+      "status": "搜索引擎可见描述，但本轮直接正文获取失败；未加入事实已核目录",
+      "reported_scope": "placement DEF/GPU sandbox/独立verifier；exact gates与权重待正文核验"
+    }
+  ],
+  "commercial_products": [
+    {
+      "name": "Cadence ChipStack",
+      "url": "https://login.cadence.com/content/cadence-www/global/en_US/home/company/newsroom/press-releases/pr/2026/cadence-unleashes-chipstack-ai-super-agent-pioneering-a-new.html",
+      "status": "官方产品发布页；本轮未取得可独立重跑的公共任务/评分包，未作为独立benchmark计数"
+    },
+    {
+      "name": "Synopsys AgentEngineer",
+      "url": "https://www.synopsys.com/blogs/chip-design/long-horizon-agentengineer-solutions.html",
+      "status": "官方工程agent产品方案；不能据产品/客户结果推公共benchmark已开放"
+    }
+  ],
+  "existing_rechecked": [
+    {
+      "id": "be-placereasoner",
+      "note": "已有16宏布局任务记录，不重复新增"
+    },
+    {
+      "id": "be-closer-pilot",
+      "note": "已有pilot与拟议stage-paired协议分别记录，不把proposal当完成的全量bench"
+    },
+    {
+      "id": "be-gatetruth-trackb",
+      "note": "已有8工程修复目标记录，不重复新增"
+    },
+    {
+      "id": "rtl-benchmt-expanded",
+      "note": "已有扩展协议记录；agent维护数据不等测agent设计能力"
+    }
+  ],
+  "method": "一手论文/固定Git源码/文档与选定评分器静态阅读；未跑EDA/模型、未执行外部代码；没有完整下载或动态重现的内容显式保留限制。",
+  "static_audit_summary": {
+    "scope": "public tree / JSON / AST metadata only; no EDA, simulator, benchmark code or models run",
+    "trees": {
+      "ahrr": {
+        "entries": 19817,
+        "truncated": false
+      },
+      "cabagent": {
+        "entries": 50,
+        "truncated": false
+      },
+      "edabench": {
+        "entries": 571,
+        "truncated": false
+      },
+      "semikongbench": {
+        "entries": 7245,
+        "truncated": false
+      },
+      "hlsfactoryagent": {
+        "entries": 233,
+        "truncated": false
+      }
+    },
+    "edabench_task_manifests": 35,
+    "ahrr_task_yamls_including_interface_variant": 12,
+    "semikong_task_jsons": 100,
+    "semikong_reference_trajectories": 100,
+    "semikong_category_weights": {
+      "discovery": 12,
+      "analysis": 20,
+      "decision": 10,
+      "execution": 30,
+      "readback": 20,
+      "containment": 8
+    }
+  }
+}

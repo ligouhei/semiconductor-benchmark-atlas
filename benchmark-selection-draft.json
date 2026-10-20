@@ -1,6 +1,6 @@
 {
-  "status": "conditional selection recommendations from the completed 12h literature study; not reproduced rankings",
-  "as_of": "2026-10-20T04:39:18.682437+00:00",
+  "status": "provisional; active 12-hour research not complete",
+  "as_of": "2026-10-20T05:17:10.217055+00:00",
   "coverage": "按任务目的整理的选型草案；不是对全部家族完成成熟度审计，未独立运行任何bench。",
   "selection_rules": [
     "先确定要证明模型读规格、生成/修复、预测、底层求解，还是工具agent能力，再选同一层输入和验收。",
@@ -1141,16 +1141,16 @@
       "source_snapshots": [
         {
           "id": "litho-vpevolve-commercial",
-          "record_sha256": "f0f4dd14199aad99c5c60fe30375f0c0e9e03439fdb23af1f4271657db0c35df",
+          "record_sha256": "2ce981dc3539019553f210f9abff78ff437faf0816a6b4363a72d1d2b2b4288d",
           "primary_sources": "https://arxiv.org/abs/2609.32473; https://arxiv.org/pdf/2609.32473v1; https://github.com/True-Litianyi/VPEVOLVE_code; https://github.com/True-Litianyi/VPEVOLVE_code/blob/5d7bbdd189be450179a423c4df2409643239bc76/README.md",
           "limitations": "每case1seed/20同源窗口，作者100%不证明跨节点/多工具/多seed普遍成功；这是有具体商业agent协议的研究benchmark，不应因方法名而漏计，也不等通用工业统一榜。物理/recipe被固定，缺公开商业model/deck仍限制复现。100trial只两案例且用另一模型；部分恢复扩展模型请求额度，需保留实际成本。paired续跑bootstrap区间跨0，不能称所有机制增益已统计显著。nominal最大EPE目标+受限PVB，不等wafer实测签核。",
           "tools_and_access": "public348treeentries含agent/experiment/src/config、20GDS/R0、standaloneoptical/resist simulator，Apache2且ACE提示模板保留其许可。原商业实验需自备Calibre及license、兼容光学/光阻模型和工艺手册；上述不随repo分发。Python3.12+/Node24+/Pi；主paper Qwen3.6-27B四H100，跨模型与100trial另设置。完整流程代码公开不代表无授权可复现原数值。"
         },
         {
           "id": "litho-vpevolve-open-testbed",
-          "record_sha256": "7a1be888fd116010a123785cedf4021acc9a28ea36df107fbb82bfe4ea068a14",
+          "record_sha256": "3c98f47b3ebfdf8312862b510b3ff860ea95a81ec5e2a0ea9db4a76bccd395a2",
           "primary_sources": "https://arxiv.org/abs/2609.32473; https://arxiv.org/pdf/2609.32473v1; https://github.com/True-Litianyi/VPEVOLVE_code; https://github.com/True-Litianyi/VPEVOLVE_code/blob/5d7bbdd189be450179a423c4df2409643239bc76/README.md",
-          "limitations": "与commercial条目共用20窗口，不新增20独立IP。preset是analytic配置，不是随附foundry/Calibre校准模型；开放光学sim可用不等commercialrecipe主实验可无依赖复现。原始论文的layer-quality阈值/商业MRC/SRAF验收不可用近似图像loss替代。",
+          "limitations": "与主评测是同一工作/同一20窗口，目录为区分任务层次保留资源记录，不应相加为两套独立benchmark。与commercial条目共用20窗口，不新增20独立IP。preset是analytic配置，不是随附foundry/Calibre校准模型；开放光学sim可用不等commercialrecipe主实验可无依赖复现。原始论文的layer-quality阈值/商业MRC/SRAF验收不可用近似图像loss替代。",
           "tools_and_access": "公开simulator独立README/LICENSE/NOTICE/modes/layouts与tests；Apache2，自备PyTorch，无须商业Calibre来研究forward/resist。mode可重建但本研究只读源码/元数据，不运行构建或仿真。"
         },
         {

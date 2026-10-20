@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-10-20T04:39:19.571587+00:00",
-  "status": "research delivery family navigation with explicit open questions; not full tool qualification",
+  "generated_at": "2026-10-20T05:17:11.099271+00:00",
+  "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 315,
-    "records": 555,
+    "families": 326,
+    "records": 566,
     "records_with_any_field_audit_entry": 324,
-    "records_with_current_field_audit_snapshot": 293,
-    "records_without_current_field_audit_snapshot": 262
+    "records_with_current_field_audit_snapshot": 291,
+    "records_without_current_field_audit_snapshot": 275
   },
   "requirements_per_record": [
     "输入与动作/权限固定",
@@ -145,6 +145,29 @@
           "limitations": "3固定拓扑为IEEE/ITC素材派生优化协议，不是新增3独立IP。当前netlist27°C/3.3V、仅typical process启用，其他corners与多项功能测量被注释；FoM低不等所有原规格/PVT/振荡或锁相正确。wrapper os.system未独立验exit/超时，依first含fom行解析；需额外独立功能/测量成功gate，同目录param/log/result.csv并发需隔离。原始注释Lbound/Ubound不自动成为代码硬约束。",
           "tools_and_access": "repo f79343772b5beb248d1c146bd8f13281fdf67a5f完整71treeentries，3circuits/py、param、processmodels/subcircuits与示例log。来自ITC2017AMS V2.2；tree无rootLICENSE，不以公开下载推商用/重分发授权。sim_command/pathparam/pathlog须配置，原包含HSPICE风格测量/模型，不能声称无修改ngspice通跑。",
           "industrial_value": "提供确定性数值搜索和学习代理的具体对照；已有SPICE/原生优化不证明任务最优。模型研究需证明跨拓扑/工艺/频率泛化、同预算效率或工程可靠增量。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "AHRR",
+      "record_count": 1,
+      "records_with_current_field_audit": 0,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "hls-ahrr-agent",
+          "name": "AHRR / agent-based HLS with RTL refinement",
+          "category": "综合HLS/多抽象层工程agent",
+          "artifact_type": "公开11任务及接口变体/实验协议/评分代码与派生轨迹",
+          "task_layer": "HLS生成→工具验证→生成RTL再优化的多步agent",
+          "evidence_status": "本轮已读作者论文/固定README及选定评分/元数据；具体见agentic-followup.json。仅静态核验，未执行下载代码、模型、EDA或仿真。",
+          "current_field_audit_snapshots": [],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得并锁定完整任务manifest、环境/工具/PDK、评分器与许可；隔离agent和验收材料，固定预算/失败分母；本轮未进行动态复现。",
+          "limitations": "公开隐藏测试定义需运行时隔离；11任务不能加接口变体算12独立IP；OOC/PnR可行与实际板级性能不同。",
+          "tools_and_access": "固定README、MIT LICENSE、docs/NUMBERS和params、round源码已读；Vitis/Vivado2025.2与Alveo U55C目标，自备商业工具。公开派生transcripts/每轮结果，原始transcripts、大型routedcheckpoint不随包提供。",
+          "industrial_value": "研究判断：HLS生成→工具验证→生成RTL再优化的多步agent；需要与原生工具或确定性流程同预算比较，成熟软件的存在不等该工程任务已解决。"
         }
       ]
     },
@@ -1265,6 +1288,29 @@
       ]
     },
     {
+      "benchmark_family": "BTTF",
+      "record_count": 1,
+      "records_with_current_field_audit": 0,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "verify-bttf-waveform-agent",
+          "name": "BTTF / tool-interactive waveform query study",
+          "category": "数字验证/波形诊断agent",
+          "artifact_type": "150自然语言查询方法评测协议",
+          "task_layer": "VCD→SQL数据库→查询/RTL溯源/响应审查",
+          "evidence_status": "本轮已读作者论文/固定README及选定评分/元数据；具体见agentic-followup.json。仅静态核验，未执行下载代码、模型、EDA或仿真。",
+          "current_field_audit_snapshots": [],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得并锁定完整任务manifest、环境/工具/PDK、评分器与许可；隔离agent和验收材料，固定预算/失败分母；本轮未进行动态复现。",
+          "limitations": "给定波形有限时间窗的证据查询，不等所有可能轨迹的formal proof；toggle活动热点不等真实电路功耗。",
+          "tools_and_access": "论文公开；本轮未确认150题/专家gold/VCD完整公开下载、许可和独立grader。",
+          "industrial_value": "研究判断：VCD→SQL数据库→查询/RTL溯源/响应审查；需要与原生工具或确定性流程同预算比较，成熟软件的存在不等该工程任务已解决。"
+        }
+      ]
+    },
+    {
       "benchmark_family": "BenchMFC",
       "record_count": 1,
       "records_with_current_field_audit": 0,
@@ -1313,6 +1359,52 @@
           "limitations": "source自由度改变任务，需限制总功率/光瞳支持/曝光dose与maskMRC，不能靠任意光源或更宽工艺提高loss。示例模型字样RL不等LLMagent；示例脚本私有环境路径需替换而非直接可运行",
           "tools_and_access": "PyTorch/Hydra/Betty；根Apache2 LICENSE正文已读，TorchLitho/底层模型上游权利另核。README clone yourusername/BiSMO是占位例，不当正式另一个repo；脚本/私有绝对路径需配置，未执行。",
           "industrial_value": "适合研究SMO求解器/超参数和物理优化；商业SMO内置优化使公平工业baseline重要，非已经完成所有光源/掩模联合设计"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "Build-A-Chip-Bench",
+      "record_count": 1,
+      "records_with_current_field_audit": 0,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "be-buildachip-agent",
+          "name": "Build-A-Chip-Bench / workload-to-GDS",
+          "category": "数字后端/跨前后端长程agent",
+          "artifact_type": "厂商公开任务形状/公式/结果；全任务包未确认",
+          "task_layer": "从workload规格自主架构、RTL、验证到GDS",
+          "evidence_status": "本轮已读作者论文/固定README及选定评分/元数据；具体见agentic-followup.json。仅静态核验，未执行下载代码、模型、EDA或仿真。",
+          "current_field_audit_snapshots": [],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得并锁定完整任务manifest、环境/工具/PDK、评分器与许可；隔离agent和验收材料，固定预算/失败分母；本轮未进行动态复现。",
+          "limitations": "厂商结果与可独立复现公开数据分别标记。不能采纳官网对其他benchmark“都只测单步”的概括：CVDP等已有工程任务，需逐协议比较。",
+          "tools_and_access": "作者ChipAgents研究页，开源工具/PDK声明、Yosys/OpenROAD流程与结果；完整taskmanifest/hiddenVIP/归一细则、工具pin和数据许可未确认，官网称liveleaderboard仍在筹备。",
+          "industrial_value": "研究判断：从workload规格自主架构、RTL、验证到GDS；需要与原生工具或确定性流程同预算比较，成熟软件的存在不等该工程任务已解决。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "CABAgent",
+      "record_count": 1,
+      "records_with_current_field_audit": 0,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "analog-cabagent-resource",
+          "name": "CABAgent / layout-verified benchmark generation resource",
+          "category": "模拟后端/基准生成agent",
+          "artifact_type": "公开示例与生成pipeline；非已核完整千题agent排行榜",
+          "task_layer": "PDK兼容网表生成→尺寸/偏置扩展→DRC/LVS/PEX/后仿",
+          "evidence_status": "本轮已读作者论文/固定README及选定评分/元数据；具体见agentic-followup.json。仅静态核验，未执行下载代码、模型、EDA或仿真。",
+          "current_field_audit_snapshots": [],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得并锁定完整任务manifest、环境/工具/PDK、评分器与许可；隔离agent和验收材料，固定预算/失败分母；本轮未进行动态复现。",
+          "limitations": "不能据README1000trials宣称完整1000任务公开可跑；缺修改版布局依赖限制端到端重现；与AnalogAgent相关技术不等全新独立训练语料。",
+          "tools_and_access": "固定README/源码示例、BSD3LICENSE；README明确修改版布局工具submodule未提供，当前code用于illustration。需ngspice/Magic/Netgen/open_pdks等。",
+          "industrial_value": "研究判断：PDK兼容网表生成→尺寸/偏置扩展→DRC/LVS/PEX/后仿；需要与原生工具或确定性流程同预算比较，成熟软件的存在不等该工程任务已解决。"
         }
       ]
     },
@@ -2922,6 +3014,29 @@
       ]
     },
     {
+      "benchmark_family": "CircuitProver",
+      "record_count": 1,
+      "records_with_current_field_audit": 0,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "verify-circuitprover-agent",
+          "name": "CircuitProver / parameterized Lean hardware proofs",
+          "category": "数字验证/交互式定理证明agent",
+          "artifact_type": "论文中的63任务评测协议；未确认完整数据仓库",
+          "task_layer": "Lean反馈→证明修订→证明知识复用",
+          "evidence_status": "本轮已读作者论文/固定README及选定评分/元数据；具体见agentic-followup.json。仅静态核验，未执行下载代码、模型、EDA或仿真。",
+          "current_field_audit_snapshots": [],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得并锁定完整任务manifest、环境/工具/PDK、评分器与许可；隔离agent和验收材料，固定预算/失败分母；本轮未进行动态复现。",
+          "limitations": "证明成立针对给定形式化模型和定理；自然语言规格→Lean翻译是否忠实仍是独立可信边界，不等任意RTL或硅实现全正确。",
+          "tools_and_access": "需Lean4与相应硬件模型/形式化库；已读全文任务和验收定义，未确认完整公开manifest/独立grader/许可。",
+          "industrial_value": "研究判断：Lean反馈→证明修订→证明知识复用；需要与原生工具或确定性流程同预算比较，成熟软件的存在不等该工程任务已解决。"
+        }
+      ]
+    },
+    {
       "benchmark_family": "CircuitReason-1K",
       "record_count": 1,
       "records_with_current_field_audit": 1,
@@ -3411,6 +3526,29 @@
           "limitations": "同8chiplet单例两优化场景、对称初值和固定边界，不是大规模泛化榜；5°C代理偏差只在该模型例中校准，其他尺寸/工况须独立峰值及非重叠检测。ANSYS对照属作者报告而非本研究复现；无公开全数据/同预算SA/端到端runtime审计。",
           "tools_and_access": "论文可读/已下载，JAX/AD与商业ANSYS对照；未定位author公开solver/source/mesh/input/golden/split/scorer或完整license，不能称已有公开可直接复现benchmark。",
           "industrial_value": "可微物理求解与布局方法有研究价值，与神经热代理不同；不能把少量commercialoracle匹配当全工业布局/热任务已解决，现阶段作为机制与测量边界参考。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "EDA-bench PCB",
+      "record_count": 1,
+      "records_with_current_field_audit": 0,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "boundary-edabench-pcb-agent",
+          "name": "EDA-bench / KiCad public-source reconstruction agents",
+          "category": "边界类/板级PCB工程agent",
+          "artifact_type": "公开35Harbor任务/独立verifier/加权聚合",
+          "task_layer": "从工程brief构建完整KiCad工程并独立验收",
+          "evidence_status": "本轮已读作者论文/固定README及选定评分/元数据；具体见agentic-followup.json。仅静态核验，未执行下载代码、模型、EDA或仿真。",
+          "current_field_audit_snapshots": [],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得并锁定完整任务manifest、环境/工具/PDK、评分器与许可；隔离agent和验收材料，固定预算/失败分母；本轮未进行动态复现。",
+          "limitations": "PCB范围边界，不是芯片IC；测web-enabled公开源工程重建，不能称闭卷原创电路设计；完整功能/制造/EMC认证不由本评分保证；旧HF包与当前nativeHarbor版不能混合。",
+          "tools_and_access": "固定repo571treeentries/35task.toml；Harbor0.19.0与自建agent/verifierimages，当前未发布registryrelease应--path运行。上游多种许可逐task核，不能全仓按同一许可再分发。",
+          "industrial_value": "研究判断：从工程brief构建完整KiCad工程并独立验收；需要与原生工具或确定性流程同预算比较，成熟软件的存在不等该工程任务已解决。"
         }
       ]
     },
@@ -4404,6 +4542,29 @@
       ]
     },
     {
+      "benchmark_family": "GoGoTB",
+      "record_count": 1,
+      "records_with_current_field_audit": 0,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "verify-gogotb-agent",
+          "name": "GoGoTB / specification-grounded coverage closure",
+          "category": "数字验证/环境生成与覆盖收敛agent",
+          "artifact_type": "8设计方法评测；全文明确完整bench稍后开放",
+          "task_layer": "验证环境生成、执行修复、spec驱动coverage闭环",
+          "evidence_status": "本轮已读作者论文/固定README及选定评分/元数据；具体见agentic-followup.json。仅静态核验，未执行下载代码、模型、EDA或仿真。",
+          "current_field_audit_snapshots": [],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得并锁定完整任务manifest、环境/工具/PDK、评分器与许可；隔离agent和验收材料，固定预算/失败分母；本轮未进行动态复现。",
+          "limitations": "8设计且提供reference model；SRG100%不等100%coverage或全部bug找出。生成coverage模型与验收强度必须分开，尚无完整独立hidden测试审计。",
+          "tools_and_access": "论文Verilator5.024、cocotb2.0.1、CodeBuddy SDK；全文明确完整8设计spec/验证环境/testpoints稍后开源。",
+          "industrial_value": "研究判断：验证环境生成、执行修复、spec驱动coverage闭环；需要与原生工具或确定性流程同预算比较，成熟软件的存在不等该工程任务已解决。"
+        }
+      ]
+    },
+    {
       "benchmark_family": "HAVEN",
       "record_count": 1,
       "records_with_current_field_audit": 1,
@@ -4600,6 +4761,29 @@
           "limitations": "同名clock_period跨阶段单位不同；HLS估计时延与真实实现/协同仿真时延不同。impl report_power生成段未显式装入SAIF/activity，需按实际工程确认活动来源，不能默认板测或仿真功耗。full-flow demo synth480s/impl1800s，report未显式timeout；32jobs与tool license并发/总CPU费用分开。ml_model是row-random80/20 seed42，构造KFold5但未用于fit，不能称5fold/未见kernel泛化；25%训练对全训练亦非25%设计泛化。",
           "tools_and_access": "当前根LICENSE AGPLv3，datasets内核来源/第三方工具/PDK许可另核；已见Vitis/Vivado、Intel/Altera、Catapult、XLS等flow代码，不据存在宣称每flow均验证。frozen15298-entry tree完整，选审12文件+MLdemo；未运行Python源/仿真/模型。XLS default delay_model=unit，字段名delay_ps本身不证明已校准物理时间。",
           "industrial_value": "适合搭现代工具编排/数据生成与原生优化基线；成熟HLS自动综合/pragma支持不是所有搜索/功能/实现约束已解。模型应证明同预算超过native默认/pragma采样/专家流程；代理预测准确亦不能替终态物理验收。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "HLSFactory-Agent",
+      "record_count": 1,
+      "records_with_current_field_audit": 0,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "hls-hlsfactory-agent-extraction",
+          "name": "HLSFactory-Agent / repository-to-HLS dataset extraction",
+          "category": "综合HLS/仓库抽取agent",
+          "artifact_type": "公开抽取工具与26仓库实验；非新独立设计优化任务集",
+          "task_layer": "浏览仓库、抽取依赖、迁移接口并合成验证",
+          "evidence_status": "本轮已读作者论文/固定README及选定评分/元数据；具体见agentic-followup.json。仅静态核验，未执行下载代码、模型、EDA或仿真。",
+          "current_field_audit_snapshots": [],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得并锁定完整任务manifest、环境/工具/PDK、评分器与许可；隔离agent和验收材料，固定预算/失败分母；本轮未进行动态复现。",
+          "limitations": "HLSFactory-Agent与已有HLSFactory工具/数据来源相关，不把所有271重复加成独立IP；数据构建agent和硬件优化agent分层。",
+          "tools_and_access": "固定公开repo/README，Python3.12/Docker/Pi/OpenRouter及自备Vitis HLS；当前完整tree未见LICENSE，不能因open-source自述就认定宽松再分发许可；上游各自授权。",
+          "industrial_value": "研究判断：浏览仓库、抽取依赖、迁移接口并合成验证；需要与原生工具或确定性流程同预算比较，成熟软件的存在不等该工程任务已解决。"
         }
       ]
     },
@@ -11093,6 +11277,29 @@
       ]
     },
     {
+      "benchmark_family": "SemiKongBench-100",
+      "record_count": 1,
+      "records_with_current_field_audit": 0,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "fab-semikongbench100-agent",
+          "name": "SemiKongBench-100 / synthetic fab operations",
+          "category": "制造/合成工厂运营agent",
+          "artifact_type": "公开100状态任务/工具/状态差分评分与参考轨迹",
+          "task_layer": "跨证据检索、工艺判断、受控状态写入与回读",
+          "evidence_status": "本轮已读作者论文/固定README及选定评分/元数据；具体见agentic-followup.json。仅静态核验，未执行下载代码、模型、EDA或仿真。",
+          "current_field_audit_snapshots": [],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得并锁定完整任务manifest、环境/工具/PDK、评分器与许可；隔离agent和验收材料，固定预算/失败分母；本轮未进行动态复现。",
+          "limitations": "作者明确非Aitomatic/SemiKong/AIAlliance官方bench。完全合成状态机，不能推真实蚀刻/CMP/OPC物理仿真、真实MES对接或工艺收益。",
+          "tools_and_access": "固定publicrepo，100任务JSON与100参考轨迹、Harbor包；sourceApache2/dataCCBY4；本轮只静态读取task001/selectedscorer/spec和tree，不执行MCP、数据库或agent。",
+          "industrial_value": "研究判断：跨证据检索、工艺判断、受控状态写入与回读；需要与原生工具或确定性流程同预算比较，成熟软件的存在不等该工程任务已解决。"
+        }
+      ]
+    },
+    {
       "benchmark_family": "SpecRead",
       "record_count": 5,
       "records_with_current_field_audit": 0,
@@ -11172,6 +11379,29 @@
           "limitations": "旧EVAL_PROTOCOL写t4无controls，但currentrepo另有41例；不据旧文断言最新只有正例。阴性题的文本分布/是否带标记可能提供捷径，应匹配excerptlength/提示和样本难度。原模型误报不等所有模型固有缺陷",
           "tools_and_access": "代码/仿真harness Apache2，JSONL数据CC-BY4，OpenTitan片段原Apache2；已取数据/scorer/原响应与人工裁决记录。Icarus仅用于构建t4 mutant过滤，不是每次LLM判分执行工具；未调用模型或运行仿真",
           "industrial_value": "对实际spec审查agent非常重要，工程上过多误报会耗人工；正负例联合验证比只追“找错数”更贴近交付，但仍非工业全流程benchmark"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "SpiceDiffBench",
+      "record_count": 1,
+      "records_with_current_field_audit": 0,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "analog-spicediffbench-repair",
+          "name": "SpiceDiffBench / bounded analog ECO repair",
+          "category": "模拟前端/受限网表修复agent",
+          "artifact_type": "IEEE一手摘要确认275题；完整任务与源码待核",
+          "task_layer": "LLM选候选位置+确定性枚举+SPICE反馈",
+          "evidence_status": "本轮已读作者论文/固定README及选定评分/元数据；具体见agentic-followup.json。仅静态核验，未执行下载代码、模型、EDA或仿真。",
+          "current_field_audit_snapshots": [],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得并锁定完整任务manifest、环境/工具/PDK、评分器与许可；隔离agent和验收材料，固定预算/失败分母；本轮未进行动态复现。",
+          "limitations": "受限两处编辑与11模板，不是任意拓扑生成/完整层次电路/后版图PPA closure。高解出率仅对应作者冻结grid与分布。",
+          "tools_and_access": "IEEE TCAD DOI10.1109/TCAD.2026.3729375，2026-08-31；本轮仅一手摘要/元数据，未取得全文/数据包/许可。",
+          "industrial_value": "研究判断：LLM选候选位置+确定性枚举+SPICE反馈；需要与原生工具或确定性流程同预算比较，成熟软件的存在不等该工程任务已解决。"
         }
       ]
     },
@@ -11573,6 +11803,29 @@
           "limitations": "SAF/TDF/SDF支持ATPG与FSIM，transient仅FSIM。SDF此处指small-delay fault，需timing-syn slack报告及标准延时注释，不能与SDF文件格式/仅STA测试混为同任务。用户自带SFF/faultlist可覆盖YAML location定义，变更可改变覆盖分母；strobe/注入时间/firmware/权重均需锁。作者仍明说PAR非研究重点、可能不工作；不能把测试框架称完整PPA闭环。root生成器不等固定独立leaderboard/全release复现。",
           "tools_and_access": "固定root/code为BSD3及Apache2许可证分别读取，上游Chipyard/Hammer/PDK/软件固件仍各自授权；TestMAX ATPG、VCS/Zoix等需实际合法工具环境。README列ETS2026 Advances in Testing and Reliability Benchmarks DOI10.1109/ETS69887.2026.11591740，本轮未取得该原paper，不能把README当全文。仅读框架配置/Makefile，无商业工具执行。",
           "industrial_value": "较适合现代SoC测试研究素材和agent工程环境候选；公开框架不等于独立封装好评分benchmark"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "TicTacBench",
+      "record_count": 1,
+      "records_with_current_field_audit": 0,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "pd-tictacbench-agent",
+          "name": "TicTacBench / post-PnR setup closure",
+          "category": "数字后端/RTL级时序收敛agent",
+          "artifact_type": "论文明确协议+匿名代码数据入口；未完整取得匿名仓库",
+          "task_layer": "根据时序报告改RTL，独立后布线验收",
+          "evidence_status": "本轮已读作者论文/固定README及选定评分/元数据；具体见agentic-followup.json。仅静态核验，未执行下载代码、模型、EDA或仿真。",
+          "current_field_audit_snapshots": [],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "取得并锁定完整任务manifest、环境/工具/PDK、评分器与许可；隔离agent和验收材料，固定预算/失败分母；本轮未进行动态复现。",
+          "limitations": "30任务含同源变体；主要单模块/单clock，CDC/存储为剩余缺口；匿名入口可访问不等完整包已取，精确搜索预算与功耗/能量归一实现仍待核。",
+          "tools_and_access": "Yosys/SymbiYosys/LibreLane/OpenROAD/OpenSTA；论文提供anonymous.4open.science入口，本轮只取入口HTML未完整审计任务文件/许可/环境pin。",
+          "industrial_value": "研究判断：根据时序报告改RTL，独立后布线验收；需要与原生工具或确定性流程同预算比较，成熟软件的存在不等该工程任务已解决。"
         }
       ]
     },
@@ -12177,25 +12430,25 @@
     {
       "benchmark_family": "VPEvolve",
       "record_count": 2,
-      "records_with_current_field_audit": 2,
+      "records_with_current_field_audit": 0,
       "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
       "records": [
         {
           "id": "litho-vpevolve-commercial",
-          "name": "VPEvolve / Calibre recipe-development agent benchmark",
+          "name": "VPEvolve / 主评测：Calibre recipe agent",
           "category": "制造/OPC recipe与工程agent",
-          "artifact_type": "公开方法代码/版图上的分轨评测协议；商业依赖与开源testbed分开",
+          "artifact_type": "同一VPEvolve家族的主agent评测；商业工具与模型依赖",
           "task_layer": "商业工具外层recipe编辑、空间诊断与经验演化agent；内层OPC仍由Calibre执行",
           "evidence_status": "已读完整primary paper方法/实验/附录和公开固定README/NOTICE/ApacheLICENSE/cases/目标验收源码；20GDS本地公开source snapshot与实时publicGitblob和manifestSHA256逐项一致。未读/使用本地私有运行结果，未执行Calibre、模型或开源simulator。",
-          "current_field_audit_snapshots": [
+          "current_field_audit_snapshots": [],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [
             {
               "audit_file": "vpevolve-correction-field-evidence.json",
-              "record_snapshot_matches_current": true,
+              "record_snapshot_matches_current": false,
               "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
             }
           ],
-          "unversioned_field_audit_entries": [],
-          "stale_field_audit_snapshots": [],
           "next_verification": "锁Calibre/tool版本、合法processmodel/deck/手册、模型与全部请求/失败预算、R0/固定测点和endpointrepeat；取raw报告重算每案例Max/Mean/PVB/硬约束，区分开源analytic testbed与原商业实验、10trial与100trial/pairedcontinuation、empty-start与历史seededbank。",
           "limitations": "每case1seed/20同源窗口，作者100%不证明跨节点/多工具/多seed普遍成功；这是有具体商业agent协议的研究benchmark，不应因方法名而漏计，也不等通用工业统一榜。物理/recipe被固定，缺公开商业model/deck仍限制复现。100trial只两案例且用另一模型；部分恢复扩展模型请求额度，需保留实际成本。paired续跑bootstrap区间跨0，不能称所有机制增益已统计显著。nominal最大EPE目标+受限PVB，不等wafer实测签核。",
           "tools_and_access": "public348treeentries含agent/experiment/src/config、20GDS/R0、standaloneoptical/resist simulator，Apache2且ACE提示模板保留其许可。原商业实验需自备Calibre及license、兼容光学/光阻模型和工艺手册；上述不随repo分发。Python3.12+/Node24+/Pi；主paper Qwen3.6-27B四H100，跨模型与100trial另设置。完整流程代码公开不代表无授权可复现原数值。",
@@ -12203,22 +12456,22 @@
         },
         {
           "id": "litho-vpevolve-open-testbed",
-          "name": "VPEvolve / open optical-resist simulation testbed",
-          "category": "制造/OPC recipe与工程agent",
-          "artifact_type": "公开方法代码/版图上的分轨评测协议；商业依赖与开源testbed分开",
+          "name": "VPEvolve / 配套仿真资源（非独立 Agent benchmark）",
+          "category": "制造/光学光阻配套仿真资源",
+          "artifact_type": "VPEvolve配套开放testbed；不是第二套独立agent benchmark",
           "task_layer": "开放forward/resist仿真与可微mask优化示例；不冒充Calibre recipeagent得分",
           "evidence_status": "已读完整primary paper方法/实验/附录和公开固定README/NOTICE/ApacheLICENSE/cases/目标验收源码；20GDS本地公开source snapshot与实时publicGitblob和manifestSHA256逐项一致。未读/使用本地私有运行结果，未执行Calibre、模型或开源simulator。",
-          "current_field_audit_snapshots": [
+          "current_field_audit_snapshots": [],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [
             {
               "audit_file": "vpevolve-correction-field-evidence.json",
-              "record_snapshot_matches_current": true,
+              "record_snapshot_matches_current": false,
               "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
             }
           ],
-          "unversioned_field_audit_entries": [],
-          "stale_field_audit_snapshots": [],
           "next_verification": "锁Calibre/tool版本、合法processmodel/deck/手册、模型与全部请求/失败预算、R0/固定测点和endpointrepeat；取raw报告重算每案例Max/Mean/PVB/硬约束，区分开源analytic testbed与原商业实验、10trial与100trial/pairedcontinuation、empty-start与历史seededbank。",
-          "limitations": "与commercial条目共用20窗口，不新增20独立IP。preset是analytic配置，不是随附foundry/Calibre校准模型；开放光学sim可用不等commercialrecipe主实验可无依赖复现。原始论文的layer-quality阈值/商业MRC/SRAF验收不可用近似图像loss替代。",
+          "limitations": "与主评测是同一工作/同一20窗口，目录为区分任务层次保留资源记录，不应相加为两套独立benchmark。与commercial条目共用20窗口，不新增20独立IP。preset是analytic配置，不是随附foundry/Calibre校准模型；开放光学sim可用不等commercialrecipe主实验可无依赖复现。原始论文的layer-quality阈值/商业MRC/SRAF验收不可用近似图像loss替代。",
           "tools_and_access": "公开simulator独立README/LICENSE/NOTICE/modes/layouts与tests；Apache2，自备PyTorch，无须商业Calibre来研究forward/resist。mode可重建但本研究只读源码/元数据，不运行构建或仿真。",
           "industrial_value": "作为开放仿真/数据素材值得收录，同时明确其和完整商业agent闭环的证据强度不同，避免将“有开源testbed”说成“原工业结果已复现”。"
         }

@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T04:39:19.518529+00:00",
+  "as_of": "2026-10-20T05:17:11.046745+00:00",
   "status": "coverage inventory with explicit residual limits, not universal completeness/quality certification",
   "scope": "依据用户阶段划分逐项列已有覆盖与剩余限制；“所有可发现”按此次公开资料检索边界理解，不声称覆盖未公开工业bench或互联网全部材料。",
   "method": [
@@ -125,8 +125,8 @@
     },
     {
       "domain": "数字验证",
-      "record_count": 56,
-      "family_count": 40,
+      "record_count": 59,
+      "family_count": 43,
       "catalog_ids": [
         "verify-fveval-human",
         "verify-fveval-machine",
@@ -183,7 +183,10 @@
         "ara-hc-c5-mutation-eff",
         "ara-hc-c5-testset-min",
         "ara-hc-c6-const-time",
-        "ara-hc-c6-seu-harden"
+        "ara-hc-c6-seu-harden",
+        "verify-circuitprover-agent",
+        "verify-gogotb-agent",
+        "verify-bttf-waveform-agent"
       ],
       "covered_tasks": "SVA/NL翻译/RTL到性质、形式证明、UVM/coverage闭环、mutation、安全/鲁棒性与EDA工具语义回归",
       "remaining_limits": "证明强度/方向/undetermined/vacuity与mutation敏感性不等价；opaque PEC、commercialformal和完整hiddenoracle限制单列，静态wrapper审计不等复现实验。",
@@ -218,8 +221,8 @@
     },
     {
       "domain": "模拟前端",
-      "record_count": 80,
-      "family_count": 38,
+      "record_count": 81,
+      "family_count": 39,
       "catalog_ids": [
         "analog-analoggym",
         "analog-autockt",
@@ -300,7 +303,8 @@
         "analog-acob-pll",
         "analog-falcon-topology",
         "analog-falcon-forward",
-        "analog-falcon-inverse"
+        "analog-falcon-inverse",
+        "analog-spicediffbench-repair"
       ],
       "covered_tasks": "电路图感知、拓扑/结构、尺寸、预测/检索、长程规格闭环、RF与存储电路/稀有失效；方法实验和成熟bench分身份",
       "remaining_limits": "多数开源spec/模型仍简化，真实PDK/全PVT/MC/寄生/测量gold有缺口；高识别/收敛/nominalFoM不能推完整电性能。部分agent论文尚未完整发布。",
@@ -335,8 +339,8 @@
     },
     {
       "domain": "综合HLS",
-      "record_count": 58,
-      "family_count": 29,
+      "record_count": 60,
+      "family_count": 31,
       "catalog_ids": [
         "synth-epfl",
         "synth-openabc",
@@ -395,7 +399,9 @@
         "hls-chrysalis-logic",
         "hls-chrysalis-pragma",
         "hls-leveri-testbench",
-        "rtl-synthagentic-crosslib"
+        "rtl-synthagentic-crosslib",
+        "hls-ahrr-agent",
+        "hls-hlsfactory-agent-extraction"
       ],
       "covered_tasks": "经典逻辑综合、IWLS现代学习/精确综合、HLS程序/应用、代理预测、DSE/agent与FPGA CAD",
       "remaining_limits": "有些原包取得但未执行CEC/HLS；数据多点并非独立IP，FPGA器件/工具版本跨域与真实后实现验收另核；PolyBench原始C包已取，部分派生HLS完整配置/标签仍待核。",
@@ -435,8 +441,8 @@
     },
     {
       "domain": "数字后端",
-      "record_count": 141,
-      "family_count": 89,
+      "record_count": 143,
+      "family_count": 91,
       "catalog_ids": [
         "physical-circuitnet",
         "physical-ispd18",
@@ -578,7 +584,9 @@
         "pd-pbargat-industrial",
         "pd-pbargat-synthetic",
         "pd-mms-mixed-size",
-        "pd-ispd05-allfree"
+        "pd-ispd05-allfree",
+        "pd-tictacbench-agent",
+        "be-buildachip-agent"
       ],
       "covered_tasks": "划分/块规划/宏与cell布局、合法化、GR/DR、CTS/STA/sizing/MBFF/ECO、功耗/IR/EM、DRC/LVS工作流与agent",
       "remaining_limits": "历年已覆盖不等全部contest题目/最终checker均取得；部分旧链接失效、商业flow与PDK不可重建；proxy、原生修复、有限DRC与全签核严格分层。",
@@ -618,8 +626,8 @@
     },
     {
       "domain": "模拟后端",
-      "record_count": 13,
-      "family_count": 11,
+      "record_count": 14,
+      "family_count": 12,
       "catalog_ids": [
         "analog-align",
         "analog-magical",
@@ -633,7 +641,8 @@
         "analog-amsio-bench",
         "analog-autockt-pex",
         "memory-openram-native",
-        "memory-sram22-native"
+        "memory-sram22-native",
+        "analog-cabagent-resource"
       ],
       "covered_tasks": "传统/语言版图、寄生感知、自动generator、后仿尺寸、IOring及memorycompiler原生基线",
       "remaining_limits": "固定工艺/模板往往承担大量先验；完整GDS/DRC/LVS/PEX与工艺授权、几何目标和电性能对应尚不能全独立复核。",
@@ -668,8 +677,8 @@
     },
     {
       "domain": "制造光刻",
-      "record_count": 59,
-      "family_count": 40,
+      "record_count": 60,
+      "family_count": 41,
       "catalog_ids": [
         "litho-lithobench",
         "litho-opc-engineer-assistant",
@@ -729,7 +738,8 @@
         "litho-iccad19-tnsb-htc",
         "fab-mimac2026-dispatch",
         "litho-vpevolve-commercial",
-        "litho-vpevolve-open-testbed"
+        "litho-vpevolve-open-testbed",
+        "fab-semikongbench100-agent"
       ],
       "covered_tasks": "OPC/ILT求解、前向代理、SMO/随机性、recipe/工程助手、掩模写版、热点/SEM/晶圆模式/计量/良率/调度",
       "remaining_limits": "VPEvolve已有公开20窗口/代码的Calibre recipeagent协议，但商业model/deck与wafer闭环不公开；跨工艺/多工具/隐藏布局统一agent榜仍缺完整对照；SEM像素与电测不是同gold。部分官方原包/许可证/lot血缘未取，mock/合成/partialagent明确标记。",
@@ -742,12 +752,12 @@
         },
         {
           "id": "litho-vpevolve-commercial",
-          "record_sha256": "f0f4dd14199aad99c5c60fe30375f0c0e9e03439fdb23af1f4271657db0c35df",
+          "record_sha256": "2ce981dc3539019553f210f9abff78ff437faf0816a6b4363a72d1d2b2b4288d",
           "primary_sources": "https://arxiv.org/abs/2609.32473; https://arxiv.org/pdf/2609.32473v1; https://github.com/True-Litianyi/VPEVOLVE_code; https://github.com/True-Litianyi/VPEVOLVE_code/blob/5d7bbdd189be450179a423c4df2409643239bc76/README.md"
         },
         {
           "id": "litho-vpevolve-open-testbed",
-          "record_sha256": "7a1be888fd116010a123785cedf4021acc9a28ea36df107fbb82bfe4ea068a14",
+          "record_sha256": "3c98f47b3ebfdf8312862b510b3ff860ea95a81ec5e2a0ea9db4a76bccd395a2",
           "primary_sources": "https://arxiv.org/abs/2609.32473; https://arxiv.org/pdf/2609.32473v1; https://github.com/True-Litianyi/VPEVOLVE_code; https://github.com/True-Litianyi/VPEVOLVE_code/blob/5d7bbdd189be450179a423c4df2409643239bc76/README.md"
         },
         {
@@ -955,15 +965,16 @@
       ]
     },
     {
-      "domain": "板级电磁",
-      "record_count": 3,
-      "family_count": 2,
+      "domain": "板级工程与电磁",
+      "record_count": 4,
+      "family_count": 3,
       "catalog_ids": [
         "boundary-emval-nf",
         "boundary-emval-sp",
-        "boundary-matrix-sparam"
+        "boundary-matrix-sparam",
+        "boundary-edabench-pcb-agent"
       ],
-      "covered_tasks": "近场/散射参数与稀疏矩阵相关公开验证，作为芯片范围边界材料",
+      "covered_tasks": "KiCad PCB工程agent、近场/散射参数与稀疏矩阵相关公开验证，作为芯片范围边界材料",
       "remaining_limits": "板级/天线EM与IC RF设计及工业封装SI/PI不合并；AEDL/Alpha-RF等候选尚未全部核成独立公共协议。",
       "evidence_boundary": "已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。",
       "source_snapshots": [

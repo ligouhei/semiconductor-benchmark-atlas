@@ -1,12 +1,12 @@
 {
-  "current_revision": "2026-10-20-vpevolve-correction",
-  "current_notice": "2026-10-20补订：原12小时清单遗漏VPEvolve，OPC agentic覆盖审核不充分。现补入商业Calibre recipeagent协议与开放光学testbed两轨（同一家族），并更正此前容易被理解为该方向没有已有评测的表述。此补订发生在原12小时交付之后；目录仍不是全行业穷尽证明。",
+  "current_revision": "2026-10-20-agentic-followup",
+  "current_notice": "2026-10-20补订：原12小时清单遗漏VPEvolve，OPC agentic覆盖审核不充分。现补入商业Calibre recipeagent协议与开放光学testbed两轨（同一家族），并更正此前容易被理解为该方向没有已有评测的表述。此补订发生在原12小时交付之后；目录仍不是全行业穷尽证明。 本次另续查新增11项研究对象（含待开放/部分协议），详见Agentic专题；VPEvolve配套testbed已显式标记非独立Agent benchmark。",
   "corrected_at": "2026-10-20T04:39:18.621805+00:00",
   "trigger": "用户指出VPEvolve遗漏",
   "original_records": 553,
   "original_families": 314,
-  "current_records": 555,
-  "current_families": 315,
+  "current_records": 566,
+  "current_families": 326,
   "added_ids": [
     "litho-vpevolve-commercial",
     "litho-vpevolve-open-testbed"
@@ -23,5 +23,12 @@
   ],
   "evidence_audit": "vpevolve-correction-static-audit.json",
   "original_delivery_archive": "revisions/2026-10-20-before-vpevolve/",
-  "original_reproduction_not_claimed": true
+  "original_reproduction_not_claimed": true,
+  "prior_revision_counts": {
+    "vpevolve_correction": {
+      "records": 555,
+      "families": 315
+    }
+  },
+  "followup_report": "agentic-followup.json"
 }

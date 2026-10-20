@@ -1,6 +1,6 @@
 {
   "status": "task-layer comparison; proposals explicitly excluded from benchmark counts",
-  "as_of": "2026-10-20T04:39:18.849639+00:00",
+  "as_of": "2026-10-20T05:17:10.376018+00:00",
   "scope": "同一OPC相关名称可能覆盖不同输入/动作/oracle，不能合并为一个模型优化排行榜；表不证明所有公开OPC基准已穷尽",
   "items": [
     {
@@ -190,7 +190,7 @@
       "source_snapshots": [
         {
           "id": "litho-vpevolve-commercial",
-          "record_sha256": "f0f4dd14199aad99c5c60fe30375f0c0e9e03439fdb23af1f4271657db0c35df",
+          "record_sha256": "2ce981dc3539019553f210f9abff78ff437faf0816a6b4363a72d1d2b2b4288d",
           "primary_sources": "https://arxiv.org/abs/2609.32473; https://arxiv.org/pdf/2609.32473v1; https://github.com/True-Litianyi/VPEVOLVE_code; https://github.com/True-Litianyi/VPEVOLVE_code/blob/5d7bbdd189be450179a423c4df2409643239bc76/README.md"
         }
       ]
@@ -208,7 +208,7 @@
       "source_snapshots": [
         {
           "id": "litho-vpevolve-open-testbed",
-          "record_sha256": "7a1be888fd116010a123785cedf4021acc9a28ea36df107fbb82bfe4ea068a14",
+          "record_sha256": "3c98f47b3ebfdf8312862b510b3ff860ea95a81ec5e2a0ea9db4a76bccd395a2",
           "primary_sources": "https://arxiv.org/abs/2609.32473; https://arxiv.org/pdf/2609.32473v1; https://github.com/True-Litianyi/VPEVOLVE_code; https://github.com/True-Litianyi/VPEVOLVE_code/blob/5d7bbdd189be450179a423c4df2409643239bc76/README.md"
         }
       ]
