@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T08:30:24.977020+00:00",
+  "generated_at": "2026-10-20T08:43:33.818312+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 357,
-    "records": 638,
-    "records_with_any_field_audit_entry": 396,
-    "records_with_current_field_audit_snapshot": 363,
+    "families": 358,
+    "records": 640,
+    "records_with_any_field_audit_entry": 398,
+    "records_with_current_field_audit_snapshot": 365,
     "records_without_current_field_audit_snapshot": 275
   },
   "requirements_per_record": [
@@ -1705,6 +1705,56 @@
           "limitations": "12有限向量main通过不等任意输入功能正确、形式等价或密码安全。改写agent若可修改main/测试/比较器并仅看返回0，会弱化验收；当前镜像top整main含硬编码输入，与开放输入kernel性能问题不同。没有运行或证明已有工具/论文发生常量折叠取巧，不能据此判整个套件失效。镜像现代5ns FPGA流和原eXCite device-independent设置不合榜；相同程序跨HLSyn/HLSDataset/HLSFactory派生数据不能当新独立程序。",
           "tools_and_access": "99-entry frozen tree完整，已读README/rootMakefile/commonwrapper/config、12入口相关C与12TCL、6aux C及原作者PDF。README要求按每子程序原copyright，不是统一MIT/宽松授权；仓库API无license不表示公有领域。现代config为xc7vx690tffg1930-3/period5，csim0/synth1/cosim1/impl1；只是配置声明，未运行C/HLS/cosim/impl。",
           "industrial_value": "经典可移植HLS编译诊断与回归素材，历史工具已综合不证明现代所有约束/搜索/迁移已解决；但只在固定whole-main上过同一有限向量不足作工业agent主榜。应配现代大应用、跨工具/器件与独立验收，用原生HLS优化作强基线。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "CI2N / Image2Net",
+      "record_count": 2,
+      "records_with_current_field_audit": 2,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "data-ci2n-visual",
+          "name": "CI2N / circuit-device, crossing and orientation annotations",
+          "category": "模拟前端/电路图感知训练数据",
+          "artifact_type": "三类视觉标注资源同家族；非12554个独立设计或agent轨迹",
+          "task_layer": "schematic→器件bbox/OBB交叉/方向镜像标签",
+          "evidence_status": "第二轮12h进行中；固定一手版本、3255个Gitblob/JSON/YOLO标签和完整tree统计核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-ci2n-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+          "limitations": "current训练图目录与122验证图有13unique byte-identicalimages；未得各成绩的冻结训练划分，不能直接判全部历史分数泄漏，也不能称已证明全familydisjoint。near-duplicate/sourcebook泄漏仍待查。公开datasets不等Image2Net完整训练/推理框架已开源。",
+          "tools_and_access": "完整tree19108entries未截断，3255selectedGitblob（全部JSON/OBB/gold+核心评分源）匹配。图像本轮未下载/重发，身份用Gitblobmetadata核；rootApache2，原教材/论文/网络图片来源权利单独保留。",
+          "industrial_value": "研究判断：实质开放的模拟前端视觉监督资源；先固定split/按电路family去重，再用于agent前端感知，不能把crop数量当独立设计数或工具交互训练数据。"
+        },
+        {
+          "id": "analog-ci2n-netlist-eval",
+          "name": "CI2N / image-to-netlist NED evaluation",
+          "category": "模拟前端/电路图到连接网表重建",
+          "artifact_type": "公开gold与GED评分资源；paper104/current122分开",
+          "task_layer": "schematic→typed-connectivity JSON→GED/NED",
+          "evidence_status": "第二轮12h进行中；固定一手版本、3255个Gitblob/JSON/YOLO标签和完整tree统计核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-ci2n-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+          "limitations": "原图/Gold生成训练关系需核，训练目录13exactimageoverlap不能忽略。缺预测/坏JSON会在Pool.map抛错、未逐题补failure，评测包装需保留该题与固定分母；timeout无候选可inf。topology reconstruction不等模拟签核或spec-to-design。",
+          "tools_and_access": "公开122gold与GED/DGL/modifiedNetworkX源均已取并核Gitblob。完整Image2Net检测/OCR/stylepipeline/模型权重不在本仓库；rootApache2及上游依赖许可分别保留。是否正是VLM-CAD122需原manifest对齐，数量相同不证明身份。",
+          "industrial_value": "研究判断：可下载、可用来核视觉解析的真实benchmark资产；旧104、新122、rawGED与normalizedNED/超时近似必须区分，避免把原生图算法分数当完整agent工程成功率。"
         }
       ]
     },
@@ -14167,7 +14217,7 @@
           "stale_field_audit_snapshots": [],
           "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
           "limitations": "familydisjoint为作者声明，需真实manifest复查；GED编辑代价/器件类型/端口对称性设置影响score，图转换器也可能错。上游CI2N资源开放性单独核，不承诺全VLM-CAD框架开源。",
-          "tools_and_access": "v5表2/appendix给明确评分；未定位所有graphedit脚本/逐图判断、固定模型快照/全60sizing轨迹。此任务无需SPICE，不能拿其F或graphscore当尺寸性能/功能等价率。",
+          "tools_and_access": "v5表2/appendix给明确评分；找到上游CI2N current图gold/评价脚本，但本实验122身份/graphscore适配/逐图判断、固定模型快照与全60sizing轨迹未核。此任务无需SPICE，不能拿其F或graphscore当尺寸性能/功能等价率。",
           "industrial_value": "研究判断：为模拟前端视觉解析提供一项可读评测协议；感知准确率与设计agent能力分开，原生parser/图算法负责连接约束。"
         }
       ]

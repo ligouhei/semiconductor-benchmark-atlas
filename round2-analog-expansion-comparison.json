@@ -72,12 +72,12 @@
       "artifact_type": "同VLM-CAD家族独立感知任务；非电路电性能成功率",
       "task_layer": "noisy schematic→type label+connectivity graph",
       "version": "arXiv2601.07315v5 /2026-09-17",
-      "input": "122噪声schematic评测；Image2Net作者训练2268图并称familydisjoint。论文指2024EDAchallenge来源，完整122manifest/图goldgraph与split未取得；不把另Image2Net原论文104pairs移作122。",
+      "input": "122噪声schematic评测；Image2Net作者训练2268图并称familydisjoint。论文指2024EDAchallenge来源，完整本实验122manifest/映射与split未取得；后来找到CI2N current122gold对，需比对身份，不把原论文104直接替代。",
       "task": "比较专用Image2Net与四个通用VLM的type label和拓扑连接恢复，前者监督训练而后者零样本；同时看label和graph，不能单项宣称全面取代。",
       "output": "电路类别、节点/边连接graph与parsed netlist。",
       "metrics": "F=100×correctlabel/122，Image2Net84/122=68.85%、Gemini3Flash117/122=95.90%；graphscore=1/log10(10+GEDcostK)，Image2Net均值.8121±populationstd.2116，不是81.21%edges正确。GPT/Qwen119nonempty但分母122，缺失F0/K=|V|+|E|；emptygraph惩罚与label独立。",
       "baseline": "Gemini3Flash/GPT5.2/Gemma4/Qwen3VL；Image2Net连接更好但label弱于Gemini，须控制专用2268train vszero-shot、图分辨率/噪声和失败分母。",
-      "tools_and_access": "v5表2/appendix给明确评分；未定位所有graphedit脚本/逐图判断、固定模型快照/全60sizing轨迹。此任务无需SPICE，不能拿其F或graphscore当尺寸性能/功能等价率。",
+      "tools_and_access": "v5表2/appendix给明确评分；找到上游CI2N current图gold/评价脚本，但本实验122身份/graphscore适配/逐图判断、固定模型快照与全60sizing轨迹未核。此任务无需SPICE，不能拿其F或graphscore当尺寸性能/功能等价率。",
       "limitations": "familydisjoint为作者声明，需真实manifest复查；GED编辑代价/器件类型/端口对称性设置影响score，图转换器也可能错。上游CI2N资源开放性单独核，不承诺全VLM-CAD框架开源。",
       "industrial_value": "研究判断：为模拟前端视觉解析提供一项可读评测协议；感知准确率与设计agent能力分开，原生parser/图算法负责连接约束。",
       "primary_sources": "https://arxiv.org/html/2601.07315v5; https://arxiv.org/html/2601.07315v1",
@@ -524,7 +524,7 @@
         },
         "graph_score": "1/log10(10+GEDcostK)，均值.8121±populationstd.2116，不是81.21%edgescorrect",
         "missing": "GPT/Qwen各119nonempty但分母122；missing F0与K=|V|+|E|，empty/unparseable K同罚，label仍可单独判。",
-        "release": "v5未给本工作完整train2268/test122/agentcode/全部trial轨迹下载；不能把上游CI2N104bench直接替代122。"
+        "release": "后续找到LAD021/ci2n_datasets current122gold及评价脚本，是否与VLM-CAD122完全同一task需冻结manifest比对；原paper104与current122/2269训练图不是同历史规模。VLM-CAD完整agentcode/trialtrace未定位。"
       },
       "release": "v5全文/appendixspecs/表公开，noauthorrepo/downloadlink定位；PTM非foundry生产PDK，predisposition电路仿真不等route/PEX/PVTsignoff。"
     },

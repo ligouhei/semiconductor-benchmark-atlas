@@ -1,0 +1,1032 @@
+{
+  "status": "round2 active; fullannotation/hash audit, no model or graphsolverexecution",
+  "protocols": [
+    {
+      "id": "data-ci2n-visual",
+      "benchmark_family": "CI2N / Image2Net",
+      "name": "CI2N / circuit-device, crossing and orientation annotations",
+      "category": "模拟前端/电路图感知训练数据",
+      "artifact_type": "三类视觉标注资源同家族；非12554个独立设计或agent轨迹",
+      "task_layer": "schematic→器件bbox/OBB交叉/方向镜像标签",
+      "version": "arXiv2508.13157v2 /2025-12-08；repo2ffd41b",
+      "input": "当前2269器件图+2269LabelmeJSON、45257rectangleannotations；图像2194uniqueGitblobs，75文件重复量。855交叉图/YOLOOBB标签共13829rows；orientation/mirror12554crop images，其中468Switch为新增，其余12086与paper类别数和一致。",
+      "task": "训练器件检测/分类、交叉点三类OBB、器件方向u/r/d/l与mirror T/F；同原图多个标注/裁片不算独立电路。输入Labelme矩形coords或YOLO9列class+4归一化角点，输出视觉类别/位置。",
+      "output": "检测框/类别、交叉连接类型和方向镜像预测；不直接输出完整电气规格/版图。",
+      "metrics": "检测/方向accuracy/recall与最终netlistNED分开；当前bbox45257全rectangle、维度完整/坐标finite，OBB13829全部9列可解析。严格浮点比较5条坐标仅超过1约2.22e−16属舍入，不当实质坏标注。paper84195总注释对TableV43914device+28195cross+12086orientation可对齐，正文device48930与表不一致。",
+      "baseline": "Image2Net使用检测/CV算法/style处理；与AMSNet/CHAI jumper策略比较，不是让LLM替代整个解析链。原paper2914图与current2269文件是不同版本，不能据目录数改写历史。",
+      "tools_and_access": "完整tree19108entries未截断，3255selectedGitblob（全部JSON/OBB/gold+核心评分源）匹配。图像本轮未下载/重发，身份用Gitblobmetadata核；rootApache2，原教材/论文/网络图片来源权利单独保留。",
+      "limitations": "current训练图目录与122验证图有13unique byte-identicalimages；未得各成绩的冻结训练划分，不能直接判全部历史分数泄漏，也不能称已证明全familydisjoint。near-duplicate/sourcebook泄漏仍待查。公开datasets不等Image2Net完整训练/推理框架已开源。",
+      "industrial_value": "研究判断：实质开放的模拟前端视觉监督资源；先固定split/按电路family去重，再用于agent前端感知，不能把crop数量当独立设计数或工具交互训练数据。",
+      "primary_sources": "https://arxiv.org/html/2508.13157v2; https://github.com/LAD021/ci2n_datasets/tree/2ffd41b2255726eb1be215fa7ba1d9808c80c808",
+      "evidence_status": "第二轮12h进行中；固定一手版本、3255个Gitblob/JSON/YOLO标签和完整tree统计核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+      "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "analog-ci2n-netlist-eval",
+      "benchmark_family": "CI2N / Image2Net",
+      "name": "CI2N / image-to-netlist NED evaluation",
+      "category": "模拟前端/电路图到连接网表重建",
+      "artifact_type": "公开gold与GED评分资源；paper104/current122分开",
+      "task_layer": "schematic→typed-connectivity JSON→GED/NED",
+      "version": "arXiv2508.13157v2；repo2ffd41b",
+      "input": "current122PNG/122goldJSON，schema ckt_type+ckt_netlist[{component_type,port_connection}]，合计1573器件/12类型。paper104人工核对pairs；当前无论文104的冻结ID列表，不能用122替换旧成绩分母。",
+      "task": "从不同画风/复杂度的图恢复器件类型/连线。忽略device/net命名，MOS D/S按同port类型合并、Gate/Body分别保留；不校数值、器件尺寸、bias和电性能。",
+      "output": "拓扑JSON/graph及rawGED；NED=GED/(golddevice+net+port数量)，无量纲。",
+      "metrics": "NED0在该图/port对称定义下匹配，不是SPICE功能等价。paper84/104≈80.77%完全成功；abstract/TableIII/conclusionmeanNED.116，正文另.657/.659不一致需原逐例scores。current入口只写perID rawGED，没有做NED归一化/均值/成功率。",
+      "baseline": "paper每例2h GED搜索，currentdefault60s且先做isomorphism；返回最好已找到编辑距离，不一定已证最小。GED预算/硬件/图大小固定后才可比较；CV/AMSNet/CHAI连接处理基线与大模型/agent整流程不同。",
+      "tools_and_access": "公开122gold与GED/DGL/modifiedNetworkX源均已取并核Gitblob。完整Image2Net检测/OCR/stylepipeline/模型权重不在本仓库；rootApache2及上游依赖许可分别保留。是否正是VLM-CAD122需原manifest对齐，数量相同不证明身份。",
+      "limitations": "原图/Gold生成训练关系需核，训练目录13exactimageoverlap不能忽略。缺预测/坏JSON会在Pool.map抛错、未逐题补failure，评测包装需保留该题与固定分母；timeout无候选可inf。topology reconstruction不等模拟签核或spec-to-design。",
+      "industrial_value": "研究判断：可下载、可用来核视觉解析的真实benchmark资产；旧104、新122、rawGED与normalizedNED/超时近似必须区分，避免把原生图算法分数当完整agent工程成功率。",
+      "primary_sources": "https://arxiv.org/html/2508.13157v2; https://github.com/LAD021/ci2n_datasets/tree/2ffd41b2255726eb1be215fa7ba1d9808c80c808",
+      "evidence_status": "第二轮12h进行中；固定一手版本、3255个Gitblob/JSON/YOLO标签和完整tree统计核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+      "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+      "retrieved_date": "2026-10-20"
+    }
+  ],
+  "static_audit": {
+    "as_of": "2026-10-20T08:41:47.210557+00:00",
+    "scope": "complete fixedGit tree + annotation/gold JSON/YOLO text static checks; no image training, inference, generated code, DGL, graph solver or simulator executed",
+    "commit": "2ffd41b2255726eb1be215fa7ba1d9808c80c808",
+    "tree_entries": 19108,
+    "files_by_top_group": {
+      ".gitignore": 1,
+      "LICENSE": 1,
+      "README.en.md": 1,
+      "README.md": 1,
+      "README_zh.md": 1,
+      "device_identification": 4538,
+      "device_orientation": 12554,
+      "jumper_identification": 1710,
+      "validation": 253
+    },
+    "paper_version": "2508.13157v2 /2025-12-08",
+    "paper_counts": {
+      "circuit_images": 2914,
+      "device_annotations": 48930,
+      "crossing_images": 1983,
+      "crossing_annotations": 28195,
+      "orientation_annotations": 12086,
+      "all_annotations": 84195,
+      "eval_pairs": 104,
+      "device_annotations_table_sum": 43914,
+      "all_annotations_table_reconciled": 84195,
+      "text_table_conflict": "正文device48930与TableV分组和43914不同；TableV43914+cross28195+orientation12086=84195，与总数一致。保留口径，不默用正文数。"
+    },
+    "current": {
+      "device_images": 2269,
+      "unique_device_image_blobs": 2194,
+      "duplicate_file_excess": 75,
+      "label_files": 2269,
+      "device_annotations": 45257,
+      "label_classes": {
+        "port": 8180,
+        "resistor": 6891,
+        "capacitor": 4277,
+        "current": 1148,
+        "nmos": 3342,
+        "voltage": 892,
+        "voltage-lines": 190,
+        "pmos-cross": 305,
+        "pmos": 2564,
+        "cross-line-curved": 1065,
+        "nmos-cross": 200,
+        "vdd": 1633,
+        "gnd": 5646,
+        "npn": 2155,
+        "single-end-amp": 674,
+        "nmos-bulk": 456,
+        "inductor": 618,
+        "pnp": 1077,
+        "diode": 843,
+        "switch": 919,
+        "resistor2": 1558,
+        "resistor2_3": 59,
+        "pmos-bulk": 327,
+        "single-input-single-end-amp": 89,
+        "inductor-3": 31,
+        "capacitor-3": 5,
+        "npn-cross": 27,
+        "pnp-cross": 22,
+        "switch-3": 12,
+        "antenna": 7,
+        "diff-amp": 45
+      },
+      "shape_types": {
+        "rectangle": 45257
+      },
+      "missing_dimensions": 0,
+      "nonfinite_shape_records": 0,
+      "crossing_pairs": 855,
+      "crossing_annotations": 13829,
+      "crossing_classes": {
+        "0": 1329,
+        "1": 7510,
+        "2": 4990
+      },
+      "malformed_crossing_lines": 0,
+      "crossing_outside_unit_coordinates": 5,
+      "orientation_images": 12554,
+      "orientation_categories": {
+        "device_orientation/train_amp_d": 1388,
+        "device_orientation/train_amp_m": 369,
+        "device_orientation/train_bjt_d": 5240,
+        "device_orientation/train_bjt_m": 1310,
+        "device_orientation/train_diode": 1248,
+        "device_orientation/train_mos": 1561,
+        "device_orientation/train_switch": 468,
+        "device_orientation/train_voltagelines": 970
+      },
+      "new_switch_images": 468,
+      "orientation_excluding_new_switch": 12086,
+      "gold_pairs": 122,
+      "gold_devices": 1573,
+      "gold_types": {
+        "Res": 178,
+        "NMOS": 548,
+        "PMOS": 582,
+        "Diso_amp": 28,
+        "Voltage": 11,
+        "Current": 33,
+        "NPN": 33,
+        "PNP": 47,
+        "Cap": 99,
+        "Dido_amp": 7,
+        "Diode": 4,
+        "Siso_amp": 3
+      },
+      "gold_schema": "ckt_type + ckt_netlist[{component_type,port_connection}]",
+      "gold_counts_per_case": [
+        {
+          "id": "001",
+          "devices": 11,
+          "ports": 32,
+          "nets": 10,
+          "nominal_normalization_denominator": 53
+        },
+        {
+          "id": "002",
+          "devices": 5,
+          "ports": 13,
+          "nets": 7,
+          "nominal_normalization_denominator": 25
+        },
+        {
+          "id": "003",
+          "devices": 7,
+          "ports": 16,
+          "nets": 7,
+          "nominal_normalization_denominator": 30
+        },
+        {
+          "id": "004",
+          "devices": 3,
+          "ports": 8,
+          "nets": 6,
+          "nominal_normalization_denominator": 17
+        },
+        {
+          "id": "006",
+          "devices": 10,
+          "ports": 27,
+          "nets": 8,
+          "nominal_normalization_denominator": 45
+        },
+        {
+          "id": "007",
+          "devices": 24,
+          "ports": 68,
+          "nets": 16,
+          "nominal_normalization_denominator": 108
+        },
+        {
+          "id": "008",
+          "devices": 15,
+          "ports": 45,
+          "nets": 15,
+          "nominal_normalization_denominator": 75
+        },
+        {
+          "id": "009",
+          "devices": 21,
+          "ports": 59,
+          "nets": 15,
+          "nominal_normalization_denominator": 95
+        },
+        {
+          "id": "010",
+          "devices": 21,
+          "ports": 59,
+          "nets": 18,
+          "nominal_normalization_denominator": 98
+        },
+        {
+          "id": "011",
+          "devices": 11,
+          "ports": 34,
+          "nets": 10,
+          "nominal_normalization_denominator": 55
+        },
+        {
+          "id": "012",
+          "devices": 5,
+          "ports": 11,
+          "nets": 6,
+          "nominal_normalization_denominator": 22
+        },
+        {
+          "id": "014",
+          "devices": 6,
+          "ports": 16,
+          "nets": 6,
+          "nominal_normalization_denominator": 28
+        },
+        {
+          "id": "015",
+          "devices": 6,
+          "ports": 17,
+          "nets": 8,
+          "nominal_normalization_denominator": 31
+        },
+        {
+          "id": "016",
+          "devices": 11,
+          "ports": 28,
+          "nets": 8,
+          "nominal_normalization_denominator": 47
+        },
+        {
+          "id": "017",
+          "devices": 12,
+          "ports": 30,
+          "nets": 9,
+          "nominal_normalization_denominator": 51
+        },
+        {
+          "id": "018",
+          "devices": 18,
+          "ports": 47,
+          "nets": 14,
+          "nominal_normalization_denominator": 79
+        },
+        {
+          "id": "019",
+          "devices": 11,
+          "ports": 33,
+          "nets": 15,
+          "nominal_normalization_denominator": 59
+        },
+        {
+          "id": "020",
+          "devices": 19,
+          "ports": 57,
+          "nets": 26,
+          "nominal_normalization_denominator": 102
+        },
+        {
+          "id": "021",
+          "devices": 11,
+          "ports": 31,
+          "nets": 10,
+          "nominal_normalization_denominator": 52
+        },
+        {
+          "id": "022",
+          "devices": 13,
+          "ports": 35,
+          "nets": 13,
+          "nominal_normalization_denominator": 61
+        },
+        {
+          "id": "023",
+          "devices": 14,
+          "ports": 42,
+          "nets": 12,
+          "nominal_normalization_denominator": 68
+        },
+        {
+          "id": "024",
+          "devices": 38,
+          "ports": 106,
+          "nets": 24,
+          "nominal_normalization_denominator": 168
+        },
+        {
+          "id": "025",
+          "devices": 15,
+          "ports": 40,
+          "nets": 11,
+          "nominal_normalization_denominator": 66
+        },
+        {
+          "id": "027",
+          "devices": 19,
+          "ports": 55,
+          "nets": 17,
+          "nominal_normalization_denominator": 91
+        },
+        {
+          "id": "028",
+          "devices": 6,
+          "ports": 15,
+          "nets": 5,
+          "nominal_normalization_denominator": 26
+        },
+        {
+          "id": "029",
+          "devices": 29,
+          "ports": 85,
+          "nets": 22,
+          "nominal_normalization_denominator": 136
+        },
+        {
+          "id": "030",
+          "devices": 11,
+          "ports": 32,
+          "nets": 9,
+          "nominal_normalization_denominator": 52
+        },
+        {
+          "id": "031",
+          "devices": 12,
+          "ports": 33,
+          "nets": 10,
+          "nominal_normalization_denominator": 55
+        },
+        {
+          "id": "032",
+          "devices": 11,
+          "ports": 30,
+          "nets": 10,
+          "nominal_normalization_denominator": 51
+        },
+        {
+          "id": "033",
+          "devices": 5,
+          "ports": 14,
+          "nets": 8,
+          "nominal_normalization_denominator": 27
+        },
+        {
+          "id": "034",
+          "devices": 12,
+          "ports": 35,
+          "nets": 14,
+          "nominal_normalization_denominator": 61
+        },
+        {
+          "id": "035",
+          "devices": 13,
+          "ports": 35,
+          "nets": 10,
+          "nominal_normalization_denominator": 58
+        },
+        {
+          "id": "036",
+          "devices": 11,
+          "ports": 33,
+          "nets": 12,
+          "nominal_normalization_denominator": 56
+        },
+        {
+          "id": "037",
+          "devices": 13,
+          "ports": 37,
+          "nets": 16,
+          "nominal_normalization_denominator": 66
+        },
+        {
+          "id": "038",
+          "devices": 13,
+          "ports": 39,
+          "nets": 14,
+          "nominal_normalization_denominator": 66
+        },
+        {
+          "id": "039",
+          "devices": 26,
+          "ports": 73,
+          "nets": 17,
+          "nominal_normalization_denominator": 116
+        },
+        {
+          "id": "040",
+          "devices": 21,
+          "ports": 61,
+          "nets": 21,
+          "nominal_normalization_denominator": 103
+        },
+        {
+          "id": "041",
+          "devices": 8,
+          "ports": 19,
+          "nets": 6,
+          "nominal_normalization_denominator": 33
+        },
+        {
+          "id": "042",
+          "devices": 17,
+          "ports": 64,
+          "nets": 13,
+          "nominal_normalization_denominator": 94
+        },
+        {
+          "id": "043",
+          "devices": 9,
+          "ports": 23,
+          "nets": 9,
+          "nominal_normalization_denominator": 41
+        },
+        {
+          "id": "044",
+          "devices": 12,
+          "ports": 34,
+          "nets": 10,
+          "nominal_normalization_denominator": 56
+        },
+        {
+          "id": "045",
+          "devices": 14,
+          "ports": 40,
+          "nets": 13,
+          "nominal_normalization_denominator": 67
+        },
+        {
+          "id": "046",
+          "devices": 11,
+          "ports": 33,
+          "nets": 12,
+          "nominal_normalization_denominator": 56
+        },
+        {
+          "id": "047",
+          "devices": 7,
+          "ports": 16,
+          "nets": 7,
+          "nominal_normalization_denominator": 30
+        },
+        {
+          "id": "048",
+          "devices": 17,
+          "ports": 49,
+          "nets": 15,
+          "nominal_normalization_denominator": 81
+        },
+        {
+          "id": "049",
+          "devices": 12,
+          "ports": 44,
+          "nets": 12,
+          "nominal_normalization_denominator": 68
+        },
+        {
+          "id": "050",
+          "devices": 6,
+          "ports": 15,
+          "nets": 5,
+          "nominal_normalization_denominator": 26
+        },
+        {
+          "id": "051",
+          "devices": 31,
+          "ports": 85,
+          "nets": 28,
+          "nominal_normalization_denominator": 144
+        },
+        {
+          "id": "052",
+          "devices": 17,
+          "ports": 60,
+          "nets": 18,
+          "nominal_normalization_denominator": 95
+        },
+        {
+          "id": "053",
+          "devices": 11,
+          "ports": 30,
+          "nets": 10,
+          "nominal_normalization_denominator": 51
+        },
+        {
+          "id": "054",
+          "devices": 16,
+          "ports": 48,
+          "nets": 16,
+          "nominal_normalization_denominator": 80
+        },
+        {
+          "id": "055",
+          "devices": 13,
+          "ports": 35,
+          "nets": 11,
+          "nominal_normalization_denominator": 59
+        },
+        {
+          "id": "056",
+          "devices": 15,
+          "ports": 41,
+          "nets": 14,
+          "nominal_normalization_denominator": 70
+        },
+        {
+          "id": "057",
+          "devices": 7,
+          "ports": 16,
+          "nets": 7,
+          "nominal_normalization_denominator": 30
+        },
+        {
+          "id": "058",
+          "devices": 6,
+          "ports": 14,
+          "nets": 6,
+          "nominal_normalization_denominator": 26
+        },
+        {
+          "id": "059",
+          "devices": 9,
+          "ports": 25,
+          "nets": 10,
+          "nominal_normalization_denominator": 44
+        },
+        {
+          "id": "060",
+          "devices": 10,
+          "ports": 29,
+          "nets": 11,
+          "nominal_normalization_denominator": 50
+        },
+        {
+          "id": "061",
+          "devices": 9,
+          "ports": 21,
+          "nets": 7,
+          "nominal_normalization_denominator": 37
+        },
+        {
+          "id": "062",
+          "devices": 28,
+          "ports": 82,
+          "nets": 27,
+          "nominal_normalization_denominator": 137
+        },
+        {
+          "id": "063",
+          "devices": 20,
+          "ports": 56,
+          "nets": 21,
+          "nominal_normalization_denominator": 97
+        },
+        {
+          "id": "064",
+          "devices": 20,
+          "ports": 57,
+          "nets": 17,
+          "nominal_normalization_denominator": 94
+        },
+        {
+          "id": "065",
+          "devices": 25,
+          "ports": 70,
+          "nets": 18,
+          "nominal_normalization_denominator": 113
+        },
+        {
+          "id": "066",
+          "devices": 9,
+          "ports": 25,
+          "nets": 10,
+          "nominal_normalization_denominator": 44
+        },
+        {
+          "id": "067",
+          "devices": 10,
+          "ports": 30,
+          "nets": 14,
+          "nominal_normalization_denominator": 54
+        },
+        {
+          "id": "068",
+          "devices": 6,
+          "ports": 15,
+          "nets": 5,
+          "nominal_normalization_denominator": 26
+        },
+        {
+          "id": "069",
+          "devices": 7,
+          "ports": 17,
+          "nets": 6,
+          "nominal_normalization_denominator": 30
+        },
+        {
+          "id": "070",
+          "devices": 14,
+          "ports": 41,
+          "nets": 12,
+          "nominal_normalization_denominator": 67
+        },
+        {
+          "id": "071",
+          "devices": 6,
+          "ports": 17,
+          "nets": 8,
+          "nominal_normalization_denominator": 31
+        },
+        {
+          "id": "072",
+          "devices": 8,
+          "ports": 24,
+          "nets": 11,
+          "nominal_normalization_denominator": 43
+        },
+        {
+          "id": "073",
+          "devices": 23,
+          "ports": 67,
+          "nets": 22,
+          "nominal_normalization_denominator": 112
+        },
+        {
+          "id": "074",
+          "devices": 17,
+          "ports": 48,
+          "nets": 20,
+          "nominal_normalization_denominator": 85
+        },
+        {
+          "id": "075",
+          "devices": 22,
+          "ports": 63,
+          "nets": 17,
+          "nominal_normalization_denominator": 102
+        },
+        {
+          "id": "076",
+          "devices": 9,
+          "ports": 25,
+          "nets": 10,
+          "nominal_normalization_denominator": 44
+        },
+        {
+          "id": "077",
+          "devices": 32,
+          "ports": 84,
+          "nets": 24,
+          "nominal_normalization_denominator": 140
+        },
+        {
+          "id": "078",
+          "devices": 15,
+          "ports": 42,
+          "nets": 13,
+          "nominal_normalization_denominator": 70
+        },
+        {
+          "id": "079",
+          "devices": 6,
+          "ports": 14,
+          "nets": 6,
+          "nominal_normalization_denominator": 26
+        },
+        {
+          "id": "080",
+          "devices": 17,
+          "ports": 49,
+          "nets": 13,
+          "nominal_normalization_denominator": 79
+        },
+        {
+          "id": "082",
+          "devices": 6,
+          "ports": 14,
+          "nets": 6,
+          "nominal_normalization_denominator": 26
+        },
+        {
+          "id": "083",
+          "devices": 18,
+          "ports": 52,
+          "nets": 19,
+          "nominal_normalization_denominator": 89
+        },
+        {
+          "id": "084",
+          "devices": 14,
+          "ports": 41,
+          "nets": 18,
+          "nominal_normalization_denominator": 73
+        },
+        {
+          "id": "085",
+          "devices": 3,
+          "ports": 9,
+          "nets": 7,
+          "nominal_normalization_denominator": 19
+        },
+        {
+          "id": "086",
+          "devices": 10,
+          "ports": 31,
+          "nets": 9,
+          "nominal_normalization_denominator": 50
+        },
+        {
+          "id": "087",
+          "devices": 29,
+          "ports": 85,
+          "nets": 28,
+          "nominal_normalization_denominator": 142
+        },
+        {
+          "id": "088",
+          "devices": 5,
+          "ports": 14,
+          "nets": 5,
+          "nominal_normalization_denominator": 24
+        },
+        {
+          "id": "089",
+          "devices": 12,
+          "ports": 35,
+          "nets": 17,
+          "nominal_normalization_denominator": 64
+        },
+        {
+          "id": "090",
+          "devices": 5,
+          "ports": 13,
+          "nets": 7,
+          "nominal_normalization_denominator": 25
+        },
+        {
+          "id": "091",
+          "devices": 11,
+          "ports": 33,
+          "nets": 16,
+          "nominal_normalization_denominator": 60
+        },
+        {
+          "id": "092",
+          "devices": 11,
+          "ports": 35,
+          "nets": 17,
+          "nominal_normalization_denominator": 63
+        },
+        {
+          "id": "093",
+          "devices": 11,
+          "ports": 31,
+          "nets": 10,
+          "nominal_normalization_denominator": 52
+        },
+        {
+          "id": "094",
+          "devices": 18,
+          "ports": 50,
+          "nets": 14,
+          "nominal_normalization_denominator": 82
+        },
+        {
+          "id": "095",
+          "devices": 12,
+          "ports": 40,
+          "nets": 11,
+          "nominal_normalization_denominator": 63
+        },
+        {
+          "id": "096",
+          "devices": 3,
+          "ports": 7,
+          "nets": 4,
+          "nominal_normalization_denominator": 14
+        },
+        {
+          "id": "097",
+          "devices": 22,
+          "ports": 60,
+          "nets": 19,
+          "nominal_normalization_denominator": 101
+        },
+        {
+          "id": "099",
+          "devices": 11,
+          "ports": 33,
+          "nets": 12,
+          "nominal_normalization_denominator": 56
+        },
+        {
+          "id": "100",
+          "devices": 7,
+          "ports": 19,
+          "nets": 7,
+          "nominal_normalization_denominator": 33
+        },
+        {
+          "id": "101",
+          "devices": 5,
+          "ports": 12,
+          "nets": 6,
+          "nominal_normalization_denominator": 23
+        },
+        {
+          "id": "102",
+          "devices": 9,
+          "ports": 24,
+          "nets": 9,
+          "nominal_normalization_denominator": 42
+        },
+        {
+          "id": "103",
+          "devices": 23,
+          "ports": 69,
+          "nets": 25,
+          "nominal_normalization_denominator": 117
+        },
+        {
+          "id": "104",
+          "devices": 16,
+          "ports": 50,
+          "nets": 23,
+          "nominal_normalization_denominator": 89
+        },
+        {
+          "id": "105",
+          "devices": 13,
+          "ports": 41,
+          "nets": 18,
+          "nominal_normalization_denominator": 72
+        },
+        {
+          "id": "106",
+          "devices": 13,
+          "ports": 34,
+          "nets": 11,
+          "nominal_normalization_denominator": 58
+        },
+        {
+          "id": "107",
+          "devices": 7,
+          "ports": 17,
+          "nets": 7,
+          "nominal_normalization_denominator": 31
+        },
+        {
+          "id": "108",
+          "devices": 12,
+          "ports": 33,
+          "nets": 10,
+          "nominal_normalization_denominator": 55
+        },
+        {
+          "id": "109",
+          "devices": 12,
+          "ports": 39,
+          "nets": 10,
+          "nominal_normalization_denominator": 61
+        },
+        {
+          "id": "110",
+          "devices": 7,
+          "ports": 19,
+          "nets": 7,
+          "nominal_normalization_denominator": 33
+        },
+        {
+          "id": "111",
+          "devices": 12,
+          "ports": 35,
+          "nets": 15,
+          "nominal_normalization_denominator": 62
+        },
+        {
+          "id": "112",
+          "devices": 7,
+          "ports": 19,
+          "nets": 8,
+          "nominal_normalization_denominator": 34
+        },
+        {
+          "id": "113",
+          "devices": 15,
+          "ports": 42,
+          "nets": 12,
+          "nominal_normalization_denominator": 69
+        },
+        {
+          "id": "114",
+          "devices": 10,
+          "ports": 26,
+          "nets": 7,
+          "nominal_normalization_denominator": 43
+        },
+        {
+          "id": "115",
+          "devices": 7,
+          "ports": 18,
+          "nets": 9,
+          "nominal_normalization_denominator": 34
+        },
+        {
+          "id": "116",
+          "devices": 5,
+          "ports": 15,
+          "nets": 9,
+          "nominal_normalization_denominator": 29
+        },
+        {
+          "id": "117",
+          "devices": 8,
+          "ports": 24,
+          "nets": 9,
+          "nominal_normalization_denominator": 41
+        },
+        {
+          "id": "118",
+          "devices": 12,
+          "ports": 36,
+          "nets": 14,
+          "nominal_normalization_denominator": 62
+        },
+        {
+          "id": "119",
+          "devices": 13,
+          "ports": 36,
+          "nets": 11,
+          "nominal_normalization_denominator": 60
+        },
+        {
+          "id": "120",
+          "devices": 11,
+          "ports": 22,
+          "nets": 5,
+          "nominal_normalization_denominator": 38
+        },
+        {
+          "id": "121",
+          "devices": 14,
+          "ports": 41,
+          "nets": 18,
+          "nominal_normalization_denominator": 73
+        },
+        {
+          "id": "122",
+          "devices": 9,
+          "ports": 25,
+          "nets": 9,
+          "nominal_normalization_denominator": 43
+        },
+        {
+          "id": "123",
+          "devices": 12,
+          "ports": 36,
+          "nets": 13,
+          "nominal_normalization_denominator": 61
+        },
+        {
+          "id": "124",
+          "devices": 14,
+          "ports": 41,
+          "nets": 18,
+          "nominal_normalization_denominator": 73
+        },
+        {
+          "id": "125",
+          "devices": 12,
+          "ports": 36,
+          "nets": 16,
+          "nominal_normalization_denominator": 64
+        },
+        {
+          "id": "126",
+          "devices": 13,
+          "ports": 38,
+          "nets": 10,
+          "nominal_normalization_denominator": 61
+        },
+        {
+          "id": "127",
+          "devices": 14,
+          "ports": 40,
+          "nets": 14,
+          "nominal_normalization_denominator": 68
+        }
+      ],
+      "crossing_maximum_bound_overshoot": 2.220446049250313e-16,
+      "crossing_outside_unit_interpretation": "严格float比较5条OBB坐标略超1，但最大仅2.22e-16，属浮点舍入量级；不能称5条实质无效标注。原标签保留，读取可用合理数值容差。"
+    },
+    "split_overlap": {
+      "exact_git_blob_overlap_unique_images": 13,
+      "method": "Git blob identity from pinned complete tree, not screenshot/names/perceptual similarity",
+      "interpretation": "currentdevice_identification目录和validation/images有13byte-identicalimages；没有冻结所有模型训练split，不能直接称全部paper成绩泄漏。近似图/同family重复仍未完整检查。"
+    },
+    "framework_release": "datasets+NED/GED evaluation publiclyavailable，not complete Image2Net detector/OCR/styleanalysis framework/trainedweights；trainvisual assets不是多步LLMagenttrajectory。current122与VLM-CAD122数量相同但需任务manifest身份比对，2269训练图不直接代替其作者2268。",
+    "score": "paperNED=GED/(golddevices+goldnets+goldports),dimensionless，NED0是类型/拓扑对应；命名不敏感，图值/器件参数/尺寸/物理功能不验。源码MOSdrain/source同edge type、gate/body不同，这是声明的port-symmetry选择，不是任意电气等价证明。",
+    "scorer": "currentcalc_ged.py按全部gold/*.json要求prediction同名，默认timeout60s，utils ged先isomorphism再限时editsearch，返回最好已找到GED（不是自动已证明最优）；无候选可能inf。入口输出perID rawGED，不负责NED normalization/全库均值或success率。paper实验每例2h，不能直接比60s。",
+    "failure": "missing/坏JSON在Pool.map未设逐例catch，可能整个评分中断；记录单条失败并保留其分母，不能只留能算距离者。isomorphism步骤不在搜索timeout内；不把60s当整个process硬walllimit。",
+    "paper_results": "paper84/104≈80.77% NED0；abstract/TableIII/conclusionmeanNED.116，但introduction.657和experiment.659不同声明，缺原104逐例score/log不能默选。current122不能替换历史104算更好率。",
+    "native_baseline": "比较AMSNet/CHAI的jumper处理组件而非通用SPICE/EDA完成全解析；CV检测与图算法是关键原生模块，agent若复用该数据需另测toolplanning/失败恢复，不能拿mAP/NED当agent设计成功。",
+    "license": "rootApache2声明及上游图像/教材/互联网source条款分别保留；不重发原图或私有PDK。当前只发布派生统计/主来源链接；本研究未训练或重分发全原语料。"
+  },
+  "selected_git_blob_matches": 3255
+}

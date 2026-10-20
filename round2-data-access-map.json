@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-10-20T08:30:24.880989+00:00",
+  "as_of": "2026-10-20T08:43:33.716029+00:00",
   "status": "第二轮12h进行中的数据/轨迹开放性核查，非完整市场清单或最终结论",
   "scope": "只覆盖本轮已保存一手核查的新增协议；训练样本、评测输入、模型权重、整理后记忆、生成采样轨迹与LLM工具交互轨迹分别描述",
-  "protocol_records": 72,
-  "families": 35,
+  "protocol_records": 74,
+  "families": 36,
   "items": [
     {
       "catalog_id": "lib-siemens-nemo-characterization",
@@ -840,7 +840,7 @@
       "object_identity": "6topology×2spec方法评测；旧版局部100%不可当新版全规格率",
       "task": "Image2Net图转graph+JSON，VLM理解连接/规格，DCOP最多10iter、inference-only最多40，转ExTuRBO up-to3worker各400sim以warmseed优化；ARD GP汇总相关敏感性作解释。",
       "available_materials_and_tools": "仅一手全文/数表/appendix；未定位完整本工作pack。Miller Table5 power68.321标mW、target.15mW，但按µW读才复算UC2.405，按literalmW约457.423，保留单位冲突不默改。",
-      "trajectory_and_training_access": "v5论文/appendix规格、统计和提示机制可读；未给作者本工作完整agentcode/122test/2268train/60run原始metrics/多轮trace/许可下载链接。上游Image2Net/CI2N公开不等本版本全复现工件，122不替代CI2N原104。",
+      "trajectory_and_training_access": "v5论文/appendix规格、统计和提示机制可读；未给作者本工作完整agentcode/122test/2268train/60run原始metrics/多轮trace/许可下载链接。上游CI2N current已有122gold对，是否正是本122评测需冻结manifest比对；公开数据不等本版本全框架/轨迹。",
       "limits": "MillerA所示lowestUC仍gain53.180<54、PM48.703<60两项miss，与同设置Table4 Relaxed5/5需rawtrialid解释。current论文历史结果未独立rerun，不能据此量化全部分数影响。ARD重要性非因果解释，PTM非工业foundry PDK，难规格仍大量失败。",
       "primary_sources": "https://arxiv.org/html/2601.07315v5; https://arxiv.org/html/2601.07315v1",
       "record_snapshot_matches_audit": true
@@ -851,8 +851,8 @@
       "family": "VLM-CAD method",
       "object_identity": "同VLM-CAD家族独立感知任务；非电路电性能成功率",
       "task": "比较专用Image2Net与四个通用VLM的type label和拓扑连接恢复，前者监督训练而后者零样本；同时看label和graph，不能单项宣称全面取代。",
-      "available_materials_and_tools": "v5表2/appendix给明确评分；未定位所有graphedit脚本/逐图判断、固定模型快照/全60sizing轨迹。此任务无需SPICE，不能拿其F或graphscore当尺寸性能/功能等价率。",
-      "trajectory_and_training_access": "v5论文/appendix规格、统计和提示机制可读；未给作者本工作完整agentcode/122test/2268train/60run原始metrics/多轮trace/许可下载链接。上游Image2Net/CI2N公开不等本版本全复现工件，122不替代CI2N原104。",
+      "available_materials_and_tools": "v5表2/appendix给明确评分；找到上游CI2N current图gold/评价脚本，但本实验122身份/graphscore适配/逐图判断、固定模型快照与全60sizing轨迹未核。此任务无需SPICE，不能拿其F或graphscore当尺寸性能/功能等价率。",
+      "trajectory_and_training_access": "v5论文/appendix规格、统计和提示机制可读；未给作者本工作完整agentcode/122test/2268train/60run原始metrics/多轮trace/许可下载链接。上游CI2N current已有122gold对，是否正是本122评测需冻结manifest比对；公开数据不等本版本全框架/轨迹。",
       "limits": "familydisjoint为作者声明，需真实manifest复查；GED编辑代价/器件类型/端口对称性设置影响score，图转换器也可能错。上游CI2N资源开放性单独核，不承诺全VLM-CAD框架开源。",
       "primary_sources": "https://arxiv.org/html/2601.07315v5; https://arxiv.org/html/2601.07315v1",
       "record_snapshot_matches_audit": true
@@ -867,6 +867,30 @@
       "trajectory_and_training_access": "公开论文toolschema/10spec/5run汇总，RAG与经验数据库仅描述；未取得可下载LUT、完整多步action/simulation/失败/成本trace或训练许可。commercialPDK与EDA依赖另列。",
       "limits": "inputIP1dB−15dBm+gain25−1≈outputOP1dB9dBm，两表input/output口径不要误判冲突。作者称相同simulationbudget却缺全部calls ledger；硬timeout失败和成功条件费用须保留，<$0.5是作者特定LLM费用非产业全成本。泛化PA/拓扑迁移属futurework。",
       "primary_sources": "https://arxiv.org/html/2605.10093v1",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "data-ci2n-visual",
+      "name": "CI2N / circuit-device, crossing and orientation annotations",
+      "family": "CI2N / Image2Net",
+      "object_identity": "三类视觉标注资源同家族；非12554个独立设计或agent轨迹",
+      "task": "训练器件检测/分类、交叉点三类OBB、器件方向u/r/d/l与mirror T/F；同原图多个标注/裁片不算独立电路。输入Labelme矩形coords或YOLO9列class+4归一化角点，输出视觉类别/位置。",
+      "available_materials_and_tools": "完整tree19108entries未截断，3255selectedGitblob（全部JSON/OBB/gold+核心评分源）匹配。图像本轮未下载/重发，身份用Gitblobmetadata核；rootApache2，原教材/论文/网络图片来源权利单独保留。",
+      "trajectory_and_training_access": "真实公开图像/器件bbox/交叉OBB/方向类别与goldnetlist，适合监督感知/解析；不是多轮LLM工具action/observation/reward/cost轨迹。当前3255个标注/gold/评分源码Gitblob已全匹配，不执行模型/GED/仿真；rootApache2与原图来源条款分开。",
+      "limits": "current训练图目录与122验证图有13unique byte-identicalimages；未得各成绩的冻结训练划分，不能直接判全部历史分数泄漏，也不能称已证明全familydisjoint。near-duplicate/sourcebook泄漏仍待查。公开datasets不等Image2Net完整训练/推理框架已开源。",
+      "primary_sources": "https://arxiv.org/html/2508.13157v2; https://github.com/LAD021/ci2n_datasets/tree/2ffd41b2255726eb1be215fa7ba1d9808c80c808",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "analog-ci2n-netlist-eval",
+      "name": "CI2N / image-to-netlist NED evaluation",
+      "family": "CI2N / Image2Net",
+      "object_identity": "公开gold与GED评分资源；paper104/current122分开",
+      "task": "从不同画风/复杂度的图恢复器件类型/连线。忽略device/net命名，MOS D/S按同port类型合并、Gate/Body分别保留；不校数值、器件尺寸、bias和电性能。",
+      "available_materials_and_tools": "公开122gold与GED/DGL/modifiedNetworkX源均已取并核Gitblob。完整Image2Net检测/OCR/stylepipeline/模型权重不在本仓库；rootApache2及上游依赖许可分别保留。是否正是VLM-CAD122需原manifest对齐，数量相同不证明身份。",
+      "trajectory_and_training_access": "真实公开图像/器件bbox/交叉OBB/方向类别与goldnetlist，适合监督感知/解析；不是多轮LLM工具action/observation/reward/cost轨迹。当前3255个标注/gold/评分源码Gitblob已全匹配，不执行模型/GED/仿真；rootApache2与原图来源条款分开。",
+      "limits": "原图/Gold生成训练关系需核，训练目录13exactimageoverlap不能忽略。缺预测/坏JSON会在Pool.map抛错、未逐题补failure，评测包装需保留该题与固定分母；timeout无候选可inf。topology reconstruction不等模拟签核或spec-to-design。",
+      "primary_sources": "https://arxiv.org/html/2508.13157v2; https://github.com/LAD021/ci2n_datasets/tree/2ffd41b2255726eb1be215fa7ba1d9808c80c808",
       "record_snapshot_matches_audit": true
     }
   ],

@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T08:30:24.921692+00:00",
+  "as_of": "2026-10-20T08:43:33.759615+00:00",
   "status": "coverage inventory with explicit residual limits, not universal completeness/quality certification",
   "scope": "依据用户阶段划分逐项列已有覆盖与剩余限制；“所有可发现”按此次公开资料检索边界理解，不声称覆盖未公开工业bench或互联网全部材料。",
   "method": [
@@ -246,8 +246,8 @@
     },
     {
       "domain": "模拟前端",
-      "record_count": 92,
-      "family_count": 44,
+      "record_count": 94,
+      "family_count": 45,
       "catalog_ids": [
         "analog-analoggym",
         "analog-autockt",
@@ -340,7 +340,9 @@
         "analog-circuitbench100",
         "analog-vlm-cad-sizing-v5",
         "analog-vlm-cad-structural-v5",
-        "rf-rfampdesigner-lna"
+        "rf-rfampdesigner-lna",
+        "data-ci2n-visual",
+        "analog-ci2n-netlist-eval"
       ],
       "covered_tasks": "电路图感知、拓扑/结构、尺寸、预测/检索、长程规格闭环、RF与存储电路/稀有失效；方法实验和成熟bench分身份",
       "remaining_limits": "多数开源spec/模型仍简化，真实PDK/全PVT/MC/寄生/测量gold有缺口；高识别/收敛/nominalFoM不能推完整电性能。部分agent论文尚未完整发布。",
