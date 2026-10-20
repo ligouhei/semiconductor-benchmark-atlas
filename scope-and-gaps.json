@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T06:24:13.837579+00:00",
+  "as_of": "2026-10-20T06:36:51.505953+00:00",
   "status": "coverage inventory with explicit residual limits, not universal completeness/quality certification",
   "scope": "依据用户阶段划分逐项列已有覆盖与剩余限制；“所有可发现”按此次公开资料检索边界理解，不声称覆盖未公开工业bench或互联网全部材料。",
   "method": [
@@ -227,8 +227,8 @@
     },
     {
       "domain": "模拟前端",
-      "record_count": 81,
-      "family_count": 39,
+      "record_count": 85,
+      "family_count": 40,
       "catalog_ids": [
         "analog-analoggym",
         "analog-autockt",
@@ -310,7 +310,11 @@
         "analog-falcon-topology",
         "analog-falcon-forward",
         "analog-falcon-inverse",
-        "analog-spicediffbench-repair"
+        "analog-spicediffbench-repair",
+        "analog-analogdb-core",
+        "analog-analogdb-regulator",
+        "analog-spicexplorer-pam4",
+        "analog-spicexplorer-lpf"
       ],
       "covered_tasks": "电路图感知、拓扑/结构、尺寸、预测/检索、长程规格闭环、RF与存储电路/稀有失效；方法实验和成熟bench分身份",
       "remaining_limits": "多数开源spec/模型仍简化，真实PDK/全PVT/MC/寄生/测量gold有缺口；高识别/收敛/nominalFoM不能推完整电性能。部分agent论文尚未完整发布。",

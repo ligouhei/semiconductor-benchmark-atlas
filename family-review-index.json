@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T06:24:13.890866+00:00",
+  "generated_at": "2026-10-20T06:36:51.562926+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 339,
-    "records": 602,
-    "records_with_any_field_audit_entry": 360,
-    "records_with_current_field_audit_snapshot": 327,
+    "families": 340,
+    "records": 606,
+    "records_with_any_field_audit_entry": 364,
+    "records_with_current_field_audit_snapshot": 331,
     "records_without_current_field_audit_snapshot": 275
   },
   "requirements_per_record": [
@@ -754,6 +754,98 @@
           "limitations": "规格公开且当前checker源码可获取，复现时须冻结commit/revision和保护挂载；与历史隐藏验收campaign的模型曝光/污染条件不同，不能仅靠cutoff证明未知。示意图/版图不在任务范围，前仿PVT/有限固定seed MC非工业后仿/真实siliconyield。beta例complete按数量/failedruns检查，不自动证明所有corner组合唯一，生成器实际清单和防重复验收应单独核；只是静态契约边界，不指原结果受攻击。paper主2h与2–6h干预分轨，current partialreward不能替代原完整pass率。 五频域/混信utils只写reward不统一非零退出；SAR4 test.sh非法/空DUT可能exit0但trap写reward0，必须读电验收状态。helper ngspice subprocess无单call timeout，整体harness预算另核。；扩展scope：five-transistor名不要求数MOS，只电合同；sigma的OTA/StrongARM是固定fixture，非模型提交。flash3仅选8analyses非45PVT全扫；SAR6与sigma仅nominal无物理transientnoise/MC，不能泛化全部50都鲁棒多工况。informationalNEF/PEF不等实际reward。；RF/电源范围：LNA模型关gateR噪声；capless理想vref无限供能免费、idealcap1nF未含面积/PEX；robustLDO外置C/ESR不属于onchipDUT，MC只nominal输出voltagepass不等整机良率。这些是明示任务抽象，既不等无研究意义，也不能以通过称工业全签核。；接口范围：CMLdivider只5P角/四频/固定1.8V27°C，power只quiescentVDD；数字divider仅TT/有限cycles且无power。bootstrap三个bench有alterparam pw但无reset，而ngspice官方教程要求reset；声明27point不等已确认27不同有效工况，影响限该task脉宽扫描，未运行验证/不推整套无效。；Flash4 clockpower虽计算但不入主5mW，bottomplate五类外源各netenergy积分clip0再求和；DAC不计VDRV输入driver能量，CMLTX按waveform采样均值非时间权重。CMLTX有限PRBS7、delay对齐/找到crossing后去均值jitter不等BER/随机jitter认证，expectedtransition覆盖未硬核；这些是局部协议边界，不据此判历史结果全无效。；电源范围：boostCP current门不含clock/enable能量，regulated外部1µA bias不经过sense；ClassD有外LC/clock且只TT两温/效率，不是音频全性能。NMOSLDO的sat headroom不等dropout，外reference/bias/10pF、扣bias Iq和mean±3σ仅nominal输出要单列；均不能由通过自动推signoff或真实siliconyield。；反馈范围：gain1 pvt_output_range只nominal，gain8才30角；MCrejection用名义gain与20fixedseed、noise为连续频域非采样噪声。ringamp外reset开关/内部端口先验很强，10%settle非其他任务严格带；FCT只activecore、外采样/holdfixture免费，RMSrelease移动非绝对settling，不推完整高速ADC设计成功。；多级OTA：Ahuja中间63pF仅5角nominalV/T，FD-Miller1MHzMCrejection只info；telescopic公开明确不按内部拓扑评分且无noise/MC。NMC五45点完整硬门/driveFoM单位与其他benchmark不同，完整矩阵非所有质量自动通过；名称/阶段数不直接证明模型按命名架构实现。；参考/驱动四任务：bandgap 4代表PVT非全Cartesian；2MHzosc功耗仅nominal；线驱动2mA为供电电流且THD只20kHz；可编程镜接收理想ICC/IPTAT、四码27C均1mA，不评估PTAT源生成。；buffer仅固定1.8V27C五角且差分输入电流gate，constantGM确定性imbalance非统计offset、startup窗口均值非settlingdeadline；两GMR分别15点/5点与不同权重，3MHz拟合残差非物理noise/SFDR，命名架构未作结构验收。；最后四任务：ClassAB formalreward严格binary；folded缺身份矩阵全0而完整质量fail可partial；biquad62正式矩阵之外另1预检，noise为LP输出端；Miller noisegain20非unity或UGB积分。namedarchitecture均以外部合同评分，不证明命名拓扑。",
           "tools_and_access": "SKY130/ngspice，软件Apache2、非软件benchmark内容CCBYNC4.0，第三方原许可另保留；内容商业使用需另书面许可。原repo已公开task manifests/instructions和tests/verify.py，不再笼统写verifier未公开；本轮读beta-multiplier与bandgap源码、未执行50任务。完整image/PDK snapshot/runner隔离配置仍未验证。",
           "industrial_value": "规格闭环agent高价值候选，已有SPICE是执行器而非设计最优；要对专家/原生参数优化和同预算BO作baseline，并保留DUT功能/全部工况与独立测量门。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "Analog-DB / SpiceXplorer",
+      "record_count": 4,
+      "records_with_current_field_audit": 4,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "analog-analogdb-core",
+          "name": "Analog-DB / 版本化电路库与分层验收",
+          "category": "模拟前端与后端/电路资源及设计案例",
+          "artifact_type": "公开电路数据库/验收资源；非统一agent挑战",
+          "task_layer": "PDK中立拓扑/测试/规格与多kit迁移",
+          "evidence_status": "第二轮12h进行中；固定数据库/子仓库/评分源码与公开trial表静态审计，未跑LLM、SPICE、布局、DRC/LVS或PEX。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-spicexplorer-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "冻结完整输入/测量版本/任务目标与可改面，分别核PVT/MC/电路语义/物理完整性、完整agent轨迹、失败分母/全部成本及各层许可。",
+          "limitations": "13reference只含上游指针且跳T1–T4；raw不完整等于资源类型不同，非模型失败。PPAarea是ΣWLM有源栅面积，不含布线/井/完整passive面积；worst-recordedcorner不是全PVT。T4越界记skip，退出无fail不等达标；validated另需所有bounded行pass。共享模板/平台变化不自动失效指纹；scoreboard仅保留baseline/Pareto/hand-kept，非完整失败轨迹。",
+          "tools_and_access": "当前SpiceXplorer v1.1.2固定f6f3f92246cc4dbe2763155b375c34aeec7dd39d；DB/platform根LICENSE为PolyForm Noncommercial1.0.0，各电路上游provenance另有MIT/BSD/Apache等，不能统称无限制开源或商业训练已授权。IHP/Sky130/GF180开PDK与ngspice自备/镜像取得；本轮不安装。62选定源文件Gitblob匹配，数表独立静态复算，未跑第三方验证器。",
+          "industrial_value": "研究判断：PDK中立拓扑/测试/规格与多kit迁移；已有确定性gm/ID、优化器和验收工具可作强基线。工程数据丰富不等独立大规模agent能力榜或已闭合全部物理签核。"
+        },
+        {
+          "id": "analog-analogdb-regulator",
+          "name": "Analog-DB / 23个LDO绑定的角色驱动修复",
+          "category": "模拟前端与后端/电路资源及设计案例",
+          "artifact_type": "论文方法实验；同库子集，非新独立数据集",
+          "task_layer": "器件角色注释、gm/ID尺寸环与必要的结构修复",
+          "evidence_status": "第二轮12h进行中；固定数据库/子仓库/评分源码与公开trial表静态审计，未跑LLM、SPICE、布局、DRC/LVS或PEX。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-spicexplorer-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "冻结完整输入/测量版本/任务目标与可改面，分别核PVT/MC/电路语义/物理完整性、完整agent轨迹、失败分母/全部成本及各层许可。",
+          "limitations": "paper两案例均作者监督、单agent/model，缺无结构artifact对照；工程sessionreports当时未随paperrelease公开。不能将≤4次记录fullsuite当全部工具调用；原始诊断探针不在分母。旧/当前phase与loadbench版本需分开，currentv1.1.2修LDO控制环与dropout量测，旧数值不自动可比。",
+          "tools_and_access": "当前SpiceXplorer v1.1.2固定f6f3f92246cc4dbe2763155b375c34aeec7dd39d；DB/platform根LICENSE为PolyForm Noncommercial1.0.0，各电路上游provenance另有MIT/BSD/Apache等，不能统称无限制开源或商业训练已授权。IHP/Sky130/GF180开PDK与ngspice自备/镜像取得；本轮不安装。62选定源文件Gitblob匹配，数表独立静态复算，未跑第三方验证器。",
+          "industrial_value": "研究判断：器件角色注释、gm/ID尺寸环与必要的结构修复；已有确定性gm/ID、优化器和验收工具可作强基线。工程数据丰富不等独立大规模agent能力榜或已闭合全部物理签核。"
+        },
+        {
+          "id": "analog-spicexplorer-pam4",
+          "name": "SpiceXplorer / PAM-4驱动器三轮布局共设计",
+          "category": "模拟前端与后端/电路资源及设计案例",
+          "artifact_type": "公开单案例/数值优化trial工件；非多任务agentbenchmark",
+          "task_layer": "agent改版图generator与边界，确定性优化器执行trial",
+          "evidence_status": "第二轮12h进行中；固定数据库/子仓库/评分源码与公开trial表静态审计，未跑LLM、SPICE、布局、DRC/LVS或PEX。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-spicexplorer-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "冻结完整输入/测量版本/任务目标与可改面，分别核PVT/MC/电路语义/物理完整性、完整agent轨迹、失败分母/全部成本及各层许可。",
+          "limitations": "layout-flow DRC no_densitytrue；LVS参考从同generator产出，需另核意图拓扑。PEX stripMIM再补模型、CC/RC及halo覆盖有限；理想bias/待完成pre-tapeout项保留。总trialtime求和不是并行campaign耗时或完整LLM/人工成本。子仓库完整tree未见LICENSE文件，不据parent非商用或PDKApache自动推子仓库训练许可。",
+          "tools_and_access": "当前SpiceXplorer v1.1.2固定f6f3f92246cc4dbe2763155b375c34aeec7dd39d；DB/platform根LICENSE为PolyForm Noncommercial1.0.0，各电路上游provenance另有MIT/BSD/Apache等，不能统称无限制开源或商业训练已授权。IHP/Sky130/GF180开PDK与ngspice自备/镜像取得；本轮不安装。62选定源文件Gitblob匹配，数表独立静态复算，未跑第三方验证器。",
+          "industrial_value": "研究判断：agent改版图generator与边界，确定性优化器执行trial；已有确定性gm/ID、优化器和验收工具可作强基线。工程数据丰富不等独立大规模agent能力榜或已闭合全部物理签核。"
+        },
+        {
+          "id": "analog-spicexplorer-lpf",
+          "name": "SpiceXplorer / 250Hz LPF噪声与版图案例",
+          "category": "模拟前端与后端/电路资源及设计案例",
+          "artifact_type": "公开单案例/历史与验收工件；非独立大规模评测集",
+          "task_layer": "固定拓扑尺寸优化、PVT再设计和布局审核",
+          "evidence_status": "第二轮12h进行中；固定数据库/子仓库/评分源码与公开trial表静态审计，未跑LLM、SPICE、布局、DRC/LVS或PEX。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-spicexplorer-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "冻结完整输入/测量版本/任务目标与可改面，分别核PVT/MC/电路语义/物理完整性、完整agent轨迹、失败分母/全部成本及各层许可。",
+          "limitations": "当前scorecard/README/历史定义不同须选正式JSON；37条不是全部原始LLM会话。PEX忽略MIMplate环境和结/衬底C，RCmesh存在重复性散布；LVS未覆盖unusedpin，复现同简化模型不等独立物理签核。子仓库完整tree未见LICENSE，商业/训练再用权限未确认；不把MC100样本当硅片yield。",
+          "tools_and_access": "当前SpiceXplorer v1.1.2固定f6f3f92246cc4dbe2763155b375c34aeec7dd39d；DB/platform根LICENSE为PolyForm Noncommercial1.0.0，各电路上游provenance另有MIT/BSD/Apache等，不能统称无限制开源或商业训练已授权。IHP/Sky130/GF180开PDK与ngspice自备/镜像取得；本轮不安装。62选定源文件Gitblob匹配，数表独立静态复算，未跑第三方验证器。",
+          "industrial_value": "研究判断：固定拓扑尺寸优化、PVT再设计和布局审核；已有确定性gm/ID、优化器和验收工具可作强基线。工程数据丰富不等独立大规模agent能力榜或已闭合全部物理签核。"
         }
       ]
     },

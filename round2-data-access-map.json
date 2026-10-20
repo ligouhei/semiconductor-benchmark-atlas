@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-10-20T06:24:13.798471+00:00",
+  "as_of": "2026-10-20T06:36:51.465936+00:00",
   "status": "第二轮12h进行中的数据/轨迹开放性核查，非完整市场清单或最终结论",
   "scope": "只覆盖本轮已保存一手核查的新增协议；训练样本、评测输入、模型权重、整理后记忆、生成采样轨迹与LLM工具交互轨迹分别描述",
-  "protocol_records": 36,
-  "families": 15,
+  "protocol_records": 40,
+  "families": 16,
   "items": [
     {
       "catalog_id": "lib-siemens-nemo-characterization",
@@ -435,6 +435,54 @@
       "trajectory_and_training_access": "可下载13skill文档/17整理后的设计记忆；完整prompt/tool交互与失败成本轨迹未定位，不能无损还原原始训练rollouts",
       "limits": "DECISIONS是整理后的结果/理由，不是全部成功失败尝试的原始对话。没有逐stepprompt-action-observation/token-cost manifest/replay corpus确认。raw技能文档可辅助工程agent，但不能把13份skill当13条已验证rollout或把策展agent效果当模型能力榜。",
       "primary_sources": "https://arxiv.org/html/2606.04126v1; https://github.com/VLSIDA/HighTide/blob/157644588d12732779acfc0d34ece49ed9b39bbb/.claude/skills/optimize-ppa/SKILL.md; https://github.com/VLSIDA/HighTide/blob/157644588d12732779acfc0d34ece49ed9b39bbb/designs/src/NVDLA/DECISIONS.md; https://github.com/VLSIDA/HighTide/blob/157644588d12732779acfc0d34ece49ed9b39bbb/.github/workflows/benchmark-status.yml",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "analog-analogdb-core",
+      "name": "Analog-DB / 版本化电路库与分层验收",
+      "family": "Analog-DB / SpiceXplorer",
+      "object_identity": "公开电路数据库/验收资源；非统一agent挑战",
+      "task": "按schema发现/复用/组合电路，参数含匹配约束；拓扑降至各PDK、组装testbench并按datasheet测试",
+      "available_materials_and_tools": "当前SpiceXplorer v1.1.2固定f6f3f92246cc4dbe2763155b375c34aeec7dd39d；DB/platform根LICENSE为PolyForm Noncommercial1.0.0，各电路上游provenance另有MIT/BSD/Apache等，不能统称无限制开源或商业训练已授权。IHP/Sky130/GF180开PDK与ngspice自备/镜像取得；本轮不安装。62选定源文件Gitblob匹配，数表独立静态复算，未跑第三方验证器。",
+      "trajectory_and_training_access": "公开拓扑/规格/测试/参数与筛选后的设计点，适合检索/电路数据研究；不是全LLMprompt-action-observation训练集，层级许可分别核",
+      "limits": "13reference只含上游指针且跳T1–T4；raw不完整等于资源类型不同，非模型失败。PPAarea是ΣWLM有源栅面积，不含布线/井/完整passive面积；worst-recordedcorner不是全PVT。T4越界记skip，退出无fail不等达标；validated另需所有bounded行pass。共享模板/平台变化不自动失效指纹；scoreboard仅保留baseline/Pareto/hand-kept，非完整失败轨迹。",
+      "primary_sources": "https://github.com/MacAnalog/spicexplorer-release/blob/f6f3f92246cc4dbe2763155b375c34aeec7dd39d/analog-db/README.md; https://github.com/MacAnalog/spicexplorer-release/blob/f6f3f92246cc4dbe2763155b375c34aeec7dd39d/analog-db/catalog.json; https://github.com/MacAnalog/spicexplorer-release/blob/f6f3f92246cc4dbe2763155b375c34aeec7dd39d/analog-db/scoreboard.json; https://github.com/MacAnalog/spicexplorer-release/blob/f6f3f92246cc4dbe2763155b375c34aeec7dd39d/analog-db/src/spicexplorer_analog_db/verify.py; https://github.com/MacAnalog/spicexplorer-release/blob/f6f3f92246cc4dbe2763155b375c34aeec7dd39d/analog-db/src/spicexplorer_analog_db/scoreboard.py",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "analog-analogdb-regulator",
+      "name": "Analog-DB / 23个LDO绑定的角色驱动修复",
+      "family": "Analog-DB / SpiceXplorer",
+      "object_identity": "论文方法实验；同库子集，非新独立数据集",
+      "task": "从导入尺寸出发，用子块角色与测量找机制，gm/ID更新尺寸；结构性缺陷可由作者监督的codingagent改连接/补CMFB",
+      "available_materials_and_tools": "当前SpiceXplorer v1.1.2固定f6f3f92246cc4dbe2763155b375c34aeec7dd39d；DB/platform根LICENSE为PolyForm Noncommercial1.0.0，各电路上游provenance另有MIT/BSD/Apache等，不能统称无限制开源或商业训练已授权。IHP/Sky130/GF180开PDK与ngspice自备/镜像取得；本轮不安装。62选定源文件Gitblob匹配，数表独立静态复算，未跑第三方验证器。",
+      "trajectory_and_training_access": "paper报告逐设计工程结论与设计点；完整监督会话、未记录诊断探针/模型token/cost不全，不称公开完整rollout数据",
+      "limits": "paper两案例均作者监督、单agent/model，缺无结构artifact对照；工程sessionreports当时未随paperrelease公开。不能将≤4次记录fullsuite当全部工具调用；原始诊断探针不在分母。旧/当前phase与loadbench版本需分开，currentv1.1.2修LDO控制环与dropout量测，旧数值不自动可比。",
+      "primary_sources": "https://arxiv.org/html/2609.01286v1; https://github.com/MacAnalog/spicexplorer-release/blob/f6f3f92246cc4dbe2763155b375c34aeec7dd39d/analog-db/README.md",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "analog-spicexplorer-pam4",
+      "name": "SpiceXplorer / PAM-4驱动器三轮布局共设计",
+      "family": "Analog-DB / SpiceXplorer",
+      "object_identity": "公开单案例/数值优化trial工件；非多任务agentbenchmark",
+      "task": "agent在轮间改generator/bounds；平台搜索build→DRC→LVS→kpex→bench；失败保留为惩罚/跳过记录",
+      "available_materials_and_tools": "当前SpiceXplorer v1.1.2固定f6f3f92246cc4dbe2763155b375c34aeec7dd39d；DB/platform根LICENSE为PolyForm Noncommercial1.0.0，各电路上游provenance另有MIT/BSD/Apache等，不能统称无限制开源或商业训练已授权。IHP/Sky130/GF180开PDK与ngspice自备/镜像取得；本轮不安装。62选定源文件Gitblob匹配，数表独立静态复算，未跑第三方验证器。",
+      "trajectory_and_training_access": "800条可下载参数/指标/失败/阶段耗时trial，属于优化器动作反馈；轮间agentdiff/解释可读，但完整原始LLM对话/token/cost轨迹未确认，训练授权另核",
+      "limits": "layout-flow DRC no_densitytrue；LVS参考从同generator产出，需另核意图拓扑。PEX stripMIM再补模型、CC/RC及halo覆盖有限；理想bias/待完成pre-tapeout项保留。总trialtime求和不是并行campaign耗时或完整LLM/人工成本。子仓库完整tree未见LICENSE文件，不据parent非商用或PDKApache自动推子仓库训练许可。",
+      "primary_sources": "https://github.com/MacAnalog/agentic-design-pam4-driver-ihp130/blob/f81f417fa8ef6b4dbe786d7e04022eb0bd7466bf/README.md; https://github.com/MacAnalog/agentic-design-pam4-driver-ihp130/blob/f81f417fa8ef6b4dbe786d7e04022eb0bd7466bf/layout/codesign/flow.yaml; https://github.com/MacAnalog/agentic-design-pam4-driver-ihp130/blob/f81f417fa8ef6b4dbe786d7e04022eb0bd7466bf/layout/codesign/project_setup.yaml; https://github.com/MacAnalog/agentic-design-pam4-driver-ihp130/blob/f81f417fa8ef6b4dbe786d7e04022eb0bd7466bf/layout/codesign/results/r3/trials.jsonl",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "analog-spicexplorer-lpf",
+      "name": "SpiceXplorer / 250Hz LPF噪声与版图案例",
+      "family": "Analog-DB / SpiceXplorer",
+      "object_identity": "公开单案例/历史与验收工件；非独立大规模评测集",
+      "task": "保留连接作器件类型/尺寸探索，再进行PVT修正与14次布局迭代，DRC/LVS/PEX加冻结bench复核",
+      "available_materials_and_tools": "当前SpiceXplorer v1.1.2固定f6f3f92246cc4dbe2763155b375c34aeec7dd39d；DB/platform根LICENSE为PolyForm Noncommercial1.0.0，各电路上游provenance另有MIT/BSD/Apache等，不能统称无限制开源或商业训练已授权。IHP/Sky130/GF180开PDK与ngspice自备/镜像取得；本轮不安装。62选定源文件Gitblob匹配，数表独立静态复算，未跑第三方验证器。",
+      "trajectory_and_training_access": "37条带why/metrics/ok的整理后尺寸探索记录与14版图iteration工件可读；非37条完整agentrollout，无全量prompt/tool/token/human-time保证",
+      "limits": "当前scorecard/README/历史定义不同须选正式JSON；37条不是全部原始LLM会话。PEX忽略MIMplate环境和结/衬底C，RCmesh存在重复性散布；LVS未覆盖unusedpin，复现同简化模型不等独立物理签核。子仓库完整tree未见LICENSE，商业/训练再用权限未确认；不把MC100样本当硅片yield。",
+      "primary_sources": "https://github.com/MacAnalog/dn-003-afe-lpf-250hz-ihp130/blob/cc24b6db5523be530f1143cbf383ccd38b246f46/README.md; https://github.com/MacAnalog/dn-003-afe-lpf-250hz-ihp130/blob/cc24b6db5523be530f1143cbf383ccd38b246f46/doc/sizing-history/rounds.json; https://github.com/MacAnalog/dn-003-afe-lpf-250hz-ihp130/blob/cc24b6db5523be530f1143cbf383ccd38b246f46/signoff/pre-pvt/scorecard.json; https://github.com/MacAnalog/dn-003-afe-lpf-250hz-ihp130/blob/cc24b6db5523be530f1143cbf383ccd38b246f46/layout/H12-pdk-cap/scorecard_post.json; https://github.com/MacAnalog/dn-003-afe-lpf-250hz-ihp130/blob/cc24b6db5523be530f1143cbf383ccd38b246f46/layout/H12-pdk-cap/REVIEW.yaml",
       "record_snapshot_matches_audit": true
     }
   ],
