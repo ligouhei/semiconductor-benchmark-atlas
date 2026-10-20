@@ -1,0 +1,791 @@
+{
+  "status": "round2 active; primaryinput/source staticcontracts only",
+  "protocols": [
+    {
+      "id": "analog-ams-sizingbench",
+      "benchmark_family": "AMS-SizingBench / AutoSizer",
+      "name": "AMS-SizingBench / 24 SKY130 circuit sizing tasks",
+      "category": "模拟前端/固定拓扑器件尺寸优化",
+      "artifact_type": "公开24电路任务配置；拓扑/平台变体不等24独立IP",
+      "task_layer": "SPICE拓扑+testbench/spec+变量范围→尺寸优化",
+      "version": "arXiv2602.02849v2 /2026-05-28；repo1b9b8f6",
+      "input": "24YAML含netlist/testbench/variable/spec/metric_post：OTA、cascode滤波变体、ring/VCO、SC、bandgap、LDO、inverter/buffer/NAND/XOR、负载放大器等；2–11变量。全部SKY130，但PDK固定build未随版确认；共享拓扑变体分清。",
+      "task": "固定连接图，改W/L/器件/偏置相关尺寸参数；Ngspice获取性能，按所有spec约束和FoM评估；不测agent从无到有发明全拓扑/完成布线。",
+      "output": "尺寸化SPICE与gain/UGBW/power/delay/PSRR/THD等指标。主24电路是prelayout仿真，不是全24已DRC/LVS/PEX/PVT闭环。",
+      "metrics": "FoM=maximize指标归一化乘积/minimize归一化乘积，负阈值有abs方向处理；SR为满足全部规格的trial比例，Evals为最终best首次达到序号、Time为trial总秒数。按YAML逐项看单位：部分ugbw标kHz，其余常MHz；无单位FoM不等跨电路相同物理收益。",
+      "baseline": "GA/BO/TuRBO原生数值优化是必要基线；24同库/不同难度split，平均FoM不能掩盖约束违例。paper比较统一300sample，各电路spec和实际attempt成本应冻结。",
+      "tools_and_access": "50selectedGitblob逐一匹配；24YAML输入可读，ngspice/SKY130公开依赖；部分拓扑支持可选ALIGN/Magic，但main硬传pre_layout_onlyTrue。根无LICENSE，PDK/upstream版权单核，不能把可下载当任意训练授权。",
+      "limitations": "当前主spec helper正则不接受负号，4配置的负dB约束漏匹配；主loop虽fom_only_checkFalse也不能算全约束验收。另FoM生成正则支持negative，不能用FoM有该项推SR也检查。paper100%SR影响量缺冻结历史metrics未量化。",
+      "industrial_value": "研究判断：有价值的开放模拟任务输入/评分场景；先修正并冻结signed约束和失败分母，再用于模型/agent工程达标率比较。",
+      "primary_sources": "https://arxiv.org/html/2602.02849v2; https://github.com/yuxi120407/AutoSizer/tree/1b9b8f6498e2c7ad3b650bbbc78c8e3b0e1205e1",
+      "evidence_status": "第二轮12h进行中；固定一手版本、50个Gitblob与24YAML静态契约核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+      "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "analog-autosizer-agent",
+      "benchmark_family": "AMS-SizingBench / AutoSizer",
+      "name": "AutoSizer / reflective sizing meta-optimization agent",
+      "category": "模拟前端/数值优化器编排agent",
+      "artifact_type": "同AMS-SizingBench家族方法协议；非新增独立24任务",
+      "task_layer": "电路理解→选变量/范围→算法编排→仿真反馈→调整空间",
+      "version": "arXiv2602.02849v2；repo1b9b8f6",
+      "input": "同24SKY130配置，LLM见netlist/testbench/spec/固定参数/优化变量和历史统计，输出结构JSON。Gemini2.5Flash，papertemp.4/top_p.85/top_k20/maxoutput8192。",
+      "task": "outer理解/缩空间/解除固定/扩缩范围，inner选择LHS/GA/BO/SA/adaptive/local等算法与批量n；仿真进展、边界聚集、stagnation反馈再决策。数值优化和SPICE引擎做实际搜索/评估。",
+      "output": "尺寸参数、逐迭代决策与模拟结果、trial summary/token记录；历史完整轨迹未随repo见。",
+      "metrics": "paper三trial、nominal最多3outer×100inner=300sample；主代码100为每outer，README称trial总100有歧义。每批n_samples直接运行未截remaining，all_searched_designs记返回对象非完整调用ledger，不能称300硬调用上限。paper称各难度SR100%，current聚合只除以已有summary，缺失trial不补0。",
+      "baseline": "GA/BO/TuRBO，与同Gemini/300预算重实现ADO-LLM/LEDRO/EEsizer；不是各方法原论文数直接拼榜。current默认3trial/3outer/3activevariables/prelayoutTrue；其余变量LLM可逐轮激活，需公平同全search-space/attempt预算比较。",
+      "tools_and_access": "核心50文件和保存逻辑可静态读；paperbody/appendix提示与策略表公开，全部原始run/prompt/tool/cost、baseline实现/精确toolbuild未核。无rootLICENSE，commercialAPI权利另核；源码中环境key字段未发现非占位凭据，本轮未执行。",
+      "limitations": "主helper虽全spec模式仍漏4个negative阈值；missingtrial聚合分母和batch可能超预算影响比较。Evals-to-best不同于总calls；time_to_best字段代码填trial total_time_seconds。签核布局/PEX为可选局部能力，不推广24任务全后端完成。",
+      "industrial_value": "研究判断：真实的agent编排数值搜索方向，与让LLM直接报精确尺寸分开；目前宜用作可审计方法环境，未把paper汇总分当独立复现。",
+      "primary_sources": "https://arxiv.org/html/2602.02849v2; https://github.com/yuxi120407/AutoSizer/tree/1b9b8f6498e2c7ad3b650bbbc78c8e3b0e1205e1",
+      "evidence_status": "第二轮12h进行中；固定一手版本、50个Gitblob与24YAML静态契约核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+      "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+      "retrieved_date": "2026-10-20"
+    }
+  ],
+  "static_audit": {
+    "as_of": "2026-10-20T08:01:30.719906+00:00",
+    "scope": "fixed source/YAML staticcontracts and own regex application, no model/simulation/layout/container execution",
+    "commit": "1b9b8f6498e2c7ad3b650bbbc78c8e3b0e1205e1",
+    "paper_version": "2602.02849v2 /2026-05-28",
+    "current_configs": [
+      {
+        "name": "3_stage_ring_osc",
+        "variables": 7,
+        "variable_names": [
+          "L_inv",
+          "W_pmos0",
+          "W_nmos0",
+          "W_pmos1",
+          "W_nmos1",
+          "W_pmos2",
+          "W_nmos2"
+        ],
+        "spec": "fom > 90 AND frequency_mhz > 400 AND power_uw < 250 AND delay_per_stage_ps < 500",
+        "metric_units": {
+          "frequency_mhz": "MHz",
+          "power_uw": "µW",
+          "delay_per_stage_ps": "ps",
+          "fom": ""
+        },
+        "has_netlist": true,
+        "has_testbench": true
+      },
+      {
+        "name": "azc",
+        "variables": 8,
+        "variable_names": [
+          "L",
+          "W_BIAS",
+          "W_AZC1",
+          "W_AZC23",
+          "W_LOAD",
+          "W_GM1",
+          "W_GM2",
+          "W_GMFOUT"
+        ],
+        "spec": "fom > 1.0 AND dc_gain_db > 45 AND ugbw > 60 AND power_dc < 120",
+        "metric_units": {
+          "dc_gain_db": "dB",
+          "ugbw": "kHz",
+          "power_dc": "µW",
+          "fom": ""
+        },
+        "has_netlist": true,
+        "has_testbench": true
+      },
+      {
+        "name": "bandgap_reference",
+        "variables": 6,
+        "variable_names": [
+          "W_mp",
+          "L_mp",
+          "W_mn",
+          "L_mn",
+          "L_ra",
+          "L_rb"
+        ],
+        "spec": "fom > 0.10 AND vref > 0.72 AND vref < 0.76 AND power_uw < 110 AND line_regulation_percent < 5.0 AND psrr_100hz_db > 25",
+        "metric_units": {
+          "vref": "V",
+          "tc_ppm": "ppm/°C",
+          "power_uw": "µW",
+          "line_regulation_percent": "%/V",
+          "psrr_100hz_db": "dB",
+          "fom": ""
+        },
+        "has_netlist": true,
+        "has_testbench": true
+      },
+      {
+        "name": "buffer",
+        "variables": 4,
+        "variable_names": [
+          "W_pmos1_base",
+          "W_nmos1_base",
+          "W_pmos2_base",
+          "W_nmos2_base"
+        ],
+        "spec": "fom > 2.5 AND dc_gain_db > 25 AND average_delay < 80 AND dynamic_power < 50",
+        "metric_units": {
+          "dc_gain_db": "dB",
+          "average_delay": "ps",
+          "dynamic_power": "µW",
+          "fom": ""
+        },
+        "has_netlist": true,
+        "has_testbench": true
+      },
+      {
+        "name": "current_mirror_ota",
+        "variables": 4,
+        "variable_names": [
+          "W_tail_base",
+          "W_diff_base",
+          "W_mirror_base",
+          "W_casc_base"
+        ],
+        "spec": "fom > 0.35 AND dc_gain_db > 15 AND ugbw > 10 AND power_dc < 65",
+        "metric_units": {
+          "dc_gain_db": "dB",
+          "ugbw": "MHz",
+          "power_dc": "µW",
+          "fom": ""
+        },
+        "has_netlist": true,
+        "has_testbench": true
+      },
+      {
+        "name": "dfcfc",
+        "variables": 10,
+        "variable_names": [
+          "L",
+          "W_BIAS_P",
+          "W_BIAS_N",
+          "W_CASC_N",
+          "W_GM1",
+          "W_GM2",
+          "W_GMF2",
+          "W_GM3",
+          "W_GM4",
+          "W_LOAD2"
+        ],
+        "spec": "dc_gain_db > 20 AND ugbw > 10 AND power_dc < 400",
+        "metric_units": {
+          "dc_gain_db": "dB",
+          "ugbw": "kHz",
+          "power_dc": "µW",
+          "fom": ""
+        },
+        "has_netlist": true,
+        "has_testbench": true
+      },
+      {
+        "name": "diode_load_amp",
+        "variables": 4,
+        "variable_names": [
+          "W_input",
+          "W_load",
+          "L_input",
+          "L_load"
+        ],
+        "spec": "fom > 3 AND gain_db > 7 AND bandwidth_mhz > 200 AND power_uw < 10 AND output_swing_v > 0.5",
+        "metric_units": {
+          "gain_db": "dB",
+          "bandwidth_mhz": "MHz",
+          "power_uw": "µW",
+          "output_swing_v": "V",
+          "fom": ""
+        },
+        "has_netlist": true,
+        "has_testbench": true
+      },
+      {
+        "name": "fdgb",
+        "variables": 11,
+        "variable_names": [
+          "L",
+          "W_GM1",
+          "W_CASC_N",
+          "W_CASC_P",
+          "W_CURR_P",
+          "W_TAIL",
+          "W_AUX_GM",
+          "W_AUX_LOAD",
+          "W_AUX_TAIL",
+          "W_BIAS_P",
+          "W_BIAS_N"
+        ],
+        "spec": "dc_gain_db > 20 AND ugbw > 1 AND power_dc < 200",
+        "metric_units": {
+          "dc_gain_db": "dB",
+          "ugbw": "MHz",
+          "power_dc": "µW",
+          "fom": ""
+        },
+        "has_netlist": true,
+        "has_testbench": true
+      },
+      {
+        "name": "five_trans_ota",
+        "variables": 3,
+        "variable_names": [
+          "W_tail_base",
+          "W_diff_base",
+          "W_load_base"
+        ],
+        "spec": "fom > 0.5 AND dc_gain_db > 15 AND ugbw > 10 AND power_dc < 65",
+        "metric_units": {
+          "dc_gain_db": "dB",
+          "ugbw": "MHz",
+          "power_dc": "µW",
+          "fom": ""
+        },
+        "has_netlist": true,
+        "has_testbench": true
+      },
+      {
+        "name": "folded_cascode_ota",
+        "variables": 6,
+        "variable_names": [
+          "W_in_base",
+          "W_fold_base",
+          "W_sink_base",
+          "W_mirror_base",
+          "W_casc_n_base",
+          "W_casc_p_base"
+        ],
+        "spec": "fom > 3.0 AND dc_gain_db > 1.5 AND ugbw > 10 AND power_dc < 1.0",
+        "metric_units": {
+          "dc_gain_db": "dB",
+          "ugbw": "MHz",
+          "power_dc": "µW",
+          "fom": ""
+        },
+        "has_netlist": true,
+        "has_testbench": true
+      },
+      {
+        "name": "folded_cascode_ota_bandp",
+        "variables": 10,
+        "variable_names": [
+          "W_in_base",
+          "W_fold_base",
+          "W_sink_base",
+          "W_mirr_base",
+          "W_casc_n_base",
+          "W_casc_p_base",
+          "R1",
+          "R2",
+          "C1",
+          "C2"
+        ],
+        "spec": "fom > 0.3 AND bpf_q_factor > 0.3 AND bpf_center_freq_hz > 0.3 AND bpf_peak_gain_db > -10",
+        "metric_units": {
+          "bpf_center_freq_hz": "MHz",
+          "bpf_bandwidth_hz": "kHz",
+          "bpf_peak_gain_db": "dB",
+          "bpf_q_factor": "",
+          "power_uw": "µW",
+          "fom": ""
+        },
+        "has_netlist": true,
+        "has_testbench": true
+      },
+      {
+        "name": "folded_cascode_ota_hp",
+        "variables": 10,
+        "variable_names": [
+          "W_in_base",
+          "W_fold_base",
+          "W_sink_base",
+          "W_mirr_base",
+          "W_casc_n_base",
+          "W_casc_p_base",
+          "R1",
+          "R2",
+          "C1",
+          "C2"
+        ],
+        "spec": "fom > 0.5 AND hpf_stopband_atten_db > 20 AND hpf_cutoff_hz > 10 AND hpf_passband_gain_db > -15",
+        "metric_units": {
+          "hpf_cutoff_hz": "MHz",
+          "hpf_passband_gain_db": "dB",
+          "hpf_rolloff_db_per_dec": "dB/dec",
+          "hpf_stopband_atten_db": "dB",
+          "hpf_q_theoretical": "",
+          "fom": ""
+        },
+        "has_netlist": true,
+        "has_testbench": true
+      },
+      {
+        "name": "folded_cascode_ota_lp",
+        "variables": 10,
+        "variable_names": [
+          "W_in_base",
+          "W_fold_base",
+          "W_sink_base",
+          "W_mirr_base",
+          "W_casc_n_base",
+          "W_casc_p_base",
+          "R1",
+          "R2",
+          "C1",
+          "C2"
+        ],
+        "spec": "fom > 0.3 AND lpf_stopband_atten_db > 20 AND lpf_cutoff_hz > 0.5 AND lpf_passband_gain_db > -5",
+        "metric_units": {
+          "lpf_cutoff_hz": "MHz",
+          "lpf_passband_gain_db": "dB",
+          "lpf_rolloff_db_per_dec": "dB/dec",
+          "lpf_stopband_atten_db": "dB",
+          "lpf_q_theoretical": "",
+          "power_uw": "µW",
+          "fom": ""
+        },
+        "has_netlist": true,
+        "has_testbench": true
+      },
+      {
+        "name": "iac",
+        "variables": 8,
+        "variable_names": [
+          "L",
+          "W_BIAS_P",
+          "W_BIAS_N",
+          "W_LOAD2",
+          "W_LOAD3",
+          "W_GM1",
+          "W_GM2",
+          "W_GMT"
+        ],
+        "spec": "dc_gain_db > 30 AND ugbw > 50 AND power_dc < 1000",
+        "metric_units": {
+          "dc_gain_db": "dB",
+          "ugbw": "kHz",
+          "power_dc": "µW",
+          "fom": ""
+        },
+        "has_netlist": true,
+        "has_testbench": true
+      },
+      {
+        "name": "inverter",
+        "variables": 2,
+        "variable_names": [
+          "W_pmos_base",
+          "W_nmos_base"
+        ],
+        "spec": "fom > 1.0 AND dc_gain_db > 20 AND average_delay < 50 AND dynamic_power < 50",
+        "metric_units": {
+          "dc_gain_db": "dB",
+          "average_delay": "ps",
+          "dynamic_power": "µW",
+          "fom": ""
+        },
+        "has_netlist": true,
+        "has_testbench": true
+      },
+      {
+        "name": "ldo_regulator",
+        "variables": 6,
+        "variable_names": [
+          "W_pass",
+          "L_pass",
+          "W_diff",
+          "W_load",
+          "W_bias",
+          "L_amp"
+        ],
+        "spec": "fom > 3 AND vout > 1.19 AND vout < 1.21 AND dropout_mv < 650 AND line_reg_mv_per_v < 0.5 AND load_reg_mv_per_ma < 1.0 AND psrr_db > 60 AND power_uw < 20000",
+        "metric_units": {
+          "vout": "V",
+          "dropout_mv": "mV",
+          "line_reg_mv_per_v": "mV/V",
+          "load_reg_mv_per_ma": "µV/mA",
+          "psrr_db": "dB",
+          "power_uw": "µW",
+          "fom": ""
+        },
+        "has_netlist": true,
+        "has_testbench": true
+      },
+      {
+        "name": "nand_gate",
+        "variables": 4,
+        "variable_names": [
+          "W_pmos",
+          "W_nmos",
+          "L_pmos",
+          "L_nmos"
+        ],
+        "spec": "fom > 0.15 AND avg_delay_ps < 200 AND energy_per_transition_fj < 25 AND noise_margin_high > 0.3 AND noise_margin_low > 0.3",
+        "metric_units": {
+          "tphl_ps": "ps",
+          "tplh_ps": "ps",
+          "avg_delay_ps": "ps",
+          "power_total_uw": "µW",
+          "energy_per_transition_fj": "fJ",
+          "noise_margin_high": "V",
+          "noise_margin_low": "V",
+          "fom": ""
+        },
+        "has_netlist": true,
+        "has_testbench": true
+      },
+      {
+        "name": "nmcnr",
+        "variables": 7,
+        "variable_names": [
+          "L",
+          "W_BIAS_P",
+          "W_BIAS_N",
+          "W_GM1",
+          "W_GM2",
+          "W_GM3",
+          "W_LOAD2"
+        ],
+        "spec": "dc_gain_db > 18 AND ugbw > 10 AND power_dc < 600",
+        "metric_units": {
+          "dc_gain_db": "dB",
+          "ugbw": "kHz",
+          "power_dc": "µW",
+          "fom": ""
+        },
+        "has_netlist": true,
+        "has_testbench": true
+      },
+      {
+        "name": "resistive_load_amp",
+        "variables": 3,
+        "variable_names": [
+          "W_input",
+          "L_input",
+          "R_load"
+        ],
+        "spec": "fom > 3 AND gain_db > 15 AND bandwidth_mhz > 200 AND power_uw < 20 AND output_swing_v > 0.4",
+        "metric_units": {
+          "gain_db": "dB",
+          "bandwidth_mhz": "MHz",
+          "power_uw": "µW",
+          "output_swing_v": "V",
+          "fom": ""
+        },
+        "has_netlist": true,
+        "has_testbench": true
+      },
+      {
+        "name": "smc",
+        "variables": 8,
+        "variable_names": [
+          "L",
+          "W_BIAS_P",
+          "W_BIAS_N",
+          "W_GM1",
+          "W_GM2",
+          "W_GMF2",
+          "W_GM3",
+          "W_LOAD2"
+        ],
+        "spec": "dc_gain_db > 40 AND ugbw > 10 AND power_dc < 500",
+        "metric_units": {
+          "dc_gain_db": "dB",
+          "ugbw": "kHz",
+          "power_dc": "µW",
+          "fom": ""
+        },
+        "has_netlist": true,
+        "has_testbench": true
+      },
+      {
+        "name": "switched_capacitor",
+        "variables": 5,
+        "variable_names": [
+          "W_op1_base",
+          "W_op2_base",
+          "W_sw_base",
+          "L_op_base",
+          "L_sw_base"
+        ],
+        "spec": "fom > 1.0 AND gain_db > 15 AND thd_db < -25 AND power_uw < 1500 AND phase_margin_deg > 50 AND ugbw_mhz > 100",
+        "metric_units": {
+          "gain_db": "dB",
+          "thd_db": "dB",
+          "power_uw": "µW",
+          "phase_margin_deg": "°",
+          "ugbw_mhz": "MHz",
+          "fom": ""
+        },
+        "has_netlist": true,
+        "has_testbench": true
+      },
+      {
+        "name": "telescopic_ota",
+        "variables": 4,
+        "variable_names": [
+          "W_tail_base",
+          "W_diff_base",
+          "W_casc_base",
+          "W_load_base"
+        ],
+        "spec": "fom > 0.08 AND dc_gain_db > 18 AND ugbw > 3.0 AND power_dc < 65",
+        "metric_units": {
+          "dc_gain_db": "dB",
+          "ugbw": "MHz",
+          "power_dc": "µW",
+          "fom": ""
+        },
+        "has_netlist": true,
+        "has_testbench": true
+      },
+      {
+        "name": "voltage_controlled_osc",
+        "variables": 4,
+        "variable_names": [
+          "W_inv_p_base",
+          "W_inv_n_base",
+          "L_inv_p_base",
+          "L_inv_n_base"
+        ],
+        "spec": "fom > 0.5 AND tuning_range_percent > 30 AND freq_at_max > 500 AND vco_gain_MHz_per_V > 200",
+        "metric_units": {
+          "tuning_range_percent": "%",
+          "freq_at_max": "MHz",
+          "power_uw": "µW",
+          "vco_gain_MHz_per_V": "MHz/V",
+          "fom": ""
+        },
+        "has_netlist": true,
+        "has_testbench": true
+      },
+      {
+        "name": "xor_gate",
+        "variables": 4,
+        "variable_names": [
+          "W_pmos",
+          "W_nmos",
+          "L_pmos",
+          "L_nmos"
+        ],
+        "spec": "fom > 0.25 AND avg_delay_ps < 8000 AND power_total_uw < 5.0 AND energy_per_transition_fj < 40 AND noise_margin_high > 0.3 AND noise_margin_low > 0.3",
+        "metric_units": {
+          "avg_delay_ps": "ps",
+          "power_total_uw": "µW",
+          "energy_per_transition_fj": "fJ",
+          "noise_margin_high": "V",
+          "noise_margin_low": "V",
+          "fom": ""
+        },
+        "has_netlist": true,
+        "has_testbench": true
+      }
+    ],
+    "config_count": 24,
+    "variable_count_range": [
+      2,
+      11
+    ],
+    "paper_primary_table": [
+      [
+        "Methods",
+        "Easy",
+        "Medium",
+        "Hard"
+      ],
+      [
+        "",
+        "FOM ↑ \\uparrow",
+        "Evals ↓ \\downarrow",
+        "Time (s) ↓ \\downarrow",
+        "SR% ↑ \\uparrow",
+        "FOM ↑ \\uparrow",
+        "Evals ↓ \\downarrow",
+        "Time (s) ↓ \\downarrow",
+        "SR% ↑ \\uparrow",
+        "FOM ↑ \\uparrow",
+        "Evals ↓ \\downarrow",
+        "Time (s) ↓ \\downarrow",
+        "SR% ↑ \\uparrow"
+      ],
+      [
+        "Traditional Method",
+        "",
+        ""
+      ],
+      [
+        "Genetic",
+        "4.0 ± 1.2 4.0\\pm{\\scriptstyle 1.2}",
+        "110.5 ± 42.9 110.5\\pm{\\scriptstyle 42.9}",
+        "515.6 ± 28.5 515.6\\pm{\\scriptstyle 28.5}",
+        "93.3 % 93.3\\%",
+        "33.6 ± 28.0 33.6\\pm{\\scriptstyle 28.0}",
+        "193.7 ± 47.9 193.7\\pm{\\scriptstyle 47.9}",
+        "1638.6 ± 18.4 1638.6\\pm{\\scriptstyle 18.4}",
+        "73.3 % 73.3\\%",
+        "3.4 ± 1.3 3.4\\pm{\\scriptstyle 1.3}",
+        "165.6 ± 49.2 165.6\\pm{\\scriptstyle 49.2}",
+        "1689.2 ± 65.1 1689.2\\pm{\\scriptstyle 65.1}",
+        "50.0 % 50.0\\%"
+      ],
+      [
+        "BO",
+        "3.2 ± 1.5 3.2\\pm{\\scriptstyle 1.5}",
+        "84.0 ± 21.4 84.0\\pm{\\scriptstyle 21.4}",
+        "415.0 ± 55.8 415.0\\pm{\\scriptstyle 55.8}",
+        "80.0 % 80.0\\%",
+        "34.1 ± 39.5 34.1\\pm{\\scriptstyle 39.5}",
+        "153.6 ± 59.8 153.6\\pm{\\scriptstyle 59.8}",
+        "1492.5 ± 48.7 1492.5\\pm{\\scriptstyle 48.7}",
+        "73.3 % 73.3\\%",
+        "3.5 ± 0.2 3.5\\pm{\\scriptstyle 0.2}",
+        "151.3 ± 51.2 151.3\\pm{\\scriptstyle 51.2}",
+        "1875.1 ± 73.5 1875.1\\pm{\\scriptstyle 73.5}",
+        "50.0 % 50.0\\%"
+      ],
+      [
+        "TuRBO",
+        "2.1 ± 1.5 2.1\\pm{\\scriptstyle 1.5}",
+        "20.6 ± 6.9 20.6\\pm{\\scriptstyle 6.9}",
+        "141.0 ± 15.6 141.0\\pm{\\scriptstyle 15.6}",
+        "39.8 % 39.8\\%",
+        "30.0 ± 47.6 30.0\\pm{\\scriptstyle 47.6}",
+        "75.7 ± 25.1 75.7\\pm{\\scriptstyle 25.1}",
+        "1450.2 ± 18.3 1450.2\\pm{\\scriptstyle 18.3}",
+        "39.8 % 39.8\\%",
+        "2.7 ± 1.9 2.7\\pm{\\scriptstyle 1.9}",
+        "107.2 ± 19.1 107.2\\pm{\\scriptstyle 19.1}",
+        "2105.2 ± 42.7 2105.2\\pm{\\scriptstyle 42.7}",
+        "25.0 % 25.0\\%"
+      ],
+      [
+        "LLM-based Agent",
+        "",
+        ""
+      ],
+      [
+        "ADO-LLM",
+        "3.3 ± 0.5 3.3\\pm{\\scriptstyle 0.5}",
+        "87.2 ± 11.5 87.2\\pm{\\scriptstyle 11.5}",
+        "527.2 ± 20.8 527.2\\pm{\\scriptstyle 20.8}",
+        "80.0 % 80.0\\%",
+        "31.9 ± 30.5 31.9\\pm{\\scriptstyle 30.5}",
+        "148.5 ± 23.5 148.5\\pm{\\scriptstyle 23.5}",
+        "1328.6 ± 25.8 1328.6\\pm{\\scriptstyle 25.8}",
+        "80.0 % 80.0\\%",
+        "3.5 ± 0.7 3.5\\pm{\\scriptstyle 0.7}",
+        "162.3 ± 42.3 162.3\\pm{\\scriptstyle 42.3}",
+        "1478.5 ± 68.5 1478.5\\pm{\\scriptstyle 68.5}",
+        "41.0 % 41.0\\%"
+      ],
+      [
+        "LEDRO",
+        "4.1 ± 1.1 4.1\\pm{\\scriptstyle 1.1}",
+        "65.6 ± 13.4 65.6\\pm{\\scriptstyle 13.4}",
+        "385.6 ± 15.5 385.6\\pm{\\scriptstyle 15.5}",
+        "100 % 100\\%",
+        "34.6 ± 56.8 34.6\\pm{\\scriptstyle 56.8}",
+        "142.5 ± 32.5 142.5\\pm{\\scriptstyle 32.5}",
+        "1150.7 ± 25.4 1150.7\\pm{\\scriptstyle 25.4}",
+        "80.0 % 80.0\\%",
+        "3.8 ± 0.6 3.8\\pm{\\scriptstyle 0.6}",
+        "140.8 ± 23.2 140.8\\pm{\\scriptstyle 23.2}",
+        "1350.8 ± 62.5 1350.8\\pm{\\scriptstyle 62.5}",
+        "80.0 % 80.0\\%"
+      ],
+      [
+        "EE-Sizer",
+        "4.0 ± 1.3 4.0\\pm{\\scriptstyle 1.3}",
+        "95.3 ± 21.8 95.3\\pm{\\scriptstyle 21.8}",
+        "756.2 ± 34.2 756.2\\pm{\\scriptstyle 34.2}",
+        "100 % 100\\%",
+        "33.3 ± 52.9 33.3\\pm{\\scriptstyle 52.9}",
+        "165.2 ± 37.4 165.2\\pm{\\scriptstyle 37.4}",
+        "1485.3 ± 37.5 1485.3\\pm{\\scriptstyle 37.5}",
+        "80.0 % 80.0\\%",
+        "3.7 ± 0.9 3.7\\pm{\\scriptstyle 0.9}",
+        "170.8 ± 20.5 170.8\\pm{\\scriptstyle 20.5}",
+        "1872.6 ± 54.6 1872.6\\pm{\\scriptstyle 54.6}",
+        "56.4%"
+      ],
+      [
+        "AutoSizer",
+        "4.4 ± 1.6 \\textbf{4.4}\\pm{\\scriptstyle 1.6}",
+        "38.9 ¯ ± 31.8 \\underline{38.9}\\pm{\\scriptstyle 31.8}",
+        "257.0 ¯ ± 16.4 \\underline{257.0}\\pm{\\scriptstyle 16.4}",
+        "100 % \\textbf{100}\\%",
+        "36.3 ± 58.8 \\textbf{36.3}\\pm{\\scriptstyle 58.8}",
+        "42.2 ± 51.0 \\textbf{42.2}\\pm{\\scriptstyle 51.0}",
+        "1359.9 ¯ ± 29.7 \\underline{1359.9}\\pm{\\scriptstyle 29.7}",
+        "100 % \\textbf{100}\\%",
+        "4.5 ± 2.7 \\textbf{4.5}\\pm{\\scriptstyle 2.7}",
+        "63.6 ± 62.5 \\textbf{63.6}\\pm{\\scriptstyle 62.5}",
+        "1473.2 ¯ ± 39.3 \\underline{1473.2}\\pm{\\scriptstyle 39.3}",
+        "100 % \\textbf{100}\\%"
+      ]
+    ],
+    "current_main_defaults": {
+      "n_trials": 3,
+      "max_total_designs": 100,
+      "num_variables_to_optimize": 3,
+      "max_regeneration_cycles": 3,
+      "pre_layout_only": true
+    },
+    "budget": "paper300sample=最多3outer×100inner；currentcode每outer新optimizer按其all_searched_designs<100计，不是README所谓trial总100。批次n_samples直接执行未按remaining截断，all_searched_designs仅append返回对象，非完整仿真attempt ledger，300不是已验证硬调用上限。",
+    "metrics": "归一化FoM maximize-product/minimize-product，负阈值源码abs方向特殊处理；normalizedscalar不自动具跨电路相同难度/物理效用。全规格SR与bestFoM不同；Evals是首次达到最终best的记录序号，Time为trial总时间，非time-to-best，current字段time_to_best填total_time_seconds。",
+    "feasibility": {
+      "main_check": "主loop明确check_user_specs_met(...fom_only_check=False)，应按全部parsed约束检查，不误称只看FoM；另optimizer默认FOM-only是不同helper。",
+      "regex_pattern": "(\\w+)\\s*([><=]+)\\s*([\\d.]+)",
+      "configs_with_unparsed_constraints": [
+        {
+          "circuit": "folded_cascode_ota_bandp",
+          "missed_constraints": [
+            [
+              "bpf_peak_gain_db",
+              ">",
+              "-10"
+            ]
+          ]
+        },
+        {
+          "circuit": "folded_cascode_ota_hp",
+          "missed_constraints": [
+            [
+              "hpf_passband_gain_db",
+              ">",
+              "-15"
+            ]
+          ]
+        },
+        {
+          "circuit": "folded_cascode_ota_lp",
+          "missed_constraints": [
+            [
+              "lpf_passband_gain_db",
+              ">",
+              "-5"
+            ]
+          ]
+        },
+        {
+          "circuit": "switched_capacitor",
+          "missed_constraints": [
+            [
+              "thd_db",
+              "<",
+              "-25"
+            ]
+          ]
+        }
+      ],
+      "interpretation": "主helper正则只接受无符号[digits.]，4配置的负dB目标完全漏匹配；own regex静态验证，不运行upstreamhelper。FoM构造另一正则支持negative，不修复SR验收漏项；paper100%SR是否受影响需冻结历史版本/原始metrics。"
+    },
+    "trials": "main默认3trial，但聚合仅装入存在的trial_summary；missing/崩溃trial不自动补0，SR分母len(loaded)不是原定3。不能从聚合100%推全部scheduledattempt成功。",
+    "layout": "main硬传pre_layout_only=True；主要24任务为ngspice电路级指标，非24个DRC/LVS/PEX/PVT签核。ALIGN/Magic仅部分拓扑可选；READMEpre_layout False说明有反向文案，按源码判。",
+    "units": "perconfigunits必须固定；ugbw在azc/dfcfc/iac/nmcnr/smc标kHz，其余常MHz，不能把所有24同名ugbw当MHz；输出simhelpers/metric_post逐项核。",
+    "release": "完整tree64entries；24YAML+核心/模拟helpers公开，repo标underconstruction。无rootLICENSE、冻结PDKbuild/全原生baseline重实现/全部rawtrialtrace与费用未见；autosizer_container.zip存在未下载或运行，不能推内容全无。",
+    "trajectory": "paper有一表bandgap3cycle策略例与汇总action频次；源码有decision/history保存机制，但tree无已发布results目录，不能当全24×3历史prompt/tool反馈已开放。",
+    "native_baselines": "GA/BO/TuRBO以及统一Gemini2.5Flash重新实现ADO/LEDRO/EEsizer，paper说相同300sample；不同于直接复用各原论文数值。尚需同真正allattempt预算/多seed与工具版本独立重算。"
+  }
+}

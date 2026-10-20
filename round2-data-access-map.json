@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-10-20T07:58:08.027325+00:00",
+  "as_of": "2026-10-20T08:02:33.260295+00:00",
   "status": "第二轮12h进行中的数据/轨迹开放性核查，非完整市场清单或最终结论",
   "scope": "只覆盖本轮已保存一手核查的新增协议；训练样本、评测输入、模型权重、整理后记忆、生成采样轨迹与LLM工具交互轨迹分别描述",
-  "protocol_records": 61,
-  "families": 29,
+  "protocol_records": 63,
+  "families": 30,
   "items": [
     {
       "catalog_id": "lib-siemens-nemo-characterization",
@@ -735,6 +735,30 @@
       "trajectory_and_training_access": "新版公开任务card/预览不是agent交互数据；未取得新版完整生成/工具反馈/失败/成本trajectory；旧repo108样例不能移为新版。",
       "limits": "同源版本分条便于看发布与刷新时间，不计独立family。1112旧news文案、1114初版paper/card、1146新版是不同声明，必须选对应版本。未有新版训练污染/公开全轨迹证据。",
       "primary_sources": "https://huggingface.co/datasets/HPAI-BSC/NotSoTiny-26-07; https://github.com/razinemg/notsotiny-website/blob/de33a6b78c92ac5ae403d036177cb692c8955bd7/src/constants.js; https://github.com/HPAI-BSC/TuRTLe/blob/6a32467e79d7a6cfbf3a6c579c24f20662475101/turtle/tasks/NotSoTiny.py",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "analog-ams-sizingbench",
+      "name": "AMS-SizingBench / 24 SKY130 circuit sizing tasks",
+      "family": "AMS-SizingBench / AutoSizer",
+      "object_identity": "公开24电路任务配置；拓扑/平台变体不等24独立IP",
+      "task": "固定连接图，改W/L/器件/偏置相关尺寸参数；Ngspice获取性能，按所有spec约束和FoM评估；不测agent从无到有发明全拓扑/完成布线。",
+      "available_materials_and_tools": "50selectedGitblob逐一匹配；24YAML输入可读，ngspice/SKY130公开依赖；部分拓扑支持可选ALIGN/Magic，但main硬传pre_layout_onlyTrue。根无LICENSE，PDK/upstream版权单核，不能把可下载当任意训练授权。",
+      "trajectory_and_training_access": "24YAML/netlist/testbench和核心optimizer/LLM保存机制公开；paper一张bandgap三cycle策略例和action汇总不是全24×3原始交互数据。当前tree无results目录；containerZIP存在但未下载/运行，内容不作无证据判断。root无LICENSE，上游PDK/数据与训练权另核。",
+      "limits": "当前主spec helper正则不接受负号，4配置的负dB约束漏匹配；主loop虽fom_only_checkFalse也不能算全约束验收。另FoM生成正则支持negative，不能用FoM有该项推SR也检查。paper100%SR影响量缺冻结历史metrics未量化。",
+      "primary_sources": "https://arxiv.org/html/2602.02849v2; https://github.com/yuxi120407/AutoSizer/tree/1b9b8f6498e2c7ad3b650bbbc78c8e3b0e1205e1",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "analog-autosizer-agent",
+      "name": "AutoSizer / reflective sizing meta-optimization agent",
+      "family": "AMS-SizingBench / AutoSizer",
+      "object_identity": "同AMS-SizingBench家族方法协议；非新增独立24任务",
+      "task": "outer理解/缩空间/解除固定/扩缩范围，inner选择LHS/GA/BO/SA/adaptive/local等算法与批量n；仿真进展、边界聚集、stagnation反馈再决策。数值优化和SPICE引擎做实际搜索/评估。",
+      "available_materials_and_tools": "核心50文件和保存逻辑可静态读；paperbody/appendix提示与策略表公开，全部原始run/prompt/tool/cost、baseline实现/精确toolbuild未核。无rootLICENSE，commercialAPI权利另核；源码中环境key字段未发现非占位凭据，本轮未执行。",
+      "trajectory_and_training_access": "24YAML/netlist/testbench和核心optimizer/LLM保存机制公开；paper一张bandgap三cycle策略例和action汇总不是全24×3原始交互数据。当前tree无results目录；containerZIP存在但未下载/运行，内容不作无证据判断。root无LICENSE，上游PDK/数据与训练权另核。",
+      "limits": "主helper虽全spec模式仍漏4个negative阈值；missingtrial聚合分母和batch可能超预算影响比较。Evals-to-best不同于总calls；time_to_best字段代码填trial total_time_seconds。签核布局/PEX为可选局部能力，不推广24任务全后端完成。",
+      "primary_sources": "https://arxiv.org/html/2602.02849v2; https://github.com/yuxi120407/AutoSizer/tree/1b9b8f6498e2c7ad3b650bbbc78c8e3b0e1205e1",
       "record_snapshot_matches_audit": true
     }
   ],

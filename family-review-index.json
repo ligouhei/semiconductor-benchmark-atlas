@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T07:58:08.124849+00:00",
+  "generated_at": "2026-10-20T08:02:33.358074+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 351,
-    "records": 627,
-    "records_with_any_field_audit_entry": 385,
-    "records_with_current_field_audit_snapshot": 352,
+    "families": 352,
+    "records": 629,
+    "records_with_any_field_audit_entry": 387,
+    "records_with_current_field_audit_snapshot": 354,
     "records_without_current_field_audit_snapshot": 275
   },
   "requirements_per_record": [
@@ -284,6 +284,56 @@
           "limitations": "论文“production-ready”是DRC+LVS交集标签，不自动覆盖ESD电气、电源完整性、bonding/package规则与全芯片签核。批量runner success仅CLI returncode0；DRC/LVS wrapper输出check completed及报告，不把missing/violations自动变成统一score，不能据绿色标记计pass；shell主要检查Calibre进程status，仍需解析具体0 violation/CORRECT及结果新鲜性。Shape VLM不等独立oracle；schema/侧边count布局检查不等信号意图一致。单次28nm芯片实测不证明全部case上硅/180nm迁移验证，当前公开gold也不是fresh blind。",
           "tools_and_access": "原paper与两repo tree/提示样例/验收脚本已静态读。需商业Cadence Virtuoso/SiemensCalibre、实际IO cell/PDK/layer maps/decks与服务器环境。公开源码可读不等开源许可：Agent README明确Proprietary—All rights reserved，Bench只写AMS-IO-Agent Project，无独立LICENSE文件；不能自行宣称宽松可商用。",
           "industrial_value": "与用户关心的工程agent非常相关：底层PDK原生工具负责规则/生成，agent负责意图和异常处理。部分模板任务已可native自动化，研究价值要以新约束/迭代修改及强nativebaseline证明；不能凭Calibre存在断言IO任务完成。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "AMS-SizingBench / AutoSizer",
+      "record_count": 2,
+      "records_with_current_field_audit": 2,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "analog-ams-sizingbench",
+          "name": "AMS-SizingBench / 24 SKY130 circuit sizing tasks",
+          "category": "模拟前端/固定拓扑器件尺寸优化",
+          "artifact_type": "公开24电路任务配置；拓扑/平台变体不等24独立IP",
+          "task_layer": "SPICE拓扑+testbench/spec+变量范围→尺寸优化",
+          "evidence_status": "第二轮12h进行中；固定一手版本、50个Gitblob与24YAML静态契约核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-autosizer-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+          "limitations": "当前主spec helper正则不接受负号，4配置的负dB约束漏匹配；主loop虽fom_only_checkFalse也不能算全约束验收。另FoM生成正则支持negative，不能用FoM有该项推SR也检查。paper100%SR影响量缺冻结历史metrics未量化。",
+          "tools_and_access": "50selectedGitblob逐一匹配；24YAML输入可读，ngspice/SKY130公开依赖；部分拓扑支持可选ALIGN/Magic，但main硬传pre_layout_onlyTrue。根无LICENSE，PDK/upstream版权单核，不能把可下载当任意训练授权。",
+          "industrial_value": "研究判断：有价值的开放模拟任务输入/评分场景；先修正并冻结signed约束和失败分母，再用于模型/agent工程达标率比较。"
+        },
+        {
+          "id": "analog-autosizer-agent",
+          "name": "AutoSizer / reflective sizing meta-optimization agent",
+          "category": "模拟前端/数值优化器编排agent",
+          "artifact_type": "同AMS-SizingBench家族方法协议；非新增独立24任务",
+          "task_layer": "电路理解→选变量/范围→算法编排→仿真反馈→调整空间",
+          "evidence_status": "第二轮12h进行中；固定一手版本、50个Gitblob与24YAML静态契约核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-autosizer-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+          "limitations": "主helper虽全spec模式仍漏4个negative阈值；missingtrial聚合分母和batch可能超预算影响比较。Evals-to-best不同于总calls；time_to_best字段代码填trial total_time_seconds。签核布局/PEX为可选局部能力，不推广24任务全后端完成。",
+          "tools_and_access": "核心50文件和保存逻辑可静态读；paperbody/appendix提示与策略表公开，全部原始run/prompt/tool/cost、baseline实现/精确toolbuild未核。无rootLICENSE，commercialAPI权利另核；源码中环境key字段未发现非占位凭据，本轮未执行。",
+          "industrial_value": "研究判断：真实的agent编排数值搜索方向，与让LLM直接报精确尺寸分开；目前宜用作可审计方法环境，未把paper汇总分当独立复现。"
         }
       ]
     },
