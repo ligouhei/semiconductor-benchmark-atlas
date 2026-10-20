@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-10-20T10:24:37.387348+00:00",
+  "as_of": "2026-10-20T10:34:26.447393+00:00",
   "status": "第二轮12h进行中的数据/轨迹开放性核查，非完整市场清单或最终结论",
   "scope": "只覆盖本轮已保存一手核查的新增协议；训练样本、评测输入、模型权重、整理后记忆、生成采样轨迹与LLM工具交互轨迹分别描述",
-  "protocol_records": 104,
-  "families": 54,
+  "protocol_records": 108,
+  "families": 55,
   "items": [
     {
       "catalog_id": "lib-siemens-nemo-characterization",
@@ -1251,6 +1251,54 @@
       "trajectory_and_training_access": "公开integration代码/Skill contracts/buglog/repro说明/私有主机工件引用；87文件核查未取得完整历史模型动作反馈、实际PDK/GDS/PEX状态或固定评测多题包。",
       "limits": "currentlayoutmatchedLVS/PEX完成声明与topology-sourceexactLVS分开：后者仍因MP_STAGE3_LOAD PCell表达式不匹配阻塞，不能叫源电路等价已全部验收。缺同预算强基线/固定任务pack/全失败ledger/历史LLM轨迹，两个成功链也有规格边界。",
       "primary_sources": "https://arxiv.org/html/2606.15052v1; https://github.com/PKU-IDEA/PANDA/tree/9e53e43c0d29bdc8c0f326640b9d66c7075e841b",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "device-agapi-known-property",
+      "name": "AGAPI-Agents / known-material pipeline fidelity and experimental-reference analysis",
+      "family": "AGAPI materials tool agents",
+      "object_identity": "复用JARVIS-Leaderboard的属性查询/误差归因评测；非新独立材料集",
+      "task": "有/无工具比较；28LLM-callablewrappers对应18REST endpoints，query/materialstructure/ALIGNN等API承数值工作。EvaluationA检查agent是否准确转述DB，B按DFTfunctional与实验比，C分agent−DB及DB−experiment残差。",
+      "available_materials_and_tools": "104client/docs与23workshop文件核；rootApache2，上游JARVIS/model各自许可；API需JWT且服务端数据/weights/版本不随client完全打包。公开arxivsource9paperfiles，SI DOI确认入口403未取得，不能称作者无SI或全原表已读。",
+      "trajectory_and_training_access": "104选定AGAPI/23 workshop文件Gitblob核；28tool schemas与函数匹配。17participant notebooks+1clientexample/202codecells/119savedstdoutobjects，非完整provider事件轨迹；7notebook疑似凭据原件受限保留、19处脱敏后才审阅。SI DOI已确认但入口403，未绕过；不称SI未发布。",
+      "limits": "v1“30+示例prompt”和v2新增结构/压力/重复任务分轨；有参考53/54不能忽略缺失后说54全对。experimentalfunctionalbias与agent取错值不同，Tc混合paramknowledge表现不等单纯复制。",
+      "primary_sources": "https://arxiv.org/html/2512.11935v2; https://doi.org/10.1021/acs.jpclett.6c00837; https://doi.org/10.1021/acs.jpclett.6c00837.s001; https://github.com/atomgptlab/agapi/tree/b367c87d99cec479737592b05883495df920e19e; https://github.com/atomgptlab/aai4science/tree/01d7630cd9914a6991ce72b2f7f6627f2774184e",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "device-agapi-defhyp",
+      "name": "AGAPI-Agents / DEF-57 and HYP-60 structure-derived bandgap tests",
+      "family": "AGAPI materials tool agents",
+      "object_identity": "同框架结构派生测试；oracle为agent可调用的ALIGNN",
+      "task": "相同结构分别tool-enabled/tool-free；reference由ALIGNN生成，agent开启工具同样调用ALIGNN。面向减少常见材料文本记忆影响，不等已证明所有构型在未知训练语料外或实际稳定/可合成。",
+      "available_materials_and_tools": "publicclient/schema/examples可读，server端ALIGNN与结构生成/JARVIS依赖另需固定。127选定blobs核，但完整SIpermaterialinput/output、backend版本和全部历史交互未取得，不伪称公开117训练结构已逐条下载。",
+      "trajectory_and_training_access": "104选定AGAPI/23 workshop文件Gitblob核；28tool schemas与函数匹配。17participant notebooks+1clientexample/202codecells/119savedstdoutobjects，非完整provider事件轨迹；7notebook疑似凭据原件受限保留、19处脱敏后才审阅。SI DOI已确认但入口403，未绕过；不称SI未发布。",
+      "limits": "作者对结构派生减记忆效应的论证与精确训练去重证明不同；缺陷引入不自动证明真实材料可实现。无需模型直接数值优化的单点属性查询，与十步defectengineering示范分开。",
+      "primary_sources": "https://arxiv.org/html/2512.11935v2; https://doi.org/10.1021/acs.jpclett.6c00837; https://doi.org/10.1021/acs.jpclett.6c00837.s001; https://github.com/atomgptlab/agapi/tree/b367c87d99cec479737592b05883495df920e19e; https://github.com/atomgptlab/aai4science/tree/01d7630cd9914a6991ce72b2f7f6627f2774184e",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "device-agapi-workflow-repeat",
+      "name": "AGAPI-Agents / four-workflow repeated execution study",
+      "family": "AGAPI materials tool agents",
+      "object_identity": "四prompt×两温度×十重复；非80独立材料任务",
+      "task": "Agent-Planner-Executor-Summarizer规划与functioncalling；保持结构在各步传递，必要时fallback/retry。nativeAPI完成数据库/材料模型/结构计算，LLM负责选择和组合。",
+      "available_materials_and_tools": "28公开tool schemas与28functions匹配；JWT/云后端、外部models/databases另依赖。17workshopnotebooks201codecells/118savedstreamoutputs+额外clientexample非80正式trials，execution_count均清空但不能据此说未运行。",
+      "trajectory_and_training_access": "104选定AGAPI/23 workshop文件Gitblob核；28tool schemas与函数匹配。17participant notebooks+1clientexample/202codecells/119savedstdoutobjects，非完整provider事件轨迹；7notebook疑似凭据原件受限保留、19处脱敏后才审阅。SI DOI已确认但入口403，未绕过；不称SI未发布。",
+      "limits": "SI称S1–S4 workflowtrace示范，403访问未取得，不把四示范/17participantstdout当80完整providerrollouts。教学notebook7件局部脱敏后审阅、原件受限保留，不发布凭据；其他数据研究不受影响。",
+      "primary_sources": "https://arxiv.org/html/2512.11935v2; https://doi.org/10.1021/acs.jpclett.6c00837; https://doi.org/10.1021/acs.jpclett.6c00837.s001; https://github.com/atomgptlab/agapi/tree/b367c87d99cec479737592b05883495df920e19e; https://github.com/atomgptlab/aai4science/tree/01d7630cd9914a6991ce72b2f7f6627f2774184e",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "device-agapi-grounding",
+      "name": "AGAPI-Agents / missing-material and contradiction grounding checks",
+      "family": "AGAPI materials tool agents",
+      "object_identity": "语义幻觉压力测试；非晶圆fabrication实验",
+      "task": "测试模型是否编造带单位数值、拒绝/flag或ambiguous；contradiction用however/actually/in fact等marker启发式识别是否提到矛盾。与生成可制造配方或预测新材料性能完全不同。",
+      "available_materials_and_tools": "mainv2与figure向量PDF可核统计，perprompt SI DOI存在但403，完整分类label/rationale/运行trace未读。公开client/tests中.pyskip是未自动纳入pytest的长网络用例，本轮也未执行。",
+      "trajectory_and_training_access": "104选定AGAPI/23 workshop文件Gitblob核；28tool schemas与函数匹配。17participant notebooks+1clientexample/202codecells/119savedstdoutobjects，非完整provider事件轨迹；7notebook疑似凭据原件受限保留、19处脱敏后才审阅。SI DOI已确认但入口403，未绕过；不称SI未发布。",
+      "limits": "图文数字皆小样本、作者自定规则；contradiction没有本轮可核独立expertlabel/结构化判定。API返回null/LLM拒答并不能代表材料物理不存在，误拒/模糊成本需另评。",
+      "primary_sources": "https://arxiv.org/html/2512.11935v2; https://doi.org/10.1021/acs.jpclett.6c00837; https://doi.org/10.1021/acs.jpclett.6c00837.s001; https://github.com/atomgptlab/agapi/tree/b367c87d99cec479737592b05883495df920e19e; https://github.com/atomgptlab/aai4science/tree/01d7630cd9914a6991ce72b2f7f6627f2774184e",
       "record_snapshot_matches_audit": true
     }
   ],

@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T10:24:36.945148+00:00",
+  "as_of": "2026-10-20T10:34:26.001425+00:00",
   "status": "logic task/input/correctness/cost comparison; not a new benchmark or model ranking",
   "scope": "逻辑综合不能只按年份或同为AIG合榜：稀疏样本学习允许误差，完整truth要求等价；PLA/DC、组合/顺序/FSM、ASIC/FPGA与代理预测各有不同输入、oracle、单位和预算。成熟native能力是必须baseline，退役/饱和仍需具体版本与同条件证据。",
   "items": [

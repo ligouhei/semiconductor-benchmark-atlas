@@ -2,10 +2,10 @@
 <html lang="zh-CN"><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>芯片行业 benchmark 分类研究 · 工作稿</title><style>
 body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:0}main{max-width:1400px;margin:auto;padding:36px}h1,h2,h3{line-height:1.35}h1{font-size:32px}h2{margin-top:40px;border-top:2px solid #ced9e4;padding-top:24px}a{color:#075ca8}table{border-collapse:collapse;background:white;width:100%;font-size:14px}th,td{border:1px solid #dbe2ea;padding:12px;vertical-align:top;text-align:left}th{background:#eaf0f7}td:first-child{min-width:160px}nav,.note{background:#e8f0fa;border-radius:10px;padding:20px}details{background:white;border:1px solid #d5e0ec;margin:12px 0;padding:16px;border-radius:8px}summary{font-weight:650;cursor:pointer}dt{font-weight:bold;margin-top:12px}dd{margin-left:0}small,.muted{color:#58697b}.tag{display:inline-block;padding:2px 8px;border-radius:5px;background:#e8eff7;font-size:12px}.tablewrap{overflow:auto}@media print{body{background:white}main{padding:0}details{break-inside:avoid}nav{display:none}a{color:#203044}td{font-size:10px}}
 </style><main><p><a href="index.html">← 返回交互式 Benchmark 表格</a></p><h1>芯片行业 benchmark 分类研究</h1>
-<p class="muted">工作稿 · 研究起点 2026-10-19 · 生成时间 2026-10-20T18:24+08:00（北京时间）</p>
+<p class="muted">工作稿 · 研究起点 2026-10-19 · 生成时间 2026-10-20T18:34+08:00（北京时间）</p>
 <div class="note"><a href="agentic-research.html">Agentic 续查专题：11项新增研究对象与开放边界</a> · <a href="agentic-followup.json">结构化协议</a></div>
 <div class="note"><a href="round2-research.html">第二轮12小时续研（进行中）：首批新增协议与证据边界</a> · <a href="round2-research-update.json">结构化增量</a></div>
-<div class="note"><strong>研究仍在进行。</strong>本稿包含 670 条任务/版本记录，归并为 375 个家族/对象。记录中也包含公开数据集、方法实验、工具示例和内部评测线索；这些数量不能解释为同等成熟的独立公开 benchmark 数量。12 小时研究尚未完成，待核验字段均保留，完整覆盖与最终优先级尚待补齐。</div>
+<div class="note"><strong>研究仍在进行。</strong>本稿包含 674 条任务/版本记录，归并为 376 个家族/对象。记录中也包含公开数据集、方法实验、工具示例和内部评测线索；这些数量不能解释为同等成熟的独立公开 benchmark 数量。12 小时研究尚未完成，待核验字段均保留，完整覆盖与最终优先级尚待补齐。</div>
 <div class="note"><strong>补订说明：</strong>2026-10-20补订：原12小时清单遗漏VPEvolve，OPC agentic覆盖审核不充分。现补入商业Calibre recipeagent协议与开放光学testbed两轨（同一家族），并更正此前容易被理解为该方向没有已有评测的表述。此补订发生在原12小时交付之后；目录仍不是全行业穷尽证明。 本次另续查新增11项研究对象（含待开放/部分协议），详见Agentic专题；VPEvolve配套testbed已显式标记非独立Agent benchmark。 <a href="research-corrections.json">更正记录</a></div>
 <p>本研究围绕芯片设计与制造中的工作任务分类。每条记录回答：给模型什么、让它完成什么、交付什么、由谁按什么指标评分，以及成熟软件已经覆盖到哪一层。成品 CPU/GPU 与微体系结构性能负载在边界组单列：其输入是程序、模型和运行数据，不是设计规格、网表或工艺规则；不直接证明EDA能力。</p>
 <p><a href="research-overview.html">从简明阅读总览开始</a> · <a href="benchmark-catalog-zh.csv">中文列名CSV</a></p><nav><strong>分类索引</strong><ol>
@@ -19,12 +19,12 @@ body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:
 <li><a href="#group-7">测试：模拟与混合信号缺陷仿真</a> · 3 条</li>
 <li><a href="#group-8">测试：数字 DFT、ATPG、后硅与调试</a> · 13 条</li>
 <li><a href="#group-9">先进封装：芯粒、3D 实现与热</a> · 20 条</li>
-<li><a href="#group-10">器件：电气建模、参数提取与仿真</a> · 15 条</li>
+<li><a href="#group-10">器件：电气建模、参数提取与仿真</a> · 19 条</li>
 <li><a href="#group-11">边界：PCB工程、板级射频与电磁仿真</a> · 4 条</li>
 <li><a href="#group-12">边界：既有加速器上的工作负载映射</a> · 2 条</li>
 <li><a href="#group-13">边界：成品性能与微体系结构工作负载</a> · 23 条</li>
 </ol><a href="catalog.csv">下载 CSV</a> · <a href="catalog.json">下载 JSON</a> · 进度与未完成事项（本地研究附件） · <a href="#coverage-limits">已有覆盖与具体缺口</a></nav>
-<p>来源存档与完整性索引（本地研究附件）：17760 条检索/下载记录，17055 个本地文件完成哈希核对，完整性异常 0 项。570/670 条目录记录至少有一个精确URL或相同GitHub repo/ref/path的存档关联。此比例不是研究准确率：入口链接与实际论文/脚本常不同，完整逐字段证据映射仍待补，下载与哈希匹配也不等事实已被来源支持。</p>
+<p>来源存档与完整性索引（本地研究附件）：17765 条检索/下载记录，17059 个本地文件完成哈希核对，完整性异常 0 项。574/674 条目录记录至少有一个精确URL或相同GitHub repo/ref/path的存档关联。此比例不是研究准确率：入口链接与实际论文/脚本常不同，完整逐字段证据映射仍待补，下载与哈希匹配也不等事实已被来源支持。</p>
 <h2>分类与判断方法</h2><p>按“领域阶段 × 任务层次 × 证据成熟度”交叉归类。任务层次包括底层数值或组合优化、性能预测与代理模型、固定工具参数调优、多步工具工作流，以及端到端工程闭环。公开可下载代码、公开可下载数据、可重建标签、独立受保护评分和可商用，分别核验。</p><p>时效性从工艺/规模/规则、基线强度、信息条件、独立评价及实际约束判断。经典基准可以仍适合算法研究；新发布的基准也可能只有弱检查器、内部数据或未完整发布的流程。研究价值判断是分析结论，和来源中直接报告的事实分开。</p>
 <h2>目前已核实的关键区别</h2><ul>
 <li>维护替代与任务饱和分开：<a href="#rtl-masterrtl-power">MasterRTL</a> 作者已明确停止旧仓库维护并推荐 RTL-Timer，因此新工作应优先检查后继实现。此证据支持实现版本替代，不能证明早期功耗预测已解决；其功耗特征还需要 EDA 提取活动率，与纯 RTL 输入分轨。</li>
@@ -13601,6 +13601,10 @@ body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:
 <tr><td><a href="#device-tcadgpt-qa">TcadGPT / expert-reference TCAD QA264</a><br/><small>arXiv2601.10128v1 /发表DOI10.1002/aisy.70520 /repo6802638</small><br/><span class="tag">模型语义问答评测；与SDE执行轨分开</span></td><td>264专家题/参考答案，PhysicalModel/Simulation/SDE/SProcess/SDevice/SVisual六模块；173为工具/语法题。currentxlsx前264有题的编号，表尾两空行不计题；三个baselineJSON有265/266额外ID不能blindjoin。</td><td>Llama3.1 8B用P1/P2约1.5M合成QA调优，回答专家题；可选49文档RAG，语义接受允许等价表达。问答正确与能生成可执行TCAD脚本分轨。<p><strong>输出：</strong>264题自然语言答复及部分model/RAG输出；expert rubric/参考判断的accuracy，不是SPICE/device simulator硬oracle。</p></td><td>paper semantic85.6%，currentworksheetTcadGPTv12为221个1/43blank，若blank视错为83.712%；当前标注不能独立重建paper85.6，不默改历史成绩或假定空白必错误。ID/题文与版本需对齐。<p class="muted">不是agent多轮工程优化bench；模型回答/人工语义标注不等器件物理正确、工艺校准或全流程收敛。公开Elmer100QA/20code是跨域FEM迁移，不额外算芯片设计数据集。</p></td></tr>
 <tr><td><a href="#device-tcadgpt-sde">TcadGPT / SDE syntax executability20 and published-version boundary</a><br/><small>arXivv1 20instructions；published indexed60/85%待完整包；repo6802638</small><br/><span class="tag">同模型代码执行轨；20旧版与60新版不可合并</span></td><td>旧版20个IR渲染未见训练指令，2D/3D、ABA/BAB布尔、Silicon/SiO2/Si3N4/PolySi/GaN/AlGaN、contact/doping/mesh/export。current20txt+22cmd（两addv变体），不是22独立任务或完整60题新版。</td><td>QA-tuned模型再IR→DPO，生成commercialSentaurusSDE脚本；同工具版本sde−S验语法。直接通过与数字placeholder补齐后通过分开，Pass@1与3分开，不能把80%宣传成单样本无修改通过率。<p><strong>输出：</strong>SDE .cmd、syntaxpass/fail；可以运行的几何构造不等达到目标器件电学性能、物理模型校准或工艺可制造。</p></td><td>preprint直接Pass@1=12/20=60%，加placeholder13/20=65%；直接Pass@3=15/20=75%，加placeholder16/20=80%。发表摘要85%且indexed60题属于新版，正文DOI403未绕过、最新完整集/日志本轮未取得。<p class="muted">模型生成语法有效不等几何精确符合指令、mesh质量、numericalconvergence或器件优化成功；训练生成器开放不等1.5M语料或完整动作反馈轨迹发布。published/preprint/current三种证据标清。</p></td></tr>
 <tr><td><a href="#device-zendot-demonstrations">zenDot / quantum-device agent demonstrations（非正式benchmark）</a><br/><small>arXiv2608.16048v1 /preliminaryversion</small><br/><span class="tag">商业开发平台与3个演示；作者明确不是优化智能benchmark</span></td><td>同Si/SiO2 double-dot参考器件，18calculation+18visualization组件；三个一维有界任务：hybrid/barrier提高Q、tunnel-charge/barrier提高Q、interdot gate length降低singlet-triplet infidelity。每任务六次完成sim预算，一本地模型。</td><td>LLM选择registeredcomponent/参数；平台验证action语法/器件兼容性，电压任务重算、geometry任务改变栅长重建并重求解。数值结果来自物理solver而非模型自行打分。<p><strong>输出：</strong>18个solver-validated迭代、参数/组件动作/度量与轨迹；论文称SupportingInfo含完整声明/prompt/reply/executionrecords及SourceData，本轮未独立定位可下载SI包。</p></td><td>hybridQ161412.67→220112.30，tunnelcharge225.07→809.67；栅长22.5nm infidelity6.273816e−8→6.272891e−8，约0.01474%相对改善。摘要近30fold来自另一operatingpointscan，不是此六步geometryagent收益。<p class="muted">内部一致物理模型不是fabricateddevice拟合；未计relaxation、未传播material/geometryuncertainty。完整SI/code/固定任务manifest未独立取得，六评估/任务不能作规模化优化能力结论。</p></td></tr>
+<tr><td><a href="#device-agapi-known-property">AGAPI-Agents / known-material pipeline fidelity and experimental-reference analysis</a><br/><small>arXiv2512.11935v2（2026-07-07）；v1演示/统计分开；clientb367c87</small><br/><span class="tag">复用JARVIS-Leaderboard的属性查询/误差归因评测；非新独立材料集</span></td><td>v2 known-property sets：bulkmodulus21、bandgap54、Tc13个property-material观测，不推为88独立材料；每例Vexp/Vdb/Vagent三种reference。bandgap54中53有MBJ参考，Cu2O缺该字段。</td><td>有/无工具比较；28LLM-callablewrappers对应18REST endpoints，query/materialstructure/ALIGNN等API承数值工作。EvaluationA检查agent是否准确转述DB，B按DFTfunctional与实验比，C分agent−DB及DB−experiment残差。<p><strong>输出：</strong>物性数值/单位、检索材料/结构/函数来源与残差；不是芯片电路仿真或工艺可制造性。相同数据库是可见工具输出时，近零agent−DB误差不代表物理预测超过该工具。</p></td><td>agent−DB MAE：bulk21为0GPa，bandgap可得53为0eV，Tc13为3.56K。agent−experiment报5.73GPa/.495eV/5.77K；bandgap按OptB88vdW/MBJ/HSE06分组1.42(n50)/.48(n53)/.27(n6)eV，reference/子集不同，不默拼同分母。<p class="muted">v1“30+示例prompt”和v2新增结构/压力/重复任务分轨；有参考53/54不能忽略缺失后说54全对。experimentalfunctionalbias与agent取错值不同，Tc混合paramknowledge表现不等单纯复制。</p></td></tr>
+<tr><td><a href="#device-agapi-defhyp">AGAPI-Agents / DEF-57 and HYP-60 structure-derived bandgap tests</a><br/><small>arXiv2512.11935v2（2026-07-07）；v1演示/统计分开；clientb367c87</small><br/><span class="tag">同框架结构派生测试；oracle为agent可调用的ALIGNN</span></td><td>DEF57五hosts Si/GaN/MgO/Al2O3/NaCl共57缺陷配置，substitution/vacancy/antisite；HYP60六prototype Si/GaN/MgO/ZnS/BN/LiF的元素替换共60假想组成。源结构与具体percase表在SI，本轮入口403未取得。</td><td>相同结构分别tool-enabled/tool-free；reference由ALIGNN生成，agent开启工具同样调用ALIGNN。面向减少常见材料文本记忆影响，不等已证明所有构型在未知训练语料外或实际稳定/可合成。<p><strong>输出：</strong>bandgap eV和与代理模型reference的MAE；当前结果衡量工具传参/读数以及tool-free偏离代理模型，不是独立DFT/硅测精度。</p></td><td>DEF57工具给57数值，但matchingGT仅56：MAE .001eV(tool)/1.859eV(no-tool)按56；HYP60按60报.003/1.254eV。不能把57数值响应视57个物理正确，也不能把两子集混成117个有完整truth的点。<p class="muted">作者对结构派生减记忆效应的论证与精确训练去重证明不同；缺陷引入不自动证明真实材料可实现。无需模型直接数值优化的单点属性查询，与十步defectengineering示范分开。</p></td></tr>
+<tr><td><a href="#device-agapi-workflow-repeat">AGAPI-Agents / four-workflow repeated execution study</a><br/><small>arXiv2512.11935v2（2026-07-07）；v1演示/统计分开；clientb367c87</small><br/><span class="tag">四prompt×两温度×十重复；非80独立材料任务</span></td><td>四个canonicalworkflow，各T0/T.7十次，共80trials；网络搜索/结构获取/supercell/替换/relax/XRD/property/bandstructure等工具链。paper十步GaN defect例是curateddemonstration，不直接推全80都是十步。</td><td>Agent-Planner-Executor-Summarizer规划与functioncalling；保持结构在各步传递，必要时fallback/retry。nativeAPI完成数据库/材料模型/结构计算，LLM负责选择和组合。<p><strong>输出：</strong>finaltext、数值/单位/目标chemistry或interface描述。作者successpredicate以最终答复出现所需内容为准，未见公开完整容差/结构等价/全backend状态验收器，不能升级为独立物理closed-loop成功。</p></td><td>T0成功35/40=87.5%，T.7为32/40=80%，−7.5percentagepoints。SiVacancy7/10→9/10；GaN-AlN10→9；SiXRD8→9；MoSe2lookup10→5，重复分母/波动逐项保留。<p class="muted">SI称S1–S4 workflowtrace示范，403访问未取得，不把四示范/17participantstdout当80完整providerrollouts。教学notebook7件局部脱敏后审阅、原件受限保留，不发布凭据；其他数据研究不受影响。</p></td></tr>
+<tr><td><a href="#device-agapi-grounding">AGAPI-Agents / missing-material and contradiction grounding checks</a><br/><small>arXiv2512.11935v2（2026-07-07）；v1演示/统计分开；clientb367c87</small><br/><span class="tag">语义幻觉压力测试；非晶圆fabrication实验</span></td><td>30个不存在于JARVIS或不合理组合/JID prompt，各tools-on/off；另20个矛盾prompt，五组wrongstructure/property/physical/JIDformula/derivedquantity。材料“missing”是给定库范围，不推全宇宙不存在。</td><td>测试模型是否编造带单位数值、拒绝/flag或ambiguous；contradiction用however/actually/in fact等marker启发式识别是否提到矛盾。与生成可制造配方或预测新材料性能完全不同。<p><strong>输出：</strong>最终自然语言答复分类、数值/单位/矛盾marker；keyword命中不等科学内容正确或全部矛盾已解决。工具client输出/知识混合需保留来源。</p></td><td>30prompt：hallucinatednumeric tools-on1/30、off8/30；ambiguous12/30和9/30；其余refused/flagged17与13。作者9×来自round3%/27%，按原始计数率比为8×，两种口径注明。20contradiction heuristic10/20=50%，不是严格物理证明50%。<p class="muted">图文数字皆小样本、作者自定规则；contradiction没有本轮可核独立expertlabel/结构化判定。API返回null/LLM拒答并不能代表材料物理不存在，误拒/模糊成本需另评。</p></td></tr>
 </tbody></table></div>
 <details id="device-mesd"><summary>MESD / MOSFET electrical simulation data · 器件/电气模型与参数提取</summary><dl>
 <dt>版本/时间</dt><dd>固定repo5dcc2236ac5b5eeb6228503f544053c2a359b636；MESD；IEEE Data Descriptions2024</dd>
@@ -13895,6 +13899,90 @@ body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:
 <dt>一手来源</dt><dd><ul>
 <li><a href="https://arxiv.org/abs/2608.16048">https://arxiv.org/abs/2608.16048</a></li>
 <li><a href="https://arxiv.org/pdf/2608.16048v1">https://arxiv.org/pdf/2608.16048v1</a></li>
+</ul></dd></dl></details>
+<details id="device-agapi-known-property"><summary>AGAPI-Agents / known-material pipeline fidelity and experimental-reference analysis · 器件/材料建模与工具agent</summary><dl>
+<dt>版本/时间</dt><dd>arXiv2512.11935v2（2026-07-07）；v1演示/统计分开；clientb367c87</dd>
+<dt>对象类型</dt><dd>复用JARVIS-Leaderboard的属性查询/误差归因评测；非新独立材料集</dd>
+<dt>模型工作的层次</dt><dd>自然语言/JID/组成式→数据库工具→带单位数值</dd>
+<dt>输入</dt><dd>v2 known-property sets：bulkmodulus21、bandgap54、Tc13个property-material观测，不推为88独立材料；每例Vexp/Vdb/Vagent三种reference。bandgap54中53有MBJ参考，Cu2O缺该字段。</dd>
+<dt>任务设定</dt><dd>有/无工具比较；28LLM-callablewrappers对应18REST endpoints，query/materialstructure/ALIGNN等API承数值工作。EvaluationA检查agent是否准确转述DB，B按DFTfunctional与实验比，C分agent−DB及DB−experiment残差。</dd>
+<dt>输出</dt><dd>物性数值/单位、检索材料/结构/函数来源与残差；不是芯片电路仿真或工艺可制造性。相同数据库是可见工具输出时，近零agent−DB误差不代表物理预测超过该工具。</dd>
+<dt>考核指标</dt><dd>agent−DB MAE：bulk21为0GPa，bandgap可得53为0eV，Tc13为3.56K。agent−experiment报5.73GPa/.495eV/5.77K；bandgap按OptB88vdW/MBJ/HSE06分组1.42(n50)/.48(n53)/.27(n6)eV，reference/子集不同，不默拼同分母。</dd>
+<dt>基线</dt><dd>直接nativeAPI查询/原DB值是必要强基线；简单JID查数已由原生工具完成，LLM新增任务在语义定位/工具选择/多步组合。不能把调用同oracle得0误差当材料泛化成功；v1五性质MAE与v2三性质残差不互换。</dd>
+<dt>工具、数据与访问条件</dt><dd>104client/docs与23workshop文件核；rootApache2，上游JARVIS/model各自许可；API需JWT且服务端数据/weights/版本不随client完全打包。公开arxivsource9paperfiles，SI DOI确认入口403未取得，不能称作者无SI或全原表已读。</dd>
+<dt>限制与可比性</dt><dd>v1“30+示例prompt”和v2新增结构/压力/重复任务分轨；有参考53/54不能忽略缺失后说54全对。experimentalfunctionalbias与agent取错值不同，Tc混合paramknowledge表现不等单纯复制。</dd>
+<dt>现实价值判断</dt><dd>研究判断：适合研究科学toolfaithfulness和reference偏差；物性查数/计算原生工具已可做，不需要让LLM重学数值，agent价值应在复杂工作流和可追溯使用上验。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；公开v2正文/作者source与127选定Git文件静态核验；未执行模型/API/材料计算或第三方tests。</dd>
+<dt>下一步核验</dt><dd>实际SI入口403未取得；需获允许的访问后核完整case/pertrial原表与oracle实现，冻结服务端/材料ID/函数/PVT-likeconditions与失败分母，不将clientpin当backend全部冻结。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://arxiv.org/html/2512.11935v2">https://arxiv.org/html/2512.11935v2</a></li>
+<li><a href="https://doi.org/10.1021/acs.jpclett.6c00837">https://doi.org/10.1021/acs.jpclett.6c00837</a></li>
+<li><a href="https://doi.org/10.1021/acs.jpclett.6c00837.s001">https://doi.org/10.1021/acs.jpclett.6c00837.s001</a></li>
+<li><a href="https://github.com/atomgptlab/agapi/tree/b367c87d99cec479737592b05883495df920e19e">https://github.com/atomgptlab/agapi/tree/b367c87d99cec479737592b05883495df920e19e</a></li>
+<li><a href="https://github.com/atomgptlab/aai4science/tree/01d7630cd9914a6991ce72b2f7f6627f2774184e">https://github.com/atomgptlab/aai4science/tree/01d7630cd9914a6991ce72b2f7f6627f2774184e</a></li>
+</ul></dd></dl></details>
+<details id="device-agapi-defhyp"><summary>AGAPI-Agents / DEF-57 and HYP-60 structure-derived bandgap tests · 器件/材料建模与工具agent</summary><dl>
+<dt>版本/时间</dt><dd>arXiv2512.11935v2（2026-07-07）；v1演示/统计分开；clientb367c87</dd>
+<dt>对象类型</dt><dd>同框架结构派生测试；oracle为agent可调用的ALIGNN</dd>
+<dt>模型工作的层次</dt><dd>缺陷/原型替换结构→bandgap工具与tool-free预测</dd>
+<dt>输入</dt><dd>DEF57五hosts Si/GaN/MgO/Al2O3/NaCl共57缺陷配置，substitution/vacancy/antisite；HYP60六prototype Si/GaN/MgO/ZnS/BN/LiF的元素替换共60假想组成。源结构与具体percase表在SI，本轮入口403未取得。</dd>
+<dt>任务设定</dt><dd>相同结构分别tool-enabled/tool-free；reference由ALIGNN生成，agent开启工具同样调用ALIGNN。面向减少常见材料文本记忆影响，不等已证明所有构型在未知训练语料外或实际稳定/可合成。</dd>
+<dt>输出</dt><dd>bandgap eV和与代理模型reference的MAE；当前结果衡量工具传参/读数以及tool-free偏离代理模型，不是独立DFT/硅测精度。</dd>
+<dt>考核指标</dt><dd>DEF57工具给57数值，但matchingGT仅56：MAE .001eV(tool)/1.859eV(no-tool)按56；HYP60按60报.003/1.254eV。不能把57数值响应视57个物理正确，也不能把两子集混成117个有完整truth的点。</dd>
+<dt>基线</dt><dd>直接ALIGNN调用与agent使用同ALIGNN；近零MAE作者明确byconstruction，native模型已执行物理近似。真正独立物理泛化需DFT/实验/更高保真heldoutoracle，而非本轮可见同工具输出。</dd>
+<dt>工具、数据与访问条件</dt><dd>publicclient/schema/examples可读，server端ALIGNN与结构生成/JARVIS依赖另需固定。127选定blobs核，但完整SIpermaterialinput/output、backend版本和全部历史交互未取得，不伪称公开117训练结构已逐条下载。</dd>
+<dt>限制与可比性</dt><dd>作者对结构派生减记忆效应的论证与精确训练去重证明不同；缺陷引入不自动证明真实材料可实现。无需模型直接数值优化的单点属性查询，与十步defectengineering示范分开。</dd>
+<dt>现实价值判断</dt><dd>研究判断：有价值的tool-use/结构参数保真微任务，物性数值本体由原生模型完成；作为独立材料物理benchmark需换更强不可见reference和稳定性/可制造性验证。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；公开v2正文/作者source与127选定Git文件静态核验；未执行模型/API/材料计算或第三方tests。</dd>
+<dt>下一步核验</dt><dd>实际SI入口403未取得；需获允许的访问后核完整case/pertrial原表与oracle实现，冻结服务端/材料ID/函数/PVT-likeconditions与失败分母，不将clientpin当backend全部冻结。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://arxiv.org/html/2512.11935v2">https://arxiv.org/html/2512.11935v2</a></li>
+<li><a href="https://doi.org/10.1021/acs.jpclett.6c00837">https://doi.org/10.1021/acs.jpclett.6c00837</a></li>
+<li><a href="https://doi.org/10.1021/acs.jpclett.6c00837.s001">https://doi.org/10.1021/acs.jpclett.6c00837.s001</a></li>
+<li><a href="https://github.com/atomgptlab/agapi/tree/b367c87d99cec479737592b05883495df920e19e">https://github.com/atomgptlab/agapi/tree/b367c87d99cec479737592b05883495df920e19e</a></li>
+<li><a href="https://github.com/atomgptlab/aai4science/tree/01d7630cd9914a6991ce72b2f7f6627f2774184e">https://github.com/atomgptlab/aai4science/tree/01d7630cd9914a6991ce72b2f7f6627f2774184e</a></li>
+</ul></dd></dl></details>
+<details id="device-agapi-workflow-repeat"><summary>AGAPI-Agents / four-workflow repeated execution study · 器件/材料建模与工具agent</summary><dl>
+<dt>版本/时间</dt><dd>arXiv2512.11935v2（2026-07-07）；v1演示/统计分开；clientb367c87</dd>
+<dt>对象类型</dt><dd>四prompt×两温度×十重复；非80独立材料任务</dd>
+<dt>模型工作的层次</dt><dd>Si vacancy/bandgap、GaN-AlN interface、SiXRD、MoSe2lookup→多API工作流</dd>
+<dt>输入</dt><dd>四个canonicalworkflow，各T0/T.7十次，共80trials；网络搜索/结构获取/supercell/替换/relax/XRD/property/bandstructure等工具链。paper十步GaN defect例是curateddemonstration，不直接推全80都是十步。</dd>
+<dt>任务设定</dt><dd>Agent-Planner-Executor-Summarizer规划与functioncalling；保持结构在各步传递，必要时fallback/retry。nativeAPI完成数据库/材料模型/结构计算，LLM负责选择和组合。</dd>
+<dt>输出</dt><dd>finaltext、数值/单位/目标chemistry或interface描述。作者successpredicate以最终答复出现所需内容为准，未见公开完整容差/结构等价/全backend状态验收器，不能升级为独立物理closed-loop成功。</dd>
+<dt>考核指标</dt><dd>T0成功35/40=87.5%，T.7为32/40=80%，−7.5percentagepoints。SiVacancy7/10→9/10；GaN-AlN10→9；SiXRD8→9；MoSe2lookup10→5，重复分母/波动逐项保留。</dd>
+<dt>基线</dt><dd>同四prompt同工具不同samplingtemperature；不是不同模型/同budgetnative deterministicworkflow的全面对抗，也不是材料发现成功率。每trialtoken/toolcalls/time/cost完整分母未取得。</dd>
+<dt>工具、数据与访问条件</dt><dd>28公开tool schemas与28functions匹配；JWT/云后端、外部models/databases另依赖。17workshopnotebooks201codecells/118savedstreamoutputs+额外clientexample非80正式trials，execution_count均清空但不能据此说未运行。</dd>
+<dt>限制与可比性</dt><dd>SI称S1–S4 workflowtrace示范，403访问未取得，不把四示范/17participantstdout当80完整providerrollouts。教学notebook7件局部脱敏后审阅、原件受限保留，不发布凭据；其他数据研究不受影响。</dd>
+<dt>现实价值判断</dt><dd>研究判断：真实科学工具编排的鲁棒性小试验，明确stochastic/semanticpredicate边界。用于工程agent训练还需完整orderedactions/observations/失败、结构状态与独立终验。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；公开v2正文/作者source与127选定Git文件静态核验；未执行模型/API/材料计算或第三方tests。</dd>
+<dt>下一步核验</dt><dd>实际SI入口403未取得；需获允许的访问后核完整case/pertrial原表与oracle实现，冻结服务端/材料ID/函数/PVT-likeconditions与失败分母，不将clientpin当backend全部冻结。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://arxiv.org/html/2512.11935v2">https://arxiv.org/html/2512.11935v2</a></li>
+<li><a href="https://doi.org/10.1021/acs.jpclett.6c00837">https://doi.org/10.1021/acs.jpclett.6c00837</a></li>
+<li><a href="https://doi.org/10.1021/acs.jpclett.6c00837.s001">https://doi.org/10.1021/acs.jpclett.6c00837.s001</a></li>
+<li><a href="https://github.com/atomgptlab/agapi/tree/b367c87d99cec479737592b05883495df920e19e">https://github.com/atomgptlab/agapi/tree/b367c87d99cec479737592b05883495df920e19e</a></li>
+<li><a href="https://github.com/atomgptlab/aai4science/tree/01d7630cd9914a6991ce72b2f7f6627f2774184e">https://github.com/atomgptlab/aai4science/tree/01d7630cd9914a6991ce72b2f7f6627f2774184e</a></li>
+</ul></dd></dl></details>
+<details id="device-agapi-grounding"><summary>AGAPI-Agents / missing-material and contradiction grounding checks · 器件/材料建模与工具agent</summary><dl>
+<dt>版本/时间</dt><dd>arXiv2512.11935v2（2026-07-07）；v1演示/统计分开；clientb367c87</dd>
+<dt>对象类型</dt><dd>语义幻觉压力测试；非晶圆fabrication实验</dd>
+<dt>模型工作的层次</dt><dd>数据库缺失/不相容材料主张→工具查询/拒答/矛盾表述</dd>
+<dt>输入</dt><dd>30个不存在于JARVIS或不合理组合/JID prompt，各tools-on/off；另20个矛盾prompt，五组wrongstructure/property/physical/JIDformula/derivedquantity。材料“missing”是给定库范围，不推全宇宙不存在。</dd>
+<dt>任务设定</dt><dd>测试模型是否编造带单位数值、拒绝/flag或ambiguous；contradiction用however/actually/in fact等marker启发式识别是否提到矛盾。与生成可制造配方或预测新材料性能完全不同。</dd>
+<dt>输出</dt><dd>最终自然语言答复分类、数值/单位/矛盾marker；keyword命中不等科学内容正确或全部矛盾已解决。工具client输出/知识混合需保留来源。</dd>
+<dt>考核指标</dt><dd>30prompt：hallucinatednumeric tools-on1/30、off8/30；ambiguous12/30和9/30；其余refused/flagged17与13。作者9×来自round3%/27%，按原始计数率比为8×，两种口径注明。20contradiction heuristic10/20=50%，不是严格物理证明50%。</dd>
+<dt>基线</dt><dd>同prompt有/无工具为控制，拒答/查空的nativeAPI规则亦是强基线；不能把ambiguous全计正确，不以低幻觉率替代较高任务完成率。</dd>
+<dt>工具、数据与访问条件</dt><dd>mainv2与figure向量PDF可核统计，perprompt SI DOI存在但403，完整分类label/rationale/运行trace未读。公开client/tests中.pyskip是未自动纳入pytest的长网络用例，本轮也未执行。</dd>
+<dt>限制与可比性</dt><dd>图文数字皆小样本、作者自定规则；contradiction没有本轮可核独立expertlabel/结构化判定。API返回null/LLM拒答并不能代表材料物理不存在，误拒/模糊成本需另评。</dd>
+<dt>现实价值判断</dt><dd>研究判断：适合考查工具返回空值时的诚实行为与矛盾提醒，不能作为半导体制造实验、安全签核或材料研发闭环胜率。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；公开v2正文/作者source与127选定Git文件静态核验；未执行模型/API/材料计算或第三方tests。</dd>
+<dt>下一步核验</dt><dd>实际SI入口403未取得；需获允许的访问后核完整case/pertrial原表与oracle实现，冻结服务端/材料ID/函数/PVT-likeconditions与失败分母，不将clientpin当backend全部冻结。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://arxiv.org/html/2512.11935v2">https://arxiv.org/html/2512.11935v2</a></li>
+<li><a href="https://doi.org/10.1021/acs.jpclett.6c00837">https://doi.org/10.1021/acs.jpclett.6c00837</a></li>
+<li><a href="https://doi.org/10.1021/acs.jpclett.6c00837.s001">https://doi.org/10.1021/acs.jpclett.6c00837.s001</a></li>
+<li><a href="https://github.com/atomgptlab/agapi/tree/b367c87d99cec479737592b05883495df920e19e">https://github.com/atomgptlab/agapi/tree/b367c87d99cec479737592b05883495df920e19e</a></li>
+<li><a href="https://github.com/atomgptlab/aai4science/tree/01d7630cd9914a6991ce72b2f7f6627f2774184e">https://github.com/atomgptlab/aai4science/tree/01d7630cd9914a6991ce72b2f7f6627f2774184e</a></li>
 </ul></dd></dl></details>
 <h2 id="group-11">边界：PCB工程、板级射频与电磁仿真</h2><div class="tablewrap"><table><thead><tr><th>名称与版本</th><th>输入</th><th>任务与输出</th><th>指标与限制</th></tr></thead><tbody>
 <tr><td><a href="#boundary-emval-nf">EMVal-NF / PCB electromagnetic surrogate</a><br/><small>v0公开pack；protocol1.0.0</small><br/><span class="tag">公开500board demo与评测协议</span></td><td>8×8mm三层PCB几何/材料/ports/frequency；500板，1–20GHz共101频点；NF每板10000probe</td><td>从几何等预测复数E/H近场；NF/SP是同一500板的两track<p><strong>输出：</strong>E(V/m)/H(A/m)复向量</p></td><td>每板先评分、再board等权macro。global relativeL2、localrelativeerror中位数、复向量alignment中位数；最佳0/0/1，global更重强场<p class="muted">仅PCB边界附录；仿真gold非测量。协议定义public/private_standard为ID、private_challenge为geometryfamily OOD，但不据定义宣称私榜已开放。评测board即使ID也不得训练</p></td></tr>
@@ -14489,7 +14577,7 @@ body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:
 <tr><td>模拟测试<p>3条 / 3域内家族</p></td><td>IEEE P2427/Infineon模拟缺陷仿真、AMS异常检测<p><a href="#analog-ieee-p2427">IEEE P2427 / ITC2017 AMS circuit set</a> · <a href="#analog-infineon-ads">Infineon AMS defect simulation benchmarks</a> · <a href="#analog-ams-anomaly">AMS-Anomaly-Dataset</a></p></td><td>analog fault模型、真实工艺缺陷、测量噪声/阈值/coverage与量产DPPM/良率不能互换；完整故障仿真和硅校准未执行。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
 <tr><td>数字测试<p>13条 / 11域内家族</p></td><td>ISCAS/ITC顺序与cut/scan变体、SoC调度、IJTAG网络、ATPG方法/工具、DFT生成器与真实后硅hook<p><a href="#test-itc99-seq">PoliTo ITC99 / I99T sequential</a> · <a href="#test-itc16-ijtag">ITC 2016 IEEE 1687 Networks</a> · <a href="#test-fan-atpg">NTU FAN_ATPG v2023 examples</a> · <a href="#test-deft">DEFT HTD-ATPG experiment</a> · <a href="#test-fuzzilicon">Fuzzilicon / real-x86 post-silicon microcode coverage experiments</a></p></td><td>历史fault lists多为未测试枚举，不是不可测gold；真实scan/ATE/诊断/压缩/DFT签核和硅故障分布缺统一公开验收；JAR/ATPG/硬件未运行。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
 <tr><td>封装芯粒热<p>20条 / 14域内家族</p></td><td>2.5D/3D实现、芯粒划分/互连/成本与资源DSE、热求解/代理/热感知布局<p><a href="#3d-open3d-mol">Open3DBench v1.1 / memory-on-logic</a> · <a href="#3d-taiwei-maintained-flow">TaiWei-Pin-3D / maintained public 3D flow and regression gates</a> · <a href="#chiplet-chipletpart">ChipletPart / cost-aware IP partitioning and technology assignment</a> · <a href="#chiplet-rapidchiplet-booksim">RapidChiplet / BookSim proxy validation and saturation protocol</a> · <a href="#thermal-thermedge-transient">ThermEDGe / transient thermal sequence prediction</a></p></td><td>公开sample/合成cost/热label不等实际组装硅校准；跨diePDK/RC/散热边界/EMIR/良率与全签核缺口显式保留。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
-<tr><td>器件<p>15条 / 9域内家族</p></td><td>I-V/C-V/参数提取、二极管/HEMT/器件模型、可靠性与模型一致性<p><a href="#device-mesd">MESD / MOSFET electrical simulation data</a> · <a href="#device-dfo-hemt">DFO compact-model extraction / 实测GaN-on-SiC HEMT</a> · <a href="#device-comphy-esid">Comphy v3 / ESiD trap-parameter extraction and extrapolation</a> · <a href="#device-esded">ESDED / emerging-device figure-digitized electrical curves</a></p></td><td>论文/模型/样例不等固定公共benchmark；部分model下载需注册，原测量与跨温/工艺gold不全，老化拟合不推全可靠性机制。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
+<tr><td>器件<p>19条 / 10域内家族</p></td><td>I-V/C-V/参数提取、二极管/HEMT/器件模型、可靠性与模型一致性<p><a href="#device-mesd">MESD / MOSFET electrical simulation data</a> · <a href="#device-dfo-hemt">DFO compact-model extraction / 实测GaN-on-SiC HEMT</a> · <a href="#device-comphy-esid">Comphy v3 / ESiD trap-parameter extraction and extrapolation</a> · <a href="#device-esded">ESDED / emerging-device figure-digitized electrical curves</a></p></td><td>论文/模型/样例不等固定公共benchmark；部分model下载需注册，原测量与跨温/工艺gold不全，老化拟合不推全可靠性机制。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
 <tr><td>板级工程与电磁<p>4条 / 3域内家族</p></td><td>KiCad PCB工程agent、近场/散射参数与稀疏矩阵相关公开验证，作为芯片范围边界材料<p><a href="#boundary-emval-nf">EMVal-NF / PCB electromagnetic surrogate</a> · <a href="#boundary-emval-sp">EMVal-SP / PCB electromagnetic surrogate</a> · <a href="#boundary-matrix-sparam">Matrix S-parameters dataset / matrix-based multi-port EM layouts</a></p></td><td>板级/天线EM与IC RF设计及工业封装SI/PI不合并；AEDL/Alpha-RF等候选尚未全部核成独立公共协议。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
 <tr><td>加速器映射<p>2条 / 2域内家族</p></td><td>wafer-scale固定架构placement/routing与物理场映射竞赛边界<p><a href="#pd-ispd20-wafer">ISPD 2020 Wafer-Scale Placement</a> · <a href="#pd-ispd21-wafer">ISPD 2021 Wafer-Scale Physics Modeling</a></p></td><td>在既有加速器上编译/映射不等制造一颗新芯片；架构/toolchain约束下指标不能套ASIC cell PPA。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
 <tr><td>成品性能<p>23条 / 13域内家族</p></td><td>SPEC/MLPerf/嵌入式/内存带宽/HPC/应用负载等，成品推理/训练与EDA能力分开<p><a href="#perf-spec-cpu2026">SPEC CPU 2026</a> · <a href="#perf-mlperf-inference-datacenter">MLPerf Inference / Datacenter Server/Offline</a> · <a href="#perf-mlperf-tiny-stream">MLPerf Tiny / Streaming Wakeword</a> · <a href="#perf-coremark">CoreMark</a> · <a href="#perf-hpcg">HPCG</a></p></td><td>不是所有芯片产品测试大全；Storage/graphics/通信/车规等仍有未逐协议覆盖候选，真实设备功率/计时/正式license规则未本地复现。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>

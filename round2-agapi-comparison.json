@@ -1,0 +1,568 @@
+{
+  "status": "round2 active; propertyreference/accessfidelity, structure-derivedtests and workflow/grounding predicates",
+  "protocols": [
+    {
+      "id": "device-agapi-known-property",
+      "benchmark_family": "AGAPI materials tool agents",
+      "name": "AGAPI-Agents / known-material pipeline fidelity and experimental-reference analysis",
+      "category": "器件/材料建模与工具agent",
+      "artifact_type": "复用JARVIS-Leaderboard的属性查询/误差归因评测；非新独立材料集",
+      "task_layer": "自然语言/JID/组成式→数据库工具→带单位数值",
+      "version": "arXiv2512.11935v2（2026-07-07）；v1演示/统计分开；clientb367c87",
+      "input": "v2 known-property sets：bulkmodulus21、bandgap54、Tc13个property-material观测，不推为88独立材料；每例Vexp/Vdb/Vagent三种reference。bandgap54中53有MBJ参考，Cu2O缺该字段。",
+      "task": "有/无工具比较；28LLM-callablewrappers对应18REST endpoints，query/materialstructure/ALIGNN等API承数值工作。EvaluationA检查agent是否准确转述DB，B按DFTfunctional与实验比，C分agent−DB及DB−experiment残差。",
+      "output": "物性数值/单位、检索材料/结构/函数来源与残差；不是芯片电路仿真或工艺可制造性。相同数据库是可见工具输出时，近零agent−DB误差不代表物理预测超过该工具。",
+      "metrics": "agent−DB MAE：bulk21为0GPa，bandgap可得53为0eV，Tc13为3.56K。agent−experiment报5.73GPa/.495eV/5.77K；bandgap按OptB88vdW/MBJ/HSE06分组1.42(n50)/.48(n53)/.27(n6)eV，reference/子集不同，不默拼同分母。",
+      "baseline": "直接nativeAPI查询/原DB值是必要强基线；简单JID查数已由原生工具完成，LLM新增任务在语义定位/工具选择/多步组合。不能把调用同oracle得0误差当材料泛化成功；v1五性质MAE与v2三性质残差不互换。",
+      "tools_and_access": "104client/docs与23workshop文件核；rootApache2，上游JARVIS/model各自许可；API需JWT且服务端数据/weights/版本不随client完全打包。公开arxivsource9paperfiles，SI DOI确认入口403未取得，不能称作者无SI或全原表已读。",
+      "limitations": "v1“30+示例prompt”和v2新增结构/压力/重复任务分轨；有参考53/54不能忽略缺失后说54全对。experimentalfunctionalbias与agent取错值不同，Tc混合paramknowledge表现不等单纯复制。",
+      "industrial_value": "研究判断：适合研究科学toolfaithfulness和reference偏差；物性查数/计算原生工具已可做，不需要让LLM重学数值，agent价值应在复杂工作流和可追溯使用上验。",
+      "primary_sources": "https://arxiv.org/html/2512.11935v2; https://doi.org/10.1021/acs.jpclett.6c00837; https://doi.org/10.1021/acs.jpclett.6c00837.s001; https://github.com/atomgptlab/agapi/tree/b367c87d99cec479737592b05883495df920e19e; https://github.com/atomgptlab/aai4science/tree/01d7630cd9914a6991ce72b2f7f6627f2774184e",
+      "evidence_status": "第二轮12h进行中；公开v2正文/作者source与127选定Git文件静态核验；未执行模型/API/材料计算或第三方tests。",
+      "next_verification": "实际SI入口403未取得；需获允许的访问后核完整case/pertrial原表与oracle实现，冻结服务端/材料ID/函数/PVT-likeconditions与失败分母，不将clientpin当backend全部冻结。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "device-agapi-defhyp",
+      "benchmark_family": "AGAPI materials tool agents",
+      "name": "AGAPI-Agents / DEF-57 and HYP-60 structure-derived bandgap tests",
+      "category": "器件/材料建模与工具agent",
+      "artifact_type": "同框架结构派生测试；oracle为agent可调用的ALIGNN",
+      "task_layer": "缺陷/原型替换结构→bandgap工具与tool-free预测",
+      "version": "arXiv2512.11935v2（2026-07-07）；v1演示/统计分开；clientb367c87",
+      "input": "DEF57五hosts Si/GaN/MgO/Al2O3/NaCl共57缺陷配置，substitution/vacancy/antisite；HYP60六prototype Si/GaN/MgO/ZnS/BN/LiF的元素替换共60假想组成。源结构与具体percase表在SI，本轮入口403未取得。",
+      "task": "相同结构分别tool-enabled/tool-free；reference由ALIGNN生成，agent开启工具同样调用ALIGNN。面向减少常见材料文本记忆影响，不等已证明所有构型在未知训练语料外或实际稳定/可合成。",
+      "output": "bandgap eV和与代理模型reference的MAE；当前结果衡量工具传参/读数以及tool-free偏离代理模型，不是独立DFT/硅测精度。",
+      "metrics": "DEF57工具给57数值，但matchingGT仅56：MAE .001eV(tool)/1.859eV(no-tool)按56；HYP60按60报.003/1.254eV。不能把57数值响应视57个物理正确，也不能把两子集混成117个有完整truth的点。",
+      "baseline": "直接ALIGNN调用与agent使用同ALIGNN；近零MAE作者明确byconstruction，native模型已执行物理近似。真正独立物理泛化需DFT/实验/更高保真heldoutoracle，而非本轮可见同工具输出。",
+      "tools_and_access": "publicclient/schema/examples可读，server端ALIGNN与结构生成/JARVIS依赖另需固定。127选定blobs核，但完整SIpermaterialinput/output、backend版本和全部历史交互未取得，不伪称公开117训练结构已逐条下载。",
+      "limitations": "作者对结构派生减记忆效应的论证与精确训练去重证明不同；缺陷引入不自动证明真实材料可实现。无需模型直接数值优化的单点属性查询，与十步defectengineering示范分开。",
+      "industrial_value": "研究判断：有价值的tool-use/结构参数保真微任务，物性数值本体由原生模型完成；作为独立材料物理benchmark需换更强不可见reference和稳定性/可制造性验证。",
+      "primary_sources": "https://arxiv.org/html/2512.11935v2; https://doi.org/10.1021/acs.jpclett.6c00837; https://doi.org/10.1021/acs.jpclett.6c00837.s001; https://github.com/atomgptlab/agapi/tree/b367c87d99cec479737592b05883495df920e19e; https://github.com/atomgptlab/aai4science/tree/01d7630cd9914a6991ce72b2f7f6627f2774184e",
+      "evidence_status": "第二轮12h进行中；公开v2正文/作者source与127选定Git文件静态核验；未执行模型/API/材料计算或第三方tests。",
+      "next_verification": "实际SI入口403未取得；需获允许的访问后核完整case/pertrial原表与oracle实现，冻结服务端/材料ID/函数/PVT-likeconditions与失败分母，不将clientpin当backend全部冻结。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "device-agapi-workflow-repeat",
+      "benchmark_family": "AGAPI materials tool agents",
+      "name": "AGAPI-Agents / four-workflow repeated execution study",
+      "category": "器件/材料建模与工具agent",
+      "artifact_type": "四prompt×两温度×十重复；非80独立材料任务",
+      "task_layer": "Si vacancy/bandgap、GaN-AlN interface、SiXRD、MoSe2lookup→多API工作流",
+      "version": "arXiv2512.11935v2（2026-07-07）；v1演示/统计分开；clientb367c87",
+      "input": "四个canonicalworkflow，各T0/T.7十次，共80trials；网络搜索/结构获取/supercell/替换/relax/XRD/property/bandstructure等工具链。paper十步GaN defect例是curateddemonstration，不直接推全80都是十步。",
+      "task": "Agent-Planner-Executor-Summarizer规划与functioncalling；保持结构在各步传递，必要时fallback/retry。nativeAPI完成数据库/材料模型/结构计算，LLM负责选择和组合。",
+      "output": "finaltext、数值/单位/目标chemistry或interface描述。作者successpredicate以最终答复出现所需内容为准，未见公开完整容差/结构等价/全backend状态验收器，不能升级为独立物理closed-loop成功。",
+      "metrics": "T0成功35/40=87.5%，T.7为32/40=80%，−7.5percentagepoints。SiVacancy7/10→9/10；GaN-AlN10→9；SiXRD8→9；MoSe2lookup10→5，重复分母/波动逐项保留。",
+      "baseline": "同四prompt同工具不同samplingtemperature；不是不同模型/同budgetnative deterministicworkflow的全面对抗，也不是材料发现成功率。每trialtoken/toolcalls/time/cost完整分母未取得。",
+      "tools_and_access": "28公开tool schemas与28functions匹配；JWT/云后端、外部models/databases另依赖。17workshopnotebooks201codecells/118savedstreamoutputs+额外clientexample非80正式trials，execution_count均清空但不能据此说未运行。",
+      "limitations": "SI称S1–S4 workflowtrace示范，403访问未取得，不把四示范/17participantstdout当80完整providerrollouts。教学notebook7件局部脱敏后审阅、原件受限保留，不发布凭据；其他数据研究不受影响。",
+      "industrial_value": "研究判断：真实科学工具编排的鲁棒性小试验，明确stochastic/semanticpredicate边界。用于工程agent训练还需完整orderedactions/observations/失败、结构状态与独立终验。",
+      "primary_sources": "https://arxiv.org/html/2512.11935v2; https://doi.org/10.1021/acs.jpclett.6c00837; https://doi.org/10.1021/acs.jpclett.6c00837.s001; https://github.com/atomgptlab/agapi/tree/b367c87d99cec479737592b05883495df920e19e; https://github.com/atomgptlab/aai4science/tree/01d7630cd9914a6991ce72b2f7f6627f2774184e",
+      "evidence_status": "第二轮12h进行中；公开v2正文/作者source与127选定Git文件静态核验；未执行模型/API/材料计算或第三方tests。",
+      "next_verification": "实际SI入口403未取得；需获允许的访问后核完整case/pertrial原表与oracle实现，冻结服务端/材料ID/函数/PVT-likeconditions与失败分母，不将clientpin当backend全部冻结。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "device-agapi-grounding",
+      "benchmark_family": "AGAPI materials tool agents",
+      "name": "AGAPI-Agents / missing-material and contradiction grounding checks",
+      "category": "器件/材料建模与工具agent",
+      "artifact_type": "语义幻觉压力测试；非晶圆fabrication实验",
+      "task_layer": "数据库缺失/不相容材料主张→工具查询/拒答/矛盾表述",
+      "version": "arXiv2512.11935v2（2026-07-07）；v1演示/统计分开；clientb367c87",
+      "input": "30个不存在于JARVIS或不合理组合/JID prompt，各tools-on/off；另20个矛盾prompt，五组wrongstructure/property/physical/JIDformula/derivedquantity。材料“missing”是给定库范围，不推全宇宙不存在。",
+      "task": "测试模型是否编造带单位数值、拒绝/flag或ambiguous；contradiction用however/actually/in fact等marker启发式识别是否提到矛盾。与生成可制造配方或预测新材料性能完全不同。",
+      "output": "最终自然语言答复分类、数值/单位/矛盾marker；keyword命中不等科学内容正确或全部矛盾已解决。工具client输出/知识混合需保留来源。",
+      "metrics": "30prompt：hallucinatednumeric tools-on1/30、off8/30；ambiguous12/30和9/30；其余refused/flagged17与13。作者9×来自round3%/27%，按原始计数率比为8×，两种口径注明。20contradiction heuristic10/20=50%，不是严格物理证明50%。",
+      "baseline": "同prompt有/无工具为控制，拒答/查空的nativeAPI规则亦是强基线；不能把ambiguous全计正确，不以低幻觉率替代较高任务完成率。",
+      "tools_and_access": "mainv2与figure向量PDF可核统计，perprompt SI DOI存在但403，完整分类label/rationale/运行trace未读。公开client/tests中.pyskip是未自动纳入pytest的长网络用例，本轮也未执行。",
+      "limitations": "图文数字皆小样本、作者自定规则；contradiction没有本轮可核独立expertlabel/结构化判定。API返回null/LLM拒答并不能代表材料物理不存在，误拒/模糊成本需另评。",
+      "industrial_value": "研究判断：适合考查工具返回空值时的诚实行为与矛盾提醒，不能作为半导体制造实验、安全签核或材料研发闭环胜率。",
+      "primary_sources": "https://arxiv.org/html/2512.11935v2; https://doi.org/10.1021/acs.jpclett.6c00837; https://doi.org/10.1021/acs.jpclett.6c00837.s001; https://github.com/atomgptlab/agapi/tree/b367c87d99cec479737592b05883495df920e19e; https://github.com/atomgptlab/aai4science/tree/01d7630cd9914a6991ce72b2f7f6627f2774184e",
+      "evidence_status": "第二轮12h进行中；公开v2正文/作者source与127选定Git文件静态核验；未执行模型/API/材料计算或第三方tests。",
+      "next_verification": "实际SI入口403未取得；需获允许的访问后核完整case/pertrial原表与oracle实现，冻结服务端/材料ID/函数/PVT-likeconditions与失败分母，不将clientpin当backend全部冻结。",
+      "retrieved_date": "2026-10-20"
+    }
+  ],
+  "static_audit": {
+    "static_only": true,
+    "as_of": "2026-10-20T10:31:03.792935+00:00",
+    "paper_versions": {
+      "v1": "2512.11935v1 Dec12 2025;platform/30+promptdemos/5propertyplot",
+      "v2": "2512.11935v2 Jul7 2026;18REST/28tools,defect/hypothetical/grounding/robustnesstests",
+      "published_doi": "10.1021/acs.jpclett.6c00837",
+      "supplement_doi": "10.1021/acs.jpclett.6c00837.s001",
+      "supplement_access": "DOIentryHTTP403, respected; actualSIexistsviaCrossref,butnotobtained. Authorarxivsource9filesdoesnotincludeSItables, do not claimSIunpublished"
+    },
+    "pinned_client_commit": "b367c87d99cec479737592b05883495df920e19e",
+    "pinned_workshop_commit": "01d7630cd9914a6991ce72b2f7f6627f2774184e",
+    "verified_selected_blobs": 127,
+    "verified_client_blobs": 104,
+    "verified_workshop_blobs": 23,
+    "callable_tools": 28,
+    "tool_schema": [
+      {
+        "name": "query_by_formula",
+        "required": [
+          "formula"
+        ],
+        "parameters": [
+          "formula"
+        ]
+      },
+      {
+        "name": "query_by_elements",
+        "required": [
+          "elements"
+        ],
+        "parameters": [
+          "elements"
+        ]
+      },
+      {
+        "name": "query_by_jid",
+        "required": [
+          "jid"
+        ],
+        "parameters": [
+          "jid"
+        ]
+      },
+      {
+        "name": "query_by_property",
+        "required": [
+          "property_name"
+        ],
+        "parameters": [
+          "property_name",
+          "min_val",
+          "max_val",
+          "elements"
+        ]
+      },
+      {
+        "name": "find_extreme",
+        "required": [
+          "property_name"
+        ],
+        "parameters": [
+          "property_name",
+          "maximize",
+          "elements",
+          "formula",
+          "constraint_property",
+          "min_constraint",
+          "max_constraint"
+        ]
+      },
+      {
+        "name": "list_jarvis_columns",
+        "required": [],
+        "parameters": []
+      },
+      {
+        "name": "make_supercell",
+        "required": [
+          "poscar",
+          "scaling_matrix"
+        ],
+        "parameters": [
+          "poscar",
+          "scaling_matrix"
+        ]
+      },
+      {
+        "name": "substitute_atom",
+        "required": [
+          "poscar",
+          "element_from",
+          "element_to"
+        ],
+        "parameters": [
+          "poscar",
+          "element_from",
+          "element_to",
+          "num_substitutions"
+        ]
+      },
+      {
+        "name": "create_vacancy",
+        "required": [
+          "poscar",
+          "element"
+        ],
+        "parameters": [
+          "poscar",
+          "element",
+          "num_vacancies"
+        ]
+      },
+      {
+        "name": "alignn_predict",
+        "required": [
+          "poscar"
+        ],
+        "parameters": [
+          "poscar",
+          "jid"
+        ]
+      },
+      {
+        "name": "alignn_ff_single_point",
+        "required": [
+          "poscar"
+        ],
+        "parameters": [
+          "poscar"
+        ]
+      },
+      {
+        "name": "alignn_ff_relax",
+        "required": [
+          "poscar"
+        ],
+        "parameters": [
+          "poscar",
+          "fmax",
+          "steps"
+        ]
+      },
+      {
+        "name": "alignn_ff_optimize",
+        "required": [
+          "poscar"
+        ],
+        "parameters": [
+          "poscar",
+          "fmax",
+          "steps",
+          "optimizer",
+          "relax_cell"
+        ]
+      },
+      {
+        "name": "alignn_ff_md",
+        "required": [
+          "poscar"
+        ],
+        "parameters": [
+          "poscar",
+          "temperature",
+          "timestep",
+          "steps",
+          "interval"
+        ]
+      },
+      {
+        "name": "slakonet_bandstructure",
+        "required": [
+          "poscar"
+        ],
+        "parameters": [
+          "poscar",
+          "energy_range_min",
+          "energy_range_max"
+        ]
+      },
+      {
+        "name": "generate_xrd_pattern",
+        "required": [
+          "poscar"
+        ],
+        "parameters": [
+          "poscar",
+          "wavelength",
+          "num_peaks",
+          "theta_range"
+        ]
+      },
+      {
+        "name": "diffractgpt_predict",
+        "required": [
+          "formula",
+          "peaks"
+        ],
+        "parameters": [
+          "formula",
+          "peaks"
+        ]
+      },
+      {
+        "name": "pxrd_match",
+        "required": [
+          "query",
+          "pattern_data"
+        ],
+        "parameters": [
+          "query",
+          "pattern_data",
+          "wavelength"
+        ]
+      },
+      {
+        "name": "xrd_match",
+        "required": [
+          "formula",
+          "xrd_pattern"
+        ],
+        "parameters": [
+          "formula",
+          "xrd_pattern"
+        ]
+      },
+      {
+        "name": "xrd_analyze",
+        "required": [
+          "formula",
+          "xrd_data"
+        ],
+        "parameters": [
+          "formula",
+          "xrd_data",
+          "wavelength",
+          "method"
+        ]
+      },
+      {
+        "name": "microscopygpt_analyze",
+        "required": [
+          "image_path",
+          "formula"
+        ],
+        "parameters": [
+          "image_path",
+          "formula"
+        ]
+      },
+      {
+        "name": "generate_interface",
+        "required": [
+          "film_poscar",
+          "substrate_poscar"
+        ],
+        "parameters": [
+          "film_poscar",
+          "substrate_poscar",
+          "film_indices",
+          "substrate_indices",
+          "film_thickness",
+          "substrate_thickness",
+          "separation",
+          "max_area"
+        ]
+      },
+      {
+        "name": "protein_fold",
+        "required": [
+          "sequence"
+        ],
+        "parameters": [
+          "sequence"
+        ]
+      },
+      {
+        "name": "openfold_predict",
+        "required": [
+          "protein_sequence",
+          "dna1",
+          "dna2"
+        ],
+        "parameters": [
+          "protein_sequence",
+          "dna1",
+          "dna2"
+        ]
+      },
+      {
+        "name": "query_mp",
+        "required": [
+          "formula"
+        ],
+        "parameters": [
+          "formula",
+          "limit"
+        ]
+      },
+      {
+        "name": "query_oqmd",
+        "required": [
+          "formula"
+        ],
+        "parameters": [
+          "formula",
+          "limit"
+        ]
+      },
+      {
+        "name": "search_arxiv",
+        "required": [
+          "query"
+        ],
+        "parameters": [
+          "query",
+          "max_results"
+        ]
+      },
+      {
+        "name": "search_crossref",
+        "required": [
+          "query"
+        ],
+        "parameters": [
+          "query",
+          "rows"
+        ]
+      }
+    ],
+    "evaluation": {
+      "known_property": {
+        "bulk_modulus_samples": 21,
+        "bandgap_samples": 54,
+        "bandgap_available_MBJ_references": 53,
+        "Tc_samples": 13,
+        "mae_agent_vs_database": {
+          "bulk_modulus_GPa": 0,
+          "bandgap_eV": 0,
+          "Tc_K": 3.56
+        },
+        "mae_agent_vs_experiment": {
+          "bulk_modulus_GPa": 5.73,
+          "bandgap_eV": 0.495,
+          "Tc_K": 5.77
+        },
+        "bandgap_functional_mae_eV": {
+          "OptB88vdW": {
+            "n": 50,
+            "mae": 1.42
+          },
+          "MBJ": {
+            "n": 53,
+            "mae": 0.48
+          },
+          "HSE06": {
+            "n": 6,
+            "mae": 0.27
+          }
+        }
+      },
+      "defect_hypothetical": {
+        "DEF57": {
+          "configurations": 57,
+          "hosts": [
+            "Si",
+            "GaN",
+            "MgO",
+            "Al2O3",
+            "NaCl"
+          ],
+          "numeric_tool_responses": 57,
+          "matching_groundtruth_samples": 56,
+          "tool_augmented_MAEeV": 0.001,
+          "tool_free_MAEeV": 1.859
+        },
+        "HYP60": {
+          "configurations": 60,
+          "prototypes": [
+            "Si",
+            "GaN",
+            "MgO",
+            "ZnS",
+            "BN",
+            "LiF"
+          ],
+          "tool_augmented_MAEeV": 0.003,
+          "tool_free_MAEeV": 1.254
+        },
+        "reference": "sameALIGNNtoolusedbyagent; nearzeroMAEbyconstruction istoolroutingfidelity, notindependentphysicalvalidation"
+      },
+      "workflow_repeats": {
+        "prompts": 4,
+        "repeats_per_temperature": 10,
+        "temperatures": [
+          0,
+          0.7
+        ],
+        "trials": 80,
+        "success_definition": "finaltextcontains expectednumericunits orinterface description andrequestedchemistry; no independentfullphysicsworkfloworacle",
+        "T0": {
+          "successes": 35,
+          "total": 40
+        },
+        "T07": {
+          "successes": 32,
+          "total": 40
+        },
+        "per_workflow_successes_T0_T07": {
+          "Si_vacancy": [
+            7,
+            9
+          ],
+          "GaN_AlN_interface": [
+            10,
+            9
+          ],
+          "Si_XRD": [
+            8,
+            9
+          ],
+          "MoSe2_lookup": [
+            10,
+            5
+          ]
+        }
+      },
+      "grounding": {
+        "nonexistent_material_prompts": 30,
+        "conditions": 2,
+        "unfounded_numeric_answers": {
+          "tools_on": 1,
+          "tools_off": 8
+        },
+        "ambiguous_answers": {
+          "tools_on": 12,
+          "tools_off": 9
+        },
+        "refusal_or_flagged": {
+          "tools_on": 17,
+          "tools_off": 13
+        },
+        "actual_rate_ratio_off_over_on": 8,
+        "rounded_percentage_claim_ratio": 9,
+        "contradiction_prompts": 20,
+        "keyword_detected": 10,
+        "contradiction_checker": "keywords however/actually/in fact etc; heuristicnotsemanticgroundtruth"
+      }
+    },
+    "workshop": {
+      "participant_notebooks": 17,
+      "code_cells": 201,
+      "saved_stream_outputs": 118,
+      "execution_count_nonnull": 0,
+      "all_outputs_streams": true,
+      "additional_client_example_notebooks": 1,
+      "task_matrix_shape": [
+        43,
+        10
+      ],
+      "local_isolated_notebooks": 7,
+      "credential_candidate_occurrences_redacted": 19,
+      "review_policy": "onlysanitizedcopiesparsed;originalsretained0600/parent0700;no credentials validatedorused",
+      "limitations": "execution_countcleareddoesnotproveneverrun; savedstdoutisnotsufficientfullprovideraction-observationtraceorindependentworkflowtruth"
+    },
+    "findings": [
+      "AGAPIv2addsactualnewtestscomparedwithv1; do notfreezev1fivepropertymetricsaslatestv2oruse5.732/3.378againstnew5.77Tcwithoutmatchingreference",
+      "28publiccallableschemasand28functiondefinitionsmatchedstaticAST;18RESTendpointsdifferentcountfromtoolwrappers. ClientcodeopensourceApache2doesnotmeanallservermodels/data/weights/lockedtoolversionsbundled",
+      "KnownJIDpropertylookupalreadyavailablethroughnativeAPI; pipelineMAE0meanscorrectforwarding. LLMnotneededfornumericphysicscalculation itself; marginalvalueinquerysemantics/toolselection/multisteporchestration/errorhandling",
+      "Bulk21/bandgap53of54 agent-vsDBMAE0, experimentMAE5.73GPa/.495eVisdatabasebias;Tcagentitselfaddsnonzeroresidual. Referencechoice/functionalbiasandagentmistakesseparated",
+      "DEF57/HYP60sameALIGNNusedasgroundtruthandagenttool, so0.001/.003eVnotindependentexperimentalaccuracy; DEF57numericanswers57butgroundtruthmatched56, keepdenominator",
+      "Fourworkflow80trialsstrictlysmallrepeatedprompts; finaltextmarkergradercanpasswithoutfullstructuredstate/physicschecking; requiredraw80transcriptsinSIcurrentaccess403notreproduced",
+      "Nonexistentmaterialtestisnumericfabrication/hallucinationNOTwaferfabricationexperiment. 1/30vs8/30 means8xratioratherthan9xrounded27/3; ambiguous12/30and9/30preventcallingremainingallcorrect",
+      "Contradiction20keywordheuristic10detecteddoesnotprove10scientificcontradictionsrigorouslyresolved. No independentdownstreamengineeringoracleprovided inmainpubliccode",
+      "17workshopnotebooks+1clientexample and43x10completionmatrixnotmodelbenchmarktrainingepisodes; outputsstdoutpartial/clearedexecutioncounts, templateshumanparticipation. Sevenfileslocallysanitizedwithoutstoppingotherresearch",
+      "Publicarxivsourceonly9paperfiles/mainfigures, actualSI DOIconfirmedbut403accessrespected; dataavailabilitylimitsareaccessnotassertionofnonrelease",
+      "No tests/notebooks/API/GPU/remotepropertytools wereexecuted; ownAST/schema/count/arithmeticreading only"
+    ]
+  }
+}

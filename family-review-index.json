@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T10:24:37.493599+00:00",
+  "generated_at": "2026-10-20T10:34:26.549378+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 375,
-    "records": 670,
-    "records_with_any_field_audit_entry": 429,
-    "records_with_current_field_audit_snapshot": 396,
+    "families": 376,
+    "records": 674,
+    "records_with_any_field_audit_entry": 433,
+    "records_with_current_field_audit_snapshot": 400,
     "records_without_current_field_audit_snapshot": 274
   },
   "requirements_per_record": [
@@ -195,6 +195,98 @@
           "limitations": "递归API重试无总上限会影响硬预算和失败分母；scorer按现有131文件目录处理缺失会抛错而非自动补0。下游AnalogCoder24题Retry3、Pass1/5是复用独立既有套件；四例SMIC180RF作者人工验证不等全部24题/版图/tapeout闭环。",
           "tools_and_access": "已公开gpt_ana_cho_on.py和多agentprompt/知识库，MIT。currentgenerator turns5而scorer turns10、paper n10；空model/API配置与Windows路径需配置。未调用模型/脚本，本轮未复现实验。",
           "industrial_value": "研究判断：能研究知识/分解agent的框架及prompt资源；完整agent训练rollout与工具反馈数据尚未定位，和ACR-Bench同家族统计。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "AGAPI materials tool agents",
+      "record_count": 4,
+      "records_with_current_field_audit": 4,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "device-agapi-known-property",
+          "name": "AGAPI-Agents / known-material pipeline fidelity and experimental-reference analysis",
+          "category": "器件/材料建模与工具agent",
+          "artifact_type": "复用JARVIS-Leaderboard的属性查询/误差归因评测；非新独立材料集",
+          "task_layer": "自然语言/JID/组成式→数据库工具→带单位数值",
+          "evidence_status": "第二轮12h进行中；公开v2正文/作者source与127选定Git文件静态核验；未执行模型/API/材料计算或第三方tests。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-agapi-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "实际SI入口403未取得；需获允许的访问后核完整case/pertrial原表与oracle实现，冻结服务端/材料ID/函数/PVT-likeconditions与失败分母，不将clientpin当backend全部冻结。",
+          "limitations": "v1“30+示例prompt”和v2新增结构/压力/重复任务分轨；有参考53/54不能忽略缺失后说54全对。experimentalfunctionalbias与agent取错值不同，Tc混合paramknowledge表现不等单纯复制。",
+          "tools_and_access": "104client/docs与23workshop文件核；rootApache2，上游JARVIS/model各自许可；API需JWT且服务端数据/weights/版本不随client完全打包。公开arxivsource9paperfiles，SI DOI确认入口403未取得，不能称作者无SI或全原表已读。",
+          "industrial_value": "研究判断：适合研究科学toolfaithfulness和reference偏差；物性查数/计算原生工具已可做，不需要让LLM重学数值，agent价值应在复杂工作流和可追溯使用上验。"
+        },
+        {
+          "id": "device-agapi-defhyp",
+          "name": "AGAPI-Agents / DEF-57 and HYP-60 structure-derived bandgap tests",
+          "category": "器件/材料建模与工具agent",
+          "artifact_type": "同框架结构派生测试；oracle为agent可调用的ALIGNN",
+          "task_layer": "缺陷/原型替换结构→bandgap工具与tool-free预测",
+          "evidence_status": "第二轮12h进行中；公开v2正文/作者source与127选定Git文件静态核验；未执行模型/API/材料计算或第三方tests。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-agapi-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "实际SI入口403未取得；需获允许的访问后核完整case/pertrial原表与oracle实现，冻结服务端/材料ID/函数/PVT-likeconditions与失败分母，不将clientpin当backend全部冻结。",
+          "limitations": "作者对结构派生减记忆效应的论证与精确训练去重证明不同；缺陷引入不自动证明真实材料可实现。无需模型直接数值优化的单点属性查询，与十步defectengineering示范分开。",
+          "tools_and_access": "publicclient/schema/examples可读，server端ALIGNN与结构生成/JARVIS依赖另需固定。127选定blobs核，但完整SIpermaterialinput/output、backend版本和全部历史交互未取得，不伪称公开117训练结构已逐条下载。",
+          "industrial_value": "研究判断：有价值的tool-use/结构参数保真微任务，物性数值本体由原生模型完成；作为独立材料物理benchmark需换更强不可见reference和稳定性/可制造性验证。"
+        },
+        {
+          "id": "device-agapi-workflow-repeat",
+          "name": "AGAPI-Agents / four-workflow repeated execution study",
+          "category": "器件/材料建模与工具agent",
+          "artifact_type": "四prompt×两温度×十重复；非80独立材料任务",
+          "task_layer": "Si vacancy/bandgap、GaN-AlN interface、SiXRD、MoSe2lookup→多API工作流",
+          "evidence_status": "第二轮12h进行中；公开v2正文/作者source与127选定Git文件静态核验；未执行模型/API/材料计算或第三方tests。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-agapi-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "实际SI入口403未取得；需获允许的访问后核完整case/pertrial原表与oracle实现，冻结服务端/材料ID/函数/PVT-likeconditions与失败分母，不将clientpin当backend全部冻结。",
+          "limitations": "SI称S1–S4 workflowtrace示范，403访问未取得，不把四示范/17participantstdout当80完整providerrollouts。教学notebook7件局部脱敏后审阅、原件受限保留，不发布凭据；其他数据研究不受影响。",
+          "tools_and_access": "28公开tool schemas与28functions匹配；JWT/云后端、外部models/databases另依赖。17workshopnotebooks201codecells/118savedstreamoutputs+额外clientexample非80正式trials，execution_count均清空但不能据此说未运行。",
+          "industrial_value": "研究判断：真实科学工具编排的鲁棒性小试验，明确stochastic/semanticpredicate边界。用于工程agent训练还需完整orderedactions/observations/失败、结构状态与独立终验。"
+        },
+        {
+          "id": "device-agapi-grounding",
+          "name": "AGAPI-Agents / missing-material and contradiction grounding checks",
+          "category": "器件/材料建模与工具agent",
+          "artifact_type": "语义幻觉压力测试；非晶圆fabrication实验",
+          "task_layer": "数据库缺失/不相容材料主张→工具查询/拒答/矛盾表述",
+          "evidence_status": "第二轮12h进行中；公开v2正文/作者source与127选定Git文件静态核验；未执行模型/API/材料计算或第三方tests。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-agapi-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "实际SI入口403未取得；需获允许的访问后核完整case/pertrial原表与oracle实现，冻结服务端/材料ID/函数/PVT-likeconditions与失败分母，不将clientpin当backend全部冻结。",
+          "limitations": "图文数字皆小样本、作者自定规则；contradiction没有本轮可核独立expertlabel/结构化判定。API返回null/LLM拒答并不能代表材料物理不存在，误拒/模糊成本需另评。",
+          "tools_and_access": "mainv2与figure向量PDF可核统计，perprompt SI DOI存在但403，完整分类label/rationale/运行trace未读。公开client/tests中.pyskip是未自动纳入pytest的长网络用例，本轮也未执行。",
+          "industrial_value": "研究判断：适合考查工具返回空值时的诚实行为与矛盾提醒，不能作为半导体制造实验、安全签核或材料研发闭环胜率。"
         }
       ]
     },
