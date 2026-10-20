@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T14:05:35.581228+00:00",
+  "as_of": "2026-10-20T14:45:28.054258+00:00",
   "status": "static protocol comparison, not reproduced model ranking",
   "scope": "编译成功、覆盖率、自检仿真通过、有界形式检查、完整证明和缺陷检出是不同证据。必须固定被测RTL身份、失败分母、oracle独立性、覆盖目标和工具预算；源码可读不等已完成运行复验。",
   "items": [

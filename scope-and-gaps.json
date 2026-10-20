@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T14:05:35.805434+00:00",
+  "as_of": "2026-10-20T14:45:28.274395+00:00",
   "status": "coverage inventory with explicit residual limits, not universal completeness/quality certification",
   "scope": "依据用户阶段划分逐项列已有覆盖与剩余限制；“所有可发现”按此次公开资料检索边界理解，不声称覆盖未公开工业bench或互联网全部材料。",
   "method": [
@@ -417,8 +417,8 @@
     },
     {
       "domain": "综合HLS",
-      "record_count": 72,
-      "family_count": 35,
+      "record_count": 76,
+      "family_count": 36,
       "catalog_ids": [
         "synth-epfl",
         "synth-openabc",
@@ -491,7 +491,11 @@
         "hls-bench4hls-generation",
         "hls-chathls-generation",
         "hls-chathls-debug",
-        "hls-chathls-tuning"
+        "hls-chathls-tuning",
+        "hls-heurigym-scheduling",
+        "synth-heurigym-techmap",
+        "synth-heurigym-egraph",
+        "data-heurigym-solvers"
       ],
       "covered_tasks": "经典逻辑综合、IWLS现代学习/精确综合、HLS程序/应用、代理预测、DSE/agent与FPGA CAD",
       "remaining_limits": "有些原包取得但未执行CEC/HLS；数据多点并非独立IP，FPGA器件/工具版本跨域与真实后实现验收另核；PolyBench原始C包已取，部分派生HLS完整配置/标签仍待核。",
@@ -531,8 +535,8 @@
     },
     {
       "domain": "数字后端",
-      "record_count": 167,
-      "family_count": 104,
+      "record_count": 168,
+      "family_count": 105,
       "catalog_ids": [
         "physical-circuitnet",
         "physical-ispd18",
@@ -700,7 +704,8 @@
         "pd-structverify-singlestep",
         "pd-structverify-multistep",
         "data-maeda-openroad-evaluator",
-        "data-maeda-commercial-transfer"
+        "data-maeda-commercial-transfer",
+        "pd-heurigym-globalrouting"
       ],
       "covered_tasks": "划分/块规划/宏与cell布局、合法化、GR/DR、CTS/STA/sizing/MBFF/ECO、功耗/IR/EM、DRC/LVS工作流与agent",
       "remaining_limits": "历年已覆盖不等全部contest题目/最终checker均取得；部分旧链接失效、商业flow与PDK不可重建；proxy、原生修复、有限DRC与全签核严格分层。",
@@ -1147,11 +1152,12 @@
     },
     {
       "domain": "加速器映射",
-      "record_count": 2,
-      "family_count": 2,
+      "record_count": 3,
+      "family_count": 3,
       "catalog_ids": [
         "pd-ispd20-wafer",
-        "pd-ispd21-wafer"
+        "pd-ispd21-wafer",
+        "arch-heurigym-intraop"
       ],
       "covered_tasks": "wafer-scale固定架构placement/routing与物理场映射竞赛边界",
       "remaining_limits": "在既有加速器上编译/映射不等制造一颗新芯片；架构/toolchain约束下指标不能套ASIC cell PPA。",

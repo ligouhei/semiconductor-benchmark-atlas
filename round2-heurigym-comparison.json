@@ -1,0 +1,2366 @@
+{
+  "status": "round2 active; five chip-relevant heuristic engineering tasks and real released solver-source companion",
+  "protocols": [
+    {
+      "id": "hls-heurigym-scheduling",
+      "benchmark_family": "HeuriGym heuristic algorithm engineering",
+      "name": "HeuriGym / resource-constrained operator scheduling",
+      "category": "综合/HLS算子调度agent",
+      "artifact_type": "CO算法工程agentbenchmark的EDA分轨",
+      "task_layer": "算法启发式代码生成/反馈改进；与工具调用流程分层",
+      "version": "ICLR2026 publishedpaper；arxiv2506.07972v2；Git a4cf0460；2026-10-20website snapshot",
+      "input": "JSON CDFG/DAG、运算延迟/资源类型与可用单元数；论文/当前baseline24instances（baseline有demo键），不是24独立芯片；5demo+largeevaluation协议与实际split成员需核。",
+      "task": "LLM写Python solve(input_file,solution_file)，读demo执行/错误反馈迭代，形成通用调度heuristic；目标非直接输出Verilog，逐实例在10s/8cores内调度，nativeHLS问题的局部阶段。",
+      "output": "node_id:startcycle文本；依赖finish<=successorstart、每周期资源usage<=上限，cost=max(start+delay)cycles。",
+      "metrics": "paperQuality=有效例min(1,expertcost/candidatecost)算术均值、Yield=有效/全部，QYI=2QY/(Q+Y)，SOLVEI/II/III@i分别执行/非空输出/约束验收。currentcollect用几何Quality、选最高QCI轮次；网站各problem加权QYI，不能把harmonic(weightedQ,weightedY)当weightedQYI。 当前parse允许负int start，verifier仅从t0扫描资源且未显式start>=0，属静态边界缺口；未运行构造case、不假定现有模型实际利用。",
+      "baseline": "ILP/Gurobi formulation与expert表，nativeHLS调度/SDC强基线；很多2025模型至5/10iter可达SOLVEIII100%，但可行不等最优cost，不能用100%可行性说agent工程已解决。",
+      "tools_and_access": "80全部Gitblobs核/rootApache2；HF heurigen/heurigen-data公开card/topfolders与CCBY4标签可见、1.39GB，但本轮shell两次timeout，deepAPI/UI不可访问后未绕过，完整inputpayload未取。网站结果/solverJSON实取并hash，公开源码不自动涵盖所有上游工具/数据许可。",
+      "limitations": "paper10iter/当前CLI默认3/网页更新5iter分别记录；paper8cores，ops/map10s、routing300s、egraph10s、intra60s，budget含优化器/全部候选/评测成本。main只给demo反馈，但collector传datasetroot递归收文件可能同时收demo/eval，并从结果选bestiteration；完整payload/ledger缺失，不能量化实际泄漏或归因每个论文run。 缺失/非法node与负起点需独立验收，missingcostfiles不进入test_case_stats时应另核固定失败分母。",
+      "industrial_value": "研究判断：成熟HLS原生优化问题转成LLMheuristic设计测试，有用来测算法编写与反馈改进；完整HLS Csim/RTLcosim/后实现PPA不由schedule合法自动保证。",
+      "primary_sources": "https://www.csl.cornell.edu/~zhiruz/pdfs/heurigym-iclr2026.pdf; https://arxiv.org/abs/2506.07972; https://github.com/cornell-zhang/heurigym/tree/a4cf0460152eb798f1b3a797ef22a08192661bf5; https://huggingface.co/datasets/heurigen/heurigen-data; https://cornell-zhang.github.io/heurigym/",
+      "evidence_status": "第二轮12h进行中；80固定Gitblobs/全文、网站CSV与185solver的自写静态AST/数表核；未运行solver/第三方grader/EDA。",
+      "next_verification": "需要匹配runrevision、严格heldoutmanifest/全部失败/原始task与完整轨迹，核评分版本、强原生基线/成本；访问受限内容不绕过。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "synth-heurigym-techmap",
+      "benchmark_family": "HeuriGym heuristic algorithm engineering",
+      "name": "HeuriGym / 6-LUT technology mapping",
+      "category": "综合/FPGA技术映射agent",
+      "artifact_type": "同套件EDA分轨；复用经典logicnetwork",
+      "task_layer": "算法启发式代码生成/反馈改进；与工具调用流程分层",
+      "version": "ICLR2026 publishedpaper；arxiv2506.07972v2；Git a4cf0460；2026-10-20website snapshot",
+      "input": "BLIF组合逻辑网络，K6LUT约束；paper/currentbaseline31instances，经典ISCAS/设计名不能当新31硅数据集。",
+      "task": "LLM生成mapping heuristic实现、读输入并写等价LUTmapped BLIF，demo反馈修复/改进；默认每例10s/8cores，原生ABC负责独立CEC与统计。",
+      "output": "mappedBLIF，hardgates=ABC CEC返回Networksareequivalent且fanin<=6；cost=ABC ps的ndnode数，minLUTarea。",
+      "metrics": "paperQuality=有效例min(1,expertcost/candidatecost)算术均值、Yield=有效/全部，QYI=2QY/(Q+Y)，SOLVEI/II/III@i分别执行/非空输出/约束验收。currentcollect用几何Quality、选最高QCI轮次；网站各problem加权QYI，不能把harmonic(weightedQ,weightedY)当weightedQYI。 对给定truthnetwork的CEC比text或finiteTB强，但LUTcount不含实际deviceplace/route/clockfrequency。",
+      "baseline": "expert ABC if -a -K 6是原生强基线，agent可调用哪些库/外部工具要固定；不能单靠在简单case近100%QYI就宣称超过工业FPGA全流程。",
+      "tools_and_access": "80全部Gitblobs核/rootApache2；HF heurigen/heurigen-data公开card/topfolders与CCBY4标签可见、1.39GB，但本轮shell两次timeout，deepAPI/UI不可访问后未绕过，完整inputpayload未取。网站结果/solverJSON实取并hash，公开源码不自动涵盖所有上游工具/数据许可。",
+      "limitations": "paper10iter/当前CLI默认3/网页更新5iter分别记录；paper8cores，ops/map10s、routing300s、egraph10s、intra60s，budget含优化器/全部候选/评测成本。main只给demo反馈，但collector传datasetroot递归收文件可能同时收demo/eval，并从结果选bestiteration；完整payload/ledger缺失，不能量化实际泄漏或归因每个论文run。 CEC与fanin检查源码公开，未本轮执行；无完整候选/ABC版本/每例label/costledger，不把AST可解析当映射正确。",
+      "industrial_value": "研究判断：区别“让LLM调用ABC”与“LLM写更好的mappingheuristic”很关键；后者确有算法优化空间，收益应以同预算原生ABC实测。",
+      "primary_sources": "https://www.csl.cornell.edu/~zhiruz/pdfs/heurigym-iclr2026.pdf; https://arxiv.org/abs/2506.07972; https://github.com/cornell-zhang/heurigym/tree/a4cf0460152eb798f1b3a797ef22a08192661bf5; https://huggingface.co/datasets/heurigen/heurigen-data; https://cornell-zhang.github.io/heurigym/",
+      "evidence_status": "第二轮12h进行中；80固定Gitblobs/全文、网站CSV与185solver的自写静态AST/数表核；未运行solver/第三方grader/EDA。",
+      "next_verification": "需要匹配runrevision、严格heldoutmanifest/全部失败/原始task与完整轨迹，核评分版本、强原生基线/成本；访问受限内容不绕过。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "pd-heurigym-globalrouting",
+      "benchmark_family": "HeuriGym heuristic algorithm engineering",
+      "name": "HeuriGym / global-routing heuristic generation",
+      "category": "数字后端/全局路由算法agent",
+      "artifact_type": "同套件EDA分轨；不同于OPC或完整P&Rflow",
+      "task_layer": "算法启发式代码生成/反馈改进；与工具调用流程分层",
+      "version": "ICLR2026 publishedpaper；arxiv2506.07972v2；Git a4cf0460；2026-10-20website snapshot",
+      "input": "3Droutinggrid .cap资源/代价+.net多pinaccesspoints；currentbaseline24names=ariane68/mempooltile/nvdla三源组各8part，名带rank_size50。不能当24独立全芯片/完整ISPDsuite。",
+      "task": "生成Python路由算法，分层连pin并输出轴对齐segments；300s/8cores perinstance，迭代demofeedback。只是globalrouting abstractpaths，不是metalDRC/MRC合法detailedrouting。",
+      "output": "每net的segments/连接、wirelength、via、overflow与加权totalcost；独立C++evaluator。",
+      "metrics": "paperQuality=有效例min(1,expertcost/candidatecost)算术均值、Yield=有效/全部，QYI=2QY/(Q+Y)，SOLVEI/II/III@i分别执行/非空输出/约束验收。currentcollect用几何Quality、选最高QCI轮次；网站各problem加权QYI，不能把harmonic(weightedQ,weightedY)当weightedQYI。 Pythonverifier虽returnTrue，C++evaluator仍查open/incompletednets并abort，不能叫整链无验收。cost=WL+via+平滑exp(.5*overflow)罚，under-capacity也非0；overflow是softcost，不是必须zero的hardgate。",
+      "baseline": "currentexpertbaseline脚本指InstantGR，24finitecost可读但actualbinary/原run未在80文件中；早期paperallmodelGR无valid输出是历史协议结果，新website部分模型已有>0Yield，不能说当前普遍0%。",
+      "tools_and_access": "80全部Gitblobs核/rootApache2；HF heurigen/heurigen-data公开card/topfolders与CCBY4标签可见、1.39GB，但本轮shell两次timeout，deepAPI/UI不可访问后未绕过，完整inputpayload未取。网站结果/solverJSON实取并hash，公开源码不自动涵盖所有上游工具/数据许可。",
+      "limitations": "paper10iter/当前CLI默认3/网页更新5iter分别记录；paper8cores，ops/map10s、routing300s、egraph10s、intra60s，budget含优化器/全部候选/评测成本。main只给demo反馈，但collector传datasetroot递归收文件可能同时收demo/eval，并从结果选bestiteration；完整payload/ledger缺失，不能量化实际泄漏或归因每个论文run。 24part复用大grid/源design，按源组heldout；没有fullinputpayload不把名字里的50当已核netcount。current默认timeout10如未覆盖不等paper300秒。",
+      "industrial_value": "研究判断：直接测新路由heuristic代码的agent能力，原生router仍是强baseline；评分只覆盖给定抽象grid，不能推出DR/timing/PDN/DRC全部闭合。",
+      "primary_sources": "https://www.csl.cornell.edu/~zhiruz/pdfs/heurigym-iclr2026.pdf; https://arxiv.org/abs/2506.07972; https://github.com/cornell-zhang/heurigym/tree/a4cf0460152eb798f1b3a797ef22a08192661bf5; https://huggingface.co/datasets/heurigen/heurigen-data; https://cornell-zhang.github.io/heurigym/",
+      "evidence_status": "第二轮12h进行中；80固定Gitblobs/全文、网站CSV与185solver的自写静态AST/数表核；未运行solver/第三方grader/EDA。",
+      "next_verification": "需要匹配runrevision、严格heldoutmanifest/全部失败/原始task与完整轨迹，核评分版本、强原生基线/成本；访问受限内容不绕过。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "synth-heurigym-egraph",
+      "benchmark_family": "HeuriGym heuristic algorithm engineering",
+      "name": "HeuriGym / e-graph extraction heuristic",
+      "category": "综合/等价表达式提取agent",
+      "artifact_type": "邻接编译优化分轨；同9问题suite",
+      "task_layer": "算法启发式代码生成/反馈改进；与工具调用流程分层",
+      "version": "ICLR2026 publishedpaper；arxiv2506.07972v2；Git a4cf0460；2026-10-20website snapshot",
+      "input": "JSON饱和egraph nodes/eclasses/rootsets、每nodecost；paper23instances，reusegivenrewriteclosure，不要求LLM自己证明所有rewrite。",
+      "task": "从equivalenceclasses选节点形成低costacyclicexpression，Pythonheuristic/10s/8cores，demo反馈迭代。",
+      "output": "selectednodeIDs列表；checker核knownID、root exactlyone、被选node每childclass exactlyone、acyclic；cost=sumselectednodecost。",
+      "metrics": "paperQuality=有效例min(1,expertcost/candidatecost)算术均值、Yield=有效/全部，QYI=2QY/(Q+Y)，SOLVEI/II/III@i分别执行/非空输出/约束验收。currentcollect用几何Quality、选最高QCI轮次；网站各problem加权QYI，不能把harmonic(weightedQ,weightedY)当weightedQYI。 此taskmetric正cost用base/cost，双方负cost用cost/base，capped1；不是所有任务同一物理单位。结构合法来自输入egraph先验，不是任意源码semanticproof。",
+      "baseline": "贪心expertbaseline/更精确求解器需相同egraph、重复子表达式共享与预算；compiler/equivalencerewriting成熟不等NP-hardextract全局最优已解决。",
+      "tools_and_access": "80全部Gitblobs核/rootApache2；HF heurigen/heurigen-data公开card/topfolders与CCBY4标签可见、1.39GB，但本轮shell两次timeout，deepAPI/UI不可访问后未绕过，完整inputpayload未取。网站结果/solverJSON实取并hash，公开源码不自动涵盖所有上游工具/数据许可。",
+      "limitations": "paper10iter/当前CLI默认3/网页更新5iter分别记录；paper8cores，ops/map10s、routing300s、egraph10s、intra60s，budget含优化器/全部候选/评测成本。main只给demo反馈，但collector传datasetroot递归收文件可能同时收demo/eval，并从结果选bestiteration；完整payload/ledger缺失，不能量化实际泄漏或归因每个论文run。 输入与rules若训练/测试复用须按sourceprogram分组；没有实际原程序/egraphpayload不能复算cost或推映射后PPA。",
+      "industrial_value": "研究判断：邻接logic/compiler优化资源，可比较LLM生成heuristic与传统extractor；其costmodel需映射实际门级成本后才能称ASIC面积收益。",
+      "primary_sources": "https://www.csl.cornell.edu/~zhiruz/pdfs/heurigym-iclr2026.pdf; https://arxiv.org/abs/2506.07972; https://github.com/cornell-zhang/heurigym/tree/a4cf0460152eb798f1b3a797ef22a08192661bf5; https://huggingface.co/datasets/heurigen/heurigen-data; https://cornell-zhang.github.io/heurigym/",
+      "evidence_status": "第二轮12h进行中；80固定Gitblobs/全文、网站CSV与185solver的自写静态AST/数表核；未运行solver/第三方grader/EDA。",
+      "next_verification": "需要匹配runrevision、严格heldoutmanifest/全部失败/原始task与完整轨迹，核评分版本、强原生基线/成本；访问受限内容不绕过。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "arch-heurigym-intraop",
+      "benchmark_family": "HeuriGym heuristic algorithm engineering",
+      "name": "HeuriGym / accelerator intra-operator sharding",
+      "category": "边界类/加速器映射与分布式策略",
+      "artifact_type": "邻接系统映射分轨；非芯片layout",
+      "task_layer": "算法启发式代码生成/反馈改进；与工具调用流程分层",
+      "version": "ICLR2026 publishedpaper；arxiv2506.07972v2；Git a4cf0460；2026-10-20website snapshot",
+      "input": "nodes多strategy/各cost与usage、pairwisestrategyedgecost、固定timeinterval和memorylimit；paper/currentbaseline28instances，ASPLOS2025IOPDDL工作负载派生。",
+      "task": "为每node选strategy最小化节点+边总cost且每时刻usage不超limit，Pythonheuristic、60s/8cores。不是写RTL或在真实多GPU集群训练模型。",
+      "output": "strategyindex向量、约束通过与sumcost；checker核长度、内存、索引与edge策略合法性。",
+      "metrics": "paperQuality=有效例min(1,expertcost/candidatecost)算术均值、Yield=有效/全部，QYI=2QY/(Q+Y)，SOLVEI/II/III@i分别执行/非空输出/约束验收。currentcollect用几何Quality、选最高QCI轮次；网站各problem加权QYI，不能把harmonic(weightedQ,weightedY)当weightedQYI。 此分轨normalize实际上min(1,log10(baselinecost)/log10(candidatecost))，与costratio不同；csvQuality接近1不等实际runtime近expert。",
+      "baseline": "nativeIOPDDL/特定精确或启发式solver为强baseline，模拟costmodel预设的通信/内存结构不能当实际电路STA。",
+      "tools_and_access": "80全部Gitblobs核/rootApache2；HF heurigen/heurigen-data公开card/topfolders与CCBY4标签可见、1.39GB，但本轮shell两次timeout，deepAPI/UI不可访问后未绕过，完整inputpayload未取。网站结果/solverJSON实取并hash，公开源码不自动涵盖所有上游工具/数据许可。",
+      "limitations": "paper10iter/当前CLI默认3/网页更新5iter分别记录；paper8cores，ops/map10s、routing300s、egraph10s、intra60s，budget含优化器/全部候选/评测成本。main只给demo反馈，但collector传datasetroot递归收文件可能同时收demo/eval，并从结果选bestiteration；完整payload/ledger缺失，不能量化实际泄漏或归因每个论文run。 currentchecker在范围检查前索引strategy做usage可能先抛异常，属formatfailure不同类别；实际发生次数未知。",
+      "industrial_value": "研究判断：芯片加速器系统映射的邻接agent算法任务，可纳入全栈地图，但不能与工艺node/布局PPA记录并榜。",
+      "primary_sources": "https://www.csl.cornell.edu/~zhiruz/pdfs/heurigym-iclr2026.pdf; https://arxiv.org/abs/2506.07972; https://github.com/cornell-zhang/heurigym/tree/a4cf0460152eb798f1b3a797ef22a08192661bf5; https://huggingface.co/datasets/heurigen/heurigen-data; https://cornell-zhang.github.io/heurigym/",
+      "evidence_status": "第二轮12h进行中；80固定Gitblobs/全文、网站CSV与185solver的自写静态AST/数表核；未运行solver/第三方grader/EDA。",
+      "next_verification": "需要匹配runrevision、严格heldoutmanifest/全部失败/原始task与完整轨迹，核评分版本、强原生基线/成本；访问受限内容不绕过。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "data-heurigym-solvers",
+      "benchmark_family": "HeuriGym heuristic algorithm engineering",
+      "name": "HeuriGym / released generated solver-source companion",
+      "category": "综合/算法工程生成结果与反馈资源",
+      "artifact_type": "真实生成代码/成绩资源；非独立bench和完整trace",
+      "task_layer": "算法启发式代码生成/反馈改进；与工具调用流程分层",
+      "version": "ICLR2026 publishedpaper；arxiv2506.07972v2；Git a4cf0460；2026-10-20website snapshot",
+      "input": "同9CO问题，website21model-ID→185problemcode strings；其中3EDA62份，若含egraph/intra则103份；其余biology/logistics不当芯片任务。30model×9problem=270聚合metricrows。",
+      "task": "可静态审阅模型生成的最终heuristic与结果，训练/复用前按任务源和modeldata许可判断；不从单个code字符串虚构中间prompt、工具反馈、候选选择或成本链。",
+      "output": "185code strings全部本地实取、hash；180能PythonAST解析且有solve，5含语法/markdown/缩进等格式问题，未执行，不代表180全部算法正确。",
+      "metrics": "网站T0为30models，T.5/T1各9。按baseline218权重复算：19/30 Yield/QYI在.001内匹配，11超舍入差；旧9Quality按case加权、新10更符合成功例数加权，网页“由aggregateQYI倒算Quality”说明与当前CSV不符。未取得匹配runversion前不合成新SOTA榜。",
+      "baseline": "paper与网站新增模型/iteration/scoreaggregation分版，SOLVE累计best可行与选定单heuristicQYI不同；成本是指定旧listprice×tokens估计，不等当前账单、CPU/验证器总成本。",
+      "tools_and_access": "80全部Gitblobs核/rootApache2；HF heurigen/heurigen-data公开card/topfolders与CCBY4标签可见、1.39GB，但本轮shell两次timeout，deepAPI/UI不可访问后未绕过，完整inputpayload未取。网站结果/solverJSON实取并hash，公开源码不自动涵盖所有上游工具/数据许可。",
+      "limitations": "paper10iter/当前CLI默认3/网页更新5iter分别记录；paper8cores，ops/map10s、routing300s、egraph10s、intra60s，budget含优化器/全部候选/评测成本。main只给demo反馈，但collector传datasetroot递归收文件可能同时收demo/eval，并从结果选bestiteration；完整payload/ledger缺失，不能量化实际泄漏或归因每个论文run。 Generatedcode/resource可能含无效解，需独立重新验收后才能作positive；缺完整error/cost/iterationhistory，不能把185当185完整providertrajectories。",
+      "industrial_value": "研究判断：比只有排行榜有用的真实生成工件，适合算法结构/错误分析；明确不是完整交互SFT库、也不是185独立硬件设计。",
+      "primary_sources": "https://www.csl.cornell.edu/~zhiruz/pdfs/heurigym-iclr2026.pdf; https://arxiv.org/abs/2506.07972; https://github.com/cornell-zhang/heurigym/tree/a4cf0460152eb798f1b3a797ef22a08192661bf5; https://huggingface.co/datasets/heurigen/heurigen-data; https://cornell-zhang.github.io/heurigym/",
+      "evidence_status": "第二轮12h进行中；80固定Gitblobs/全文、网站CSV与185solver的自写静态AST/数表核；未运行solver/第三方grader/EDA。",
+      "next_verification": "需要匹配runrevision、严格heldoutmanifest/全部失败/原始task与完整轨迹，核评分版本、强原生基线/成本；访问受限内容不绕过。",
+      "retrieved_date": "2026-10-20"
+    }
+  ],
+  "static_audit": {
+    "as_of": "2026-10-20T14:41:45.098968+00:00",
+    "mode": "static_only_source_csv_ast_and_own_math",
+    "source_blobs": 80,
+    "code_pin": "a4cf0460152eb798f1b3a797ef22a08192661bf5",
+    "baseline_instance_counts": {
+      "global_routing": 24,
+      "crew_pairing": 14,
+      "intra_op_parallel": 28,
+      "pickup_delivery_time_windows": 30,
+      "egraph_extraction": 23,
+      "pedigree": 20,
+      "operator_scheduling": 24,
+      "protein_sequence_design": 24,
+      "technology_mapping": 31
+    },
+    "baseline_total": 218,
+    "global_routing_source_groups": {
+      "ariane_68": 8,
+      "mempool_tile": 8,
+      "nvdla": 8
+    },
+    "website": {
+      "t0_models": 30,
+      "t05_models": 9,
+      "t1_models": 9,
+      "problem_rows": 270,
+      "aggregate_checks": [
+        {
+          "model": "Claude-3.7-Sonnet",
+          "checks": {
+            "Yield": {
+              "weighted_from_rounded_problem_table": 0.5963302752293578,
+              "published": 0.5963302752293578,
+              "absolute_delta": 0.0
+            },
+            "Quality": {
+              "weighted_from_rounded_problem_table": 0.46864181419935014,
+              "published": 0.4686418141993501,
+              "absolute_delta": 5.551115123125783e-17
+            },
+            "QYI": {
+              "weighted_from_rounded_problem_table": 0.5033804686934877,
+              "published": 0.5033804686934877,
+              "absolute_delta": 0.0
+            }
+          },
+          "harmonic_of_aggregate_quality_yield": 0.5248312229391852,
+          "aggregate_qyi": 0.5033804686934877,
+          "delta_aggregate_harmonic_vs_weighted_qyi": 0.021450754245697423,
+          "passcount_weighted_quality": 0.6474615575169482,
+          "passcount_weighted_quality_error": 0.17881974331759815,
+          "caption_backcalculated_quality": 0.4354993294921785,
+          "caption_backcalculation_error": 0.03314248470717157
+        },
+        {
+          "model": "DeepSeek-R1",
+          "checks": {
+            "Yield": {
+              "weighted_from_rounded_problem_table": 0.6972477064220184,
+              "published": 0.6972477064220184,
+              "absolute_delta": 0.0
+            },
+            "Quality": {
+              "weighted_from_rounded_problem_table": 0.577478688066221,
+              "published": 0.5774786880662209,
+              "absolute_delta": 1.1102230246251565e-16
+            },
+            "QYI": {
+              "weighted_from_rounded_problem_table": 0.5497613438082674,
+              "published": 0.5497613438082675,
+              "absolute_delta": 1.1102230246251565e-16
+            }
+          },
+          "harmonic_of_aggregate_quality_yield": 0.6317366495316319,
+          "aggregate_qyi": 0.5497613438082675,
+          "delta_aggregate_harmonic_vs_weighted_qyi": 0.08197530572336442,
+          "passcount_weighted_quality": 0.6212259738035598,
+          "passcount_weighted_quality_error": 0.04374728573733888,
+          "caption_backcalculated_quality": 0.4537757503818281,
+          "caption_backcalculation_error": 0.12370293768439283
+        },
+        {
+          "model": "DeepSeek-V3-0304",
+          "checks": {
+            "Yield": {
+              "weighted_from_rounded_problem_table": 0.45871559633027525,
+              "published": 0.45871559633027525,
+              "absolute_delta": 0.0
+            },
+            "Quality": {
+              "weighted_from_rounded_problem_table": 0.3889853401286581,
+              "published": 0.3889853401286581,
+              "absolute_delta": 0.0
+            },
+            "QYI": {
+              "weighted_from_rounded_problem_table": 0.3707350059677378,
+              "published": 0.3707350059677378,
+              "absolute_delta": 0.0
+            }
+          },
+          "harmonic_of_aggregate_quality_yield": 0.4209825295374001,
+          "aggregate_qyi": 0.3707350059677378,
+          "delta_aggregate_harmonic_vs_weighted_qyi": 0.05024752356966233,
+          "passcount_weighted_quality": 0.6444483980898715,
+          "passcount_weighted_quality_error": 0.25546305796121344,
+          "caption_backcalculated_quality": 0.3110720972315038,
+          "caption_backcalculation_error": 0.07791324289715429
+        },
+        {
+          "model": "GPT-o4-mini:high",
+          "checks": {
+            "Yield": {
+              "weighted_from_rounded_problem_table": 0.6926605504587156,
+              "published": 0.6926605504587156,
+              "absolute_delta": 0.0
+            },
+            "Quality": {
+              "weighted_from_rounded_problem_table": 0.6439745393516236,
+              "published": 0.6439745393516236,
+              "absolute_delta": 0.0
+            },
+            "QYI": {
+              "weighted_from_rounded_problem_table": 0.6088897345539104,
+              "published": 0.6088897345539104,
+              "absolute_delta": 0.0
+            }
+          },
+          "harmonic_of_aggregate_quality_yield": 0.6674308677202035,
+          "aggregate_qyi": 0.6088897345539104,
+          "delta_aggregate_harmonic_vs_weighted_qyi": 0.05854113316629317,
+          "passcount_weighted_quality": 0.7420909227214859,
+          "passcount_weighted_quality_error": 0.09811638336986228,
+          "caption_backcalculated_quality": 0.5431953382822378,
+          "caption_backcalculation_error": 0.10077920106938587
+        },
+        {
+          "model": "Gemini-2.5-Flash-0417",
+          "checks": {
+            "Yield": {
+              "weighted_from_rounded_problem_table": 0.6605504587155964,
+              "published": 0.6605504587155964,
+              "absolute_delta": 0.0
+            },
+            "Quality": {
+              "weighted_from_rounded_problem_table": 0.5280710856959938,
+              "published": 0.5280710856959938,
+              "absolute_delta": 0.0
+            },
+            "QYI": {
+              "weighted_from_rounded_problem_table": 0.5682284542835527,
+              "published": 0.5682284542835527,
+              "absolute_delta": 0.0
+            }
+          },
+          "harmonic_of_aggregate_quality_yield": 0.5869279410775089,
+          "aggregate_qyi": 0.5682284542835527,
+          "delta_aggregate_harmonic_vs_weighted_qyi": 0.018699486793956166,
+          "passcount_weighted_quality": 0.7688375200853536,
+          "passcount_weighted_quality_error": 0.24076643438935974,
+          "caption_backcalculated_quality": 0.49854867126233215,
+          "caption_backcalculation_error": 0.02952241443366166
+        },
+        {
+          "model": "Gemini-2.5-Pro-0506",
+          "checks": {
+            "Yield": {
+              "weighted_from_rounded_problem_table": 0.6467889908256881,
+              "published": 0.6467889908256881,
+              "absolute_delta": 0.0
+            },
+            "Quality": {
+              "weighted_from_rounded_problem_table": 0.6700432180770771,
+              "published": 0.6700432180770771,
+              "absolute_delta": 0.0
+            },
+            "QYI": {
+              "weighted_from_rounded_problem_table": 0.6170361475639661,
+              "published": 0.6170361475639661,
+              "absolute_delta": 0.0
+            }
+          },
+          "harmonic_of_aggregate_quality_yield": 0.6582107787153461,
+          "aggregate_qyi": 0.6170361475639661,
+          "delta_aggregate_harmonic_vs_weighted_qyi": 0.04117463115137998,
+          "passcount_weighted_quality": 0.791395174555274,
+          "passcount_weighted_quality_error": 0.12135195647819685,
+          "caption_backcalculated_quality": 0.5899002353996409,
+          "caption_backcalculation_error": 0.08014298267743625
+        },
+        {
+          "model": "LLaMA-3.3-70B-Instruct",
+          "checks": {
+            "Yield": {
+              "weighted_from_rounded_problem_table": 0.3394495412844037,
+              "published": 0.3394495412844037,
+              "absolute_delta": 0.0
+            },
+            "Quality": {
+              "weighted_from_rounded_problem_table": 0.3520955828277668,
+              "published": 0.3520955828277669,
+              "absolute_delta": 5.551115123125783e-17
+            },
+            "QYI": {
+              "weighted_from_rounded_problem_table": 0.29509494863144425,
+              "published": 0.29509494863144425,
+              "absolute_delta": 0.0
+            }
+          },
+          "harmonic_of_aggregate_quality_yield": 0.3456569352074962,
+          "aggregate_qyi": 0.29509494863144425,
+          "delta_aggregate_harmonic_vs_weighted_qyi": 0.05056198657605193,
+          "passcount_weighted_quality": 0.5227315677064849,
+          "passcount_weighted_quality_error": 0.170635984878718,
+          "caption_backcalculated_quality": 0.260992094901813,
+          "caption_backcalculation_error": 0.09110348792595385
+        },
+        {
+          "model": "LLaMA-4-Maverick-17B-128E-Instruct",
+          "checks": {
+            "Yield": {
+              "weighted_from_rounded_problem_table": 0.3211009174311927,
+              "published": 0.3211009174311927,
+              "absolute_delta": 0.0
+            },
+            "Quality": {
+              "weighted_from_rounded_problem_table": 0.338313647708639,
+              "published": 0.338313647708639,
+              "absolute_delta": 0.0
+            },
+            "QYI": {
+              "weighted_from_rounded_problem_table": 0.29552543243560553,
+              "published": 0.29552543243560553,
+              "absolute_delta": 0.0
+            }
+          },
+          "harmonic_of_aggregate_quality_yield": 0.32948263020457014,
+          "aggregate_qyi": 0.29552543243560553,
+          "delta_aggregate_harmonic_vs_weighted_qyi": 0.03395719776896461,
+          "passcount_weighted_quality": 0.6201049475891162,
+          "passcount_weighted_quality_error": 0.2817912998804772,
+          "caption_backcalculated_quality": 0.273723526652106,
+          "caption_backcalculation_error": 0.064590121056533
+        },
+        {
+          "model": "Qwen3-235B-A22B",
+          "checks": {
+            "Yield": {
+              "weighted_from_rounded_problem_table": 0.44495412844036697,
+              "published": 0.44495412844036697,
+              "absolute_delta": 0.0
+            },
+            "Quality": {
+              "weighted_from_rounded_problem_table": 0.4513170424961306,
+              "published": 0.45131704249613064,
+              "absolute_delta": 5.551115123125783e-17
+            },
+            "QYI": {
+              "weighted_from_rounded_problem_table": 0.4355052474142274,
+              "published": 0.4355052474142274,
+              "absolute_delta": 0.0
+            }
+          },
+          "harmonic_of_aggregate_quality_yield": 0.4481129992931078,
+          "aggregate_qyi": 0.4355052474142274,
+          "delta_aggregate_harmonic_vs_weighted_qyi": 0.012607751878880413,
+          "passcount_weighted_quality": 0.7686005603764549,
+          "passcount_weighted_quality_error": 0.3172835178803242,
+          "caption_backcalculated_quality": 0.42644932748555486,
+          "caption_backcalculation_error": 0.024867715010575775
+        },
+        {
+          "model": "Gemini-3.1-Pro",
+          "checks": {
+            "Yield": {
+              "weighted_from_rounded_problem_table": 0.8485963302752294,
+              "published": 0.849,
+              "absolute_delta": 0.0004036697247705723
+            },
+            "Quality": {
+              "weighted_from_rounded_problem_table": 0.939894495412844,
+              "published": 0.947,
+              "absolute_delta": 0.007105504587155975
+            },
+            "QYI": {
+              "weighted_from_rounded_problem_table": 0.8781284403669725,
+              "published": 0.878,
+              "absolute_delta": 0.00012844036697245986
+            }
+          },
+          "harmonic_of_aggregate_quality_yield": 0.895326280623608,
+          "aggregate_qyi": 0.878,
+          "delta_aggregate_harmonic_vs_weighted_qyi": 0.01732628062360797,
+          "passcount_weighted_quality": 0.9474315058866775,
+          "passcount_weighted_quality_error": 0.0004315058866775079,
+          "caption_backcalculated_quality": 0.9090512195121953,
+          "caption_backcalculation_error": 0.0379487804878047
+        },
+        {
+          "model": "GPT-5.3-Codex",
+          "checks": {
+            "Yield": {
+              "weighted_from_rounded_problem_table": 0.908211009174312,
+              "published": 0.908,
+              "absolute_delta": 0.000211009174311938
+            },
+            "Quality": {
+              "weighted_from_rounded_problem_table": 0.7930045871559633,
+              "published": 0.773,
+              "absolute_delta": 0.020004587155963316
+            },
+            "QYI": {
+              "weighted_from_rounded_problem_table": 0.7882935779816514,
+              "published": 0.788,
+              "absolute_delta": 0.00029357798165141613
+            }
+          },
+          "harmonic_of_aggregate_quality_yield": 0.8350791195716836,
+          "aggregate_qyi": 0.788,
+          "delta_aggregate_harmonic_vs_weighted_qyi": 0.047079119571683536,
+          "passcount_weighted_quality": 0.7733983029445932,
+          "passcount_weighted_quality_error": 0.0003983029445931985,
+          "caption_backcalculated_quality": 0.6960155642023347,
+          "caption_backcalculation_error": 0.07698443579766534
+        },
+        {
+          "model": "Claude-Opus-4.6",
+          "checks": {
+            "Yield": {
+              "weighted_from_rounded_problem_table": 0.7890137614678899,
+              "published": 0.789,
+              "absolute_delta": 1.3761467889894519e-05
+            },
+            "Quality": {
+              "weighted_from_rounded_problem_table": 0.7277339449541285,
+              "published": 0.849,
+              "absolute_delta": 0.12126605504587151
+            },
+            "QYI": {
+              "weighted_from_rounded_problem_table": 0.750256880733945,
+              "published": 0.75,
+              "absolute_delta": 0.00025688073394503075
+            }
+          },
+          "harmonic_of_aggregate_quality_yield": 0.817901098901099,
+          "aggregate_qyi": 0.75,
+          "delta_aggregate_harmonic_vs_weighted_qyi": 0.06790109890109897,
+          "passcount_weighted_quality": 0.8487699427342228,
+          "passcount_weighted_quality_error": 0.00023005726577718377,
+          "caption_backcalculated_quality": 0.7146739130434782,
+          "caption_backcalculation_error": 0.13432608695652182
+        },
+        {
+          "model": "GLM-5",
+          "checks": {
+            "Yield": {
+              "weighted_from_rounded_problem_table": 0.7843669724770642,
+              "published": 0.784,
+              "absolute_delta": 0.0003669724770641869
+            },
+            "Quality": {
+              "weighted_from_rounded_problem_table": 0.8647201834862385,
+              "published": 0.849,
+              "absolute_delta": 0.015720183486238493
+            },
+            "QYI": {
+              "weighted_from_rounded_problem_table": 0.776091743119266,
+              "published": 0.776,
+              "absolute_delta": 9.174311926596346e-05
+            }
+          },
+          "harmonic_of_aggregate_quality_yield": 0.8152063686466625,
+          "aggregate_qyi": 0.776,
+          "delta_aggregate_harmonic_vs_weighted_qyi": 0.03920636864666249,
+          "passcount_weighted_quality": 0.8488546949564891,
+          "passcount_weighted_quality_error": 0.00014530504351084605,
+          "caption_backcalculated_quality": 0.7681616161616162,
+          "caption_backcalculation_error": 0.08083838383838382
+        },
+        {
+          "model": "Gemini-3-Flash",
+          "checks": {
+            "Yield": {
+              "weighted_from_rounded_problem_table": 0.76601376146789,
+              "published": 0.766,
+              "absolute_delta": 1.3761467890005541e-05
+            },
+            "Quality": {
+              "weighted_from_rounded_problem_table": 0.6912477064220184,
+              "published": 0.76,
+              "absolute_delta": 0.06875229357798163
+            },
+            "QYI": {
+              "weighted_from_rounded_problem_table": 0.6821467889908257,
+              "published": 0.682,
+              "absolute_delta": 0.00014678899082565255
+            }
+          },
+          "harmonic_of_aggregate_quality_yield": 0.7629882044560944,
+          "aggregate_qyi": 0.682,
+          "delta_aggregate_harmonic_vs_weighted_qyi": 0.08098820445609434,
+          "passcount_weighted_quality": 0.7603102382763143,
+          "passcount_weighted_quality_error": 0.0003102382763142675,
+          "caption_backcalculated_quality": 0.6146023529411766,
+          "caption_backcalculation_error": 0.1453976470588234
+        },
+        {
+          "model": "Grok-4",
+          "checks": {
+            "Yield": {
+              "weighted_from_rounded_problem_table": 0.628545871559633,
+              "published": 0.628,
+              "absolute_delta": 0.0005458715596330377
+            },
+            "Quality": {
+              "weighted_from_rounded_problem_table": 0.8680045871559633,
+              "published": 0.868,
+              "absolute_delta": 4.587155963298173e-06
+            },
+            "QYI": {
+              "weighted_from_rounded_problem_table": 0.6521697247706422,
+              "published": 0.652,
+              "absolute_delta": 0.00016972477064214342
+            }
+          },
+          "harmonic_of_aggregate_quality_yield": 0.7287486631016044,
+          "aggregate_qyi": 0.652,
+          "delta_aggregate_harmonic_vs_weighted_qyi": 0.07674866310160433,
+          "passcount_weighted_quality": 0.867884055961408,
+          "passcount_weighted_quality_error": 0.00011594403859194191,
+          "caption_backcalculated_quality": 0.677907284768212,
+          "caption_backcalculation_error": 0.19009271523178795
+        },
+        {
+          "model": "Kimi-K2.5",
+          "checks": {
+            "Yield": {
+              "weighted_from_rounded_problem_table": 0.6788577981651376,
+              "published": 0.679,
+              "absolute_delta": 0.0001422018348624654
+            },
+            "Quality": {
+              "weighted_from_rounded_problem_table": 0.5442614678899083,
+              "published": 0.73,
+              "absolute_delta": 0.18573853211009173
+            },
+            "QYI": {
+              "weighted_from_rounded_problem_table": 0.5924495412844036,
+              "published": 0.593,
+              "absolute_delta": 0.0005504587155963359
+            }
+          },
+          "harmonic_of_aggregate_quality_yield": 0.7035770049680624,
+          "aggregate_qyi": 0.593,
+          "delta_aggregate_harmonic_vs_weighted_qyi": 0.11057700496806244,
+          "passcount_weighted_quality": 0.730315593515822,
+          "passcount_weighted_quality_error": 0.0003155935158219991,
+          "caption_backcalculated_quality": 0.5263359477124182,
+          "caption_backcalculation_error": 0.20366405228758178
+        },
+        {
+          "model": "Qwen3.5-397B",
+          "checks": {
+            "Yield": {
+              "weighted_from_rounded_problem_table": 0.6696788990825688,
+              "published": 0.67,
+              "absolute_delta": 0.00032110091743120517
+            },
+            "Quality": {
+              "weighted_from_rounded_problem_table": 0.5943394495412844,
+              "published": 0.709,
+              "absolute_delta": 0.1146605504587156
+            },
+            "QYI": {
+              "weighted_from_rounded_problem_table": 0.5782201834862385,
+              "published": 0.578,
+              "absolute_delta": 0.00022018348623853434
+            }
+          },
+          "harmonic_of_aggregate_quality_yield": 0.6889485134155185,
+          "aggregate_qyi": 0.578,
+          "delta_aggregate_harmonic_vs_weighted_qyi": 0.11094851341551859,
+          "passcount_weighted_quality": 0.7093377765600384,
+          "passcount_weighted_quality_error": 0.0003377765600384164,
+          "caption_backcalculated_quality": 0.5082152230971128,
+          "caption_backcalculation_error": 0.2007847769028872
+        },
+        {
+          "model": "MiniMax-M2.5",
+          "checks": {
+            "Yield": {
+              "weighted_from_rounded_problem_table": 0.33939449541284405,
+              "published": 0.339,
+              "absolute_delta": 0.00039449541284403145
+            },
+            "Quality": {
+              "weighted_from_rounded_problem_table": 0.29275229357798166,
+              "published": 0.681,
+              "absolute_delta": 0.3882477064220184
+            },
+            "QYI": {
+              "weighted_from_rounded_problem_table": 0.30016513761467895,
+              "published": 0.3,
+              "absolute_delta": 0.00016513761467895627
+            }
+          },
+          "harmonic_of_aggregate_quality_yield": 0.452664705882353,
+          "aggregate_qyi": 0.3,
+          "delta_aggregate_harmonic_vs_weighted_qyi": 0.15266470588235304,
+          "passcount_weighted_quality": 0.6813656809212304,
+          "passcount_weighted_quality_error": 0.0003656809212303491,
+          "caption_backcalculated_quality": 0.269047619047619,
+          "caption_backcalculation_error": 0.41195238095238107
+        },
+        {
+          "model": "DeepSeek-V3.2",
+          "checks": {
+            "Yield": {
+              "weighted_from_rounded_problem_table": 0.33953669724770646,
+              "published": 0.339,
+              "absolute_delta": 0.0005366972477064413
+            },
+            "Quality": {
+              "weighted_from_rounded_problem_table": 0.393105504587156,
+              "published": 0.626,
+              "absolute_delta": 0.23289449541284402
+            },
+            "QYI": {
+              "weighted_from_rounded_problem_table": 0.3067385321100917,
+              "published": 0.307,
+              "absolute_delta": 0.0002614678899082734
+            }
+          },
+          "harmonic_of_aggregate_quality_yield": 0.4398217616580311,
+          "aggregate_qyi": 0.307,
+          "delta_aggregate_harmonic_vs_weighted_qyi": 0.1328217616580311,
+          "passcount_weighted_quality": 0.6265081803320768,
+          "passcount_weighted_quality_error": 0.0005081803320767797,
+          "caption_backcalculated_quality": 0.28052021563342316,
+          "caption_backcalculation_error": 0.34547978436657684
+        },
+        {
+          "model": "MiMo-V2-Flash",
+          "checks": {
+            "Yield": {
+              "weighted_from_rounded_problem_table": 0.15596146788990825,
+              "published": 0.14378606557377047,
+              "absolute_delta": 0.012175402316137784
+            },
+            "Quality": {
+              "weighted_from_rounded_problem_table": 0.4767128440366972,
+              "published": 0.532472950819672,
+              "absolute_delta": 0.05576010678297483
+            },
+            "QYI": {
+              "weighted_from_rounded_problem_table": 0.17100366972477066,
+              "published": 0.1613065573770492,
+              "absolute_delta": 0.00969711234772147
+            }
+          },
+          "harmonic_of_aggregate_quality_yield": 0.2264285984122779,
+          "aggregate_qyi": 0.1613065573770492,
+          "delta_aggregate_harmonic_vs_weighted_qyi": 0.0651220410352287,
+          "passcount_weighted_quality": 0.6261446652313557,
+          "passcount_weighted_quality_error": 0.09367171441168365,
+          "caption_backcalculated_quality": 0.18368930298177533,
+          "caption_backcalculation_error": 0.3487836478378967
+        },
+        {
+          "model": "GPT-5.4",
+          "checks": {
+            "Yield": {
+              "weighted_from_rounded_problem_table": 0.7201885321100918,
+              "published": 0.7500045081967214,
+              "absolute_delta": 0.02981597608662956
+            },
+            "Quality": {
+              "weighted_from_rounded_problem_table": 0.7465940366972477,
+              "published": 0.7709643442622951,
+              "absolute_delta": 0.024370307565047433
+            },
+            "QYI": {
+              "weighted_from_rounded_problem_table": 0.7079944954128441,
+              "published": 0.737777868852459,
+              "absolute_delta": 0.029783373439614902
+            }
+          },
+          "harmonic_of_aggregate_quality_yield": 0.7603400068591886,
+          "aggregate_qyi": 0.737777868852459,
+          "delta_aggregate_harmonic_vs_weighted_qyi": 0.02256213800672957,
+          "passcount_weighted_quality": 0.8419868325126384,
+          "passcount_weighted_quality_error": 0.0710224882503433,
+          "caption_backcalculated_quality": 0.7259434745906416,
+          "caption_backcalculation_error": 0.04502086967165353
+        },
+        {
+          "model": "Mimo-V2-Pro",
+          "checks": {
+            "Yield": {
+              "weighted_from_rounded_problem_table": 0.6100908256880734,
+              "published": 0.6516385245901639,
+              "absolute_delta": 0.041547698902090535
+            },
+            "Quality": {
+              "weighted_from_rounded_problem_table": 0.6536633027522937,
+              "published": 0.6883622950819672,
+              "absolute_delta": 0.03469899232967355
+            },
+            "QYI": {
+              "weighted_from_rounded_problem_table": 0.5646788990825689,
+              "published": 0.6099467213114754,
+              "absolute_delta": 0.045267822228906573
+            }
+          },
+          "harmonic_of_aggregate_quality_yield": 0.6694971880098787,
+          "aggregate_qyi": 0.6099467213114754,
+          "delta_aggregate_harmonic_vs_weighted_qyi": 0.05955046669840325,
+          "passcount_weighted_quality": 0.8427265871076498,
+          "passcount_weighted_quality_error": 0.15436429202568258,
+          "caption_backcalculated_quality": 0.5732689968658065,
+          "caption_backcalculation_error": 0.11509329821616077
+        },
+        {
+          "model": "Mimo-V2-Omni",
+          "checks": {
+            "Yield": {
+              "weighted_from_rounded_problem_table": 0.513756880733945,
+              "published": 0.5655696721311475,
+              "absolute_delta": 0.05181279139720252
+            },
+            "Quality": {
+              "weighted_from_rounded_problem_table": 0.5185142201834863,
+              "published": 0.5633520491803279,
+              "absolute_delta": 0.04483782899684163
+            },
+            "QYI": {
+              "weighted_from_rounded_problem_table": 0.5123394495412844,
+              "published": 0.5609680327868853,
+              "absolute_delta": 0.04862858324560093
+            }
+          },
+          "harmonic_of_aggregate_quality_yield": 0.5644586825368039,
+          "aggregate_qyi": 0.5609680327868853,
+          "delta_aggregate_harmonic_vs_weighted_qyi": 0.0034906497499185285,
+          "passcount_weighted_quality": 0.8529318217126939,
+          "passcount_weighted_quality_error": 0.289579772532366,
+          "caption_backcalculated_quality": 0.5564406696618173,
+          "caption_backcalculation_error": 0.006911379518510619
+        },
+        {
+          "model": "GLM-5.1",
+          "checks": {
+            "Yield": {
+              "weighted_from_rounded_problem_table": 0.7339353211009175,
+              "published": 0.7622864754098362,
+              "absolute_delta": 0.028351154308918658
+            },
+            "Quality": {
+              "weighted_from_rounded_problem_table": 0.8785981651376147,
+              "published": 0.8898081967213115,
+              "absolute_delta": 0.011210031583696822
+            },
+            "QYI": {
+              "weighted_from_rounded_problem_table": 0.7824344036697247,
+              "published": 0.8047438524590165,
+              "absolute_delta": 0.022309448789291753
+            }
+          },
+          "harmonic_of_aggregate_quality_yield": 0.8211257690147995,
+          "aggregate_qyi": 0.8047438524590165,
+          "delta_aggregate_harmonic_vs_weighted_qyi": 0.016381916555783027,
+          "passcount_weighted_quality": 0.8797902682472706,
+          "passcount_weighted_quality_error": 0.010017928474040927,
+          "caption_backcalculated_quality": 0.852209720745913,
+          "caption_backcalculation_error": 0.03759847597539856
+        },
+        {
+          "model": "Gemma-4-31B",
+          "checks": {
+            "Yield": {
+              "weighted_from_rounded_problem_table": 0.7064233944954129,
+              "published": 0.6444684426229509,
+              "absolute_delta": 0.06195495187246203
+            },
+            "Quality": {
+              "weighted_from_rounded_problem_table": 0.7595793577981651,
+              "published": 0.7797315573770492,
+              "absolute_delta": 0.020152199578884145
+            },
+            "QYI": {
+              "weighted_from_rounded_problem_table": 0.6194761467889908,
+              "published": 0.5770049180327869,
+              "absolute_delta": 0.042471228756203905
+            }
+          },
+          "harmonic_of_aggregate_quality_yield": 0.7056767061462645,
+          "aggregate_qyi": 0.5770049180327869,
+          "delta_aggregate_harmonic_vs_weighted_qyi": 0.12867178811347768,
+          "passcount_weighted_quality": 0.7075698949287761,
+          "passcount_weighted_quality_error": 0.07216166244827316,
+          "caption_backcalculated_quality": 0.5223272419779654,
+          "caption_backcalculation_error": 0.2574043153990838
+        },
+        {
+          "model": "Claude-Opus-4.7",
+          "checks": {
+            "Yield": {
+              "weighted_from_rounded_problem_table": 0.9174275229357798,
+              "published": 0.9262262295081968,
+              "absolute_delta": 0.008798706572416992
+            },
+            "Quality": {
+              "weighted_from_rounded_problem_table": 0.9132885321100918,
+              "published": 0.9219741803278689,
+              "absolute_delta": 0.008685648217777175
+            },
+            "QYI": {
+              "weighted_from_rounded_problem_table": 0.9119834862385321,
+              "published": 0.9210852459016393,
+              "absolute_delta": 0.009101759663107223
+            }
+          },
+          "harmonic_of_aggregate_quality_yield": 0.9240953136946201,
+          "aggregate_qyi": 0.9210852459016393,
+          "delta_aggregate_harmonic_vs_weighted_qyi": 0.003010067792980742,
+          "passcount_weighted_quality": 0.9170333808335234,
+          "passcount_weighted_quality_error": 0.00494079949434556,
+          "caption_backcalculated_quality": 0.9160010169501109,
+          "caption_backcalculation_error": 0.005973163377757995
+        },
+        {
+          "model": "Kimi-K2.6",
+          "checks": {
+            "Yield": {
+              "weighted_from_rounded_problem_table": 0.3119284403669725,
+              "published": 0.27869016393442625,
+              "absolute_delta": 0.03323827643254623
+            },
+            "Quality": {
+              "weighted_from_rounded_problem_table": 0.2673614678899083,
+              "published": 0.238872131147541,
+              "absolute_delta": 0.028489336742367283
+            },
+            "QYI": {
+              "weighted_from_rounded_problem_table": 0.28501651376146786,
+              "published": 0.25464590163934425,
+              "absolute_delta": 0.030370612122123608
+            }
+          },
+          "harmonic_of_aggregate_quality_yield": 0.25724947130598436,
+          "aggregate_qyi": 0.25464590163934425,
+          "delta_aggregate_harmonic_vs_weighted_qyi": 0.0026035696666401043,
+          "passcount_weighted_quality": 0.8201725813377568,
+          "passcount_weighted_quality_error": 0.5813004501902158,
+          "caption_backcalculated_quality": 0.23442100377212163,
+          "caption_backcalculation_error": 0.004451127375419361
+        },
+        {
+          "model": "Mimo-V2.5-Pro",
+          "checks": {
+            "Yield": {
+              "weighted_from_rounded_problem_table": 0.6192715596330276,
+              "published": 0.6598409836065574,
+              "absolute_delta": 0.040569423973529806
+            },
+            "Quality": {
+              "weighted_from_rounded_problem_table": 0.7512747706422018,
+              "published": 0.7747733606557378,
+              "absolute_delta": 0.023498590013535936
+            },
+            "QYI": {
+              "weighted_from_rounded_problem_table": 0.6151197247706423,
+              "published": 0.6546077868852459,
+              "absolute_delta": 0.03948806211460365
+            }
+          },
+          "harmonic_of_aggregate_quality_yield": 0.7127033385827776,
+          "aggregate_qyi": 0.6546077868852459,
+          "delta_aggregate_harmonic_vs_weighted_qyi": 0.05809555169753167,
+          "passcount_weighted_quality": 0.8756466395113525,
+          "passcount_weighted_quality_error": 0.1008732788556147,
+          "caption_backcalculated_quality": 0.6494569459333629,
+          "caption_backcalculation_error": 0.12531641472237487
+        },
+        {
+          "model": "DeepSeek-V4-Pro",
+          "checks": {
+            "Yield": {
+              "weighted_from_rounded_problem_table": 0.5779844036697248,
+              "published": 0.6229532786885246,
+              "absolute_delta": 0.04496887501879976
+            },
+            "Quality": {
+              "weighted_from_rounded_problem_table": 0.6879724770642203,
+              "published": 0.7212213114754099,
+              "absolute_delta": 0.03324883441118964
+            },
+            "QYI": {
+              "weighted_from_rounded_problem_table": 0.5862403669724771,
+              "published": 0.6303295081967213,
+              "absolute_delta": 0.04408914122424423
+            }
+          },
+          "harmonic_of_aggregate_quality_yield": 0.6684952742468514,
+          "aggregate_qyi": 0.6303295081967213,
+          "delta_aggregate_harmonic_vs_weighted_qyi": 0.03816576605013011,
+          "passcount_weighted_quality": 0.9047688103072524,
+          "passcount_weighted_quality_error": 0.18354749883184251,
+          "caption_backcalculated_quality": 0.6378825109027818,
+          "caption_backcalculation_error": 0.0833388005726281
+        },
+        {
+          "model": "GPT-5.5",
+          "checks": {
+            "Yield": {
+              "weighted_from_rounded_problem_table": 0.908261009174312,
+              "published": 0.918036475409836,
+              "absolute_delta": 0.009775466235524055
+            },
+            "Quality": {
+              "weighted_from_rounded_problem_table": 0.9453628440366972,
+              "published": 0.9511848360655738,
+              "absolute_delta": 0.005821992028876566
+            },
+            "QYI": {
+              "weighted_from_rounded_problem_table": 0.9223862385321101,
+              "published": 0.9306565573770491,
+              "absolute_delta": 0.008270318844939006
+            }
+          },
+          "harmonic_of_aggregate_quality_yield": 0.9343167328599222,
+          "aggregate_qyi": 0.9306565573770491,
+          "delta_aggregate_harmonic_vs_weighted_qyi": 0.003660175482873118,
+          "passcount_weighted_quality": 0.9464480274079563,
+          "passcount_weighted_quality_error": 0.004736808657617497,
+          "caption_backcalculated_quality": 0.9436284475730785,
+          "caption_backcalculation_error": 0.007556388492495292
+        }
+      ],
+      "per_problem_harmonic_checks": [
+        {
+          "model": "Gemini-3.1-Pro",
+          "problem": "operator_scheduling",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Gemini-3.1-Pro",
+          "problem": "technology_mapping",
+          "rounded_table_harmonic_error": 0.0004913971094288039
+        },
+        {
+          "model": "Gemini-3.1-Pro",
+          "problem": "global_routing",
+          "rounded_table_harmonic_error": 0.0002307692307692566
+        },
+        {
+          "model": "Gemini-3.1-Pro",
+          "problem": "egraph_extraction",
+          "rounded_table_harmonic_error": 0.00044538706256624927
+        },
+        {
+          "model": "Gemini-3.1-Pro",
+          "problem": "intra_op_parallel",
+          "rounded_table_harmonic_error": 0.00029681794470526324
+        },
+        {
+          "model": "Gemini-3.1-Pro",
+          "problem": "pedigree",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Gemini-3.1-Pro",
+          "problem": "crew_pairing",
+          "rounded_table_harmonic_error": 0.000698678414096876
+        },
+        {
+          "model": "Gemini-3.1-Pro",
+          "problem": "pickup_delivery_time_windows",
+          "rounded_table_harmonic_error": 4.008016032064354e-06
+        },
+        {
+          "model": "Gemini-3.1-Pro",
+          "problem": "protein_sequence_design",
+          "rounded_table_harmonic_error": 0.0004264392324092592
+        },
+        {
+          "model": "Claude-Opus-4.6",
+          "problem": "operator_scheduling",
+          "rounded_table_harmonic_error": 0.0004574735782586492
+        },
+        {
+          "model": "Claude-Opus-4.6",
+          "problem": "technology_mapping",
+          "rounded_table_harmonic_error": 0.00026569435637291416
+        },
+        {
+          "model": "Claude-Opus-4.6",
+          "problem": "global_routing",
+          "rounded_table_harmonic_error": 2.7593254982138937e-05
+        },
+        {
+          "model": "Claude-Opus-4.6",
+          "problem": "egraph_extraction",
+          "rounded_table_harmonic_error": 3.862660944209395e-05
+        },
+        {
+          "model": "Claude-Opus-4.6",
+          "problem": "intra_op_parallel",
+          "rounded_table_harmonic_error": 0.00012208657047729776
+        },
+        {
+          "model": "Claude-Opus-4.6",
+          "problem": "pedigree",
+          "rounded_table_harmonic_error": 0.00012121212121207758
+        },
+        {
+          "model": "Claude-Opus-4.6",
+          "problem": "crew_pairing",
+          "rounded_table_harmonic_error": 0.0005671641791045179
+        },
+        {
+          "model": "Claude-Opus-4.6",
+          "problem": "pickup_delivery_time_windows",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Claude-Opus-4.6",
+          "problem": "protein_sequence_design",
+          "rounded_table_harmonic_error": 0.0004937124111537017
+        },
+        {
+          "model": "GPT-5.3-Codex",
+          "problem": "operator_scheduling",
+          "rounded_table_harmonic_error": 0.0004877069744104734
+        },
+        {
+          "model": "GPT-5.3-Codex",
+          "problem": "technology_mapping",
+          "rounded_table_harmonic_error": 0.0001691939345571103
+        },
+        {
+          "model": "GPT-5.3-Codex",
+          "problem": "global_routing",
+          "rounded_table_harmonic_error": 2.7593254982138937e-05
+        },
+        {
+          "model": "GPT-5.3-Codex",
+          "problem": "egraph_extraction",
+          "rounded_table_harmonic_error": 0.0002225031605562755
+        },
+        {
+          "model": "GPT-5.3-Codex",
+          "problem": "intra_op_parallel",
+          "rounded_table_harmonic_error": 0.0006363636363636571
+        },
+        {
+          "model": "GPT-5.3-Codex",
+          "problem": "pedigree",
+          "rounded_table_harmonic_error": 0.00033607822954195843
+        },
+        {
+          "model": "GPT-5.3-Codex",
+          "problem": "crew_pairing",
+          "rounded_table_harmonic_error": 0.00015866388308993784
+        },
+        {
+          "model": "GPT-5.3-Codex",
+          "problem": "pickup_delivery_time_windows",
+          "rounded_table_harmonic_error": 1.363636363638232e-05
+        },
+        {
+          "model": "GPT-5.3-Codex",
+          "problem": "protein_sequence_design",
+          "rounded_table_harmonic_error": 0.0003443983402487971
+        },
+        {
+          "model": "GLM-5",
+          "problem": "operator_scheduling",
+          "rounded_table_harmonic_error": 0.00010101010101004615
+        },
+        {
+          "model": "GLM-5",
+          "problem": "technology_mapping",
+          "rounded_table_harmonic_error": 4.999999999988347e-05
+        },
+        {
+          "model": "GLM-5",
+          "problem": "global_routing",
+          "rounded_table_harmonic_error": 0.00024530271398759407
+        },
+        {
+          "model": "GLM-5",
+          "problem": "egraph_extraction",
+          "rounded_table_harmonic_error": 0.0001527703066164232
+        },
+        {
+          "model": "GLM-5",
+          "problem": "intra_op_parallel",
+          "rounded_table_harmonic_error": 0.0005003043213632763
+        },
+        {
+          "model": "GLM-5",
+          "problem": "pedigree",
+          "rounded_table_harmonic_error": 0.00012121212121207758
+        },
+        {
+          "model": "GLM-5",
+          "problem": "crew_pairing",
+          "rounded_table_harmonic_error": 4.783599088842294e-05
+        },
+        {
+          "model": "GLM-5",
+          "problem": "pickup_delivery_time_windows",
+          "rounded_table_harmonic_error": 0.0009982788296041822
+        },
+        {
+          "model": "GLM-5",
+          "problem": "protein_sequence_design",
+          "rounded_table_harmonic_error": 0.00014763897190672726
+        },
+        {
+          "model": "Gemini-3-Flash",
+          "problem": "operator_scheduling",
+          "rounded_table_harmonic_error": 2.5125628140720835e-05
+        },
+        {
+          "model": "Gemini-3-Flash",
+          "problem": "technology_mapping",
+          "rounded_table_harmonic_error": 7.473841554639371e-06
+        },
+        {
+          "model": "Gemini-3-Flash",
+          "problem": "global_routing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Gemini-3-Flash",
+          "problem": "egraph_extraction",
+          "rounded_table_harmonic_error": 0.00019434063000534074
+        },
+        {
+          "model": "Gemini-3-Flash",
+          "problem": "intra_op_parallel",
+          "rounded_table_harmonic_error": 0.000211009174311938
+        },
+        {
+          "model": "Gemini-3-Flash",
+          "problem": "pedigree",
+          "rounded_table_harmonic_error": 9.664582148904977e-06
+        },
+        {
+          "model": "Gemini-3-Flash",
+          "problem": "crew_pairing",
+          "rounded_table_harmonic_error": 0.000211009174311938
+        },
+        {
+          "model": "Gemini-3-Flash",
+          "problem": "pickup_delivery_time_windows",
+          "rounded_table_harmonic_error": 0.000781910397295027
+        },
+        {
+          "model": "Gemini-3-Flash",
+          "problem": "protein_sequence_design",
+          "rounded_table_harmonic_error": 7.759119861028285e-05
+        },
+        {
+          "model": "Grok-4",
+          "problem": "operator_scheduling",
+          "rounded_table_harmonic_error": 0.0006114199090450079
+        },
+        {
+          "model": "Grok-4",
+          "problem": "technology_mapping",
+          "rounded_table_harmonic_error": 1.550387596899183e-05
+        },
+        {
+          "model": "Grok-4",
+          "problem": "global_routing",
+          "rounded_table_harmonic_error": 8.043217286912707e-05
+        },
+        {
+          "model": "Grok-4",
+          "problem": "egraph_extraction",
+          "rounded_table_harmonic_error": 0.00034971428571428653
+        },
+        {
+          "model": "Grok-4",
+          "problem": "intra_op_parallel",
+          "rounded_table_harmonic_error": 0.00044538706256624927
+        },
+        {
+          "model": "Grok-4",
+          "problem": "pedigree",
+          "rounded_table_harmonic_error": 8.108108108118017e-05
+        },
+        {
+          "model": "Grok-4",
+          "problem": "crew_pairing",
+          "rounded_table_harmonic_error": 0.0009053084648493193
+        },
+        {
+          "model": "Grok-4",
+          "problem": "pickup_delivery_time_windows",
+          "rounded_table_harmonic_error": 0.00018499999999999073
+        },
+        {
+          "model": "Grok-4",
+          "problem": "protein_sequence_design",
+          "rounded_table_harmonic_error": 0.00024961240310084065
+        },
+        {
+          "model": "Kimi-K2.5",
+          "problem": "operator_scheduling",
+          "rounded_table_harmonic_error": 0.0002866565195331905
+        },
+        {
+          "model": "Kimi-K2.5",
+          "problem": "technology_mapping",
+          "rounded_table_harmonic_error": 0.0003071895424836546
+        },
+        {
+          "model": "Kimi-K2.5",
+          "problem": "global_routing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Kimi-K2.5",
+          "problem": "egraph_extraction",
+          "rounded_table_harmonic_error": 3.901170351117145e-05
+        },
+        {
+          "model": "Kimi-K2.5",
+          "problem": "intra_op_parallel",
+          "rounded_table_harmonic_error": 0.0004874591057796307
+        },
+        {
+          "model": "Kimi-K2.5",
+          "problem": "pedigree",
+          "rounded_table_harmonic_error": 0.00023875066172585058
+        },
+        {
+          "model": "Kimi-K2.5",
+          "problem": "crew_pairing",
+          "rounded_table_harmonic_error": 0.00036855838225713367
+        },
+        {
+          "model": "Kimi-K2.5",
+          "problem": "pickup_delivery_time_windows",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Kimi-K2.5",
+          "problem": "protein_sequence_design",
+          "rounded_table_harmonic_error": 0.0004173441734417471
+        },
+        {
+          "model": "Qwen3.5-397B",
+          "problem": "operator_scheduling",
+          "rounded_table_harmonic_error": 4.934541792545044e-05
+        },
+        {
+          "model": "Qwen3.5-397B",
+          "problem": "technology_mapping",
+          "rounded_table_harmonic_error": 0.00020634920634921006
+        },
+        {
+          "model": "Qwen3.5-397B",
+          "problem": "global_routing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Qwen3.5-397B",
+          "problem": "egraph_extraction",
+          "rounded_table_harmonic_error": 2.7850761954884007e-05
+        },
+        {
+          "model": "Qwen3.5-397B",
+          "problem": "intra_op_parallel",
+          "rounded_table_harmonic_error": 1.6861219195751787e-05
+        },
+        {
+          "model": "Qwen3.5-397B",
+          "problem": "pedigree",
+          "rounded_table_harmonic_error": 0.00039356814701380083
+        },
+        {
+          "model": "Qwen3.5-397B",
+          "problem": "crew_pairing",
+          "rounded_table_harmonic_error": 0.00025629993853715227
+        },
+        {
+          "model": "Qwen3.5-397B",
+          "problem": "pickup_delivery_time_windows",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Qwen3.5-397B",
+          "problem": "protein_sequence_design",
+          "rounded_table_harmonic_error": 0.0005709660010793094
+        },
+        {
+          "model": "MiniMax-M2.5",
+          "problem": "operator_scheduling",
+          "rounded_table_harmonic_error": 3.7273695420503294e-05
+        },
+        {
+          "model": "MiniMax-M2.5",
+          "problem": "technology_mapping",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "MiniMax-M2.5",
+          "problem": "global_routing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "MiniMax-M2.5",
+          "problem": "egraph_extraction",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "MiniMax-M2.5",
+          "problem": "intra_op_parallel",
+          "rounded_table_harmonic_error": 0.00047264770240695864
+        },
+        {
+          "model": "MiniMax-M2.5",
+          "problem": "pedigree",
+          "rounded_table_harmonic_error": 0.000484181568088049
+        },
+        {
+          "model": "MiniMax-M2.5",
+          "problem": "crew_pairing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "MiniMax-M2.5",
+          "problem": "pickup_delivery_time_windows",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "MiniMax-M2.5",
+          "problem": "protein_sequence_design",
+          "rounded_table_harmonic_error": 0.0004791929382094162
+        },
+        {
+          "model": "DeepSeek-V3.2",
+          "problem": "operator_scheduling",
+          "rounded_table_harmonic_error": 0.0006142034548944353
+        },
+        {
+          "model": "DeepSeek-V3.2",
+          "problem": "technology_mapping",
+          "rounded_table_harmonic_error": 0.00046860986547087036
+        },
+        {
+          "model": "DeepSeek-V3.2",
+          "problem": "global_routing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "DeepSeek-V3.2",
+          "problem": "egraph_extraction",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "DeepSeek-V3.2",
+          "problem": "intra_op_parallel",
+          "rounded_table_harmonic_error": 0.0005237492083597362
+        },
+        {
+          "model": "DeepSeek-V3.2",
+          "problem": "pedigree",
+          "rounded_table_harmonic_error": 2.350965575148578e-05
+        },
+        {
+          "model": "DeepSeek-V3.2",
+          "problem": "crew_pairing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "DeepSeek-V3.2",
+          "problem": "pickup_delivery_time_windows",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "DeepSeek-V3.2",
+          "problem": "protein_sequence_design",
+          "rounded_table_harmonic_error": 0.00030381303813042937
+        },
+        {
+          "model": "Claude-3.7-Sonnet",
+          "problem": "operator_scheduling",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Claude-3.7-Sonnet",
+          "problem": "technology_mapping",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Claude-3.7-Sonnet",
+          "problem": "global_routing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Claude-3.7-Sonnet",
+          "problem": "egraph_extraction",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Claude-3.7-Sonnet",
+          "problem": "intra_op_parallel",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Claude-3.7-Sonnet",
+          "problem": "pedigree",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Claude-3.7-Sonnet",
+          "problem": "crew_pairing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Claude-3.7-Sonnet",
+          "problem": "pickup_delivery_time_windows",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Claude-3.7-Sonnet",
+          "problem": "protein_sequence_design",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "DeepSeek-R1",
+          "problem": "operator_scheduling",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "DeepSeek-R1",
+          "problem": "technology_mapping",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "DeepSeek-R1",
+          "problem": "global_routing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "DeepSeek-R1",
+          "problem": "egraph_extraction",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "DeepSeek-R1",
+          "problem": "intra_op_parallel",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "DeepSeek-R1",
+          "problem": "pedigree",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "DeepSeek-R1",
+          "problem": "crew_pairing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "DeepSeek-R1",
+          "problem": "pickup_delivery_time_windows",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "DeepSeek-R1",
+          "problem": "protein_sequence_design",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "DeepSeek-V3-0304",
+          "problem": "operator_scheduling",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "DeepSeek-V3-0304",
+          "problem": "technology_mapping",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "DeepSeek-V3-0304",
+          "problem": "global_routing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "DeepSeek-V3-0304",
+          "problem": "egraph_extraction",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "DeepSeek-V3-0304",
+          "problem": "intra_op_parallel",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "DeepSeek-V3-0304",
+          "problem": "pedigree",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "DeepSeek-V3-0304",
+          "problem": "crew_pairing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "DeepSeek-V3-0304",
+          "problem": "pickup_delivery_time_windows",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "DeepSeek-V3-0304",
+          "problem": "protein_sequence_design",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "GPT-o4-mini:high",
+          "problem": "operator_scheduling",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "GPT-o4-mini:high",
+          "problem": "technology_mapping",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "GPT-o4-mini:high",
+          "problem": "global_routing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "GPT-o4-mini:high",
+          "problem": "egraph_extraction",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "GPT-o4-mini:high",
+          "problem": "intra_op_parallel",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "GPT-o4-mini:high",
+          "problem": "pedigree",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "GPT-o4-mini:high",
+          "problem": "crew_pairing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "GPT-o4-mini:high",
+          "problem": "pickup_delivery_time_windows",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "GPT-o4-mini:high",
+          "problem": "protein_sequence_design",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Gemini-2.5-Flash-0417",
+          "problem": "operator_scheduling",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Gemini-2.5-Flash-0417",
+          "problem": "technology_mapping",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Gemini-2.5-Flash-0417",
+          "problem": "global_routing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Gemini-2.5-Flash-0417",
+          "problem": "egraph_extraction",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Gemini-2.5-Flash-0417",
+          "problem": "intra_op_parallel",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Gemini-2.5-Flash-0417",
+          "problem": "pedigree",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Gemini-2.5-Flash-0417",
+          "problem": "crew_pairing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Gemini-2.5-Flash-0417",
+          "problem": "pickup_delivery_time_windows",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Gemini-2.5-Flash-0417",
+          "problem": "protein_sequence_design",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Gemini-2.5-Pro-0506",
+          "problem": "operator_scheduling",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Gemini-2.5-Pro-0506",
+          "problem": "technology_mapping",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Gemini-2.5-Pro-0506",
+          "problem": "global_routing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Gemini-2.5-Pro-0506",
+          "problem": "egraph_extraction",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Gemini-2.5-Pro-0506",
+          "problem": "intra_op_parallel",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Gemini-2.5-Pro-0506",
+          "problem": "pedigree",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Gemini-2.5-Pro-0506",
+          "problem": "crew_pairing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Gemini-2.5-Pro-0506",
+          "problem": "pickup_delivery_time_windows",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Gemini-2.5-Pro-0506",
+          "problem": "protein_sequence_design",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "LLaMA-3.3-70B-Instruct",
+          "problem": "operator_scheduling",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "LLaMA-3.3-70B-Instruct",
+          "problem": "technology_mapping",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "LLaMA-3.3-70B-Instruct",
+          "problem": "global_routing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "LLaMA-3.3-70B-Instruct",
+          "problem": "egraph_extraction",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "LLaMA-3.3-70B-Instruct",
+          "problem": "intra_op_parallel",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "LLaMA-3.3-70B-Instruct",
+          "problem": "pedigree",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "LLaMA-3.3-70B-Instruct",
+          "problem": "crew_pairing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "LLaMA-3.3-70B-Instruct",
+          "problem": "pickup_delivery_time_windows",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "LLaMA-3.3-70B-Instruct",
+          "problem": "protein_sequence_design",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "LLaMA-4-Maverick-17B-128E-Instruct",
+          "problem": "operator_scheduling",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "LLaMA-4-Maverick-17B-128E-Instruct",
+          "problem": "technology_mapping",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "LLaMA-4-Maverick-17B-128E-Instruct",
+          "problem": "global_routing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "LLaMA-4-Maverick-17B-128E-Instruct",
+          "problem": "egraph_extraction",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "LLaMA-4-Maverick-17B-128E-Instruct",
+          "problem": "intra_op_parallel",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "LLaMA-4-Maverick-17B-128E-Instruct",
+          "problem": "pedigree",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "LLaMA-4-Maverick-17B-128E-Instruct",
+          "problem": "crew_pairing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "LLaMA-4-Maverick-17B-128E-Instruct",
+          "problem": "pickup_delivery_time_windows",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "LLaMA-4-Maverick-17B-128E-Instruct",
+          "problem": "protein_sequence_design",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Qwen3-235B-A22B",
+          "problem": "operator_scheduling",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Qwen3-235B-A22B",
+          "problem": "technology_mapping",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Qwen3-235B-A22B",
+          "problem": "global_routing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Qwen3-235B-A22B",
+          "problem": "egraph_extraction",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Qwen3-235B-A22B",
+          "problem": "intra_op_parallel",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Qwen3-235B-A22B",
+          "problem": "pedigree",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Qwen3-235B-A22B",
+          "problem": "crew_pairing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Qwen3-235B-A22B",
+          "problem": "pickup_delivery_time_windows",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Qwen3-235B-A22B",
+          "problem": "protein_sequence_design",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "MiMo-V2-Flash",
+          "problem": "operator_scheduling",
+          "rounded_table_harmonic_error": 6.14380339829107e-05
+        },
+        {
+          "model": "MiMo-V2-Flash",
+          "problem": "technology_mapping",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "MiMo-V2-Flash",
+          "problem": "global_routing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "MiMo-V2-Flash",
+          "problem": "egraph_extraction",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "MiMo-V2-Flash",
+          "problem": "intra_op_parallel",
+          "rounded_table_harmonic_error": 6.047978814538446e-05
+        },
+        {
+          "model": "MiMo-V2-Flash",
+          "problem": "protein_sequence_design",
+          "rounded_table_harmonic_error": 1.1922196796299023e-05
+        },
+        {
+          "model": "MiMo-V2-Flash",
+          "problem": "pedigree",
+          "rounded_table_harmonic_error": 3.0434782608723676e-05
+        },
+        {
+          "model": "MiMo-V2-Flash",
+          "problem": "crew_pairing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "MiMo-V2-Flash",
+          "problem": "pickup_delivery_time_windows",
+          "rounded_table_harmonic_error": 1.6528775343221946e-05
+        },
+        {
+          "model": "GPT-5.4",
+          "problem": "operator_scheduling",
+          "rounded_table_harmonic_error": 4.429706879971462e-06
+        },
+        {
+          "model": "GPT-5.4",
+          "problem": "technology_mapping",
+          "rounded_table_harmonic_error": 6.792358803975329e-05
+        },
+        {
+          "model": "GPT-5.4",
+          "problem": "global_routing",
+          "rounded_table_harmonic_error": 4.679066767021567e-05
+        },
+        {
+          "model": "GPT-5.4",
+          "problem": "egraph_extraction",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "GPT-5.4",
+          "problem": "intra_op_parallel",
+          "rounded_table_harmonic_error": 3.6917497733490734e-05
+        },
+        {
+          "model": "GPT-5.4",
+          "problem": "protein_sequence_design",
+          "rounded_table_harmonic_error": 5.9233076264986195e-06
+        },
+        {
+          "model": "GPT-5.4",
+          "problem": "pedigree",
+          "rounded_table_harmonic_error": 4.227563585523786e-05
+        },
+        {
+          "model": "GPT-5.4",
+          "problem": "crew_pairing",
+          "rounded_table_harmonic_error": 3.5779915684708286e-05
+        },
+        {
+          "model": "GPT-5.4",
+          "problem": "pickup_delivery_time_windows",
+          "rounded_table_harmonic_error": 1.0009129388255378e-05
+        },
+        {
+          "model": "Mimo-V2-Pro",
+          "problem": "operator_scheduling",
+          "rounded_table_harmonic_error": 4.1757186884261444e-05
+        },
+        {
+          "model": "Mimo-V2-Pro",
+          "problem": "technology_mapping",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Mimo-V2-Pro",
+          "problem": "global_routing",
+          "rounded_table_harmonic_error": 5.7958344047204235e-05
+        },
+        {
+          "model": "Mimo-V2-Pro",
+          "problem": "egraph_extraction",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Mimo-V2-Pro",
+          "problem": "intra_op_parallel",
+          "rounded_table_harmonic_error": 2.9958391123519057e-05
+        },
+        {
+          "model": "Mimo-V2-Pro",
+          "problem": "protein_sequence_design",
+          "rounded_table_harmonic_error": 7.282902829031102e-05
+        },
+        {
+          "model": "Mimo-V2-Pro",
+          "problem": "pedigree",
+          "rounded_table_harmonic_error": 2.2973863386677174e-05
+        },
+        {
+          "model": "Mimo-V2-Pro",
+          "problem": "crew_pairing",
+          "rounded_table_harmonic_error": 2.051840807426597e-05
+        },
+        {
+          "model": "Mimo-V2-Pro",
+          "problem": "pickup_delivery_time_windows",
+          "rounded_table_harmonic_error": 4.6515679442513114e-05
+        },
+        {
+          "model": "Mimo-V2-Omni",
+          "problem": "operator_scheduling",
+          "rounded_table_harmonic_error": 4.6408497933470017e-08
+        },
+        {
+          "model": "Mimo-V2-Omni",
+          "problem": "technology_mapping",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Mimo-V2-Omni",
+          "problem": "global_routing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Mimo-V2-Omni",
+          "problem": "egraph_extraction",
+          "rounded_table_harmonic_error": 2.085319794431495e-05
+        },
+        {
+          "model": "Mimo-V2-Omni",
+          "problem": "intra_op_parallel",
+          "rounded_table_harmonic_error": 3.068893528179739e-05
+        },
+        {
+          "model": "Mimo-V2-Omni",
+          "problem": "protein_sequence_design",
+          "rounded_table_harmonic_error": 2.5859415084594772e-05
+        },
+        {
+          "model": "Mimo-V2-Omni",
+          "problem": "pedigree",
+          "rounded_table_harmonic_error": 1.2437810945287175e-05
+        },
+        {
+          "model": "Mimo-V2-Omni",
+          "problem": "crew_pairing",
+          "rounded_table_harmonic_error": 2.2696523152787584e-05
+        },
+        {
+          "model": "Mimo-V2-Omni",
+          "problem": "pickup_delivery_time_windows",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "GLM-5.1",
+          "problem": "operator_scheduling",
+          "rounded_table_harmonic_error": 3.385421917534437e-05
+        },
+        {
+          "model": "GLM-5.1",
+          "problem": "technology_mapping",
+          "rounded_table_harmonic_error": 1.4289439374204349e-05
+        },
+        {
+          "model": "GLM-5.1",
+          "problem": "global_routing",
+          "rounded_table_harmonic_error": 7.074056714306831e-05
+        },
+        {
+          "model": "GLM-5.1",
+          "problem": "egraph_extraction",
+          "rounded_table_harmonic_error": 1.7724143651087765e-05
+        },
+        {
+          "model": "GLM-5.1",
+          "problem": "intra_op_parallel",
+          "rounded_table_harmonic_error": 5.353164328292248e-05
+        },
+        {
+          "model": "GLM-5.1",
+          "problem": "protein_sequence_design",
+          "rounded_table_harmonic_error": 1.1072664359845774e-05
+        },
+        {
+          "model": "GLM-5.1",
+          "problem": "pedigree",
+          "rounded_table_harmonic_error": 1.8918918918808814e-05
+        },
+        {
+          "model": "GLM-5.1",
+          "problem": "crew_pairing",
+          "rounded_table_harmonic_error": 3.026359693036884e-05
+        },
+        {
+          "model": "GLM-5.1",
+          "problem": "pickup_delivery_time_windows",
+          "rounded_table_harmonic_error": 3.014811902346537e-07
+        },
+        {
+          "model": "Gemma-4-31B",
+          "problem": "operator_scheduling",
+          "rounded_table_harmonic_error": 4.9641426842217395e-06
+        },
+        {
+          "model": "Gemma-4-31B",
+          "problem": "technology_mapping",
+          "rounded_table_harmonic_error": 1.3187641295653307e-07
+        },
+        {
+          "model": "Gemma-4-31B",
+          "problem": "global_routing",
+          "rounded_table_harmonic_error": 1.5871055394356404e-06
+        },
+        {
+          "model": "Gemma-4-31B",
+          "problem": "egraph_extraction",
+          "rounded_table_harmonic_error": 5.256602963277235e-05
+        },
+        {
+          "model": "Gemma-4-31B",
+          "problem": "intra_op_parallel",
+          "rounded_table_harmonic_error": 4.873518485759565e-05
+        },
+        {
+          "model": "Gemma-4-31B",
+          "problem": "protein_sequence_design",
+          "rounded_table_harmonic_error": 2.4871778636192943e-05
+        },
+        {
+          "model": "Gemma-4-31B",
+          "problem": "pedigree",
+          "rounded_table_harmonic_error": 1.8918918918808814e-05
+        },
+        {
+          "model": "Gemma-4-31B",
+          "problem": "crew_pairing",
+          "rounded_table_harmonic_error": 5.4730983302442304e-05
+        },
+        {
+          "model": "Gemma-4-31B",
+          "problem": "pickup_delivery_time_windows",
+          "rounded_table_harmonic_error": 3.2840481219570394e-05
+        },
+        {
+          "model": "Claude-Opus-4.7",
+          "problem": "operator_scheduling",
+          "rounded_table_harmonic_error": 6.777621816778101e-06
+        },
+        {
+          "model": "Claude-Opus-4.7",
+          "problem": "technology_mapping",
+          "rounded_table_harmonic_error": 3.558675207859796e-05
+        },
+        {
+          "model": "Claude-Opus-4.7",
+          "problem": "global_routing",
+          "rounded_table_harmonic_error": 1.0001000139148175e-08
+        },
+        {
+          "model": "Claude-Opus-4.7",
+          "problem": "egraph_extraction",
+          "rounded_table_harmonic_error": 4.180802755882063e-06
+        },
+        {
+          "model": "Claude-Opus-4.7",
+          "problem": "intra_op_parallel",
+          "rounded_table_harmonic_error": 1.5563372774751727e-05
+        },
+        {
+          "model": "Claude-Opus-4.7",
+          "problem": "protein_sequence_design",
+          "rounded_table_harmonic_error": 3.9148517018694484e-05
+        },
+        {
+          "model": "Claude-Opus-4.7",
+          "problem": "pedigree",
+          "rounded_table_harmonic_error": 1.8918918918808814e-05
+        },
+        {
+          "model": "Claude-Opus-4.7",
+          "problem": "crew_pairing",
+          "rounded_table_harmonic_error": 2.4943498153406907e-05
+        },
+        {
+          "model": "Claude-Opus-4.7",
+          "problem": "pickup_delivery_time_windows",
+          "rounded_table_harmonic_error": 4.3861375314313555e-05
+        },
+        {
+          "model": "Kimi-K2.6",
+          "problem": "operator_scheduling",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Kimi-K2.6",
+          "problem": "technology_mapping",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Kimi-K2.6",
+          "problem": "global_routing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Kimi-K2.6",
+          "problem": "egraph_extraction",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Kimi-K2.6",
+          "problem": "intra_op_parallel",
+          "rounded_table_harmonic_error": 3.376928415110836e-05
+        },
+        {
+          "model": "Kimi-K2.6",
+          "problem": "protein_sequence_design",
+          "rounded_table_harmonic_error": 2.4019294885380127e-05
+        },
+        {
+          "model": "Kimi-K2.6",
+          "problem": "pedigree",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Kimi-K2.6",
+          "problem": "crew_pairing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Kimi-K2.6",
+          "problem": "pickup_delivery_time_windows",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "Mimo-V2.5-Pro",
+          "problem": "operator_scheduling",
+          "rounded_table_harmonic_error": 1.6533116948824755e-06
+        },
+        {
+          "model": "Mimo-V2.5-Pro",
+          "problem": "technology_mapping",
+          "rounded_table_harmonic_error": 7.870773999807401e-05
+        },
+        {
+          "model": "Mimo-V2.5-Pro",
+          "problem": "global_routing",
+          "rounded_table_harmonic_error": 6.40512409888494e-07
+        },
+        {
+          "model": "Mimo-V2.5-Pro",
+          "problem": "egraph_extraction",
+          "rounded_table_harmonic_error": 1.2149532710337141e-05
+        },
+        {
+          "model": "Mimo-V2.5-Pro",
+          "problem": "intra_op_parallel",
+          "rounded_table_harmonic_error": 4.396028681752373e-05
+        },
+        {
+          "model": "Mimo-V2.5-Pro",
+          "problem": "protein_sequence_design",
+          "rounded_table_harmonic_error": 9.351886674169307e-06
+        },
+        {
+          "model": "Mimo-V2.5-Pro",
+          "problem": "pedigree",
+          "rounded_table_harmonic_error": 2.94117647058334e-05
+        },
+        {
+          "model": "Mimo-V2.5-Pro",
+          "problem": "crew_pairing",
+          "rounded_table_harmonic_error": 1.1354070423963414e-05
+        },
+        {
+          "model": "Mimo-V2.5-Pro",
+          "problem": "pickup_delivery_time_windows",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "DeepSeek-V4-Pro",
+          "problem": "operator_scheduling",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "DeepSeek-V4-Pro",
+          "problem": "technology_mapping",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "DeepSeek-V4-Pro",
+          "problem": "global_routing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "DeepSeek-V4-Pro",
+          "problem": "egraph_extraction",
+          "rounded_table_harmonic_error": 4.144446777232247e-05
+        },
+        {
+          "model": "DeepSeek-V4-Pro",
+          "problem": "intra_op_parallel",
+          "rounded_table_harmonic_error": 2.043528825490526e-06
+        },
+        {
+          "model": "DeepSeek-V4-Pro",
+          "problem": "protein_sequence_design",
+          "rounded_table_harmonic_error": 6.161616161626249e-05
+        },
+        {
+          "model": "DeepSeek-V4-Pro",
+          "problem": "pedigree",
+          "rounded_table_harmonic_error": 1.8918918918808814e-05
+        },
+        {
+          "model": "DeepSeek-V4-Pro",
+          "problem": "crew_pairing",
+          "rounded_table_harmonic_error": 6.3257893266222e-05
+        },
+        {
+          "model": "DeepSeek-V4-Pro",
+          "problem": "pickup_delivery_time_windows",
+          "rounded_table_harmonic_error": 3.057723646965327e-05
+        },
+        {
+          "model": "GPT-5.5",
+          "problem": "operator_scheduling",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "GPT-5.5",
+          "problem": "technology_mapping",
+          "rounded_table_harmonic_error": 5.0184049079637916e-06
+        },
+        {
+          "model": "GPT-5.5",
+          "problem": "global_routing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "GPT-5.5",
+          "problem": "egraph_extraction",
+          "rounded_table_harmonic_error": 4.771616741017226e-05
+        },
+        {
+          "model": "GPT-5.5",
+          "problem": "intra_op_parallel",
+          "rounded_table_harmonic_error": 2.2146238821685316e-05
+        },
+        {
+          "model": "GPT-5.5",
+          "problem": "protein_sequence_design",
+          "rounded_table_harmonic_error": 4.737978856428349e-05
+        },
+        {
+          "model": "GPT-5.5",
+          "problem": "pedigree",
+          "rounded_table_harmonic_error": 3.9320090108541095e-05
+        },
+        {
+          "model": "GPT-5.5",
+          "problem": "crew_pairing",
+          "rounded_table_harmonic_error": 0.0
+        },
+        {
+          "model": "GPT-5.5",
+          "problem": "pickup_delivery_time_windows",
+          "rounded_table_harmonic_error": 1.1828829872273516e-06
+        }
+      ],
+      "aggregate_yield_qyi_match_within_001": 19,
+      "aggregate_all_three_weighted_match_within_001": 10,
+      "caption_backcalculation_match_within_001": 0,
+      "notes": [
+        "19/30 overallYield/QYI match218-case weightedperproblem within.001; 11differbeyondrounding, matchedrun/revisionneedsclarification.",
+        "Original9overallQuality matchescaseweightedmean; subsequent10matchespasscount-weightedQuality; no30row matchescaptionbackcalculation within.001. Preserveversions, donotassumeallareoneaggregation.",
+        "PaperQuality arithmetic mean; currentcollect_results.py usesgeometric mean; taskmetric forintraop useslog10(base)/log10(cost).",
+        "Currentcollector selects onebestiteration byQCI on supplieddatasetroot; main passesroot and run.py recursively enumeratesall nonhidden/nonpyfiles, notonly/eval. Actualpayloadnotobtained, so no measureddemo/evalleakrate claimed.",
+        "all_errors andtest_case_stats determinefailuredenominator; missingcostfiles notinthatdictrequireexplicitfrozenmanifest."
+      ]
+    },
+    "solver_resource": {
+      "models": 21,
+      "final_solver_strings": 185,
+      "python_ast_parse_count": 180,
+      "solve_function_count": 180,
+      "per_problem": {
+        "crew_pairing": 20,
+        "egraph_extraction": 20,
+        "global_routing": 20,
+        "intra_op_parallel": 21,
+        "operator_scheduling": 21,
+        "pedigree": 21,
+        "pickup_delivery_time_windows": 20,
+        "protein_sequence_design": 21,
+        "technology_mapping": 21
+      },
+      "EDA_three_problem_solver_count": 62,
+      "five_relevant_problem_solver_count": 103,
+      "scope": "One code string permodel/problem, not complete candidate history or message/action/tool traces; parse success is not functional validation"
+    },
+    "static_oracle_findings": {
+      "operator_scheduling": "Dependency/resource cycles checked, but no explicit start>=0 check; negative schedule can escape resource scan fromt=0, inferred static boundary only, no exploitrun.",
+      "technology_mapping": "ABC CEC equivalence andfan-in<=6; costABCndnodes, nofullFPGA P&R timingtruth.",
+      "global_routing": "verifier.pyreturnstrue butC++evaluator checksopen/incompleteconnectivity andaborts; do notcalloveralloracleacceptall. Costwire+via+smooth exponentialoverflow, nonzeroevenunder-capacity, nothardzerooverflow.",
+      "intra_op_parallel": "Memory/strategy constraints; normalizedqualityuseslog10costratio, notnativewhole-system runtime.",
+      "egraph": "Knownnodes/root/childselection/acyclic constraints; sumselectednodecost, equivalencefromgivenegraph construction, notindependentarbitrarysourceproof."
+    },
+    "access": {
+      "HF": "Publiccardandtopfolderlistread viaweb, CC BY4,1.39GB; shellmetadatapayloadtimeouttwice, deeperwebAPI/UIreportednotaccessible andnotbypassed. Noactualfullinputpack downloaded.",
+      "licenses": "GitApache2; HFdataCCBY4; upstreampackagesanddatasetsremainseparate",
+      "full_traces": "Notlocatedcomplete messages/per-candidate graderstate/costledger;185code strings not fulltrajectories"
+    }
+  }
+}

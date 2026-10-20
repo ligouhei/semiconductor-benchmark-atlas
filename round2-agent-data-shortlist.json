@@ -1,6 +1,6 @@
 {
   "status": "第二轮12小时仍在进行；静态核查清单，不是训练授权或模型实验结果",
-  "as_of": "2026-10-20T14:05:20.192299+00:00",
+  "as_of": "2026-10-20T14:45:27.042324+00:00",
   "scope": "只发布派生研究摘要；原始轨迹/问题/答案/凭据不随网站重发。",
   "records": [
     {
@@ -372,6 +372,28 @@
       "sources": [
         "https://arxiv.org/html/2512.11611v1",
         "https://github.com/aiben-ch/GUI-EDA"
+      ]
+    },
+    {
+      "name": "HeuriGym / released generated solver-source companion",
+      "catalog_ids": [
+        "data-heurigym-solvers",
+        "hls-heurigym-scheduling",
+        "synth-heurigym-techmap",
+        "pd-heurigym-globalrouting"
+      ],
+      "data_kind": "真实最终生成算法源码与聚合结果；非全轨迹",
+      "quantity": "21modelIDs/185solverstrings；3EDA任务62份、含egraph/intra共103份，270problemmetrics。",
+      "authenticity": "实际模型最终code；不含每次prompt/candidate/toolfeedback，180AST可解析不等180功能正确。",
+      "availability": "80全部Gitblobs核，网站JSON/CSV实取；HF公共card可读但完整inputpayload请求timeout、深目录不可访问未绕过。",
+      "license_note": "GitApache2/HFcardCCBY4，上游不同数据/工具许可另核；网站generatedcode许可作用范围需核。",
+      "caution": "论文/脚本/网页Quality定义和版本不同，11/30weightedYield/QYI未与perproblemtable对齐，不能作为全验证positive直接训练。",
+      "sources": [
+        "https://www.csl.cornell.edu/~zhiruz/pdfs/heurigym-iclr2026.pdf",
+        "https://arxiv.org/abs/2506.07972",
+        "https://github.com/cornell-zhang/heurigym/tree/a4cf0460152eb798f1b3a797ef22a08192661bf5",
+        "https://huggingface.co/datasets/heurigen/heurigen-data",
+        "https://cornell-zhang.github.io/heurigym/"
       ]
     }
   ]

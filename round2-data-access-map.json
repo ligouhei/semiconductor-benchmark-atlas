@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-10-20T14:05:35.761160+00:00",
+  "as_of": "2026-10-20T14:45:28.230034+00:00",
   "status": "第二轮12h进行中的数据/轨迹开放性核查，非完整市场清单或最终结论",
   "scope": "只覆盖本轮已保存一手核查的新增协议；训练样本、评测输入、模型权重、整理后记忆、生成采样轨迹与LLM工具交互轨迹分别描述",
-  "protocol_records": 150,
-  "families": 73,
+  "protocol_records": 156,
+  "families": 74,
   "items": [
     {
       "catalog_id": "lib-siemens-nemo-characterization",
@@ -1803,6 +1803,78 @@
       "trajectory_and_training_access": "paper描述2082annotatedkeyframes与clickregions，不是2082完整操作轨迹；currentcorpus入口404，未取得完整providerhistory。",
       "limits": "III-D称10selectedphysicalcases，VI-E称7iterations；且仅keyStep由agent操作，前后goldensteps由工程师完成。选例物理验证不能推广所有2082或任意点击均预言硅成功；具体rawmeasurement/匹配ledger未公开可核。",
       "primary_sources": "https://arxiv.org/html/2512.11611v1; https://github.com/aiben-ch/GUI-EDA",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "hls-heurigym-scheduling",
+      "name": "HeuriGym / resource-constrained operator scheduling",
+      "family": "HeuriGym heuristic algorithm engineering",
+      "object_identity": "CO算法工程agentbenchmark的EDA分轨",
+      "task": "LLM写Python solve(input_file,solution_file)，读demo执行/错误反馈迭代，形成通用调度heuristic；目标非直接输出Verilog，逐实例在10s/8cores内调度，nativeHLS问题的局部阶段。",
+      "available_materials_and_tools": "80全部Gitblobs核/rootApache2；HF heurigen/heurigen-data公开card/topfolders与CCBY4标签可见、1.39GB，但本轮shell两次timeout，deepAPI/UI不可访问后未绕过，完整inputpayload未取。网站结果/solverJSON实取并hash，公开源码不自动涵盖所有上游工具/数据许可。",
+      "trajectory_and_training_access": "website21份ops最终solver code；没有完整逐次LLM/执行消息history，inputpack下载未成功。",
+      "limits": "paper10iter/当前CLI默认3/网页更新5iter分别记录；paper8cores，ops/map10s、routing300s、egraph10s、intra60s，budget含优化器/全部候选/评测成本。main只给demo反馈，但collector传datasetroot递归收文件可能同时收demo/eval，并从结果选bestiteration；完整payload/ledger缺失，不能量化实际泄漏或归因每个论文run。 缺失/非法node与负起点需独立验收，missingcostfiles不进入test_case_stats时应另核固定失败分母。",
+      "primary_sources": "https://www.csl.cornell.edu/~zhiruz/pdfs/heurigym-iclr2026.pdf; https://arxiv.org/abs/2506.07972; https://github.com/cornell-zhang/heurigym/tree/a4cf0460152eb798f1b3a797ef22a08192661bf5; https://huggingface.co/datasets/heurigen/heurigen-data; https://cornell-zhang.github.io/heurigym/",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "synth-heurigym-techmap",
+      "name": "HeuriGym / 6-LUT technology mapping",
+      "family": "HeuriGym heuristic algorithm engineering",
+      "object_identity": "同套件EDA分轨；复用经典logicnetwork",
+      "task": "LLM生成mapping heuristic实现、读输入并写等价LUTmapped BLIF，demo反馈修复/改进；默认每例10s/8cores，原生ABC负责独立CEC与统计。",
+      "available_materials_and_tools": "80全部Gitblobs核/rootApache2；HF heurigen/heurigen-data公开card/topfolders与CCBY4标签可见、1.39GB，但本轮shell两次timeout，deepAPI/UI不可访问后未绕过，完整inputpayload未取。网站结果/solverJSON实取并hash，公开源码不自动涵盖所有上游工具/数据许可。",
+      "trajectory_and_training_access": "website21份techmap最终code，其中1份不是可直接AST解析的Python；仅静态格式发现，不据此否定作者所有run。",
+      "limits": "paper10iter/当前CLI默认3/网页更新5iter分别记录；paper8cores，ops/map10s、routing300s、egraph10s、intra60s，budget含优化器/全部候选/评测成本。main只给demo反馈，但collector传datasetroot递归收文件可能同时收demo/eval，并从结果选bestiteration；完整payload/ledger缺失，不能量化实际泄漏或归因每个论文run。 CEC与fanin检查源码公开，未本轮执行；无完整候选/ABC版本/每例label/costledger，不把AST可解析当映射正确。",
+      "primary_sources": "https://www.csl.cornell.edu/~zhiruz/pdfs/heurigym-iclr2026.pdf; https://arxiv.org/abs/2506.07972; https://github.com/cornell-zhang/heurigym/tree/a4cf0460152eb798f1b3a797ef22a08192661bf5; https://huggingface.co/datasets/heurigen/heurigen-data; https://cornell-zhang.github.io/heurigym/",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "pd-heurigym-globalrouting",
+      "name": "HeuriGym / global-routing heuristic generation",
+      "family": "HeuriGym heuristic algorithm engineering",
+      "object_identity": "同套件EDA分轨；不同于OPC或完整P&Rflow",
+      "task": "生成Python路由算法，分层连pin并输出轴对齐segments；300s/8cores perinstance，迭代demofeedback。只是globalrouting abstractpaths，不是metalDRC/MRC合法detailedrouting。",
+      "available_materials_and_tools": "80全部Gitblobs核/rootApache2；HF heurigen/heurigen-data公开card/topfolders与CCBY4标签可见、1.39GB，但本轮shell两次timeout，deepAPI/UI不可访问后未绕过，完整inputpayload未取。网站结果/solverJSON实取并hash，公开源码不自动涵盖所有上游工具/数据许可。",
+      "trajectory_and_training_access": "website20份GR最终solver源代码；没有完整routingcandidate/每轮feedback与执行资源ledger。",
+      "limits": "paper10iter/当前CLI默认3/网页更新5iter分别记录；paper8cores，ops/map10s、routing300s、egraph10s、intra60s，budget含优化器/全部候选/评测成本。main只给demo反馈，但collector传datasetroot递归收文件可能同时收demo/eval，并从结果选bestiteration；完整payload/ledger缺失，不能量化实际泄漏或归因每个论文run。 24part复用大grid/源design，按源组heldout；没有fullinputpayload不把名字里的50当已核netcount。current默认timeout10如未覆盖不等paper300秒。",
+      "primary_sources": "https://www.csl.cornell.edu/~zhiruz/pdfs/heurigym-iclr2026.pdf; https://arxiv.org/abs/2506.07972; https://github.com/cornell-zhang/heurigym/tree/a4cf0460152eb798f1b3a797ef22a08192661bf5; https://huggingface.co/datasets/heurigen/heurigen-data; https://cornell-zhang.github.io/heurigym/",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "synth-heurigym-egraph",
+      "name": "HeuriGym / e-graph extraction heuristic",
+      "family": "HeuriGym heuristic algorithm engineering",
+      "object_identity": "邻接编译优化分轨；同9问题suite",
+      "task": "从equivalenceclasses选节点形成低costacyclicexpression，Pythonheuristic/10s/8cores，demo反馈迭代。",
+      "available_materials_and_tools": "80全部Gitblobs核/rootApache2；HF heurigen/heurigen-data公开card/topfolders与CCBY4标签可见、1.39GB，但本轮shell两次timeout，deepAPI/UI不可访问后未绕过，完整inputpayload未取。网站结果/solverJSON实取并hash，公开源码不自动涵盖所有上游工具/数据许可。",
+      "trajectory_and_training_access": "website20份egraph最终code，含非直接Pythonparse片段；非fullagenttrajectory。",
+      "limits": "paper10iter/当前CLI默认3/网页更新5iter分别记录；paper8cores，ops/map10s、routing300s、egraph10s、intra60s，budget含优化器/全部候选/评测成本。main只给demo反馈，但collector传datasetroot递归收文件可能同时收demo/eval，并从结果选bestiteration；完整payload/ledger缺失，不能量化实际泄漏或归因每个论文run。 输入与rules若训练/测试复用须按sourceprogram分组；没有实际原程序/egraphpayload不能复算cost或推映射后PPA。",
+      "primary_sources": "https://www.csl.cornell.edu/~zhiruz/pdfs/heurigym-iclr2026.pdf; https://arxiv.org/abs/2506.07972; https://github.com/cornell-zhang/heurigym/tree/a4cf0460152eb798f1b3a797ef22a08192661bf5; https://huggingface.co/datasets/heurigen/heurigen-data; https://cornell-zhang.github.io/heurigym/",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "arch-heurigym-intraop",
+      "name": "HeuriGym / accelerator intra-operator sharding",
+      "family": "HeuriGym heuristic algorithm engineering",
+      "object_identity": "邻接系统映射分轨；非芯片layout",
+      "task": "为每node选strategy最小化节点+边总cost且每时刻usage不超limit，Pythonheuristic、60s/8cores。不是写RTL或在真实多GPU集群训练模型。",
+      "available_materials_and_tools": "80全部Gitblobs核/rootApache2；HF heurigen/heurigen-data公开card/topfolders与CCBY4标签可见、1.39GB，但本轮shell两次timeout，deepAPI/UI不可访问后未绕过，完整inputpayload未取。网站结果/solverJSON实取并hash，公开源码不自动涵盖所有上游工具/数据许可。",
+      "trajectory_and_training_access": "website21份intraop最终code，非真实分布式执行/LLMtooltrace。",
+      "limits": "paper10iter/当前CLI默认3/网页更新5iter分别记录；paper8cores，ops/map10s、routing300s、egraph10s、intra60s，budget含优化器/全部候选/评测成本。main只给demo反馈，但collector传datasetroot递归收文件可能同时收demo/eval，并从结果选bestiteration；完整payload/ledger缺失，不能量化实际泄漏或归因每个论文run。 currentchecker在范围检查前索引strategy做usage可能先抛异常，属formatfailure不同类别；实际发生次数未知。",
+      "primary_sources": "https://www.csl.cornell.edu/~zhiruz/pdfs/heurigym-iclr2026.pdf; https://arxiv.org/abs/2506.07972; https://github.com/cornell-zhang/heurigym/tree/a4cf0460152eb798f1b3a797ef22a08192661bf5; https://huggingface.co/datasets/heurigen/heurigen-data; https://cornell-zhang.github.io/heurigym/",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "data-heurigym-solvers",
+      "name": "HeuriGym / released generated solver-source companion",
+      "family": "HeuriGym heuristic algorithm engineering",
+      "object_identity": "真实生成代码/成绩资源；非独立bench和完整trace",
+      "task": "可静态审阅模型生成的最终heuristic与结果，训练/复用前按任务源和modeldata许可判断；不从单个code字符串虚构中间prompt、工具反馈、候选选择或成本链。",
+      "available_materials_and_tools": "80全部Gitblobs核/rootApache2；HF heurigen/heurigen-data公开card/topfolders与CCBY4标签可见、1.39GB，但本轮shell两次timeout，deepAPI/UI不可访问后未绕过，完整inputpayload未取。网站结果/solverJSON实取并hash，公开源码不自动涵盖所有上游工具/数据许可。",
+      "trajectory_and_training_access": "实际185最终sourcecode和公开summaryCSV，缺对应完整inputpayload/candidatehistory/toolmessages；本轮仅发派生统计及原链接。",
+      "limits": "paper10iter/当前CLI默认3/网页更新5iter分别记录；paper8cores，ops/map10s、routing300s、egraph10s、intra60s，budget含优化器/全部候选/评测成本。main只给demo反馈，但collector传datasetroot递归收文件可能同时收demo/eval，并从结果选bestiteration；完整payload/ledger缺失，不能量化实际泄漏或归因每个论文run。 Generatedcode/resource可能含无效解，需独立重新验收后才能作positive；缺完整error/cost/iterationhistory，不能把185当185完整providertrajectories。",
+      "primary_sources": "https://www.csl.cornell.edu/~zhiruz/pdfs/heurigym-iclr2026.pdf; https://arxiv.org/abs/2506.07972; https://github.com/cornell-zhang/heurigym/tree/a4cf0460152eb798f1b3a797ef22a08192661bf5; https://huggingface.co/datasets/heurigen/heurigen-data; https://cornell-zhang.github.io/heurigym/",
       "record_snapshot_matches_audit": true
     }
   ],

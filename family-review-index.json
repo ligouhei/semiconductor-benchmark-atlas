@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T14:05:35.865793+00:00",
+  "generated_at": "2026-10-20T14:45:28.337569+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 394,
-    "records": 716,
-    "records_with_any_field_audit_entry": 475,
-    "records_with_current_field_audit_snapshot": 442,
+    "families": 395,
+    "records": 722,
+    "records_with_any_field_audit_entry": 481,
+    "records_with_current_field_audit_snapshot": 448,
     "records_without_current_field_audit_snapshot": 274
   },
   "requirements_per_record": [
@@ -7219,6 +7219,140 @@
           "limitations": "官网“fully-featured”是产品定位，当前CCS仍标comingsoon；不能据支持SDC就认定完整商业signoff等价。delay与exception测试输入不同，借PT SDF的高相关不证明独立CCS精度；旧论文对照与现版本能力分开",
           "tools_and_access": "官网发布Linux CPU/GPU .so和C header、文档；学术/非商业用途需邮箱验证license，不等开源核心或无许可门槛。本研究未注册/发送邮件/下载激活许可。fullpaper公开；论文精确输入包/脚本manifest与官网binary对应关系尚需核",
           "industrial_value": "可作为现代时序引擎强基线/集成工具；模型要优化新层次，如配置调试/约束修复/工具维护，需额外agent协议及独立验收；已有软件不等底层加速研究无价值"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "HeuriGym heuristic algorithm engineering",
+      "record_count": 6,
+      "records_with_current_field_audit": 6,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "hls-heurigym-scheduling",
+          "name": "HeuriGym / resource-constrained operator scheduling",
+          "category": "综合/HLS算子调度agent",
+          "artifact_type": "CO算法工程agentbenchmark的EDA分轨",
+          "task_layer": "算法启发式代码生成/反馈改进；与工具调用流程分层",
+          "evidence_status": "第二轮12h进行中；80固定Gitblobs/全文、网站CSV与185solver的自写静态AST/数表核；未运行solver/第三方grader/EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-heurigym-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需要匹配runrevision、严格heldoutmanifest/全部失败/原始task与完整轨迹，核评分版本、强原生基线/成本；访问受限内容不绕过。",
+          "limitations": "paper10iter/当前CLI默认3/网页更新5iter分别记录；paper8cores，ops/map10s、routing300s、egraph10s、intra60s，budget含优化器/全部候选/评测成本。main只给demo反馈，但collector传datasetroot递归收文件可能同时收demo/eval，并从结果选bestiteration；完整payload/ledger缺失，不能量化实际泄漏或归因每个论文run。 缺失/非法node与负起点需独立验收，missingcostfiles不进入test_case_stats时应另核固定失败分母。",
+          "tools_and_access": "80全部Gitblobs核/rootApache2；HF heurigen/heurigen-data公开card/topfolders与CCBY4标签可见、1.39GB，但本轮shell两次timeout，deepAPI/UI不可访问后未绕过，完整inputpayload未取。网站结果/solverJSON实取并hash，公开源码不自动涵盖所有上游工具/数据许可。",
+          "industrial_value": "研究判断：成熟HLS原生优化问题转成LLMheuristic设计测试，有用来测算法编写与反馈改进；完整HLS Csim/RTLcosim/后实现PPA不由schedule合法自动保证。"
+        },
+        {
+          "id": "synth-heurigym-techmap",
+          "name": "HeuriGym / 6-LUT technology mapping",
+          "category": "综合/FPGA技术映射agent",
+          "artifact_type": "同套件EDA分轨；复用经典logicnetwork",
+          "task_layer": "算法启发式代码生成/反馈改进；与工具调用流程分层",
+          "evidence_status": "第二轮12h进行中；80固定Gitblobs/全文、网站CSV与185solver的自写静态AST/数表核；未运行solver/第三方grader/EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-heurigym-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需要匹配runrevision、严格heldoutmanifest/全部失败/原始task与完整轨迹，核评分版本、强原生基线/成本；访问受限内容不绕过。",
+          "limitations": "paper10iter/当前CLI默认3/网页更新5iter分别记录；paper8cores，ops/map10s、routing300s、egraph10s、intra60s，budget含优化器/全部候选/评测成本。main只给demo反馈，但collector传datasetroot递归收文件可能同时收demo/eval，并从结果选bestiteration；完整payload/ledger缺失，不能量化实际泄漏或归因每个论文run。 CEC与fanin检查源码公开，未本轮执行；无完整候选/ABC版本/每例label/costledger，不把AST可解析当映射正确。",
+          "tools_and_access": "80全部Gitblobs核/rootApache2；HF heurigen/heurigen-data公开card/topfolders与CCBY4标签可见、1.39GB，但本轮shell两次timeout，deepAPI/UI不可访问后未绕过，完整inputpayload未取。网站结果/solverJSON实取并hash，公开源码不自动涵盖所有上游工具/数据许可。",
+          "industrial_value": "研究判断：区别“让LLM调用ABC”与“LLM写更好的mappingheuristic”很关键；后者确有算法优化空间，收益应以同预算原生ABC实测。"
+        },
+        {
+          "id": "pd-heurigym-globalrouting",
+          "name": "HeuriGym / global-routing heuristic generation",
+          "category": "数字后端/全局路由算法agent",
+          "artifact_type": "同套件EDA分轨；不同于OPC或完整P&Rflow",
+          "task_layer": "算法启发式代码生成/反馈改进；与工具调用流程分层",
+          "evidence_status": "第二轮12h进行中；80固定Gitblobs/全文、网站CSV与185solver的自写静态AST/数表核；未运行solver/第三方grader/EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-heurigym-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需要匹配runrevision、严格heldoutmanifest/全部失败/原始task与完整轨迹，核评分版本、强原生基线/成本；访问受限内容不绕过。",
+          "limitations": "paper10iter/当前CLI默认3/网页更新5iter分别记录；paper8cores，ops/map10s、routing300s、egraph10s、intra60s，budget含优化器/全部候选/评测成本。main只给demo反馈，但collector传datasetroot递归收文件可能同时收demo/eval，并从结果选bestiteration；完整payload/ledger缺失，不能量化实际泄漏或归因每个论文run。 24part复用大grid/源design，按源组heldout；没有fullinputpayload不把名字里的50当已核netcount。current默认timeout10如未覆盖不等paper300秒。",
+          "tools_and_access": "80全部Gitblobs核/rootApache2；HF heurigen/heurigen-data公开card/topfolders与CCBY4标签可见、1.39GB，但本轮shell两次timeout，deepAPI/UI不可访问后未绕过，完整inputpayload未取。网站结果/solverJSON实取并hash，公开源码不自动涵盖所有上游工具/数据许可。",
+          "industrial_value": "研究判断：直接测新路由heuristic代码的agent能力，原生router仍是强baseline；评分只覆盖给定抽象grid，不能推出DR/timing/PDN/DRC全部闭合。"
+        },
+        {
+          "id": "synth-heurigym-egraph",
+          "name": "HeuriGym / e-graph extraction heuristic",
+          "category": "综合/等价表达式提取agent",
+          "artifact_type": "邻接编译优化分轨；同9问题suite",
+          "task_layer": "算法启发式代码生成/反馈改进；与工具调用流程分层",
+          "evidence_status": "第二轮12h进行中；80固定Gitblobs/全文、网站CSV与185solver的自写静态AST/数表核；未运行solver/第三方grader/EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-heurigym-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需要匹配runrevision、严格heldoutmanifest/全部失败/原始task与完整轨迹，核评分版本、强原生基线/成本；访问受限内容不绕过。",
+          "limitations": "paper10iter/当前CLI默认3/网页更新5iter分别记录；paper8cores，ops/map10s、routing300s、egraph10s、intra60s，budget含优化器/全部候选/评测成本。main只给demo反馈，但collector传datasetroot递归收文件可能同时收demo/eval，并从结果选bestiteration；完整payload/ledger缺失，不能量化实际泄漏或归因每个论文run。 输入与rules若训练/测试复用须按sourceprogram分组；没有实际原程序/egraphpayload不能复算cost或推映射后PPA。",
+          "tools_and_access": "80全部Gitblobs核/rootApache2；HF heurigen/heurigen-data公开card/topfolders与CCBY4标签可见、1.39GB，但本轮shell两次timeout，deepAPI/UI不可访问后未绕过，完整inputpayload未取。网站结果/solverJSON实取并hash，公开源码不自动涵盖所有上游工具/数据许可。",
+          "industrial_value": "研究判断：邻接logic/compiler优化资源，可比较LLM生成heuristic与传统extractor；其costmodel需映射实际门级成本后才能称ASIC面积收益。"
+        },
+        {
+          "id": "arch-heurigym-intraop",
+          "name": "HeuriGym / accelerator intra-operator sharding",
+          "category": "边界类/加速器映射与分布式策略",
+          "artifact_type": "邻接系统映射分轨；非芯片layout",
+          "task_layer": "算法启发式代码生成/反馈改进；与工具调用流程分层",
+          "evidence_status": "第二轮12h进行中；80固定Gitblobs/全文、网站CSV与185solver的自写静态AST/数表核；未运行solver/第三方grader/EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-heurigym-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需要匹配runrevision、严格heldoutmanifest/全部失败/原始task与完整轨迹，核评分版本、强原生基线/成本；访问受限内容不绕过。",
+          "limitations": "paper10iter/当前CLI默认3/网页更新5iter分别记录；paper8cores，ops/map10s、routing300s、egraph10s、intra60s，budget含优化器/全部候选/评测成本。main只给demo反馈，但collector传datasetroot递归收文件可能同时收demo/eval，并从结果选bestiteration；完整payload/ledger缺失，不能量化实际泄漏或归因每个论文run。 currentchecker在范围检查前索引strategy做usage可能先抛异常，属formatfailure不同类别；实际发生次数未知。",
+          "tools_and_access": "80全部Gitblobs核/rootApache2；HF heurigen/heurigen-data公开card/topfolders与CCBY4标签可见、1.39GB，但本轮shell两次timeout，deepAPI/UI不可访问后未绕过，完整inputpayload未取。网站结果/solverJSON实取并hash，公开源码不自动涵盖所有上游工具/数据许可。",
+          "industrial_value": "研究判断：芯片加速器系统映射的邻接agent算法任务，可纳入全栈地图，但不能与工艺node/布局PPA记录并榜。"
+        },
+        {
+          "id": "data-heurigym-solvers",
+          "name": "HeuriGym / released generated solver-source companion",
+          "category": "综合/算法工程生成结果与反馈资源",
+          "artifact_type": "真实生成代码/成绩资源；非独立bench和完整trace",
+          "task_layer": "算法启发式代码生成/反馈改进；与工具调用流程分层",
+          "evidence_status": "第二轮12h进行中；80固定Gitblobs/全文、网站CSV与185solver的自写静态AST/数表核；未运行solver/第三方grader/EDA。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-heurigym-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需要匹配runrevision、严格heldoutmanifest/全部失败/原始task与完整轨迹，核评分版本、强原生基线/成本；访问受限内容不绕过。",
+          "limitations": "paper10iter/当前CLI默认3/网页更新5iter分别记录；paper8cores，ops/map10s、routing300s、egraph10s、intra60s，budget含优化器/全部候选/评测成本。main只给demo反馈，但collector传datasetroot递归收文件可能同时收demo/eval，并从结果选bestiteration；完整payload/ledger缺失，不能量化实际泄漏或归因每个论文run。 Generatedcode/resource可能含无效解，需独立重新验收后才能作positive；缺完整error/cost/iterationhistory，不能把185当185完整providertrajectories。",
+          "tools_and_access": "80全部Gitblobs核/rootApache2；HF heurigen/heurigen-data公开card/topfolders与CCBY4标签可见、1.39GB，但本轮shell两次timeout，deepAPI/UI不可访问后未绕过，完整inputpayload未取。网站结果/solverJSON实取并hash，公开源码不自动涵盖所有上游工具/数据许可。",
+          "industrial_value": "研究判断：比只有排行榜有用的真实生成工件，适合算法结构/错误分析；明确不是完整交互SFT库、也不是185独立硬件设计。"
         }
       ]
     },
