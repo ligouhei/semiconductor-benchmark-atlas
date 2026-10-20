@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T09:21:31.386301+00:00",
+  "generated_at": "2026-10-20T09:45:35.834057+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 365,
-    "records": 651,
-    "records_with_any_field_audit_entry": 409,
-    "records_with_current_field_audit_snapshot": 376,
+    "families": 369,
+    "records": 660,
+    "records_with_any_field_audit_entry": 418,
+    "records_with_current_field_audit_snapshot": 385,
     "records_without_current_field_audit_snapshot": 275
   },
   "requirements_per_record": [
@@ -1190,8 +1190,8 @@
     },
     {
       "benchmark_family": "AnalogGym",
-      "record_count": 3,
-      "records_with_current_field_audit": 3,
+      "record_count": 6,
+      "records_with_current_field_audit": 6,
       "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
       "records": [
         {
@@ -1267,6 +1267,69 @@
           "limitations": "终止只表示选定11惩罚契约；没有独立全PVT/MC/PEX/MRC/布局gate。os.system未显式processfreshness验收、异常可能读旧输出；helperfall边界不扩大成所有sr_score错误。ray/训练10000steps不自动等20000独立有效design或paperFEs，reset/初始/重复/失败要算。",
           "tools_and_access": "核心BSD3，PDK/模型/第三方各自授权；ngspice+SKY130 AMP/LDO，另有Spectre/HSPICE兼容声明，不代表全部工具/PDK工艺都公开可跑。README推荐ngspice≥42，41的温度/DC sweep已知限制；未安装/仿真/加载checkpoint",
           "industrial_value": "适合比较RL/BO/agent达标效率、可靠工具反馈；与现成ADE等可行性搜索同预算比较，不能仅policy训练成功推工业鲁棒电路已完成。"
+        },
+        {
+          "id": "analog-analoggym-opt-grpo",
+          "name": "AnalogGym-Opt / numerical GRPO sizing and PVT verification",
+          "category": "模拟前端/尺寸优化",
+          "artifact_type": "复用AnalogGym拓扑的数值RL优化基础设施；非LLM policy",
+          "task_layer": "固定拓扑SKY130尺寸/OP图→ngspice→多目标/PVT反馈",
+          "evidence_status": "第二轮12h进行中；一手正文/固定源码/官方归档静态核查及自编数据算术核对；未运行模型、EDA、仿真或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-vpr-resizer-analogopt-tcad-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需对齐论文/当前工件版本、真实环境与评分硬门、失败分母/成本和数据使用许可；静态核验不等性能复现。",
+          "limitations": "evaluate-design scalarreward>=0打印all targets satisfied，不等15个YAMLspec全过；Pareto保存PM可行也非fullspec。proxy未验证候选不能当全PVTrobust。当前库和历史性能数据来源/单位不同，不能拼成统一groundtruth或称LLM替代全部优化器。",
+          "tools_and_access": "95个metadata/core blobs逐hash匹配，17YAML/source可审阅；ngspice与SKY130开源依赖，rootMIT、PDK另列。Active_Area实际sqrt(devicearea proxy sum)，不是YAML注释mm²物理面积；未仿真/训练。",
+          "industrial_value": "研究判断：作为可执行数值优化器/agent工具环境有用，GRPO不是此处的语言模型强化学习；原生optimizer可完成尺寸数值搜索，LLM的增量任务应评价规格解释、工具选择、预算与诊断。"
+        },
+        {
+          "id": "analog-analoggym-opt-agent-tools",
+          "name": "AnalogGym-Opt / LLM-callable sizing skills and MCP interface",
+          "category": "模拟前端/工程agent环境",
+          "artifact_type": "同框架agent工具接口；未见固定LLM对抗评测",
+          "task_layer": "高层请求→CLI/MCP/skill→原生仿真或数值优化器",
+          "evidence_status": "第二轮12h进行中；一手正文/固定源码/官方归档静态核查及自编数据算术核对；未运行模型、EDA、仿真或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-vpr-resizer-analogopt-tcad-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需对齐论文/当前工件版本、真实环境与评分硬门、失败分母/成本和数据使用许可；静态核验不等性能复现。",
+          "limitations": "论文abstract称structured electricaldataset含sizing/OP/PVT，但公开历史CSV只有performance/provenance，缺TD/TBM参数。两者不能自动等同；新仿真可产数据不代表历史开放轨迹已存在。",
+          "tools_and_access": "rootMIT；SKY130/ngspice本地执行环境另需配置；skills/MCP不是API服务托管数据。95文件审阅，未启动MCP/运行工具。",
+          "industrial_value": "研究判断：作为构建agent基准的工具底座收录，明确标为环境/接口而非已验证模型智能优势；数值优化能力与LLM编排价值分别评价。"
+        },
+        {
+          "id": "data-analoggym-opt-historical",
+          "name": "AnalogGym-Opt / 358234 historical performance observations",
+          "category": "模拟前端/性能数据资源",
+          "artifact_type": "同源历史性能表；非完整尺寸监督/agent轨迹",
+          "task_layer": "18拓扑/73源表的generation-index与17performance字段",
+          "evidence_status": "第二轮12h进行中；一手正文/固定源码/官方归档静态核查及自编数据算术核对；未运行模型、EDA、仿真或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-vpr-resizer-analogopt-tcad-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需对齐论文/当前工件版本、真实环境与评分硬门、失败分母/成本和数据使用许可；静态核验不等性能复现。",
+          "limitations": "chip_area原源sqrt(abs(area))不是物理面积；FOM_AW固定1500e-12而非每目录CL、noise/TC/settling定义和真实PVT不完整。此历史表不是当前SKY130ngspice结果，亦非paper所有sizing/OP/PVT结构化训练记录的已证发布。",
+          "tools_and_access": "95metadata/core blobs+23.23MBgzip CSV已核，358234行与73源manifest逐计数吻合；rootMIT软件声明，历史源权利/PDK另核。字段单位多数inferred/unresolved，保留来源，不推测补齐。",
+          "industrial_value": "研究判断：确实下载并验证的公开性能数据，适合retrieval/数据分析；完整设计参数监督、校准数字孪生、LLM交互训练均有实质缺口。不能用35.8万行宣传同等数量agent轨迹。"
         }
       ]
     },
@@ -12365,6 +12428,56 @@
       ]
     },
     {
+      "benchmark_family": "ResizerAgent post-CTS repair",
+      "record_count": 2,
+      "records_with_current_field_audit": 2,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "pd-resizeragent-repair",
+          "name": "ResizerAgent / post-CTS timing-repair orchestration",
+          "category": "后端/时序修复与物理优化agent",
+          "artifact_type": "agent控制原生OpenROAD Resizer的方法评测",
+          "task_layer": "CTS种子/STA路径/布局与单元库上下文→计划Tcl→原生Resizer反馈",
+          "evidence_status": "第二轮12h进行中；一手正文/固定源码/官方归档静态核查及自编数据算术核对；未运行模型、EDA、仿真或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-vpr-resizer-analogopt-tcad-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需对齐论文/当前工件版本、真实环境与评分硬门、失败分母/成本和数据使用许可；静态核验不等性能复现。",
+          "limitations": "paper AT13×4与RA15×up4、currentAT20startup+15×4等预算不同；periterationruntime非完整同机campaign成本。current status成功可仅ODB存在、不等时序改善；内部power_mw实为rawW标签冲突而最终power_W字段正确。Gitgcd sample有retry后仍提升回归plan问题，与全归档分开。论文/归档均存在退步点，不称普遍dominance。",
+          "tools_and_access": "273选定Gitblobs与官方1.83GBoutputs校验；rootBSD3，上游ORFS/PDK另列。currentGit README说bundled但gitlink pin0b219829/AtmadipORFS；Zenodo源码1.032GB官方MD5匹配，26760个ORFSbundledfiles、272选定core与Git逐字节相同（.gitmodules仅Git有），确实包含上游源码/PDK。仅静态读取，未装EDA/执行agent。",
+          "industrial_value": "研究判断：仍有价值的工程编排agent/失败诊断任务；工具内置repair不等整个计划/状态管理已解决。优先比较同起点、同parasitic阶段、相同搜索预算和时序/面积/功耗/DRC/功能门；不能只取最优WNS。"
+        },
+        {
+          "id": "data-resizeragent-traces",
+          "name": "ResizerAgent / released planner-selector traces and native-search controls",
+          "category": "后端/工程agent交互数据",
+          "artifact_type": "同工作开放轨迹/报告资源；非新增独立benchmark",
+          "task_layer": "真实多轮roleprompt/action/feedback及数值TPE对照数据",
+          "evidence_status": "第二轮12h进行中；一手正文/固定源码/官方归档静态核查及自编数据算术核对；未运行模型、EDA、仿真或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-vpr-resizer-analogopt-tcad-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需对齐论文/当前工件版本、真实环境与评分硬门、失败分母/成本和数据使用许可；静态核验不等性能复现。",
+          "limitations": "CSVcost是作者按token价估算，ClaudeMax实际订阅计费不同；部分retry重复iteration-role、空cost，不能按少数行合成整campaign账单。工具状态/输入context需对齐，14Write差异需独立定位，不能称全量高质量已清洗训练集。",
+          "tools_and_access": "1.83GB官方MD5验证，72内ZIP共48401文件、18.35GB逻辑展开；审阅只读取压缩内容和选定数据，未运行脚本。归档ODB-free，源码ZIP已核含ORFS/上游/PDK，环境仍须构建/核工具版本；rootlicense不自动替代每个上游依赖权利。",
+          "industrial_value": "研究判断：本轮有实质公开action-observation数据的候选之一，强于仅prompt/最终patch；适合研究带真实工具失败的后端agent。数据规模、可回放性、SFT适用性与同源泄漏分别报告。"
+        }
+      ]
+    },
+    {
       "benchmark_family": "Rodinia",
       "record_count": 1,
       "records_with_current_field_audit": 0,
@@ -13760,6 +13873,56 @@
       ]
     },
     {
+      "benchmark_family": "TcadGPT",
+      "record_count": 2,
+      "records_with_current_field_audit": 2,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "device-tcadgpt-qa",
+          "name": "TcadGPT / expert-reference TCAD QA264",
+          "category": "器件/TCAD知识与代码",
+          "artifact_type": "模型语义问答评测；与SDE执行轨分开",
+          "task_layer": "TCAD物理/仿真与商业工具知识问题→参考答案匹配",
+          "evidence_status": "第二轮12h进行中；一手正文/固定源码/官方归档静态核查及自编数据算术核对；未运行模型、EDA、仿真或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-vpr-resizer-analogopt-tcad-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需对齐论文/当前工件版本、真实环境与评分硬门、失败分母/成本和数据使用许可；静态核验不等性能复现。",
+          "limitations": "不是agent多轮工程优化bench；模型回答/人工语义标注不等器件物理正确、工艺校准或全流程收敛。公开Elmer100QA/20code是跨域FEM迁移，不额外算芯片设计数据集。",
+          "tools_and_access": "85core Gitblobs全部核；public gold和7model输出JSON可审阅。README明确不含大训练集/weights/generatedoutputs，未核到完整1.5M公开包。商业Sentaurus手册来源与rootlicense未定位，papernoncommercialacademic声明不能替代每个素材权利。",
+          "industrial_value": "研究判断：有真实公开小QA金标准和模型输出，适合工具知识评估；主要缺完整训练语料、公开可复算评分协议/版本与工具执行真实性。"
+        },
+        {
+          "id": "device-tcadgpt-sde",
+          "name": "TcadGPT / SDE syntax executability20 and published-version boundary",
+          "category": "器件/TCAD代码与优化",
+          "artifact_type": "同模型代码执行轨；20旧版与60新版不可合并",
+          "task_layer": "结构/材料/掺杂/mesh/export自然语言指令→SDE Scheme deck",
+          "evidence_status": "第二轮12h进行中；一手正文/固定源码/官方归档静态核查及自编数据算术核对；未运行模型、EDA、仿真或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-vpr-resizer-analogopt-tcad-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需对齐论文/当前工件版本、真实环境与评分硬门、失败分母/成本和数据使用许可；静态核验不等性能复现。",
+          "limitations": "模型生成语法有效不等几何精确符合指令、mesh质量、numericalconvergence或器件优化成功；训练生成器开放不等1.5M语料或完整动作反馈轨迹发布。published/preprint/current三种证据标清。",
+          "tools_and_access": "公开20instructiontxt/22cmd示例及IR/DPO脚本，Sentaurus商业授权/版本不可由公开源码替代；无3samples×20完整编译日志/全部DPO对/新版60题包可定位，本轮未执行编译器。",
+          "industrial_value": "研究判断：有意义的商业工具脚本语法落地任务，不能算成熟器件优化agentbench；仍需独立语义/物理oracle和真实workflow评价。"
+        }
+      ]
+    },
+    {
       "benchmark_family": "Testyard hardware testing framework",
       "record_count": 1,
       "records_with_current_field_audit": 1,
@@ -14560,6 +14723,35 @@
       ]
     },
     {
+      "benchmark_family": "VPR-Evolve FPGA source evolution",
+      "record_count": 1,
+      "records_with_current_field_audit": 1,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "pd-vpr-evolve-source",
+          "name": "VPR-Evolve / FPGA packing-placement-routing code evolution",
+          "category": "后端/FPGA布局布线算法研发agent",
+          "artifact_type": "复用VTR9的源码演化方法评测；与OPC VPEvolve不同",
+          "task_layer": "FPGA CAD源码/架构/BLIF→构建与P&R→多指标反馈",
+          "evidence_status": "第二轮12h进行中；一手正文/固定源码/官方归档静态核查及自编数据算术核对；未运行模型、EDA、仿真或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-vpr-resizer-analogopt-tcad-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需对齐论文/当前工件版本、真实环境与评分硬门、失败分母/成本和数据使用许可；静态核验不等性能复现。",
+          "limitations": "paper五阶段/五设计/五seed，与current早期六阶段/三seed叙述不同。fork LU8/bgm仅4/7个postbase commits，多数命名分支仍stock；paper mcml示例commit当前fork422未解析。当前四个sha迁移摘要全部已完成题退步，是另run，不能套作paper17/19反证；37k inspiration主要上游代码不是agent数据。",
+          "tools_and_access": "116选定Gitblobs匹配；docs/benchmarks含8设计×双flow5seed和100seed基线、固定seed/fabric；当前root gitlink是stock。上游VTR/复制代码各自许可，未见项目rootLICENSE；未编译运行。",
+          "industrial_value": "研究判断：真实agent研发原生FPGA算法，与仅调knob或直接预测placement区别清楚；复用经典设计不代表任务已被原生工具解决，是否改善取决于固定fabric/预算/完整失败分母和迁移证据。"
+        }
+      ]
+    },
+    {
       "benchmark_family": "VTR benchmarks",
       "record_count": 1,
       "records_with_current_field_audit": 0,
@@ -15297,6 +15489,35 @@
           "limitations": "源码和README的candidate tier/认证叙述不同，需以明确冻结的score policy和版本报告为准；认证报告本研究未重跑。报告明确连续时间只认证有限差分/有状态behavior、KCL只认证可观测branch贡献而非未知节点MNA求解；noise/analysis仅特定transient/checker契约，不能据此推全模拟精度。formal-candidate是仓库标签，不表示数学形式证明。公开gold必须与agent隔离。v1 overview86entry/300forms但仅73core/265forms入分母，不能将entry/form/version数字混用，更不能沿用检索页400/1200。",
           "tools_and_access": "公开repo/runners/task schemas和EVAS/Spectre接口；root完整tree未见LICENSE，pyproject仅元数据，代码/题目/模拟器许可须另取得明确依据，不称宽松开源。EVAS版本与strict配置需锁；root说EVAS用于正式验收、Spectre可选parity，但v3 model runner仍要求paper-facing Spectre并保留claimfalse，存在发布策略不一致。商业Spectre许可另核，未建镜像/执行。",
           "industrial_value": "填补AMS模型编程/测试/调试评测；对功能抽象和测试工程agent有价值，不能代替真实晶体管设计/多PVT后仿/器件噪声及签核。模板化行为生成已有工具仍须研究复杂契约和oracle强度，不等工业任务已解决。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "zenDot quantum TCAD platform",
+      "record_count": 1,
+      "records_with_current_field_audit": 1,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "device-zendot-demonstrations",
+          "name": "zenDot / quantum-device agent demonstrations（非正式benchmark）",
+          "category": "器件/量子TCAD工程agent",
+          "artifact_type": "商业开发平台与3个演示；作者明确不是优化智能benchmark",
+          "task_layer": "材料标记器件状态→量子物理solver→结构化动作反馈",
+          "evidence_status": "第二轮12h进行中；一手正文/固定源码/官方归档静态核查及自编数据算术核对；未运行模型、EDA、仿真或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-vpr-resizer-analogopt-tcad-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需对齐论文/当前工件版本、真实环境与评分硬门、失败分母/成本和数据使用许可；静态核验不等性能复现。",
+          "limitations": "内部一致物理模型不是fabricateddevice拟合；未计relaxation、未传播material/geometryuncertainty。完整SI/code/固定任务manifest未独立取得，六评估/任务不能作规模化优化能力结论。",
+          "tools_and_access": "codeavailability明确商业开发、源码不公开，学术evaluation需作者另授条款；平台接口/18步演示不等公开可执行环境/训练数据。这里只读官方PDF，未请求私有材料/运行求解。",
+          "industrial_value": "研究判断：纳入agent工程环境地图，明确为器件设计演示、非成熟bench；对比未来同变量/同oracle/同预算数值策略，才能判断LLM编排价值。"
         }
       ]
     }

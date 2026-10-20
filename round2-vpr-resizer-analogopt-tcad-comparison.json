@@ -1,0 +1,4182 @@
+{
+  "status": "round2 active; sourceevolution, realtraces, numericRL, performance-onlydata, QA/code andclosedplatformdemo distinguished",
+  "protocols": [
+    {
+      "id": "pd-vpr-evolve-source",
+      "benchmark_family": "VPR-Evolve FPGA source evolution",
+      "name": "VPR-Evolve / FPGA packing-placement-routing code evolution",
+      "category": "后端/FPGA布局布线算法研发agent",
+      "artifact_type": "复用VTR9的源码演化方法评测；与OPC VPEvolve不同",
+      "task_layer": "FPGA CAD源码/架构/BLIF→构建与P&R→多指标反馈",
+      "version": "arXiv2607.24998v1；repo8285bb50 /stockVTR bd5434a94",
+      "input": "五个大VTR9设计LU8/bgm/sv2/LU32/mcml、固定40nm旗舰架构k6_frac_N10_frac_chain_mem32K_40nm；layout分别68/76/96/123/117，channelwidth108/88/116/148/164。固定同BLIF和fabric，设计源复用，不是新建五个芯片。",
+      "task": "planner/coder/reviewer/inspiration角色修改VPR生产C++；paper五阶段pack/place/route/cross-stage/tune，先选SA或AP，5seeds内环，100seeds终评。每阶段最多5plans、5外迭代、最多2次plateauescape、120h/设计；Opus4.7 planner、Sonnet4.6其余角色，64CPU/256GB。",
+      "output": "选定可审阅源码diff、CPDns/routeWL/VPRruntime秒、带KEPT/REVERTED/BUILD_FAILED标记的部分历史；迁移时复用同代码，不必每次P&R调用LLM。",
+      "metrics": "Score=1000−[50(bCPD−mCPD)/bCPD+20(bWL−mWL)/bWL+30(bRT−mRT)/bRT]，越低越好。paper最大CPD/WL/runtime改善9.8/18.1/79.3%；100seed成绩与5seed阶段表分开，不能由几何均值指标直接重算逐seed均分。迁移完成19/20个offdiagonal、其中17改善，缺失不能删去不报。",
+      "baseline": "stockVTR9与TPE AutoTuner每设计至多3000trials；作者称TPE更长walltime，非相同toolcall/token预算。LU8的WL变差，AutoTuner也有WL/runtime胜点，综合分是权衡。mcml stock runtime由routefail/3000s timeout主导，79.3%非共同成功子集纯加速。",
+      "tools_and_access": "116选定Gitblobs匹配；docs/benchmarks含8设计×双flow5seed和100seed基线、固定seed/fabric；当前root gitlink是stock。上游VTR/复制代码各自许可，未见项目rootLICENSE；未编译运行。",
+      "limitations": "paper五阶段/五设计/五seed，与current早期六阶段/三seed叙述不同。fork LU8/bgm仅4/7个postbase commits，多数命名分支仍stock；paper mcml示例commit当前fork422未解析。当前四个sha迁移摘要全部已完成题退步，是另run，不能套作paper17/19反证；37k inspiration主要上游代码不是agent数据。",
+      "industrial_value": "研究判断：真实agent研发原生FPGA算法，与仅调knob或直接预测placement区别清楚；复用经典设计不代表任务已被原生工具解决，是否改善取决于固定fabric/预算/完整失败分母和迁移证据。",
+      "primary_sources": "https://arxiv.org/html/2607.24998v1; https://github.com/ASU-VDA-Lab/VPR-Evolve/tree/8285bb50ce719498a49721bfd75ad6e98a05a47b; https://github.com/hahacharlie/vtr-verilog-to-routing",
+      "evidence_status": "第二轮12h进行中；一手正文/固定源码/官方归档静态核查及自编数据算术核对；未运行模型、EDA、仿真或第三方代码。",
+      "next_verification": "需对齐论文/当前工件版本、真实环境与评分硬门、失败分母/成本和数据使用许可；静态核验不等性能复现。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "pd-resizeragent-repair",
+      "benchmark_family": "ResizerAgent post-CTS repair",
+      "name": "ResizerAgent / post-CTS timing-repair orchestration",
+      "category": "后端/时序修复与物理优化agent",
+      "artifact_type": "agent控制原生OpenROAD Resizer的方法评测",
+      "task_layer": "CTS种子/STA路径/布局与单元库上下文→计划Tcl→原生Resizer反馈",
+      "version": "MLCAD2026 DOI10.1145/3831599.3840328；repoae402b9 /Zenodo21959752",
+      "input": "aes/ibex/jpeg三RTL，ASAP7与NG45利用率/clock sweeps；source36配置含33主实验+3ablation输入，outputs两类sweep各18点、重复3个配置，合33独特主配置。postCTS ODB/netlist/SDC/lib与路径、可用cell/delay、面积/功率/拥塞上下文。",
+      "task": "reporter→planner→deterministicPythonexecutor/必要时LLMTclrepair→parallelOpenROADworkers→selector；sequence/staged单操作/targetedECO三计划类型。paper最多4plans×15迭代，Git样例最多3plans；Opus4.7计划/选择、Sonnet4.6异常修复。",
+      "output": "Tcl/Resizer操作次序、单元/netlist改动、每轮路径与WNS/TNS/面积/功率、最终postDR独立重评；native Resizer/DPL/GR负责实际数值优化。",
+      "metrics": "paper选择WNS>TNS>power lexicographic，WNS2ps/TNS5%tie、area/power5%高评级guard；当前best_solutions纯WNS排序，非所有指标硬门。postOpt GR估计与postDR提取RC分开，ECP=period−signedWNS。paperWNS/TNS正违例幅值越小越好；CSV signednegative越高越好，TNS ps→ns、powerW→mW须明确。",
+      "baseline": "默认ORFSrepair_timing和TPE AutoTuner；原生强基线不是空白对手。归档36扫描run重算postDR WNS优于default30/36、优于AT31/36，TNS分别32/36；33独特配置但重复run保留。仅1/36最终WNS>=0，非全时序闭合/全signoff。9个ASAP7 util点WNS与paperTable2两位小数全吻合。",
+      "tools_and_access": "273选定Gitblobs与官方1.83GBoutputs校验；rootBSD3，上游ORFS/PDK另列。currentGit README说bundled但gitlink pin0b219829/AtmadipORFS；Zenodo源码1.032GB官方MD5匹配，26760个ORFSbundledfiles、272选定core与Git逐字节相同（.gitmodules仅Git有），确实包含上游源码/PDK。仅静态读取，未装EDA/执行agent。",
+      "limitations": "paper AT13×4与RA15×up4、currentAT20startup+15×4等预算不同；periterationruntime非完整同机campaign成本。current status成功可仅ODB存在、不等时序改善；内部power_mw实为rawW标签冲突而最终power_W字段正确。Gitgcd sample有retry后仍提升回归plan问题，与全归档分开。论文/归档均存在退步点，不称普遍dominance。",
+      "industrial_value": "研究判断：仍有价值的工程编排agent/失败诊断任务；工具内置repair不等整个计划/状态管理已解决。优先比较同起点、同parasitic阶段、相同搜索预算和时序/面积/功耗/DRC/功能门；不能只取最优WNS。",
+      "primary_sources": "https://vlsicad.ucsd.edu/Publications/Conferences/428/c428.pdf; https://github.com/ASU-VDA-Lab/ResizerAgent/tree/ae402b9bf00b5116b9f2743b3bd8f7c9aed52127; https://zenodo.org/records/21959752",
+      "evidence_status": "第二轮12h进行中；一手正文/固定源码/官方归档静态核查及自编数据算术核对；未运行模型、EDA、仿真或第三方代码。",
+      "next_verification": "需对齐论文/当前工件版本、真实环境与评分硬门、失败分母/成本和数据使用许可；静态核验不等性能复现。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "data-resizeragent-traces",
+      "benchmark_family": "ResizerAgent post-CTS repair",
+      "name": "ResizerAgent / released planner-selector traces and native-search controls",
+      "category": "后端/工程agent交互数据",
+      "artifact_type": "同工作开放轨迹/报告资源；非新增独立benchmark",
+      "task_layer": "真实多轮roleprompt/action/feedback及数值TPE对照数据",
+      "version": "Zenodo21959752 outputs.zip已核；Git样例与正式归档区分",
+      "input": "36个sweep-specific agent run、540轮目录；1080个JSONL内容去重1050文件，16997去重事件含4148assistant流式片段/2175user块及metadata，不能按事件数叫独立样本。共享配置需按PDK/design/util/clock/run与轨迹hash去重。",
+      "task": "可用于planner/selector行为模仿、退步诊断/回退、评价模型、工具状态归因；保留实际失败和retry，不把所有执行成功plan设成优化正例。跨源RTL/PDK或整run划分，避免相同布局/报告落入train/test。",
+      "output": "报告与结构化planner/selectordecision、Tcl/逐planmetrics/netlist/路径/context、cost/tokens/API记录、AT参数搜索/失败对照。不是全可重放ODB快照，也不是所有assistant片段都构成完整toolturn。",
+      "metrics": "原始1432planCSV行1421success/5infra_error/6OpenROADfail、15行缺afterWNS；2289ATtrial行2280success/5OpenROADfail/4infra_error。1065/1080最后可解析Write与finalJSON写入字段匹配，14不完全匹配、1无可解析Write，需处理postprocess/repair再生成监督标签。",
+      "baseline": "同归档36default/AT结果为负样本和非语言策略对照；不是36×15个独立电路或1080独立题。相同配置两sweep归档并非逐字节相同，不能全部机械合并；仅30convo文件精确重复已去重。",
+      "tools_and_access": "1.83GB官方MD5验证，72内ZIP共48401文件、18.35GB逻辑展开；审阅只读取压缩内容和选定数据，未运行脚本。归档ODB-free，源码ZIP已核含ORFS/上游/PDK，环境仍须构建/核工具版本；rootlicense不自动替代每个上游依赖权利。",
+      "limitations": "CSVcost是作者按token价估算，ClaudeMax实际订阅计费不同；部分retry重复iteration-role、空cost，不能按少数行合成整campaign账单。工具状态/输入context需对齐，14Write差异需独立定位，不能称全量高质量已清洗训练集。",
+      "industrial_value": "研究判断：本轮有实质公开action-observation数据的候选之一，强于仅prompt/最终patch；适合研究带真实工具失败的后端agent。数据规模、可回放性、SFT适用性与同源泄漏分别报告。",
+      "primary_sources": "https://vlsicad.ucsd.edu/Publications/Conferences/428/c428.pdf; https://github.com/ASU-VDA-Lab/ResizerAgent/tree/ae402b9bf00b5116b9f2743b3bd8f7c9aed52127; https://zenodo.org/records/21959752",
+      "evidence_status": "第二轮12h进行中；一手正文/固定源码/官方归档静态核查及自编数据算术核对；未运行模型、EDA、仿真或第三方代码。",
+      "next_verification": "需对齐论文/当前工件版本、真实环境与评分硬门、失败分母/成本和数据使用许可；静态核验不等性能复现。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "analog-analoggym-opt-grpo",
+      "benchmark_family": "AnalogGym",
+      "name": "AnalogGym-Opt / numerical GRPO sizing and PVT verification",
+      "category": "模拟前端/尺寸优化",
+      "artifact_type": "复用AnalogGym拓扑的数值RL优化基础设施；非LLM policy",
+      "task_layer": "固定拓扑SKY130尺寸/OP图→ngspice→多目标/PVT反馈",
+      "version": "TCAD2026 DOI10.1109/TCAD.2026.3733612；repo10093e3",
+      "input": "16个放大器+1LDO GRPO YAML配置、设计变量/范围/步长、晶体管图与测试台；移植SKY1301.8V，非原历史22/180nm绝对性能原样复现。8sensor/reference为仿真only，不算17个GRPO以外的已完成优化评测。",
+      "task": "relationalGNN数值policy用GRPO与多目标/Pareto优化尺寸；tt仅典型角、proxy以VAE与选择性真PVT校核、full每步全角三模式。CLI默认300steps/proxy不是300次完整PVT或固定LLM交互预算。",
+      "output": "尺寸参数、ngspice性能/OP、rewardvector、PMfeasible与Pareto候选、选择性已验证PVT结果；proxy预测与full真实corner分别标识。",
+      "metrics": "当前AMP reward=六constraint项(PM/gain/PSRP/PSRN/CMRR/settling)+FOML/FOMS/ActiveArea三objective；PM固定45..90°而NMCF YAML target60。另PSRR/vos/TC/Power/GBW/sr未独立硬门，FOM间接作用不等阈值验收；pm_feasible只PM_violation<=1e-8。",
+      "baseline": "配套DDPG/GRPO比较代码，paper称效率-面积/PVT VR/Pareto改善；本轮取得官方摘要和源码，未取得完整paper逐任务原表，不编造统一成功率或领先幅度。要与BO/DDPG/native仿真相同calls/角数预算比较。",
+      "tools_and_access": "95个metadata/core blobs逐hash匹配，17YAML/source可审阅；ngspice与SKY130开源依赖，rootMIT、PDK另列。Active_Area实际sqrt(devicearea proxy sum)，不是YAML注释mm²物理面积；未仿真/训练。",
+      "limitations": "evaluate-design scalarreward>=0打印all targets satisfied，不等15个YAMLspec全过；Pareto保存PM可行也非fullspec。proxy未验证候选不能当全PVTrobust。当前库和历史性能数据来源/单位不同，不能拼成统一groundtruth或称LLM替代全部优化器。",
+      "industrial_value": "研究判断：作为可执行数值优化器/agent工具环境有用，GRPO不是此处的语言模型强化学习；原生optimizer可完成尺寸数值搜索，LLM的增量任务应评价规格解释、工具选择、预算与诊断。",
+      "primary_sources": "https://ieeexplore.ieee.org/document/11690621; https://doi.org/10.1109/TCAD.2026.3733612; https://github.com/Computing-Intelligent-Decision-Team/AnalogGym-Opt/tree/10093e3496ef2c7d06494d91d131b0cc5de6c25b",
+      "evidence_status": "第二轮12h进行中；一手正文/固定源码/官方归档静态核查及自编数据算术核对；未运行模型、EDA、仿真或第三方代码。",
+      "next_verification": "需对齐论文/当前工件版本、真实环境与评分硬门、失败分母/成本和数据使用许可；静态核验不等性能复现。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "analog-analoggym-opt-agent-tools",
+      "benchmark_family": "AnalogGym",
+      "name": "AnalogGym-Opt / LLM-callable sizing skills and MCP interface",
+      "category": "模拟前端/工程agent环境",
+      "artifact_type": "同框架agent工具接口；未见固定LLM对抗评测",
+      "task_layer": "高层请求→CLI/MCP/skill→原生仿真或数值优化器",
+      "version": "repo10093e3496ef / .claude skills与tools MCP",
+      "input": "与数值GRPO相同的固定拓扑/变量/规格/测试台；工具支持检查电路、单点仿真、启动监测优化、添加验证新电路。README/skills是使用说明，不是已完成agent训练集。",
+      "task": "LLM选择工具、提交参数或启动GRPO任务并读结构化反馈；实际policyGRPO和ngspice原生数值计算分别承担搜索/电学求解。可研究任务分解/预算分配/故障修复，但需另冻结任务、agent动作边界和验收。",
+      "output": "CLI/MCP结果、设计点/优化任务状态及性能报告；当前没有独立固定agent leaderboard/同预算任务manifest或全量历史多轮轨迹可定位。",
+      "metrics": "应使用独立specvalidator重验每个硬门、失败率/仿真calls/角数、time/cost/Pareto与最终性能；不能以tools调用成功或pm_feasible当全部specpass。当前reward/PM/area公式边界与数值轨相同。",
+      "baseline": "相同工具的确定性脚本/nativeGRPO/BO/人工workflow才是对应基线；尚无本轮核到的严格相同预算LLM增益表。框架具有agent入口，不自动成为agentic benchmark。",
+      "tools_and_access": "rootMIT；SKY130/ngspice本地执行环境另需配置；skills/MCP不是API服务托管数据。95文件审阅，未启动MCP/运行工具。",
+      "limitations": "论文abstract称structured electricaldataset含sizing/OP/PVT，但公开历史CSV只有performance/provenance，缺TD/TBM参数。两者不能自动等同；新仿真可产数据不代表历史开放轨迹已存在。",
+      "industrial_value": "研究判断：作为构建agent基准的工具底座收录，明确标为环境/接口而非已验证模型智能优势；数值优化能力与LLM编排价值分别评价。",
+      "primary_sources": "https://ieeexplore.ieee.org/document/11690621; https://doi.org/10.1109/TCAD.2026.3733612; https://github.com/Computing-Intelligent-Decision-Team/AnalogGym-Opt/tree/10093e3496ef2c7d06494d91d131b0cc5de6c25b",
+      "evidence_status": "第二轮12h进行中；一手正文/固定源码/官方归档静态核查及自编数据算术核对；未运行模型、EDA、仿真或第三方代码。",
+      "next_verification": "需对齐论文/当前工件版本、真实环境与评分硬门、失败分母/成本和数据使用许可；静态核验不等性能复现。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "data-analoggym-opt-historical",
+      "benchmark_family": "AnalogGym",
+      "name": "AnalogGym-Opt / 358234 historical performance observations",
+      "category": "模拟前端/性能数据资源",
+      "artifact_type": "同源历史性能表；非完整尺寸监督/agent轨迹",
+      "task_layer": "18拓扑/73源表的generation-index与17performance字段",
+      "version": "repo10093e3 / dataset schema1.1；CSV压缩/展开SHA256与Gitblob已核",
+      "input": "实际358234行、18放大器拓扑、73MAT性能源表；目录标签22/180nm与VDD/VCM/CL/run、generation/index+17性能字段、稳定recordID/sourcehash。未公开原MAT及配套TD/TBM尺寸参数表。",
+      "task": "可作性能检索、质量分析/阈值筛选、度量关系研究、LLM按需读SQL；缺器件W/L等输入时不能直接做完整尺寸→性能surrogate训练或动作重放。需要另定义按source/run/topology分割，随机行分割会泄漏代际相关/重复profile。",
+      "output": "CSV/18 JSONL/索引SQLite三种表示；只独立读全CSV并核压缩/展开官方hash及Gitblob，不把三格式重复计3套数据。所有原有限数保留，明确flag而非静默丢异常。",
+      "metrics": "独立重算125974 flagged/232260无flag；负SR40444、SR=-1疑sentinel39684、负FOML40444、settling字段相等86290。源内19numeric列无完全重复/无nonfinite；17performance合317619 source-local exactprofile，不等317619独立电路或可行设计。",
+      "baseline": "源提取已过滤PM<0，不能估计全仿真成功率；无flag也不是通过全部spec。物理仿真/原生optimizer并非模型baseline，数据本身没有统一任务或排行榜。",
+      "tools_and_access": "95metadata/core blobs+23.23MBgzip CSV已核，358234行与73源manifest逐计数吻合；rootMIT软件声明，历史源权利/PDK另核。字段单位多数inferred/unresolved，保留来源，不推测补齐。",
+      "limitations": "chip_area原源sqrt(abs(area))不是物理面积；FOM_AW固定1500e-12而非每目录CL、noise/TC/settling定义和真实PVT不完整。此历史表不是当前SKY130ngspice结果，亦非paper所有sizing/OP/PVT结构化训练记录的已证发布。",
+      "industrial_value": "研究判断：确实下载并验证的公开性能数据，适合retrieval/数据分析；完整设计参数监督、校准数字孪生、LLM交互训练均有实质缺口。不能用35.8万行宣传同等数量agent轨迹。",
+      "primary_sources": "https://ieeexplore.ieee.org/document/11690621; https://doi.org/10.1109/TCAD.2026.3733612; https://github.com/Computing-Intelligent-Decision-Team/AnalogGym-Opt/tree/10093e3496ef2c7d06494d91d131b0cc5de6c25b",
+      "evidence_status": "第二轮12h进行中；一手正文/固定源码/官方归档静态核查及自编数据算术核对；未运行模型、EDA、仿真或第三方代码。",
+      "next_verification": "需对齐论文/当前工件版本、真实环境与评分硬门、失败分母/成本和数据使用许可；静态核验不等性能复现。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "device-tcadgpt-qa",
+      "benchmark_family": "TcadGPT",
+      "name": "TcadGPT / expert-reference TCAD QA264",
+      "category": "器件/TCAD知识与代码",
+      "artifact_type": "模型语义问答评测；与SDE执行轨分开",
+      "task_layer": "TCAD物理/仿真与商业工具知识问题→参考答案匹配",
+      "version": "arXiv2601.10128v1 /发表DOI10.1002/aisy.70520 /repo6802638",
+      "input": "264专家题/参考答案，PhysicalModel/Simulation/SDE/SProcess/SDevice/SVisual六模块；173为工具/语法题。currentxlsx前264有题的编号，表尾两空行不计题；三个baselineJSON有265/266额外ID不能blindjoin。",
+      "task": "Llama3.1 8B用P1/P2约1.5M合成QA调优，回答专家题；可选49文档RAG，语义接受允许等价表达。问答正确与能生成可执行TCAD脚本分轨。",
+      "output": "264题自然语言答复及部分model/RAG输出；expert rubric/参考判断的accuracy，不是SPICE/device simulator硬oracle。",
+      "metrics": "paper semantic85.6%，currentworksheetTcadGPTv12为221个1/43blank，若blank视错为83.712%；当前标注不能独立重建paper85.6，不默改历史成绩或假定空白必错误。ID/题文与版本需对齐。",
+      "baseline": "paper GPT4o46.6/DeepSeekR152.3/V350.0等，同RAG对齐模型可能下降；currentxlsx/JSON与paper不完全同snapshot，应分别保留。RAG原手册/向量库不是作者全部训练数据可下载的证据。",
+      "tools_and_access": "85core Gitblobs全部核；public gold和7model输出JSON可审阅。README明确不含大训练集/weights/generatedoutputs，未核到完整1.5M公开包。商业Sentaurus手册来源与rootlicense未定位，papernoncommercialacademic声明不能替代每个素材权利。",
+      "limitations": "不是agent多轮工程优化bench；模型回答/人工语义标注不等器件物理正确、工艺校准或全流程收敛。公开Elmer100QA/20code是跨域FEM迁移，不额外算芯片设计数据集。",
+      "industrial_value": "研究判断：有真实公开小QA金标准和模型输出，适合工具知识评估；主要缺完整训练语料、公开可复算评分协议/版本与工具执行真实性。",
+      "primary_sources": "https://arxiv.org/html/2601.10128v1; https://doi.org/10.1002/aisy.70520; https://github.com/wddddds1/TcadGPT/tree/68026387da36d33a74de6ad4d2cc12d16970b141",
+      "evidence_status": "第二轮12h进行中；一手正文/固定源码/官方归档静态核查及自编数据算术核对；未运行模型、EDA、仿真或第三方代码。",
+      "next_verification": "需对齐论文/当前工件版本、真实环境与评分硬门、失败分母/成本和数据使用许可；静态核验不等性能复现。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "device-tcadgpt-sde",
+      "benchmark_family": "TcadGPT",
+      "name": "TcadGPT / SDE syntax executability20 and published-version boundary",
+      "category": "器件/TCAD代码与优化",
+      "artifact_type": "同模型代码执行轨；20旧版与60新版不可合并",
+      "task_layer": "结构/材料/掺杂/mesh/export自然语言指令→SDE Scheme deck",
+      "version": "arXivv1 20instructions；published indexed60/85%待完整包；repo6802638",
+      "input": "旧版20个IR渲染未见训练指令，2D/3D、ABA/BAB布尔、Silicon/SiO2/Si3N4/PolySi/GaN/AlGaN、contact/doping/mesh/export。current20txt+22cmd（两addv变体），不是22独立任务或完整60题新版。",
+      "task": "QA-tuned模型再IR→DPO，生成commercialSentaurusSDE脚本；同工具版本sde−S验语法。直接通过与数字placeholder补齐后通过分开，Pass@1与3分开，不能把80%宣传成单样本无修改通过率。",
+      "output": "SDE .cmd、syntaxpass/fail；可以运行的几何构造不等达到目标器件电学性能、物理模型校准或工艺可制造。",
+      "metrics": "preprint直接Pass@1=12/20=60%，加placeholder13/20=65%；直接Pass@3=15/20=75%，加placeholder16/20=80%。发表摘要85%且indexed60题属于新版，正文DOI403未绕过、最新完整集/日志本轮未取得。",
+      "baseline": "preprint DeepSeekV3 0/20；统一SDE版本和解码采样预算必须冻结。IR/DPO正负构建可评instructionfidelity，但syntaxoracle不覆盖全部语义；不能与Elmer实际solver执行率直接比。",
+      "tools_and_access": "公开20instructiontxt/22cmd示例及IR/DPO脚本，Sentaurus商业授权/版本不可由公开源码替代；无3samples×20完整编译日志/全部DPO对/新版60题包可定位，本轮未执行编译器。",
+      "limitations": "模型生成语法有效不等几何精确符合指令、mesh质量、numericalconvergence或器件优化成功；训练生成器开放不等1.5M语料或完整动作反馈轨迹发布。published/preprint/current三种证据标清。",
+      "industrial_value": "研究判断：有意义的商业工具脚本语法落地任务，不能算成熟器件优化agentbench；仍需独立语义/物理oracle和真实workflow评价。",
+      "primary_sources": "https://arxiv.org/html/2601.10128v1; https://doi.org/10.1002/aisy.70520; https://github.com/wddddds1/TcadGPT/tree/68026387da36d33a74de6ad4d2cc12d16970b141",
+      "evidence_status": "第二轮12h进行中；一手正文/固定源码/官方归档静态核查及自编数据算术核对；未运行模型、EDA、仿真或第三方代码。",
+      "next_verification": "需对齐论文/当前工件版本、真实环境与评分硬门、失败分母/成本和数据使用许可；静态核验不等性能复现。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "device-zendot-demonstrations",
+      "benchmark_family": "zenDot quantum TCAD platform",
+      "name": "zenDot / quantum-device agent demonstrations（非正式benchmark）",
+      "category": "器件/量子TCAD工程agent",
+      "artifact_type": "商业开发平台与3个演示；作者明确不是优化智能benchmark",
+      "task_layer": "材料标记器件状态→量子物理solver→结构化动作反馈",
+      "version": "arXiv2608.16048v1 /preliminaryversion",
+      "input": "同Si/SiO2 double-dot参考器件，18calculation+18visualization组件；三个一维有界任务：hybrid/barrier提高Q、tunnel-charge/barrier提高Q、interdot gate length降低singlet-triplet infidelity。每任务六次完成sim预算，一本地模型。",
+      "task": "LLM选择registeredcomponent/参数；平台验证action语法/器件兼容性，电压任务重算、geometry任务改变栅长重建并重求解。数值结果来自物理solver而非模型自行打分。",
+      "output": "18个solver-validated迭代、参数/组件动作/度量与轨迹；论文称SupportingInfo含完整声明/prompt/reply/executionrecords及SourceData，本轮未独立定位可下载SI包。",
+      "metrics": "hybridQ161412.67→220112.30，tunnelcharge225.07→809.67；栅长22.5nm infidelity6.273816e−8→6.272891e−8，约0.01474%相对改善。摘要近30fold来自另一operatingpointscan，不是此六步geometryagent收益。",
+      "baseline": "作者明说demonstrations ratherthan benchmarksofoptimizationintelligence；无多模型/确定性optimizer同预算对抗、无跨器件统计或fab实测校准，不能宣称优于传统优化。",
+      "tools_and_access": "codeavailability明确商业开发、源码不公开，学术evaluation需作者另授条款；平台接口/18步演示不等公开可执行环境/训练数据。这里只读官方PDF，未请求私有材料/运行求解。",
+      "limitations": "内部一致物理模型不是fabricateddevice拟合；未计relaxation、未传播material/geometryuncertainty。完整SI/code/固定任务manifest未独立取得，六评估/任务不能作规模化优化能力结论。",
+      "industrial_value": "研究判断：纳入agent工程环境地图，明确为器件设计演示、非成熟bench；对比未来同变量/同oracle/同预算数值策略，才能判断LLM编排价值。",
+      "primary_sources": "https://arxiv.org/abs/2608.16048; https://arxiv.org/pdf/2608.16048v1",
+      "evidence_status": "第二轮12h进行中；一手正文/固定源码/官方归档静态核查及自编数据算术核对；未运行模型、EDA、仿真或第三方代码。",
+      "next_verification": "需对齐论文/当前工件版本、真实环境与评分硬门、失败分母/成本和数据使用许可；静态核验不等性能复现。",
+      "retrieved_date": "2026-10-20"
+    }
+  ],
+  "audits": {
+    "vprevolve": {
+      "as_of": "2026-10-20T09:35:12.295229+00:00",
+      "static_only": true,
+      "pinned_commit": "8285bb50ce719498a49721bfd75ad6e98a05a47b",
+      "full_tree_entries": 37869,
+      "verified_selected_blobs": 116,
+      "top_level_tree_counts": {
+        ".claude": 17,
+        ".gitignore": 1,
+        ".gitmodules": 1,
+        ".opencode": 20,
+        ".vpr-evolve": 46,
+        "AGENTS.md": 1,
+        "CLAUDE.md": 1,
+        "CODEX.md": 1,
+        "EXPLORATION_PLAN.md": 1,
+        "PI.md": 1,
+        "README.md": 1,
+        "docs": 29,
+        "inspiration": 37734,
+        "launch_experiments.sh": 1,
+        "opencode.json": 1,
+        "sbatch_launch_experiments.sh": 1,
+        "sbatch_transfer_eval_100.sh": 1,
+        "scripts": 9,
+        "setup.sh": 1,
+        "vtr-verilog-to-routing": 1
+      },
+      "root_license_present": false,
+      "source_submodule": {
+        "path": "vtr-verilog-to-routing",
+        "mode": "160000",
+        "type": "commit",
+        "sha": "bd5434a94a82cff6b4db2f756c8e3cafd2ef28ad"
+      },
+      "current_fork_branches": [
+        {
+          "name": "NEWRT-decomp-base",
+          "sha": "35f683de2add1d9a3ee6b39dcd763b38d6c8f3a5"
+        },
+        {
+          "name": "NEWRT-parallel-base",
+          "sha": "35c8c33be2f54e6aa031f09cb4e790cb3dd8e6bf"
+        },
+        {
+          "name": "NEWRT-serial-base",
+          "sha": "6bf23bebbeff91e598798f6e54f651e456ccfd78"
+        },
+        {
+          "name": "evolve",
+          "sha": "bd5434a94a82cff6b4db2f756c8e3cafd2ef28ad"
+        },
+        {
+          "name": "evolve-LU8PEEng",
+          "sha": "ad51d00fd3e562155dfe5c79e28f07de34ab3f17"
+        },
+        {
+          "name": "evolve-LU32PEEng",
+          "sha": "bd5434a94a82cff6b4db2f756c8e3cafd2ef28ad"
+        },
+        {
+          "name": "evolve-bgm",
+          "sha": "058dde26289f6a369a1f3d2ca585109832d8b37d"
+        },
+        {
+          "name": "evolve-mcml",
+          "sha": "bd5434a94a82cff6b4db2f756c8e3cafd2ef28ad"
+        },
+        {
+          "name": "evolve-stereovision0",
+          "sha": "bd5434a94a82cff6b4db2f756c8e3cafd2ef28ad"
+        },
+        {
+          "name": "evolve-stereovision1",
+          "sha": "bd5434a94a82cff6b4db2f756c8e3cafd2ef28ad"
+        },
+        {
+          "name": "evolve-stereovision2",
+          "sha": "bd5434a94a82cff6b4db2f756c8e3cafd2ef28ad"
+        },
+        {
+          "name": "master",
+          "sha": "66bddbf165eccfe5f86c642d041a66ac7895b775"
+        }
+      ],
+      "selected_fork_histories": {
+        "vpr_lu8_commits": [
+          {
+            "sha": "ad51d00fd3e562155dfe5c79e28f07de34ab3f17",
+            "subject": "[place] Criticality-weighted FR centroid target for moving block outputs",
+            "message": "[place] Criticality-weighted FR centroid target for moving block outputs\n\nReplace single output-driver target point (xt,yt) with criticality-weighted\ncentroid of all critical output sinks (fanout<=15, crit>place_crit_limit).\nFalls back to original output driver location when no critical sinks found.\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>"
+          },
+          {
+            "sha": "9a4250e70b7c2bd210cbe246044cbfdd79cc47b6",
+            "subject": "[place] Tournament selection for critical pin picking in pick_from_highly_critical_block",
+            "message": "[place] Tournament selection for critical pin picking in pick_from_highly_critical_block\n\nBias FR and CRIT_UNIFORM moves toward highest-criticality connections by\ntournament-selecting 2 random critical pins and keeping the more critical one.\nInspired by ripple-fpga dp_ble.cpp quality-sorted candidate approach."
+          },
+          {
+            "sha": "3736d37baa9568127e64340497c5caca7e059d25",
+            "subject": "[pack] Connectivity-weighted base_gain for single-atom molecules",
+            "message": "[pack] Connectivity-weighted base_gain for single-atom molecules\n\nUse inverse-fanout scoring for single-atom molecule base_gain to improve\nunrelated clustering fill order, inspired by FPGAPart's GetNormEdgeScore.\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>"
+          },
+          {
+            "sha": "8117e8c1f31555b928bb8b129046bdc63f2f64aa",
+            "subject": "[pack] Neighbor-absorption-potential seed scoring for BLEND2",
+            "message": "[pack] Neighbor-absorption-potential seed scoring for BLEND2\n\nAdd connectivity-weighted neighbor absorption potential term to BLEND2\nseed gain. Molecules whose direct neighbors are timing-critical and\ntightly coupled (low-fanout) score higher as seeds, inspired by\nFPGAPart coarsener vertex matching.\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>"
+          }
+        ],
+        "vpr_bgm_commits": [
+          {
+            "sha": "058dde26289f6a369a1f3d2ca585109832d8b37d",
+            "subject": "[place] Phase 19: Gentler late-anneal cooling alpha 0.8->0.9 for timing refinement (KEPT)",
+            "message": "[place] Phase 19: Gentler late-anneal cooling alpha 0.8->0.9 for timing refinement (KEPT)\n\nDecision: Score 0.9982 — marginal CPD improvement but less effective than Phase 17 alone; late-anneal RNG trajectory diverges from Phase 17's optimal basin, ending in slightly worse results on average.\nCPD: 19.6067 ns (-0.22% vs baseline) | WL: 362421 | Runtime: 60s\nComposite score: 0.9982\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>"
+          },
+          {
+            "sha": "c0bca8414c8d31f296341f80601da6e999925afb",
+            "subject": "[place] Phase 17: Convex (quadratic) criticality exponent schedule (KEPT)",
+            "message": "[place] Phase 17: Convex (quadratic) criticality exponent schedule (KEPT)\n\nDecision: Synergizes with Phase 15 timing_tradeoff ramp — keeps criticality landscape soft during early WL-focused anneal, then ramps sharply for timing-focused late anneal. Best CPD improvement yet.\nCPD: 19.1768 ns (-2.41% vs baseline) | WL: 364351 | Runtime: 60s\nComposite score: 0.9809\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>"
+          },
+          {
+            "sha": "f1f691684a49633bc7955a4666eb901986575bbb",
+            "subject": "[place] Phase 15: 5-phase timing_tradeoff ramp 0.3->0.7 across SA anneal (KEPT)",
+            "message": "[place] Phase 15: 5-phase timing_tradeoff ramp 0.3->0.7 across SA anneal (KEPT)\n\nDecision: Ramping from WL-focused early to timing-focused late improves CPD modestly; based on historical_ralph_log experiments showing -1.665% CPD on LU32PEEng.\nCPD: 19.6126 ns (-0.19% vs baseline) | WL: 363120 | Runtime: 59.67s\nComposite score: 0.9985\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>"
+          },
+          {
+            "sha": "c46546ec8d7f87f5d4d9f8ea6bc9bfac2b501994",
+            "subject": "[place] Phase 14: Net connectivity ordering in initial placement (KEPT)",
+            "message": "[place] Phase 14: Net connectivity ordering in initial placement (KEPT)\n\nDecision: Placing high-connectivity blocks first anchors centroid calculations for neighboring blocks; modest CPD improvement before SA begins with no runtime cost.\nCPD: 19.4762 ns (-0.88% vs baseline) | WL: 363384 | Runtime: 59.67s\nComposite score: 0.9930\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>"
+          },
+          {
+            "sha": "4d154dab2f26cd95223f5a2fac7adf9d5ce213b2",
+            "subject": "Phase 10: BB-aware destination re-roll for critical uniform moves",
+            "message": "Phase 10: BB-aware destination re-roll for critical uniform moves"
+          },
+          {
+            "sha": "c5f3817e1ab7e7eded43979af3e79638df40dd06",
+            "subject": "Phase 8: Driver-or-sink coin flip for highly critical block selection",
+            "message": "Phase 8: Driver-or-sink coin flip for highly critical block selection"
+          },
+          {
+            "sha": "95e0c8d7663163ec1458c40ff368e6fa58f4d189",
+            "subject": "[place] bgm Phase 6: Criticality-squared weighted critical block selection",
+            "message": "[place] bgm Phase 6: Criticality-squared weighted critical block selection\n\nCPD -0.19%, runtime +4.6% (within deadband), WL +0.05%; score 0.9985 (KEPT)"
+          }
+        ]
+      },
+      "baseline_5seed_circuits": [
+        {
+          "circuit": "LU32PEEng",
+          "sa_seed_count": 5,
+          "ap_seed_count": 5,
+          "fixed_w": 148,
+          "fixed_layout": 123
+        },
+        {
+          "circuit": "LU8PEEng",
+          "sa_seed_count": 5,
+          "ap_seed_count": 5,
+          "fixed_w": 108,
+          "fixed_layout": 68
+        },
+        {
+          "circuit": "bgm",
+          "sa_seed_count": 5,
+          "ap_seed_count": 5,
+          "fixed_w": 88,
+          "fixed_layout": 76
+        },
+        {
+          "circuit": "mcml",
+          "sa_seed_count": 5,
+          "ap_seed_count": 5,
+          "fixed_w": 164,
+          "fixed_layout": 117
+        },
+        {
+          "circuit": "stereovision0",
+          "sa_seed_count": 5,
+          "ap_seed_count": 5,
+          "fixed_w": 54,
+          "fixed_layout": 41
+        },
+        {
+          "circuit": "stereovision1",
+          "sa_seed_count": 5,
+          "ap_seed_count": 5,
+          "fixed_w": 96,
+          "fixed_layout": 48
+        },
+        {
+          "circuit": "stereovision2",
+          "sa_seed_count": 5,
+          "ap_seed_count": 5,
+          "fixed_w": 116,
+          "fixed_layout": 96
+        },
+        {
+          "circuit": "sha",
+          "sa_seed_count": 5,
+          "ap_seed_count": 5,
+          "fixed_w": 80,
+          "fixed_layout": 18
+        }
+      ],
+      "search_seeds": [
+        140892,
+        596854,
+        888599,
+        841236,
+        800876
+      ],
+      "final_seeds": [
+        140892,
+        596854,
+        888599,
+        841236,
+        800876,
+        66173,
+        267460,
+        123647,
+        519502,
+        797927,
+        471326,
+        495186,
+        683245,
+        398056,
+        827037,
+        220154,
+        98419,
+        511555,
+        29725,
+        936711,
+        876364,
+        408745,
+        453790,
+        636945,
+        799309,
+        804424,
+        2209,
+        729634,
+        467023,
+        279268,
+        756590,
+        840776,
+        239875,
+        619870,
+        991189,
+        107193,
+        945216,
+        332850,
+        32076,
+        23407,
+        26682,
+        681099,
+        567713,
+        9653,
+        984770,
+        924041,
+        399722,
+        719831,
+        227121,
+        442622,
+        761112,
+        30452,
+        553260,
+        232461,
+        800799,
+        459159,
+        984788,
+        519897,
+        579716,
+        244407,
+        362494,
+        242082,
+        709728,
+        229409,
+        797912,
+        481930,
+        998501,
+        303859,
+        971513,
+        22534,
+        436397,
+        878265,
+        960779,
+        583485,
+        966985,
+        673495,
+        104858,
+        194937,
+        659925,
+        758791,
+        901720,
+        310788,
+        126763,
+        779246,
+        348857,
+        939079,
+        756532,
+        745739,
+        525127,
+        981930,
+        442612,
+        532381,
+        870356,
+        954399,
+        702867,
+        199072,
+        318105,
+        297963,
+        616123,
+        925347
+      ],
+      "in_loop_seeds_in_final": [
+        140892,
+        596854,
+        800876,
+        841236,
+        888599
+      ],
+      "clean100seed_tables": {
+        "baseline_eval100.json": {
+          "seed_count": 100,
+          "seed_list_matches": true,
+          "circuits": [
+            {
+              "circuit": "LU8PEEng",
+              "seeds": 100,
+              "has_mean": true
+            },
+            {
+              "circuit": "LU32PEEng",
+              "seeds": 100,
+              "has_mean": true
+            },
+            {
+              "circuit": "bgm",
+              "seeds": 100,
+              "has_mean": true
+            },
+            {
+              "circuit": "mcml",
+              "seeds": 100,
+              "has_mean": true
+            },
+            {
+              "circuit": "stereovision0",
+              "seeds": 100,
+              "has_mean": true
+            },
+            {
+              "circuit": "stereovision1",
+              "seeds": 100,
+              "has_mean": true
+            },
+            {
+              "circuit": "stereovision2",
+              "seeds": 100,
+              "has_mean": true
+            },
+            {
+              "circuit": "sha",
+              "seeds": 100,
+              "has_mean": true
+            }
+          ],
+          "summary": {
+            "geomean_composite": 1.015838,
+            "geomean_cpd_ratio": 1.000059
+          }
+        },
+        "baseline_eval100_ap.json": {
+          "seed_count": 100,
+          "seed_list_matches": true,
+          "circuits": [
+            {
+              "circuit": "LU8PEEng",
+              "seeds": 100,
+              "has_mean": true
+            },
+            {
+              "circuit": "LU32PEEng",
+              "seeds": 100,
+              "has_mean": true
+            },
+            {
+              "circuit": "bgm",
+              "seeds": 100,
+              "has_mean": true
+            },
+            {
+              "circuit": "mcml",
+              "seeds": 100,
+              "has_mean": true
+            },
+            {
+              "circuit": "stereovision0",
+              "seeds": 100,
+              "has_mean": true
+            },
+            {
+              "circuit": "stereovision1",
+              "seeds": 100,
+              "has_mean": true
+            },
+            {
+              "circuit": "stereovision2",
+              "seeds": 100,
+              "has_mean": true
+            },
+            {
+              "circuit": "sha",
+              "seeds": 100,
+              "has_mean": true
+            }
+          ],
+          "summary": {
+            "geomean_composite": 1.071404,
+            "geomean_cpd_ratio": 0.991518
+          }
+        }
+      },
+      "transfer_summaries": [
+        {
+          "path": ".vpr-evolve/transfer-eval/sha-sa_100seed_55951014/results.json",
+          "rows": 7,
+          "statuses": {
+            "FAILED": 1,
+            "OK": 6
+          },
+          "generalizes": 0,
+          "base_reference": "5-seed baseline.json, not 100-seed clean measurement"
+        },
+        {
+          "path": ".vpr-evolve/transfer-eval/sha-sa_100seed_all7/results.json",
+          "rows": 7,
+          "statuses": {
+            "OK": 7
+          },
+          "generalizes": 0,
+          "base_reference": "5-seed baseline.json, not 100-seed clean measurement"
+        },
+        {
+          "path": ".vpr-evolve/transfer-eval/sha-sa_20260616_172751/results.json",
+          "rows": 1,
+          "statuses": {
+            "OK": 1
+          },
+          "generalizes": 0,
+          "base_reference": "5-seed baseline.json, not 100-seed clean measurement"
+        },
+        {
+          "path": ".vpr-evolve/transfer-eval/sha-sa_20260616_174022/results.json",
+          "rows": 7,
+          "statuses": {
+            "OK": 7
+          },
+          "generalizes": 0,
+          "base_reference": "5-seed baseline.json, not 100-seed clean measurement"
+        }
+      ],
+      "actual_jsonl_paths": [],
+      "paper": {
+        "arxiv": "2607.24998v1",
+        "source_circuits": [
+          "LU8PEEng",
+          "bgm",
+          "stereovision2",
+          "LU32PEEng",
+          "mcml"
+        ],
+        "architecture": "k6_frac_N10_frac_chain_mem32K_40nm",
+        "score": "1000 - [50*(bCPD-mCPD)/bCPD +20*(bWL-mWL)/bWL +30*(bRT-mRT)/bRT]",
+        "stages": 5,
+        "plans_per_stage": 5,
+        "outer_iterations": 5,
+        "walltime_hours_per_design": 120,
+        "final_seeds": 100,
+        "off_diagonal_transfers": {
+          "completed": 19,
+          "improving": 17,
+          "missing": 1
+        },
+        "timing_improvement_up_to_pct": 9.8,
+        "wirelength_improvement_up_to_pct": 18.1,
+        "runtime_improvement_up_to_pct": 79.3,
+        "largest_runtime_caveat": "mcml stock baseline dominated by route failure / 3000s timeout, not common-success speedup"
+      },
+      "findings": [
+        "VPR FPGA P&R source evolution is unrelated to VPEvolve OPC recipe optimization; one method family reuses VTR9 circuits, not new independent FPGA design corpus",
+        "Current root README only title; substantive harness/roles in .vpr-evolve. 37734 inspiration entries mostly copied upstream CAD source, not model rollouts",
+        "Root gitlink pins stock baseline; public named source branches mostly baseline. LU8/bgm branches hold 4/7 post-base commits, not all paper five winning lineages. Paper mcml illustrative hashes queried return422, not currently resolvable in this fork",
+        "docs/vpr_committed_changes.md is curated 3-seed/6-stage older source diff history (five circuits including stereovision0), not paper 5-seed/5-stage five-circuit full trajectory or raw final100 scores",
+        "Eight-circuit5seed and eight-circuit100seed baseline tables exist under docs/benchmarks, but expected rootbenchmarks/synthBLIF/arch and full evaluationlogs not in currenttree. Do not say no baseline data",
+        "Current four transfer resultJSONs report older sha source, seven targetcases; all completed scores regress, with one missing trial in one snapshot. This does not independently contradict paper five-source 17/19 transfer result: different source/run/score reference",
+        "transfer_score correctly recomputed all archived scored rows, mean summary explicitly over successful cases; failed-circuit count must remain alongside it",
+        "parse_eval requires full seedcount to attach circuitmeans but prints warning and returns0 on incomplete seeds; missing WL/runtime handled separately, must enforce complete metric hard gates externally",
+        "Native VTR baseline and TPE up3000trials are strong controls, but paper longerwalltimeTPE is not a matched toolcall/token/evaluation budget; fixedhardware/runtime settings and timeoutdenominator matter",
+        "No root redistribution license located; copied VTR/codebase/papers licenses remain separate; code diff/curated narrative not automatically full licensed agenttraining set"
+      ]
+    },
+    "resizer": {
+      "as_of": "2026-10-20T09:45:08.277949+00:00",
+      "static_only": true,
+      "pinned_commit": "ae402b9bf00b5116b9f2743b3bd8f7c9aed52127",
+      "tree_entries": 1521,
+      "verified_gitblobs": 273,
+      "root_license": "BSD3-Clause; bundled platform/upstream separate",
+      "orfs_gitlink": "0b21982981a78823d1b8fb1316d57a58e52f458a",
+      "input_configs": {
+        "total": 36,
+        "per_pdk": {
+          "asap7": 22,
+          "nangate45": 14
+        },
+        "source_designs": [
+          "aes",
+          "ibex",
+          "jpeg"
+        ],
+        "paths": [
+          "AE/dataset/asap7/aes/aes_60_240/setup/config.mk",
+          "AE/dataset/asap7/aes/aes_65_160/setup/config.mk",
+          "AE/dataset/asap7/aes/aes_65_240/setup/config.mk",
+          "AE/dataset/asap7/aes/aes_70_240/setup/config.mk",
+          "AE/dataset/asap7/ibex/ibex_40_500/setup/config.mk",
+          "AE/dataset/asap7/ibex/ibex_60_750/setup/config.mk",
+          "AE/dataset/asap7/ibex/ibex_70_550/setup/config.mk",
+          "AE/dataset/asap7/ibex/ibex_70_600/setup/config.mk",
+          "AE/dataset/asap7/ibex/ibex_70_650/setup/config.mk",
+          "AE/dataset/asap7/ibex/ibex_70_700/setup/config.mk",
+          "AE/dataset/asap7/ibex/ibex_70_750/setup/config.mk",
+          "AE/dataset/asap7/ibex/ibex_70_800/setup/config.mk",
+          "AE/dataset/asap7/ibex/ibex_75_750/setup/config.mk",
+          "AE/dataset/asap7/jpeg/jpeg_60_430/setup/config.mk",
+          "AE/dataset/asap7/jpeg/jpeg_70_330/setup/config.mk",
+          "AE/dataset/asap7/jpeg/jpeg_70_370/setup/config.mk",
+          "AE/dataset/asap7/jpeg/jpeg_70_390/setup/config.mk",
+          "AE/dataset/asap7/jpeg/jpeg_70_410/setup/config.mk",
+          "AE/dataset/asap7/jpeg/jpeg_70_430/setup/config.mk",
+          "AE/dataset/asap7/jpeg/jpeg_70_450/setup/config.mk",
+          "AE/dataset/asap7/jpeg/jpeg_70_470/setup/config.mk",
+          "AE/dataset/asap7/jpeg/jpeg_80_430/setup/config.mk",
+          "AE/dataset/nangate45/aes/aes_40_620/setup/config.mk",
+          "AE/dataset/nangate45/aes/aes_45_620/setup/config.mk",
+          "AE/dataset/nangate45/aes/aes_50_620/setup/config.mk",
+          "AE/dataset/nangate45/ibex/ibex_50_1600/setup/config.mk",
+          "AE/dataset/nangate45/ibex/ibex_50_1700/setup/config.mk",
+          "AE/dataset/nangate45/ibex/ibex_50_1800/setup/config.mk",
+          "AE/dataset/nangate45/ibex/ibex_50_1900/setup/config.mk",
+          "AE/dataset/nangate45/ibex/ibex_50_2000/setup/config.mk",
+          "AE/dataset/nangate45/ibex/ibex_50_2100/setup/config.mk",
+          "AE/dataset/nangate45/ibex/ibex_60_2100/setup/config.mk",
+          "AE/dataset/nangate45/ibex/ibex_70_2100/setup/config.mk",
+          "AE/dataset/nangate45/jpeg/jpeg_50_1000/setup/config.mk",
+          "AE/dataset/nangate45/jpeg/jpeg_60_1000/setup/config.mk",
+          "AE/dataset/nangate45/jpeg/jpeg_70_1000/setup/config.mk"
+        ]
+      },
+      "sample_conversations": {
+        "sample_output_structure/gcd_180_asap7/llm_iterations/iteration1/planner_convo.jsonl": {
+          "jsonl_records": 17,
+          "record_types": {
+            "queue-operation": 2,
+            "user": 2,
+            "attachment": 3,
+            "last-prompt": 3,
+            "ai-title": 3,
+            "assistant": 4
+          },
+          "message_roles": {
+            "no_message": 11,
+            "user": 2,
+            "assistant": 4
+          },
+          "content_blocks": {
+            "string": 1,
+            "thinking": 1,
+            "text": 2,
+            "tool_use": 1,
+            "tool_result": 1
+          }
+        },
+        "sample_output_structure/gcd_180_asap7/llm_iterations/iteration1/selector_convo.jsonl": {
+          "jsonl_records": 17,
+          "record_types": {
+            "queue-operation": 2,
+            "user": 2,
+            "attachment": 3,
+            "last-prompt": 3,
+            "ai-title": 3,
+            "assistant": 4
+          },
+          "message_roles": {
+            "no_message": 11,
+            "user": 2,
+            "assistant": 4
+          },
+          "content_blocks": {
+            "string": 1,
+            "thinking": 1,
+            "text": 2,
+            "tool_use": 1,
+            "tool_result": 1
+          }
+        }
+      },
+      "tool_decision_alignment": {
+        "planner": {
+          "write_content_json_equal": true,
+          "tool_name": "Write",
+          "all_written_fields_match": true,
+          "postprocessed_added_keys": []
+        },
+        "selector": {
+          "write_content_json_equal": false,
+          "tool_name": "Write",
+          "all_written_fields_match": true,
+          "postprocessed_added_keys": [
+            "chosen_metrics",
+            "chosen_plan",
+            "chosen_sequence",
+            "convergence",
+            "iteration",
+            "iteration_table",
+            "plan_results",
+            "rationale",
+            "regressed"
+          ]
+        }
+      },
+      "sample_metrics": {
+        "base/base_metrics.csv": [
+          {
+            "stage": "base",
+            "wns": "-67.756967",
+            "tns": "-1145.036071",
+            "area_um2": "50",
+            "util_percent": "85",
+            "power_mw": "1.854e-03",
+            "violating_endpoints": "48",
+            "input_db": "/workspace/work_dir/claude/asap7/gcd_180/base/base_cts.odb",
+            "sdc_file": "/workspace/work_dir/claude/asap7/gcd_180/base/constraint.sdc"
+          }
+        ],
+        "default/default_metrics.csv": [
+          {
+            "stage": "default",
+            "wns": "-65.596931",
+            "tns": "-1243.204766",
+            "area_um2": "52",
+            "util_percent": "89",
+            "power_mw": "2.073e-03",
+            "violating_endpoints": "48",
+            "input_db": "/workspace/work_dir/claude/asap7/gcd_180/base/base_cts.odb",
+            "sdc_file": "/workspace/work_dir/claude/asap7/gcd_180/base/constraint.sdc"
+          }
+        ],
+        "llm_iterations/iteration1/best/best_metrics.csv": [
+          {
+            "stage": "plan3",
+            "wns": "-69.325795",
+            "tns": "-1433.474012",
+            "area_um2": "50",
+            "util_percent": "85",
+            "power_mw": "1.925e-03",
+            "violating_endpoints": "49",
+            "input_db": "/workspace/work_dir/claude/asap7/gcd_180/llm_iterations/iteration1/plan3/input.odb",
+            "sdc_file": "/workspace/work_dir/claude/asap7/gcd_180/base/constraint.sdc"
+          }
+        ],
+        "llm_iterations/iteration1/plan1/plan1_metrics.csv": [
+          {
+            "stage": "plan1",
+            "wns": "-71.575607",
+            "tns": "-1499.878339",
+            "area_um2": "50",
+            "util_percent": "85",
+            "power_mw": "2.030e-03",
+            "violating_endpoints": "49",
+            "input_db": "/workspace/work_dir/claude/asap7/gcd_180/llm_iterations/iteration1/plan1/input.odb",
+            "sdc_file": "/workspace/work_dir/claude/asap7/gcd_180/base/constraint.sdc"
+          }
+        ],
+        "llm_iterations/iteration1/plan1/plan_metrics.csv": [
+          {
+            "plan": "plan1",
+            "status": "success",
+            "error_type": "",
+            "first_error": "",
+            "wns": "-71.575607",
+            "tns": "-1499.878339",
+            "area_um2": "50.0",
+            "util_percent": "85.0",
+            "power_mw": "0.00203",
+            "violating_endpoints": "49",
+            "log": "<sample_root>/llm_iterations/iteration1/plan1/plan1.log"
+          }
+        ],
+        "llm_iterations/iteration1/plan2/plan2_metrics.csv": [
+          {
+            "stage": "plan2",
+            "wns": "-71.967446",
+            "tns": "-1480.540585",
+            "area_um2": "50",
+            "util_percent": "85",
+            "power_mw": "2.038e-03",
+            "violating_endpoints": "49",
+            "input_db": "/workspace/work_dir/claude/asap7/gcd_180/llm_iterations/iteration1/plan2/input.odb",
+            "sdc_file": "/workspace/work_dir/claude/asap7/gcd_180/base/constraint.sdc"
+          }
+        ],
+        "llm_iterations/iteration1/plan2/plan_metrics.csv": [
+          {
+            "plan": "plan2",
+            "status": "success",
+            "error_type": "",
+            "first_error": "",
+            "wns": "-71.967446",
+            "tns": "-1480.540585",
+            "area_um2": "50.0",
+            "util_percent": "85.0",
+            "power_mw": "0.002038",
+            "violating_endpoints": "49",
+            "log": "<sample_root>/llm_iterations/iteration1/plan2/plan2.log"
+          }
+        ],
+        "llm_iterations/iteration1/plan3/plan3_metrics.csv": [
+          {
+            "stage": "plan3",
+            "wns": "-69.325795",
+            "tns": "-1433.474012",
+            "area_um2": "50",
+            "util_percent": "85",
+            "power_mw": "1.925e-03",
+            "violating_endpoints": "49",
+            "input_db": "/workspace/work_dir/claude/asap7/gcd_180/llm_iterations/iteration1/plan3/input.odb",
+            "sdc_file": "/workspace/work_dir/claude/asap7/gcd_180/base/constraint.sdc"
+          }
+        ],
+        "llm_iterations/iteration1/plan3/plan_metrics.csv": [
+          {
+            "plan": "plan3",
+            "status": "success",
+            "error_type": "",
+            "first_error": "",
+            "wns": "-69.325795",
+            "tns": "-1433.474012",
+            "area_um2": "50.0",
+            "util_percent": "85.0",
+            "power_mw": "0.001925",
+            "violating_endpoints": "49",
+            "log": "<sample_root>/llm_iterations/iteration1/plan3/plan3.log"
+          }
+        ],
+        "llm_iterations/iteration1/start/seed_metrics.csv": [
+          {
+            "stage": "base",
+            "wns": "-67.756967",
+            "tns": "-1145.036071",
+            "area_um2": "50",
+            "util_percent": "85",
+            "power_mw": "1.854e-03",
+            "violating_endpoints": "48",
+            "input_db": "/workspace/work_dir/claude/asap7/gcd_180/base/base_cts.odb",
+            "sdc_file": "/workspace/work_dir/claude/asap7/gcd_180/base/constraint.sdc"
+          }
+        ]
+      },
+      "sample_plan_types": [
+        "sequence",
+        "sequence",
+        "eco"
+      ],
+      "sample_selector_decision": "retry",
+      "sample_tokens": {
+        "rows": 10,
+        "iterations": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ],
+        "recorded_dollar_sum": 6.857540999999999,
+        "blank_cost_rows": 1,
+        "role_counts": {
+          "planner": 5,
+          "selector": 5
+        }
+      },
+      "sample_rankings": {
+        "design": "gcd_180",
+        "agent": "claude",
+        "pdk": "asap7",
+        "last_updated_iteration": 4,
+        "last_updated": "2026-05-27T06:32:51",
+        "note": "rank 1 = best WNS (closest to 0 ps). All successful plans from every iteration compete — not just selector winners. ODB paths reference original plan directories; files are not copied here.",
+        "rankings": [
+          {
+            "iteration": 3,
+            "plan": "plan1",
+            "wns_ps": -63.954,
+            "tns_ps": -1030.916,
+            "odb": "<sample_root>/llm_iterations/iteration3/plan1/output.odb",
+            "sdc": "<sample_root>/llm_iterations/iteration3/plan1/output.sdc",
+            "odb_exists": true,
+            "chosen": true,
+            "rank": 1
+          },
+          {
+            "iteration": 3,
+            "plan": "plan2",
+            "wns_ps": -63.954,
+            "tns_ps": -1031.781,
+            "odb": "<sample_root>/llm_iterations/iteration3/plan2/output.odb",
+            "sdc": "<sample_root>/llm_iterations/iteration3/plan2/output.sdc",
+            "odb_exists": true,
+            "chosen": false,
+            "rank": 2
+          },
+          {
+            "iteration": 4,
+            "plan": "plan1",
+            "wns_ps": -63.954,
+            "tns_ps": -1030.916,
+            "odb": "<sample_root>/llm_iterations/iteration4/plan1/output.odb",
+            "sdc": "<sample_root>/llm_iterations/iteration4/plan1/output.sdc",
+            "odb_exists": true,
+            "chosen": true,
+            "rank": 3
+          },
+          {
+            "iteration": 4,
+            "plan": "plan2",
+            "wns_ps": -64.095,
+            "tns_ps": -998.009,
+            "odb": "<sample_root>/llm_iterations/iteration4/plan2/output.odb",
+            "sdc": "<sample_root>/llm_iterations/iteration4/plan2/output.sdc",
+            "odb_exists": true,
+            "chosen": false,
+            "rank": 4
+          }
+        ]
+      },
+      "static_findings": [
+        "README says bundled ORFS regular files but exact tree uses gitlink and .gitmodules points Atmadip/ORFS; submodule must be obtained at pinned commit; no upstream tool installed/executed",
+        "36 configs are3RTL designs aes/ibex/jpeg across ASAP7/Nangate45 util/period sweeps, not36 independent source designs",
+        "one gcd sample iteration has actual planner/selector JSONL interactions incl thinking/text/Write/tool_result, with planner JSON exactlymatching, selector writtenfields allmatching plus9deterministicpostprocessingfields",
+        "sample README says iteration1 starts default.odb, but run.py994 and seed_metrics prove starts base_cts; base uses placementparasitics, default postGR. Freeze stage to compare",
+        "sample planner predicts timing improvements but all3actualplans worsen WNS/TNS; selectorretry doesnotmean successful optimization",
+        "current run.py retryatiter1 promotes chosen regressedplan since no previousbest; contradicts selector guidance to re-seed original; nextiteration carries promotedcandidate",
+        "sample rankings refs iterations3/4 absent from detailed tree; tokenCSV has5iterations and blank finalselectorcost; cannot reconstruct complete5iterationrollout or fullcostdenominator",
+        "sample ODB/netlist intentionallystripped, worstpaths truncated; no completeartifactreplay orDRC/LVS/fullformalclosureproof",
+        "sample powerreport explicitlyWatts1.854e-3 while CSVpower_mw1.854e-3; currentparserreturnsrawWatts into power_mwfield; factor1000labelconflict, backendpower_W path separate",
+        "current best_solutions sorts descendingWNS only, not lexicographic WNS/TNS/area/power hardgated scoring; closuremarkerWNS>=0 notproof of hold/DRC/LVS",
+        "planstatussuccess currently outputODBexistsbeforeerrorinspection; allsampleplans success but negativeWNS. Status isexecutionartifactavailability, notengineeringclosure",
+        "executorplanTCL built deterministicPythonfirst, LLMrepair onlyremainingTCLerrors; avoidattributingnativeResizer/GR/DPLalgorithmworktoLLM",
+        "currentbase/defaultbudget vsagent15outeriter×up3plans andextraTCLretry differs; AutoTunerTPE20startup+15×4trials fromsamebase uses weightedWNS/TNS/powercost. Need equalbudget/scale/metrics forcausal comparison",
+        "Subsequent primarypaper+Zenodo source/outputaudits located: see resizer-source-static-audit.json/resizer-outputs-static-audit.json/resizer-archive-summary.json; GitHubsampleincomplete scopedhere, fullofficialarchivesincludeactualmultiiterationtraces and sourcebundle"
+      ]
+    },
+    "resizer-source": {
+      "static_only": true,
+      "download_receipt": {
+        "status": "downloaded_verified",
+        "url": "https://zenodo.org/api/records/21959752/files/ResizerAgent.zip/content",
+        "file": "round2-resizer-source.zip",
+        "bytes": 1032030173,
+        "md5": "f2d3532c6c723582b927bffa953897b1",
+        "sha256": "2282276c17a3ca41a430c3d02b65203367a46b323f2077f18ced4fc44d7b692e",
+        "elapsed_seconds": 422.1357252597809,
+        "retrieved_at": "2026-10-20T09:43:29.595787+00:00",
+        "scope": "bytes only; no contents executed"
+      },
+      "files": 27921,
+      "expanded_bytes": 3282296201,
+      "orfs_bundled_files": 26760,
+      "orfs_git_metadata_paths": [],
+      "odb_files": [
+        "ResizerAgent/openroad-flow-scripts/flow/results/asap7/aes/base/2_floorplan.odb",
+        "ResizerAgent/openroad-flow-scripts/flow/results/asap7/aes/base/3_place.odb",
+        "ResizerAgent/openroad-flow-scripts/flow/results/asap7/aes/base/3_5_place_dp.odb",
+        "ResizerAgent/openroad-flow-scripts/flow/results/asap7/aes/base/2_2_floorplan_macro.odb",
+        "ResizerAgent/openroad-flow-scripts/flow/results/asap7/aes/base/4_cts.odb",
+        "ResizerAgent/openroad-flow-scripts/flow/results/asap7/aes/base/3_4_place_resized.odb",
+        "ResizerAgent/openroad-flow-scripts/flow/results/asap7/aes/base/2_4_floorplan_pdn.odb",
+        "ResizerAgent/openroad-flow-scripts/flow/results/asap7/aes/base/4_1_cts.odb",
+        "ResizerAgent/openroad-flow-scripts/flow/results/asap7/aes/base/2_1_floorplan.odb",
+        "ResizerAgent/openroad-flow-scripts/flow/results/asap7/aes/base/3_1_place_gp_skip_io.odb",
+        "ResizerAgent/openroad-flow-scripts/flow/results/asap7/aes/base/3_3_place_gp.odb",
+        "ResizerAgent/openroad-flow-scripts/flow/results/asap7/aes/base/2_3_floorplan_tapcell.odb",
+        "ResizerAgent/openroad-flow-scripts/flow/results/asap7/aes/base/3_2_place_iop.odb",
+        "ResizerAgent/openroad-flow-scripts/flow/results/asap7/aes/base/1_synth.odb",
+        "ResizerAgent/openroad-flow-scripts/flow/tutorials/scripts/metal_fill/5_route.odb",
+        "ResizerAgent/openroad-flow-scripts/tools/OpenROAD/test/gcd_sky130hd.odb",
+        "ResizerAgent/openroad-flow-scripts/tools/OpenROAD/src/odb/test/data/design.odb",
+        "ResizerAgent/openroad-flow-scripts/tools/OpenROAD/src/dbSta/test/hierwrite.odb"
+      ],
+      "elf_tool_binaries": [],
+      "selected_core_comparison": {
+        "absent": 1,
+        "byte_equal": 272
+      },
+      "findings": [
+        "Zenodo public sourcearchive indeed bundles regularORFS+OpenROAD/upstream/PDK files, unlikeGitHubrootgitlink. Must notclaimartifactmissingORFSbasedonlyonGitHubtree",
+        "CurrentGitselectedcorealignmentcheckedseparately; bundledtools/sourceversionandbinarycompatibilitymuststillfrozenforperformance reproduction. No file executed",
+        "OuterMD5verifiedauthorarchive; snapshot is3.282GBexpanded/27921files. Thisisdistribution/inventoryverification, notsolverinstallationorfunctionaltest"
+      ]
+    },
+    "resizer-outputs": {
+      "static_only": true,
+      "as_of": "2026-10-20T09:31:52.504553+00:00",
+      "outer_receipt": {
+        "status": "downloaded_verified",
+        "url": "https://zenodo.org/api/records/21959752/files/outputs.zip/content",
+        "file": "round2-resizer-outputs.zip",
+        "bytes": 1833082649,
+        "md5": "1c23b8214c066d099b4e13d77a1d0096",
+        "sha256": "c31916fbf144ad08ae55722a470a7e1490b17e8611b1fc6757c320917db24acf",
+        "elapsed_seconds": 1497.9307568073273,
+        "retrieved_at": "2026-10-20T09:29:53.305156+00:00",
+        "scope": "bytes only; no contents executed"
+      },
+      "configs_by_group": {
+        "agent": 33,
+        "autotuner": 33
+      },
+      "archive_counts": {
+        "agent": 36,
+        "autotuner": 36
+      },
+      "conversation_files": 1080,
+      "conversation_sha256_unique": 1050,
+      "conversation_records": 17444,
+      "conversation_role_counts": {
+        "no_message": 10946,
+        "user": 2235,
+        "assistant": 4263
+      },
+      "conversation_tool_counts": {
+        "Write": 1097,
+        "Bash": 18,
+        "ScheduleWakeup": 1,
+        "ToolSearch": 4,
+        "Glob": 1,
+        "Edit": 17,
+        "Read": 17
+      },
+      "suspicious_token_pattern_count": 0,
+      "csv_files": 12218,
+      "csv_rows": 31358,
+      "total_files": 48401,
+      "expanded_bytes": 18351325850
+    },
+    "analogopt": {
+      "as_of": "2026-10-20T09:40:20.716501+00:00",
+      "static_only": true,
+      "pinned_commit": "10093e3496ef2c7d06494d91d131b0cc5de6c25b",
+      "verified_metadata_source_blobs": 95,
+      "csv_compressed_gitblob": "0a366ac6710b5275d3db9ff63764111ab293f9ae",
+      "csv_compressed_sha256": "cfcd7746ab4a619325a09194f5e3edf89da80a80b575d3283b478d375f174c21",
+      "csv_sha256": "81155af166e87d173558ab09f3e9a640181fbd78d79ebe1b8c03260fd400b660",
+      "rows": 358234,
+      "source_tables": 73,
+      "topologies": {
+        "Alfio_RAFFC_Pin_3": 12310,
+        "Cascode_Miller_Pin_2": 6464,
+        "Fan_SMC_Pin_3": 27066,
+        "Grasso_RAFFC_Pin_3": 19686,
+        "HoiLee_AFFC_Pin_3": 21409,
+        "Leung_DFCFC1_Pin_3": 6265,
+        "Leung_DFCFC2_Pin_3": 12897,
+        "Leung_NMCF_Pin_3": 23773,
+        "Leung_NMCNR_Pin_3": 33701,
+        "Peng_ACBC_Pin_3": 5852,
+        "Peng_IAC_Pin_3": 7593,
+        "Qu2017_AZC_Pin_3": 30807,
+        "Qu_LEC_Pin_3": 17891,
+        "Ramos_PFC_Pin_3": 6426,
+        "Sau_CFCC_Pin_3": 25939,
+        "Song_DACFC_Pin_3": 42698,
+        "Yan_AZ_Pin_3": 38090,
+        "Yan_NCM_Pin_3": 19367
+      },
+      "technology_directory_labels": {
+        "180": 249439,
+        "22": 108795
+      },
+      "csv_fields": [
+        "record_id",
+        "source_id",
+        "source_row",
+        "topology",
+        "tech_node_label",
+        "vdd_label",
+        "vcm_label",
+        "cl_label",
+        "run_label",
+        "gen",
+        "index",
+        "pm",
+        "gbw",
+        "gain",
+        "noise",
+        "CMRR",
+        "PSRR",
+        "SR",
+        "ivdd_27",
+        "vos",
+        "tc",
+        "d_settle",
+        "settlingTime",
+        "FOMS",
+        "FOML",
+        "chip_area",
+        "fitness",
+        "FOM_AW",
+        "quality_flag_count",
+        "quality_flags"
+      ],
+      "all_source_row_counts_match_manifest": true,
+      "unique_record_ids": 358234,
+      "duplicate_source_19field_rows": 0,
+      "nonfinite_cells": 0,
+      "exact_source_17performance_groups": 317619,
+      "flags_recomputed": {
+        "sr_negative": 40444,
+        "sr_minus_one": 39684,
+        "foml_negative": 40444,
+        "settling_fields_equal": 86290
+      },
+      "flagged_rows": 125974,
+      "unflagged_rows": 232260,
+      "flag_mismatches": 0,
+      "generation_ranges_by_source": {
+        "src_aaf7ee153b930965": [
+          1,
+          100
+        ],
+        "src_12b3fbe6c0b8d015": [
+          0,
+          100
+        ],
+        "src_5836cb2719ac270d": [
+          0,
+          100
+        ],
+        "src_55f3df625770930c": [
+          13,
+          100
+        ],
+        "src_8f2baf4e6f06b227": [
+          0,
+          35
+        ],
+        "src_6629f47165abc3d4": [
+          0,
+          28
+        ],
+        "src_1142d3cd5b08df94": [
+          1,
+          98
+        ],
+        "src_de5bde89d47874b6": [
+          0,
+          100
+        ],
+        "src_520a7d87dab47873": [
+          0,
+          100
+        ],
+        "src_cba014366403a3dc": [
+          0,
+          36
+        ],
+        "src_71adafd44bb9d83a": [
+          0,
+          100
+        ],
+        "src_738068d35a712976": [
+          0,
+          77
+        ],
+        "src_70fc225d8ae25c33": [
+          0,
+          100
+        ],
+        "src_61be94e49335e5a0": [
+          10,
+          100
+        ],
+        "src_17aabba587aa84cb": [
+          0,
+          83
+        ],
+        "src_18de2ec4db0a034b": [
+          0,
+          100
+        ],
+        "src_b1d379e3b1bcb282": [
+          0,
+          100
+        ],
+        "src_b48f8cedb769af8d": [
+          0,
+          100
+        ],
+        "src_56c27cda97b21b0d": [
+          0,
+          100
+        ],
+        "src_0d772fb58d37593d": [
+          0,
+          100
+        ],
+        "src_2017253dfc964e2e": [
+          0,
+          100
+        ],
+        "src_9719c64a4e645b15": [
+          0,
+          100
+        ],
+        "src_b2677455627bc705": [
+          0,
+          37
+        ],
+        "src_1c483b94eb85dfdb": [
+          0,
+          43
+        ],
+        "src_9ac90919c2939496": [
+          0,
+          100
+        ],
+        "src_3d354af2dddb41de": [
+          0,
+          127
+        ],
+        "src_8530ef090ec6d984": [
+          0,
+          200
+        ],
+        "src_e4856e5c922002d3": [
+          0,
+          200
+        ],
+        "src_e117e1f46e8478f7": [
+          0,
+          100
+        ],
+        "src_7e60cdeed89a22f5": [
+          0,
+          100
+        ],
+        "src_3c56f955f6522db5": [
+          0,
+          26
+        ],
+        "src_71f0a01820fcd4bf": [
+          0,
+          10
+        ],
+        "src_6f3886d43077b463": [
+          0,
+          37
+        ],
+        "src_c0d5ed0fdab0b668": [
+          0,
+          100
+        ],
+        "src_fb1ca26320067d54": [
+          0,
+          100
+        ],
+        "src_5e86b4f806c664e5": [
+          0,
+          100
+        ],
+        "src_60b6aa96b3e6801b": [
+          0,
+          17
+        ],
+        "src_8e4cdd352fa58c7b": [
+          0,
+          100
+        ],
+        "src_3e64dd4bc30c4c30": [
+          0,
+          31
+        ],
+        "src_cc6ab99abfc0cb11": [
+          0,
+          54
+        ],
+        "src_25aaff80f17ce9de": [
+          0,
+          100
+        ],
+        "src_978682bb83b9ca04": [
+          0,
+          100
+        ],
+        "src_74304d56094329de": [
+          0,
+          40
+        ],
+        "src_5cb3eefcf17abc6b": [
+          0,
+          100
+        ],
+        "src_0546307969cd350a": [
+          0,
+          100
+        ],
+        "src_ae20e4b355635096": [
+          1,
+          100
+        ],
+        "src_538ea22a65933aa2": [
+          2,
+          100
+        ],
+        "src_50662abc1700aebd": [
+          0,
+          36
+        ],
+        "src_bb5f372ee5342980": [
+          0,
+          26
+        ],
+        "src_5e756c846d4951d4": [
+          0,
+          13
+        ],
+        "src_e9ca64b31fcb7e66": [
+          0,
+          76
+        ],
+        "src_2e4e3178bbefd188": [
+          0,
+          100
+        ],
+        "src_f92201d6f06df3cd": [
+          0,
+          16
+        ],
+        "src_6d79edfde1fd6edd": [
+          0,
+          100
+        ],
+        "src_b904b08432deaf58": [
+          0,
+          30
+        ],
+        "src_27405daede08c24c": [
+          0,
+          74
+        ],
+        "src_dc94a8042d9d451f": [
+          0,
+          24
+        ],
+        "src_fd3aa6d34e2089d1": [
+          0,
+          200
+        ],
+        "src_6173971d8e85887f": [
+          0,
+          85
+        ],
+        "src_5a535de5117b9a88": [
+          0,
+          43
+        ],
+        "src_8a433aa6ea33258e": [
+          0,
+          100
+        ],
+        "src_77acec5e3acee767": [
+          0,
+          81
+        ],
+        "src_fe805b59e3061db9": [
+          0,
+          100
+        ],
+        "src_ca57eca58c664771": [
+          0,
+          100
+        ],
+        "src_55099ecff625bd1e": [
+          0,
+          100
+        ],
+        "src_ef4be3039c2aeb6f": [
+          0,
+          40
+        ],
+        "src_2d70b4d8f8e268f6": [
+          0,
+          25
+        ],
+        "src_cd7049f980c8c596": [
+          0,
+          1
+        ],
+        "src_333a4561dfa223b2": [
+          0,
+          88
+        ],
+        "src_9ea927eb51089bca": [
+          0,
+          21
+        ],
+        "src_4feb0b7b9c541f70": [
+          0,
+          100
+        ],
+        "src_f46a45174cc4ec58": [
+          0,
+          100
+        ],
+        "src_e698dcd3f57c4f82": [
+          0,
+          100
+        ]
+      },
+      "current_grpo_configs": [
+        "circuit_configs/amp_acbc.yaml",
+        "circuit_configs/amp_affc.yaml",
+        "circuit_configs/amp_az.yaml",
+        "circuit_configs/amp_azc.yaml",
+        "circuit_configs/amp_cfcc.yaml",
+        "circuit_configs/amp_clia.yaml",
+        "circuit_configs/amp_dacfc.yaml",
+        "circuit_configs/amp_dfcfc1.yaml",
+        "circuit_configs/amp_dfcfc2.yaml",
+        "circuit_configs/amp_iac.yaml",
+        "circuit_configs/amp_nmcf.yaml",
+        "circuit_configs/amp_nmcnr.yaml",
+        "circuit_configs/amp_pfc.yaml",
+        "circuit_configs/amp_raffc.yaml",
+        "circuit_configs/amp_smc.yaml",
+        "circuit_configs/amp_tcfc.yaml",
+        "circuit_configs/ldo_basic.yaml"
+      ],
+      "current_grpo_config_count": 17,
+      "findings": [
+        "358234 actual performance observations,18topologies73source tables; author compressed/uncompressedSHA256 and Gitblob independently match, all rows/flags/profilecounts recomputed",
+        "19originalnumericcolumns include generation/index+17performance values; paired TD/TBM transistor designparameter tables are NOT included. Cannot treat as complete W/L-to-performance regression training or replayable sizing actions",
+        "358234 observations collapse to317619 source-local exact17performance profiles; this does not prove identical physical design. Gen/index not independence. No source-local exact19column duplicates",
+        "125974 reviewflagged rows retained, not cleaned-away failures; source script already filters PM<0, so total simulation success/failure denominator unavailable",
+        "22/180nm are historical directory labels, actual perrowPVT/aggregation/units mostly inferred or unresolved, not contemporary ngspiceSKY130results; area field sqrt(abs(sourcearea)) not physical area",
+        "FOM_AW historical formula hardcodes1500e-12 capacitance and is not recomputed from folderCL; keep original units/conventions and flags",
+        "Performance-only lookup/feasibility mining/retrieval/metricanalysis plausible; no LLM action-observation or toolcall trajectories in this CSV. Split by source/run/topology; random row split risks repeated profiles/optimization generation leakage",
+        "Current16amp+1LDO numericalGRPOconfigs derive from AnalogGym; MCP/skills wrapper is a separate LLMorchestration interface, GRPO policy itself is numeric not language-model RL",
+        "RootMIT covers software/docs claim, underlying historicalMAT/TD/TBMsource notbundled and currentSKY130PDKlicense separate. No claim that a repositoryroot license automatically establishes every historicalsource right",
+        "CurrentAMP scalarreward has6constraint terms+3objective terms; NMCF YAML15metrics includes6withoutseparatehardgate(PSRR/vos/TC/Power/GBW/sr). Power/GBW may influenceFOMindirectly, not equivalenttoexplicitthreshold. all targets satisfied print requiresreward>=0 only",
+        "CurrentAMP PMgate45..90 ignores YAMLtarget60; GRPOpm_feasible/Pareto/recommendedcandidate is PM-only, notfullspecsuccess. Do nottransferheadlinefull-spec/PVTrobustnessclaimeveryprintedcandidate",
+        "CurrentAMP Active_Area computes sqrt(sumdeviceareaproxies), not mm²physicalarea. HistoricalCSVareaandcurrentsizingproxybothneedtheiractualformula, notnatural-languagefieldlabel"
+      ],
+      "current_amp_scoring_contract": {
+        "active_area": "sqrt(sum device area proxies), not literal physical area; YAML mm^2 label not established",
+        "phase_margin_gate": "fixed45<=PM<=90, despite NMCF YAML target60",
+        "constraint_reward": [
+          "phase_margin_score",
+          "dcgain_score",
+          "PSRP_score",
+          "PSRN_score",
+          "cmrrdc_score",
+          "settlingTime_score"
+        ],
+        "objectives": [
+          "FOML_score",
+          "FOMS_score",
+          "Active_Area_score"
+        ],
+        "reported_but_not_individually_hardgated": [
+          "PSRR",
+          "vos",
+          "TC",
+          "Power",
+          "GBW",
+          "sr"
+        ],
+        "success_message": "tools/evaluate_design.py prints all targets satisfied iff scalarreward>=0; this is current selected-score contract, not all15YAMLthresholds",
+        "grpo_pareto_filter": "pm_feasible only means PM_violation<=1e-8; not allspec feasibility"
+      }
+    },
+    "tcadgpt": {
+      "as_of": "2026-10-20T09:40:53.242158+00:00",
+      "static_only": true,
+      "pinned_commit": "68026387da36d33a74de6ad4d2cc12d16970b141",
+      "verified_selected_blobs": 85,
+      "tree_entries": 97,
+      "suspicious_token_patterns": 0,
+      "tcad_qa_gold_questions": 264,
+      "tcad_qa_ids": [
+        1,
+        264
+      ],
+      "tcad_qa_output_files": {
+        "tcad/QA_test/DSR1.json": {
+          "rows": 266,
+          "unique_ids": 266,
+          "extra_ids": [
+            265,
+            266
+          ],
+          "missing_ids": [],
+          "exact_question_matches": 264
+        },
+        "tcad/QA_test/DeepseekV3+RAG.json": {
+          "rows": 264,
+          "unique_ids": 264,
+          "extra_ids": [],
+          "missing_ids": [],
+          "exact_question_matches": 264
+        },
+        "tcad/QA_test/GPT4o.json": {
+          "rows": 266,
+          "unique_ids": 266,
+          "extra_ids": [
+            265,
+            266
+          ],
+          "missing_ids": [],
+          "exact_question_matches": 264
+        },
+        "tcad/QA_test/TcadGPT_V12+RAG.json": {
+          "rows": 264,
+          "unique_ids": 264,
+          "extra_ids": [],
+          "missing_ids": [],
+          "exact_question_matches": 264
+        },
+        "tcad/QA_test/TcadGPT_V12.json": {
+          "rows": 264,
+          "unique_ids": 264,
+          "extra_ids": [],
+          "missing_ids": [],
+          "exact_question_matches": 264
+        },
+        "tcad/QA_test/llama3.1:8b+RAG.json": {
+          "rows": 264,
+          "unique_ids": 264,
+          "extra_ids": [],
+          "missing_ids": [],
+          "exact_question_matches": 264
+        },
+        "tcad/QA_test/llama3.1:8b.json": {
+          "rows": 266,
+          "unique_ids": 266,
+          "extra_ids": [
+            265,
+            266
+          ],
+          "missing_ids": [],
+          "exact_question_matches": 264
+        }
+      },
+      "spreadsheet_marks": {
+        "llama 3.1 8b": {
+          "ones": 65,
+          "blank": 199,
+          "fraction_if_blank_incorrect": 0.24621212121212122
+        },
+        "GPT4o": {
+          "ones": 124,
+          "blank": 140,
+          "fraction_if_blank_incorrect": 0.4696969696969697
+        },
+        "Deepseek R1": {
+          "ones": 140,
+          "blank": 124,
+          "fraction_if_blank_incorrect": 0.5303030303030303
+        },
+        "llama 3.1 8b +RAG": {
+          "ones": 154,
+          "blank": 110,
+          "fraction_if_blank_incorrect": 0.5833333333333334
+        },
+        "Deepseek V3 + RAG": {
+          "ones": 180,
+          "blank": 84,
+          "fraction_if_blank_incorrect": 0.6818181818181818
+        },
+        "TcadGPT V12 + RAG": {
+          "ones": 170,
+          "blank": 94,
+          "fraction_if_blank_incorrect": 0.6439393939393939
+        },
+        "TcadGPT v10": {
+          "ones": 71,
+          "blank": 193,
+          "fraction_if_blank_incorrect": 0.2689393939393939
+        },
+        "TcadGPT v11": {
+          "ones": 217,
+          "blank": 47,
+          "fraction_if_blank_incorrect": 0.821969696969697
+        },
+        "Deepseek V3": {
+          "ones": 131,
+          "blank": 133,
+          "fraction_if_blank_incorrect": 0.4962121212121212
+        },
+        "TcadGPT v12": {
+          "ones": 221,
+          "blank": 43,
+          "fraction_if_blank_incorrect": 0.8371212121212122
+        }
+      },
+      "sde_instruction_txt_count": 20,
+      "sde_cmd_count": 22,
+      "elmer_qa_judge_recomputed": {
+        "gpt4o": {
+          "rows": 100,
+          "correct": 32
+        },
+        "deepseek": {
+          "rows": 100,
+          "correct": 34
+        },
+        "elmer_gradio": {
+          "rows": 100,
+          "correct": 52
+        }
+      },
+      "elmer_code_cases": 20,
+      "elmer_json_jsonl_equal": true,
+      "root_license_present": false,
+      "paper_preprint": {
+        "arxiv": "2601.10128v1",
+        "semantic_qa_questions": 264,
+        "semantic_accuracy_pct": 85.6,
+        "sde_tasks": 20,
+        "direct_pass1": 12,
+        "placeholder_resolved_pass1": 13,
+        "direct_pass3": 15,
+        "placeholder_resolved_pass3": 16
+      },
+      "published_version": {
+        "doi": "10.1002/aisy.70520",
+        "syntax_headline_pct": 85.0,
+        "sde_tasks_indexed_publisher_text": 60,
+        "scope": "publisher indexed excerpt, full DOI page HTTP403 respected; no direct fulltext/tableverification"
+      },
+      "findings": [
+        "264expertQA gold/reference and7modeloutputJSONs public;3modeloutputs have266rows/extras265266, others264; must join by verifiedquestionID/text ratherthanblindrowcount",
+        "CurrentspreadsheetTcadGPTv12has221positive1marksand43blanks; ifblankswrong83.712%, notpaper85.6%. Do not silentlyreplacepaperresult; scorer/rubric/version mappingneeded",
+        "SDEcurrent20instructiontxt+22cmdexamples(twoaddvvariants), notpubliccomplete60latesttestpack or3samplepercasecompilerlogs. Sourcecommands/examples notautomaticallyhistoricalmodeloutputs",
+        "Preprintheadline80% is16/20Pass@3includingoneplaceholderresolvedcase; directPass@1is12/20=60%, placeholderresolvedPass@1is13/20=65%. Differentk/repaircannotmergeasoneaccuracy",
+        "Publishedindex85%/60instructions notsameversionaspreprint80%/20; fullpublisher403notbypassed, latestcompletecasepack/resultsnotlocated",
+        "SDE -S syntaxacceptance doesnotcertifygeometricinstructionfidelity, numericalconvergence, calibrateddevicephysics, PVTrobustness or manufacturingqualification",
+        "QAsemanticjudge/expertreference separatefromtool-levelsyntacticoracle; RAGimprovement/degradation notagentdesignoptimization",
+        "RootREADMEexplicitlyexcludeslargedatasets/modelweights/generatedoutputs, whilepaperclaimsallreleased; 1.5MsyntheticQApairsandtrainingIR-DPOexamplesnotlocatedinthis85blobcorebundle",
+        "Elmer100QA/20codecases aregeneralsolvercrossdomainportability notnewindependentchipbenchmark. Current300judgeoutputs recompute32/34/52correct, agreeingpaper; codegenerationsstoredwithoutexecutiontruthlogs",
+        "Publicprompt/code/QAanswers areusefulsmallSFT/evaluationassets; notfullmulti-turnagenttooltrajectories. NativecommercialSentaurus license/toolversionstillneeded; no solverrunperformed",
+        "No rootlicensefound; papermentionsnoncommercialacademicmanual-derivedcorpus. Actualrightsforcommercialmanualderivedtrainingmustbeestablished, notassumedfrompublicGitHub"
+      ]
+    },
+    "resizer-official-archive-summary": {
+      "static_only": true,
+      "unique_configurations": 33,
+      "sweep_specific_agent_runs": 36,
+      "outer_iterations_per_run": 15,
+      "outer_iterations_archive_occurrences": 540,
+      "conversations": {
+        "files": 1080,
+        "unique_files": 1050,
+        "records_in_unique_files": 16997,
+        "roles_in_unique_files": {
+          "no_message": 10674,
+          "user": 2175,
+          "assistant": 4148
+        },
+        "last_write_all_fields_match": 1065,
+        "mismatching_last_write_files": 14,
+        "no_parseable_write_files": 1
+      },
+      "repeated_sweep_points": [
+        {
+          "group": "agent",
+          "config": "ibex_70_750",
+          "archive_count": 2,
+          "archives_byte_identical": false
+        },
+        {
+          "group": "agent",
+          "config": "jpeg_70_430",
+          "archive_count": 2,
+          "archives_byte_identical": false
+        },
+        {
+          "group": "agent",
+          "config": "ibex_50_2100",
+          "archive_count": 2,
+          "archives_byte_identical": false
+        },
+        {
+          "group": "autotuner",
+          "config": "ibex_70_750",
+          "archive_count": 2,
+          "archives_byte_identical": false
+        },
+        {
+          "group": "autotuner",
+          "config": "jpeg_70_430",
+          "archive_count": 2,
+          "archives_byte_identical": false
+        },
+        {
+          "group": "autotuner",
+          "config": "ibex_50_2100",
+          "archive_count": 2,
+          "archives_byte_identical": false
+        }
+      ],
+      "agent_plan_csv_rows": 1432,
+      "agent_plan_status_counts": {
+        "success": 1421,
+        "infra_error": 5,
+        "openroad_fail": 6
+      },
+      "agent_plan_blank_after_wns": 15,
+      "agent_plan_types": {
+        "sequence": 751,
+        "staged": 187,
+        "eco": 494
+      },
+      "autotuner_trial_status_counts": {
+        "success": 2280,
+        "openroad_fail": 5,
+        "infra_error": 4
+      },
+      "post_dr_comparisons_36_sweep_specific_runs": {
+        "agent_wns_better_than_default": 30,
+        "agent_tns_better_than_default": 32,
+        "agent_wns_better_than_at": 31,
+        "agent_tns_better_than_at": 32
+      },
+      "agent_post_dr_nonnegative_wns_runs": 1,
+      "paper_table2_postdr_wns_checks": [
+        {
+          "config": "aes_60_240",
+          "paper_post_dr_wns_magnitude_ps": 41.59,
+          "archive_post_dr_wns_magnitude_ps": 41.589,
+          "rounded_2dp_match": true
+        },
+        {
+          "config": "aes_65_240",
+          "paper_post_dr_wns_magnitude_ps": 45.3,
+          "archive_post_dr_wns_magnitude_ps": 45.296,
+          "rounded_2dp_match": true
+        },
+        {
+          "config": "aes_70_240",
+          "paper_post_dr_wns_magnitude_ps": 45.97,
+          "archive_post_dr_wns_magnitude_ps": 45.965,
+          "rounded_2dp_match": true
+        },
+        {
+          "config": "ibex_60_750",
+          "paper_post_dr_wns_magnitude_ps": 24.39,
+          "archive_post_dr_wns_magnitude_ps": 24.386,
+          "rounded_2dp_match": true
+        },
+        {
+          "config": "ibex_70_750",
+          "paper_post_dr_wns_magnitude_ps": 39.26,
+          "archive_post_dr_wns_magnitude_ps": 39.263,
+          "rounded_2dp_match": true
+        },
+        {
+          "config": "ibex_75_750",
+          "paper_post_dr_wns_magnitude_ps": 38.73,
+          "archive_post_dr_wns_magnitude_ps": 38.733,
+          "rounded_2dp_match": true
+        },
+        {
+          "config": "jpeg_60_430",
+          "paper_post_dr_wns_magnitude_ps": 8.25,
+          "archive_post_dr_wns_magnitude_ps": 8.252,
+          "rounded_2dp_match": true
+        },
+        {
+          "config": "jpeg_70_430",
+          "paper_post_dr_wns_magnitude_ps": 9.3,
+          "archive_post_dr_wns_magnitude_ps": 9.304,
+          "rounded_2dp_match": true
+        },
+        {
+          "config": "jpeg_80_430",
+          "paper_post_dr_wns_magnitude_ps": 26.09,
+          "archive_post_dr_wns_magnitude_ps": 26.086,
+          "rounded_2dp_match": true
+        }
+      ],
+      "budget_notes": "tokens.csv nominal providerpriced estimates, not subscription bill; some duplicate/retry same iteration-role rows, missing finalcost may remain; not total campaign cost or raw API turn count",
+      "budget_rows": [
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/asap7/ibex/ibex_70_550.zip",
+          "rows": 32,
+          "roles": {
+            "planner": 16,
+            "selector": 16
+          },
+          "blank_cost_rows": 1,
+          "nominal_known_cost_usd": 38.7842,
+          "input_tokens": 128,
+          "output_tokens": 618987,
+          "cache_creation_tokens": 3067720,
+          "cache_read_tokens": 4323079
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/asap7/ibex/ibex_70_600.zip",
+          "rows": 31,
+          "roles": {
+            "planner": 16,
+            "selector": 15
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 37.977114,
+          "input_tokens": 118,
+          "output_tokens": 623033,
+          "cache_creation_tokens": 2838390,
+          "cache_read_tokens": 3766071
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/asap7/ibex/ibex_70_650.zip",
+          "rows": 32,
+          "roles": {
+            "planner": 16,
+            "selector": 16
+          },
+          "blank_cost_rows": 1,
+          "nominal_known_cost_usd": 37.687342,
+          "input_tokens": 126,
+          "output_tokens": 587505,
+          "cache_creation_tokens": 3041819,
+          "cache_read_tokens": 4019672
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/asap7/ibex/ibex_70_700.zip",
+          "rows": 31,
+          "roles": {
+            "planner": 16,
+            "selector": 15
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 36.672072,
+          "input_tokens": 122,
+          "output_tokens": 553875,
+          "cache_creation_tokens": 2966469,
+          "cache_read_tokens": 3839291
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/asap7/ibex/ibex_70_750.zip",
+          "rows": 49,
+          "roles": {
+            "planner": 26,
+            "selector": 23
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 60.233374,
+          "input_tokens": 224,
+          "output_tokens": 960786,
+          "cache_creation_tokens": 4735989,
+          "cache_read_tokens": 7063768
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/asap7/ibex/ibex_70_800.zip",
+          "rows": 47,
+          "roles": {
+            "planner": 24,
+            "selector": 23
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 58.385337,
+          "input_tokens": 218,
+          "output_tokens": 971038,
+          "cache_creation_tokens": 4479008,
+          "cache_read_tokens": 6631781
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/asap7/jpeg/jpeg_70_370.zip",
+          "rows": 30,
+          "roles": {
+            "planner": 15,
+            "selector": 15
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 21.585388000000002,
+          "input_tokens": 216,
+          "output_tokens": 224406,
+          "cache_creation_tokens": 2090017,
+          "cache_read_tokens": 2932339
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/asap7/jpeg/jpeg_70_390.zip",
+          "rows": 31,
+          "roles": {
+            "planner": 16,
+            "selector": 15
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 22.674408,
+          "input_tokens": 217,
+          "output_tokens": 254440,
+          "cache_creation_tokens": 2140940,
+          "cache_read_tokens": 2944290
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/asap7/jpeg/jpeg_70_410.zip",
+          "rows": 30,
+          "roles": {
+            "planner": 15,
+            "selector": 15
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 22.267249,
+          "input_tokens": 210,
+          "output_tokens": 261936,
+          "cache_creation_tokens": 2065932,
+          "cache_read_tokens": 2826975
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/asap7/jpeg/jpeg_70_430.zip",
+          "rows": 30,
+          "roles": {
+            "planner": 15,
+            "selector": 15
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 22.785769,
+          "input_tokens": 210,
+          "output_tokens": 277126,
+          "cache_creation_tokens": 2087079,
+          "cache_read_tokens": 2837413
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/asap7/jpeg/jpeg_70_450.zip",
+          "rows": 32,
+          "roles": {
+            "planner": 16,
+            "selector": 16
+          },
+          "blank_cost_rows": 1,
+          "nominal_known_cost_usd": 29.481436,
+          "input_tokens": 64916,
+          "output_tokens": 510724,
+          "cache_creation_tokens": 2217055,
+          "cache_read_tokens": 2276183
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/asap7/jpeg/jpeg_70_470.zip",
+          "rows": 30,
+          "roles": {
+            "planner": 15,
+            "selector": 15
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 29.273493,
+          "input_tokens": 62026,
+          "output_tokens": 503345,
+          "cache_creation_tokens": 2150541,
+          "cache_read_tokens": 2138040
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/nangate45/ibex/ibex_50_1600.zip",
+          "rows": 32,
+          "roles": {
+            "planner": 16,
+            "selector": 16
+          },
+          "blank_cost_rows": 1,
+          "nominal_known_cost_usd": 24.790065,
+          "input_tokens": 219,
+          "output_tokens": 240399,
+          "cache_creation_tokens": 2445512,
+          "cache_read_tokens": 3513377
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/nangate45/ibex/ibex_50_1700.zip",
+          "rows": 34,
+          "roles": {
+            "planner": 18,
+            "selector": 16
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 36.394202,
+          "input_tokens": 138,
+          "output_tokens": 609744,
+          "cache_creation_tokens": 2846452,
+          "cache_read_tokens": 2975761
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/nangate45/ibex/ibex_50_1800.zip",
+          "rows": 31,
+          "roles": {
+            "planner": 16,
+            "selector": 15
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 25.990845,
+          "input_tokens": 217,
+          "output_tokens": 294820,
+          "cache_creation_tokens": 2456586,
+          "cache_read_tokens": 3110644
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/nangate45/ibex/ibex_50_1900.zip",
+          "rows": 30,
+          "roles": {
+            "planner": 15,
+            "selector": 15
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 33.505499,
+          "input_tokens": 124,
+          "output_tokens": 587293,
+          "cache_creation_tokens": 2530717,
+          "cache_read_tokens": 2741142
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/nangate45/ibex/ibex_50_2000.zip",
+          "rows": 35,
+          "roles": {
+            "planner": 18,
+            "selector": 17
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 34.353983,
+          "input_tokens": 163,
+          "output_tokens": 542087,
+          "cache_creation_tokens": 2758847,
+          "cache_read_tokens": 2997724
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/nangate45/ibex/ibex_50_2100.zip",
+          "rows": 31,
+          "roles": {
+            "planner": 16,
+            "selector": 15
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 33.869188,
+          "input_tokens": 128,
+          "output_tokens": 644526,
+          "cache_creation_tokens": 2408824,
+          "cache_read_tokens": 2475199
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/asap7/aes/aes_60_240.zip",
+          "rows": 30,
+          "roles": {
+            "planner": 15,
+            "selector": 15
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 21.311514,
+          "input_tokens": 212,
+          "output_tokens": 297874,
+          "cache_creation_tokens": 1819051,
+          "cache_read_tokens": 2769956
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/asap7/aes/aes_65_240.zip",
+          "rows": 30,
+          "roles": {
+            "planner": 15,
+            "selector": 15
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 21.555341,
+          "input_tokens": 210,
+          "output_tokens": 300951,
+          "cache_creation_tokens": 1853201,
+          "cache_read_tokens": 2575929
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/asap7/aes/aes_70_240.zip",
+          "rows": 30,
+          "roles": {
+            "planner": 15,
+            "selector": 15
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 21.658609,
+          "input_tokens": 212,
+          "output_tokens": 300939,
+          "cache_creation_tokens": 1858203,
+          "cache_read_tokens": 2745298
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/asap7/ibex/ibex_60_750.zip",
+          "rows": 30,
+          "roles": {
+            "planner": 15,
+            "selector": 15
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 29.278221000000002,
+          "input_tokens": 217,
+          "output_tokens": 346280,
+          "cache_creation_tokens": 2709335,
+          "cache_read_tokens": 3577808
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/asap7/ibex/ibex_70_750.zip",
+          "rows": 30,
+          "roles": {
+            "planner": 15,
+            "selector": 15
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 28.737303,
+          "input_tokens": 214,
+          "output_tokens": 339086,
+          "cache_creation_tokens": 2647203,
+          "cache_read_tokens": 3777576
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/asap7/ibex/ibex_75_750.zip",
+          "rows": 30,
+          "roles": {
+            "planner": 15,
+            "selector": 15
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 25.649749,
+          "input_tokens": 211,
+          "output_tokens": 284096,
+          "cache_creation_tokens": 2433487,
+          "cache_read_tokens": 3325476
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/asap7/jpeg/jpeg_60_430.zip",
+          "rows": 30,
+          "roles": {
+            "planner": 15,
+            "selector": 15
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 22.884785,
+          "input_tokens": 211,
+          "output_tokens": 270294,
+          "cache_creation_tokens": 2121080,
+          "cache_read_tokens": 2904053
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/asap7/jpeg/jpeg_70_430.zip",
+          "rows": 30,
+          "roles": {
+            "planner": 15,
+            "selector": 15
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 22.785769,
+          "input_tokens": 210,
+          "output_tokens": 277126,
+          "cache_creation_tokens": 2087079,
+          "cache_read_tokens": 2837413
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/asap7/jpeg/jpeg_80_430.zip",
+          "rows": 30,
+          "roles": {
+            "planner": 15,
+            "selector": 15
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 23.195765,
+          "input_tokens": 210,
+          "output_tokens": 302705,
+          "cache_creation_tokens": 2062516,
+          "cache_read_tokens": 2796101
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/nangate45/aes/aes_40_620.zip",
+          "rows": 30,
+          "roles": {
+            "planner": 15,
+            "selector": 15
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 20.134981,
+          "input_tokens": 214,
+          "output_tokens": 290235,
+          "cache_creation_tokens": 1653436,
+          "cache_read_tokens": 3195065
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/nangate45/aes/aes_45_620.zip",
+          "rows": 30,
+          "roles": {
+            "planner": 15,
+            "selector": 15
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 17.976642000000002,
+          "input_tokens": 216,
+          "output_tokens": 226746,
+          "cache_creation_tokens": 1588264,
+          "cache_read_tokens": 2868729
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/nangate45/aes/aes_50_620.zip",
+          "rows": 30,
+          "roles": {
+            "planner": 15,
+            "selector": 15
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 17.43474,
+          "input_tokens": 210,
+          "output_tokens": 214735,
+          "cache_creation_tokens": 1558053,
+          "cache_read_tokens": 2798550
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/nangate45/ibex/ibex_50_2100.zip",
+          "rows": 30,
+          "roles": {
+            "planner": 15,
+            "selector": 15
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 23.009463,
+          "input_tokens": 212,
+          "output_tokens": 232914,
+          "cache_creation_tokens": 2249535,
+          "cache_read_tokens": 3110909
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/nangate45/ibex/ibex_60_2100.zip",
+          "rows": 30,
+          "roles": {
+            "planner": 15,
+            "selector": 15
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 23.648347,
+          "input_tokens": 205,
+          "output_tokens": 234453,
+          "cache_creation_tokens": 2292565,
+          "cache_read_tokens": 3214682
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/nangate45/ibex/ibex_70_2100.zip",
+          "rows": 30,
+          "roles": {
+            "planner": 15,
+            "selector": 15
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 23.68447,
+          "input_tokens": 210,
+          "output_tokens": 258306,
+          "cache_creation_tokens": 2265811,
+          "cache_read_tokens": 3012767
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/nangate45/jpeg/jpeg_50_1000.zip",
+          "rows": 30,
+          "roles": {
+            "planner": 15,
+            "selector": 15
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 20.596158,
+          "input_tokens": 211,
+          "output_tokens": 243481,
+          "cache_creation_tokens": 1906579,
+          "cache_read_tokens": 2715630
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/nangate45/jpeg/jpeg_60_1000.zip",
+          "rows": 30,
+          "roles": {
+            "planner": 15,
+            "selector": 15
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 20.261047,
+          "input_tokens": 210,
+          "output_tokens": 234884,
+          "cache_creation_tokens": 1892375,
+          "cache_read_tokens": 2662298
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/nangate45/jpeg/jpeg_70_1000.zip",
+          "rows": 31,
+          "roles": {
+            "planner": 16,
+            "selector": 15
+          },
+          "blank_cost_rows": 0,
+          "nominal_known_cost_usd": 21.131346,
+          "input_tokens": 217,
+          "output_tokens": 230605,
+          "cache_creation_tokens": 2018163,
+          "cache_read_tokens": 2826378
+        }
+      ],
+      "measurements": [
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/asap7/ibex/ibex_70_550.zip",
+          "config": "ibex_70_550",
+          "agent_post_opt": {
+            "stage": "agentic_iter4_plan1",
+            "wns_ps": "-253.640",
+            "tns_ps": "-260505.062",
+            "area_um2": "2632.00",
+            "util_pct": "87.00",
+            "power_W": "6.293000e-02"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-275.318",
+            "tns_ps": "-288902.357",
+            "area_um2": "2638.00",
+            "util_pct": "88.00",
+            "power_W": "5.952000e-02"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-238.654",
+            "tns_ps": "-240812.000",
+            "area_um2": "2632.00",
+            "util_pct": "87.00",
+            "power_W": "6.169170e-02"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-254.497",
+            "tns_ps": "-265825.000",
+            "area_um2": "2638.00",
+            "util_pct": "88.00",
+            "power_W": "6.066990e-02"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_056_postDR",
+            "wns_ps": "-251.957",
+            "tns_ps": "-262258.000",
+            "area_um2": "2628.00",
+            "util_pct": "87.00",
+            "power_W": "5.982880e-02"
+          },
+          "agent_wns_better_than_default": true,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": true,
+          "at_trials": 62
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/asap7/ibex/ibex_70_600.zip",
+          "config": "ibex_70_600",
+          "agent_post_opt": {
+            "stage": "agentic_iter15_plan1",
+            "wns_ps": "-181.335",
+            "tns_ps": "-162450.647",
+            "area_um2": "2602.00",
+            "util_pct": "86.00",
+            "power_W": "5.772000e-02"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-184.619",
+            "tns_ps": "-169803.500",
+            "area_um2": "2615.00",
+            "util_pct": "87.00",
+            "power_W": "5.477000e-02"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-174.704",
+            "tns_ps": "-147700.000",
+            "area_um2": "2602.00",
+            "util_pct": "86.00",
+            "power_W": "5.662170e-02"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-172.756",
+            "tns_ps": "-153819.000",
+            "area_um2": "2615.00",
+            "util_pct": "87.00",
+            "power_W": "5.574180e-02"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_039_postDR",
+            "wns_ps": "-177.940",
+            "tns_ps": "-158917.000",
+            "area_um2": "2620.00",
+            "util_pct": "87.00",
+            "power_W": "5.610400e-02"
+          },
+          "agent_wns_better_than_default": false,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": true,
+          "at_trials": 62
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/asap7/ibex/ibex_70_650.zip",
+          "config": "ibex_70_650",
+          "agent_post_opt": {
+            "stage": "agentic_iter7_plan1",
+            "wns_ps": "-153.593",
+            "tns_ps": "-122989.406",
+            "area_um2": "2551.00",
+            "util_pct": "85.00",
+            "power_W": "5.076000e-02"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-665.910",
+            "tns_ps": "-189012.128",
+            "area_um2": "2561.00",
+            "util_pct": "85.00",
+            "power_W": "4.943000e-02"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-139.997",
+            "tns_ps": "-103795.000",
+            "area_um2": "2551.00",
+            "util_pct": "85.00",
+            "power_W": "4.967230e-02"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-207.026",
+            "tns_ps": "-117034.000",
+            "area_um2": "2561.00",
+            "util_pct": "85.00",
+            "power_W": "5.040500e-02"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_032_postDR",
+            "wns_ps": "-160.357",
+            "tns_ps": "-110809.000",
+            "area_um2": "2540.00",
+            "util_pct": "84.00",
+            "power_W": "4.969990e-02"
+          },
+          "agent_wns_better_than_default": true,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": true,
+          "at_trials": 62
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/asap7/ibex/ibex_70_700.zip",
+          "config": "ibex_70_700",
+          "agent_post_opt": {
+            "stage": "agentic_iter12_plan1",
+            "wns_ps": "-85.501",
+            "tns_ps": "-41680.558",
+            "area_um2": "2493.00",
+            "util_pct": "83.00",
+            "power_W": "4.786000e-02"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-130.127",
+            "tns_ps": "-64230.335",
+            "area_um2": "2501.00",
+            "util_pct": "83.00",
+            "power_W": "4.557000e-02"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-86.126",
+            "tns_ps": "-33767.000",
+            "area_um2": "2493.00",
+            "util_pct": "83.00",
+            "power_W": "4.693740e-02"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-110.829",
+            "tns_ps": "-50342.600",
+            "area_um2": "2501.00",
+            "util_pct": "83.00",
+            "power_W": "4.640070e-02"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_032_postDR",
+            "wns_ps": "-94.934",
+            "tns_ps": "-43213.900",
+            "area_um2": "2503.00",
+            "util_pct": "83.00",
+            "power_W": "4.656000e-02"
+          },
+          "agent_wns_better_than_default": true,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": true,
+          "at_trials": 62
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/asap7/ibex/ibex_70_750.zip",
+          "config": "ibex_70_750",
+          "agent_post_opt": {
+            "stage": "agentic_iter15_plan2",
+            "wns_ps": "-35.144",
+            "tns_ps": "-7050.360",
+            "area_um2": "2464.00",
+            "util_pct": "82.00",
+            "power_W": "4.396000e-02"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-65.240",
+            "tns_ps": "-15308.434",
+            "area_um2": "2453.00",
+            "util_pct": "81.00",
+            "power_W": "4.071000e-02"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-42.121",
+            "tns_ps": "-4621.120",
+            "area_um2": "2464.00",
+            "util_pct": "82.00",
+            "power_W": "4.318870e-02"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-47.484",
+            "tns_ps": "-8177.500",
+            "area_um2": "2453.00",
+            "util_pct": "81.00",
+            "power_W": "4.145010e-02"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_020_postDR",
+            "wns_ps": "-47.496",
+            "tns_ps": "-5112.870",
+            "area_um2": "2466.00",
+            "util_pct": "82.00",
+            "power_W": "4.248490e-02"
+          },
+          "agent_wns_better_than_default": true,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": true,
+          "at_trials": 62
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/asap7/ibex/ibex_70_800.zip",
+          "config": "ibex_70_800",
+          "agent_post_opt": {
+            "stage": "agentic_iter15_plan1",
+            "wns_ps": "-21.705",
+            "tns_ps": "-4035.444",
+            "area_um2": "2407.00",
+            "util_pct": "80.00",
+            "power_W": "3.852000e-02"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-52.833",
+            "tns_ps": "-12483.033",
+            "area_um2": "2395.00",
+            "util_pct": "79.00",
+            "power_W": "3.617000e-02"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-21.437",
+            "tns_ps": "-996.145",
+            "area_um2": "2407.00",
+            "util_pct": "80.00",
+            "power_W": "3.769700e-02"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-40.728",
+            "tns_ps": "-4378.220",
+            "area_um2": "2395.00",
+            "util_pct": "79.00",
+            "power_W": "3.676300e-02"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_058_postDR",
+            "wns_ps": "-10.784",
+            "tns_ps": "-25.725",
+            "area_um2": "2442.00",
+            "util_pct": "81.00",
+            "power_W": "3.963800e-02"
+          },
+          "agent_wns_better_than_default": true,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": false,
+          "agent_tns_better_than_at": false,
+          "at_trials": 62
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/asap7/jpeg/jpeg_70_370.zip",
+          "config": "jpeg_70_370",
+          "agent_post_opt": {
+            "stage": "agentic_iter5_plan2",
+            "wns_ps": "-82.867",
+            "tns_ps": "-39685.666",
+            "area_um2": "7209.00",
+            "util_pct": "81.00",
+            "power_W": "2.950000e-01"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-113.658",
+            "tns_ps": "-67731.492",
+            "area_um2": "7016.00",
+            "util_pct": "79.00",
+            "power_W": "2.682000e-01"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-80.967",
+            "tns_ps": "-32820.600",
+            "area_um2": "7242.00",
+            "util_pct": "81.00",
+            "power_W": "2.853190e-01"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-79.741",
+            "tns_ps": "-40097.200",
+            "area_um2": "7039.00",
+            "util_pct": "79.00",
+            "power_W": "2.699300e-01"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_036_postDR",
+            "wns_ps": "-89.027",
+            "tns_ps": "-43654.000",
+            "area_um2": "7065.00",
+            "util_pct": "79.00",
+            "power_W": "2.682860e-01"
+          },
+          "agent_wns_better_than_default": false,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": true,
+          "at_trials": 63
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/asap7/jpeg/jpeg_70_390.zip",
+          "config": "jpeg_70_390",
+          "agent_post_opt": {
+            "stage": "agentic_iter14_plan1",
+            "wns_ps": "-49.034",
+            "tns_ps": "-16587.697",
+            "area_um2": "7170.00",
+            "util_pct": "81.00",
+            "power_W": "2.750000e-01"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-88.980",
+            "tns_ps": "-44405.198",
+            "area_um2": "6993.00",
+            "util_pct": "79.00",
+            "power_W": "2.529000e-01"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-45.259",
+            "tns_ps": "-8421.870",
+            "area_um2": "7209.00",
+            "util_pct": "81.00",
+            "power_W": "2.660660e-01"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-56.530",
+            "tns_ps": "-18562.500",
+            "area_um2": "7050.00",
+            "util_pct": "79.00",
+            "power_W": "2.560870e-01"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_055_postDR",
+            "wns_ps": "-65.279",
+            "tns_ps": "-24685.300",
+            "area_um2": "7013.00",
+            "util_pct": "79.00",
+            "power_W": "2.519230e-01"
+          },
+          "agent_wns_better_than_default": true,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": true,
+          "at_trials": 63
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/asap7/jpeg/jpeg_70_410.zip",
+          "config": "jpeg_70_410",
+          "agent_post_opt": {
+            "stage": "agentic_iter15_plan1",
+            "wns_ps": "-32.783",
+            "tns_ps": "-7904.978",
+            "area_um2": "7107.00",
+            "util_pct": "80.00",
+            "power_W": "2.609000e-01"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-93.828",
+            "tns_ps": "-42858.911",
+            "area_um2": "6964.00",
+            "util_pct": "78.00",
+            "power_W": "2.401000e-01"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-24.022",
+            "tns_ps": "-1292.420",
+            "area_um2": "7135.00",
+            "util_pct": "80.00",
+            "power_W": "2.513420e-01"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-41.208",
+            "tns_ps": "-11478.000",
+            "area_um2": "6995.00",
+            "util_pct": "79.00",
+            "power_W": "2.426970e-01"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_042_postDR",
+            "wns_ps": "-53.455",
+            "tns_ps": "-15757.500",
+            "area_um2": "6988.00",
+            "util_pct": "79.00",
+            "power_W": "2.398590e-01"
+          },
+          "agent_wns_better_than_default": true,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": true,
+          "at_trials": 63
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/asap7/jpeg/jpeg_70_430.zip",
+          "config": "jpeg_70_430",
+          "agent_post_opt": {
+            "stage": "agentic_iter12_plan1",
+            "wns_ps": "-22.643",
+            "tns_ps": "-2599.857",
+            "area_um2": "7022.00",
+            "util_pct": "79.00",
+            "power_W": "2.433000e-01"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-69.011",
+            "tns_ps": "-24982.864",
+            "area_um2": "6929.00",
+            "util_pct": "78.00",
+            "power_W": "2.275000e-01"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-14.960",
+            "tns_ps": "-34.502",
+            "area_um2": "7065.00",
+            "util_pct": "79.00",
+            "power_W": "2.350650e-01"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-16.268",
+            "tns_ps": "-507.127",
+            "area_um2": "6982.00",
+            "util_pct": "79.00",
+            "power_W": "2.304310e-01"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_032_postDR",
+            "wns_ps": "-39.187",
+            "tns_ps": "-7094.640",
+            "area_um2": "6894.00",
+            "util_pct": "78.00",
+            "power_W": "2.227080e-01"
+          },
+          "agent_wns_better_than_default": true,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": true,
+          "at_trials": 63
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/asap7/jpeg/jpeg_70_450.zip",
+          "config": "jpeg_70_450",
+          "agent_post_opt": {
+            "stage": "agentic_iter15_plan1",
+            "wns_ps": "-11.166",
+            "tns_ps": "-905.827",
+            "area_um2": "6899.00",
+            "util_pct": "78.00",
+            "power_W": "2.265000e-01"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-38.905",
+            "tns_ps": "-6343.833",
+            "area_um2": "6886.00",
+            "util_pct": "77.00",
+            "power_W": "2.165000e-01"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-5.775",
+            "tns_ps": "-15.962",
+            "area_um2": "6899.00",
+            "util_pct": "78.00",
+            "power_W": "2.169320e-01"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-14.182",
+            "tns_ps": "-517.663",
+            "area_um2": "6886.00",
+            "util_pct": "77.00",
+            "power_W": "2.153590e-01"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_052_postDR",
+            "wns_ps": "-14.495",
+            "tns_ps": "-195.145",
+            "area_um2": "6900.00",
+            "util_pct": "78.00",
+            "power_W": "2.164340e-01"
+          },
+          "agent_wns_better_than_default": true,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": true,
+          "at_trials": 63
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/asap7/jpeg/jpeg_70_470.zip",
+          "config": "jpeg_70_470",
+          "agent_post_opt": {
+            "stage": "agentic_iter15_plan1",
+            "wns_ps": "-7.992",
+            "tns_ps": "-169.283",
+            "area_um2": "6835.00",
+            "util_pct": "77.00",
+            "power_W": "2.156000e-01"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-37.985",
+            "tns_ps": "-5810.472",
+            "area_um2": "6798.00",
+            "util_pct": "76.00",
+            "power_W": "2.034000e-01"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "3.520",
+            "tns_ps": "0.000",
+            "area_um2": "6835.00",
+            "util_pct": "77.00",
+            "power_W": "2.065220e-01"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-14.966",
+            "tns_ps": "-373.386",
+            "area_um2": "6798.00",
+            "util_pct": "76.00",
+            "power_W": "2.024120e-01"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_040_postDR",
+            "wns_ps": "-7.783",
+            "tns_ps": "-53.751",
+            "area_um2": "6793.00",
+            "util_pct": "76.00",
+            "power_W": "2.053600e-01"
+          },
+          "agent_wns_better_than_default": true,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": true,
+          "at_trials": 62
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/nangate45/ibex/ibex_50_1600.zip",
+          "config": "ibex_50_1600",
+          "agent_post_opt": {
+            "stage": "agentic_iter10_plan2",
+            "wns_ps": "-517.071",
+            "tns_ps": "-460738.348",
+            "area_um2": "32883.00",
+            "util_pct": "57.00",
+            "power_W": "1.373000e-01"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-546.075",
+            "tns_ps": "-479688.153",
+            "area_um2": "31687.00",
+            "util_pct": "55.00",
+            "power_W": "1.188000e-01"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-492.332",
+            "tns_ps": "-437905.000",
+            "area_um2": "32883.00",
+            "util_pct": "57.00",
+            "power_W": "1.343690e-01"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-497.328",
+            "tns_ps": "-450204.000",
+            "area_um2": "31687.00",
+            "util_pct": "55.00",
+            "power_W": "1.204160e-01"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_010_postDR",
+            "wns_ps": "-487.983",
+            "tns_ps": "-442929.000",
+            "area_um2": "31844.00",
+            "util_pct": "56.00",
+            "power_W": "1.229010e-01"
+          },
+          "agent_wns_better_than_default": true,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": false,
+          "agent_tns_better_than_at": true,
+          "at_trials": 62
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/nangate45/ibex/ibex_50_1700.zip",
+          "config": "ibex_50_1700",
+          "agent_post_opt": {
+            "stage": "agentic_iter15_plan3",
+            "wns_ps": "-410.645",
+            "tns_ps": "-322315.751",
+            "area_um2": "32231.00",
+            "util_pct": "56.00",
+            "power_W": "1.261000e-01"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-469.079",
+            "tns_ps": "-373061.038",
+            "area_um2": "31658.00",
+            "util_pct": "55.00",
+            "power_W": "1.128000e-01"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-391.874",
+            "tns_ps": "-298612.000",
+            "area_um2": "32231.00",
+            "util_pct": "56.00",
+            "power_W": "1.234840e-01"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-447.259",
+            "tns_ps": "-343375.000",
+            "area_um2": "31658.00",
+            "util_pct": "55.00",
+            "power_W": "1.142980e-01"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_026_postDR",
+            "wns_ps": "-413.268",
+            "tns_ps": "-322775.000",
+            "area_um2": "31653.00",
+            "util_pct": "55.00",
+            "power_W": "1.143690e-01"
+          },
+          "agent_wns_better_than_default": true,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": true,
+          "at_trials": 62
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/nangate45/ibex/ibex_50_1800.zip",
+          "config": "ibex_50_1800",
+          "agent_post_opt": {
+            "stage": "agentic_iter3_plan2",
+            "wns_ps": "-345.217",
+            "tns_ps": "-225777.050",
+            "area_um2": "31746.00",
+            "util_pct": "55.00",
+            "power_W": "1.171000e-01"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-376.877",
+            "tns_ps": "-280646.398",
+            "area_um2": "31375.00",
+            "util_pct": "55.00",
+            "power_W": "1.067000e-01"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-326.603",
+            "tns_ps": "-206098.000",
+            "area_um2": "31746.00",
+            "util_pct": "55.00",
+            "power_W": "1.145130e-01"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-322.117",
+            "tns_ps": "-241434.000",
+            "area_um2": "31375.00",
+            "util_pct": "55.00",
+            "power_W": "1.079800e-01"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_050_postDR",
+            "wns_ps": "-333.465",
+            "tns_ps": "-242367.000",
+            "area_um2": "31315.00",
+            "util_pct": "55.00",
+            "power_W": "1.087060e-01"
+          },
+          "agent_wns_better_than_default": false,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": true,
+          "at_trials": 62
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/nangate45/ibex/ibex_50_1900.zip",
+          "config": "ibex_50_1900",
+          "agent_post_opt": {
+            "stage": "agentic_iter14_plan2",
+            "wns_ps": "-268.445",
+            "tns_ps": "-138623.453",
+            "area_um2": "31803.00",
+            "util_pct": "55.00",
+            "power_W": "1.113000e-01"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-299.119",
+            "tns_ps": "-154626.737",
+            "area_um2": "30901.00",
+            "util_pct": "54.00",
+            "power_W": "9.773000e-02"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-245.929",
+            "tns_ps": "-122175.000",
+            "area_um2": "31803.00",
+            "util_pct": "55.00",
+            "power_W": "1.090080e-01"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-251.054",
+            "tns_ps": "-135469.000",
+            "area_um2": "30901.00",
+            "util_pct": "54.00",
+            "power_W": "9.905650e-02"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_035_postDR",
+            "wns_ps": "-255.244",
+            "tns_ps": "-135409.000",
+            "area_um2": "31119.00",
+            "util_pct": "54.00",
+            "power_W": "1.008360e-01"
+          },
+          "agent_wns_better_than_default": true,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": true,
+          "at_trials": 62
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/nangate45/ibex/ibex_50_2000.zip",
+          "config": "ibex_50_2000",
+          "agent_post_opt": {
+            "stage": "agentic_iter13_plan2",
+            "wns_ps": "-185.904",
+            "tns_ps": "-74005.728",
+            "area_um2": "31529.00",
+            "util_pct": "55.00",
+            "power_W": "1.036000e-01"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-320.206",
+            "tns_ps": "-118354.574",
+            "area_um2": "30610.00",
+            "util_pct": "53.00",
+            "power_W": "9.142000e-02"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-150.241",
+            "tns_ps": "-53992.700",
+            "area_um2": "31529.00",
+            "util_pct": "55.00",
+            "power_W": "1.012210e-01"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-180.545",
+            "tns_ps": "-72666.600",
+            "area_um2": "30610.00",
+            "util_pct": "53.00",
+            "power_W": "9.260930e-02"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_059_postDR",
+            "wns_ps": "-169.687",
+            "tns_ps": "-66904.700",
+            "area_um2": "30744.00",
+            "util_pct": "54.00",
+            "power_W": "9.422320e-02"
+          },
+          "agent_wns_better_than_default": true,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": true,
+          "at_trials": 62
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/clock_sweep/nangate45/ibex/ibex_50_2100.zip",
+          "config": "ibex_50_2100",
+          "agent_post_opt": {
+            "stage": "agentic_iter15_plan1",
+            "wns_ps": "-131.403",
+            "tns_ps": "-22938.621",
+            "area_um2": "30495.00",
+            "util_pct": "53.00",
+            "power_W": "9.038000e-02"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-184.612",
+            "tns_ps": "-16829.324",
+            "area_um2": "30402.00",
+            "util_pct": "53.00",
+            "power_W": "8.654000e-02"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-91.373",
+            "tns_ps": "-12287.700",
+            "area_um2": "30495.00",
+            "util_pct": "53.00",
+            "power_W": "8.868670e-02"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-130.810",
+            "tns_ps": "-8737.220",
+            "area_um2": "30402.00",
+            "util_pct": "53.00",
+            "power_W": "8.772490e-02"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_026_postDR",
+            "wns_ps": "-94.903",
+            "tns_ps": "-16627.500",
+            "area_um2": "30434.00",
+            "util_pct": "53.00",
+            "power_W": "8.771380e-02"
+          },
+          "agent_wns_better_than_default": true,
+          "agent_tns_better_than_default": false,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": true,
+          "at_trials": 62
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/asap7/aes/aes_60_240.zip",
+          "config": "aes_60_240",
+          "agent_post_opt": {
+            "stage": "agentic_iter4_plan1",
+            "wns_ps": "-48.975",
+            "tns_ps": "-5405.419",
+            "area_um2": "2109.00",
+            "util_pct": "76.00",
+            "power_W": "3.749000e-01"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-49.891",
+            "tns_ps": "-5753.951",
+            "area_um2": "2099.00",
+            "util_pct": "76.00",
+            "power_W": "3.545000e-01"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-41.589",
+            "tns_ps": "-4215.290",
+            "area_um2": "2109.00",
+            "util_pct": "76.00",
+            "power_W": "3.648550e-01"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-43.540",
+            "tns_ps": "-4572.490",
+            "area_um2": "2099.00",
+            "util_pct": "76.00",
+            "power_W": "3.591800e-01"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_057_postDR",
+            "wns_ps": "-42.760",
+            "tns_ps": "-4215.890",
+            "area_um2": "2092.00",
+            "util_pct": "76.00",
+            "power_W": "3.560580e-01"
+          },
+          "agent_wns_better_than_default": true,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": true,
+          "at_trials": 60
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/asap7/aes/aes_65_240.zip",
+          "config": "aes_65_240",
+          "agent_post_opt": {
+            "stage": "agentic_iter8_plan1",
+            "wns_ps": "-51.985",
+            "tns_ps": "-5476.730",
+            "area_um2": "2097.00",
+            "util_pct": "82.00",
+            "power_W": "3.728000e-01"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-57.677",
+            "tns_ps": "-5548.073",
+            "area_um2": "2104.00",
+            "util_pct": "82.00",
+            "power_W": "3.572000e-01"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-45.296",
+            "tns_ps": "-4476.630",
+            "area_um2": "2152.00",
+            "util_pct": "84.00",
+            "power_W": "3.722520e-01"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-50.828",
+            "tns_ps": "-4346.390",
+            "area_um2": "2153.00",
+            "util_pct": "84.00",
+            "power_W": "3.719270e-01"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_049_postDR",
+            "wns_ps": "-46.856",
+            "tns_ps": "-4801.640",
+            "area_um2": "2094.00",
+            "util_pct": "82.00",
+            "power_W": "3.583720e-01"
+          },
+          "agent_wns_better_than_default": true,
+          "agent_tns_better_than_default": false,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": true,
+          "at_trials": 60
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/asap7/aes/aes_70_240.zip",
+          "config": "aes_70_240",
+          "agent_post_opt": {
+            "stage": "agentic_iter13_plan2",
+            "wns_ps": "-49.268",
+            "tns_ps": "-5106.823",
+            "area_um2": "2097.00",
+            "util_pct": "88.00",
+            "power_W": "3.762000e-01"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-55.189",
+            "tns_ps": "-5253.469",
+            "area_um2": "2094.00",
+            "util_pct": "88.00",
+            "power_W": "3.563000e-01"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-45.965",
+            "tns_ps": "-4088.840",
+            "area_um2": "2097.00",
+            "util_pct": "88.00",
+            "power_W": "3.682170e-01"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-47.930",
+            "tns_ps": "-4289.250",
+            "area_um2": "2094.00",
+            "util_pct": "88.00",
+            "power_W": "3.628120e-01"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_058_postDR",
+            "wns_ps": "-42.708",
+            "tns_ps": "-4456.180",
+            "area_um2": "2071.00",
+            "util_pct": "87.00",
+            "power_W": "3.553610e-01"
+          },
+          "agent_wns_better_than_default": true,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": false,
+          "agent_tns_better_than_at": true,
+          "at_trials": 60
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/asap7/ibex/ibex_60_750.zip",
+          "config": "ibex_60_750",
+          "agent_post_opt": {
+            "stage": "agentic_iter12_plan2",
+            "wns_ps": "-29.322",
+            "tns_ps": "-5828.170",
+            "area_um2": "2470.00",
+            "util_pct": "70.00",
+            "power_W": "4.345000e-02"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-46.390",
+            "tns_ps": "-12863.930",
+            "area_um2": "2456.00",
+            "util_pct": "70.00",
+            "power_W": "4.042000e-02"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-24.386",
+            "tns_ps": "-562.428",
+            "area_um2": "2470.00",
+            "util_pct": "70.00",
+            "power_W": "4.245200e-02"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-45.218",
+            "tns_ps": "-2915.000",
+            "area_um2": "2456.00",
+            "util_pct": "70.00",
+            "power_W": "4.105490e-02"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_029_postDR",
+            "wns_ps": "-32.788",
+            "tns_ps": "-377.652",
+            "area_um2": "2484.00",
+            "util_pct": "71.00",
+            "power_W": "4.339510e-02"
+          },
+          "agent_wns_better_than_default": true,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": false,
+          "at_trials": 60
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/asap7/ibex/ibex_70_750.zip",
+          "config": "ibex_70_750",
+          "agent_post_opt": {
+            "stage": "agentic_iter15_plan2",
+            "wns_ps": "-41.721",
+            "tns_ps": "-8383.034",
+            "area_um2": "2448.00",
+            "util_pct": "81.00",
+            "power_W": "4.279000e-02"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-60.308",
+            "tns_ps": "-14955.555",
+            "area_um2": "2445.00",
+            "util_pct": "81.00",
+            "power_W": "4.037000e-02"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-39.263",
+            "tns_ps": "-4207.590",
+            "area_um2": "2448.00",
+            "util_pct": "81.00",
+            "power_W": "4.199230e-02"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-46.207",
+            "tns_ps": "-8787.890",
+            "area_um2": "2445.00",
+            "util_pct": "81.00",
+            "power_W": "4.115340e-02"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_054_postDR",
+            "wns_ps": "-42.107",
+            "tns_ps": "-7698.470",
+            "area_um2": "2451.00",
+            "util_pct": "81.00",
+            "power_W": "4.229520e-02"
+          },
+          "agent_wns_better_than_default": true,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": true,
+          "at_trials": 60
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/asap7/ibex/ibex_75_750.zip",
+          "config": "ibex_75_750",
+          "agent_post_opt": {
+            "stage": "agentic_iter15_plan1",
+            "wns_ps": "-41.092",
+            "tns_ps": "-13015.056",
+            "area_um2": "2431.00",
+            "util_pct": "86.00",
+            "power_W": "4.210000e-02"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-573.644",
+            "tns_ps": "-77311.811",
+            "area_um2": "2430.00",
+            "util_pct": "86.00",
+            "power_W": "3.915000e-02"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-38.733",
+            "tns_ps": "-5638.180",
+            "area_um2": "2431.00",
+            "util_pct": "86.00",
+            "power_W": "4.131190e-02"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-97.434",
+            "tns_ps": "-24965.900",
+            "area_um2": "2430.00",
+            "util_pct": "86.00",
+            "power_W": "3.990070e-02"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_048_postDR",
+            "wns_ps": "-65.380",
+            "tns_ps": "-14393.500",
+            "area_um2": "2424.00",
+            "util_pct": "86.00",
+            "power_W": "3.975060e-02"
+          },
+          "agent_wns_better_than_default": true,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": true,
+          "at_trials": 60
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/asap7/jpeg/jpeg_60_430.zip",
+          "config": "jpeg_60_430",
+          "agent_post_opt": {
+            "stage": "agentic_iter11_plan2",
+            "wns_ps": "-20.100",
+            "tns_ps": "-2102.572",
+            "area_um2": "7072.00",
+            "util_pct": "68.00",
+            "power_W": "2.474000e-01"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-67.055",
+            "tns_ps": "-26435.979",
+            "area_um2": "6955.00",
+            "util_pct": "67.00",
+            "power_W": "2.312000e-01"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-8.252",
+            "tns_ps": "-79.192",
+            "area_um2": "7072.00",
+            "util_pct": "68.00",
+            "power_W": "2.372070e-01"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-49.264",
+            "tns_ps": "-11967.400",
+            "area_um2": "6955.00",
+            "util_pct": "67.00",
+            "power_W": "2.300480e-01"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_028_postDR",
+            "wns_ps": "-35.326",
+            "tns_ps": "-6392.010",
+            "area_um2": "7004.00",
+            "util_pct": "68.00",
+            "power_W": "2.311860e-01"
+          },
+          "agent_wns_better_than_default": true,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": true,
+          "at_trials": 63
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/asap7/jpeg/jpeg_70_430.zip",
+          "config": "jpeg_70_430",
+          "agent_post_opt": {
+            "stage": "agentic_iter12_plan1",
+            "wns_ps": "-22.643",
+            "tns_ps": "-2599.857",
+            "area_um2": "7022.00",
+            "util_pct": "79.00",
+            "power_W": "2.433000e-01"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-69.011",
+            "tns_ps": "-24982.864",
+            "area_um2": "6929.00",
+            "util_pct": "78.00",
+            "power_W": "2.275000e-01"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-9.304",
+            "tns_ps": "-85.181",
+            "area_um2": "7022.00",
+            "util_pct": "79.00",
+            "power_W": "2.331250e-01"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-51.050",
+            "tns_ps": "-9910.220",
+            "area_um2": "6929.00",
+            "util_pct": "78.00",
+            "power_W": "2.262970e-01"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_057_postDR",
+            "wns_ps": "-25.509",
+            "tns_ps": "-3079.710",
+            "area_um2": "6957.00",
+            "util_pct": "78.00",
+            "power_W": "2.278240e-01"
+          },
+          "agent_wns_better_than_default": true,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": true,
+          "at_trials": 63
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/asap7/jpeg/jpeg_80_430.zip",
+          "config": "jpeg_80_430",
+          "agent_post_opt": {
+            "stage": "agentic_iter5_plan2",
+            "wns_ps": "-36.708",
+            "tns_ps": "-4660.860",
+            "area_um2": "6938.00",
+            "util_pct": "89.00",
+            "power_W": "2.423000e-01"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-70.063",
+            "tns_ps": "-27861.169",
+            "area_um2": "6924.00",
+            "util_pct": "89.00",
+            "power_W": "2.294000e-01"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-26.086",
+            "tns_ps": "-1071.790",
+            "area_um2": "6938.00",
+            "util_pct": "89.00",
+            "power_W": "2.331270e-01"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-58.369",
+            "tns_ps": "-15462.100",
+            "area_um2": "6924.00",
+            "util_pct": "89.00",
+            "power_W": "2.290980e-01"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_066_postDR",
+            "wns_ps": "-48.796",
+            "tns_ps": "-6801.060",
+            "area_um2": "6900.00",
+            "util_pct": "89.00",
+            "power_W": "2.295590e-01"
+          },
+          "agent_wns_better_than_default": true,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": true,
+          "at_trials": 62
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/nangate45/aes/aes_40_620.zip",
+          "config": "aes_40_620",
+          "agent_post_opt": {
+            "stage": "agentic_iter4_plan3",
+            "wns_ps": "-155.094",
+            "tns_ps": "-18773.842",
+            "area_um2": "26301.00",
+            "util_pct": "64.00",
+            "power_W": "5.622000e-01"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-211.879",
+            "tns_ps": "-19667.264",
+            "area_um2": "25537.00",
+            "util_pct": "62.00",
+            "power_W": "5.195000e-01"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-135.553",
+            "tns_ps": "-16984.400",
+            "area_um2": "26301.00",
+            "util_pct": "64.00",
+            "power_W": "5.528540e-01"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-140.827",
+            "tns_ps": "-17751.800",
+            "area_um2": "25537.00",
+            "util_pct": "62.00",
+            "power_W": "5.304090e-01"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_044_postDR",
+            "wns_ps": "-147.218",
+            "tns_ps": "-19062.400",
+            "area_um2": "24617.00",
+            "util_pct": "60.00",
+            "power_W": "5.029330e-01"
+          },
+          "agent_wns_better_than_default": true,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": true,
+          "at_trials": 62
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/nangate45/aes/aes_45_620.zip",
+          "config": "aes_45_620",
+          "agent_post_opt": {
+            "stage": "agentic_iter11_plan2",
+            "wns_ps": "-152.961",
+            "tns_ps": "-18989.305",
+            "area_um2": "25181.00",
+            "util_pct": "69.00",
+            "power_W": "5.278000e-01"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-235.313",
+            "tns_ps": "-21282.502",
+            "area_um2": "24683.00",
+            "util_pct": "68.00",
+            "power_W": "4.960000e-01"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-143.724",
+            "tns_ps": "-17289.700",
+            "area_um2": "25181.00",
+            "util_pct": "69.00",
+            "power_W": "5.192960e-01"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-159.680",
+            "tns_ps": "-19987.900",
+            "area_um2": "24683.00",
+            "util_pct": "68.00",
+            "power_W": "5.073280e-01"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_031_postDR",
+            "wns_ps": "-161.289",
+            "tns_ps": "-19190.000",
+            "area_um2": "25167.00",
+            "util_pct": "69.00",
+            "power_W": "5.204480e-01"
+          },
+          "agent_wns_better_than_default": true,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": true,
+          "at_trials": 62
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/nangate45/aes/aes_50_620.zip",
+          "config": "aes_50_620",
+          "agent_post_opt": {
+            "stage": "agentic_iter8_plan3",
+            "wns_ps": "-175.786",
+            "tns_ps": "-19551.545",
+            "area_um2": "26394.00",
+            "util_pct": "81.00",
+            "power_W": "5.717000e-01"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-254.774",
+            "tns_ps": "-21526.573",
+            "area_um2": "25376.00",
+            "util_pct": "77.00",
+            "power_W": "5.134000e-01"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-176.820",
+            "tns_ps": "-17691.600",
+            "area_um2": "26394.00",
+            "util_pct": "81.00",
+            "power_W": "5.634480e-01"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-170.898",
+            "tns_ps": "-19223.500",
+            "area_um2": "25376.00",
+            "util_pct": "77.00",
+            "power_W": "5.259490e-01"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_054_postDR",
+            "wns_ps": "-192.832",
+            "tns_ps": "-19937.200",
+            "area_um2": "24491.00",
+            "util_pct": "75.00",
+            "power_W": "4.956250e-01"
+          },
+          "agent_wns_better_than_default": false,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": true,
+          "at_trials": 62
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/nangate45/ibex/ibex_50_2100.zip",
+          "config": "ibex_50_2100",
+          "agent_post_opt": {
+            "stage": "agentic_iter12_plan1",
+            "wns_ps": "-121.570",
+            "tns_ps": "-10249.287",
+            "area_um2": "30762.00",
+            "util_pct": "54.00",
+            "power_W": "9.303000e-02"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-184.612",
+            "tns_ps": "-16829.324",
+            "area_um2": "30402.00",
+            "util_pct": "53.00",
+            "power_W": "8.654000e-02"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-86.512",
+            "tns_ps": "-3362.630",
+            "area_um2": "30762.00",
+            "util_pct": "54.00",
+            "power_W": "9.120260e-02"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-130.810",
+            "tns_ps": "-8737.220",
+            "area_um2": "30402.00",
+            "util_pct": "53.00",
+            "power_W": "8.772490e-02"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_026_postDR",
+            "wns_ps": "-94.903",
+            "tns_ps": "-16627.500",
+            "area_um2": "30434.00",
+            "util_pct": "53.00",
+            "power_W": "8.771380e-02"
+          },
+          "agent_wns_better_than_default": true,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": true,
+          "at_trials": 62
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/nangate45/ibex/ibex_60_2100.zip",
+          "config": "ibex_60_2100",
+          "agent_post_opt": {
+            "stage": "agentic_iter11_plan1",
+            "wns_ps": "-115.566",
+            "tns_ps": "-28602.437",
+            "area_um2": "30480.00",
+            "util_pct": "64.00",
+            "power_W": "9.062000e-02"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-175.943",
+            "tns_ps": "-34034.980",
+            "area_um2": "30077.00",
+            "util_pct": "63.00",
+            "power_W": "8.326000e-02"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-79.165",
+            "tns_ps": "-11236.000",
+            "area_um2": "30480.00",
+            "util_pct": "64.00",
+            "power_W": "8.866210e-02"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-110.577",
+            "tns_ps": "-21143.000",
+            "area_um2": "30077.00",
+            "util_pct": "63.00",
+            "power_W": "8.475200e-02"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_031_postDR",
+            "wns_ps": "-83.939",
+            "tns_ps": "-13866.300",
+            "area_um2": "30263.00",
+            "util_pct": "63.00",
+            "power_W": "8.594340e-02"
+          },
+          "agent_wns_better_than_default": true,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": true,
+          "at_trials": 62
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/nangate45/ibex/ibex_70_2100.zip",
+          "config": "ibex_70_2100",
+          "agent_post_opt": {
+            "stage": "agentic_iter12_plan3",
+            "wns_ps": "-125.807",
+            "tns_ps": "-12218.416",
+            "area_um2": "30405.00",
+            "util_pct": "74.00",
+            "power_W": "8.941000e-02"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-155.792",
+            "tns_ps": "-22917.032",
+            "area_um2": "30105.00",
+            "util_pct": "74.00",
+            "power_W": "8.318000e-02"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-78.558",
+            "tns_ps": "-2717.610",
+            "area_um2": "30405.00",
+            "util_pct": "74.00",
+            "power_W": "8.756750e-02"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-104.260",
+            "tns_ps": "-8442.580",
+            "area_um2": "30105.00",
+            "util_pct": "74.00",
+            "power_W": "8.473760e-02"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_018_postDR",
+            "wns_ps": "-85.171",
+            "tns_ps": "-10639.600",
+            "area_um2": "30218.00",
+            "util_pct": "74.00",
+            "power_W": "8.581800e-02"
+          },
+          "agent_wns_better_than_default": true,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": true,
+          "at_trials": 62
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/nangate45/jpeg/jpeg_50_1000.zip",
+          "config": "jpeg_50_1000",
+          "agent_post_opt": {
+            "stage": "agentic_iter13_plan2",
+            "wns_ps": "-159.672",
+            "tns_ps": "-70830.241",
+            "area_um2": "95081.00",
+            "util_pct": "53.00",
+            "power_W": "5.918000e-01"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-162.613",
+            "tns_ps": "-73789.148",
+            "area_um2": "94842.00",
+            "util_pct": "53.00",
+            "power_W": "5.660000e-01"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-131.858",
+            "tns_ps": "-55572.600",
+            "area_um2": "95081.00",
+            "util_pct": "53.00",
+            "power_W": "5.681370e-01"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-130.480",
+            "tns_ps": "-57940.000",
+            "area_um2": "94842.00",
+            "util_pct": "53.00",
+            "power_W": "5.637970e-01"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_054_postDR",
+            "wns_ps": "-130.276",
+            "tns_ps": "-56300.500",
+            "area_um2": "94829.00",
+            "util_pct": "53.00",
+            "power_W": "5.634510e-01"
+          },
+          "agent_wns_better_than_default": false,
+          "agent_tns_better_than_default": true,
+          "agent_wns_better_than_at": false,
+          "agent_tns_better_than_at": true,
+          "at_trials": 62
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/nangate45/jpeg/jpeg_60_1000.zip",
+          "config": "jpeg_60_1000",
+          "agent_post_opt": {
+            "stage": "agentic_iter14_plan3",
+            "wns_ps": "-135.881",
+            "tns_ps": "-64709.818",
+            "area_um2": "95322.00",
+            "util_pct": "64.00",
+            "power_W": "5.934000e-01"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-141.780",
+            "tns_ps": "-63947.065",
+            "area_um2": "94540.00",
+            "util_pct": "64.00",
+            "power_W": "5.623000e-01"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-117.165",
+            "tns_ps": "-51771.200",
+            "area_um2": "95322.00",
+            "util_pct": "64.00",
+            "power_W": "5.693740e-01"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-118.620",
+            "tns_ps": "-48169.600",
+            "area_um2": "94540.00",
+            "util_pct": "64.00",
+            "power_W": "5.608340e-01"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_019_postDR",
+            "wns_ps": "-120.086",
+            "tns_ps": "-48835.900",
+            "area_um2": "94544.00",
+            "util_pct": "64.00",
+            "power_W": "5.609590e-01"
+          },
+          "agent_wns_better_than_default": true,
+          "agent_tns_better_than_default": false,
+          "agent_wns_better_than_at": true,
+          "agent_tns_better_than_at": false,
+          "at_trials": 62
+        },
+        {
+          "archive": "outputs/outputs/agent_and_default/util_sweep/nangate45/jpeg/jpeg_70_1000.zip",
+          "config": "jpeg_70_1000",
+          "agent_post_opt": {
+            "stage": "agentic_iter4_plan2",
+            "wns_ps": "-164.528",
+            "tns_ps": "-76450.244",
+            "area_um2": "94405.00",
+            "util_pct": "74.00",
+            "power_W": "5.853000e-01"
+          },
+          "baseline_post_opt": {
+            "stage": "default_repair",
+            "wns_ps": "-151.012",
+            "tns_ps": "-68923.884",
+            "area_um2": "94471.00",
+            "util_pct": "74.00",
+            "power_W": "5.643000e-01"
+          },
+          "agent_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-144.756",
+            "tns_ps": "-64726.300",
+            "area_um2": "94405.00",
+            "util_pct": "74.00",
+            "power_W": "5.631990e-01"
+          },
+          "baseline_post_dr": {
+            "stage": "dr_post_route",
+            "wns_ps": "-132.888",
+            "tns_ps": "-56648.300",
+            "area_um2": "94471.00",
+            "util_pct": "74.00",
+            "power_W": "5.639270e-01"
+          },
+          "autotuner_post_dr": {
+            "flow": "autotuner_trial_050_postDR",
+            "wns_ps": "-125.601",
+            "tns_ps": "-54999.900",
+            "area_um2": "94909.00",
+            "util_pct": "74.00",
+            "power_W": "5.716500e-01"
+          },
+          "agent_wns_better_than_default": false,
+          "agent_tns_better_than_default": false,
+          "agent_wns_better_than_at": false,
+          "agent_tns_better_than_at": false,
+          "at_trials": 124
+        }
+      ],
+      "limitations": [
+        "ArchiveMD5 verifies official1.833GBbytes;48,401innerfiles/18.35GBexpandedinventory does not mean allfilesmaterialized or EDA replay tested",
+        "36sweepruns contain33uniqueconfigs; repeatedconfigarchives are notbyteidentical, 1080convofiles contain1050uniqueSHA256files; do not merge allrepeats blindly or count as1080designs",
+        "All36agent ZIPs contain15iterationdirectories,planner/selectorJSONL andmanyTcl/netlist/report/contextfiles; noODBfiles in theseZIPs. Complete conversation availability is muchstronger than GitHubgcdsample, but environment/toolstate/ORFS/PDK/harness stillneeded",
+        "RawJSONL eventrecords includequeue/title/attachment/thinking/text/toolcalls; assistantrowsarestreamblocks, not independent reasoningsteps. Fullturn groupingrequiresmessageid/parentuuid andtoolround semantics",
+        "SomeWrite outputs laterpostprocessed and14lastwritefiles do notmatch all finalJSONfields; do not assumeexactpolicyactionlabels withoutaligning prompts/repair/postprocessing",
+        "PostOpt/GRvs postDR use differentparasitics; CSVpower_mwinternal israwW in currentparser, while endtoendpower_W isexplicitcorrectunit. Do not applyfactor1000blindlytoeverypowercolumn",
+        "PureWNSbest_solutions ranking may selectdifferentpower/TNScompromise frompromptlexicographicpolicy; default/AT/agent nativework budgetsandcost notidentical",
+        "Aregressed/negativeWNScandidatecanstatusexecutionsuccess; archiveoutputs mustnotbeconverted toallpositiveSFT labels. Preservebadplans,selectorretry,contextandtoolfeedback",
+        "CurrentGitHubsamplediscrepancies remain sample-scoped, no longerusedasargumentthatallpublicagenttrajectoriesaremissing"
+      ]
+    }
+  }
+}

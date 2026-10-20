@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-10-20T09:21:31.285432+00:00",
+  "as_of": "2026-10-20T09:45:35.734873+00:00",
   "status": "第二轮12h进行中的数据/轨迹开放性核查，非完整市场清单或最终结论",
   "scope": "只覆盖本轮已保存一手核查的新增协议；训练样本、评测输入、模型权重、整理后记忆、生成采样轨迹与LLM工具交互轨迹分别描述",
-  "protocol_records": 85,
-  "families": 43,
+  "protocol_records": 94,
+  "families": 48,
   "items": [
     {
       "catalog_id": "lib-siemens-nemo-characterization",
@@ -1023,6 +1023,114 @@
       "trajectory_and_training_access": "公开DPL/GPL/RSZ三headlinepatch及重建源码、S0模块文档、S1/S2计划、scopedLean proof与formalchecker接口；全53Gitblobs匹配。归档52文件，51与current仅CRLF差异，README内容更新/rootLICENSE新增分开。未见完整1126calls/100candidate runroots/404rawscores或agent对话轨迹。",
       "limits": "Lean证明选定数学kernel bounds/guard/monotone，不模型化全部C++语义/全局QoR/功能等价。paper主physicalrun EQYdisabled，timingclamp单例manifest不等Table主榜全由formalgate验收。404个1ps扰动点非404独立design；缺raw全ledger，不能独立复算92wins/相关统计。",
       "primary_sources": "https://vlsicad.ucsd.edu/Publications/Conferences/431/c431.pdf; https://github.com/ABKGroup/AuDoPEDA/tree/d396422e27496b6836ecbc7229edff33f642525c; https://zenodo.org/records/22020200",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "pd-vpr-evolve-source",
+      "name": "VPR-Evolve / FPGA packing-placement-routing code evolution",
+      "family": "VPR-Evolve FPGA source evolution",
+      "object_identity": "复用VTR9的源码演化方法评测；与OPC VPEvolve不同",
+      "task": "planner/coder/reviewer/inspiration角色修改VPR生产C++；paper五阶段pack/place/route/cross-stage/tune，先选SA或AP，5seeds内环，100seeds终评。每阶段最多5plans、5外迭代、最多2次plateauescape、120h/设计；Opus4.7 planner、Sonnet4.6其余角色，64CPU/256GB。",
+      "available_materials_and_tools": "116选定Gitblobs匹配；docs/benchmarks含8设计×双flow5seed和100seed基线、固定seed/fabric；当前root gitlink是stock。上游VTR/复制代码各自许可，未见项目rootLICENSE；未编译运行。",
+      "trajectory_and_training_access": "公开harness/角色prompt与116选定文件、curated源码diff历史、5/100seed基线和四个迁移摘要；未定位五设计完整LLM action-observation-cost轨迹及paper五个winninglineages。不能把复制inspiration code计为训练样本。",
+      "limits": "paper五阶段/五设计/五seed，与current早期六阶段/三seed叙述不同。fork LU8/bgm仅4/7个postbase commits，多数命名分支仍stock；paper mcml示例commit当前fork422未解析。当前四个sha迁移摘要全部已完成题退步，是另run，不能套作paper17/19反证；37k inspiration主要上游代码不是agent数据。",
+      "primary_sources": "https://arxiv.org/html/2607.24998v1; https://github.com/ASU-VDA-Lab/VPR-Evolve/tree/8285bb50ce719498a49721bfd75ad6e98a05a47b; https://github.com/hahacharlie/vtr-verilog-to-routing",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "pd-resizeragent-repair",
+      "name": "ResizerAgent / post-CTS timing-repair orchestration",
+      "family": "ResizerAgent post-CTS repair",
+      "object_identity": "agent控制原生OpenROAD Resizer的方法评测",
+      "task": "reporter→planner→deterministicPythonexecutor/必要时LLMTclrepair→parallelOpenROADworkers→selector；sequence/staged单操作/targetedECO三计划类型。paper最多4plans×15迭代，Git样例最多3plans；Opus4.7计划/选择、Sonnet4.6异常修复。",
+      "available_materials_and_tools": "273选定Gitblobs与官方1.83GBoutputs校验；rootBSD3，上游ORFS/PDK另列。currentGit README说bundled但gitlink pin0b219829/AtmadipORFS；Zenodo源码1.032GB官方MD5匹配，26760个ORFSbundledfiles、272选定core与Git逐字节相同（.gitmodules仅Git有），确实包含上游源码/PDK。仅静态读取，未装EDA/执行agent。",
+      "trajectory_and_training_access": "官方outputs.zip1,833,082,649B、MD5匹配；36agent/default+36AutoTuner ZIP，覆盖33独特配置/3RTL设计。36agent run均15轮，1080planner/selectorJSONL，SHA去重1050，去重事件16997（含metadata，非16997agent决策）。真实prompt/Write/工具反馈、Tcl、netlist、报告、1432计划CSV行与2289ATtrial行已核；ODB剥离，不能直接完整重放。",
+      "limits": "paper AT13×4与RA15×up4、currentAT20startup+15×4等预算不同；periterationruntime非完整同机campaign成本。current status成功可仅ODB存在、不等时序改善；内部power_mw实为rawW标签冲突而最终power_W字段正确。Gitgcd sample有retry后仍提升回归plan问题，与全归档分开。论文/归档均存在退步点，不称普遍dominance。",
+      "primary_sources": "https://vlsicad.ucsd.edu/Publications/Conferences/428/c428.pdf; https://github.com/ASU-VDA-Lab/ResizerAgent/tree/ae402b9bf00b5116b9f2743b3bd8f7c9aed52127; https://zenodo.org/records/21959752",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "data-resizeragent-traces",
+      "name": "ResizerAgent / released planner-selector traces and native-search controls",
+      "family": "ResizerAgent post-CTS repair",
+      "object_identity": "同工作开放轨迹/报告资源；非新增独立benchmark",
+      "task": "可用于planner/selector行为模仿、退步诊断/回退、评价模型、工具状态归因；保留实际失败和retry，不把所有执行成功plan设成优化正例。跨源RTL/PDK或整run划分，避免相同布局/报告落入train/test。",
+      "available_materials_and_tools": "1.83GB官方MD5验证，72内ZIP共48401文件、18.35GB逻辑展开；审阅只读取压缩内容和选定数据，未运行脚本。归档ODB-free，源码ZIP已核含ORFS/上游/PDK，环境仍须构建/核工具版本；rootlicense不自动替代每个上游依赖权利。",
+      "trajectory_and_training_access": "官方outputs.zip1,833,082,649B、MD5匹配；36agent/default+36AutoTuner ZIP，覆盖33独特配置/3RTL设计。36agent run均15轮，1080planner/selectorJSONL，SHA去重1050，去重事件16997（含metadata，非16997agent决策）。真实prompt/Write/工具反馈、Tcl、netlist、报告、1432计划CSV行与2289ATtrial行已核；ODB剥离，不能直接完整重放。",
+      "limits": "CSVcost是作者按token价估算，ClaudeMax实际订阅计费不同；部分retry重复iteration-role、空cost，不能按少数行合成整campaign账单。工具状态/输入context需对齐，14Write差异需独立定位，不能称全量高质量已清洗训练集。",
+      "primary_sources": "https://vlsicad.ucsd.edu/Publications/Conferences/428/c428.pdf; https://github.com/ASU-VDA-Lab/ResizerAgent/tree/ae402b9bf00b5116b9f2743b3bd8f7c9aed52127; https://zenodo.org/records/21959752",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "analog-analoggym-opt-grpo",
+      "name": "AnalogGym-Opt / numerical GRPO sizing and PVT verification",
+      "family": "AnalogGym",
+      "object_identity": "复用AnalogGym拓扑的数值RL优化基础设施；非LLM policy",
+      "task": "relationalGNN数值policy用GRPO与多目标/Pareto优化尺寸；tt仅典型角、proxy以VAE与选择性真PVT校核、full每步全角三模式。CLI默认300steps/proxy不是300次完整PVT或固定LLM交互预算。",
+      "available_materials_and_tools": "95个metadata/core blobs逐hash匹配，17YAML/source可审阅；ngspice与SKY130开源依赖，rootMIT、PDK另列。Active_Area实际sqrt(devicearea proxy sum)，不是YAML注释mm²物理面积；未仿真/训练。",
+      "trajectory_and_training_access": "公开数值GRPO/环境/17配置、MCP/skills工具接口；未定位历史完整LLM规划-工具反馈轨迹。35.8万历史CSV另轨，不能算GRPO或LLM rollout。",
+      "limits": "evaluate-design scalarreward>=0打印all targets satisfied，不等15个YAMLspec全过；Pareto保存PM可行也非fullspec。proxy未验证候选不能当全PVTrobust。当前库和历史性能数据来源/单位不同，不能拼成统一groundtruth或称LLM替代全部优化器。",
+      "primary_sources": "https://ieeexplore.ieee.org/document/11690621; https://doi.org/10.1109/TCAD.2026.3733612; https://github.com/Computing-Intelligent-Decision-Team/AnalogGym-Opt/tree/10093e3496ef2c7d06494d91d131b0cc5de6c25b",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "analog-analoggym-opt-agent-tools",
+      "name": "AnalogGym-Opt / LLM-callable sizing skills and MCP interface",
+      "family": "AnalogGym",
+      "object_identity": "同框架agent工具接口；未见固定LLM对抗评测",
+      "task": "LLM选择工具、提交参数或启动GRPO任务并读结构化反馈；实际policyGRPO和ngspice原生数值计算分别承担搜索/电学求解。可研究任务分解/预算分配/故障修复，但需另冻结任务、agent动作边界和验收。",
+      "available_materials_and_tools": "rootMIT；SKY130/ngspice本地执行环境另需配置；skills/MCP不是API服务托管数据。95文件审阅，未启动MCP/运行工具。",
+      "trajectory_and_training_access": "接口/skill/prompt可公开读取；没有查到完整历史LLM action-observation轨迹或固定agent比较任务包，不把接口能力视作数据发布。",
+      "limits": "论文abstract称structured electricaldataset含sizing/OP/PVT，但公开历史CSV只有performance/provenance，缺TD/TBM参数。两者不能自动等同；新仿真可产数据不代表历史开放轨迹已存在。",
+      "primary_sources": "https://ieeexplore.ieee.org/document/11690621; https://doi.org/10.1109/TCAD.2026.3733612; https://github.com/Computing-Intelligent-Decision-Team/AnalogGym-Opt/tree/10093e3496ef2c7d06494d91d131b0cc5de6c25b",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "data-analoggym-opt-historical",
+      "name": "AnalogGym-Opt / 358234 historical performance observations",
+      "family": "AnalogGym",
+      "object_identity": "同源历史性能表；非完整尺寸监督/agent轨迹",
+      "task": "可作性能检索、质量分析/阈值筛选、度量关系研究、LLM按需读SQL；缺器件W/L等输入时不能直接做完整尺寸→性能surrogate训练或动作重放。需要另定义按source/run/topology分割，随机行分割会泄漏代际相关/重复profile。",
+      "available_materials_and_tools": "95metadata/core blobs+23.23MBgzip CSV已核，358234行与73源manifest逐计数吻合；rootMIT软件声明，历史源权利/PDK另核。字段单位多数inferred/unresolved，保留来源，不推测补齐。",
+      "trajectory_and_training_access": "完整CSV性能观测已读取与hash/flag/profilecounts核对；只有generation/index与performance，没有LLM话轮/toolcall/配套器件参数，属于历史观察而非可直接SFT的agent行为数据。",
+      "limits": "chip_area原源sqrt(abs(area))不是物理面积；FOM_AW固定1500e-12而非每目录CL、noise/TC/settling定义和真实PVT不完整。此历史表不是当前SKY130ngspice结果，亦非paper所有sizing/OP/PVT结构化训练记录的已证发布。",
+      "primary_sources": "https://ieeexplore.ieee.org/document/11690621; https://doi.org/10.1109/TCAD.2026.3733612; https://github.com/Computing-Intelligent-Decision-Team/AnalogGym-Opt/tree/10093e3496ef2c7d06494d91d131b0cc5de6c25b",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "device-tcadgpt-qa",
+      "name": "TcadGPT / expert-reference TCAD QA264",
+      "family": "TcadGPT",
+      "object_identity": "模型语义问答评测；与SDE执行轨分开",
+      "task": "Llama3.1 8B用P1/P2约1.5M合成QA调优，回答专家题；可选49文档RAG，语义接受允许等价表达。问答正确与能生成可执行TCAD脚本分轨。",
+      "available_materials_and_tools": "85core Gitblobs全部核；public gold和7model输出JSON可审阅。README明确不含大训练集/weights/generatedoutputs，未核到完整1.5M公开包。商业Sentaurus手册来源与rootlicense未定位，papernoncommercialacademic声明不能替代每个素材权利。",
+      "trajectory_and_training_access": "264gold/7答复JSON/worksheet与生成管线可审阅，非完整agenttool交互。1.5M合成QA训练corpus/权重README明确排除；Elmer300judge输出重算32/34/52正确与paper一致，但属于跨域附录。",
+      "limits": "不是agent多轮工程优化bench；模型回答/人工语义标注不等器件物理正确、工艺校准或全流程收敛。公开Elmer100QA/20code是跨域FEM迁移，不额外算芯片设计数据集。",
+      "primary_sources": "https://arxiv.org/html/2601.10128v1; https://doi.org/10.1002/aisy.70520; https://github.com/wddddds1/TcadGPT/tree/68026387da36d33a74de6ad4d2cc12d16970b141",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "device-tcadgpt-sde",
+      "name": "TcadGPT / SDE syntax executability20 and published-version boundary",
+      "family": "TcadGPT",
+      "object_identity": "同模型代码执行轨；20旧版与60新版不可合并",
+      "task": "QA-tuned模型再IR→DPO，生成commercialSentaurusSDE脚本；同工具版本sde−S验语法。直接通过与数字placeholder补齐后通过分开，Pass@1与3分开，不能把80%宣传成单样本无修改通过率。",
+      "available_materials_and_tools": "公开20instructiontxt/22cmd示例及IR/DPO脚本，Sentaurus商业授权/版本不可由公开源码替代；无3samples×20完整编译日志/全部DPO对/新版60题包可定位，本轮未执行编译器。",
+      "trajectory_and_training_access": "公开有限题答示例、IR-DPO构建脚本；未定位完整历史工具执行交互/新版60题及多采样truthlogs。20样例单轮监督与agent工具轨迹区别保留。",
+      "limits": "模型生成语法有效不等几何精确符合指令、mesh质量、numericalconvergence或器件优化成功；训练生成器开放不等1.5M语料或完整动作反馈轨迹发布。published/preprint/current三种证据标清。",
+      "primary_sources": "https://arxiv.org/html/2601.10128v1; https://doi.org/10.1002/aisy.70520; https://github.com/wddddds1/TcadGPT/tree/68026387da36d33a74de6ad4d2cc12d16970b141",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "device-zendot-demonstrations",
+      "name": "zenDot / quantum-device agent demonstrations（非正式benchmark）",
+      "family": "zenDot quantum TCAD platform",
+      "object_identity": "商业开发平台与3个演示；作者明确不是优化智能benchmark",
+      "task": "LLM选择registeredcomponent/参数；平台验证action语法/器件兼容性，电压任务重算、geometry任务改变栅长重建并重求解。数值结果来自物理solver而非模型自行打分。",
+      "available_materials_and_tools": "codeavailability明确商业开发、源码不公开，学术evaluation需作者另授条款；平台接口/18步演示不等公开可执行环境/训练数据。这里只读官方PDF，未请求私有材料/运行求解。",
+      "trajectory_and_training_access": "论文声称SI保存18步prompt/reply/execution与SourceData，但本轮仅取得主PDF，未核到公开SI下载；源码明确商业开发不公开。不得把18迭代记成已下载训练轨迹。",
+      "limits": "内部一致物理模型不是fabricateddevice拟合；未计relaxation、未传播material/geometryuncertainty。完整SI/code/固定任务manifest未独立取得，六评估/任务不能作规模化优化能力结论。",
+      "primary_sources": "https://arxiv.org/abs/2608.16048; https://arxiv.org/pdf/2608.16048v1",
       "record_snapshot_matches_audit": true
     }
   ],

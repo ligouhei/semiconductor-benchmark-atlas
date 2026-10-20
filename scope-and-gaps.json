@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T09:21:31.327163+00:00",
+  "as_of": "2026-10-20T09:45:35.775775+00:00",
   "status": "coverage inventory with explicit residual limits, not universal completeness/quality certification",
   "scope": "依据用户阶段划分逐项列已有覆盖与剩余限制；“所有可发现”按此次公开资料检索边界理解，不声称覆盖未公开工业bench或互联网全部材料。",
   "method": [
@@ -246,7 +246,7 @@
     },
     {
       "domain": "模拟前端",
-      "record_count": 98,
+      "record_count": 101,
       "family_count": 47,
       "catalog_ids": [
         "analog-analoggym",
@@ -346,7 +346,10 @@
         "analog-acr-symbolic-reasoning",
         "analog-acr-agent-workflow",
         "analog-agenticsizing-workflow",
-        "data-agenticsizing-knowledge"
+        "data-agenticsizing-knowledge",
+        "analog-analoggym-opt-grpo",
+        "analog-analoggym-opt-agent-tools",
+        "data-analoggym-opt-historical"
       ],
       "covered_tasks": "电路图感知、拓扑/结构、尺寸、预测/检索、长程规格闭环、RF与存储电路/稀有失效；方法实验和成熟bench分身份",
       "remaining_limits": "多数开源spec/模型仍简化，真实PDK/全PVT/MC/寄生/测量gold有缺口；高识别/收敛/nominalFoM不能推完整电性能。部分agent论文尚未完整发布。",
@@ -495,8 +498,8 @@
     },
     {
       "domain": "数字后端",
-      "record_count": 156,
-      "family_count": 99,
+      "record_count": 159,
+      "family_count": 101,
       "catalog_ids": [
         "physical-circuitnet",
         "physical-ispd18",
@@ -653,7 +656,10 @@
         "be-edaenv-physical-opt",
         "pd-helix-openroad-evolution",
         "pd-helix-dreamplace-transfer",
-        "pd-audopeda-code-improvement"
+        "pd-audopeda-code-improvement",
+        "pd-vpr-evolve-source",
+        "pd-resizeragent-repair",
+        "data-resizeragent-traces"
       ],
       "covered_tasks": "划分/块规划/宏与cell布局、合法化、GR/DR、CTS/STA/sizing/MBFF/ECO、功耗/IR/EM、DRC/LVS工作流与agent",
       "remaining_limits": "历年已覆盖不等全部contest题目/最终checker均取得；部分旧链接失效、商业flow与PDK不可重建；proxy、原生修复、有限DRC与全签核严格分层。",
@@ -1007,8 +1013,8 @@
     },
     {
       "domain": "器件",
-      "record_count": 12,
-      "family_count": 7,
+      "record_count": 15,
+      "family_count": 9,
       "catalog_ids": [
         "device-mesd",
         "device-mesd2.0",
@@ -1021,7 +1027,10 @@
         "device-agentic-iwo-calibration",
         "device-agentictcad-codegen",
         "device-agentictcad-corpus",
-        "device-agentictcad-nsfet"
+        "device-agentictcad-nsfet",
+        "device-tcadgpt-qa",
+        "device-tcadgpt-sde",
+        "device-zendot-demonstrations"
       ],
       "covered_tasks": "I-V/C-V/参数提取、二极管/HEMT/器件模型、可靠性与模型一致性",
       "remaining_limits": "论文/模型/样例不等固定公共benchmark；部分model下载需注册，原测量与跨温/工艺gold不全，老化拟合不推全可靠性机制。",
