@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T07:50:34.059617+00:00",
+  "as_of": "2026-10-20T07:58:07.626979+00:00",
   "status": "frontend task and data identity comparison; not a new benchmark or ranking",
   "scope": "数字前端需先分训练语料、单次代码生成、工具反馈agent、文本补全、真实仓库修复及可信度审计。同一题库的不同方法不新增独立家族；数据量、文本相似、给定性质通过与完整工程功能是不同证据层级。",
   "items": [
