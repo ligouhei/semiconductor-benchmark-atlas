@@ -1,0 +1,130 @@
+{
+  "status": "round2 active; training/inference/evaluationrelease boundaries",
+  "protocols": [
+    {
+      "id": "rtl-chipmate-crossverify",
+      "benchmark_family": "ChipMATE multi-agent RTL method",
+      "name": "ChipMATE / Verilog–Python cross-verification agents",
+      "category": "数字前端/RTL与参考模型互证agent",
+      "artifact_type": "复用4已有benchmark的多agent训练/推理方法；非新独立任务库",
+      "task_layer": "NLspec+接口→V/P各写实现→有限随机互证→独立goldTB评分",
+      "version": "arXiv2605.12857v1；repo d94087b",
+      "input": "VerilogEvalv2/RTLLMv2/ChipBench-SC/CVDPcid03复用任务；结构接口从goldRTL取port宣称不读logic，可用工业spec接口替代。两agent各看spec/自身代码与mismatch，不看对方实现；最终goldTB另评分。",
+      "task": "V/P各采候选，Icarus+Python相同stimuli输出比对，反馈首次分歧并多轮修复。推理无需goldTB；训练和最终评分用gold，二者分开。当前N对indexwise配对，训练XGRPO K×K说明不作推理N²调用数。",
+      "output": "最终RTL/Python与matched/TurnLogs；matched是互相一致率，不是独立功能正确率或形式等价。",
+      "metrics": "paper Best3×3turn×1000stimuli/temp1、10workflowoutput/题，标准组合pass1/5；一次agentworkflow最多两agent多轮多样本，不能与单次LLM当同token预算。当前default10×5×30/temp.6，repro脚本常5outer×5inner×3×30，ChipBenchdefaulttemp.1，需显式统一才对比。",
+      "baseline": "samebase4B/9B singleVerilogagent vs双agent训练/推理，与单轮API baseline比较是不同test-time compute；paper最高9B VEv2pass1=80.1并非goldfree一致率。需同GPU/模型总参数/全部LLM调用与wallcost核边际。",
+      "tools_and_access": "23固定selectedGitblob匹配；inference框架/rootApache2公开，模型card可读但weights受gate，训练/完整64.4K/历史交互未定位。currentrepro VEv2改spec与合成TB、ChipBench加8gate，不自动等原upstreamoracle/论文exactreproduction。",
+      "limitations": "当前globalbest仅用于最终返回，nextturn仍carry当轮较差pair，与paper严格revert机制有差异。只识别literalclk/heuristicreset，有限随机协议；双边缺值None可能当一致，需有效输出硬门。上述静态契约未执行/未量化历史分数影响；缺题continue聚合需保留固定分母。",
+      "industrial_value": "研究判断：开源推理环境可研究互证/多agent训练，但共同幻觉与有限刺激仍要独立gold验证；不要把“无需gold推理”或权重页面当无gold训练/完整训练轨迹发布。",
+      "primary_sources": "https://arxiv.org/html/2605.12857v1; https://github.com/zhongkaiyu/ChipMATE/tree/d94087b5159aea482648b26398a2ffb164246671; https://huggingface.co/core12345/ChipMATE-V-9B; https://huggingface.co/core12345/ChipMATE-P-9B",
+      "evidence_status": "第二轮12h进行中；固定一手版本、23个Gitblob/AST与156输入schema核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+      "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "data-chipmate-python-reference",
+      "benchmark_family": "ChipMATE multi-agent RTL method",
+      "name": "ChipMATE / 64.4K Python reference-model training corpus claim",
+      "category": "数字验证/RTL到Python参考模型数据构建",
+      "artifact_type": "论文构建语料；当前完整下载包未定位，非新独立evalbench",
+      "task_layer": "goldRTL→Python模型/CoT→crosslanguage验证→训练",
+      "version": "arXiv2605.12857v1；当前repo d94087b",
+      "input": "Verilogagent用QiMengCodeV-R1约87K，Python约64.4K：API蒸馏25K+IR翻译36K+定向augmentation3.4K，均作者近似数，未独立全manifest实数核。",
+      "task": "API模型见goldRTL写Python并用gold交叉模拟修复；IR/AST翻译降低成本，再事后附CoT；看VerilogEval错误类别后定向补FSM/protocol/bit-arithmetic并声称filterbenchmarkoverlap。",
+      "output": "Python参考模型、推理文本、验证反馈和SFT/RL数据；后附CoT非真实工具搜索历史。",
+      "metrics": "API87K作者singleturn17%/twoturn35%，最终约25K，四key并行>200h/>$2000；IR称<2h出36K，不当全流程零成本。SFT6epochs，singleGRPO300steps/16group，multiRL200steps，训练金标准local/fixreward与teamagreement区分。",
+      "baseline": "25K仅API与加入IR/3.4K补难例消融；targetedaugmentation参考评测错误类型会有适配偏置，精确代码/时间/训练集与eval重合过滤需manifest，声称过滤不等独立复算。",
+      "tools_and_access": "框架/4modelcard链接不等此64.4K corpus和全训练pipeline已发布；当前完整tree26files没定位训练数据/全部SFT与XGRPO源。HF9Bweights受gate；代码Apache2不自动授予未发布数据/所有上游CodeV/网页抓取内容训练权。",
+      "limitations": "训练correctfix奖金要求两者修复后相对gold正确，故paper“nogolden”仅部署推理；不能拿team一致训练奖励当独立验证。87K/25K/36K/3.4K是同源流水线拆分，非多个独立新数据集。",
+      "industrial_value": "研究判断：重要的参考模型训练资源线索与数据构建方法；当前列“论文构建/未取全量原件”，不推荐把它当现成可下载agentic训练集。",
+      "primary_sources": "https://arxiv.org/html/2605.12857v1; https://github.com/zhongkaiyu/ChipMATE/tree/d94087b5159aea482648b26398a2ffb164246671; https://huggingface.co/core12345/ChipMATE-V-9B; https://huggingface.co/core12345/ChipMATE-P-9B",
+      "evidence_status": "第二轮12h进行中；固定一手版本、23个Gitblob/AST与156输入schema核查；未执行模型、EDA、形式工具、DPI或第三方代码。",
+      "next_verification": "核冻结manifest/原始样本/独立oracle/逐trial成本/完整轨迹与许可；未取得处保持缺口，不把发布承诺作已可用代码。",
+      "retrieved_date": "2026-10-20"
+    }
+  ],
+  "static_audit": {
+    "as_of": "2026-10-20T08:13:17.332402+00:00",
+    "scope": "static AST/constants/schema/fixed source contracts; no model/Verilog/Python sandbox/EDA execution",
+    "commit": "d94087b5159aea482648b26398a2ffb164246671",
+    "source_files": 26,
+    "new_benchmark": "none: evaluates reused VerilogEvalv2/RTLLMv2/ChipBench/CVDP; added as method/training-corpus object not independentnewtasklibrary",
+    "training_data_author_claim": {
+      "verilog_qimeng_rows": 87000,
+      "python_total_rows": 64400,
+      "api_distilled_verified_approx": 25000,
+      "ir_translated_verified_approx": 36000,
+      "targeted_augmented_approx": 3400,
+      "api_build_usd_over": 2000,
+      "api_build_hours_over": 200,
+      "ir_under_hours": 2,
+      "interpretation": "25k+36k+3.4k=64.4k近似pipeline，非独立逐run数manifest；IR后附CoT不是实际搜索过程。targetedaugmentation先看VerilogEval错误类型再定向补三类别，虽称filteroverlap，未独立拿manifest复核污染/选择偏置。"
+    },
+    "training_reward": "Stage1 SFT+GRPO，Stage2X-GRPO；训练localcompile/runtime/IO/correctness分层reward和correctfix奖金用gold输出，δlocal10/δfix.2/δmatch.5。无gold是推理过程条件，不是训练/最终benchmarkoracle缺失。",
+    "inference": "V/P分别生成，有限随机输入Icarus+Python交叉比对；match100%只说明两者在同stimuli下agree，不是相对spec/golden正确/形式等价。主评分另用各benchmarkgoldTB。",
+    "paper_config": {
+      "candidate_pairs_per_turn": 3,
+      "maxturns": 3,
+      "randomstimuli": 1000,
+      "temp": 1.0,
+      "independent_workflow_samples": 10,
+      "metric": "standardunbiased pass1/5 over workflowoutputs; one workflow may2agents×3samples×3turns，非singleLLMpass1同callbudget"
+    },
+    "current_defaults": {
+      "DEFAULT_N": 10,
+      "DEFAULT_MAX_TURNS": 5,
+      "DEFAULT_NUM_VERIFY_TESTS": 30,
+      "DEFAULT_TEMPERATURE": 0.6,
+      "DEFAULT_SEED": 42
+    },
+    "reproduction_constants": {
+      "paper_repro/vev2/vev2_framework.py": {
+        "N_SAMPLES": 5,
+        "N_INNER": 5,
+        "MAX_TURNS": 3,
+        "NUM_VERIFY_TESTS": 30,
+        "TEMPERATURE": 1.0
+      },
+      "paper_repro/rtllm/rtllm_framework.py": {
+        "N_SAMPLES": 5,
+        "N_INNER": 5,
+        "MAX_TURNS": 3,
+        "NUM_VERIFY_TESTS": 30,
+        "TEMPERATURE": 1.0
+      },
+      "paper_repro/chipbench/chipbench_framework.py": {
+        "N_SAMPLES": 5,
+        "N_INNER": 5,
+        "MAX_TURNS": 3,
+        "NUM_VERIFY_TESTS": 30
+      },
+      "paper_repro/chipbench/chipbench_framework_subsets.py": {
+        "N_SAMPLES": 5,
+        "N_INNER": 5,
+        "MAX_TURNS": 3,
+        "NUM_VERIFY_TESTS": 30
+      }
+    },
+    "configuration_boundary": "rootREADME给3×3×1000/temp1/10runs；inference默认10×5×30/temp.6，paper_repro多为5outer×5inner×3turns×30；ChipBenchdefaulttemp.1，CVDP另有3inner/2turn/5sample defaults和README10inner/5turnexample。必须显式冻结同套flag，不自动把paper_repro当Table1exact reproduction。",
+    "current_pairing": "当前inference第i个V只配第i个P，N对不是N²；paper训练XGRPO描述K×K，figure文字“index-wise intoK×K”亦含歧义，缺训练代码不能还原。",
+    "backtracking": "当前globalbest只在提高时更新并最终返回，下一轮v_carry/p_carry仍使用当轮best，即使比globalbest差；不是论文所述差修正完全revert到最后接受版本的同一契约，历史score影响未实测。",
+    "checker_limits": "只识别literalclk单clock、reset命名/极性启发式、随机stimuli/有限周期，非任意多时钟/protocolboundedproof。SV不能parse的X/Z/缺值和Pythonmissing可成None，两侧None==None会当一致，需有效输出mask硬门；仅静态可能性未构造/运行exploit。",
+    "scoring_variants": "paper_repro VE使用重写spec及合成RefModule/DUT随机TB，ChipBench加入8specgates，不能冒称原upstream完全同题同oracle。paraphrase声称语义不变但需逐条审核；静态替换asserted→sethigh对active-low潜有语义风险，未量化实际变更样本。部分repro聚合缺problem直接continue，all-task分母需固定。",
+    "released_example": {
+      "rows": 156,
+      "fields": [
+        "task_id",
+        "question",
+        "ref_sv"
+      ],
+      "scope": "156VerilogEval输入/gold，不是新训练corpus或agenttrajectory"
+    },
+    "release": {
+      "code": "rootApache2/currentinference可读；fulltraining pipeline/64.4KPython/全部GRPOrollout不在26files tree中定位",
+      "models": "publicHF V/P9B cards可读，明确gated requiring login/contact acceptance，未访问/下载受限files；不称已独立校验完整weights",
+      "public_card_evidence": "evidence/round2-chipmate95-public-modelcards-web.txt",
+      "trace": "TurnLog与输出保存机制≠历史完整公开多轮prompt/action/observation/cost；weights不等训练语料。"
+    }
+  }
+}

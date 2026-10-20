@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T08:09:25.810537+00:00",
+  "as_of": "2026-10-20T08:14:50.477622+00:00",
   "status": "coverage inventory with explicit residual limits, not universal completeness/quality certification",
   "scope": "依据用户阶段划分逐项列已有覆盖与剩余限制；“所有可发现”按此次公开资料检索边界理解，不声称覆盖未公开工业bench或互联网全部材料。",
   "method": [
@@ -12,8 +12,8 @@
   "items": [
     {
       "domain": "数字前端",
-      "record_count": 92,
-      "family_count": 40,
+      "record_count": 93,
+      "family_count": 41,
       "catalog_ids": [
         "rtl-verilogeval-v1",
         "rtl-verilogeval-v2",
@@ -106,7 +106,8 @@
         "rtl-realbench-system",
         "rtl-realbench-agent-current",
         "rtl-notsotiny-2512",
-        "rtl-notsotiny-2607"
+        "rtl-notsotiny-2607",
+        "rtl-chipmate-crossverify"
       ],
       "covered_tasks": "RTL与VHDL生成/理解/修复、跨模块工程、微架构优化、规格一致性与功耗/PPA预测；单轮生成与多步agent分别记录",
       "remaining_limits": "近期大套件完整harness/隐藏数据/许可未全公开；CPU/PCIe规范完成不等全ASIC实现，训练语料与评测集关系、跨family泛化需持续核。",
@@ -141,8 +142,8 @@
     },
     {
       "domain": "数字验证",
-      "record_count": 66,
-      "family_count": 47,
+      "record_count": 67,
+      "family_count": 48,
       "catalog_ids": [
         "verify-fveval-human",
         "verify-fveval-machine",
@@ -209,7 +210,8 @@
         "verify-saarthi-coverage-companion",
         "verify-rwopd-fveval",
         "verify-refevo-systemc",
-        "rtl-benchls-repoissue"
+        "rtl-benchls-repoissue",
+        "data-chipmate-python-reference"
       ],
       "covered_tasks": "SVA/NL翻译/RTL到性质、形式证明、UVM/coverage闭环、mutation、安全/鲁棒性与EDA工具语义回归",
       "remaining_limits": "证明强度/方向/undetermined/vacuity与mutation敏感性不等价；opaque PEC、commercialformal和完整hiddenoracle限制单列，静态wrapper审计不等复现实验。",

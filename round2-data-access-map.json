@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-10-20T08:09:25.771019+00:00",
+  "as_of": "2026-10-20T08:14:50.437644+00:00",
   "status": "第二轮12h进行中的数据/轨迹开放性核查，非完整市场清单或最终结论",
   "scope": "只覆盖本轮已保存一手核查的新增协议；训练样本、评测输入、模型权重、整理后记忆、生成采样轨迹与LLM工具交互轨迹分别描述",
-  "protocol_records": 65,
-  "families": 31,
+  "protocol_records": 67,
+  "families": 32,
   "items": [
     {
       "catalog_id": "lib-siemens-nemo-characterization",
@@ -783,6 +783,30 @@
       "trajectory_and_training_access": "当前42个路由器source分支；已固定4branch HEAD，各取100commit元数据与HEAD源码diff，真实部分code-mutation/parent顺序可派生。3QoR工作簿27sheets/81selectedNEWGR交叉测试行，不能自动与每commit对齐；无全prompt/action/toolstdout/费用/失败的LLMreplay。root无LICENSE，upstreamrouter/PDK与派生训练授权另核。",
       "limits": "主论文DRC/LVSclean声明针对ORFS最终选择，standaloneMO/TO0不是详细DRC/LVS/时序签核；不能把GR WL改进拿去当最终DR线长。边界固定，原生工具自身优化/预算与模型训练成本要并报。",
       "primary_sources": "https://arxiv.org/html/2604.22234v1; https://github.com/ASU-VDA-Lab/GR-Evolve/tree/5223e79c1a15891d3615db6e009fe1c606c6a2b2; https://github.com/taizun-jj202/OpenROAD_New_GRT",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "rtl-chipmate-crossverify",
+      "name": "ChipMATE / Verilog–Python cross-verification agents",
+      "family": "ChipMATE multi-agent RTL method",
+      "object_identity": "复用4已有benchmark的多agent训练/推理方法；非新独立任务库",
+      "task": "V/P各采候选，Icarus+Python相同stimuli输出比对，反馈首次分歧并多轮修复。推理无需goldTB；训练和最终评分用gold，二者分开。当前N对indexwise配对，训练XGRPO K×K说明不作推理N²调用数。",
+      "available_materials_and_tools": "23固定selectedGitblob匹配；inference框架/rootApache2公开，模型card可读但weights受gate，训练/完整64.4K/历史交互未定位。currentrepro VEv2改spec与合成TB、ChipBench加8gate，不自动等原upstreamoracle/论文exactreproduction。",
+      "trajectory_and_training_access": "当前代码Apache2、156VerilogEval输入/gold示例可取；TurnLog/输出保存不等历史全prompt/tool/reward/cost轨迹公开。HF V/P9B publiccards明确gated须登录/接受条件，未访问受限files，不称权重已下载验证；64.4KPython训练集/GRPOrollout未在当前tree定位。",
+      "limits": "当前globalbest仅用于最终返回，nextturn仍carry当轮较差pair，与paper严格revert机制有差异。只识别literalclk/heuristicreset，有限随机协议；双边缺值None可能当一致，需有效输出硬门。上述静态契约未执行/未量化历史分数影响；缺题continue聚合需保留固定分母。",
+      "primary_sources": "https://arxiv.org/html/2605.12857v1; https://github.com/zhongkaiyu/ChipMATE/tree/d94087b5159aea482648b26398a2ffb164246671; https://huggingface.co/core12345/ChipMATE-V-9B; https://huggingface.co/core12345/ChipMATE-P-9B",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "data-chipmate-python-reference",
+      "name": "ChipMATE / 64.4K Python reference-model training corpus claim",
+      "family": "ChipMATE multi-agent RTL method",
+      "object_identity": "论文构建语料；当前完整下载包未定位，非新独立evalbench",
+      "task": "API模型见goldRTL写Python并用gold交叉模拟修复；IR/AST翻译降低成本，再事后附CoT；看VerilogEval错误类别后定向补FSM/protocol/bit-arithmetic并声称filterbenchmarkoverlap。",
+      "available_materials_and_tools": "框架/4modelcard链接不等此64.4K corpus和全训练pipeline已发布；当前完整tree26files没定位训练数据/全部SFT与XGRPO源。HF9Bweights受gate；代码Apache2不自动授予未发布数据/所有上游CodeV/网页抓取内容训练权。",
+      "trajectory_and_training_access": "当前代码Apache2、156VerilogEval输入/gold示例可取；TurnLog/输出保存不等历史全prompt/tool/reward/cost轨迹公开。HF V/P9B publiccards明确gated须登录/接受条件，未访问受限files，不称权重已下载验证；64.4KPython训练集/GRPOrollout未在当前tree定位。",
+      "limits": "训练correctfix奖金要求两者修复后相对gold正确，故paper“nogolden”仅部署推理；不能拿team一致训练奖励当独立验证。87K/25K/36K/3.4K是同源流水线拆分，非多个独立新数据集。",
+      "primary_sources": "https://arxiv.org/html/2605.12857v1; https://github.com/zhongkaiyu/ChipMATE/tree/d94087b5159aea482648b26398a2ffb164246671; https://huggingface.co/core12345/ChipMATE-V-9B; https://huggingface.co/core12345/ChipMATE-P-9B",
       "record_snapshot_matches_audit": true
     }
   ],

@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T08:09:25.125165+00:00",
+  "as_of": "2026-10-20T08:14:49.816640+00:00",
   "status": "task and input/label comparison, not a new benchmark or ranking",
   "scope": "器件仿真数据、论文图表数字化、硅实测拟合、TCAD逆映射及数值一致性分轨；误差单位、物理来源、参数可辨识性与按器件/论文划分决定结论。",
   "items": [
