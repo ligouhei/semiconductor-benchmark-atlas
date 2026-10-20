@@ -1,5 +1,5 @@
 {
-  "status": "round2 active; fullannotation/hash audit, no model or graphsolverexecution",
+  "status": "round2 completed; fullannotation/hash audit, no model or graphsolverexecution",
   "protocols": [
     {
       "id": "data-ci2n-visual",

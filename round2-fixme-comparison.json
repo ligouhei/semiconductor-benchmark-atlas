@@ -1,5 +1,5 @@
 {
-  "status": "round2 active; current-source static audit, no execution",
+  "status": "round2 completed; current-source static audit, no execution",
   "pinned_commit": "e875437fbb11590b71775b32d3579726d702cfc6",
   "paper_versions": {
     "arxiv_v1": "180 tasks / 6 domains",

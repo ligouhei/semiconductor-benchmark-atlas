@@ -1,5 +1,5 @@
 {
-  "status": "round2 active; sourceevolution, realtraces, numericRL, performance-onlydata, QA/code andclosedplatformdemo distinguished",
+  "status": "round2 completed; sourceevolution, realtraces, numericRL, performance-onlydata, QA/code andclosedplatformdemo distinguished",
   "protocols": [
     {
       "id": "pd-vpr-evolve-source",

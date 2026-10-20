@@ -1,5 +1,5 @@
 {
-  "status": "round2 active; MetaChat QA/API and MAHL chiplet generation, not full physical signoff",
+  "status": "round2 completed; MetaChat QA/API and MAHL chiplet generation, not full physical signoff",
   "protocols": [
     {
       "id": "photonic-metachat-nanophotonics",

@@ -1,5 +1,5 @@
 {
-  "status": "round2 active; fixed-source proof-strength and released-table arithmetic only",
+  "status": "round2 completed; fixed-source proof-strength and released-table arithmetic only",
   "protocols": [
     {
       "id": "verify-rtl-gauntlet",

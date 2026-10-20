@@ -1,5 +1,5 @@
 {
-  "status": "round2 active; static Analog-DB/SpiceXplorer schema, metrics and trial audit only",
+  "status": "round2 completed; static Analog-DB/SpiceXplorer schema, metrics and trial audit only",
   "protocols": [
     {
       "id": "analog-analogdb-core",

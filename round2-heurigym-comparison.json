@@ -1,5 +1,5 @@
 {
-  "status": "round2 active; five chip-relevant heuristic engineering tasks and real released solver-source companion",
+  "status": "round2 completed; five chip-relevant heuristic engineering tasks and real released solver-source companion",
   "protocols": [
     {
       "id": "hls-heurigym-scheduling",

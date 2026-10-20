@@ -1,5 +1,5 @@
 {
-  "status": "round2 active; static reading, Git identity and published-table arithmetic only",
+  "status": "round2 completed; static reading, Git identity and published-table arithmetic only",
   "scope": "缺陷理解/生成mask/OPC recipe/人工审核TCAD校准分开；同源LithoBench方法不增加独立数据家族",
   "protocols": [
     {

@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-20T17:12:05.034912+00:00",
-  "status": "active research review queue; not a maturity verdict",
+  "generated_at": "2026-10-20T17:24:36.905056+00:00",
+  "status": "research delivery family navigation with explicit open questions; not full tool qualification",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
     "families": 407,

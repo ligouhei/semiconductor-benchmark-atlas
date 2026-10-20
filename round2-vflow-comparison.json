@@ -1,5 +1,5 @@
 {
-  "status": "round2 active; workflow search v1/v2 and shared VerilogEval/RTLLM source tasks",
+  "status": "round2 completed; workflow search v1/v2 and shared VerilogEval/RTLLM source tasks",
   "protocols": [
     {
       "id": "rtl-vflow-v1",

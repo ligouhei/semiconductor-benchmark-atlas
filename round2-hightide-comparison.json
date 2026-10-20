@@ -1,5 +1,5 @@
 {
-  "status": "round2 active; static HighTide provenance/contract audit, no flow execution",
+  "status": "round2 completed; static HighTide provenance/contract audit, no flow execution",
   "protocols": [
     {
       "id": "pd-hightide-flow-suite",

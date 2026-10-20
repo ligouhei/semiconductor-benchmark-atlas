@@ -1,5 +1,5 @@
 {
-  "status": "round2 active; training/inference/evaluationrelease boundaries",
+  "status": "round2 completed; training/inference/evaluationrelease boundaries",
   "protocols": [
     {
       "id": "rtl-chipmate-crossverify",

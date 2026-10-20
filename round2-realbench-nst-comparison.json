@@ -1,5 +1,5 @@
 {
-  "status": "round2 active; primary source and releasedexample audit only",
+  "status": "round2 completed; primary source and releasedexample audit only",
   "protocols": [
     {
       "id": "rtl-realbench-module",

@@ -1,5 +1,5 @@
 {
-  "status": "round2 active; evaluation agents and single-frame GUI tasks, not native optimization",
+  "status": "round2 completed; evaluation agents and single-frame GUI tasks, not native optimization",
   "protocols": [
     {
       "id": "data-maeda-openroad-evaluator",

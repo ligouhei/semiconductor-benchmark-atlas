@@ -1,5 +1,5 @@
 {
-  "status": "round2 active; propertyreference/accessfidelity, structure-derivedtests and workflow/grounding predicates",
+  "status": "round2 completed; propertyreference/accessfidelity, structure-derivedtests and workflow/grounding predicates",
   "protocols": [
     {
       "id": "device-agapi-known-property",

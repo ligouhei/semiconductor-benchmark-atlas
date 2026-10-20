@@ -1,15 +1,15 @@
 {
-  "as_of": "2026-10-20T17:15:38.228797+00:00",
+  "as_of": "2026-10-20T17:24:47.273129+00:00",
   "catalog_sha256": "dc89e3f3a09ae882b829e2db3fd78cd32b325dfe7de22101f10b78c97f55249d",
-  "status": "本轮仍在进行，尚未触发完成时间门",
+  "status": "本轮完整12小时静态研究已完成",
   "research_period": {
     "start_utc": "2026-10-20T05:23:20Z",
     "start_beijing": "2026-10-20T13:23:20+08:00",
     "minimum_seconds": 43200,
     "earliest_completion_beijing": "2026-10-21T01:23:20+08:00",
-    "completed_utc": null,
-    "elapsed_seconds_to_receipt": 42738.228797,
-    "time_gate_satisfied": false
+    "completed_utc": "2026-10-20T17:24:35+00:00",
+    "elapsed_seconds_to_receipt": 43287.273129,
+    "time_gate_satisfied": true
   },
   "counts": {
     "baseline_records": 566,
@@ -1250,7 +1250,7 @@
     }
   ],
   "source_accounting": {
-    "as_of": "2026-10-20T17:12:03.792182+00:00",
+    "as_of": "2026-10-20T17:24:35.649972+00:00",
     "round2_manifest_files": 207,
     "retrieval_records": 13386,
     "downloaded_records": 12900,

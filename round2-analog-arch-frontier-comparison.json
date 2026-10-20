@@ -1,5 +1,5 @@
 {
-  "status": "round2 active; restricted QA protocols, versioned analog tasks, milestone scoring and numerical architecture baselines",
+  "status": "round2 completed; restricted QA protocols, versioned analog tasks, milestone scoring and numerical architecture baselines",
   "protocols": [
     {
       "id": "analog-razavi-direct",

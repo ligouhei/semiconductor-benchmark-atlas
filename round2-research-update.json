@@ -1,7 +1,7 @@
 {
-  "status": "第二轮12小时研究进行中，非最终交付",
+  "status": "第二轮完整12小时研究已完成",
   "round": 2,
-  "updated_beijing": "2026-10-21T01:12:03+08:00",
+  "updated_beijing": "2026-10-21T01:24:35+08:00",
   "start_beijing": "2026-10-20T13:23:20+08:00",
   "earliest_completion_beijing": "2026-10-21T01:23:20+08:00",
   "baseline_records": 566,
@@ -3685,7 +3685,7 @@
       "retrieved_date": "2026-10-20"
     }
   ],
-  "scope": "公开资料/任务/代码的静态研究；未运行模型、EDA或仿真。当前仅为阶段性增量，不声称完成全范围或12小时。",
+  "scope": "已完成本轮至少43200秒的公开资料/任务/代码静态研究；未运行模型、EDA或仿真，不声称穷尽行业全部benchmark或独立复现所有成绩。",
   "findings": [
     "Siemens表征背景库229cells，但工作流调试每次只取2cells×36PVT；约95%为meancompositereward，非全库通过率。",
     "FPL26公开功能validator为结构检查+有限仿真；19DCP含同源变体，final7题，费用/时间扣分后按题名次平均排名。",
@@ -3801,7 +3801,7 @@
     "本轮新增175条任务/版本协议，不等同数量的成熟公共数据集；TimingAnalysis、HLS-Eval、ChatHLS与FIXME各分轨按同家族登记。",
     "FPL26原包743289124bytes与官方SHA256匹配，19DCP逐文件匹配包内SHA256SUM；只核字节/元数据，不加载执行DCP。",
     "HLS-Eval202configs已核固定Git身份，含同源变体；Bench4HLS170个task各有reference/TB路径。",
-    "其他候选仍在查证；后续会继续增补原生工具基线、交互轨迹和评分隔离。"
+    "未取得或受限候选保留到候选清单；不把未发布、访问受限或演示框架算作成熟独立benchmark。"
   ],
   "revised_protocols": [
     {
@@ -3846,5 +3846,8 @@
       "retrieved_date": "2026-10-20",
       "benchmark_family": "SemiKongBench-100"
     }
-  ]
+  ],
+  "completed_utc": "2026-10-20T17:24:35+00:00",
+  "completed_beijing": "2026-10-21T01:24:35+08:00",
+  "research_elapsed_seconds": 43275.0
 }

@@ -1,5 +1,5 @@
 {
-  "status": "round2 active; numericalRL and experimentmicrotests distinguished",
+  "status": "round2 completed; numericalRL and experimentmicrotests distinguished",
   "protocols": [
     {
       "id": "litho-arlo-method",

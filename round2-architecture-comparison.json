@@ -1,5 +1,5 @@
 {
-  "status": "round2 active; architecture-agent settings/sharedDPC4/AgenticArchitectversions/workloadconstruction",
+  "status": "round2 completed; architecture-agent settings/sharedDPC4/AgenticArchitectversions/workloadconstruction",
   "protocols": [
     {
       "id": "arch-archeval-l1",

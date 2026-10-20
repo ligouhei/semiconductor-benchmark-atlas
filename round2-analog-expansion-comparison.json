@@ -1,5 +1,5 @@
 {
-  "status": "round2 active; analogcorpus, topologyjudge, structuralparsing and RFsizing separated",
+  "status": "round2 completed; analogcorpus, topologyjudge, structuralparsing and RFsizing separated",
   "protocols": [
     {
       "id": "data-circuitformer-analog",

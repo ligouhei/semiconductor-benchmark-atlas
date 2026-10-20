@@ -1,5 +1,5 @@
 {
-  "status": "round2 active; symbolicreasoning, workflow and curatedknowledge separated",
+  "status": "round2 completed; symbolicreasoning, workflow and curatedknowledge separated",
   "protocols": [
     {
       "id": "analog-acr-symbolic-reasoning",

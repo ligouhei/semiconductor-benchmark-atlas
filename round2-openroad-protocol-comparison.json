@@ -1,5 +1,5 @@
 {
-  "status": "round2 active; realtooltrainingdata and executionoracles vs protocolfunctionalvalidation/syntheticplanning",
+  "status": "round2 completed; realtooltrainingdata and executionoracles vs protocolfunctionalvalidation/syntheticplanning",
   "protocols": [
     {
       "id": "data-eda-corpus-qa-v1",

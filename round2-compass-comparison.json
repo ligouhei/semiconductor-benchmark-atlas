@@ -1,5 +1,5 @@
 {
-  "status": "round2 active; full public trajectory schema and released score arithmetic only",
+  "status": "round2 completed; full public trajectory schema and released score arithmetic only",
   "protocols": [
     {
       "id": "fab-supplybench-compass",

@@ -1,5 +1,5 @@
 {
-  "status": "round2 active; current releaseddata/schema and nativebaseline arithmetic",
+  "status": "round2 completed; current releaseddata/schema and nativebaseline arithmetic",
   "protocols": [
     {
       "id": "rtl-benchls-roundtrip",

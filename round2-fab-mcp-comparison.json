@@ -1,5 +1,5 @@
 {
-  "status": "round2 active; papers and access receipts only, no execution",
+  "status": "round2 completed; papers and access receipts only, no execution",
   "protocols": [
     {
       "id": "fab-fabbench-rag",

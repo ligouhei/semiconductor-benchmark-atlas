@@ -1,5 +1,5 @@
 {
-  "status": "round2 active; chiplet in-domain/transfer DSE and native BO versus LLM policies",
+  "status": "round2 completed; chiplet in-domain/transfer DSE and native BO versus LLM policies",
   "protocols": [
     {
       "id": "chiplet-llmbo-3d",
@@ -156,21 +156,6 @@
       "Offline training and full-space simulation generation excluded from online runtime.",
       "Conference2018/DOIplaceholder are template residue, not publication metadata.",
       "No claim that 18,432 configurations are independent sourcechip designs."
-    ],
-    "primary_source_tables": [
-      "(1) HV ​ ( f r ​ e ​ f , Ω ) = Volume ​ ( ⋃ 𝒙 ∈ Ω ∏ i = 1 m [ f i ​ ( 𝒙 ) , f i r ​ e ​ f ] ) , \\text{HV}(f^{ref},\\Omega)=\\text{Volume}\\left(\\bigcup_{\\bm{x}\\in\\Omega}\\prod_{i=1}^{m}[f_{i}(\\bm{x}),f_{i}^{ref}]\\right),",
-      "(2) ADRS ​ ( Γ , Ω ) = 1 | Γ | ​ ∑ γ ∈ Γ min ω ∈ Ω ⁡ ‖ γ − ω ‖ 2 , \\text{ADRS}(\\Gamma,\\Omega)=\\frac{1}{|\\Gamma|}\\sum_{\\gamma\\in\\Gamma}\\min_{\\omega\\in\\Omega}||\\gamma-\\omega||_{2},",
-      "(3) 𝒙 t ∗ = arg ⁡ max 𝒙 ∈ Ω t ​ [ HV ⁡ ( Ω t ) − HV ⁡ ( Ω t ∖ { 𝒙 } ) ] . \\bm{x}_{t}^{*}=\\underset{\\bm{x}\\in\\Omega_{t}}{\\arg\\max}\\left[\\mathrm{HV}(\\Omega_{t})-\\mathrm{HV}(\\Omega_{t}\\setminus\\{\\bm{x}\\})\\right].",
-      "(4) R total = α ​ R think + β ​ R answer + γ ​ R gain . R_{\\text{total}}=\\alpha R_{\\text{think}}+\\beta R_{\\text{answer}}+\\gamma R_{\\text{gain}}.",
-      "(5) R think = | T correct | | T req | , R_{\\text{think}}=\\frac{|T_{\\text{correct}}|}{|T_{\\text{req}}|},",
-      "(6) R answer = { 0 , Incorrect Format | P valid | | P | , Otherwise R_{\\text{answer}}=\\left\\{\\begin{array}[]{cl}0,&\\text{Incorrect Format}\\\\\n\\frac{|P_{\\text{valid}}|}{|P|},&\\text{Otherwise}\\end{array}\\right.",
-      "(7) TMHI ​ ( 𝒂 ) = HV ​ ( Ω t ∪ 𝕐 𝒂 ) − HV ​ ( Ω t ) . \\text{TMHI}(\\bm{a})=\\text{HV}(\\Omega_{t}\\cup\\mathbb{Y}_{\\bm{a}})-\\text{HV}(\\Omega_{t}).",
-      "(8) R gain = TMHI ​ ( 𝒂 LLM ) max 𝒂 ′ ∈ 𝒜 ⁡ TMHI ​ ( 𝒂 ′ ) . R_{\\text{gain}}=\\frac{\\text{TMHI}(\\bm{a}_{\\text{LLM}})}{\\max_{\\bm{a^{\\prime}}\\in\\mathcal{A}}\\text{TMHI}(\\bm{a^{\\prime}})}.",
-      "(9) EHVI ​ ( 𝒙 | 𝔻 ) \\displaystyle\\text{EHVI}(\\bm{x}|\\mathbb{D}) = 𝔼 G ​ P ​ [ HV ​ ( 𝔻 ∪ { 𝒙 } ) − HV ​ ( 𝔻 ) ] , \\displaystyle=\\mathbb{E}_{GP}[\\text{HV}(\\mathbb{D}\\cup\\{\\bm{x}\\})-\\text{HV}(\\mathbb{D})], P-EHVI ​ ( 𝒙 | 𝔻 ) \\displaystyle\\text{P-EHVI}(\\bm{x}|\\mathbb{D}) = EHVI ​ ( 𝒙 | 𝔻 ) ⋅ ( 1 + λ ⋅ I ⁡ ( 𝒙 ∈ 𝒳 𝒂 ) ) , \\displaystyle=\\text{EHVI}(\\bm{x}|\\mathbb{D})\\cdot\\left(1+\\lambda\\cdot I(\\bm{x}\\in\\mathcal{X}_{\\bm{a}}\\right)),",
-      "Module Parameters Candidates GPU CoresPerCluster 1, 2 CacheModel 0, 1 CPU DispatchWidth 1, 2, 3, 4 ROBSize 32, 64, 96, 128 ICacheSize 32, 64 ICacheAssociativity 4, 8 DCacheSize 32, 64, 128 DCacheAssociativity 4, 8 Network RoutingBuffer 6, 12 FlitSize 2, 4, 8 NumVC 2, 4",
-      "Dataset Metric XGBoost BOOM Explorer MCT Explorer LLAMBO (w/Qwen) LLAMBO (w/GPT) LLM-DSE (w/Qwen) LLM-DSE (w/GPT) Ours 3D chiplet HV ↑ \\uparrow 0.7509 0.7466 0.7376 0.7881 0.7549 0.8210 0.8209 0.8356 ( ↑13.3% ) ADRS ↓ \\downarrow 0.1116 0.1028 0.1378 0.1129 0.0986 0.1405 0.1417 0.0983 ( ↓28.7% ) 2.5D chiplet HV ↑ \\uparrow 0.7502 0.7630 0.7366 0.7732 0.7809 0.7564 0.7638 0.8051 ( ↑ 9.3% ) ADRS ↓ \\downarrow 0.1239 0.0859 0.1239 0.1175 0.1095 0.1315 0.1289 0.0835 ( ↓32.6% )",
-      "Dataset T lim T_{\\mathrm{lim}} ( ∘ C {}^{\\circ}\\mathrm{C} ) Sampled T peak T_{\\mathrm{peak}} ( ∘ C {}^{\\circ}\\mathrm{C} ) Pareto T peak max T_{\\mathrm{peak}}^{\\max} ( ∘ C {}^{\\circ}\\mathrm{C} ) 2.5D chiplet 85 [42.3,   61.8] 57.9 3D chiplet 85 [45.6,   68.4] 63.7",
-      "Method Hypervolume ↑ \\uparrow ADRS ↓ \\downarrow Standard BO 0.7428 0.1272 Base LLM 0.7764 0.1525 LLM w/ ADPR 0.8117 0.1486 LLM w/ Sim-FT 0.7979 0.1610 LLM w/ Sim-FT + ADPR 0.8247 0.1247 Ours (Gain-Aware FT + ADPR) 0.8356 0.0983"
     ],
     "HV_relative_gains": {
       "3D": {

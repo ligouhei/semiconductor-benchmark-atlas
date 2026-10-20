@@ -1,5 +1,5 @@
 {
-  "status": "round2 active; primaryinput/source staticcontracts only",
+  "status": "round2 completed; primaryinput/source staticcontracts only",
   "protocols": [
     {
       "id": "analog-ams-sizingbench",
