@@ -1,6 +1,6 @@
 {
   "status": "第二轮12小时仍在进行；静态核查清单，不是训练授权或模型实验结果",
-  "as_of": "2026-10-20T12:40:31.819892+00:00",
+  "as_of": "2026-10-20T13:40:20.978858+00:00",
   "scope": "只发布派生研究摘要；原始轨迹/问题/答案/凭据不随网站重发。",
   "records": [
     {
@@ -267,6 +267,76 @@
         "https://doi.org/10.1021/acs.jpclett.6c00837.s001",
         "https://github.com/atomgptlab/agapi/tree/b367c87d99cec479737592b05883495df920e19e",
         "https://github.com/atomgptlab/aai4science/tree/01d7630cd9914a6991ce72b2f7f6627f2774184e"
+      ]
+    },
+    {
+      "name": "AnalogSAGE current / 52 mixed-source circuit tasks and summary logs",
+      "catalog_ids": [
+        "analog-analogsage-current52",
+        "analog-analogsage-paper10"
+      ],
+      "data_kind": "迭代成功摘要、任务与拓扑库",
+      "quantity": "当前52任务×15trials=780，704solved；86topologies/3seedmemories。论文另为10×5trial。",
+      "authenticity": "每trial仅failure/success迭代标签与solved，不是电学数值/LLM动作/工具输出全轨迹。",
+      "availability": "作者当前396blobs全部核、52filters与prompt一一对应、52Pass1/Pass5复算一致。",
+      "license_note": "根明确LICENSE未定位；外部Pinecone知识RAG/PDK依赖另核。",
+      "caution": "52中27任务复用AnalogGym/AutoSizer；本地fallback跳过RAG不能自动复现论文，nominalpass不等PEX/PVT。",
+      "sources": [
+        "https://arxiv.org/html/2512.22435v1",
+        "https://github.com/xz-group/AnalogSAGE/tree/8fd72e235d2b331ee3ef2e3b633b4875bb9fa358"
+      ]
+    },
+    {
+      "name": "Razavi-Bench / direct multimodal QA",
+      "catalog_ids": [
+        "analog-razavi-direct",
+        "analog-razavi-agentic",
+        "analog-razavi-spice"
+      ],
+      "data_kind": "受限多模态评测材料；三种同题协议",
+      "quantity": "50题(30+20)，direct/fileagent/ngspice-assisted共享题库。",
+      "authenticity": "推理答案/软件协议；不能由agentic名称推断完整tooltrace可得。",
+      "availability": "仅19个核心软件/说明文件hash核，未下载题图/gold/模型输出，未镜像。",
+      "license_note": "软件Apache2；benchmarkmaterials另有严格条款，训练/微调/再分发需事先书面许可。",
+      "caution": "可本地评测/引用不等训练许可；工具辅助最终仍由rubric评分，不是SPICE独立电学验收。",
+      "sources": [
+        "https://github.com/Arcadia-1/razavi-bench/tree/223ce9182c13a13c16e7f5fe18e0cf5f4a182752",
+        "https://razavi-bench.tokenzhang.com"
+      ]
+    },
+    {
+      "name": "ASIC-Agent-Bench / open-ended ASIC engineering milestones",
+      "catalog_ids": [
+        "rtl-asic-agent-bench"
+      ],
+      "data_kind": "论文定义工程agent任务；公开工件未取得",
+      "quantity": "20任务、三baseLLM的score/steps/USDcost聚合表。",
+      "authenticity": "论文agent过程与部分分；不是已取得的真实provider/action-observation数据。",
+      "availability": "全文与20行数表独立复算，官方repo当前404。",
+      "license_note": "没有取得任务包/许可；不借论文open-source措辞替当前artifact证明。",
+      "caution": "88%为检查点加权均分，不能当整题成功率；GDS存在不证明DRC/LVS/PPA全面合格。",
+      "sources": [
+        "https://arxiv.org/html/2508.15940v1",
+        "https://github.com/AUCOHL/ASIC-Agent-Bench"
+      ]
+    },
+    {
+      "name": "ArchGym / DRAMGym memory-controller",
+      "catalog_ids": [
+        "arch-archgym-dram",
+        "arch-archgym-timeloop",
+        "arch-archgym-farsi",
+        "arch-archgym-maestro"
+      ],
+      "data_kind": "数值DSE框架与logger；非LLM轨迹",
+      "quantity": "4env/5算法；paper21600hyperparameterexperiments与约1.5Bsimulations为作者声明。",
+      "authenticity": "数字参数→原生cost反馈；不含自然语言agent消息。",
+      "availability": "11核心源文件hash核，完整历史dataset/所有sim文件未核。",
+      "license_note": "rootApache2，各bundledsim/workload许可分开。",
+      "caution": "不能把logger能力当完整历史数据下载证明；不同reward方向/饱和阈值/单位需逐env固定。",
+      "sources": [
+        "https://arxiv.org/html/2306.08888v1",
+        "https://github.com/srivatsankrishnan/oss-arch-gym/tree/53f745af87b256794c0cd712c2b8e77aab74b4a6"
       ]
     }
   ]

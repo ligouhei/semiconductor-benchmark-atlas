@@ -2,16 +2,16 @@
 <html lang="zh-CN"><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>芯片行业 benchmark 分类研究 · 工作稿</title><style>
 body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:0}main{max-width:1400px;margin:auto;padding:36px}h1,h2,h3{line-height:1.35}h1{font-size:32px}h2{margin-top:40px;border-top:2px solid #ced9e4;padding-top:24px}a{color:#075ca8}table{border-collapse:collapse;background:white;width:100%;font-size:14px}th,td{border:1px solid #dbe2ea;padding:12px;vertical-align:top;text-align:left}th{background:#eaf0f7}td:first-child{min-width:160px}nav,.note{background:#e8f0fa;border-radius:10px;padding:20px}details{background:white;border:1px solid #d5e0ec;margin:12px 0;padding:16px;border-radius:8px}summary{font-weight:650;cursor:pointer}dt{font-weight:bold;margin-top:12px}dd{margin-left:0}small,.muted{color:#58697b}.tag{display:inline-block;padding:2px 8px;border-radius:5px;background:#e8eff7;font-size:12px}.tablewrap{overflow:auto}@media print{body{background:white}main{padding:0}details{break-inside:avoid}nav{display:none}a{color:#203044}td{font-size:10px}}
 </style><main><p><a href="index.html">← 返回交互式 Benchmark 表格</a></p><h1>芯片行业 benchmark 分类研究</h1>
-<p class="muted">工作稿 · 研究起点 2026-10-19 · 生成时间 2026-10-20T20:40+08:00（北京时间）</p>
+<p class="muted">工作稿 · 研究起点 2026-10-19 · 生成时间 2026-10-20T21:42+08:00（北京时间）</p>
 <div class="note"><a href="agentic-research.html">Agentic 续查专题：11项新增研究对象与开放边界</a> · <a href="agentic-followup.json">结构化协议</a></div>
 <div class="note"><a href="round2-research.html">第二轮12小时续研（进行中）：首批新增协议与证据边界</a> · <a href="round2-research-update.json">结构化增量</a></div>
-<div class="note"><strong>研究仍在进行。</strong>本稿包含 700 条任务/版本记录，归并为 387 个家族/对象。记录中也包含公开数据集、方法实验、工具示例和内部评测线索；这些数量不能解释为同等成熟的独立公开 benchmark 数量。12 小时研究尚未完成，待核验字段均保留，完整覆盖与最终优先级尚待补齐。</div>
+<div class="note"><strong>研究仍在进行。</strong>本稿包含 711 条任务/版本记录，归并为 392 个家族/对象。记录中也包含公开数据集、方法实验、工具示例和内部评测线索；这些数量不能解释为同等成熟的独立公开 benchmark 数量。12 小时研究尚未完成，待核验字段均保留，完整覆盖与最终优先级尚待补齐。</div>
 <div class="note"><strong>补订说明：</strong>2026-10-20补订：原12小时清单遗漏VPEvolve，OPC agentic覆盖审核不充分。现补入商业Calibre recipeagent协议与开放光学testbed两轨（同一家族），并更正此前容易被理解为该方向没有已有评测的表述。此补订发生在原12小时交付之后；目录仍不是全行业穷尽证明。 本次另续查新增11项研究对象（含待开放/部分协议），详见Agentic专题；VPEvolve配套testbed已显式标记非独立Agent benchmark。 <a href="research-corrections.json">更正记录</a></div>
 <p>本研究围绕芯片设计与制造中的工作任务分类。每条记录回答：给模型什么、让它完成什么、交付什么、由谁按什么指标评分，以及成熟软件已经覆盖到哪一层。成品 CPU/GPU 与微体系结构性能负载在边界组单列：其输入是程序、模型和运行数据，不是设计规格、网表或工艺规则；不直接证明EDA能力。</p>
 <p><a href="research-overview.html">从简明阅读总览开始</a> · <a href="benchmark-catalog-zh.csv">中文列名CSV</a></p><nav><strong>分类索引</strong><ol>
-<li><a href="#group-0">数字前端：RTL 生成、理解与工程任务</a> · 112 条</li>
+<li><a href="#group-0">数字前端：RTL 生成、理解与工程任务</a> · 117 条</li>
 <li><a href="#group-1">数字验证：断言、形式证明、修复与安全</a> · 67 条</li>
-<li><a href="#group-2">模拟前端：感知、推理、拓扑、尺寸与规格闭环</a> · 103 条</li>
+<li><a href="#group-2">模拟前端：感知、推理、拓扑、尺寸与规格闭环</a> · 109 条</li>
 <li><a href="#group-3">综合、HLS 与 FPGA 加速器</a> · 72 条</li>
 <li><a href="#group-4">数字后端：布局布线、预测与优化</a> · 165 条</li>
 <li><a href="#group-5">模拟后端：版图与物理实现</a> · 17 条</li>
@@ -24,7 +24,7 @@ body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:
 <li><a href="#group-12">边界：既有加速器上的工作负载映射</a> · 2 条</li>
 <li><a href="#group-13">边界：成品性能与微体系结构工作负载</a> · 23 条</li>
 </ol><a href="catalog.csv">下载 CSV</a> · <a href="catalog.json">下载 JSON</a> · 进度与未完成事项（本地研究附件） · <a href="#coverage-limits">已有覆盖与具体缺口</a></nav>
-<p>来源存档与完整性索引（本地研究附件）：18773 条检索/下载记录，18053 个本地文件完成哈希核对，完整性异常 0 项。599/700 条目录记录至少有一个精确URL或相同GitHub repo/ref/path的存档关联。此比例不是研究准确率：入口链接与实际论文/脚本常不同，完整逐字段证据映射仍待补，下载与哈希匹配也不等事实已被来源支持。</p>
+<p>来源存档与完整性索引（本地研究附件）：19237 条检索/下载记录，18511 个本地文件完成哈希核对，完整性异常 0 项。607/711 条目录记录至少有一个精确URL或相同GitHub repo/ref/path的存档关联。此比例不是研究准确率：入口链接与实际论文/脚本常不同，完整逐字段证据映射仍待补，下载与哈希匹配也不等事实已被来源支持。</p>
 <h2>分类与判断方法</h2><p>按“领域阶段 × 任务层次 × 证据成熟度”交叉归类。任务层次包括底层数值或组合优化、性能预测与代理模型、固定工具参数调优、多步工具工作流，以及端到端工程闭环。公开可下载代码、公开可下载数据、可重建标签、独立受保护评分和可商用，分别核验。</p><p>时效性从工艺/规模/规则、基线强度、信息条件、独立评价及实际约束判断。经典基准可以仍适合算法研究；新发布的基准也可能只有弱检查器、内部数据或未完整发布的流程。研究价值判断是分析结论，和来源中直接报告的事实分开。</p>
 <h2>目前已核实的关键区别</h2><ul>
 <li>维护替代与任务饱和分开：<a href="#rtl-masterrtl-power">MasterRTL</a> 作者已明确停止旧仓库维护并推荐 RTL-Timer，因此新工作应优先检查后继实现。此证据支持实现版本替代，不能证明早期功耗预测已解决；其功耗特征还需要 EDA 提取活动率，与纯 RTL 输入分轨。</li>
@@ -716,6 +716,11 @@ body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:
 <tr><td><a href="#rtl-protocolllm-generation">ProtocolLLM / SPI-I2C-UART-AXI one-shot generation</a><br/><small>2506.07945v2（2025-07-15）；Gitfba94a81</small><br/><span class="tag">公开RTL协议生成评测；单轮vanilla/RAG</span></td><td>4协议/9variants：SPI四CPOL/CPHA、I2C7/10bit、UART有/无parity、AXI4Lite一项；natural-language完整module规格，有/无spec-documentRAG。不是全AMBA/任意UART行业合规证明。</td><td>T0单输出Pass@1，Verilatorlint→Yosys/OpenSTA/lib综合面积功耗→paperUVM/波形验收。可综合不等时序协议正确，原生成熟接口IP可作更强工程基线。<p><strong>输出：</strong>SystemVerilog候选、lint/综合报告、paperwaveformpass、areaµm²/powermW；repo汇总metric与paper字段不同，勿混榜。</p></td><td>paper各协议平均variants的lint/synth/waveformPass1。当前src/total.py Score%只累加lintpass+synthpass除2N，完全不含waveform/timing/power/area；100%不是功能通过。62model-protocolsummary行的数/score/可得power-area均值独立复算一致。<p class="muted">有8个zero-byte extractedSV但rawanswer261fields均非空，不能称8个LLM无响应。currentPower(W)与paper mW应×1000，失败缺metric的availablemean不当全部designmean。paper有限波形不是形式全输入协议证明。</p></td></tr>
 <tr><td><a href="#data-protocolllm-generations">ProtocolLLM / public generations and lint-refinement companion</a><br/><small>fixedGitfba94a81；paper2506.07945v2</small><br/><span class="tag">同评测的输出/单轮修复数据；非独立bench</span></td><td>102rawgenerationJSON按model/protocol/RAG分类、22refinedJSON；合计261prompt_/answer_字段对，221extractedHDL、221metrics。四协议同9variants，输出次数不是独立任务数。</td><td>主输出是prompt→answer；optionalrefine把lint报告回传后生成revision。当前没有端到端硬件仿真/可改toolserver的统一多步轨迹；JSON中的长spec context不当工具observation。<p><strong>输出：</strong>正/负候选与lint/综合局部标签，可构造监督生成/修复对；保留rawanswer与extractedcode不同、code为空/语法失败的分母。</p></td><td>62汇总rows按model/protocol重算score一致；评分仅lint+综合，waveformtruth缺失，因此不能将Score100作为functionalpositive训练标签。8zero-byteSV单列，261answer文本均非空。<p class="muted">rawJSON/HDL重复表示同一次生成不能重复统计两条；refined22是局部lint修复而非22独立完整agentepisodes。缺完整评测脚本/函数truth与成本，不宣称高质量全验证训练集。</p></td></tr>
 <tr><td><a href="#rtl-cdm-supergates-method">CDM supergates / multimodal hardware-agent method evaluation</a><br/><small>GLSVLSI2026 DOI10.1145/3787109.3816376</small><br/><span class="tag">一手公开索引页可读的方法选例；全文下载403未取得</span></td><td>四tier共28circuits：Small13来自VerilogEval/RTLLM/CVDP，Medium8含custom，CDM2transistorcase，Multimodal5prosespec；text/PDF/DOCX/audio/video canonicalIR+CDM六cellfamily先验。不是28套新独立芯片数据集。</td><td>LLM+retrieval生成RTL/gates/pmosnmos/SPICE；typedrulecontroller修复；spec-derived确定性TB为主，smokeTB作fallback。外部Verilator/Icarus/Yosys/SymbiYosys/OpenSTA/ngspice做验收，缺binary/library的optionalstage可能跳过。<p><strong>输出：</strong>RTL/netlist/SPICE与SVG layoutpreview、ITRS analytical area/power/delay估计；130–5nm可调估计不是各nodePDK合法GDS或DRCclean签核。</p></td><td>公开一手页Table3：baseline16/28=57.1%、agent27/28=96.4%；13/13、7/8、2/2、5/5。2/2按100%解释，正文99.0%字样不沿用。8bitXOR约192T→136T减29.17%；结构knowledge3/3不等物理证明。<p class="muted">specderived与fallbacksmoke的oracle强度不同，需每caseoracle/跳过stage明细；compilepassingbest不应当全功能pass。CDMcustomlayout仍作者明确openfrontier，SVG/ITRS不是已完成制造布局。</p></td></tr>
+<tr><td><a href="#rtl-asic-agent-bench">ASIC-Agent-Bench / open-ended ASIC engineering milestones</a><br/><small>2508.15940v1（2025-08-21）</small><br/><span class="tag">论文20任务；官方repo当前404、工件未取得</span></td><td>20selectedtasks从DFF/counter/adder、FPU/AES/RISCV/NN，到Wishbonebugfix/memorydebug、AdderDPI、OpenLaneRTLtoGDS与UART/IPM/GPIO-Caravelintegration。Problemstatement+可用sandbox/EDA/documentRAG；跨前后端，不能每一域再算20个独立任务。</td><td>agent自主拆分RTL、测试、debug、hardening、Caravelintegration，多文件允许自由结构。main/verification/hardening/integrationagents协作；论文方法内部多agent不等本轮研究运行了任何agentcode。<p><strong>输出：</strong>RTL/TB、config.json、stdout、GDSII与检查点deliverables；Gemini2.5Pro judge读代码/工件判binarycheckpoints，evaluatorscript另核TB执行完成和输出，judge本身不生成或执行测试。</p></td><td>最终=milestoneimportance加权部分分；20行重算均值ClaudeSonnet4=88、GPT4.1=60.8、Gemini2.5Pro=71.45，非任务成功率。观测100分数10/20、5/20、5/20仍不独立证明全功能。meansteps36.5/29.6/34.75，costUSD4.909/1.882/3.643；99步存在但未见明确预算不能自行断言cap100。<p class="muted">humanreview迭代改judge但未见量化interrater一致性/抽检分母。partialcredit与LLM评审可能重表面工件；每题独立truth/盲评/失败及toolcost需补。本轮仅重算论文数表，不认定全部物理流程真实成功。</p></td></tr>
+<tr><td><a href="#arch-archgym-dram">ArchGym / DRAMGym memory-controller</a><br/><small>2306.08888v1/ISCA2023；Git53f745af</small><br/><span class="tag">数值ML/DSE环境；agent指算法，不是LLMagent</span></td><td>DRAMSys+cloud1/cloud2/stream/randommemorytraces；pagepolicy/scheduler/buffer/refresh等离散参数。</td><td>ACO/GA/BO/RL/RandomWalker统一接口选择数值designpoint，simulator反馈cost；论文共21600hyperparameterexperiments/~1.5Bsimulations是作者聚合声明，本轮未逐run验证。样本budget100/1K/100K/250K，每算法调参成本也需纳入。<p><strong>输出：</strong>设计参数/原生性能cost/优化记录；论文聚合数据用于RandomForestproxy，非自然语言推理或LLMtoolhistory。</p></td><td>energy/power/latency；paperpower目标1W示例。现行reward=target/abs(actual−target)，both乘积，RL再取倒数；不是单调越低power越好，exacttarget可除零；必须核wrapper方向/目标单位。 paper比较跨hyperparameter分布/样本效率，不能只挑单个SOTAseed；2000×proxyinference加速与.61%RMSE为DRAMproxy特定实验，不是所有env或全训练workflow加速。<p class="muted">完整21600experimentdataset与历史logs本轮11文件未核；未把代码可记录数据当现有完整轨迹下载证明。DRAMparser做1e9/1e3数值转换但注释仍写rawunits，配置mW/ns注释不可靠；需随实际simstdout固定单位。</p></td></tr>
+<tr><td><a href="#arch-archgym-timeloop">ArchGym / TimeloopGym accelerator</a><br/><small>2306.08888v1/ISCA2023；Git53f745af</small><br/><span class="tag">数值ML/DSE环境；agent指算法，不是LLMagent</span></td><td>CNNworkloads，例ResNet50/Eyeriss-likehardware；PE/buffer/architectureparameters与Timeloopmapper。</td><td>ACO/GA/BO/RL/RandomWalker统一接口选择数值designpoint，simulator反馈cost；论文共21600hyperparameterexperiments/~1.5Bsimulations是作者聚合声明，本轮未逐run验证。样本budget100/1K/100K/250K，每算法调参成本也需纳入。<p><strong>输出：</strong>设计参数/原生性能cost/优化记录；论文聚合数据用于RandomForestproxy，非自然语言推理或LLMtoolhistory。</p></td><td>energy/area/cycles；currentcost是单侧normalized超限，joint以.001起，失败1500，标量全满足变1e−5；lowerbetter，阈值内进一步优化会被压平。 paper比较跨hyperparameter分布/样本效率，不能只挑单个SOTAseed；2000×proxyinference加速与.61%RMSE为DRAMproxy特定实验，不是所有env或全训练workflow加速。<p class="muted">完整21600experimentdataset与历史logs本轮11文件未核；未把代码可记录数据当现有完整轨迹下载证明。DRAMparser做1e9/1e3数值转换但注释仍写rawunits，配置mW/ns注释不可靠；需随实际simstdout固定单位。</p></td></tr>
+<tr><td><a href="#arch-archgym-farsi">ArchGym / FARSIGym SoC</a><br/><small>2306.08888v1/ISCA2023；Git53f745af</small><br/><span class="tag">数值ML/DSE环境；agent指算法，不是LLMagent</span></td><td>AR/VR/edge-detection/audio-decoder/hpvm-cavaworkloads，硬件资源/映射/互连配置，FARSIcostmodel。</td><td>ACO/GA/BO/RL/RandomWalker统一接口选择数值designpoint，simulator反馈cost；论文共21600hyperparameterexperiments/~1.5Bsimulations是作者聚合声明，本轮未逐run验证。样本budget100/1K/100K/250K，每算法调参成本也需纳入。<p><strong>输出：</strong>设计参数/原生性能cost/优化记录；论文聚合数据用于RandomForestproxy，非自然语言推理或LLMtoolhistory。</p></td><td>power/area/latency；currentdist_to_goal([power,area,latency])，RL倒数，非RLlowerbetter；具体upstreammetric_sel_dis_mode本轮选定文件未包含，不自行编归一化公式。 paper比较跨hyperparameter分布/样本效率，不能只挑单个SOTAseed；2000×proxyinference加速与.61%RMSE为DRAMproxy特定实验，不是所有env或全训练workflow加速。<p class="muted">完整21600experimentdataset与历史logs本轮11文件未核；未把代码可记录数据当现有完整轨迹下载证明。DRAMparser做1e9/1e3数值转换但注释仍写rawunits，配置mW/ns注释不可靠；需随实际simstdout固定单位。</p></td></tr>
+<tr><td><a href="#arch-archgym-maestro">ArchGym / MaestroGym DNN mapping</a><br/><small>2306.08888v1/ISCA2023；Git53f745af</small><br/><span class="tag">数值ML/DSE环境；agent指算法，不是LLMagent</span></td><td>Maestro/GAMMA DNNworkloads，paperResNet18/VGG16、dataflow/mapping探索；不是RTL生成。</td><td>ACO/GA/BO/RL/RandomWalker统一接口选择数值designpoint，simulator反馈cost；论文共21600hyperparameterexperiments/~1.5Bsimulations是作者聚合声明，本轮未逐run验证。样本budget100/1K/100K/250K，每算法调参成本也需纳入。<p><strong>输出：</strong>设计参数/原生性能cost/优化记录；论文聚合数据用于RandomForestproxy，非自然语言推理或LLMtoolhistory。</p></td><td>latency与mapping质量；paper对GA+aging/growth/reordering与vanillaGA比较；当前11选定sourcefiles未含MaestroEnv/scorer，公式以paper层描述，不声称已核该env当前实现。 paper比较跨hyperparameter分布/样本效率，不能只挑单个SOTAseed；2000×proxyinference加速与.61%RMSE为DRAMproxy特定实验，不是所有env或全训练workflow加速。<p class="muted">完整21600experimentdataset与历史logs本轮11文件未核；未把代码可记录数据当现有完整轨迹下载证明。DRAMparser做1e9/1e3数值转换但注释仍写rawunits，配置mW/ns注释不可靠；需随实际simstdout固定单位。</p></td></tr>
 </tbody></table></div>
 <details id="rtl-verilogeval-v1"><summary>VerilogEval v1 · 数字前端/RTL生成</summary><dl>
 <dt>版本/时间</dt><dd>ICCAD2023；release/1.0.0当前commit 4fa0ac4ed70ff1685114c25cd2e4c17cbba6a0c4</dd>
@@ -2881,6 +2886,96 @@ body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:
 <dt>一手来源</dt><dd><ul>
 <li><a href="https://doi.org/10.1145/3787109.3816376">https://doi.org/10.1145/3787109.3816376</a></li>
 </ul></dd></dl></details>
+<details id="rtl-asic-agent-bench"><summary>ASIC-Agent-Bench / open-ended ASIC engineering milestones · 数字前端与后端/设计验证硬化agent</summary><dl>
+<dt>版本/时间</dt><dd>2508.15940v1（2025-08-21）</dd>
+<dt>对象类型</dt><dd>论文20任务；官方repo当前404、工件未取得</dd>
+<dt>模型工作的层次</dt><dd>数字RTL/测试/硬化与SoC集成agent</dd>
+<dt>输入</dt><dd>20selectedtasks从DFF/counter/adder、FPU/AES/RISCV/NN，到Wishbonebugfix/memorydebug、AdderDPI、OpenLaneRTLtoGDS与UART/IPM/GPIO-Caravelintegration。Problemstatement+可用sandbox/EDA/documentRAG；跨前后端，不能每一域再算20个独立任务。</dd>
+<dt>任务设定</dt><dd>agent自主拆分RTL、测试、debug、hardening、Caravelintegration，多文件允许自由结构。main/verification/hardening/integrationagents协作；论文方法内部多agent不等本轮研究运行了任何agentcode。</dd>
+<dt>输出</dt><dd>RTL/TB、config.json、stdout、GDSII与检查点deliverables；Gemini2.5Pro judge读代码/工件判binarycheckpoints，evaluatorscript另核TB执行完成和输出，judge本身不生成或执行测试。</dd>
+<dt>考核指标</dt><dd>最终=milestoneimportance加权部分分；20行重算均值ClaudeSonnet4=88、GPT4.1=60.8、Gemini2.5Pro=71.45，非任务成功率。观测100分数10/20、5/20、5/20仍不独立证明全功能。meansteps36.5/29.6/34.75，costUSD4.909/1.882/3.643；99步存在但未见明确预算不能自行断言cap100。</dd>
+<dt>基线</dt><dd>同ASIC-Agent换三baseLLMs对照；没有论文外独立checker/成熟人工脚本/OpenLane原生flow等预算强基线。presenceofconfig/GDSmilestone≠等价、全部DRC/LVS、时序和PPA合格。</dd>
+<dt>工具、数据与访问条件</dt><dd>paper全文可读，作者给的AUCOHL/ASIC-Agent-Bench及ASIC-Agent当前官方入口404；不是搜到占位别名就证明artifact开放。未取得冻结20taskmanifest/权重/checkpointjudgeprompts、容器和原始runlogs。GitHubsearchAPI本轮403ratelimit后停止请求未绕过。</dd>
+<dt>限制与可比性</dt><dd>humanreview迭代改judge但未见量化interrater一致性/抽检分母。partialcredit与LLM评审可能重表面工件；每题独立truth/盲评/失败及toolcost需补。本轮仅重算论文数表，不认定全部物理流程真实成功。</dd>
+<dt>现实价值判断</dt><dd>研究判断：覆盖多文件工程、测试与SoC集成的agent任务设定，仍有工业价值；成熟OpenLane完成优化求解，agent价值应体现在正确接线、配置、恢复与达成独立验收。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；426固定Gitblobs、原始论文与评分公式静态核；仅自写解析/算术，没有运行第三方模型、仿真、EDA或评测器。</dd>
+<dt>下一步核验</dt><dd>按各工作许可取得冻结taskmanifest/评分器/全部失败与成本ledger，核gold隔离、oracle独立性、native强基线与同预算对照；受限或未发布内容保持边界。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://arxiv.org/html/2508.15940v1">https://arxiv.org/html/2508.15940v1</a></li>
+<li><a href="https://github.com/AUCOHL/ASIC-Agent-Bench">https://github.com/AUCOHL/ASIC-Agent-Bench</a></li>
+</ul></dd></dl></details>
+<details id="arch-archgym-dram"><summary>ArchGym / DRAMGym memory-controller · 数字前端/架构数值优化与原生工具环境</summary><dl>
+<dt>版本/时间</dt><dd>2306.08888v1/ISCA2023；Git53f745af</dd>
+<dt>对象类型</dt><dd>数值ML/DSE环境；agent指算法，不是LLMagent</dd>
+<dt>模型工作的层次</dt><dd>架构数值设计空间探索/原生优化基线</dd>
+<dt>输入</dt><dd>DRAMSys+cloud1/cloud2/stream/randommemorytraces；pagepolicy/scheduler/buffer/refresh等离散参数。</dd>
+<dt>任务设定</dt><dd>ACO/GA/BO/RL/RandomWalker统一接口选择数值designpoint，simulator反馈cost；论文共21600hyperparameterexperiments/~1.5Bsimulations是作者聚合声明，本轮未逐run验证。样本budget100/1K/100K/250K，每算法调参成本也需纳入。</dd>
+<dt>输出</dt><dd>设计参数/原生性能cost/优化记录；论文聚合数据用于RandomForestproxy，非自然语言推理或LLMtoolhistory。</dd>
+<dt>考核指标</dt><dd>energy/power/latency；paperpower目标1W示例。现行reward=target/abs(actual−target)，both乘积，RL再取倒数；不是单调越低power越好，exacttarget可除零；必须核wrapper方向/目标单位。 paper比较跨hyperparameter分布/样本效率，不能只挑单个SOTAseed；2000×proxyinference加速与.61%RMSE为DRAMproxy特定实验，不是所有env或全训练workflow加速。</dd>
+<dt>基线</dt><dd>成熟ACO/GA/BO/RW/RL本身就是强原生优化基线；论文“hyperparameterlottery”说明充分调参可各自达target，不证明所有算法在任意预算/架构性能相等。nativeoptimization成熟也不等agent集成/目标设定已解。</dd>
+<dt>工具、数据与访问条件</dt><dd>11selectedsourceblobs/licensereadme/env/config已核，rootApache2；全tree8389blobs包含大量bundledsim上游，不宣称全核。paper与README列表支持4env，README“三个simulator”是过期文字；AstraSim/CFU/Vizier为WIP。各sim/data许可另核。</dd>
+<dt>限制与可比性</dt><dd>完整21600experimentdataset与历史logs本轮11文件未核；未把代码可记录数据当现有完整轨迹下载证明。DRAMparser做1e9/1e3数值转换但注释仍写rawunits，配置mW/ns注释不可靠；需随实际simstdout固定单位。</dd>
+<dt>现实价值判断</dt><dd>研究判断：应纳入行业benchmark地图的传统数值DSE环境/agent强基线，不能因名称含Agent/Gym归到LLMagentbench或可训练对话；四env同一框架家族但不同任务域。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；426固定Gitblobs、原始论文与评分公式静态核；仅自写解析/算术，没有运行第三方模型、仿真、EDA或评测器。</dd>
+<dt>下一步核验</dt><dd>按各工作许可取得冻结taskmanifest/评分器/全部失败与成本ledger，核gold隔离、oracle独立性、native强基线与同预算对照；受限或未发布内容保持边界。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://arxiv.org/html/2306.08888v1">https://arxiv.org/html/2306.08888v1</a></li>
+<li><a href="https://github.com/srivatsankrishnan/oss-arch-gym/tree/53f745af87b256794c0cd712c2b8e77aab74b4a6">https://github.com/srivatsankrishnan/oss-arch-gym/tree/53f745af87b256794c0cd712c2b8e77aab74b4a6</a></li>
+</ul></dd></dl></details>
+<details id="arch-archgym-timeloop"><summary>ArchGym / TimeloopGym accelerator · 数字前端/架构数值优化与原生工具环境</summary><dl>
+<dt>版本/时间</dt><dd>2306.08888v1/ISCA2023；Git53f745af</dd>
+<dt>对象类型</dt><dd>数值ML/DSE环境；agent指算法，不是LLMagent</dd>
+<dt>模型工作的层次</dt><dd>架构数值设计空间探索/原生优化基线</dd>
+<dt>输入</dt><dd>CNNworkloads，例ResNet50/Eyeriss-likehardware；PE/buffer/architectureparameters与Timeloopmapper。</dd>
+<dt>任务设定</dt><dd>ACO/GA/BO/RL/RandomWalker统一接口选择数值designpoint，simulator反馈cost；论文共21600hyperparameterexperiments/~1.5Bsimulations是作者聚合声明，本轮未逐run验证。样本budget100/1K/100K/250K，每算法调参成本也需纳入。</dd>
+<dt>输出</dt><dd>设计参数/原生性能cost/优化记录；论文聚合数据用于RandomForestproxy，非自然语言推理或LLMtoolhistory。</dd>
+<dt>考核指标</dt><dd>energy/area/cycles；currentcost是单侧normalized超限，joint以.001起，失败1500，标量全满足变1e−5；lowerbetter，阈值内进一步优化会被压平。 paper比较跨hyperparameter分布/样本效率，不能只挑单个SOTAseed；2000×proxyinference加速与.61%RMSE为DRAMproxy特定实验，不是所有env或全训练workflow加速。</dd>
+<dt>基线</dt><dd>成熟ACO/GA/BO/RW/RL本身就是强原生优化基线；论文“hyperparameterlottery”说明充分调参可各自达target，不证明所有算法在任意预算/架构性能相等。nativeoptimization成熟也不等agent集成/目标设定已解。</dd>
+<dt>工具、数据与访问条件</dt><dd>11selectedsourceblobs/licensereadme/env/config已核，rootApache2；全tree8389blobs包含大量bundledsim上游，不宣称全核。paper与README列表支持4env，README“三个simulator”是过期文字；AstraSim/CFU/Vizier为WIP。各sim/data许可另核。</dd>
+<dt>限制与可比性</dt><dd>完整21600experimentdataset与历史logs本轮11文件未核；未把代码可记录数据当现有完整轨迹下载证明。DRAMparser做1e9/1e3数值转换但注释仍写rawunits，配置mW/ns注释不可靠；需随实际simstdout固定单位。</dd>
+<dt>现实价值判断</dt><dd>研究判断：应纳入行业benchmark地图的传统数值DSE环境/agent强基线，不能因名称含Agent/Gym归到LLMagentbench或可训练对话；四env同一框架家族但不同任务域。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；426固定Gitblobs、原始论文与评分公式静态核；仅自写解析/算术，没有运行第三方模型、仿真、EDA或评测器。</dd>
+<dt>下一步核验</dt><dd>按各工作许可取得冻结taskmanifest/评分器/全部失败与成本ledger，核gold隔离、oracle独立性、native强基线与同预算对照；受限或未发布内容保持边界。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://arxiv.org/html/2306.08888v1">https://arxiv.org/html/2306.08888v1</a></li>
+<li><a href="https://github.com/srivatsankrishnan/oss-arch-gym/tree/53f745af87b256794c0cd712c2b8e77aab74b4a6">https://github.com/srivatsankrishnan/oss-arch-gym/tree/53f745af87b256794c0cd712c2b8e77aab74b4a6</a></li>
+</ul></dd></dl></details>
+<details id="arch-archgym-farsi"><summary>ArchGym / FARSIGym SoC · 数字前端/架构数值优化与原生工具环境</summary><dl>
+<dt>版本/时间</dt><dd>2306.08888v1/ISCA2023；Git53f745af</dd>
+<dt>对象类型</dt><dd>数值ML/DSE环境；agent指算法，不是LLMagent</dd>
+<dt>模型工作的层次</dt><dd>架构数值设计空间探索/原生优化基线</dd>
+<dt>输入</dt><dd>AR/VR/edge-detection/audio-decoder/hpvm-cavaworkloads，硬件资源/映射/互连配置，FARSIcostmodel。</dd>
+<dt>任务设定</dt><dd>ACO/GA/BO/RL/RandomWalker统一接口选择数值designpoint，simulator反馈cost；论文共21600hyperparameterexperiments/~1.5Bsimulations是作者聚合声明，本轮未逐run验证。样本budget100/1K/100K/250K，每算法调参成本也需纳入。</dd>
+<dt>输出</dt><dd>设计参数/原生性能cost/优化记录；论文聚合数据用于RandomForestproxy，非自然语言推理或LLMtoolhistory。</dd>
+<dt>考核指标</dt><dd>power/area/latency；currentdist_to_goal([power,area,latency])，RL倒数，非RLlowerbetter；具体upstreammetric_sel_dis_mode本轮选定文件未包含，不自行编归一化公式。 paper比较跨hyperparameter分布/样本效率，不能只挑单个SOTAseed；2000×proxyinference加速与.61%RMSE为DRAMproxy特定实验，不是所有env或全训练workflow加速。</dd>
+<dt>基线</dt><dd>成熟ACO/GA/BO/RW/RL本身就是强原生优化基线；论文“hyperparameterlottery”说明充分调参可各自达target，不证明所有算法在任意预算/架构性能相等。nativeoptimization成熟也不等agent集成/目标设定已解。</dd>
+<dt>工具、数据与访问条件</dt><dd>11selectedsourceblobs/licensereadme/env/config已核，rootApache2；全tree8389blobs包含大量bundledsim上游，不宣称全核。paper与README列表支持4env，README“三个simulator”是过期文字；AstraSim/CFU/Vizier为WIP。各sim/data许可另核。</dd>
+<dt>限制与可比性</dt><dd>完整21600experimentdataset与历史logs本轮11文件未核；未把代码可记录数据当现有完整轨迹下载证明。DRAMparser做1e9/1e3数值转换但注释仍写rawunits，配置mW/ns注释不可靠；需随实际simstdout固定单位。</dd>
+<dt>现实价值判断</dt><dd>研究判断：应纳入行业benchmark地图的传统数值DSE环境/agent强基线，不能因名称含Agent/Gym归到LLMagentbench或可训练对话；四env同一框架家族但不同任务域。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；426固定Gitblobs、原始论文与评分公式静态核；仅自写解析/算术，没有运行第三方模型、仿真、EDA或评测器。</dd>
+<dt>下一步核验</dt><dd>按各工作许可取得冻结taskmanifest/评分器/全部失败与成本ledger，核gold隔离、oracle独立性、native强基线与同预算对照；受限或未发布内容保持边界。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://arxiv.org/html/2306.08888v1">https://arxiv.org/html/2306.08888v1</a></li>
+<li><a href="https://github.com/srivatsankrishnan/oss-arch-gym/tree/53f745af87b256794c0cd712c2b8e77aab74b4a6">https://github.com/srivatsankrishnan/oss-arch-gym/tree/53f745af87b256794c0cd712c2b8e77aab74b4a6</a></li>
+</ul></dd></dl></details>
+<details id="arch-archgym-maestro"><summary>ArchGym / MaestroGym DNN mapping · 数字前端/架构数值优化与原生工具环境</summary><dl>
+<dt>版本/时间</dt><dd>2306.08888v1/ISCA2023；Git53f745af</dd>
+<dt>对象类型</dt><dd>数值ML/DSE环境；agent指算法，不是LLMagent</dd>
+<dt>模型工作的层次</dt><dd>架构数值设计空间探索/原生优化基线</dd>
+<dt>输入</dt><dd>Maestro/GAMMA DNNworkloads，paperResNet18/VGG16、dataflow/mapping探索；不是RTL生成。</dd>
+<dt>任务设定</dt><dd>ACO/GA/BO/RL/RandomWalker统一接口选择数值designpoint，simulator反馈cost；论文共21600hyperparameterexperiments/~1.5Bsimulations是作者聚合声明，本轮未逐run验证。样本budget100/1K/100K/250K，每算法调参成本也需纳入。</dd>
+<dt>输出</dt><dd>设计参数/原生性能cost/优化记录；论文聚合数据用于RandomForestproxy，非自然语言推理或LLMtoolhistory。</dd>
+<dt>考核指标</dt><dd>latency与mapping质量；paper对GA+aging/growth/reordering与vanillaGA比较；当前11选定sourcefiles未含MaestroEnv/scorer，公式以paper层描述，不声称已核该env当前实现。 paper比较跨hyperparameter分布/样本效率，不能只挑单个SOTAseed；2000×proxyinference加速与.61%RMSE为DRAMproxy特定实验，不是所有env或全训练workflow加速。</dd>
+<dt>基线</dt><dd>成熟ACO/GA/BO/RW/RL本身就是强原生优化基线；论文“hyperparameterlottery”说明充分调参可各自达target，不证明所有算法在任意预算/架构性能相等。nativeoptimization成熟也不等agent集成/目标设定已解。</dd>
+<dt>工具、数据与访问条件</dt><dd>11selectedsourceblobs/licensereadme/env/config已核，rootApache2；全tree8389blobs包含大量bundledsim上游，不宣称全核。paper与README列表支持4env，README“三个simulator”是过期文字；AstraSim/CFU/Vizier为WIP。各sim/data许可另核。</dd>
+<dt>限制与可比性</dt><dd>完整21600experimentdataset与历史logs本轮11文件未核；未把代码可记录数据当现有完整轨迹下载证明。DRAMparser做1e9/1e3数值转换但注释仍写rawunits，配置mW/ns注释不可靠；需随实际simstdout固定单位。</dd>
+<dt>现实价值判断</dt><dd>研究判断：应纳入行业benchmark地图的传统数值DSE环境/agent强基线，不能因名称含Agent/Gym归到LLMagentbench或可训练对话；四env同一框架家族但不同任务域。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；426固定Gitblobs、原始论文与评分公式静态核；仅自写解析/算术，没有运行第三方模型、仿真、EDA或评测器。</dd>
+<dt>下一步核验</dt><dd>按各工作许可取得冻结taskmanifest/评分器/全部失败与成本ledger，核gold隔离、oracle独立性、native强基线与同预算对照；受限或未发布内容保持边界。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://arxiv.org/html/2306.08888v1">https://arxiv.org/html/2306.08888v1</a></li>
+<li><a href="https://github.com/srivatsankrishnan/oss-arch-gym/tree/53f745af87b256794c0cd712c2b8e77aab74b4a6">https://github.com/srivatsankrishnan/oss-arch-gym/tree/53f745af87b256794c0cd712c2b8e77aab74b4a6</a></li>
+</ul></dd></dl></details>
 <h2 id="group-1">数字验证：断言、形式证明、修复与安全</h2><div class="tablewrap"><table><thead><tr><th>名称与版本</th><th>输入</th><th>任务与输出</th><th>指标与限制</th></tr></thead><tbody>
 <tr><td><a href="#verify-fveval-human">FVEval NL2SVA-Human</a><br/><small>原paper2024/25；冻结root 141afe7dcf03a0b86547b94657d9d610b6087724</small><br/><span class="tag">公开题集+形式评测</span></td><td>79row/13design TB（counter/四arbiter/多个fifo/fsm/ram等）；原CSV43种完全相同prompt文本、47种完全相同ref文本和13TB，重复跨TB不自动等语义重复题。task_id字段仅38种，正式UID加design_name与trial后区分，不误报79ID冲突。给NL描述/信号/参数/部分TB、ICL或CoT按配置选择。</td><td>生成指定SVA，先把原TB+ref+模型assertion组合做语法elaboration，再clear-all调用PEC比较reference/model性质；不是证明参考性质在原RTL上成立。<p><strong>输出：</strong>SVA断言</p></td><td>syntax=未匹配小写“syntax error”；strict=functionality仅stdout含Full equivalence；relaxed=full或任何方向implies均1，未识别为0。方向不区分，relaxed不等同样强规格。Human取expression按tb_reset)末段/第一个);截断，信号从prompt单引号词和outputTB参数名收集；Tcl把clk/rst实参均传空字符串，内部默认/parameter语义在opaque核心未核。另报evaluate BLEU/ROUGE-L/exactmatch，不替代语义。pass_at_k实现1−C(n−c,k)/C(n,k)的无放回估计，c必须来自同一明确二元gate。<p class="muted">当前wrapper只返回stdout，不按returncode/stderr硬门计分且subprocess无timeout，父processjoin也无限期；缺TASK_ID使评估抛错，child无queue输出需与expectedmanifest核齐，不能默默按收到行算分。syntax只查“syntax error”字样，缺此字符串得1不构成成功elaboration证明。以上是源码边界，未证明任何已发表结果发生错计。 79row非79独立IP、相同family不同约束宜同group；本参考等价只在已定义的信号/表达式/PEC语义下。原时钟/reset外层未传不能擅自声称保持原TB所有assumptions；未知/timeout没有full/implies不当proven。</p></td></tr>
 <tr><td><a href="#verify-fveval-machine">FVEval NL2SVA-Machine</a><br/><small>原paper2024/25；冻结root 141afe7dcf03a0b86547b94657d9d610b6087724</small><br/><span class="tag">生成式公开题集</span></td><td>300row/300不同prompt与ref，只有1种dummyTB；taskids前缀3/4各150。synthetic逻辑/时序表达式+LLM生成英文并用另一LLM筛选；不是300真实IP或完全人工独立gold。</td><td>翻译合成NL到SVA；syntaxelaboration后clear-all送PEC，与原生成reference的逻辑/时序比较。current generator outer logic_depth3/4未传generate_assertion()的max_depth（默认3），故标签3/4不能直接证明两真实深度分布。固定CSV可用与重生成可精确复现是两件事。<p><strong>输出：</strong>SVA</p></td><td>与Human同strict Full equivalence/relaxed任一implies、syntax字符串门；Machine按clk)末段和第一个);抽expression，signal_list从ref的sig_*去重得出。clk/rst空实参传PEC，内部默认未知。BLEU/ROUGE/exactmatch另轨；pass@k无放回公式要求明确成功gate，不把partial/full相加。<p class="muted">当前wrapper只返回stdout，不按returncode/stderr硬门计分且subprocess无timeout，父processjoin也无限期；缺TASK_ID使评估抛错，child无queue输出需与expectedmanifest核齐，不能默默按收到行算分。syntax只查“syntax error”字样，缺此字符串得1不构成成功elaboration证明。以上是源码边界，未证明任何已发表结果发生错计。 合成语言由gpt4o写/gpt4-0125-previewjudge筛（原生成器），即使seed固定仍有API/judge随机条件；未重新生成。dummyTB不是全工业设计，逻辑深度tag不可当深度证据；text/semantic重复与未见操作组合要另核。</p></td></tr>
@@ -4366,6 +4461,12 @@ body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:
 <tr><td><a href="#data-analoggym-opt-historical">AnalogGym-Opt / 358234 historical performance observations</a><br/><small>repo10093e3 / dataset schema1.1；CSV压缩/展开SHA256与Gitblob已核</small><br/><span class="tag">同源历史性能表；非完整尺寸监督/agent轨迹</span></td><td>实际358234行、18放大器拓扑、73MAT性能源表；目录标签22/180nm与VDD/VCM/CL/run、generation/index+17性能字段、稳定recordID/sourcehash。未公开原MAT及配套TD/TBM尺寸参数表。</td><td>可作性能检索、质量分析/阈值筛选、度量关系研究、LLM按需读SQL；缺器件W/L等输入时不能直接做完整尺寸→性能surrogate训练或动作重放。需要另定义按source/run/topology分割，随机行分割会泄漏代际相关/重复profile。<p><strong>输出：</strong>CSV/18 JSONL/索引SQLite三种表示；只独立读全CSV并核压缩/展开官方hash及Gitblob，不把三格式重复计3套数据。所有原有限数保留，明确flag而非静默丢异常。</p></td><td>独立重算125974 flagged/232260无flag；负SR40444、SR=-1疑sentinel39684、负FOML40444、settling字段相等86290。源内19numeric列无完全重复/无nonfinite；17performance合317619 source-local exactprofile，不等317619独立电路或可行设计。<p class="muted">chip_area原源sqrt(abs(area))不是物理面积；FOM_AW固定1500e-12而非每目录CL、noise/TC/settling定义和真实PVT不完整。此历史表不是当前SKY130ngspice结果，亦非paper所有sizing/OP/PVT结构化训练记录的已证发布。</p></td></tr>
 <tr><td><a href="#analog-atlas-sar-method">ATLAS / template-constrained SAR ADC generation proof of concept</a><br/><small>arXiv2607.14165v1；paper/source已读</small><br/><span class="tag">SAR ADC方法选例；不是穷举多模型benchmark</span></td><td>主GPDK45nm 8bit/fs3.33MHz/fclk20MHz“synchronouslowpower”；4bit20MHz、10bit2.5MHz变体；TSMC65迁移另case。expert-curatedcomparator/SARlogic/capDAC模板与文献kNNk5检索，不是无先验自由生成。</td><td>Planner检索expertknowledge、Selector选模板、Integrator组网、BitModifier扩位、TestbenchCreator改模板、Debugger修语法；Sizer提W/L/m/nf/C与范围，Sobol+GP/qParEGO原生多目标BO负责数值搜索。主GPT4o、10bitModifier Gemini3.1。<p><strong>输出：</strong>可仿真schematic/netlist/ADC重构谱指标和尺寸；未包含layout/PEX/DRC/LVS/PVT/硅测。TSMC65由自定义primitive映射+localoptimizer完成，为保护foundrydata不运行LLM生成流程。</p></td><td>8bit45nm目标ENOB7.5/SINAD45/SFDR50/THD≤−50dB/power≤8µW，报7.59/47.5/55.6/−51.5/6；65nm报7.82/48.8/56.5/−52.5/5.7。4bit目标3.7/24/31.5/≤−28/≤25，报3.86/25/33.6/−29.8/21.1。<p class="muted">humanexpert会修testbench，idealDAC重构用于谱指标，不是全无人oracle。power原文average DAC/comparator/SARlogic，需完整测试台确认时间平均/全ADC求和口径，不擅算修正倍数；budget/失败分母/cost未全披露。</p></td></tr>
 <tr><td><a href="#analog-panda-intent-layout">PANDA / intent-to-layout skills and two real-chain cases</a><br/><small>arXiv2606.15052v1；repo9e53e43 currentflow与paper版本分开</small><br/><span class="tag">任务handoff方法与示范流程；非固定多题公开benchmark</span></td><td>七Skill覆盖topologygeneration/posttopologydecision/sizing/placementplanning/placement/routingplanning/routing；JSON handoffs显式连接native工具。paper OTA+comparator两案例，currentREADME为three-stageOTA与StrongARM真实主机案例，不能默认同snapshot/电路。</td><td>LLM生成结构/规划约束/尺寸变量，数值BO/Spectre/PCell/place-routekernels做优化和布局，LVS/PEX adapter连接反馈；每attempt独立工件与状态。smokeadapter仅编排测试，实际商业host依赖不公开。<p><strong>输出：</strong>topology.json/sizing.json/pl.json/rt.json、PCell GDS/route/verificationmanifest/PEXperformance，模型决策artifact与nativegenerator产物分开；returncode0不等routeDRC成功。</p></td><td>paper OTAintentgain&gt;75dB/PM&gt;60°/UGB&gt;8MHz；pre79.07/67.47/10.84，post76.11/65.3/4.192，因此后仿UGB未过。power411.2→435.2µW；comparator469.9→606.6nW、delay1→1.447ns，不宣称全指标改善或全部specclosure。<p class="muted">currentlayoutmatchedLVS/PEX完成声明与topology-sourceexactLVS分开：后者仍因MP_STAGE3_LOAD PCell表达式不匹配阻塞，不能叫源电路等价已全部验收。缺同预算强基线/固定任务pack/全失败ledger/历史LLM轨迹，两个成功链也有规格边界。</p></td></tr>
+<tr><td><a href="#analog-razavi-direct">Razavi-Bench / direct multimodal QA</a><br/><small>Git223ce918 currentrelease；Fall2025/Spring2026题源</small><br/><span class="tag">同50题的直接多模态QA；不是三套独立数据</span></td><td>同50multimodalcircuitquestions，Part1 30/Part2 20；文字题与PNG图。直接送给vision-capablemodel。</td><td>解读拓扑/工作机制、数学推导与数值电路分析。单轮直接最终答复，reasoning/token/retrybudget与模型配置须记录。<p><strong>输出：</strong>自然语言/公式最终答案；netlists、scratch与工具logs不直接得分。逐答hash、judge/gold/rubrichash与tokenusage用于记录一致性，不构成物理电路真实性证明。</p></td><td>软件judge给0–4整数，score%=mean(score)/4×100；满分比例score==4另列，部分分不是二值Pass@1。judgeCLI仅打印已评分均值，但发布构建要求完整task×rollout答案/score/token并校hash，显式unanswered填0，不能简单说整站删失败。成本统计包含已付费重试，selectedanswer tokens另列。<p class="muted">公开网页/仓库可读不等可训练；同50题三设置共享血缘。NGSPICE skill不是工业PEX/PVT/DRC/LVS验证；真实完整tooltrajectory公开程度未定位。历史模型/裁判更新后需固定版本，不能拿新榜覆盖旧榜。</p></td></tr>
+<tr><td><a href="#analog-razavi-agentic">Razavi-Bench / file-based agentic QA</a><br/><small>Git223ce918 currentrelease；Fall2025/Spring2026题源</small><br/><span class="tag">同50题的文件agent协议；不是三套独立数据</span></td><td>同50multimodalcircuitquestions，Part1 30/Part2 20；文字题与PNG图。/app/instruction.md+figurefiles，agent写/app/answer.md；不把gold/rubric/sourcearticle/judgedata给agent。</td><td>解读拓扑/工作机制、数学推导与数值电路分析。agent可用shell/files/工具处理，固定最终answer.md验收；harness、工具与token/时间预算应分别列。<p><strong>输出：</strong>自然语言/公式最终答案；netlists、scratch与工具logs不直接得分。逐答hash、judge/gold/rubrichash与tokenusage用于记录一致性，不构成物理电路真实性证明。</p></td><td>软件judge给0–4整数，score%=mean(score)/4×100；满分比例score==4另列，部分分不是二值Pass@1。judgeCLI仅打印已评分均值，但发布构建要求完整task×rollout答案/score/token并校hash，显式unanswered填0，不能简单说整站删失败。成本统计包含已付费重试，selectedanswer tokens另列。<p class="muted">公开网页/仓库可读不等可训练；同50题三设置共享血缘。NGSPICE skill不是工业PEX/PVT/DRC/LVS验证；真实完整tooltrajectory公开程度未定位。历史模型/裁判更新后需固定版本，不能拿新榜覆盖旧榜。</p></td></tr>
+<tr><td><a href="#analog-razavi-spice">Razavi-Bench / ngspice-SKY130 assisted agentic QA</a><br/><small>Git223ce918 currentrelease；Fall2025/Spring2026题源</small><br/><span class="tag">同50题的仿真skill辅助协议；不是三套独立数据</span></td><td>同50multimodalcircuitquestions，Part1 30/Part2 20；文字题与PNG图。/app/instruction.md+figurefiles，agent写/app/answer.md；不把gold/rubric/sourcearticle/judgedata给agent。另允许ngspice+SKY130subset模型/skill；不是完整工艺签核PDK。</td><td>解读拓扑/工作机制、数学推导与数值电路分析。agent可用shell/files/工具处理，固定最终answer.md验收；harness、工具与token/时间预算应分别列。仿真由agent选择是否使用，bench仍评分最终答复，不自动以SPICE结果替代评分rubric。<p><strong>输出：</strong>自然语言/公式最终答案；netlists、scratch与工具logs不直接得分。逐答hash、judge/gold/rubrichash与tokenusage用于记录一致性，不构成物理电路真实性证明。</p></td><td>软件judge给0–4整数，score%=mean(score)/4×100；满分比例score==4另列，部分分不是二值Pass@1。judgeCLI仅打印已评分均值，但发布构建要求完整task×rollout答案/score/token并校hash，显式unanswered填0，不能简单说整站删失败。成本统计包含已付费重试，selectedanswer tokens另列。<p class="muted">公开网页/仓库可读不等可训练；同50题三设置共享血缘。NGSPICE skill不是工业PEX/PVT/DRC/LVS验证；真实完整tooltrajectory公开程度未定位。历史模型/裁判更新后需固定版本，不能拿新榜覆盖旧榜。</p></td></tr>
+<tr><td><a href="#analog-analogsage-paper10">AnalogSAGE v1 / 10-opamp topology-selection and sizing study</a><br/><small>2512.22435v1（2025-12-27）</small><br/><span class="tag">论文10任务协议；与现行扩展仓库分版</span></td><td>10opamp规格任务、50候选拓扑，SKY130/ngspice；从1955–2024约10000ISSCC论文构建的知识RAG，Gemini2.5Flash与embedding检索。任务是选拓扑并设参数，不是从任意文本直接完成签核layout。</td><td>每任务5独立trial，每trial最多3reasoningiterations；LLM选择候选/给参数范围，nativeBO/GA执行尺寸搜索，失败后反馈并换拓扑/改候选。Pass@1的“一次”是整个可迭代优化trial，不是一通LLM或一次SPICE。<p><strong>输出：</strong>候选拓扑、尺寸、仿真指标与满足规格标记；论文Table3逐任务5trial比例。</p></td><td>Table3为8题5/5、2题4/5，总48/50=96%trialPass@1；“overallpassrate100%”指10/10任务至少1trial成功，不是50/50。平均搜索空间比.26约3.85倍缩小，不等同实际runtime/SPICEcalls快4倍。<p class="muted">paperTable2 Task6/7打印七项spec相同，但当前两题targets/prompts不同，不能仅由表格认定真实重复。没有全50trial的数值SPICE/参数/netlist/LLM动作ledger核物理真实性；nominalspec不等PEX/PVT。</p></td></tr>
+<tr><td><a href="#analog-analogsage-current52">AnalogSAGE current / 52 mixed-source circuit tasks and summary logs</a><br/><small>Git8fd72e23 currentrelease</small><br/><span class="tag">公开扩展任务/聚合反馈；复用AnalogGym与AutoSizer</span></td><td>52prompt/filterrows：40opamp+6LDO+6bandgap；25proposed(A15/L5/B5)+16AnalogGym+11AutoSizer，后27为复用源任务。86topologylibrary=50opamp/13LDO/23bandgap，3seedmemories。52不是52新独立benchmark。</td><td>配置默认最多3designiterations、topK5；对选中未试topology尺寸搜索150simulations，上来40LLM-guidedsims，20步刷新/5LLMsamples；原候选与refinedcandidate可能各做优化，150不能当整个episode总成本。ASTwhitelist把受限PySpice声明转netlist，并非直接执行生成类。<p><strong>输出：</strong>当前52evalLog每题15result，共780trial/704solved；每trial仅iters中failure/success与solved，无每次数值measurement、完整deck、动作或provider记录。不是780全长agent轨迹。</p></td><td>独立复算52行n/c、Pass@1与组合Pass@5均匹配两位小数；总704/780=90.2564%trial成功。A1..10当前146/150=97.3333%与paper48/50不同版本。objective=−4Σ单侧归一化spec违例，硬pass另查全部真实约束；missing/nonfinite负罚。跨目标未计入约束的质量不能由高reward推定。<p class="muted">聚合solved由作者运行标签而非本轮独立SPICE重算；AST/端口/PDK/加载gate只证结构可载入，不证明全电学spec。52任务不同来源/重复拓扑分组；不得混入训练检索后用同题无污染宣称泛化。</p></td></tr>
+<tr><td><a href="#analog-circuit-numeric-robustness">CIRCUIT / numerical circuit QA and grouped robustness</a><br/><small>2502.07980v1（2025-02-11）</small><br/><span class="tag">论文定义数据；尚未公开可取得完整题库</span></td><td>510QA=102templates×5不同numericalsetups；93templates带图，79带修改过语法的netlists（对应395题），四域basic/analog/power/RF、课程级别1/3/5。伪SPICE用于方向/目标语义，不应假设可直接执行。</td><td>zero/oneshot±netlist解答单一数值，输出六位小数、regex提取；GPT4turbo/GPT4o/Gemini1.5Pro max1536tokens。无netlist全510、部分带netlist实验仅395，比较须保持相同分母；不含toolagent交互。<p><strong>输出：</strong>最终数值、人工数学/格式/推理/拓扑错误审查。图和netlist是否提供是输入处理条件，不是独立数据集。</p></td><td>自动正确=绝对差&lt;.001（指定单位，非相对误差）；global=/510或所用subset。特殊pass@k/5=至少k个不同参数setup答对的template比例(/102)，不是常用模型重采样Pass@k。headline48.04%=245/510、全部5/5template27.45%=28/102为整数重建，不据此假设所有promptsetting相同。<p class="muted">五参数变体高度同源，训练/测试需按template分组；固定.001对各单位尺度含义不同。没有公开逐题数据就不能完整复现245正确的身份/regex失败分母；2024模型低分不证明2026仍未饱和。</p></td></tr>
 </tbody></table></div>
 <details id="analog-analoggym"><summary>AnalogGym · 模拟前端/固定拓扑尺寸优化</summary><dl>
 <dt>版本/时间</dt><dd>ICCAD24 paper；current commit 0a9d1390ade361e2b4a2d33181e22367edbb8afc，README修订FOM/电压与ngspice要求</dd>
@@ -6431,6 +6532,113 @@ body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:
 <dt>一手来源</dt><dd><ul>
 <li><a href="https://arxiv.org/html/2606.15052v1">https://arxiv.org/html/2606.15052v1</a></li>
 <li><a href="https://github.com/PKU-IDEA/PANDA/tree/9e53e43c0d29bdc8c0f326640b9d66c7075e841b">https://github.com/PKU-IDEA/PANDA/tree/9e53e43c0d29bdc8c0f326640b9d66c7075e841b</a></li>
+</ul></dd></dl></details>
+<details id="analog-razavi-direct"><summary>Razavi-Bench / direct multimodal QA · 模拟前端/电路推理与工具辅助</summary><dl>
+<dt>版本/时间</dt><dd>Git223ce918 currentrelease；Fall2025/Spring2026题源</dd>
+<dt>对象类型</dt><dd>同50题的直接多模态QA；不是三套独立数据</dd>
+<dt>模型工作的层次</dt><dd>模拟电路推理/拓扑/尺寸与反馈</dd>
+<dt>输入</dt><dd>同50multimodalcircuitquestions，Part1 30/Part2 20；文字题与PNG图。直接送给vision-capablemodel。</dd>
+<dt>任务设定</dt><dd>解读拓扑/工作机制、数学推导与数值电路分析。单轮直接最终答复，reasoning/token/retrybudget与模型配置须记录。</dd>
+<dt>输出</dt><dd>自然语言/公式最终答案；netlists、scratch与工具logs不直接得分。逐答hash、judge/gold/rubrichash与tokenusage用于记录一致性，不构成物理电路真实性证明。</dd>
+<dt>考核指标</dt><dd>软件judge给0–4整数，score%=mean(score)/4×100；满分比例score==4另列，部分分不是二值Pass@1。judgeCLI仅打印已评分均值，但发布构建要求完整task×rollout答案/score/token并校hash，显式unanswered填0，不能简单说整站删失败。成本统计包含已付费重试，selectedanswer tokens另列。</dd>
+<dt>基线</dt><dd>direct vsagentic vsSPICE-assisted应同50题、模型/推理级别/预算/裁判比较；商业SPICE可做辅助求解baseline，但自动仿真不能替代拓扑理解/模型选取与答案解释。当前不复制作者成绩表或受限模型输出。</dd>
+<dt>工具、数据与访问条件</dt><dd>19个核心软件/说明文件Gitblob核；软件Apache2，benchmarkmaterials另有严格条款：可按条款本地评测/研究引用，训练、微调、再分发原题/图/gold/输出需事先书面许可。本轮未下载题目/答案/模型输出数据，仅发布自写事实摘要和来源。</dd>
+<dt>限制与可比性</dt><dd>公开网页/仓库可读不等可训练；同50题三设置共享血缘。NGSPICE skill不是工业PEX/PVT/DRC/LVS验证；真实完整tooltrajectory公开程度未定位。历史模型/裁判更新后需固定版本，不能拿新榜覆盖旧榜。</dd>
+<dt>现实价值判断</dt><dd>研究判断：有明确agentic与工具辅助对照的模拟推理协议；与尺寸BO/拓扑生成是不同任务，不因SPICE成熟而过时。训练许可限制使其不能直接列作开放SFT语料。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；426固定Gitblobs、原始论文与评分公式静态核；仅自写解析/算术，没有运行第三方模型、仿真、EDA或评测器。</dd>
+<dt>下一步核验</dt><dd>按各工作许可取得冻结taskmanifest/评分器/全部失败与成本ledger，核gold隔离、oracle独立性、native强基线与同预算对照；受限或未发布内容保持边界。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://github.com/Arcadia-1/razavi-bench/tree/223ce9182c13a13c16e7f5fe18e0cf5f4a182752">https://github.com/Arcadia-1/razavi-bench/tree/223ce9182c13a13c16e7f5fe18e0cf5f4a182752</a></li>
+<li><a href="https://razavi-bench.tokenzhang.com">https://razavi-bench.tokenzhang.com</a></li>
+</ul></dd></dl></details>
+<details id="analog-razavi-agentic"><summary>Razavi-Bench / file-based agentic QA · 模拟前端/电路推理与工具辅助</summary><dl>
+<dt>版本/时间</dt><dd>Git223ce918 currentrelease；Fall2025/Spring2026题源</dd>
+<dt>对象类型</dt><dd>同50题的文件agent协议；不是三套独立数据</dd>
+<dt>模型工作的层次</dt><dd>模拟电路推理/拓扑/尺寸与反馈</dd>
+<dt>输入</dt><dd>同50multimodalcircuitquestions，Part1 30/Part2 20；文字题与PNG图。/app/instruction.md+figurefiles，agent写/app/answer.md；不把gold/rubric/sourcearticle/judgedata给agent。</dd>
+<dt>任务设定</dt><dd>解读拓扑/工作机制、数学推导与数值电路分析。agent可用shell/files/工具处理，固定最终answer.md验收；harness、工具与token/时间预算应分别列。</dd>
+<dt>输出</dt><dd>自然语言/公式最终答案；netlists、scratch与工具logs不直接得分。逐答hash、judge/gold/rubrichash与tokenusage用于记录一致性，不构成物理电路真实性证明。</dd>
+<dt>考核指标</dt><dd>软件judge给0–4整数，score%=mean(score)/4×100；满分比例score==4另列，部分分不是二值Pass@1。judgeCLI仅打印已评分均值，但发布构建要求完整task×rollout答案/score/token并校hash，显式unanswered填0，不能简单说整站删失败。成本统计包含已付费重试，selectedanswer tokens另列。</dd>
+<dt>基线</dt><dd>direct vsagentic vsSPICE-assisted应同50题、模型/推理级别/预算/裁判比较；商业SPICE可做辅助求解baseline，但自动仿真不能替代拓扑理解/模型选取与答案解释。当前不复制作者成绩表或受限模型输出。</dd>
+<dt>工具、数据与访问条件</dt><dd>19个核心软件/说明文件Gitblob核；软件Apache2，benchmarkmaterials另有严格条款：可按条款本地评测/研究引用，训练、微调、再分发原题/图/gold/输出需事先书面许可。本轮未下载题目/答案/模型输出数据，仅发布自写事实摘要和来源。</dd>
+<dt>限制与可比性</dt><dd>公开网页/仓库可读不等可训练；同50题三设置共享血缘。NGSPICE skill不是工业PEX/PVT/DRC/LVS验证；真实完整tooltrajectory公开程度未定位。历史模型/裁判更新后需固定版本，不能拿新榜覆盖旧榜。</dd>
+<dt>现实价值判断</dt><dd>研究判断：有明确agentic与工具辅助对照的模拟推理协议；与尺寸BO/拓扑生成是不同任务，不因SPICE成熟而过时。训练许可限制使其不能直接列作开放SFT语料。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；426固定Gitblobs、原始论文与评分公式静态核；仅自写解析/算术，没有运行第三方模型、仿真、EDA或评测器。</dd>
+<dt>下一步核验</dt><dd>按各工作许可取得冻结taskmanifest/评分器/全部失败与成本ledger，核gold隔离、oracle独立性、native强基线与同预算对照；受限或未发布内容保持边界。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://github.com/Arcadia-1/razavi-bench/tree/223ce9182c13a13c16e7f5fe18e0cf5f4a182752">https://github.com/Arcadia-1/razavi-bench/tree/223ce9182c13a13c16e7f5fe18e0cf5f4a182752</a></li>
+<li><a href="https://razavi-bench.tokenzhang.com">https://razavi-bench.tokenzhang.com</a></li>
+</ul></dd></dl></details>
+<details id="analog-razavi-spice"><summary>Razavi-Bench / ngspice-SKY130 assisted agentic QA · 模拟前端/电路推理与工具辅助</summary><dl>
+<dt>版本/时间</dt><dd>Git223ce918 currentrelease；Fall2025/Spring2026题源</dd>
+<dt>对象类型</dt><dd>同50题的仿真skill辅助协议；不是三套独立数据</dd>
+<dt>模型工作的层次</dt><dd>模拟电路推理/拓扑/尺寸与反馈</dd>
+<dt>输入</dt><dd>同50multimodalcircuitquestions，Part1 30/Part2 20；文字题与PNG图。/app/instruction.md+figurefiles，agent写/app/answer.md；不把gold/rubric/sourcearticle/judgedata给agent。另允许ngspice+SKY130subset模型/skill；不是完整工艺签核PDK。</dd>
+<dt>任务设定</dt><dd>解读拓扑/工作机制、数学推导与数值电路分析。agent可用shell/files/工具处理，固定最终answer.md验收；harness、工具与token/时间预算应分别列。仿真由agent选择是否使用，bench仍评分最终答复，不自动以SPICE结果替代评分rubric。</dd>
+<dt>输出</dt><dd>自然语言/公式最终答案；netlists、scratch与工具logs不直接得分。逐答hash、judge/gold/rubrichash与tokenusage用于记录一致性，不构成物理电路真实性证明。</dd>
+<dt>考核指标</dt><dd>软件judge给0–4整数，score%=mean(score)/4×100；满分比例score==4另列，部分分不是二值Pass@1。judgeCLI仅打印已评分均值，但发布构建要求完整task×rollout答案/score/token并校hash，显式unanswered填0，不能简单说整站删失败。成本统计包含已付费重试，selectedanswer tokens另列。</dd>
+<dt>基线</dt><dd>direct vsagentic vsSPICE-assisted应同50题、模型/推理级别/预算/裁判比较；商业SPICE可做辅助求解baseline，但自动仿真不能替代拓扑理解/模型选取与答案解释。当前不复制作者成绩表或受限模型输出。</dd>
+<dt>工具、数据与访问条件</dt><dd>19个核心软件/说明文件Gitblob核；软件Apache2，benchmarkmaterials另有严格条款：可按条款本地评测/研究引用，训练、微调、再分发原题/图/gold/输出需事先书面许可。本轮未下载题目/答案/模型输出数据，仅发布自写事实摘要和来源。</dd>
+<dt>限制与可比性</dt><dd>公开网页/仓库可读不等可训练；同50题三设置共享血缘。NGSPICE skill不是工业PEX/PVT/DRC/LVS验证；真实完整tooltrajectory公开程度未定位。历史模型/裁判更新后需固定版本，不能拿新榜覆盖旧榜。</dd>
+<dt>现实价值判断</dt><dd>研究判断：有明确agentic与工具辅助对照的模拟推理协议；与尺寸BO/拓扑生成是不同任务，不因SPICE成熟而过时。训练许可限制使其不能直接列作开放SFT语料。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；426固定Gitblobs、原始论文与评分公式静态核；仅自写解析/算术，没有运行第三方模型、仿真、EDA或评测器。</dd>
+<dt>下一步核验</dt><dd>按各工作许可取得冻结taskmanifest/评分器/全部失败与成本ledger，核gold隔离、oracle独立性、native强基线与同预算对照；受限或未发布内容保持边界。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://github.com/Arcadia-1/razavi-bench/tree/223ce9182c13a13c16e7f5fe18e0cf5f4a182752">https://github.com/Arcadia-1/razavi-bench/tree/223ce9182c13a13c16e7f5fe18e0cf5f4a182752</a></li>
+<li><a href="https://razavi-bench.tokenzhang.com">https://razavi-bench.tokenzhang.com</a></li>
+</ul></dd></dl></details>
+<details id="analog-analogsage-paper10"><summary>AnalogSAGE v1 / 10-opamp topology-selection and sizing study · 模拟前端/拓扑与尺寸优化</summary><dl>
+<dt>版本/时间</dt><dd>2512.22435v1（2025-12-27）</dd>
+<dt>对象类型</dt><dd>论文10任务协议；与现行扩展仓库分版</dd>
+<dt>模型工作的层次</dt><dd>模拟电路推理/拓扑/尺寸与反馈</dd>
+<dt>输入</dt><dd>10opamp规格任务、50候选拓扑，SKY130/ngspice；从1955–2024约10000ISSCC论文构建的知识RAG，Gemini2.5Flash与embedding检索。任务是选拓扑并设参数，不是从任意文本直接完成签核layout。</dd>
+<dt>任务设定</dt><dd>每任务5独立trial，每trial最多3reasoningiterations；LLM选择候选/给参数范围，nativeBO/GA执行尺寸搜索，失败后反馈并换拓扑/改候选。Pass@1的“一次”是整个可迭代优化trial，不是一通LLM或一次SPICE。</dd>
+<dt>输出</dt><dd>候选拓扑、尺寸、仿真指标与满足规格标记；论文Table3逐任务5trial比例。</dd>
+<dt>考核指标</dt><dd>Table3为8题5/5、2题4/5，总48/50=96%trialPass@1；“overallpassrate100%”指10/10任务至少1trial成功，不是50/50。平均搜索空间比.26约3.85倍缩小，不等同实际runtime/SPICEcalls快4倍。</dd>
+<dt>基线</dt><dd>AnalogCoderPro改编基线仅1/50trial成功=2%、1/10task覆盖=10%；所谓48倍来自该弱基线，不证明超越所有成熟analogoptimizer。Artisan-style为作者重构，不是未公开原Artisan完整实现复现；nativeBO/GA已经内嵌方法。</dd>
+<dt>工具、数据与访问条件</dt><dd>现行作者仓库396全部blobs已核，但当前52tasks/15trials与论文10/5不同。RAG依赖外部Pinecone，论文chunks/index并未随库完整打包；不可达则skipRAG属于另一实验条件。根统一LICENSE未定位，不把paperopen-source措辞当明确训练许可。</dd>
+<dt>限制与可比性</dt><dd>paperTable2 Task6/7打印七项spec相同，但当前两题targets/prompts不同，不能仅由表格认定真实重复。没有全50trial的数值SPICE/参数/netlist/LLM动作ledger核物理真实性；nominalspec不等PEX/PVT。</dd>
+<dt>现实价值判断</dt><dd>研究判断：agent的增量在知识检索、拓扑与优化器协同；原生尺寸工具本身已有强能力。对比必须计拓扑搜索与全部optimizer调用，不能把尺寸搜索收益全归LLM。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；426固定Gitblobs、原始论文与评分公式静态核；仅自写解析/算术，没有运行第三方模型、仿真、EDA或评测器。</dd>
+<dt>下一步核验</dt><dd>按各工作许可取得冻结taskmanifest/评分器/全部失败与成本ledger，核gold隔离、oracle独立性、native强基线与同预算对照；受限或未发布内容保持边界。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://arxiv.org/html/2512.22435v1">https://arxiv.org/html/2512.22435v1</a></li>
+<li><a href="https://github.com/xz-group/AnalogSAGE/tree/8fd72e235d2b331ee3ef2e3b633b4875bb9fa358">https://github.com/xz-group/AnalogSAGE/tree/8fd72e235d2b331ee3ef2e3b633b4875bb9fa358</a></li>
+</ul></dd></dl></details>
+<details id="analog-analogsage-current52"><summary>AnalogSAGE current / 52 mixed-source circuit tasks and summary logs · 模拟前端/拓扑与尺寸优化</summary><dl>
+<dt>版本/时间</dt><dd>Git8fd72e23 currentrelease</dd>
+<dt>对象类型</dt><dd>公开扩展任务/聚合反馈；复用AnalogGym与AutoSizer</dd>
+<dt>模型工作的层次</dt><dd>模拟电路推理/拓扑/尺寸与反馈</dd>
+<dt>输入</dt><dd>52prompt/filterrows：40opamp+6LDO+6bandgap；25proposed(A15/L5/B5)+16AnalogGym+11AutoSizer，后27为复用源任务。86topologylibrary=50opamp/13LDO/23bandgap，3seedmemories。52不是52新独立benchmark。</dd>
+<dt>任务设定</dt><dd>配置默认最多3designiterations、topK5；对选中未试topology尺寸搜索150simulations，上来40LLM-guidedsims，20步刷新/5LLMsamples；原候选与refinedcandidate可能各做优化，150不能当整个episode总成本。ASTwhitelist把受限PySpice声明转netlist，并非直接执行生成类。</dd>
+<dt>输出</dt><dd>当前52evalLog每题15result，共780trial/704solved；每trial仅iters中failure/success与solved，无每次数值measurement、完整deck、动作或provider记录。不是780全长agent轨迹。</dd>
+<dt>考核指标</dt><dd>独立复算52行n/c、Pass@1与组合Pass@5均匹配两位小数；总704/780=90.2564%trial成功。A1..10当前146/150=97.3333%与paper48/50不同版本。objective=−4Σ单侧归一化spec违例，硬pass另查全部真实约束；missing/nonfinite负罚。跨目标未计入约束的质量不能由高reward推定。</dd>
+<dt>基线</dt><dd>原生BO/GA、相同候选集合/参数范围/总simulationbudget应作基线。现行evalLog只列AnalogSAGE(Ours)，没有各竞争方法同52题ledger，不能把此aggregate与旧论文baseline直接组新榜。</dd>
+<dt>工具、数据与访问条件</dt><dd>396blobs全核/52filters与prompts一一对应，根LICENSE缺；Pinecone知识库另依赖。tt/VDD1.8nominal；opamp默认1pF，LDO10µA–10mA/100pF，bandgap含behavioralauxamp，真实电路边界需逐例披露。</dd>
+<dt>限制与可比性</dt><dd>聚合solved由作者运行标签而非本轮独立SPICE重算；AST/端口/PDK/加载gate只证结构可载入，不证明全电学spec。52任务不同来源/重复拓扑分组；不得混入训练检索后用同题无污染宣称泛化。</dd>
+<dt>现实价值判断</dt><dd>研究判断：可审阅拓扑/规格与成功摘要，适合构建未来闭环任务；真实数值/动作轨迹与明示数据许可仍缺，不能当全验证可训练agentcorpus。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；426固定Gitblobs、原始论文与评分公式静态核；仅自写解析/算术，没有运行第三方模型、仿真、EDA或评测器。</dd>
+<dt>下一步核验</dt><dd>按各工作许可取得冻结taskmanifest/评分器/全部失败与成本ledger，核gold隔离、oracle独立性、native强基线与同预算对照；受限或未发布内容保持边界。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://arxiv.org/html/2512.22435v1">https://arxiv.org/html/2512.22435v1</a></li>
+<li><a href="https://github.com/xz-group/AnalogSAGE/tree/8fd72e235d2b331ee3ef2e3b633b4875bb9fa358">https://github.com/xz-group/AnalogSAGE/tree/8fd72e235d2b331ee3ef2e3b633b4875bb9fa358</a></li>
+</ul></dd></dl></details>
+<details id="analog-circuit-numeric-robustness"><summary>CIRCUIT / numerical circuit QA and grouped robustness · 模拟前端/多模态电路分析</summary><dl>
+<dt>版本/时间</dt><dd>2502.07980v1（2025-02-11）</dd>
+<dt>对象类型</dt><dd>论文定义数据；尚未公开可取得完整题库</dd>
+<dt>模型工作的层次</dt><dd>模拟电路推理/拓扑/尺寸与反馈</dd>
+<dt>输入</dt><dd>510QA=102templates×5不同numericalsetups；93templates带图，79带修改过语法的netlists（对应395题），四域basic/analog/power/RF、课程级别1/3/5。伪SPICE用于方向/目标语义，不应假设可直接执行。</dd>
+<dt>任务设定</dt><dd>zero/oneshot±netlist解答单一数值，输出六位小数、regex提取；GPT4turbo/GPT4o/Gemini1.5Pro max1536tokens。无netlist全510、部分带netlist实验仅395，比较须保持相同分母；不含toolagent交互。</dd>
+<dt>输出</dt><dd>最终数值、人工数学/格式/推理/拓扑错误审查。图和netlist是否提供是输入处理条件，不是独立数据集。</dd>
+<dt>考核指标</dt><dd>自动正确=绝对差&lt;.001（指定单位，非相对误差）；global=/510或所用subset。特殊pass@k/5=至少k个不同参数setup答对的template比例(/102)，不是常用模型重采样Pass@k。headline48.04%=245/510、全部5/5template27.45%=28/102为整数重建，不据此假设所有promptsetting相同。</dd>
+<dt>基线</dt><dd>历史三模型/四prompt条件；数值结论正确可能推理错误，人工无错误criterion另列。SPICE/CAS+正确netlist应作为工具辅助强基线，不能把数值算术bench直接等同analogdesign优化。</dd>
+<dt>工具、数据与访问条件</dt><dd>完整v1paper可读。伦理节明确在AppendixA原题作者知情同意前不会公开dataset；本轮未定位授权corpus/scorer，不找未经授权镜像，不重发原题。论文开放不等题库开放。</dd>
+<dt>限制与可比性</dt><dd>五参数变体高度同源，训练/测试需按template分组；固定.001对各单位尺度含义不同。没有公开逐题数据就不能完整复现245正确的身份/regex失败分母；2024模型低分不证明2026仍未饱和。</dd>
+<dt>现实价值判断</dt><dd>研究判断：很好地区分“碰巧答对一道”与同拓扑参数稳健性；属于推理评测而非agent或电路尺寸SOTA，公开可训练数据价值受来源许可限制。</dd>
+<dt>证据状态</dt><dd>第二轮12h进行中；426固定Gitblobs、原始论文与评分公式静态核；仅自写解析/算术，没有运行第三方模型、仿真、EDA或评测器。</dd>
+<dt>下一步核验</dt><dd>按各工作许可取得冻结taskmanifest/评分器/全部失败与成本ledger，核gold隔离、oracle独立性、native强基线与同预算对照；受限或未发布内容保持边界。</dd>
+<dt>一手来源</dt><dd><ul>
+<li><a href="https://arxiv.org/html/2502.07980v1">https://arxiv.org/html/2502.07980v1</a></li>
 </ul></dd></dl></details>
 <h2 id="group-3">综合、HLS 与 FPGA 加速器</h2><div class="tablewrap"><table><thead><tr><th>名称与版本</th><th>输入</th><th>任务与输出</th><th>指标与限制</th></tr></thead><tbody>
 <tr><td><a href="#synth-epfl">EPFL Combinational Benchmark Suite</a><br/><small>2015原23；master82d8cc6910419298e713a46644ed59fd3df53038声明2026结果/2027周期；本次tags/releases实取最高v2025.1(2025-11-18),commit8c832d5d07d822d28ba84dc6e95295367702401f，二者不混</small><br/><span class="tag">公开电路集+持续结果征集</span></td><td>23个原始组合电路；Verilog/VHDL/BLIF/AIGER；10算术、10随机/控制、3超大电路</td><td>保持组合等价，压缩逻辑并映射到LUT6<p><strong>输出：</strong>等价BLIF映射网表与方法说明</p></td><td>LUT6数量（面积代理）与逻辑层数（深度），size/depth各自best，非同一实现同时全指标最优或ASICµm²/ns。v2025.1官方Adder sizebest129LUT/126levels，而depthbest343LUT/5levels，不能拼成129LUT/5levels。提交须CEC；原始ABC if-K6表为刻意未优化起点非当前best。自写BLIF names计数含buf/constant，不自动等officialLUT。<p class="muted">masterREADME声明2026已发布，但本次实时API tags最高v2025.1、releases亦最高v2025.1；未定位2026结果绑定工件，不能将2025表冠2026。名字中年份不同为历史best继承，并非全部2025新算法。原20+3与best文件公开范围区分，MtM不在该tree全部展开。纯组合LUT6/level非ASIC后布线PPA，多指标保持配对；CEC/timeout/全部失败与优化总成本未独立核。更优历史实现存在不证明全局最优或任务饱和。</p></td></tr>
@@ -15071,9 +15279,9 @@ body{font:16px/1.7 system-ui,sans-serif;color:#203044;background:#f5f7fa;margin:
 <li><a href="https://github.com/mlcommons/mlperf_client/blob/13b7680725891ff16eefcdb28aed1a97d637c412/rules/MLPerf_Client_Rules.md">https://github.com/mlcommons/mlperf_client/blob/13b7680725891ff16eefcdb28aed1a97d637c412/rules/MLPerf_Client_Rules.md</a></li>
 </ul></dd></dl></details>
 <h2 id="coverage-limits">已有覆盖与具体缺口</h2><p>依据用户阶段划分逐项列已有覆盖与剩余限制；“所有可发现”按此次公开资料检索边界理解，不声称覆盖未公开工业bench或互联网全部材料。 <a href="scope-and-gaps.json">结构化范围说明</a>。</p><ul><li>以官方规则/作者论文/固定源码/原包为证据；搜索摘要仅作发现线索。</li><li>只运行自写下载/文本/JSON/归档元数据/哈希/静态审计与报告生成，不执行下载源code、模型、EDA、仿真或硬件。</li><li>领域覆盖、对象身份、逐字段证据、独立验收、商业可用性和饱和判断分开；缺源/失链/401/许可/opaque限制保留。</li><li>同一IP多版本/多flow/多设计点按协议记录，归并家族；记录数量不是同等成熟独立benchmark数。</li><li>已知历史协议修订按具体版本标注；未有足够证据把任何整家族宣称已被软件彻底解决。</li></ul><div class="tablewrap"><table><tr><th>领域 / 目录记录数</th><th>已有任务覆盖</th><th>尚未解决的访问、协议与验收限制</th></tr>
-<tr><td>数字前端<p>112条 / 49域内家族</p></td><td>RTL与VHDL生成/理解/修复、跨模块工程、微架构优化、规格一致性与功耗/PPA预测；单轮生成与多步agent分别记录<p><a href="#rtl-verilogeval-v2">VerilogEval v2</a> · <a href="#rtl-hwe-arch-v2">HWE Bench / FeSens architecture V2</a> · <a href="#rtl-cvdp-agentic">CVDP / agentic project workflow</a> · <a href="#ara-cpu-level2">Chip-Bench ARA / CPU Level 2</a> · <a href="#ara-network-n3">Chip-Bench ARA / n3-pcie-switch</a></p></td><td>近期大套件完整harness/隐藏数据/许可未全公开；CPU/PCIe规范完成不等全ASIC实现，训练语料与评测集关系、跨family泛化需持续核。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
+<tr><td>数字前端<p>117条 / 51域内家族</p></td><td>RTL与VHDL生成/理解/修复、跨模块工程、微架构优化、规格一致性与功耗/PPA预测；单轮生成与多步agent分别记录<p><a href="#rtl-verilogeval-v2">VerilogEval v2</a> · <a href="#rtl-hwe-arch-v2">HWE Bench / FeSens architecture V2</a> · <a href="#rtl-cvdp-agentic">CVDP / agentic project workflow</a> · <a href="#ara-cpu-level2">Chip-Bench ARA / CPU Level 2</a> · <a href="#ara-network-n3">Chip-Bench ARA / n3-pcie-switch</a></p></td><td>近期大套件完整harness/隐藏数据/许可未全公开；CPU/PCIe规范完成不等全ASIC实现，训练语料与评测集关系、跨family泛化需持续核。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
 <tr><td>数字验证<p>67条 / 48域内家族</p></td><td>SVA/NL翻译/RTL到性质、形式证明、UVM/coverage闭环、mutation、安全/鲁棒性与EDA工具语义回归<p><a href="#verify-fveval-human">FVEval NL2SVA-Human</a> · <a href="#verify-fveval-design">FVEval Design2SVA</a> · <a href="#verify-security-assertions">(Security) Assertions by LLMs</a> · <a href="#verify-chibench-tool-corpus">ChiBench / real-world Verilog tool-testing corpus</a> · <a href="#ver-haven-uvm">HAVEN / protocol-template and coverage-guided DSL UVM suite</a></p></td><td>证明强度/方向/undetermined/vacuity与mutation敏感性不等价；opaque PEC、commercialformal和完整hiddenoracle限制单列，静态wrapper审计不等复现实验。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
-<tr><td>模拟前端<p>103条 / 49域内家族</p></td><td>电路图感知、拓扑/结构、尺寸、预测/检索、长程规格闭环、RF与存储电路/稀有失效；方法实验和成熟bench分身份<p><a href="#analog-longhorizon">Analog Design Bench (Long-Horizon)</a> · <a href="#analog-sganalog-sizing">SGAnalog / 17-task device sizing: 10 fidelity + 7 survival</a> · <a href="#analog-analogmaster-image-layout">AnalogMaster / 15-circuit image-to-layout method evaluation</a> · <a href="#memory-openyield-rare-yield">OpenYield / rare-event yield-estimation research track</a> · <a href="#rf-cobra">COBRA / surrogate-assisted RF circuit optimization workflow</a></p></td><td>多数开源spec/模型仍简化，真实PDK/全PVT/MC/寄生/测量gold有缺口；高识别/收敛/nominalFoM不能推完整电性能。部分agent论文尚未完整发布。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
+<tr><td>模拟前端<p>109条 / 52域内家族</p></td><td>电路图感知、拓扑/结构、尺寸、预测/检索、长程规格闭环、RF与存储电路/稀有失效；方法实验和成熟bench分身份<p><a href="#analog-longhorizon">Analog Design Bench (Long-Horizon)</a> · <a href="#analog-sganalog-sizing">SGAnalog / 17-task device sizing: 10 fidelity + 7 survival</a> · <a href="#analog-analogmaster-image-layout">AnalogMaster / 15-circuit image-to-layout method evaluation</a> · <a href="#memory-openyield-rare-yield">OpenYield / rare-event yield-estimation research track</a> · <a href="#rf-cobra">COBRA / surrogate-assisted RF circuit optimization workflow</a></p></td><td>多数开源spec/模型仍简化，真实PDK/全PVT/MC/寄生/测量gold有缺口；高识别/收敛/nominalFoM不能推完整电性能。部分agent论文尚未完整发布。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
 <tr><td>综合HLS<p>72条 / 35域内家族</p></td><td>经典逻辑综合、IWLS现代学习/精确综合、HLS程序/应用、代理预测、DSE/agent与FPGA CAD<p><a href="#synth-epfl">EPFL Combinational Benchmark Suite</a> · <a href="#synth-iwls25-weighted">IWLS2025 / 200 exact functions, AIG-only weighted old/new score</a> · <a href="#hls-hlsyn-inductive">HLSyn / inductive unseen-kernel prediction</a> · <a href="#hls-hlsdataset">HLSDataset</a> · <a href="#fpga-vtr">VTR benchmark circuits / full FPGA CAD flow</a> · <a href="#ara-acc-a3-bf16-exp">Chip-Bench ARA / a3-bf16-exp</a></p></td><td>有些原包取得但未执行CEC/HLS；数据多点并非独立IP，FPGA器件/工具版本跨域与真实后实现验收另核；PolyBench原始C包已取，部分派生HLS完整配置/标签仍待核。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
 <tr><td>数字后端<p>165条 / 103域内家族</p></td><td>划分/块规划/宏与cell布局、合法化、GR/DR、CTS/STA/sizing/MBFF/ECO、功耗/IR/EM、DRC/LVS工作流与agent<p><a href="#macro-ct">Circuit Training / AlphaChip public Ariane protocol</a> · <a href="#physical-ispd19">ISPD 2019 Initial Detailed Routing</a> · <a href="#physical-ispd26">ISPD 2026 Post-Placement Buffering and Sizing</a> · <a href="#pd-ispd10-cts">ISPD 2010 Clock Network Synthesis</a> · <a href="#pd-iccad25-incremental">ICCAD 2025 Problem C / joint sizing-buffering-relocation</a> · <a href="#be-posteda-drc-essential">PostEDA-Bench / DRC-Essential</a></p></td><td>历年已覆盖不等全部contest题目/最终checker均取得；部分旧链接失效、商业flow与PDK不可重建；proxy、原生修复、有限DRC与全签核严格分层。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>
 <tr><td>模拟后端<p>17条 / 14域内家族</p></td><td>传统/语言版图、寄生感知、自动generator、后仿尺寸、IOring及memorycompiler原生基线<p><a href="#analog-align">ALIGN CircuitsDatabase/examples</a> · <a href="#analog-glayout-language">gLayout / MLCAD2024 human-language-to-layout evaluation</a> · <a href="#analog-autockt-pex">AutoCkt / Spectre-to-BAG post-layout transfer experiment</a> · <a href="#analog-amsio-bench">AMS-IO-Bench / wirebond AMS I/O-ring generation</a> · <a href="#memory-openram-native">OpenRAM / native SRAM compiler and verification baseline</a></p></td><td>固定工艺/模板往往承担大量先验；完整GDS/DRC/LVS/PEX与工艺授权、几何目标和电性能对应尚不能全独立复核。<p class="muted">已入目录及选定一手协议核验，不表示本域每条全字段事实审计、完整工具复现或私有工业覆盖。</p></td></tr>

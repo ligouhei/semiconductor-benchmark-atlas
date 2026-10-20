@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T12:40:33.013173+00:00",
+  "generated_at": "2026-10-20T13:42:47.602742+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 387,
-    "records": 700,
-    "records_with_any_field_audit_entry": 459,
-    "records_with_current_field_audit_snapshot": 426,
+    "families": 392,
+    "records": 711,
+    "records_with_any_field_audit_entry": 470,
+    "records_with_current_field_audit_snapshot": 437,
     "records_without_current_field_audit_snapshot": 274
   },
   "requirements_per_record": [
@@ -615,6 +615,35 @@
           "limitations": "TB API消息只含本地网表路径字符串而非网表正文，所读标准chat请求无文件读取工具；必须明确外层是否附content，否则输入条件不符合paper“给网表”。CKT_design依赖缺失check材料；函数记录netlist警告/check_function失败后仍return0，退出码不等通过所有电规则。topology/name/error脚本和独立电性能验收不同，补包/修wrapper需标修订版本。不要把该公开脚本直接视完整paper验收或据此断原论文结果无效。",
           "tools_and_access": "当前GitHub固定tree8个文件（README、两prompt、environment、CKT_design、tb_api_test、test models），未见rootLICENSE。HF网页可读并列12任务目录，viewer仅自动选中的161-row test表，不等全suite只有161或全部约8k已验证；当前HFAPI/card网络超时/SSL错误，完整递归manifest/图片/JSON和dataset许可未取。页面代码模板许可不推为图片/教材和数据授权。",
           "industrial_value": "测量程序生成有独立价值；需要受保护的测试台检验防止自证"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "ASIC-Agent-Bench workflow",
+      "record_count": 1,
+      "records_with_current_field_audit": 1,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "rtl-asic-agent-bench",
+          "name": "ASIC-Agent-Bench / open-ended ASIC engineering milestones",
+          "category": "数字前端与后端/设计验证硬化agent",
+          "artifact_type": "论文20任务；官方repo当前404、工件未取得",
+          "task_layer": "数字RTL/测试/硬化与SoC集成agent",
+          "evidence_status": "第二轮12h进行中；426固定Gitblobs、原始论文与评分公式静态核；仅自写解析/算术，没有运行第三方模型、仿真、EDA或评测器。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-analog-arch-frontier-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "按各工作许可取得冻结taskmanifest/评分器/全部失败与成本ledger，核gold隔离、oracle独立性、native强基线与同预算对照；受限或未发布内容保持边界。",
+          "limitations": "humanreview迭代改judge但未见量化interrater一致性/抽检分母。partialcredit与LLM评审可能重表面工件；每题独立truth/盲评/失败及toolcost需补。本轮仅重算论文数表，不认定全部物理流程真实成功。",
+          "tools_and_access": "paper全文可读，作者给的AUCOHL/ASIC-Agent-Bench及ASIC-Agent当前官方入口404；不是搜到占位别名就证明artifact开放。未取得冻结20taskmanifest/权重/checkpointjudgeprompts、容器和原始runlogs。GitHubsearchAPI本轮403ratelimit后停止请求未绕过。",
+          "industrial_value": "研究判断：覆盖多文件工程、测试与SoC集成的agent任务设定，仍有工业价值；成熟OpenLane完成优化求解，agent价值应体现在正确接线、配置、恢复与达成独立验收。"
         }
       ]
     },
@@ -1534,6 +1563,56 @@
       ]
     },
     {
+      "benchmark_family": "AnalogSAGE circuit topology sizing",
+      "record_count": 2,
+      "records_with_current_field_audit": 2,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "analog-analogsage-paper10",
+          "name": "AnalogSAGE v1 / 10-opamp topology-selection and sizing study",
+          "category": "模拟前端/拓扑与尺寸优化",
+          "artifact_type": "论文10任务协议；与现行扩展仓库分版",
+          "task_layer": "模拟电路推理/拓扑/尺寸与反馈",
+          "evidence_status": "第二轮12h进行中；426固定Gitblobs、原始论文与评分公式静态核；仅自写解析/算术，没有运行第三方模型、仿真、EDA或评测器。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-analog-arch-frontier-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "按各工作许可取得冻结taskmanifest/评分器/全部失败与成本ledger，核gold隔离、oracle独立性、native强基线与同预算对照；受限或未发布内容保持边界。",
+          "limitations": "paperTable2 Task6/7打印七项spec相同，但当前两题targets/prompts不同，不能仅由表格认定真实重复。没有全50trial的数值SPICE/参数/netlist/LLM动作ledger核物理真实性；nominalspec不等PEX/PVT。",
+          "tools_and_access": "现行作者仓库396全部blobs已核，但当前52tasks/15trials与论文10/5不同。RAG依赖外部Pinecone，论文chunks/index并未随库完整打包；不可达则skipRAG属于另一实验条件。根统一LICENSE未定位，不把paperopen-source措辞当明确训练许可。",
+          "industrial_value": "研究判断：agent的增量在知识检索、拓扑与优化器协同；原生尺寸工具本身已有强能力。对比必须计拓扑搜索与全部optimizer调用，不能把尺寸搜索收益全归LLM。"
+        },
+        {
+          "id": "analog-analogsage-current52",
+          "name": "AnalogSAGE current / 52 mixed-source circuit tasks and summary logs",
+          "category": "模拟前端/拓扑与尺寸优化",
+          "artifact_type": "公开扩展任务/聚合反馈；复用AnalogGym与AutoSizer",
+          "task_layer": "模拟电路推理/拓扑/尺寸与反馈",
+          "evidence_status": "第二轮12h进行中；426固定Gitblobs、原始论文与评分公式静态核；仅自写解析/算术，没有运行第三方模型、仿真、EDA或评测器。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-analog-arch-frontier-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "按各工作许可取得冻结taskmanifest/评分器/全部失败与成本ledger，核gold隔离、oracle独立性、native强基线与同预算对照；受限或未发布内容保持边界。",
+          "limitations": "聚合solved由作者运行标签而非本轮独立SPICE重算；AST/端口/PDK/加载gate只证结构可载入，不证明全电学spec。52任务不同来源/重复拓扑分组；不得混入训练检索后用同题无污染宣称泛化。",
+          "tools_and_access": "396blobs全核/52filters与prompts一一对应，根LICENSE缺；Pinecone知识库另依赖。tt/VDD1.8nominal；opamp默认1pF，LDO10µA–10mA/100pF，bandgap含behavioralauxamp，真实电路边界需逐例披露。",
+          "industrial_value": "研究判断：可审阅拓扑/规格与成功摘要，适合构建未来闭环任务；真实数值/动作轨迹与明示数据许可仍缺，不能当全验证可训练agentcorpus。"
+        }
+      ]
+    },
+    {
       "benchmark_family": "AnalogTester",
       "record_count": 1,
       "records_with_current_field_audit": 1,
@@ -1653,6 +1732,98 @@
           "limitations": "论文4个model+harness×20题×3setting=240单seed runs，非240题。任务表简写N/A与详细card部分不一致（BTB16KB、LLC组合64KB等），需canonicalchecker核。源码包23个论文/图文件；作者call-for-challenges仓库固定55cc85b仅README，不等完整20题/实验日志发布。",
           "tools_and_access": "已读完整正文/20卡与source archive；8种开源simulator不等ArchEval adapters/workloads/container已全部开放。调用/文件diff/buildlog记录是平台能力，完整历史trajectory下载未定位。",
           "industrial_value": "研究判断：把反馈驱动搜索、自己建立实验工具和无反馈判断拆开，可判断agent是否只会消费现成EDA接口。原生仿真工具提供oracle，并未使所有策略设计任务自动饱和。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "ArchGym numerical architecture DSE",
+      "record_count": 4,
+      "records_with_current_field_audit": 4,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "arch-archgym-dram",
+          "name": "ArchGym / DRAMGym memory-controller",
+          "category": "数字前端/架构数值优化与原生工具环境",
+          "artifact_type": "数值ML/DSE环境；agent指算法，不是LLMagent",
+          "task_layer": "架构数值设计空间探索/原生优化基线",
+          "evidence_status": "第二轮12h进行中；426固定Gitblobs、原始论文与评分公式静态核；仅自写解析/算术，没有运行第三方模型、仿真、EDA或评测器。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-analog-arch-frontier-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "按各工作许可取得冻结taskmanifest/评分器/全部失败与成本ledger，核gold隔离、oracle独立性、native强基线与同预算对照；受限或未发布内容保持边界。",
+          "limitations": "完整21600experimentdataset与历史logs本轮11文件未核；未把代码可记录数据当现有完整轨迹下载证明。DRAMparser做1e9/1e3数值转换但注释仍写rawunits，配置mW/ns注释不可靠；需随实际simstdout固定单位。",
+          "tools_and_access": "11selectedsourceblobs/licensereadme/env/config已核，rootApache2；全tree8389blobs包含大量bundledsim上游，不宣称全核。paper与README列表支持4env，README“三个simulator”是过期文字；AstraSim/CFU/Vizier为WIP。各sim/data许可另核。",
+          "industrial_value": "研究判断：应纳入行业benchmark地图的传统数值DSE环境/agent强基线，不能因名称含Agent/Gym归到LLMagentbench或可训练对话；四env同一框架家族但不同任务域。"
+        },
+        {
+          "id": "arch-archgym-timeloop",
+          "name": "ArchGym / TimeloopGym accelerator",
+          "category": "数字前端/架构数值优化与原生工具环境",
+          "artifact_type": "数值ML/DSE环境；agent指算法，不是LLMagent",
+          "task_layer": "架构数值设计空间探索/原生优化基线",
+          "evidence_status": "第二轮12h进行中；426固定Gitblobs、原始论文与评分公式静态核；仅自写解析/算术，没有运行第三方模型、仿真、EDA或评测器。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-analog-arch-frontier-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "按各工作许可取得冻结taskmanifest/评分器/全部失败与成本ledger，核gold隔离、oracle独立性、native强基线与同预算对照；受限或未发布内容保持边界。",
+          "limitations": "完整21600experimentdataset与历史logs本轮11文件未核；未把代码可记录数据当现有完整轨迹下载证明。DRAMparser做1e9/1e3数值转换但注释仍写rawunits，配置mW/ns注释不可靠；需随实际simstdout固定单位。",
+          "tools_and_access": "11selectedsourceblobs/licensereadme/env/config已核，rootApache2；全tree8389blobs包含大量bundledsim上游，不宣称全核。paper与README列表支持4env，README“三个simulator”是过期文字；AstraSim/CFU/Vizier为WIP。各sim/data许可另核。",
+          "industrial_value": "研究判断：应纳入行业benchmark地图的传统数值DSE环境/agent强基线，不能因名称含Agent/Gym归到LLMagentbench或可训练对话；四env同一框架家族但不同任务域。"
+        },
+        {
+          "id": "arch-archgym-farsi",
+          "name": "ArchGym / FARSIGym SoC",
+          "category": "数字前端/架构数值优化与原生工具环境",
+          "artifact_type": "数值ML/DSE环境；agent指算法，不是LLMagent",
+          "task_layer": "架构数值设计空间探索/原生优化基线",
+          "evidence_status": "第二轮12h进行中；426固定Gitblobs、原始论文与评分公式静态核；仅自写解析/算术，没有运行第三方模型、仿真、EDA或评测器。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-analog-arch-frontier-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "按各工作许可取得冻结taskmanifest/评分器/全部失败与成本ledger，核gold隔离、oracle独立性、native强基线与同预算对照；受限或未发布内容保持边界。",
+          "limitations": "完整21600experimentdataset与历史logs本轮11文件未核；未把代码可记录数据当现有完整轨迹下载证明。DRAMparser做1e9/1e3数值转换但注释仍写rawunits，配置mW/ns注释不可靠；需随实际simstdout固定单位。",
+          "tools_and_access": "11selectedsourceblobs/licensereadme/env/config已核，rootApache2；全tree8389blobs包含大量bundledsim上游，不宣称全核。paper与README列表支持4env，README“三个simulator”是过期文字；AstraSim/CFU/Vizier为WIP。各sim/data许可另核。",
+          "industrial_value": "研究判断：应纳入行业benchmark地图的传统数值DSE环境/agent强基线，不能因名称含Agent/Gym归到LLMagentbench或可训练对话；四env同一框架家族但不同任务域。"
+        },
+        {
+          "id": "arch-archgym-maestro",
+          "name": "ArchGym / MaestroGym DNN mapping",
+          "category": "数字前端/架构数值优化与原生工具环境",
+          "artifact_type": "数值ML/DSE环境；agent指算法，不是LLMagent",
+          "task_layer": "架构数值设计空间探索/原生优化基线",
+          "evidence_status": "第二轮12h进行中；426固定Gitblobs、原始论文与评分公式静态核；仅自写解析/算术，没有运行第三方模型、仿真、EDA或评测器。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-analog-arch-frontier-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "按各工作许可取得冻结taskmanifest/评分器/全部失败与成本ledger，核gold隔离、oracle独立性、native强基线与同预算对照；受限或未发布内容保持边界。",
+          "limitations": "完整21600experimentdataset与历史logs本轮11文件未核；未把代码可记录数据当现有完整轨迹下载证明。DRAMparser做1e9/1e3数值转换但注释仍写rawunits，配置mW/ns注释不可靠；需随实际simstdout固定单位。",
+          "tools_and_access": "11selectedsourceblobs/licensereadme/env/config已核，rootApache2；全tree8389blobs包含大量bundledsim上游，不宣称全核。paper与README列表支持4env，README“三个simulator”是过期文字；AstraSim/CFU/Vizier为WIP。各sim/data许可另核。",
+          "industrial_value": "研究判断：应纳入行业benchmark地图的传统数值DSE环境/agent强基线，不能因名称含Agent/Gym归到LLMagentbench或可训练对话；四env同一框架家族但不同任务域。"
         }
       ]
     },
@@ -2268,6 +2439,35 @@
           "limitations": "原图/Gold生成训练关系需核，训练目录13exactimageoverlap不能忽略。缺预测/坏JSON会在Pool.map抛错、未逐题补failure，评测包装需保留该题与固定分母；timeout无候选可inf。topology reconstruction不等模拟签核或spec-to-design。",
           "tools_and_access": "公开122gold与GED/DGL/modifiedNetworkX源均已取并核Gitblob。完整Image2Net检测/OCR/stylepipeline/模型权重不在本仓库；rootApache2及上游依赖许可分别保留。是否正是VLM-CAD122需原manifest对齐，数量相同不证明身份。",
           "industrial_value": "研究判断：可下载、可用来核视觉解析的真实benchmark资产；旧104、新122、rawGED与normalizedNED/超时近似必须区分，避免把原生图算法分数当完整agent工程成功率。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "CIRCUIT circuit reasoning",
+      "record_count": 1,
+      "records_with_current_field_audit": 1,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "analog-circuit-numeric-robustness",
+          "name": "CIRCUIT / numerical circuit QA and grouped robustness",
+          "category": "模拟前端/多模态电路分析",
+          "artifact_type": "论文定义数据；尚未公开可取得完整题库",
+          "task_layer": "模拟电路推理/拓扑/尺寸与反馈",
+          "evidence_status": "第二轮12h进行中；426固定Gitblobs、原始论文与评分公式静态核；仅自写解析/算术，没有运行第三方模型、仿真、EDA或评测器。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-analog-arch-frontier-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "按各工作许可取得冻结taskmanifest/评分器/全部失败与成本ledger，核gold隔离、oracle独立性、native强基线与同预算对照；受限或未发布内容保持边界。",
+          "limitations": "五参数变体高度同源，训练/测试需按template分组；固定.001对各单位尺度含义不同。没有公开逐题数据就不能完整复现245正确的身份/regex失败分母；2024模型低分不证明2026仍未饱和。",
+          "tools_and_access": "完整v1paper可读。伦理节明确在AppendixA原题作者知情同意前不会公开dataset；本轮未定位授权corpus/scorer，不找未经授权镜像，不重发原题。论文开放不等题库开放。",
+          "industrial_value": "研究判断：很好地区分“碰巧答对一道”与同拓扑参数稳健性；属于推理评测而非agent或电路尺寸SOTA，公开可训练数据价值受来源许可限制。"
         }
       ]
     },
@@ -13150,6 +13350,77 @@
           "limitations": "周期仿真不是实片golden；配置saturationfactor改变定义。runtime图latency使用单.001 BookSim报告runtime，throughput累加所有numericload runtime；解析metric time包含首次所需intermediates、复用顺序影响费用，非整个冷启动墙钟。wrapper异常按stderr或missingpacketlatency break，不统一核returncode/finite/全load完整性，需外部强验收。BookSim数据不含3D热/DRC/LVS或物理时序签核。",
           "tools_and_access": "Python解析评估，周期级另编译BookSim2/Netrace；冻结tree226项不截断，源码与输入配置已静态取得；根目录无LICENSE，只有BookSim2/Netrace第三方许可，不能据依赖许可推整个RapidChiplet可商用。packaging含函数字符串eval，本研究仅读字符串从未执行。",
           "industrial_value": "适合架构proxy精度与搜索终态复核材料，不等现成通用agentbenchmark；已有网络仿真与解析工具不证明拓扑搜索问题已饱和。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "Razavi-Bench multimodal circuit reasoning",
+      "record_count": 3,
+      "records_with_current_field_audit": 3,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "analog-razavi-direct",
+          "name": "Razavi-Bench / direct multimodal QA",
+          "category": "模拟前端/电路推理与工具辅助",
+          "artifact_type": "同50题的直接多模态QA；不是三套独立数据",
+          "task_layer": "模拟电路推理/拓扑/尺寸与反馈",
+          "evidence_status": "第二轮12h进行中；426固定Gitblobs、原始论文与评分公式静态核；仅自写解析/算术，没有运行第三方模型、仿真、EDA或评测器。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-analog-arch-frontier-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "按各工作许可取得冻结taskmanifest/评分器/全部失败与成本ledger，核gold隔离、oracle独立性、native强基线与同预算对照；受限或未发布内容保持边界。",
+          "limitations": "公开网页/仓库可读不等可训练；同50题三设置共享血缘。NGSPICE skill不是工业PEX/PVT/DRC/LVS验证；真实完整tooltrajectory公开程度未定位。历史模型/裁判更新后需固定版本，不能拿新榜覆盖旧榜。",
+          "tools_and_access": "19个核心软件/说明文件Gitblob核；软件Apache2，benchmarkmaterials另有严格条款：可按条款本地评测/研究引用，训练、微调、再分发原题/图/gold/输出需事先书面许可。本轮未下载题目/答案/模型输出数据，仅发布自写事实摘要和来源。",
+          "industrial_value": "研究判断：有明确agentic与工具辅助对照的模拟推理协议；与尺寸BO/拓扑生成是不同任务，不因SPICE成熟而过时。训练许可限制使其不能直接列作开放SFT语料。"
+        },
+        {
+          "id": "analog-razavi-agentic",
+          "name": "Razavi-Bench / file-based agentic QA",
+          "category": "模拟前端/电路推理与工具辅助",
+          "artifact_type": "同50题的文件agent协议；不是三套独立数据",
+          "task_layer": "模拟电路推理/拓扑/尺寸与反馈",
+          "evidence_status": "第二轮12h进行中；426固定Gitblobs、原始论文与评分公式静态核；仅自写解析/算术，没有运行第三方模型、仿真、EDA或评测器。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-analog-arch-frontier-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "按各工作许可取得冻结taskmanifest/评分器/全部失败与成本ledger，核gold隔离、oracle独立性、native强基线与同预算对照；受限或未发布内容保持边界。",
+          "limitations": "公开网页/仓库可读不等可训练；同50题三设置共享血缘。NGSPICE skill不是工业PEX/PVT/DRC/LVS验证；真实完整tooltrajectory公开程度未定位。历史模型/裁判更新后需固定版本，不能拿新榜覆盖旧榜。",
+          "tools_and_access": "19个核心软件/说明文件Gitblob核；软件Apache2，benchmarkmaterials另有严格条款：可按条款本地评测/研究引用，训练、微调、再分发原题/图/gold/输出需事先书面许可。本轮未下载题目/答案/模型输出数据，仅发布自写事实摘要和来源。",
+          "industrial_value": "研究判断：有明确agentic与工具辅助对照的模拟推理协议；与尺寸BO/拓扑生成是不同任务，不因SPICE成熟而过时。训练许可限制使其不能直接列作开放SFT语料。"
+        },
+        {
+          "id": "analog-razavi-spice",
+          "name": "Razavi-Bench / ngspice-SKY130 assisted agentic QA",
+          "category": "模拟前端/电路推理与工具辅助",
+          "artifact_type": "同50题的仿真skill辅助协议；不是三套独立数据",
+          "task_layer": "模拟电路推理/拓扑/尺寸与反馈",
+          "evidence_status": "第二轮12h进行中；426固定Gitblobs、原始论文与评分公式静态核；仅自写解析/算术，没有运行第三方模型、仿真、EDA或评测器。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-analog-arch-frontier-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "按各工作许可取得冻结taskmanifest/评分器/全部失败与成本ledger，核gold隔离、oracle独立性、native强基线与同预算对照；受限或未发布内容保持边界。",
+          "limitations": "公开网页/仓库可读不等可训练；同50题三设置共享血缘。NGSPICE skill不是工业PEX/PVT/DRC/LVS验证；真实完整tooltrajectory公开程度未定位。历史模型/裁判更新后需固定版本，不能拿新榜覆盖旧榜。",
+          "tools_and_access": "19个核心软件/说明文件Gitblob核；软件Apache2，benchmarkmaterials另有严格条款：可按条款本地评测/研究引用，训练、微调、再分发原题/图/gold/输出需事先书面许可。本轮未下载题目/答案/模型输出数据，仅发布自写事实摘要和来源。",
+          "industrial_value": "研究判断：有明确agentic与工具辅助对照的模拟推理协议；与尺寸BO/拓扑生成是不同任务，不因SPICE成熟而过时。训练许可限制使其不能直接列作开放SFT语料。"
         }
       ]
     },

@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T12:40:32.951763+00:00",
+  "as_of": "2026-10-20T13:42:47.528737+00:00",
   "status": "coverage inventory with explicit residual limits, not universal completeness/quality certification",
   "scope": "依据用户阶段划分逐项列已有覆盖与剩余限制；“所有可发现”按此次公开资料检索边界理解，不声称覆盖未公开工业bench或互联网全部材料。",
   "method": [
@@ -12,8 +12,8 @@
   "items": [
     {
       "domain": "数字前端",
-      "record_count": 112,
-      "family_count": 49,
+      "record_count": 117,
+      "family_count": 51,
       "catalog_ids": [
         "rtl-verilogeval-v1",
         "rtl-verilogeval-v2",
@@ -126,7 +126,12 @@
         "arch-ds2sc-model-generation",
         "rtl-protocolllm-generation",
         "data-protocolllm-generations",
-        "rtl-cdm-supergates-method"
+        "rtl-cdm-supergates-method",
+        "rtl-asic-agent-bench",
+        "arch-archgym-dram",
+        "arch-archgym-timeloop",
+        "arch-archgym-farsi",
+        "arch-archgym-maestro"
       ],
       "covered_tasks": "RTL与VHDL生成/理解/修复、跨模块工程、微架构优化、规格一致性与功耗/PPA预测；单轮生成与多步agent分别记录",
       "remaining_limits": "近期大套件完整harness/隐藏数据/许可未全公开；CPU/PCIe规范完成不等全ASIC实现，训练语料与评测集关系、跨family泛化需持续核。",
@@ -265,8 +270,8 @@
     },
     {
       "domain": "模拟前端",
-      "record_count": 103,
-      "family_count": 49,
+      "record_count": 109,
+      "family_count": 52,
       "catalog_ids": [
         "analog-analoggym",
         "analog-autockt",
@@ -370,7 +375,13 @@
         "analog-analoggym-opt-agent-tools",
         "data-analoggym-opt-historical",
         "analog-atlas-sar-method",
-        "analog-panda-intent-layout"
+        "analog-panda-intent-layout",
+        "analog-razavi-direct",
+        "analog-razavi-agentic",
+        "analog-razavi-spice",
+        "analog-analogsage-paper10",
+        "analog-analogsage-current52",
+        "analog-circuit-numeric-robustness"
       ],
       "covered_tasks": "电路图感知、拓扑/结构、尺寸、预测/检索、长程规格闭环、RF与存储电路/稀有失效；方法实验和成熟bench分身份",
       "remaining_limits": "多数开源spec/模型仍简化，真实PDK/全PVT/MC/寄生/测量gold有缺口；高识别/收敛/nominalFoM不能推完整电性能。部分agent论文尚未完整发布。",
