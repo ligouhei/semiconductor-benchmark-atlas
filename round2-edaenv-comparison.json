@@ -1,0 +1,4442 @@
+{
+  "status": "round2 active; public85/taskscore and submittedpatches, not103released noragenttrajectories",
+  "protocols": [
+    {
+      "id": "be-edaenv-engineering",
+      "benchmark_family": "EDA-env RTL-to-GDS",
+      "name": "EDA-env / 57 completion and engineering-repair tasks",
+      "category": "后端/跨阶段工程修复agent",
+      "artifact_type": "公开85题中的57二元验收题；与28优化题互斥同家族",
+      "task_layer": "受限project patch→独立重建→工程hardgate",
+      "version": "ICCAD2026 DOI10.1145/3831252.3848500；public85 /repo89dfcbed /Zenodo22990248",
+      "input": "任务文本、starterRTL/config/scripts、allowed-path/profile和物理/时序view。本轨57题=bringup8、PDKtransfer6、macroplacementrepair9、macrointegration7、PDNrepair9、SDCrepair7、flowrepair9、blockcomposition2。同源design多故障不算独立IP；current总53ASAP7/29NG45/3SKY130。",
+      "task": "诊断并修改允许的RTL/flow/config，提交patch；独立无网container重建，用固定evalSDC/libraries/RCX量测，逐任务检查DRC、setup、实例下限、macrocount/position/connectivity、IRdrop及部分functional。保护输入hash与scoring不由agent输出报告决定。",
+      "output": "最终设计/flow补丁与新跑measurement、各gate和reward；本轨reward=gate=1或0，所有requiredmetric须finite且达标。",
+      "metrics": "公开57题二元完成hardgate；同家族另外28题逆ECP/area，不能混为相同量纲分数。full85作者Kimi-k3 reported72/85=84.706%gatepass，13fail保留分母，不是全103成功率；本轮仅核文件/重算声明，不执行流。",
+      "baseline": "原始starter/noop与已知reference用于qualification，37/85需重建starter作相对阈值；代码/recipe修复与简单knobtuning不同，需等wall预算原生优化器或确定性修复对照。公开最终patch不是独立完整agent基线训练。",
+      "tools_and_access": "1295archive/Gitblobs一致，85submissionhash匹配。DockerORFSimage带sha256，8CPU/16GB、flow无网、measurement另容器readonly。85题budget均14400s；paper103含九RocketGemmini12h任务，当前未发布这些或九BlackParrot题。",
+      "limitations": "paper12family96+初始PPA7=103，当前85且F11acceleratorintegration0；不能按103宣称公开量。current只6EQY/8TB，其他靠固定RTL/source检查，不是85份postrouteformalproof。whs被测但0/85targetgate检hold；DRCcheck缺时可fallbackstageJSON；没有fullLVS/工厂签核保证。034/071原patch含不允runner.sh，replaydiff只去wrapper，原证据保留。",
+      "industrial_value": "研究判断：实质开放、评分与工作区分离的工程agent评测；可靠强度取决具体hardgate/工具版本，当前未提供完整交互训练数据，硬门通过也不扩张为全芯片量产签核。",
+      "primary_sources": "https://vlsicad.ucsd.edu/Publications/Conferences/436/c436.pdf; https://github.com/Ergodex-Labs/eda-env-iccad-26/tree/89dfcbed4376e2065b3917249f6c91f56dbf79bc; https://zenodo.org/records/22990248",
+      "evidence_status": "第二轮12h进行中；一手正文/固定Git源码和数据静态核查，EDA-env归档1295文件/固定Gitblobs及85submissionhash匹配；未执行模型、EDA、仿真、形式工具或第三方代码。",
+      "next_verification": "需冻结逐trial的输入、agent版本、原始反馈/成功硬门/失败分母/成本与许可；论文成绩与当前配置不一致处需原始运行记录，不默改作者成绩。",
+      "retrieved_date": "2026-10-20"
+    },
+    {
+      "id": "be-edaenv-physical-opt",
+      "benchmark_family": "EDA-env RTL-to-GDS",
+      "name": "EDA-env / 28 constrained timing and area optimization tasks",
+      "category": "后端/跨RTL与物理PPA优化agent",
+      "artifact_type": "同85题套件的28物理量优化题；与57完成题互斥",
+      "task_layer": "recipe/局部RTL/retiming patch→重建→带硬门物理reward",
+      "version": "ICCAD2026 /public85 /repo89dfcbed",
+      "input": "26timing与2area题，覆盖初始PPA7、tightclockclosure8、constrainedPPA6、logicdepth/retiming7；任务给starter、固定接口/时钟、允许编辑及其余PPA约束。不是28独立设计；与engineering57共用sourcefamilies。",
+      "task": "可改recipe和特定RTL/寄存器结构，提升目标时序或面积，同时保留任务的功能/物理/其他PPA约束。ECP使用固定评价时钟−signedworstsetupslack；每题原生timeunit/scale不可从变量名猜。",
+      "output": "patch+重新测量的ECP/area/power/DRC及约束检查；失败0，grader基础设施错误或requiredstarterfail返回statuserror且无数值，不应静默丢题或当普通模型fail。",
+      "metrics": "26题reward=gate×scale/ECP，ASAP7ps用scale1000、NG45ns用scale1，均GHz；字段eval_clk_ps在NG45仍可为ns。2题gate×1e6/areaµm²=1/mm²。这些reward不限定[0,1]，不能与二元完成/不同单位直接平均作总能力。",
+      "baseline": "保留原生Yosys/OpenROAD/Resizer/GR/DR作为实现与量测，agent改变策略/结构。paperAES ECP降低24.8%但power+31.1%/logicarea+1.6%，不称全部PPA同时改善；各任务其他约束硬门需核。",
+      "tools_and_access": "公开输入/评分源和最终diff，所有1295文件与归档匹配。每题4hagent预算/8CPU16GB；currentevaluatorflowtimeout用4h、measurement8000s另可加LEC/TB，evaluate.py无总containerwalltimeout，非paper字面2hgrader硬封顶。未训练/运行EDA。",
+      "limitations": "paperreported103qualified仅85评测/发布，18大型systemtask未取得。当前crossstagehardgate只覆盖具体声明，14functionalconfigs的EQYbasicSATdepth5/TB与固定输入hash不等完整无界signoff。最终patch/reward真公开而7132step/7556call轨迹不公开，不能直接作多轮agentrollout训练。",
+      "industrial_value": "研究判断：可用于研究高成本flow选择、跨阶段结构修复与受限PPAtradeoff；应按目标单位/硬门/失败类型/实际预算评测，不把不同reward值当统一成功率。",
+      "primary_sources": "https://vlsicad.ucsd.edu/Publications/Conferences/436/c436.pdf; https://github.com/Ergodex-Labs/eda-env-iccad-26/tree/89dfcbed4376e2065b3917249f6c91f56dbf79bc; https://zenodo.org/records/22990248",
+      "evidence_status": "第二轮12h进行中；一手正文/固定Git源码和数据静态核查，EDA-env归档1295文件/固定Gitblobs及85submissionhash匹配；未执行模型、EDA、仿真、形式工具或第三方代码。",
+      "next_verification": "需冻结逐trial的输入、agent版本、原始反馈/成功硬门/失败分母/成本与许可；论文成绩与当前配置不一致处需原始运行记录，不默改作者成绩。",
+      "retrieved_date": "2026-10-20"
+    }
+  ],
+  "static_audit": {
+    "as_of": "2026-10-20T09:12:06.318244+00:00",
+    "static_only": true,
+    "pinned_commit": "89dfcbed4376e2065b3917249f6c91f56dbf79bc",
+    "zenodo_record": 22990248,
+    "archive": {
+      "filename": "EDA-env-85-tasks.tar.gz",
+      "bytes": 366102,
+      "md5": "b56029215e9bcc743c0dd375cee9530d",
+      "sha256": "3f80927e92be70b4e92deb1e5db7ad6c0009861d43e5c7bb7f8a5026b0a96205",
+      "git_blob_matches": 1295,
+      "all_archive_git_files_identical": true
+    },
+    "paper_scope": {
+      "qualified_tasks": 103,
+      "task_families": 12,
+      "initialPPA": 7,
+      "qualification": "116originalproposals−14exclusions+later117=103",
+      "paper_platform_counts": {
+        "asap7": 53,
+        "nangate45": 47,
+        "sky130hd": 3
+      },
+      "paper_budgets": "94tasks4h+9RocketGemmini12h,8CPU16GB30GB; build1h separate; grader2h bundle versus15h Rocketservice",
+      "interaction_summary_authorclaim": {
+        "steps": 7132,
+        "toolcalls": 7556,
+        "raw_trajectories_released": false
+      }
+    },
+    "current_release": {
+      "tasks": 85,
+      "platform_counts": {
+        "asap7": 53,
+        "nangate45": 29,
+        "sky130hd": 3
+      },
+      "budget_sec_counts": {
+        "14400": 85
+      },
+      "family_summary": {
+        "F0": {
+          "released_tasks": 7,
+          "ids": [
+            1,
+            2,
+            4,
+            5,
+            8,
+            9,
+            11
+          ],
+          "reported_gate_pass": 6
+        },
+        "F1": {
+          "released_tasks": 8,
+          "ids": [
+            12,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            32
+          ],
+          "reported_gate_pass": 8
+        },
+        "F2": {
+          "released_tasks": 8,
+          "ids": [
+            13,
+            14,
+            16,
+            80,
+            87,
+            90,
+            92,
+            93
+          ],
+          "reported_gate_pass": 5
+        },
+        "F3": {
+          "released_tasks": 6,
+          "ids": [
+            23,
+            24,
+            25,
+            26,
+            27,
+            28
+          ],
+          "reported_gate_pass": 6
+        },
+        "F4": {
+          "released_tasks": 9,
+          "ids": [
+            36,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47
+          ],
+          "reported_gate_pass": 9
+        },
+        "F5": {
+          "released_tasks": 7,
+          "ids": [
+            38,
+            71,
+            72,
+            76,
+            77,
+            88,
+            89
+          ],
+          "reported_gate_pass": 6
+        },
+        "F6": {
+          "released_tasks": 9,
+          "ids": [
+            34,
+            56,
+            57,
+            58,
+            64,
+            65,
+            81,
+            82,
+            83
+          ],
+          "reported_gate_pass": 8
+        },
+        "F7": {
+          "released_tasks": 7,
+          "ids": [
+            33,
+            52,
+            59,
+            60,
+            61,
+            73,
+            79
+          ],
+          "reported_gate_pass": 5
+        },
+        "F8": {
+          "released_tasks": 9,
+          "ids": [
+            35,
+            48,
+            49,
+            50,
+            51,
+            53,
+            63,
+            78,
+            99
+          ],
+          "reported_gate_pass": 9
+        },
+        "F9": {
+          "released_tasks": 2,
+          "ids": [
+            39,
+            67
+          ],
+          "reported_gate_pass": 2
+        },
+        "F10": {
+          "released_tasks": 6,
+          "ids": [
+            31,
+            54,
+            85,
+            91,
+            97,
+            98
+          ],
+          "reported_gate_pass": 4
+        },
+        "F11": {
+          "released_tasks": 0,
+          "ids": [],
+          "reported_gate_pass": 0
+        },
+        "F12": {
+          "released_tasks": 7,
+          "ids": [
+            37,
+            66,
+            68,
+            69,
+            74,
+            75,
+            84
+          ],
+          "reported_gate_pass": 4
+        }
+      },
+      "reward_groups": [
+        {
+          "form": "inverse",
+          "metric": "ecp",
+          "tasks": 26
+        },
+        {
+          "form": "inverse",
+          "metric": "area_um2",
+          "tasks": 2
+        },
+        {
+          "form": "gate",
+          "metric": "completion",
+          "tasks": 57
+        }
+      ],
+      "gate_metric_appearances": {
+        "wns": 81,
+        "drc_violations": 85,
+        "instance_count": 85,
+        "ecp": 4,
+        "area_um2": 16,
+        "utilization": 32,
+        "power_total": 23,
+        "ir_drop_v": 9,
+        "lec_equivalent": 6,
+        "macro_count": 10,
+        "macro_placed": 10,
+        "macro_conn_signal": 10,
+        "macro_conn_power": 10,
+        "tb_pass": 8,
+        "macro_masters_present": 3
+      },
+      "reported_gate_pass": 72,
+      "reported_gate_fail": 13,
+      "reported_pass_fraction": 0.8470588235294118,
+      "tasks_with_lec": 6,
+      "tasks_with_tb": 8,
+      "tasks_needing_starter_replay": 37,
+      "submission_hashes_matched": 85
+    },
+    "replay_diffs": [
+      {
+        "task": "eda-env-034-aes-asap7-irrepair",
+        "old_diff_blocks": 3,
+        "replay_diff_blocks": 2,
+        "removed_headers": [
+          "diff --git a/runner.sh b/runner.sh"
+        ],
+        "added_blocks": 0,
+        "all_other_blocks_unchanged": true
+      },
+      {
+        "task": "eda-env-071-keyvault1-ng45-macro",
+        "old_diff_blocks": 3,
+        "replay_diff_blocks": 2,
+        "removed_headers": [
+          "diff --git a/runner.sh b/runner.sh"
+        ],
+        "added_blocks": 0,
+        "all_other_blocks_unchanged": true
+      }
+    ],
+    "current_findings": [
+      "85currenttasks=53ASAP7+29NanGate45+3SKY130;18BlackParrot/RocketGemmini fullpaperscope tasks notcurrentrelease; F11acceleratorintegration3paper/0released",
+      "57completion gate1/0;26timing inverseECP+2area inversearea. Unboundedphysicalunits rewards not directlyaveragable withcompletion oracrossmetricgroups; preserve scale/unit",
+      "ECPeval_clock−signedsetupslack; ASAP7 nativeps scale1000→GHz, NG45native ns scale1→GHz despite eval_clk_psfieldname; areaµm² scale1e6→1/mm²",
+      "scores requireallnumericfinitehardgatevalues, missing/nonfiniterequiredmeasurementfails; starterreferencefail markedinfraerror/no numeric score ratherthansilently0",
+      "original34/71submissionpatch includesrunnerwrapper notallowed; providedreplaydiff removesonlywrapper. Originalandcorrected preserved; notallpaperpatchesdirectlyacceptedunmodified",
+      "DockerORFSimagepinnedsha256; flowcontainer nonnetwork8CPU16G, separate readonlymeasurementcontainer usesfixedevalSDC/lib/RCX",
+      "currentgradertimeouts flowbudget14400+measurement8000+optionalLEC1500/TB600+1200; no overallcontainerwalltimeout inevaluate.py; notliteralpaper2hgraderdeadlineenforced",
+      "physicalDRC usescheck_drc ifavailable, fallsbackstageJSON ifcheckerunavailable, disagreementmaxcount; absence failsrequiredgate. NativeDRCreport notfullfoundryCalibre/LVS",
+      "whs holdslack ismeasured butnoneof85targetgateclauseschecksit; setupgatepasses notfullsetup/holdclosure",
+      "14taskdeclaredfunctionalconfigs6EQY/8TB; otherfixedRTLguard byhash/sourceconsumption, notall85postroutefunctionalLEC. EQYbasicSAT depth5 notautomaticallyunboundedproofoffull chip",
+      "14separatefunctionalchecks scopedRTL/testbench notsameallcycleoracles; readingevalsource permittedforaudit doesnotprove liveagentaccess isolation",
+      "paper143scoringtests/qualificationgenerator notinrelease; noindependentrunhere",
+      "finalpatches anddeclaredresults realpublicassets, explicitlynoagenttrajectories/taskgenerationqualificationpipeline; selected7ksteps summary nottrainingdownload",
+      "BSD3root; publicRTL/openPDK/upstreamlicenses separate; authorsnote pretrainingoverlappossible, notheldoutIPclaim"
+    ],
+    "tasks": [
+      {
+        "task": "eda-env-001-aes-asap7-ecp",
+        "id": 1,
+        "family": "F0",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 385.5,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.8
+            }
+          ],
+          "reward": {
+            "metric": "ecp",
+            "form": "inverse",
+            "scale": 1000.0,
+            "units": "GHz"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 3.430191,
+        "submission": "submissions/eda-env-001-aes-asap7-ecp/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-002-jpeg-ng45-ecp",
+        "id": 2,
+        "family": "F0",
+        "platform": "nangate45",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 0.6,
+          "gates": [
+            {
+              "metric": "ecp",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 0.998
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.6
+            }
+          ],
+          "reward": {
+            "metric": "ecp",
+            "form": "inverse",
+            "scale": 1.0,
+            "units": "GHz"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 0.893861,
+        "submission": "submissions/eda-env-002-jpeg-ng45-ecp/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-004-aes-asap7-area",
+        "id": 4,
+        "family": "F0",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 400,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "area_um2",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 0.995
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.8
+            }
+          ],
+          "reward": {
+            "metric": "area_um2",
+            "form": "inverse",
+            "scale": 1000000.0,
+            "units": "1/mm2"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 0.0,
+        "reported_reward": 0.0,
+        "submission": "submissions/eda-env-004-aes-asap7-area/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-005-ibex-ng45-ecp",
+        "id": 5,
+        "family": "F0",
+        "platform": "nangate45",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 2.2,
+          "gates": [
+            {
+              "metric": "ecp",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 0.998
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.6
+            }
+          ],
+          "reward": {
+            "metric": "ecp",
+            "form": "inverse",
+            "scale": 1.0,
+            "units": "GHz"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 0.482385,
+        "submission": "submissions/eda-env-005-ibex-ng45-ecp/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-008-jpeg-asap7-ecp",
+        "id": 8,
+        "family": "F0",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 400,
+          "gates": [
+            {
+              "metric": "ecp",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 0.998
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.6
+            }
+          ],
+          "reward": {
+            "metric": "ecp",
+            "form": "inverse",
+            "scale": 1000.0,
+            "units": "GHz"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.884341,
+        "submission": "submissions/eda-env-008-jpeg-asap7-ecp/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-009-aes-ng45-area",
+        "id": 9,
+        "family": "F0",
+        "platform": "nangate45",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 0.9,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "area_um2",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 0.995
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.8
+            }
+          ],
+          "reward": {
+            "metric": "area_um2",
+            "form": "inverse",
+            "scale": 1000000.0,
+            "units": "1/mm2"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 61.05695,
+        "submission": "submissions/eda-env-009-aes-ng45-area/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-011-ibex-asap7-ecp",
+        "id": 11,
+        "family": "F0",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 1000,
+          "gates": [
+            {
+              "metric": "ecp",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 0.998
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.6
+            }
+          ],
+          "reward": {
+            "metric": "ecp",
+            "form": "inverse",
+            "scale": 1000.0,
+            "units": "GHz"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.048569,
+        "submission": "submissions/eda-env-011-ibex-asap7-ecp/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-012-aes-asap7-impl",
+        "id": 12,
+        "family": "F1",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 800,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 8492
+            },
+            {
+              "metric": "utilization",
+              "op": ">=",
+              "value": 0.48
+            },
+            {
+              "metric": "utilization",
+              "op": "<=",
+              "value": 0.62
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-012-aes-asap7-impl/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-013-aes-asap7-close5",
+        "id": 13,
+        "family": "F2",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 368.2,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "area_um2",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.03
+            },
+            {
+              "metric": "power_total",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.05
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.8
+            }
+          ],
+          "reward": {
+            "metric": "ecp",
+            "form": "inverse",
+            "scale": 1000.0,
+            "units": "GHz"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 2.822886,
+        "submission": "submissions/eda-env-013-aes-asap7-close5/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-014-aes-asap7-close15",
+        "id": 14,
+        "family": "F2",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 329.5,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "area_um2",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.03
+            },
+            {
+              "metric": "power_total",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.05
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.8
+            }
+          ],
+          "reward": {
+            "metric": "ecp",
+            "form": "inverse",
+            "scale": 1000.0,
+            "units": "GHz"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 0.0,
+        "reported_reward": 0.0,
+        "submission": "submissions/eda-env-014-aes-asap7-close15/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-016-jpeg-asap7-close5",
+        "id": 16,
+        "family": "F2",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 560.5,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "area_um2",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.03
+            },
+            {
+              "metric": "power_total",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.05
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.8
+            }
+          ],
+          "reward": {
+            "metric": "ecp",
+            "form": "inverse",
+            "scale": 1000.0,
+            "units": "GHz"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.964917,
+        "submission": "submissions/eda-env-016-jpeg-asap7-close5/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-017-ibex-asap7-impl",
+        "id": 17,
+        "family": "F1",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 1250,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 15877
+            },
+            {
+              "metric": "utilization",
+              "op": ">=",
+              "value": 0.55
+            },
+            {
+              "metric": "utilization",
+              "op": "<=",
+              "value": 0.69
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-017-ibex-asap7-impl/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-018-mult16-asap7-impl",
+        "id": 18,
+        "family": "F1",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 900,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 1278
+            },
+            {
+              "metric": "utilization",
+              "op": ">=",
+              "value": 0.48
+            },
+            {
+              "metric": "utilization",
+              "op": "<=",
+              "value": 0.65
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-018-mult16-asap7-impl/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-019-elevatorfsm-sky130hd-impl",
+        "id": 19,
+        "family": "F1",
+        "platform": "sky130hd",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 10,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 132
+            },
+            {
+              "metric": "utilization",
+              "op": ">=",
+              "value": 0.42
+            },
+            {
+              "metric": "utilization",
+              "op": "<=",
+              "value": 0.6
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-019-elevatorfsm-sky130hd-impl/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-020-uart-sky130hd-impl",
+        "id": 20,
+        "family": "F1",
+        "platform": "sky130hd",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 10,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 309
+            },
+            {
+              "metric": "utilization",
+              "op": ">=",
+              "value": 0.45
+            },
+            {
+              "metric": "utilization",
+              "op": "<=",
+              "value": 0.63
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-020-uart-sky130hd-impl/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-021-systolic-ng45-impl",
+        "id": 21,
+        "family": "F1",
+        "platform": "nangate45",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 2.2,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 4728
+            },
+            {
+              "metric": "utilization",
+              "op": ">=",
+              "value": 0.42
+            },
+            {
+              "metric": "utilization",
+              "op": "<=",
+              "value": 0.6
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-021-systolic-ng45-impl/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-022-tinyriscv-asap7-impl",
+        "id": 22,
+        "family": "F1",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 1100,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 18130
+            },
+            {
+              "metric": "utilization",
+              "op": ">=",
+              "value": 0.54
+            },
+            {
+              "metric": "utilization",
+              "op": "<=",
+              "value": 0.68
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-022-tinyriscv-asap7-impl/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-023-aes-ng45-asap7-port",
+        "id": 23,
+        "family": "F3",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 800,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 8492
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-023-aes-ng45-asap7-port/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-024-ibex-ng45-asap7-port",
+        "id": 24,
+        "family": "F3",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 1250,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 15877
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-024-ibex-ng45-asap7-port/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-025-jpeg-ng45-asap7-port",
+        "id": 25,
+        "family": "F3",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 1100,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 45132
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-025-jpeg-ng45-asap7-port/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-026-uart-ng45-sky130hd-port",
+        "id": 26,
+        "family": "F3",
+        "platform": "sky130hd",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 10,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 309
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-026-uart-ng45-sky130hd-port/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-027-aes-asap7-ng45-port",
+        "id": 27,
+        "family": "F3",
+        "platform": "nangate45",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 1.6,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 10978
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-027-aes-asap7-ng45-port/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-028-systolic-asap7-ng45-port",
+        "id": 28,
+        "family": "F3",
+        "platform": "nangate45",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 2.2,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 4728
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-028-systolic-asap7-ng45-port/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-031-aes-asap7-perfpower",
+        "id": 31,
+        "family": "F10",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 340,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "area_um2",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.05
+            },
+            {
+              "metric": "power_total",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.1
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.8
+            }
+          ],
+          "reward": {
+            "metric": "ecp",
+            "form": "inverse",
+            "scale": 1000.0,
+            "units": "GHz"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 0.0,
+        "reported_reward": 0.0,
+        "submission": "submissions/eda-env-031-aes-asap7-perfpower/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-032-ariane133-ng45-impl",
+        "id": 32,
+        "family": "F1",
+        "platform": "nangate45",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 3.6,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 130942
+            },
+            {
+              "metric": "utilization",
+              "op": ">=",
+              "value": 0.38
+            },
+            {
+              "metric": "utilization",
+              "op": "<=",
+              "value": 0.62
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-032-ariane133-ng45-impl/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-033-aes-asap7-sdcrepair",
+        "id": 33,
+        "family": "F7",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 385.5,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 10505
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-033-aes-asap7-sdcrepair/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-034-aes-asap7-irrepair",
+        "id": 34,
+        "family": "F6",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 400,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.8
+            },
+            {
+              "metric": "power_total",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.05
+            },
+            {
+              "metric": "ir_drop_v",
+              "op": "<=",
+              "value": 0.025
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-034-aes-asap7-irrepair/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-035-aes-asap7-flowfix",
+        "id": 35,
+        "family": "F8",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 400,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 9827
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-035-aes-asap7-flowfix/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-036-ariane133-ng45-macrofix",
+        "id": 36,
+        "family": "F4",
+        "platform": "nangate45",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 3.6,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 130942
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-036-ariane133-ng45-macrofix/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-037-sboxpipe-asap7-depth",
+        "id": 37,
+        "family": "F12",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 312,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.3
+            },
+            {
+              "metric": "lec_equivalent",
+              "op": ">=",
+              "value": 1
+            }
+          ],
+          "reward": {
+            "metric": "ecp",
+            "form": "inverse",
+            "scale": 1000.0,
+            "units": "GHz"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 5.665398,
+        "submission": "submissions/eda-env-037-sboxpipe-asap7-depth/submission.diff",
+        "has_lec": true,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-038-pktstore-ng45-macro",
+        "id": 38,
+        "family": "F5",
+        "platform": "nangate45",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 1.0,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "macro_count",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "metric": "macro_placed",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "macro_conn_signal",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "macro_conn_power",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "tb_pass",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 408
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-038-pktstore-ng45-macro/submission.diff",
+        "has_lec": false,
+        "has_tb": true
+      },
+      {
+        "task": "eda-env-039-aes-asap7-hier",
+        "id": 39,
+        "family": "F9",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 450,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "macro_count",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "metric": "macro_masters_present",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "metric": "macro_placed",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "macro_conn_signal",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "macro_conn_power",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 3924
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-039-aes-asap7-hier/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-040-mpb1-asap7-macrofix",
+        "id": 40,
+        "family": "F4",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 800,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 1460
+            },
+            {
+              "metric": "utilization",
+              "op": ">=",
+              "value": 0.4
+            },
+            {
+              "metric": "utilization",
+              "op": "<=",
+              "value": 0.6
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-040-mpb1-asap7-macrofix/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-041-mpb2-asap7-macrofix",
+        "id": 41,
+        "family": "F4",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 800,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 1131
+            },
+            {
+              "metric": "utilization",
+              "op": ">=",
+              "value": 0.4
+            },
+            {
+              "metric": "utilization",
+              "op": "<=",
+              "value": 0.6
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-041-mpb2-asap7-macrofix/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-042-mpb3-asap7-macrofix",
+        "id": 42,
+        "family": "F4",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 850,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 2061
+            },
+            {
+              "metric": "utilization",
+              "op": ">=",
+              "value": 0.4
+            },
+            {
+              "metric": "utilization",
+              "op": "<=",
+              "value": 0.6
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-042-mpb3-asap7-macrofix/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-043-mpb4-asap7-macrofix",
+        "id": 43,
+        "family": "F4",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 850,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 2078
+            },
+            {
+              "metric": "utilization",
+              "op": ">=",
+              "value": 0.4
+            },
+            {
+              "metric": "utilization",
+              "op": "<=",
+              "value": 0.6
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-043-mpb4-asap7-macrofix/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-044-mpb5-asap7-macrofix",
+        "id": 44,
+        "family": "F4",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 850,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 1884
+            },
+            {
+              "metric": "utilization",
+              "op": ">=",
+              "value": 0.4
+            },
+            {
+              "metric": "utilization",
+              "op": "<=",
+              "value": 0.6
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-044-mpb5-asap7-macrofix/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-045-mpb6-asap7-macrofix",
+        "id": 45,
+        "family": "F4",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 850,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 1440
+            },
+            {
+              "metric": "utilization",
+              "op": ">=",
+              "value": 0.4
+            },
+            {
+              "metric": "utilization",
+              "op": "<=",
+              "value": 0.6
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-045-mpb6-asap7-macrofix/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-046-mpb7-asap7-macrofix",
+        "id": 46,
+        "family": "F4",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 850,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 1547
+            },
+            {
+              "metric": "utilization",
+              "op": ">=",
+              "value": 0.4
+            },
+            {
+              "metric": "utilization",
+              "op": "<=",
+              "value": 0.6
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-046-mpb7-asap7-macrofix/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-047-mpb8-asap7-macrofix",
+        "id": 47,
+        "family": "F4",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 850,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 1665
+            },
+            {
+              "metric": "utilization",
+              "op": ">=",
+              "value": 0.4
+            },
+            {
+              "metric": "utilization",
+              "op": "<=",
+              "value": 0.6
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-047-mpb8-asap7-macrofix/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-048-pktstore-ng45-memcap",
+        "id": 48,
+        "family": "F8",
+        "platform": "nangate45",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 1.1,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 47940
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-048-pktstore-ng45-memcap/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-049-mpb1-asap7-lefmismatch",
+        "id": 49,
+        "family": "F8",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 800,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 240
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-049-mpb1-asap7-lefmismatch/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-050-mpb1-asap7-nolib",
+        "id": 50,
+        "family": "F8",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 800,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 240
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-050-mpb1-asap7-nolib/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-051-aes-asap7-badsite",
+        "id": 51,
+        "family": "F8",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 410,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 11599
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-051-aes-asap7-badsite/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-052-aes-asap7-sdcport",
+        "id": 52,
+        "family": "F7",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 410,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 11599
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-052-aes-asap7-sdcport/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-053-mpb3-asap7-mplcrash",
+        "id": 53,
+        "family": "F8",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 850,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 2232
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-053-mpb3-asap7-mplcrash/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-054-aes-asap7-perfarea",
+        "id": 54,
+        "family": "F10",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 340,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "area_um2",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.02
+            },
+            {
+              "metric": "power_total",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.1
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.8
+            }
+          ],
+          "reward": {
+            "metric": "ecp",
+            "form": "inverse",
+            "scale": 1000.0,
+            "units": "GHz"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 3.226371,
+        "submission": "submissions/eda-env-054-aes-asap7-perfarea/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-056-aes-asap7-irsevere",
+        "id": 56,
+        "family": "F6",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 400,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.8
+            },
+            {
+              "metric": "power_total",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.05
+            },
+            {
+              "metric": "ir_drop_v",
+              "op": "<=",
+              "value": 0.025
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-056-aes-asap7-irsevere/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-057-ibex-asap7-irmild",
+        "id": 57,
+        "family": "F6",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 1000,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.8
+            },
+            {
+              "metric": "power_total",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.05
+            },
+            {
+              "metric": "ir_drop_v",
+              "op": "<=",
+              "value": 0.025
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-057-ibex-asap7-irmild/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-058-ibex-asap7-irsevere",
+        "id": 58,
+        "family": "F6",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 1000,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.8
+            },
+            {
+              "metric": "power_total",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.05
+            },
+            {
+              "metric": "ir_drop_v",
+              "op": "<=",
+              "value": 0.025
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-058-ibex-asap7-irsevere/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-059-ibex-asap7-noclk",
+        "id": 59,
+        "family": "F7",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 1040,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 16156
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 0.0,
+        "reported_reward": 0.0,
+        "submission": "submissions/eda-env-059-ibex-asap7-noclk/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-060-aes-asap7-noio",
+        "id": 60,
+        "family": "F7",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 410,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 11599
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-060-aes-asap7-noio/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-061-jpeg-asap7-sdcport",
+        "id": 61,
+        "family": "F7",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 620,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 43155
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-061-jpeg-asap7-sdcport/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-063-gcd-asap7-tinydie",
+        "id": 63,
+        "family": "F8",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 390,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 354
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-063-gcd-asap7-tinydie/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-064-jpeg-ng45-irmild",
+        "id": 64,
+        "family": "F6",
+        "platform": "nangate45",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 1.25,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.8
+            },
+            {
+              "metric": "power_total",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.05
+            },
+            {
+              "metric": "ir_drop_v",
+              "op": "<=",
+              "value": 0.06
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-064-jpeg-ng45-irmild/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-065-jpeg-ng45-irsevere",
+        "id": 65,
+        "family": "F6",
+        "platform": "nangate45",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 1.25,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.8
+            },
+            {
+              "metric": "power_total",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.05
+            },
+            {
+              "metric": "ir_drop_v",
+              "op": "<=",
+              "value": 0.06
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-065-jpeg-ng45-irsevere/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-066-systolic-ng45-depth",
+        "id": 66,
+        "family": "F12",
+        "platform": "nangate45",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 1.43,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.3
+            },
+            {
+              "metric": "lec_equivalent",
+              "op": ">=",
+              "value": 1
+            }
+          ],
+          "reward": {
+            "metric": "ecp",
+            "form": "inverse",
+            "scale": 1.0,
+            "units": "GHz"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 0.705891,
+        "submission": "submissions/eda-env-066-systolic-ng45-depth/submission.diff",
+        "has_lec": true,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-067-ethquad-asap7-hier",
+        "id": 67,
+        "family": "F9",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 1000.0,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "macro_count",
+              "op": ">=",
+              "value": 4
+            },
+            {
+              "metric": "macro_masters_present",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "macro_placed",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "macro_conn_signal",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "macro_conn_power",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 1283
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-067-ethquad-asap7-hier/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-068-aesround-asap7-depth",
+        "id": 68,
+        "family": "F12",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 470,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.3
+            },
+            {
+              "metric": "lec_equivalent",
+              "op": ">=",
+              "value": 1
+            }
+          ],
+          "reward": {
+            "metric": "ecp",
+            "form": "inverse",
+            "scale": 1000.0,
+            "units": "GHz"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 0.0,
+        "reported_reward": 0.0,
+        "submission": "submissions/eda-env-068-aesround-asap7-depth/submission.diff",
+        "has_lec": true,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-069-sharound-ng45-depth",
+        "id": 69,
+        "family": "F12",
+        "platform": "nangate45",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 1.33,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.3
+            },
+            {
+              "metric": "lec_equivalent",
+              "op": ">=",
+              "value": 1
+            }
+          ],
+          "reward": {
+            "metric": "ecp",
+            "form": "inverse",
+            "scale": 1.0,
+            "units": "GHz"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 0.0,
+        "reported_reward": 0.0,
+        "submission": "submissions/eda-env-069-sharound-ng45-depth/submission.diff",
+        "has_lec": true,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-071-keyvault1-ng45-macro",
+        "id": 71,
+        "family": "F5",
+        "platform": "nangate45",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 1.0,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "macro_count",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "macro_placed",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "macro_conn_signal",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "macro_conn_power",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "tb_pass",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 53
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-071-keyvault1-ng45-macro/submission.diff",
+        "has_lec": false,
+        "has_tb": true
+      },
+      {
+        "task": "eda-env-072-keyvault2-ng45-macro",
+        "id": 72,
+        "family": "F5",
+        "platform": "nangate45",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 1.0,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "macro_count",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "metric": "macro_placed",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "macro_conn_signal",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "macro_conn_power",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "tb_pass",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 79
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-072-keyvault2-ng45-macro/submission.diff",
+        "has_lec": false,
+        "has_tb": true
+      },
+      {
+        "task": "eda-env-073-ethmac-asap7-xdomain",
+        "id": 73,
+        "family": "F7",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 1350,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 47526
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 0.0,
+        "reported_reward": 0.0,
+        "submission": "submissions/eda-env-073-ethmac-asap7-xdomain/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-074-mult16-asap7-depth",
+        "id": 74,
+        "family": "F12",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 653,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.3
+            },
+            {
+              "metric": "lec_equivalent",
+              "op": ">=",
+              "value": 1
+            }
+          ],
+          "reward": {
+            "metric": "ecp",
+            "form": "inverse",
+            "scale": 1000.0,
+            "units": "GHz"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 2.490495,
+        "submission": "submissions/eda-env-074-mult16-asap7-depth/submission.diff",
+        "has_lec": true,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-075-adder64-asap7-depth",
+        "id": 75,
+        "family": "F12",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 360,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.3
+            },
+            {
+              "metric": "lec_equivalent",
+              "op": ">=",
+              "value": 1
+            }
+          ],
+          "reward": {
+            "metric": "ecp",
+            "form": "inverse",
+            "scale": 1000.0,
+            "units": "GHz"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 4.489485,
+        "submission": "submissions/eda-env-075-adder64-asap7-depth/submission.diff",
+        "has_lec": true,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-076-icache1-ng45-macro",
+        "id": 76,
+        "family": "F5",
+        "platform": "nangate45",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 1.0,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "macro_count",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "macro_placed",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "macro_conn_signal",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "macro_conn_power",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "tb_pass",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 475
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-076-icache1-ng45-macro/submission.diff",
+        "has_lec": false,
+        "has_tb": true
+      },
+      {
+        "task": "eda-env-077-icache2-ng45-macro",
+        "id": 77,
+        "family": "F5",
+        "platform": "nangate45",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 1.0,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "macro_count",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "metric": "macro_placed",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "macro_conn_signal",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "macro_conn_power",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "tb_pass",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 82
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-077-icache2-ng45-macro/submission.diff",
+        "has_lec": false,
+        "has_tb": true
+      },
+      {
+        "task": "eda-env-078-aes-asap7-routecap",
+        "id": 78,
+        "family": "F8",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 410,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 9015
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-078-aes-asap7-routecap/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-079-ethmac-asap7-xdomainl3",
+        "id": 79,
+        "family": "F7",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 1350,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 47526
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-079-ethmac-asap7-xdomainl3/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-080-swerv-ng45-close5",
+        "id": 80,
+        "family": "F2",
+        "platform": "nangate45",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 2.44,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "area_um2",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.06
+            },
+            {
+              "metric": "power_total",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.05
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.8
+            }
+          ],
+          "reward": {
+            "metric": "ecp",
+            "form": "inverse",
+            "scale": 1.0,
+            "units": "GHz"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 0.0,
+        "reported_reward": 0.0,
+        "submission": "submissions/eda-env-080-swerv-ng45-close5/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-081-mpb1-asap7-chanir",
+        "id": 81,
+        "family": "F6",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 800,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.8
+            },
+            {
+              "metric": "power_total",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.05
+            },
+            {
+              "metric": "ir_drop_v",
+              "op": "<=",
+              "value": 0.013
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-081-mpb1-asap7-chanir/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-082-ariane133-ng45-irmild",
+        "id": 82,
+        "family": "F6",
+        "platform": "nangate45",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 3.6,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.8
+            },
+            {
+              "metric": "power_total",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.05
+            },
+            {
+              "metric": "ir_drop_v",
+              "op": "<=",
+              "value": 0.0053
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 0.0,
+        "reported_reward": 0.0,
+        "submission": "submissions/eda-env-082-ariane133-ng45-irmild/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-083-ariane133-ng45-irsevere",
+        "id": 83,
+        "family": "F6",
+        "platform": "nangate45",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 3.6,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.8
+            },
+            {
+              "metric": "power_total",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.05
+            },
+            {
+              "metric": "ir_drop_v",
+              "op": "<=",
+              "value": 0.0066
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-083-ariane133-ng45-irsevere/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-084-fir4-asap7-retime",
+        "id": 84,
+        "family": "F12",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 450,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.3
+            },
+            {
+              "metric": "tb_pass",
+              "op": ">=",
+              "value": 1
+            }
+          ],
+          "reward": {
+            "metric": "ecp",
+            "form": "inverse",
+            "scale": 1000.0,
+            "units": "GHz"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 0.0,
+        "reported_reward": 0.0,
+        "submission": "submissions/eda-env-084-fir4-asap7-retime/submission.diff",
+        "has_lec": false,
+        "has_tb": true
+      },
+      {
+        "task": "eda-env-085-systolic-ng45-perfpower",
+        "id": 85,
+        "family": "F10",
+        "platform": "nangate45",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 1.4,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "area_um2",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.12
+            },
+            {
+              "metric": "power_total",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.26
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.8
+            }
+          ],
+          "reward": {
+            "metric": "ecp",
+            "form": "inverse",
+            "scale": 1.0,
+            "units": "GHz"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 0.807537,
+        "submission": "submissions/eda-env-085-systolic-ng45-perfpower/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-087-mult16-asap7-close3",
+        "id": 87,
+        "family": "F2",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 615,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "area_um2",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.09
+            },
+            {
+              "metric": "power_total",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.18
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.8
+            }
+          ],
+          "reward": {
+            "metric": "ecp",
+            "form": "inverse",
+            "scale": 1000.0,
+            "units": "GHz"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 2.161103,
+        "submission": "submissions/eda-env-087-mult16-asap7-close3/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-088-scratch1-ng45-macro",
+        "id": 88,
+        "family": "F5",
+        "platform": "nangate45",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 1.0,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "macro_count",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "macro_placed",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "macro_conn_signal",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "macro_conn_power",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "tb_pass",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 36
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 0.0,
+        "reported_reward": 0.0,
+        "submission": "submissions/eda-env-088-scratch1-ng45-macro/submission.diff",
+        "has_lec": false,
+        "has_tb": true
+      },
+      {
+        "task": "eda-env-089-scratch2-ng45-macro",
+        "id": 89,
+        "family": "F5",
+        "platform": "nangate45",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 1.0,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "macro_count",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "metric": "macro_placed",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "macro_conn_signal",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "macro_conn_power",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "tb_pass",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 59
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-089-scratch2-ng45-macro/submission.diff",
+        "has_lec": false,
+        "has_tb": true
+      },
+      {
+        "task": "eda-env-090-swerv-ng45-close15",
+        "id": 90,
+        "family": "F2",
+        "platform": "nangate45",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 2.4,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "area_um2",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.06
+            },
+            {
+              "metric": "power_total",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.05
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.8
+            }
+          ],
+          "reward": {
+            "metric": "ecp",
+            "form": "inverse",
+            "scale": 1.0,
+            "units": "GHz"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 0.0,
+        "reported_reward": 0.0,
+        "submission": "submissions/eda-env-090-swerv-ng45-close15/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-091-swerv-ng45-perfpower",
+        "id": 91,
+        "family": "F10",
+        "platform": "nangate45",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 2.44,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "area_um2",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.05
+            },
+            {
+              "metric": "power_total",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.1
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.8
+            }
+          ],
+          "reward": {
+            "metric": "ecp",
+            "form": "inverse",
+            "scale": 1.0,
+            "units": "GHz"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 0.411919,
+        "submission": "submissions/eda-env-091-swerv-ng45-perfpower/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-092-ethmac-ng45-close5",
+        "id": 92,
+        "family": "F2",
+        "platform": "nangate45",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 2.9,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "area_um2",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.06
+            },
+            {
+              "metric": "power_total",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.4
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.8
+            }
+          ],
+          "reward": {
+            "metric": "ecp",
+            "form": "inverse",
+            "scale": 1.0,
+            "units": "GHz"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 0.359832,
+        "submission": "submissions/eda-env-092-ethmac-ng45-close5/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-093-ethmac-ng45-close15",
+        "id": 93,
+        "family": "F2",
+        "platform": "nangate45",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 2.89,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "area_um2",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.06
+            },
+            {
+              "metric": "power_total",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.4
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.8
+            }
+          ],
+          "reward": {
+            "metric": "ecp",
+            "form": "inverse",
+            "scale": 1.0,
+            "units": "GHz"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 0.355689,
+        "submission": "submissions/eda-env-093-ethmac-ng45-close15/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-097-aes-asap7-3d",
+        "id": 97,
+        "family": "F10",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 340,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "area_um2",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.0
+            },
+            {
+              "metric": "power_total",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.04
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.8
+            }
+          ],
+          "reward": {
+            "metric": "ecp",
+            "form": "inverse",
+            "scale": 1000.0,
+            "units": "GHz"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 3.051616,
+        "submission": "submissions/eda-env-097-aes-asap7-3d/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-098-systolic-ng45-3d",
+        "id": 98,
+        "family": "F10",
+        "platform": "nangate45",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 1.36,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "area_um2",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.13
+            },
+            {
+              "metric": "power_total",
+              "op": "<=",
+              "ref": "noop",
+              "scale": 1.31
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "ref": "noop",
+              "scale": 0.8
+            }
+          ],
+          "reward": {
+            "metric": "ecp",
+            "form": "inverse",
+            "scale": 1.0,
+            "units": "GHz"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 0.0,
+        "reported_reward": 0.0,
+        "submission": "submissions/eda-env-098-systolic-ng45-3d/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      },
+      {
+        "task": "eda-env-099-ethquad-asap7-synmacro",
+        "id": 99,
+        "family": "F8",
+        "platform": "asap7",
+        "targets": {
+          "budget_sec": 14400,
+          "eval_clk_ps": 1000.0,
+          "gates": [
+            {
+              "metric": "wns",
+              "op": ">=",
+              "value": 0.0
+            },
+            {
+              "metric": "drc_violations",
+              "op": "<=",
+              "value": 0
+            },
+            {
+              "metric": "macro_count",
+              "op": ">=",
+              "value": 4
+            },
+            {
+              "metric": "macro_masters_present",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "macro_placed",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "macro_conn_signal",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "macro_conn_power",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "metric": "instance_count",
+              "op": ">=",
+              "value": 1283
+            }
+          ],
+          "reward": {
+            "form": "gate",
+            "scale": 1.0,
+            "units": "pass"
+          }
+        },
+        "profile_kind": "P1",
+        "manifest_mode": "EXACT",
+        "reported_gate": 1.0,
+        "reported_reward": 1.0,
+        "submission": "submissions/eda-env-099-ethquad-asap7-synmacro/submission.diff",
+        "has_lec": false,
+        "has_tb": false
+      }
+    ]
+  }
+}

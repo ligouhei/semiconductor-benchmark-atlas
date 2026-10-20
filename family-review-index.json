@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-20T09:09:31.291424+00:00",
+  "generated_at": "2026-10-20T09:15:57.099711+00:00",
   "status": "active research review queue; not a maturity verdict",
   "scope": "全家族审计导航：读取逐字段证据文件中的record_sha256并与当前catalog比较；名称未命中不表示未读来源。技术证据深度、可获得性、现代baseline和时效性必须人工判断，不按hash数量生成质量/过时分。",
   "counts": {
-    "families": 362,
-    "records": 646,
-    "records_with_any_field_audit_entry": 404,
-    "records_with_current_field_audit_snapshot": 371,
+    "families": 363,
+    "records": 648,
+    "records_with_any_field_audit_entry": 406,
+    "records_with_current_field_audit_snapshot": 373,
     "records_without_current_field_audit_snapshot": 275
   },
   "requirements_per_record": [
@@ -4170,6 +4170,56 @@
           "limitations": "PCB范围边界，不是芯片IC；测web-enabled公开源工程重建，不能称闭卷原创电路设计；完整功能/制造/EMC认证不由本评分保证；旧HF包与当前nativeHarbor版不能混合。",
           "tools_and_access": "固定repo571treeentries/35task.toml；Harbor0.19.0与自建agent/verifierimages，当前未发布registryrelease应--path运行。上游多种许可逐task核，不能全仓按同一许可再分发。",
           "industrial_value": "研究判断：从工程brief构建完整KiCad工程并独立验收；需要与原生工具或确定性流程同预算比较，成熟软件的存在不等该工程任务已解决。"
+        }
+      ]
+    },
+    {
+      "benchmark_family": "EDA-env RTL-to-GDS",
+      "record_count": 2,
+      "records_with_current_field_audit": 2,
+      "review_status": "未作全家族完整验收；按各记录证据与缺口逐项复核",
+      "records": [
+        {
+          "id": "be-edaenv-engineering",
+          "name": "EDA-env / 57 completion and engineering-repair tasks",
+          "category": "后端/跨阶段工程修复agent",
+          "artifact_type": "公开85题中的57二元验收题；与28优化题互斥同家族",
+          "task_layer": "受限project patch→独立重建→工程hardgate",
+          "evidence_status": "第二轮12h进行中；一手正文/固定Git源码和数据静态核查，EDA-env归档1295文件/固定Gitblobs及85submissionhash匹配；未执行模型、EDA、仿真、形式工具或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-edaenv-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需冻结逐trial的输入、agent版本、原始反馈/成功硬门/失败分母/成本与许可；论文成绩与当前配置不一致处需原始运行记录，不默改作者成绩。",
+          "limitations": "paper12family96+初始PPA7=103，当前85且F11acceleratorintegration0；不能按103宣称公开量。current只6EQY/8TB，其他靠固定RTL/source检查，不是85份postrouteformalproof。whs被测但0/85targetgate检hold；DRCcheck缺时可fallbackstageJSON；没有fullLVS/工厂签核保证。034/071原patch含不允runner.sh，replaydiff只去wrapper，原证据保留。",
+          "tools_and_access": "1295archive/Gitblobs一致，85submissionhash匹配。DockerORFSimage带sha256，8CPU/16GB、flow无网、measurement另容器readonly。85题budget均14400s；paper103含九RocketGemmini12h任务，当前未发布这些或九BlackParrot题。",
+          "industrial_value": "研究判断：实质开放、评分与工作区分离的工程agent评测；可靠强度取决具体hardgate/工具版本，当前未提供完整交互训练数据，硬门通过也不扩张为全芯片量产签核。"
+        },
+        {
+          "id": "be-edaenv-physical-opt",
+          "name": "EDA-env / 28 constrained timing and area optimization tasks",
+          "category": "后端/跨RTL与物理PPA优化agent",
+          "artifact_type": "同85题套件的28物理量优化题；与57完成题互斥",
+          "task_layer": "recipe/局部RTL/retiming patch→重建→带硬门物理reward",
+          "evidence_status": "第二轮12h进行中；一手正文/固定Git源码和数据静态核查，EDA-env归档1295文件/固定Gitblobs及85submissionhash匹配；未执行模型、EDA、仿真、形式工具或第三方代码。",
+          "current_field_audit_snapshots": [
+            {
+              "audit_file": "round2-edaenv-field-evidence.json",
+              "record_snapshot_matches_current": true,
+              "scope": "保存了记录版本hash；仍不证明所有字段正确/完整或复现成功"
+            }
+          ],
+          "unversioned_field_audit_entries": [],
+          "stale_field_audit_snapshots": [],
+          "next_verification": "需冻结逐trial的输入、agent版本、原始反馈/成功硬门/失败分母/成本与许可；论文成绩与当前配置不一致处需原始运行记录，不默改作者成绩。",
+          "limitations": "paperreported103qualified仅85评测/发布，18大型systemtask未取得。当前crossstagehardgate只覆盖具体声明，14functionalconfigs的EQYbasicSATdepth5/TB与固定输入hash不等完整无界signoff。最终patch/reward真公开而7132step/7556call轨迹不公开，不能直接作多轮agentrollout训练。",
+          "tools_and_access": "公开输入/评分源和最终diff，所有1295文件与归档匹配。每题4hagent预算/8CPU16GB；currentevaluatorflowtimeout用4h、measurement8000s另可加LEC/TB，evaluate.py无总containerwalltimeout，非paper字面2hgrader硬封顶。未训练/运行EDA。",
+          "industrial_value": "研究判断：可用于研究高成本flow选择、跨阶段结构修复与受限PPAtradeoff；应按目标单位/硬门/失败类型/实际预算评测，不把不同reward值当统一成功率。"
         }
       ]
     },
