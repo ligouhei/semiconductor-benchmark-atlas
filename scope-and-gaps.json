@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20T10:03:25.483340+00:00",
+  "as_of": "2026-10-20T10:24:37.430659+00:00",
   "status": "coverage inventory with explicit residual limits, not universal completeness/quality certification",
   "scope": "依据用户阶段划分逐项列已有覆盖与剩余限制；“所有可发现”按此次公开资料检索边界理解，不声称覆盖未公开工业bench或互联网全部材料。",
   "method": [
@@ -246,8 +246,8 @@
     },
     {
       "domain": "模拟前端",
-      "record_count": 101,
-      "family_count": 47,
+      "record_count": 103,
+      "family_count": 49,
       "catalog_ids": [
         "analog-analoggym",
         "analog-autockt",
@@ -349,7 +349,9 @@
         "data-agenticsizing-knowledge",
         "analog-analoggym-opt-grpo",
         "analog-analoggym-opt-agent-tools",
-        "data-analoggym-opt-historical"
+        "data-analoggym-opt-historical",
+        "analog-atlas-sar-method",
+        "analog-panda-intent-layout"
       ],
       "covered_tasks": "电路图感知、拓扑/结构、尺寸、预测/检索、长程规格闭环、RF与存储电路/稀有失效；方法实验和成熟bench分身份",
       "remaining_limits": "多数开源spec/模型仍简化，真实PDK/全PVT/MC/寄生/测量gold有缺口；高识别/收敛/nominalFoM不能推完整电性能。部分agent论文尚未完整发布。",
@@ -699,8 +701,8 @@
     },
     {
       "domain": "模拟后端",
-      "record_count": 15,
-      "family_count": 13,
+      "record_count": 17,
+      "family_count": 14,
       "catalog_ids": [
         "analog-align",
         "analog-magical",
@@ -716,7 +718,9 @@
         "memory-openram-native",
         "memory-sram22-native",
         "analog-cabagent-resource",
-        "analog-tapeoutbench-v01"
+        "analog-tapeoutbench-v01",
+        "analog-layout-icpi-real",
+        "analog-layout-icpi-synthetic"
       ],
       "covered_tasks": "传统/语言版图、寄生感知、自动generator、后仿尺寸、IOring及memorycompiler原生基线",
       "remaining_limits": "固定工艺/模板往往承担大量先验；完整GDS/DRC/LVS/PEX与工艺授权、几何目标和电性能对应尚不能全独立复核。",

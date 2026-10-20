@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="zh-CN"><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>芯片 benchmark 研究 · 阅读总览</title><style>body{font:16px/1.7 system-ui,sans-serif;margin:0;color:#203044;background:#f4f7fa}main{max-width:1250px;margin:auto;padding:32px}h1,h2{line-height:1.35}a{color:#075ba5}nav,.note{padding:18px;background:#e7effa;border-radius:10px;margin:18px 0}table{width:100%;border-collapse:collapse;background:white;font-size:14px}th,td{border:1px solid #d6e1eb;text-align:left;vertical-align:top;padding:12px}th{background:#e8eef5}small{color:#536375}.scroll{overflow:auto}@media print{main{padding:0}body{background:white}a{color:inherit}}</style><main><p><a href="index.html">← 返回交互式 Benchmark 表格</a></p><h1>芯片行业 benchmark：阅读总览</h1>
-<p>研究进行中 · 12小时尚未完成。完整目录 666 条任务/版本记录，归为 372 个家族/对象；包含工具素材、方法实验与私有评测线索，数量不等于同等成熟的独立公开基准。</p>
+<p>研究进行中 · 12小时尚未完成。完整目录 670 条任务/版本记录，归为 375 个家族/对象；包含工具素材、方法实验与私有评测线索，数量不等于同等成熟的独立公开基准。</p>
 <div class="note"><strong>补订说明：</strong>2026-10-20补订：原12小时清单遗漏VPEvolve，OPC agentic覆盖审核不充分。现补入商业Calibre recipeagent协议与开放光学testbed两轨（同一家族），并更正此前容易被理解为该方向没有已有评测的表述。此补订发生在原12小时交付之后；目录仍不是全行业穷尽证明。 本次另续查新增11项研究对象（含待开放/部分协议），详见Agentic专题；VPEvolve配套testbed已显式标记非独立Agent benchmark。 <a href="research-corrections.json">更正记录</a></div>
 <nav><a href="research-report.html">完整分类报告与逐条详解</a> · <a href="benchmark-catalog-zh.csv">中文列名CSV</a> · <a href="catalog.csv">原字段CSV</a> · <a href="catalog.json">JSON</a> · <a href="research-report.html#coverage-limits">已有覆盖与具体缺口</a></nav>
 <div class="note">先确定要证明的能力，再比较相同输入、约束、工具、预算和独立验收。软件已经能执行某一步，只能说明必须采用强原生基线；不能据此认定任务最优、过时或没有模型研究价值。本研究是公开资料与实现的静态分析，未运行模型、EDA、仿真或硬件。</div>
 <h2>分类入口</h2><div class="scroll"><table><tr><th>领域</th><th>记录数</th><th>覆盖任务</th></tr>
 <tr><td><a href="research-report.html#group-0">数字前端</a></td><td>93</td><td>RTL与VHDL生成/理解/修复、跨模块工程、微架构优化、规格一致性与功耗/PPA预测；单轮生成与多步agent分别记录</td></tr>
 <tr><td><a href="research-report.html#group-1">数字验证</a></td><td>67</td><td>SVA/NL翻译/RTL到性质、形式证明、UVM/coverage闭环、mutation、安全/鲁棒性与EDA工具语义回归</td></tr>
-<tr><td><a href="research-report.html#group-2">模拟前端</a></td><td>101</td><td>电路图感知、拓扑/结构、尺寸、预测/检索、长程规格闭环、RF与存储电路/稀有失效；方法实验和成熟bench分身份</td></tr>
+<tr><td><a href="research-report.html#group-2">模拟前端</a></td><td>103</td><td>电路图感知、拓扑/结构、尺寸、预测/检索、长程规格闭环、RF与存储电路/稀有失效；方法实验和成熟bench分身份</td></tr>
 <tr><td><a href="research-report.html#group-3">综合HLS</a></td><td>72</td><td>经典逻辑综合、IWLS现代学习/精确综合、HLS程序/应用、代理预测、DSE/agent与FPGA CAD</td></tr>
 <tr><td><a href="research-report.html#group-4">数字后端</a></td><td>159</td><td>划分/块规划/宏与cell布局、合法化、GR/DR、CTS/STA/sizing/MBFF/ECO、功耗/IR/EM、DRC/LVS工作流与agent</td></tr>
-<tr><td><a href="research-report.html#group-5">模拟后端</a></td><td>15</td><td>传统/语言版图、寄生感知、自动generator、后仿尺寸、IOring及memorycompiler原生基线</td></tr>
+<tr><td><a href="research-report.html#group-5">模拟后端</a></td><td>17</td><td>传统/语言版图、寄生感知、自动generator、后仿尺寸、IOring及memorycompiler原生基线</td></tr>
 <tr><td><a href="research-report.html#group-6">制造光刻</a></td><td>79</td><td>OPC/ILT求解、前向代理、SMO/随机性、recipe/工程助手、掩模写版、热点/SEM/晶圆模式/计量/良率/调度</td></tr>
 <tr><td><a href="research-report.html#group-7">模拟测试</a></td><td>3</td><td>IEEE P2427/Infineon模拟缺陷仿真、AMS异常检测</td></tr>
 <tr><td><a href="research-report.html#group-8">数字测试</a></td><td>13</td><td>ISCAS/ITC顺序与cut/scan变体、SoC调度、IJTAG网络、ATPG方法/工具、DFT生成器与真实后硅hook</td></tr>

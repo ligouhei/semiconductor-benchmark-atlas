@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-10-20T10:03:25.442466+00:00",
+  "as_of": "2026-10-20T10:24:37.387348+00:00",
   "status": "第二轮12h进行中的数据/轨迹开放性核查，非完整市场清单或最终结论",
   "scope": "只覆盖本轮已保存一手核查的新增协议；训练样本、评测输入、模型权重、整理后记忆、生成采样轨迹与LLM工具交互轨迹分别描述",
-  "protocol_records": 100,
-  "families": 51,
+  "protocol_records": 104,
+  "families": 54,
   "items": [
     {
       "catalog_id": "lib-siemens-nemo-characterization",
@@ -1203,6 +1203,54 @@
       "trajectory_and_training_access": "只取得论文所示五状态单轨迹/30cached-equivalence描述；未取得完整可回放source/任务包，且此工作不是LLM对话agent数据。",
       "limits": "singleexemplar的metrictradeoff与固定场景复用不支持跨PDK/新optics/unrestrictedtransfer；并未给出商业toolrecipe/制造signoff/hardwareclosure。source实验归档提及不等完整公开训练数据取得。",
       "primary_sources": "https://arxiv.org/abs/2609.27621; https://arxiv.org/pdf/2609.27621v2",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "analog-layout-icpi-real",
+      "name": "ICPI / two-OTA post-layout refinement study",
+      "family": "ICPI analog layout refinement",
+      "object_identity": "两个真实PDK设计的方法评测；公开syntheticdemo另轨",
+      "task": "one-shotAnalyzer识别拓扑/敏感net；每轮Supervisor选一参数族、Executor数值编辑/生成器失败回退、Reflector记designjournal。30轮/31committed布局，每轮PEX、每三轮完整postlayoutsimulation，共31PEX+11Spectre；经验进prompt、不改LLM权重。",
+      "available_materials_and_tools": "公开36demoGitblobs完整核，实际65/40nm PDK、Spectre/PEX与realrun完整日志未取得。paper每轮约37/43s、12k/17ktokens，30轮18–21min，PEX/sim保守>141min且不含P&R；不是全campaign费用或固定APIprice。",
+      "trajectory_and_training_access": "paper讨论真实designjournal/act-observe-reflect，但公开仓库无历史runs/JSONL；36文件提供toy环境/角色/生成日志代码，不等两真实PDK完整训练轨迹。",
+      "limits": "paper31committed、11电学sim不等31次全量电学独立验证；allcommittedfunctional/LVSclean需原日志。area不在目标，OTA1 ICPI4031.4µm²高于无ICPI3288.3；单设计best不等统计Pass@k或普遍所有PPA改善。",
+      "primary_sources": "https://arxiv.org/html/2608.13767v1; https://github.com/bingyang1132/ICLAD2026-demo-sim-aware-in-context/tree/7ad0f408ae59405eaff312ad42b9cfbab08855a7",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "analog-layout-icpi-synthetic",
+      "name": "ICPI / PDK-free SyntheticOTAOracle companion demo",
+      "family": "ICPI analog layout refinement",
+      "object_identity": "同框架配套testbed；非真实PDK基准重现",
+      "task": "同Analyzer/Supervisor/Executor/Reflector和journal接口；oracle公式把controls映射到R/C/congestion/legalization/routefailrisk再映射合成电学。sim-every控制显示反馈，并非真实Spectre作业数；Executor可多次重试。",
+      "available_materials_and_tools": "36全Gitblobs核，rootMIT，swappableAPIbackbone。无第三方模型/数值oracle运行；无真实EDA/PDK依赖使流程可移植，但真实性也受手工oracle限制。",
+      "trajectory_and_training_access": "公开toy结构/源码/prompt/日志schema，当前Git未见历史runs/*.jsonl；真实Spectre/PEX轨迹未发布。",
+      "limits": "已有五个源码测试是toy接口检查，不据此说实电路过；repo无历史runs或agent JSONL。公式、难度和指标均能独立改写，需版本冻结和train/test策略，不能计独立新增真实OTA集。",
+      "primary_sources": "https://arxiv.org/html/2608.13767v1; https://github.com/bingyang1132/ICLAD2026-demo-sim-aware-in-context/tree/7ad0f408ae59405eaff312ad42b9cfbab08855a7",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "analog-atlas-sar-method",
+      "name": "ATLAS / template-constrained SAR ADC generation proof of concept",
+      "family": "ATLAS SAR ADC generation",
+      "object_identity": "SAR ADC方法选例；不是穷举多模型benchmark",
+      "task": "Planner检索expertknowledge、Selector选模板、Integrator组网、BitModifier扩位、TestbenchCreator改模板、Debugger修语法；Sizer提W/L/m/nf/C与范围，Sobol+GP/qParEGO原生多目标BO负责数值搜索。主GPT4o、10bitModifier Gemini3.1。",
+      "available_materials_and_tools": "官方source tar25个TeX/figures文件可审阅，未定位ATLAS完整执行repo、模板/任务manifest、优化器trialledger或历史tooltrajectories。商业Spectre/GPDK/TSMC依赖另需授权，开源reference模板并非整个框架发布。",
+      "trajectory_and_training_access": "仅论文与25源TeX/图，未定位完整任务/模板/可执行agent/原始优化history；图示prompt/计划不等工具交互训练集。",
+      "limits": "humanexpert会修testbench，idealDAC重构用于谱指标，不是全无人oracle。power原文average DAC/comparator/SARlogic，需完整测试台确认时间平均/全ADC求和口径，不擅算修正倍数；budget/失败分母/cost未全披露。",
+      "primary_sources": "https://arxiv.org/html/2607.14165v1; https://arxiv.org/src/2607.14165v1",
+      "record_snapshot_matches_audit": true
+    },
+    {
+      "catalog_id": "analog-panda-intent-layout",
+      "name": "PANDA / intent-to-layout skills and two real-chain cases",
+      "family": "PANDA analog intent-to-layout",
+      "object_identity": "任务handoff方法与示范流程；非固定多题公开benchmark",
+      "task": "LLM生成结构/规划约束/尺寸变量，数值BO/Spectre/PCell/place-routekernels做优化和布局，LVS/PEX adapter连接反馈；每attempt独立工件与状态。smokeadapter仅编排测试，实际商业host依赖不公开。",
+      "available_materials_and_tools": "373tree/323files，87选定integration/docs/source逐hash核；原生generator/bridge等上游另依赖，未执行。Cadence/PDK/Calibre/OpenAccess/Paprika/实际GDS-PEX工件不tracked；公开workflow不能当零依赖fullEDAbenchmark。",
+      "trajectory_and_training_access": "公开integration代码/Skill contracts/buglog/repro说明/私有主机工件引用；87文件核查未取得完整历史模型动作反馈、实际PDK/GDS/PEX状态或固定评测多题包。",
+      "limits": "currentlayoutmatchedLVS/PEX完成声明与topology-sourceexactLVS分开：后者仍因MP_STAGE3_LOAD PCell表达式不匹配阻塞，不能叫源电路等价已全部验收。缺同预算强基线/固定任务pack/全失败ledger/历史LLM轨迹，两个成功链也有规格边界。",
+      "primary_sources": "https://arxiv.org/html/2606.15052v1; https://github.com/PKU-IDEA/PANDA/tree/9e53e43c0d29bdc8c0f326640b9d66c7075e841b",
       "record_snapshot_matches_audit": true
     }
   ],
